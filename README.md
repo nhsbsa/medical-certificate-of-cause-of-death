@@ -1,6 +1,6 @@
 > **Warning**
 >
-> This is a prototype of the Medical Certificate of Cause of Death digital service, all code is not suitable for production.
+> This is a prototype of the Medical Certificate of Cause of Death digital service, code is not suitable for production.
 > 
 
 # Medical Certificate of Cause of Death 
