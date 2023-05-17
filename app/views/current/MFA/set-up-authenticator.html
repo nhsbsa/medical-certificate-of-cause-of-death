@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Set up your account with an authentication app </h1>
+
+        <p>Set your account so that you can sign in using an authentication app on your smartphone or desktop computer.
+        </p>
+        <p>Use the app to generate a 6 digit security code each time you sign in.</p>
+
+        <h2 class="govuk-heading-l">Which device do you want to download an authentication app onto?</h2>
+
+        <form action="set-up-authenticator" method="post">
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+                    <div class="govuk-radios">
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="radioGroupAuth-desktop" name="radioGroupAuth" type="radio" value="desktop">
+                            <label class="govuk-label govuk-radios__label" for="radioGroupAuth-desktop">
+                                Desktop (including laptop)
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="radioGroupAuth-smartphone" name="radioGroupAuth" type="radio" value="smartphone">
+                            <label class="govuk-label govuk-radios__label" for="radioGroupAuth-smartphone">
+                                Smartphone
+                            </label>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+            </div>
+            <button class="govuk-button" type="submit">
+                Continue
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -5,15 +5,82 @@
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-full">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    <h1 class="govuk-heading-xl">Medical Certificate of Cause of Death</h1>
+    <p>One of the main benefits of this work is to improve what is a difficult experience for the bereaved by removing
+      the need for the bereaved to transport the MCCD in a sealed envelope to the registrar in person and instead
+      implementing a digital transfer of the MCCD</p>
 
-    <h1 class="govuk-heading-xl">
-      {{ serviceName }}
-    </h1>
+    <!-- ================================================ -->
+    <!-- Current Version -->
+    <!-- ================================================ -->
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <h2 class="govuk-heading-m">Current Version</h2>
+    <p>This version of the prototype is matching as close as possible to what is currently live.</p>
+    <p><a href="current/auth/login-page?account-creation-journey=no">Over 28 Days Journey</a></p>
+    <p><a href="current/MFA/account-created-email">Multi-factor authentication journey</a></p>
+    <p class="govuk-caption-m govuk-caption--bottom">Last updated: 11 May 2023</p>
+
+    <!-- ================================================ -->
+    <!-- Iterations -->
+    <!-- ================================================ -->
+
+    <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-8">
+
+    <h2 class="govuk-heading-m">Iterations</h2>
+
+    <!-- Verion 6 -->
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          MVP Version 6
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-1">Moving to the GOVUK Toolkit</h2>
+        <p class="govuk-caption-m govuk-caption--bottom">Full rebrand to use the GOVUK Toolkit</p>
+
+        <h3 class="nhsuk-heading-s">What we created</h3>
+        <ul>
+          <li>removed NHS branding</li>
+          <li>implemented the GOVUK Toolkit</li>
+        </ul>
+
+        <h3 class="nhsuk-heading-s">What we plan to test</h3>
+        <ul>
+          <li>is the new branding still trusted</li>
+
+        </ul>
+
+        <h3 class="nhsuk-heading-s">What we found</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+
+        <h3 class="nhsuk-heading-s">Any known issues</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+
+        <a href="current/auth/login-page?account-creation-journey=no" class="govuk-button">Medical Certificate of Cause of Death Journey</a></p>
+
+      </div>
+    </details>
+
+
+    <!-- ================================================ -->
+    <!-- Historic Version Content -->
+    <!-- ================================================ -->
+
+    <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-9">
+
+    <h2 class="govuk-heading-m">Historic versions</h2>
+    <p>To view previous NHS branding versions go to the old <a href="https://nhs-bsa-mccd.herokuapp.com/">Medical
+        Certificate of Cause of Death prototype</a>.</p>
+
+
+
   </div>
 </div>
 

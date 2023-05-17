@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h1 class="govuk-panel__title">
+        Medical certificate of cause of death (MCCD) created
+      </h1>
+    </div>
+
+    <p>We'll send the MCCD and notice to informant to the email address you entered.</p>
+
+    <h2 class="govuk-heading-m">What happens next</h2>
+
+    <p>The administration or bereavement team will send the MCCD output to the local registry service
+      (LRS). They'll give the notice to informant to the next of kin or bereaved.</p>
+
+    <p>The next of kin or bereaved can use the notice to informant to get an official death
+      certificate from the LRS.</p>
+
+    <h2 class="govuk-heading-m">Give feedback</h2>
+    <p><a href="#">What did you think of this service?</a> (takes about 5 minutes)</p>
+
+    <form action="start-new-mccd" method="post">
+      <button class="govuk-button" type="submit">
+        Start a new MCCD
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

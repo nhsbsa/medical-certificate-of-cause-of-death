@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Enter the code shown by your authentication app</h1>
+
+        <form action="enter-code" method="post">
+            <div class="govuk-warning-text govuk-form-group">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    <span class="visually-hidden"> </span>
+                    You have 3 minutes to enter these details before your session times out.
+                </span>
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="enter-code">
+                    Enter code
+                    <div class="govuk-hint">
+                        This is a 6 digit code, like 123 456 </div>
+                    <input class="govuk-input govuk-input--width-20" id="enter-code" name="enter-code" type="text" required>
+                </label>
+            </div>
+
+            <a class="govuk-button" href="../66-or-65" draggable="false">
+                Continue
+            </a>
+        </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

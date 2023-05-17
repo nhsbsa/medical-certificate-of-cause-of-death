@@ -1,0 +1,32 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+            <h1 class="govuk-panel__title">
+                Your account is set up
+            </h1>
+            <div class="govuk-panel__body">
+                You can use your authentication app to sign in to the Create a medical certificate of cause of death (MCCD) service
+            </div>
+        </div>
+
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p>Use the authentication app to generate 6 digit code each time you sign in.</p>
+        <p>To access the service, select <strong>Continue</strong>.</p>
+
+        <a class="govuk-button" href="../66-or-65">
+            Continue
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

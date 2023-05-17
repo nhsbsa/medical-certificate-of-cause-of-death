@@ -1,0 +1,99 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-xl"><span class="govuk-caption-l govuk-caption--bottom">MCCD outputs</span>
+      Where do you need to send the notice to informant?</h1>
+
+    <p class="govuk-body">The informant will use the notice to informant to register the death. The person acting as
+      the informant must be qualified and legally responsible.</p>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          People qualified and legally responsible to act as informants
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <p>These people are qualified to give information concerning a death under the Births and Deaths Registration
+          Act 1953:</p>
+        <h3 class="govuk-heading-m">Deaths in houses and public institutions</h3>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>A relative of the deceased, present at the death.</li>
+          <li>A relative of the deceased, in attendance during the last illness.</li>
+          <li>A relative of the deceased, residing or being in the sub-district where the death occurred.</li>
+          <li>A person present at the death.</li>
+          <li>The occupier if they knew of the happening of the death.</li>
+          <li>Any inmate if they knew of the happening of the death.</li>
+          <li>The person arranging the disposal of the body</li>
+        </ul>
+        <h3 class="govuk-heading-m">Deaths in houses and public institutions</h3>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Any relative of the deceased having knowledge of any of the information required at registration</li>
+          <li>Any person present at the death</li>
+          <li>Any person who found the body</li>
+          <li>Any person in charge of the body</li>
+          <li>The person arranging the disposal of the body.</li>
+        </ul>
+        <p>In relation to a public institution, the occupier includes the:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>governor</li>
+          <li>keeper</li>
+          <li>master</li>
+          <li>matron</li>
+          <li>superintendent</li>
+          <li>chief resident office</li>
+        </ul>
+
+      </div>
+    </details>
+    <form action="send-notice-to-informant" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l govuk-visually-hidden">
+            Where do you need to send the notice to informant?
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">            
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="output-option-yes" name="outputOption" type="radio" value="same as mccd">
+              <label class="govuk-label govuk-radios__label" for="output-option-yes">
+                To the same email address as the MCCD output
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="output-option-no" name="outputOption" type="radio" value="different email" data-aria-controls="email-address">
+              <label class="govuk-label govuk-radios__label" for="output-option-no">
+                To a different email address
+              </label>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="email-address">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="informant-email">
+                  Enter address
+                </label>
+                <input class="govuk-input govuk-input--width-20" id="informant-email" name="informant-email" type="text">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" type="submit">
+        Continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

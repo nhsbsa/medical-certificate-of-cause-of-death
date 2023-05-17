@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-xl"><span class="govuk-caption-l govuk-caption--bottom">MCCD outputs</span> Send a copy of the MCCD</h1>
+    <p class="govuk-body">Places you can send this:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>administration team or your secretary if you work in a community setting</li>
+      <li>bereavement team if you work in a trust</li>
+      <li>local registry service (LRS)</li>
+    </ul>
+
+    <form action="send-mccd-copy" method="post">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="mccd-email">mccd-email address</label>
+        <input class="govuk-input" id="mccd-email" name="mccd-email" type="text">
+      </div>
+      <button class="govuk-button" type="submit">Continue</button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-xl"><span class="govuk-caption-l govuk-caption--bottom">Actions after death</span>
+      Was the deceased person seen by a doctor after their death?
+    </h1>
+
+    <div class="govuk-hint" id="contact-hint">
+      The doctor must be registered with the GMC and have a license to practise.
+    </div>
+
+    <form action="death-seen-by" method="post">
+
+      <fieldset class="govuk-fieldset">
+
+        <div class="govuk-form-group">
+
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="death-seenby-1" name="death-seenby" type="radio"
+                value="Yes, they were seen after death by me">
+              <label class="govuk-label govuk-radios__label" for="death-seenby-1">
+                Yes, they were seen after death by me
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="death-seenby-2" name="death-seenby" type="radio"
+                value="Yes, they were seen after death by another doctor">
+              <label class="govuk-label govuk-radios__label" for="death-seenby-2">
+                Yes, they were seen after death by another doctor
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="death-seenby-3" name="death-seenby" type="radio"
+                value="No, they were not seen after death by a doctor">
+              <label class="govuk-label govuk-radios__label" for="death-seenby-3">
+                No, they were not seen after death by a doctor
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+
+      </fieldset>
+
+      <button class="govuk-button" type="submit">
+        Continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
