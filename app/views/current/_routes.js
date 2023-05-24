@@ -68,13 +68,7 @@ router.post(/enter-code/, (req, res) => {
 // Was the death more than 28 days after the birth?
 router.post(/66-or-65/, (req, res) => {
    
-    const underOverTwentyEightDays = req.session.data['over-under-28']
-
-    if (underOverTwentyEightDays == 'yes') {
-        res.redirect('name-of-the-deceased')
-    } else {
-        res.redirect('under-28-ko')
-    }
+    res.redirect('name-of-the-deceased')
 
 });
 
@@ -85,7 +79,15 @@ router.post(/name-of-the-deceased/, (req, res) => {
 
 // What is their date of death?
 router.post(/date-of-death/, (req, res) => {
-    res.redirect('age-66')
+    
+    const overUnder28 = req.session.data['over-under-28']
+    
+    if (overUnder28 == 'yes') {
+        res.redirect('age-66')
+    } else {
+        res.redirect('neo-natal-deaths/deceased-persons-age')
+    }
+    
 });
 
 // What was the deceased persons age?
@@ -126,8 +128,17 @@ router.post(/death-hospital/, (req, res) => {
 });
 
 // At which hospital did the death occur?
-router.post(/death-location-hospital/, (req, res) => {
-    res.redirect('cya-deceased')
+router.post(/death-location/, (req, res) => {
+    
+    const overUnder28 = req.session.data['over-under-28']
+
+    if ( overUnder28 == 'yes') {
+        res.redirect('cya-deceased')
+    } else {
+        res.redirect('neo-natal-deaths/location-born')
+    }
+    
+
 });
 
 // Do you know the full address of the death?
@@ -143,15 +154,6 @@ router.post(/location-of-death/, (req, res) => {
     
 });
 
-// What was the approximate location of the death?
-router.post(/unknown-address/, (req, res) => {
-    res.redirect('cya-deceased')
-});
-
-// What was the location of the death?
-router.post(/exact-address/, (req, res) => {
-    res.redirect('cya-deceased')
-});
 
 // ************************************************************
 // Actions after death section
@@ -181,7 +183,15 @@ router.post(/check-your-answers-dc/, (req, res) => {
 
 // What caused the death?
 router.post(/cause-of-death/, (req, res) => {
-    res.redirect('caused-by-employment')
+    
+    const overUnder28 = req.session.data['over-under-28']
+
+    if (overUnder28 == 'yes') {
+        res.redirect('caused-by-employment')
+    } else {
+        res.redirect('cya-cause-death')
+    }
+
 });
 
 // Could the deceased person's job have caused or contributed to their death?
@@ -252,7 +262,34 @@ router.post(/send-notice-to-informant/, (req, res) => {
 router.post(/start-new-mccd/, (req, res) => {
     req.session.data = {}
     res.redirect('index')
-}); 
+});
+
+// ************************************************************
+// Neo-Natal Deaths Journey
+// ************************************************************
+
+// What was the deceased person's age?
+router.post(/deceased-persons-age/, (req, res) => {
+    
+    res.redirect('what-is-their-sex')
+    
+});
+
+// What is their sex?
+router.post(/what-is-their-sex/, (req, res) => {
+    
+    res.redirect('../last-seen-alive')
+    
+});
+
+// Where were they born?
+router.post(/location-born/, (req, res) => {
+    
+    res.redirect('../cya-deceased')
+    
+});
+
+
 
 
 module.exports = router;

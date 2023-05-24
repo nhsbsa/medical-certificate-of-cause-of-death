@@ -77,23 +77,59 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
       </div>
 
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Age
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ data['deceased-age']}}
-        </dd>
+      {% if data['over-under-28'] == 'yes' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['deceased-age']}}
+          </dd>
 
-        <dd class="govuk-summary-list__actions">
+          <dd class="govuk-summary-list__actions">
 
-          <a href="age-66">
-            Change<span class="govuk-visually-hidden"> age</span>
-          </a>
+            <a href="age-66">
+              Change<span class="govuk-visually-hidden"> age</span>
+            </a>
 
-        </dd>
+          </dd>
+        </div>
+      {% endif %}
 
-      </div>
+      {% if data['over-under-28'] == 'no' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['deceased-persons-age-days']}} Days, {{ data['deceased-persons-age-hours']}} Hours
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/deceased-persons-age">
+              Change<span class="govuk-visually-hidden"> age</span>
+            </a>
+
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Sex
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['what-is-their-sex']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/what-is-their-sex">
+              Change<span class="govuk-visually-hidden"> sex</span>
+            </a>
+
+          </dd>
+        </div>
+      {% endif %}
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -204,6 +240,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </dd>
 
       </div>
+
+      {% if data['over-under-28'] == 'no' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Location of birth
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['location-of-birth']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/location-born">
+              Change<span class="govuk-visually-hidden"> location of birth</span>
+            </a>
+
+          </dd>
+        </div>
+      {% endif %}
 
     </dl>
 
