@@ -3,4 +3,32 @@
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 // 
 
-// Add extra styles here
+// Custom addition to header following HMRC header
+// https://design.tax.service.gov.uk/examples/sign-out/example/
+.hmrc-sign-out-nav {
+    float: right;
+}
+.hmrc-sign-out-nav .hmrc-sign-out-nav__link {
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.8em;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Custom account signed in details and sign out link
+.account-signed-in {
+    text-align: right;
+    margin-top: 10px;
+
+    p {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+}
+.service-account {
+    background-color: #f3f2f1;
+}

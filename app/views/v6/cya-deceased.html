@@ -1,0 +1,272 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-xl"><span class="govuk-caption-l govuk-caption--bottom">Deceased person's details</span>
+      Check your answers
+    </h1>
+
+    <div class="govuk-inset-text">
+      <span class="govuk-visually-hidden">Information: </span>
+      <p>Check that all the details are correct before you send this to the registrar</p>
+    </div>
+
+    <h2 class="govuk-heading-m">Deceased person's details</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Over 28 days old at time of death?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['over-under-28']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="66-or-65">
+            Change<span class="govuk-visually-hidden"> over 28 days olf at time of death</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Full name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['deceased-first-name']}} {{ data['deceased-last-name']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="name-of-the-deceased">
+            Change<span class="govuk-visually-hidden"> name</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Date of death
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="date-of-death">
+            Change<span class="govuk-visually-hidden"> date of death</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      {% if data['over-under-28'] == 'yes' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['deceased-age']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="age-66">
+              Change<span class="govuk-visually-hidden"> age</span>
+            </a>
+
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['over-under-28'] == 'no' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['deceased-persons-age-days']}} Days, {{ data['deceased-persons-age-hours']}} Hours
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/deceased-persons-age">
+              Change<span class="govuk-visually-hidden"> age</span>
+            </a>
+
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Sex
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['what-is-their-sex']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/what-is-their-sex">
+              Change<span class="govuk-visually-hidden"> sex</span>
+            </a>
+
+          </dd>
+        </div>
+      {% endif %}
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Seen before death?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['last-seen-alive']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="last-seen-alive">
+            Change<span class="govuk-visually-hidden"> seen before death</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      {% if data['last-seen-alive'] == 'yes' %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Date last seen alive?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['last-seen-day']}} {{ data['last-seen-month']}} {{ data['last-seen-year']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="date-last-seen">
+            Change<span class="govuk-visually-hidden"> date last seen alive</span>
+          </a>
+
+        </dd>
+
+      </div>
+      {% endif %}
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Was the death in a hospital?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['death-in-hospital']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="death-seen-by">
+            Change<span class="govuk-visually-hidden"> death in a hospital</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      {% if data['death-in-hospital'] == 'yes' %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Consultant responsible for care
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['consultant']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="death-seen-by">
+            Change<span class="govuk-visually-hidden"> consultant name</span>
+          </a>
+
+        </dd>
+
+      </div>
+      {% endif %}
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location of death
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if data['death-in-hospital'] == 'no' %}
+          {% if data['location-of-death'] == 'no' %}
+          {{ data['location-death']}}
+          {% else %}
+          {{ data['address-line-1']}}<br>
+          {{ data['address-line-2']}}<br>
+          {{ data['address-town']}}<br>
+          {{ data['address-county']}}<br>
+          {{ data['address-postcode']}}<br>
+          {% endif %}
+          {% else %}
+          {{ data['address-line-1']}}
+          {{ data['address-line-2']}}<br>
+          {{ data['address-town']}}<br>
+          {{ data['address-county']}}<br>
+          {{ data['address-postcode']}}<br>
+          {% endif %}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="location-of-death">
+            Change<span class="govuk-visually-hidden"> location of death</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      {% if data['over-under-28'] == 'no' %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Location of birth
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['location-of-birth']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="neo-natal-deaths/location-born">
+              Change<span class="govuk-visually-hidden"> location of birth</span>
+            </a>
+
+          </dd>
+        </div>
+      {% endif %}
+
+    </dl>
+
+    <a class="govuk-button" href="mccd-tasklist">
+      Continue
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}
