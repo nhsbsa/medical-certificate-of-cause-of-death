@@ -18,7 +18,7 @@ The historic version of the prototype is using the NHS Toolkit, this was changed
 
 **Username and Password:** bsa
 
-## Quick start guide
+## Quick start
 **Pre-requisite:** Node.js v18
 
 1. Clone repository
