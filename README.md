@@ -3,7 +3,7 @@
 > This is a prototype of the Medical Certificate of Cause of Death digital service, code is not suitable for production.
 > 
 
-# Medical Certificate of Cause of Death 
+# Medical Certificate of Cause of Death TEST
 One of the main benefits of this work is to improve what is a difficult experience for the bereaved by removing the need for the bereaved to transport the Medical Certificate of Cause of Death in a sealed envelope to the registrar in person and instead implementing a digital system to transfer this.
 
 ## Access the prototype
