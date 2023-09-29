@@ -1,0 +1,29 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l">You need to complete the paper MCCD for neonatal deaths (Form 65)</h1>
+
+    <p class="govuk-body">You cannot create a medical certificate of cause of death (MCCD) for a person who died during the first 28 days of life yet. This is because the online service is still being developed and not everyone can use it yet.</p>
+    <p class="govuk-body">You can still complete the paper neonatal MCCD (Form 65)</p>
+    <p class="govuk-body">You can get a Form 65 MCCD booklet from:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>the administration team if you work in a community setting</li>
+      <li>the bereavement team if you work in a trust</li>
+    </ul>
+
+    <p><a href="index" class="govuk-link">Back to start</a></p>
+
+  </div>
+</div>
+
+{% endblock %}

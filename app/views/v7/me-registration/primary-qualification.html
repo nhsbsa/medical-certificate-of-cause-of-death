@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <form action="primary-qualification" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l govuk-caption--bottom">Register to use this service</span>
+                            Is this your primary medical qualification?
+                        </h1>
+                    </legend>
+                    <div class="govuk-inset-text">
+                        MB ChB 2010 University of Edinburgh
+                    </div>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="primary-qualification-yes"
+                                name="primary-qualification" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="primary-qualification-yes">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="primary-qualification-no"
+                                name="primary-qualification" type="radio" value="no"
+                                data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="primary-qualification-no">
+                                No
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-contact">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="contact-by-email">
+                                    Enter qualification
+                                </label>
+                                <input class="govuk-input" id="contact-by-email" name="contactByEmail" type="email"
+                                    spellcheck="false" autocomplete="email">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" type="submit">Continue</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

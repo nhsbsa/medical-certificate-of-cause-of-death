@@ -1,0 +1,74 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">MCCD outputs</span>
+      Check your answers
+    </h1>
+
+    <div class="govuk-inset-text">
+      <span class="govuk-visually-hidden">Information: </span>
+      <p>Check that all the details are correct before this is sent to the registrar.</p>
+    </div>
+
+    <dl class="govuk-summary-list">
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Email address MCCD output will be sent to
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['mccd-email']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="name-of-the-deceased">
+            Change<span class="govuk-visually-hidden"> name</span>
+          </a>
+
+        </dd>
+
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Email address notice to informant will be sent to
+        </dt>
+        <dd class="govuk-summary-list__value">
+
+          {% if data['outputOption'] == 'same as mccd' %}
+          {{ data['mccd-email']}}
+          {% else %}
+          {{ data['informant-email']}}
+          {% endif %}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="name-of-the-deceased">
+            Change<span class="govuk-visually-hidden"> name</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+    </dl>
+
+    <a class="govuk-button" href="confirmation">
+      Submit for scrutiny
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}

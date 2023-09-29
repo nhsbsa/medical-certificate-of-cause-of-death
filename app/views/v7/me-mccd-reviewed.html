@@ -1,0 +1,31 @@
+{% extends "layouts/prototype-main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+            <h1 class="govuk-panel__title">
+                Medical certificate of cause of death (MCCD) reviewed
+            </h1>
+        </div>
+
+        <p>Your notes have been recorded on the MCCD. You can still view this MCCD in the dashboard list.</p>
+
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p>Log into MES and complete the cause of death certificate in MES system.  Ensure all the details captured match the MCCD information.</p>
+        <p>You can view historical MCCD you have reviewed if you need to check information relating to that case</p>
+
+        <a class="govuk-button" href="dashboard?reviewed=yes">
+            Return to dashboard
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

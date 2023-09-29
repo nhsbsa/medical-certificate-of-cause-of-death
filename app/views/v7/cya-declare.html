@@ -1,0 +1,113 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Your details</span>
+      Check your answers
+    </h1>
+
+    <div class="govuk-inset-text">
+      <span class="govuk-visually-hidden">Information: </span>
+      <p>Check that all the details are correct before this is sent to the registrar.</p>
+    </div>
+
+    <form action="check-your-answers-declare" method="post">
+
+      <dl class="govuk-summary-list">
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Your name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['your-name-first'] }} {{ data['your-name-last'] }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="name-of-the-deceased">
+              Change<span class="govuk-visually-hidden"> name</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Your GMC number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['gmc-number'] }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="date-of-birth">
+              Change<span class="govuk-visually-hidden"> gmc number</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Your qualifications
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['qualifications'] }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="date-of-death">
+              Change<span class="govuk-visually-hidden"> qualifications</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Your work address
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['residency-line-1']}} {{ data['residency-line-2']}}<br>
+            {{ data['residency-town']}}<br>
+            {{ data['residency-county']}}<br>
+            {{ data['residency-postcode']}}
+
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="location-of-death">
+              Change<span class="govuk-visually-hidden"> your work address</span>
+            </a>
+
+          </dd>
+
+        </div>
+      </dl>
+
+      <button class="govuk-button" type="submit">
+        Continue
+      </button>
+      <!-- End of content -->
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row govuk-!-margin-top-7">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">
+      Your Dashboard
+     </h1>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    {% if data['me'] == 'no' %}
+    <a href="confirm-details" class="govuk-button align-right">New MCCD</a>
+    {% endif %}
+  </div>
+
+
+  <div class="govuk-grid-column-full">
+    <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden">Certificates assigned to you</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Name</th>
+            <th scope="col" class="govuk-table__header">Date submitted</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Thomas Robertson</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="me-mccd-summary">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+                <a href="#">
+                    {% if data['reviewed'] == 'yes' %}
+                    <strong class="govuk-tag govuk-tag--green">
+                        Reviewed
+                    </strong>
+                    {% else %}
+                    <strong class="govuk-tag govuk-tag--grey">
+                        Incomplete
+                    </strong>
+                    {% endif %}
+              </a>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Mary Smith</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag govuk-tag--grey">
+                Incomplete
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Jodi Smyth</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag">
+                Completed
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Mia Karr</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag govuk-tag--grey">
+                Incomplete
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Margaret Winston</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag">
+                Completed
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Dwayne Pipe</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag govuk-tag--grey">
+                Incomplete
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Jerry Sanders</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag">
+                Completed
+              </strong>
+              </a></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Monika Newton</th>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag govuk-tag--grey">
+                Incomplete
+              </strong>
+              </a></td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+
+
+  </div>
+</div>
+
+{% endblock %}
