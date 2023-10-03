@@ -199,7 +199,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </dl>
             </div>
         </div>
-
+{% if data['me'] == 'yes' %}
         <!-- <form action="primary-qualification" method="post"> -->
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
@@ -238,9 +238,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
             <a href="me-mccd-reviewed" class="govuk-button">Continue</a>
         <!-- </form> -->
-
-
-
+        {% else %}
+        <a href="dashboard" class="govuk-button">Continue</a>
+        {% endif %}
     </div>
 </div>
 
