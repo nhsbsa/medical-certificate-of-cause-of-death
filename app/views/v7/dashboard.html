@@ -49,8 +49,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <td class="govuk-table__cell govuk-table__cell--numeric">
                 <a href="#">
                   {% if data['me'] == 'no' %}
-                  <strong class="govuk-tag govuk-tag--grey">
-                    Draft
+                  <strong class="govuk-tag govuk-tag--purple">
+                    In scrutiny
                   </strong>
                   {% else %}
                     {% if data['reviewed'] == 'yes' %}
@@ -59,7 +59,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </strong>
                     {% else %}
                     <strong class="govuk-tag govuk-tag--grey">
-                        Pending review
+                        In progress
                     </strong>
                     {% endif %}
                     {% endif %}
@@ -76,13 +76,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Review
               {% endif %}
             </a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <a href="#">
               {% if data ['me'] == 'no' %}  
               <strong class="govuk-tag govuk-tag--grey">Draft</strong>
               {% else %}
-              <strong class="govuk-tag govuk-tag--grey">Pending Review</strong>
+              <strong class="govuk-tag govuk-tag--grey">In progress</strong>
               {% endif %}
-              </a></td>
+              </a>
+            </td>
           </tr>
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Jodi Smyth</th>
@@ -106,24 +108,29 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data ['me'] == 'no' %}  
-                <strong class="govuk-tag govuk-tag--grey">Draft</strong>
+                {% if data['me'] == 'no' %} 
+                <strong class="govuk-tag govuk-tag--orange">To be amended</strong>
                 {% else %}
-                <strong class="govuk-tag govuk-tag--grey">Pending Review</strong>
+                <strong class="govuk-tag govuk-tag--orange">Pending AP amends</strong>
                 {% endif %}
                 </a></td>
           </tr>
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Margaret Winston</th>
             <td class="govuk-table__cell">28 September 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">
+              {% if data['me'] == 'no' %}
               View
               {% else %}
               Review
               {% endif %}</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#"><strong class="govuk-tag">
-                Completed
-              </strong>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <a href="#">
+                {% if data ['me'] == 'no' %}
+                <strong class="govuk-tag govuk-tag--grey">Draft</strong>
+                {% else %}
+                <strong class="govuk-tag govuk-tag--grey">In progress</strong>
+                {% endif %}
               </a></td>
           </tr>
           <tr class="govuk-table__row">
@@ -135,10 +142,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data ['me'] == 'no' %}  
-                <strong class="govuk-tag govuk-tag--grey">Draft</strong>
+                {% if data['me'] == 'no' %} 
+                <strong class="govuk-tag govuk-tag--orange">To be amended</strong>
                 {% else %}
-                <strong class="govuk-tag govuk-tag--grey">Pending Review</strong>
+                <strong class="govuk-tag govuk-tag--orange">Pending AP amends</strong>
                 {% endif %}
                 </a></td>
           </tr>
@@ -151,11 +158,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data ['me'] == 'no' %}  
-                <strong class="govuk-tag govuk-tag--grey">Draft</strong>
-                {% else %}
-                <strong class="govuk-tag govuk-tag--grey">Pending Review</strong>
-                {% endif %}
+                <strong class="govuk-tag">Completed</strong>
                 </a></td>
           </tr>
           <tr class="govuk-table__row">
@@ -167,11 +170,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data ['me'] == 'no' %}  
-                <strong class="govuk-tag govuk-tag--grey">Draft</strong>
-                {% else %}
-                <strong class="govuk-tag govuk-tag--grey">Pending Review</strong>
-                {% endif %}
+                <strong class="govuk-tag">Completed</strong>
                 </a></td>
           </tr>
         </tbody>

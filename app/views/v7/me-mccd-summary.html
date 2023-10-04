@@ -205,7 +205,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
-                            Do you agree with the information above?
+                            Medical examiner declaration
                         </h2>
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
@@ -213,7 +213,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             <input class="govuk-radios__input" id="primary-qualification-yes"
                                 name="primary-qualification" type="radio" value="yes">
                             <label class="govuk-label govuk-radios__label" for="primary-qualification-yes">
-                                Yes
+                                I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated on the certificate.
                             </label>
                         </div>
                         <div class="govuk-radios__item">
@@ -221,14 +221,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                 name="primary-qualification" type="radio" value="no"
                                 data-aria-controls="conditional-contact">
                             <label class="govuk-label govuk-radios__label" for="primary-qualification-no">
-                                No
+                                I am a duly appointed medical examiner and following scrutiny I have provided suggestions about the cause of death stated on the certificate.
                             </label>
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                             id="conditional-contact">
                             <div class="govuk-form-group">
                                 <label class="govuk-label" for="enter-details">
-                                    Enter details for your decision
+                                    Provide suggestions and details about your decision
                                 </label>
                                 <textarea class="govuk-textarea" id="enter-details" name="moreDetail" rows="5" aria-describedby="more-detail-hint"></textarea>
                             </div>
@@ -239,7 +239,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <a href="me-mccd-reviewed" class="govuk-button">Continue</a>
         <!-- </form> -->
         {% else %}
-        <a href="dashboard" class="govuk-button">Continue</a>
+        <a href="dashboard" class="govuk-button">Back to dashboard</a>
         {% endif %}
     </div>
 </div>
