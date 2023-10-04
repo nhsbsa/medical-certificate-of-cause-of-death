@@ -19,7 +19,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Full name
           </dt>
           <dd class="govuk-summary-list__value">
-            Sarah Philips
+            {% if data['your-full-name-first'] and data['your-full-name-last'] %}
+              {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
+            {% else %}
+              Sarah Philips
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="#">
@@ -32,7 +36,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             GMC number
           </dt>
           <dd class="govuk-summary-list__value">
-            24681235
+            {{ data['gmc-number'] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="#">
@@ -45,7 +49,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Primary qualification
           </dt>
           <dd class="govuk-summary-list__value">
-            MB ChB 2010 University of Edinburgh
+            {% if data['primary-qualification'] == 'no' %}
+              {{ data['other-qualification'] }}
+            {% else %}
+              MB ChB 2010 University of Edinburgh
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="#">
@@ -58,8 +66,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Work location
             </dt>
             <dd class="govuk-summary-list__value">
-              282 Barrow street,<br>
-              M20 5XG
+              Northern General Hospital,<br> Herries Road,<br>SHEFFIELD,<br> S5 7AU
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">
