@@ -14,7 +14,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             MCCD summary
         </h1>
 
+        {% if data['me'] == 'yes' %} 
         <p>Review the details provided by the attending practitioner and accept or reject the MCCD.</p>
+        {% endif %}
+
+       
 
 
         <div class="govuk-summary-card">
