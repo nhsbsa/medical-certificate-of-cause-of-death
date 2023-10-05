@@ -58,7 +58,10 @@ router.post(/auth-setup/, (req, res) => {
 // ************************************************************
 
 router.post(/role-assignment/, (req, res) => {    
+    
+    const roleType = req.session.data['role-type']
     res.redirect('your-name')
+
 });
 
 router.post(/me-full-name/, (req, res) => {    

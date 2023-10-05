@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <h1 class="govuk-heading-l">Check your answers</h1>
+
+        <div class="govuk-form-group">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Full name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">
+                            Change<span class="govuk-visually-hidden"> full name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        GMC number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['gmc-number'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">
+                            Change<span class="govuk-visually-hidden"> gmc number</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Primary qualifications
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['primary-qualification'] == 'no' %}
+                        {{ data['other-qualification'] }}
+                        {% else %}
+                        MB ChB 2010 University of Edinburgh
+                        {% endif %}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">
+                            Change<span class="govuk-visually-hidden"> primary qualification</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Where do you work
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">
+                            Change<span class="govuk-visually-hidden"> where you work</span>
+                        </a>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+        <a href="your-email-address" class="govuk-button">Continue</a>
+    </div>
+</div>
+
+{% endblock %}

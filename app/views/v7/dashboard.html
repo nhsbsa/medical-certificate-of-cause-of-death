@@ -13,7 +13,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
      </h1>
   </div>
   <div class="govuk-grid-column-one-third">
-    {% if data['me'] == 'no' %}
+    {% if data['role-type'] == 'ap' %}
     <a href="confirm-details" class="govuk-button align-right">New MCCD</a>
     {% endif %}
   </div>
@@ -26,7 +26,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="col" class="govuk-table__header">Name</th>
             <th scope="col" class="govuk-table__header">
-              {% if data['me'] == 'no' %}
+              {% if data['role-type'] == 'ap' %}
               Date of death
               {% else %}
               Date submitted
@@ -41,14 +41,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <th scope="row" class="govuk-table__header">Thomas Robertson</th>
             <td class="govuk-table__cell">29 September 2023</td>
             <td class="govuk-table__cell"><a href="me-mccd-summary">
-              {% if data['me'] == 'no' %}
+              {% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
               {% endif %}</a></td>
             <td class="govuk-table__cell govuk-table__cell--numeric">
                 <a href="#">
-                  {% if data['me'] == 'no' %}
+                  {% if data['role-type'] == 'ap' %}
                   <strong class="govuk-tag govuk-tag--purple">
                     In scrutiny
                   </strong>
@@ -70,7 +70,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <th scope="row" class="govuk-table__header">Mary Smith</th>
             <td class="govuk-table__cell">3 October 2023</td>
             <td class="govuk-table__cell"><a href="#">
-              {% if data['me'] == 'no' %}
+              {% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
@@ -78,7 +78,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </a></td>
             <td class="govuk-table__cell govuk-table__cell--numeric">
               <a href="#">
-              {% if data ['me'] == 'no' %}  
+              {% if data ['role-type'] == 'ap' %}  
               <strong class="govuk-tag govuk-tag--grey">Draft</strong>
               {% else %}
               <strong class="govuk-tag govuk-tag--grey">In progress</strong>
@@ -89,7 +89,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Jodi Smyth</th>
             <td class="govuk-table__cell">27 September 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">{% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
@@ -102,13 +102,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Mia Karr</th>
             <td class="govuk-table__cell">2 October 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">{% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data['me'] == 'no' %} 
+                {% if data['role-type'] == 'ap' %} 
                 <strong class="govuk-tag govuk-tag--orange">To be amended</strong>
                 {% else %}
                 <strong class="govuk-tag govuk-tag--orange">Pending AP amends</strong>
@@ -119,7 +119,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <th scope="row" class="govuk-table__header">Margaret Winston</th>
             <td class="govuk-table__cell">28 September 2023</td>
             <td class="govuk-table__cell"><a href="#">
-              {% if data['me'] == 'no' %}
+              {% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
@@ -136,13 +136,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Dwayne Pipe</th>
             <td class="govuk-table__cell">30 September 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">{% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
               {% endif %}</a></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#">
-                {% if data['me'] == 'no' %} 
+                {% if data['role-type'] == 'ap' %} 
                 <strong class="govuk-tag govuk-tag--orange">To be amended</strong>
                 {% else %}
                 <strong class="govuk-tag govuk-tag--orange">Pending AP amends</strong>
@@ -152,7 +152,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Jerry Sanders</th>
             <td class="govuk-table__cell">1 October 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">{% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
@@ -164,7 +164,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Monika Newton</th>
             <td class="govuk-table__cell">29 September 2023</td>
-            <td class="govuk-table__cell"><a href="#">{% if data['me'] == 'no' %}
+            <td class="govuk-table__cell"><a href="#">{% if data['role-type'] == 'ap' %}
               View
               {% else %}
               Review
