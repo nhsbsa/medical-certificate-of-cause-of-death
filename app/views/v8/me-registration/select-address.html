@@ -9,25 +9,42 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <p>{{ data['addresses'] | length }} {% if (data['addresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['postcode'] }}. <a href="find-address">Search again</a></p>
 
-    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Register to use this service</span>
-      Where do you work?
-    </h1>
+    <form action="select-address" method="post" novalidate>
+    
+      <div class="govuk-form-group">
+    
+        <div class="govuk-radios">
 
-    <h2 class="govuk-heading-s">Select your work address</h2>
+          
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="sort">
+                <h1 class="govuk-heading-l">
+                  Select an address
+                </h1>
+              </label>
+              <select class="govuk-select" id="select-address" name="select-address">
+                {% for address in data['addresses'] %}
+                  <option value="choose" selected>Select address</option>
+                  <option value="{{ address }}">{{ address }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          
+    
+        </div>
+      </div>
+    
+    </fieldset>
 
-    <ul class="govuk-list">
-        <li><p class="govuk-!-margin-bottom-0"><a href="details-cya">Northern General Hospital, Herries Road SHEFFIELD S5 7AU</a></p></li>
-        <li><p class="govuk-!-margin-bottom-0"><a href="details-cya">Northern General Hospital, NHS Trust, Herries Road SHEFFIELD S5 7AU</a></p></li>
-        
-    </ul>
+    <button class="govuk-button" type="submit">Use this address</button>
 
-    <p>Or</p>
+    </form>
 
-    <p><a href="#">My work address is not on the list</a></p>
-
-
+    <div class="govuk-form-group">
+      <p><a href="address">Enter your address manually</a></p>
+    </div>
 
   </div>
 </div>
