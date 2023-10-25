@@ -25,8 +25,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </h1>
               </label>
               <select class="govuk-select" id="select-address" name="select-address">
+                <option value="choose" selected>Select address</option>
                 {% for address in data['addresses'] %}
-                  <option value="choose" selected>Select address</option>
                   <option value="{{ address }}">{{ address }}</option>
                 {% endfor %}
               </select>
