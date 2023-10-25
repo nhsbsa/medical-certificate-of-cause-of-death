@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Register to use this service</span>
+      Where do you work?
+    </h1>
+
+    <form action="postcode-lookup" class="form" method="post">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="postcode">
+          Postcode
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="postcode" name="postcode" type="text">
+      </div>
+
+      <p class="govuk-!-margin-bottom-6"><a href="#">Enter address manually</a></p>
+
+      <button class="govuk-button" type="submit">
+        Find address
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

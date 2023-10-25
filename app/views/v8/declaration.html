@@ -1,0 +1,38 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Create a medical certificate of cause of death (MCCD)</span>Declaration</h1>
+
+    <form action="declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="ap-declaration" name="ap-declaration" type="checkbox" value="ap-declaration"> <label class="govuk-label govuk-checkboxes__label" for="ap-declaration">
+                I declare that:
+                <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-3">
+                  <li>I was in medical attendance during the deceased person's last illness</li>
+                  <li>the information and cause of death are true to the best of my knowledge and belief</li>
+                </ul>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button class="govuk-button" type="submit">Continue</button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

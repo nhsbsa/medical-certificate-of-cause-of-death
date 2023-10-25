@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Deceased person's details</span>
+      Do you know the full address of the death?
+    </h1>
+
+    <form action="location-of-death" method="post">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="location-of-death-yes" name="location-of-death" type="radio"
+                value="yes">
+              <label class="govuk-label govuk-radios__label" for="location-of-death-yes">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="location-of-death-no" name="location-of-death" type="radio"
+                value="no">
+              <label class="govuk-label govuk-radios__label" for="location-of-death-no">
+                No
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+
+      </div>
+
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
