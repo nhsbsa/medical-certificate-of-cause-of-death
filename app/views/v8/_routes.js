@@ -5,6 +5,75 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+// External dependencies
+const axios = require('axios')
+
+// Find your address
+
+// ************************************************************
+// Postcode Lookup
+// ************************************************************
+
+router.get(/postcode-lookup/, (req, res) => {
+
+    // Get the 'postcode' data from the submitted form
+    var postcodeLookup = req.session.data['postcode']
+
+    // Define a 'regular expression' to validate the postcode format
+    const regex = RegExp('^([A-PR-UWYZ](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Z]{2})$');
+
+    // Check if 'postcodeLookup' has a value
+    if (postcodeLookup) {
+
+        // Check if the 'postcodeLookup' matches the specified 'regular expression'
+        if (regex.test(postcodeLookup) === true) {
+
+            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
+            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key="+ process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var addresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = addresses.map(address => {
+                    const parts = address.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
+                    });
+                    return formattedParts.join(', ');
+                });
+
+                // Store the formatted addresses in the session data
+                req.session.data['addresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                res.redirect('select-address')
+            })
+            .catch(error => {
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
+
+        }
+
+    } else {
+        // Redirect if 'postcodeLookup' is empty
+        res.redirect('where-do-you-work')
+    }
+
+})
+
+router.post(/select-address/, (req, res) => {
+    res.redirect('details-cya')
+});
+
 // ************************************************************
 // MFA set up
 // ************************************************************
@@ -74,10 +143,6 @@ router.post(/me-gmc-number/, (req, res) => {
 
 router.post(/primary-qualification/, (req, res) => {    
     res.redirect('where-do-you-work')
-});
-
-router.post(/postcode-lookup/, (req, res) => {    
-    res.redirect('select-address')
 });
 
 router.post(/me-email-address/, (req, res) => {    

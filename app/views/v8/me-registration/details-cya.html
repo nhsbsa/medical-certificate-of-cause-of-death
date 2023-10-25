@@ -63,7 +63,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         Where do you work
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
+                        {% if data['select-address'] %}
+                            {{ data['select-address'] }}
+                        {% else %}
+                            Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="#">
