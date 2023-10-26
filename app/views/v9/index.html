@@ -1,0 +1,30 @@
+{% extends "layouts/prototype-main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Create a medical certificate of cause of death (MCCD)</h1>
+        <p class="govuk-body">Only a doctor registered with the General Medical Council (GMC) can create an MCCD.</p>
+
+        <h2 class="govuk-heading-l">Before you start</h2>
+        <p class="govuk-body">You'll need:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>personal details of the deceased person</li>
+            <li>medical information relating to the cause of death</li>
+            <li>your work address, GMC number and qualifications</li>
+        </ul>
+
+        <p class="govuk-body">It takes about 10 minutes to create an MCCD.</p>
+
+        <a class="govuk-button govuk-!-margin-top-5 govuk-!-margin-right-2" href="auth/login-page?account-creation-journey=no">Sign in</a> <a class="govuk-button govuk-button--secondary govuk-!-margin-top-5" href="me-registration/role-assignment">Register</a>
+
+    </div>
+</div>
+
+{% endblock %}

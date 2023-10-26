@@ -1,0 +1,88 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Your details</span>
+        Check your details before you start an MCCD
+    </h1>
+      
+    <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Full name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['your-full-name-first'] and data['your-full-name-last'] %}
+              {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
+            {% else %}
+              Sarah Philips
+            {% endif %}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">
+              Change<span class="govuk-visually-hidden"> name</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            GMC number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['gmc-number'] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">
+              Change<span class="govuk-visually-hidden"> gmc number</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Primary qualification
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['primary-qualification'] == 'no' %}
+              {{ data['other-qualification'] }}
+            {% else %}
+              MB ChB 2010 University of Edinburgh
+            {% endif %}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">
+              Change<span class="govuk-visually-hidden"> primary qualification</span>
+            </a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work location
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['select-address'] %}
+                  {{ data['select-address'] }}
+              {% else %}
+                  Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">
+                Change<span class="govuk-visually-hidden"> address</span>
+              </a>
+            </dd>
+          </div>
+      </dl>
+      
+      <a href="66-or-65" class="govuk-button">Save and continue</a>
+
+  </div>
+</div>
+
+{% endblock %}

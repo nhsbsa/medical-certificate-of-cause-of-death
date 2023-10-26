@@ -1,0 +1,37 @@
+{% extends "layouts/prototype-main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+            <h1 class="govuk-panel__title">
+                Medical certificate of cause of death reviewed
+            </h1>
+        </div>
+
+        {% if data['declaration-approve'] == 'yes' %}
+            <p>The medical certificate of cause of death has now been authorised.</p>
+        {% else %}
+            <p>The medical certificate of cause of death has now been reviewed.</p>
+        {% endif %}
+
+        <h2 class="govuk-heading-m">What happens next</h2>
+        {% if data['declaration-approve'] == 'yes' %}
+            <p>The medical certificate of cause of death will now be sent to the registrar. You can still view the certificate in your dashboard under completed certificates.</p>
+        {% else %}
+            <p>The attending practitioner involved will now be notified of rejection and sent comments your have provided.</p>
+        {% endif %}
+        <a class="govuk-button" href="dashboard?reviewed=yes">
+            Return to dashboard
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
