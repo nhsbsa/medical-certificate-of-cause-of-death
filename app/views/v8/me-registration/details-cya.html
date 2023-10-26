@@ -66,7 +66,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         {% if data['select-address'] %}
                             {{ data['select-address'] }}
                         {% else %}
-                            Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
+                            {{ data['work-address-line-1']}}
+                            {{ data['work-address-line-2']}}<br>
+                            {{ data['work-address-town']}}<br>
+                            {{ data['work-address-county']}}<br>
+                            {{ data['work-address-postcode']}}<br>
                         {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">

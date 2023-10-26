@@ -8,72 +8,6 @@ const router = govukPrototypeKit.requests.setupRouter()
 // External dependencies
 const axios = require('axios')
 
-// Find your address
-
-// ************************************************************
-// Postcode Lookup
-// ************************************************************
-
-router.get(/postcode-lookup/, (req, res) => {
-
-    // Get the 'postcode' data from the submitted form
-    var postcodeLookup = req.session.data['postcode']
-
-    // Define a 'regular expression' to validate the postcode format
-    const regex = RegExp('^([A-PR-UWYZ](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Z]{2})$');
-
-    // Check if 'postcodeLookup' has a value
-    if (postcodeLookup) {
-
-        // Check if the 'postcodeLookup' matches the specified 'regular expression'
-        if (regex.test(postcodeLookup) === true) {
-
-            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
-            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key="+ process.env.POSTCODEAPIKEY)
-            .then(response => {
-                // Extract and map the addresses from the API response
-                var addresses = response.data.results.map(result => result.DPA.ADDRESS);
-
-                // Format the addresses in title case
-                const titleCaseAddresses = addresses.map(address => {
-                    const parts = address.split(', ');
-                    const formattedParts = parts.map((part, index) => {
-                        if (index === parts.length - 1) {
-                            // Preserve postcode (SW1A 2AA) in uppercase
-                            return part.toUpperCase();
-                        }
-                        return part
-                            .split(' ')
-                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                            .join(' ');
-                    });
-                    return formattedParts.join(', ');
-                });
-
-                // Store the formatted addresses in the session data
-                req.session.data['addresses'] = titleCaseAddresses;
-
-                // Redirect to the 'Select Address' page
-                res.redirect('select-address')
-            })
-            .catch(error => {
-                // Redirect in case of an error
-                res.redirect('no-address-found')
-            });
-
-        }
-
-    } else {
-        // Redirect if 'postcodeLookup' is empty
-        res.redirect('where-do-you-work')
-    }
-
-})
-
-router.post(/select-address/, (req, res) => {
-    res.redirect('details-cya')
-});
-
 // ************************************************************
 // MFA set up
 // ************************************************************
@@ -123,7 +57,7 @@ router.post(/auth-setup/, (req, res) => {
 });
 
 // ************************************************************
-// Medical Examiner Authorisation Journey
+// Medical Examiner Registration Journey
 // ************************************************************
 
 router.post(/role-assignment/, (req, res) => {    
@@ -143,6 +77,10 @@ router.post(/me-gmc-number/, (req, res) => {
 
 router.post(/primary-qualification/, (req, res) => {    
     res.redirect('where-do-you-work')
+});
+
+router.post(/manual-work-address/, (req, res) => {    
+    res.redirect('details-cya')
 });
 
 router.post(/me-email-address/, (req, res) => {    
@@ -221,7 +159,7 @@ router.post(/death-hospital/, (req, res) => {
     const consultantName = req.session.data['consultant']
     
     if (deathInHospital == 'yes') {
-        res.redirect('location-death-hospital')
+        res.redirect('hospital-postcode')
     } else {
         res.redirect('location-of-death')
     }
@@ -248,7 +186,7 @@ router.post(/location-of-death/, (req, res) => {
     const locationOfDeath = req.session.data['location-of-death']
     
     if (locationOfDeath == 'yes') {
-        res.redirect('exact-address')
+        res.redirect('another-location-postcode')
     } else {
         res.redirect('unknown-address')
     }
@@ -391,6 +329,195 @@ router.post(/location-born/, (req, res) => {
 });
 
 
+// ************************************************************
+// Postcode Lookup - registraion, hospital and known address
+// ************************************************************
 
+// Registraion
+router.get(/postcode-lookup/, (req, res) => {
+
+    // Get the 'postcode' data from the submitted form
+    var postcodeLookup = req.session.data['postcode']
+
+    // Define a 'regular expression' to validate the postcode format
+    const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
+
+    // Check if 'postcodeLookup' has a value
+    if (postcodeLookup) {
+
+        // Check if the 'postcodeLookup' matches the specified 'regular expression'
+        if (regex.test(postcodeLookup) === true) {
+
+            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
+            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key="+ process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var addresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = addresses.map(address => {
+                    const parts = address.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
+                    });
+                    return formattedParts.join(', ');
+                });
+
+                // Store the formatted addresses in the session data
+                req.session.data['addresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                res.redirect('select-address')
+            })
+            .catch(error => {
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
+
+        }
+
+    } else {
+        // Redirect if 'postcodeLookup' is empty
+        res.redirect('where-do-you-work')
+    }
+
+})
+
+router.post(/select-address/, (req, res) => {
+    res.redirect('details-cya')
+});
+
+// =======================================================
+
+// Hospital address
+router.get(/hospital-lookup/, (req, res) => {
+
+    // Get the 'postcode' data from the submitted form
+    var postcodeLookup = req.session.data['hospital-postcode']
+
+    // Define a 'regular expression' to validate the postcode format
+    const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
+
+    // Check if 'postcodeLookup' has a value
+    if (postcodeLookup) {
+
+        // Check if the 'postcodeLookup' matches the specified 'regular expression'
+        if (regex.test(postcodeLookup) === true) {
+
+            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
+            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key="+ process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var hospitalAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = hospitalAddresses.map(hospitalAddress => {
+                    const parts = hospitalAddress.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
+                    });
+                    return formattedParts.join(', ');
+                });
+
+                // Store the formatted addresses in the session data
+                req.session.data['hospitalAddresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                res.redirect('select-hospital-address')
+            })
+            .catch(error => {
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
+
+        }
+
+    } else {
+        // Redirect if 'postcodeLookup' is empty
+        res.redirect('hospital-postcode')
+    }
+
+})
+
+router.post(/select-hospital-address/, (req, res) => {
+    res.redirect('cya-deceased')
+});
+
+// =======================================================
+
+// Non hospital address
+router.get(/another-location-lookup/, (req, res) => {
+
+    // Get the 'postcode' data from the submitted form
+    var postcodeLookup = req.session.data['another-location-postcode']
+
+    // Define a 'regular expression' to validate the postcode format
+    const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
+
+    // Check if 'postcodeLookup' has a value
+    if (postcodeLookup) {
+
+        // Check if the 'postcodeLookup' matches the specified 'regular expression'
+        if (regex.test(postcodeLookup) === true) {
+
+            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
+            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key="+ process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var anotherAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = anotherAddresses.map(anotherAddress => {
+                    const parts = anotherAddress.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
+                    });
+                    return formattedParts.join(', ');
+                });
+
+                // Store the formatted addresses in the session data
+                req.session.data['anotherAddresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                res.redirect('select-another-address')
+            })
+            .catch(error => {
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
+
+        }
+
+    } else {
+        // Redirect if 'postcodeLookup' is empty
+        res.redirect('another-location-postcode')
+    }
+
+})
+
+router.post(/select-hospital-address/, (req, res) => {
+    res.redirect('cya-deceased')
+});
 
 module.exports = router;
