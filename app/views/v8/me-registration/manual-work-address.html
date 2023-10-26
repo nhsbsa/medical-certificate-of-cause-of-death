@@ -1,0 +1,67 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Register to use this service</span>
+      Where do you work?
+    </h1>
+
+    <form action="manual-work-address" class="form" method="post">
+
+      <fieldset class="govuk-fieldset">
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="work-address-line-1">
+            Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>
+          </label>
+          <input class="govuk-input" id="work-address-line-1" name="work-address-line-1" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="work-address-line-2">
+            Address line 2 (optional)<span class="govuk-visually-hidden">Building and street line 2 of 2</span>
+          </label>
+          <input class="govuk-input" id="work-address-line-2" name="work-address-line-2" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="work-address-town">
+            Town or city (optional)
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="work-address-town" name="work-address-town" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="work-address-county">
+            County (optional)
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="work-address-county" name="work-address-county" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="work-address-postcode">
+            Postcode
+          </label>
+          <input class="govuk-input govuk-input--width-10" id="work-address-postcode" name="work-address-postcode" type="text">
+        </div>
+
+      </fieldset>
+
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
