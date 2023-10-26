@@ -204,7 +204,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
         </div>
         {% if data['role-type'] == 'me' or data['role-type'] == 'both' %}
-            {% if data['declaration-approve'] == 'yes' %}
+            {% if data['declaration-approve'] %}
                 <a href="dashboard" class="govuk-button">Back to dashboard</a>
             {% else %}
             <form action="me-declaration" method="post">
