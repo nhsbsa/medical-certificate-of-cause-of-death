@@ -218,6 +218,24 @@ router.post(/death-circumstances/, (req, res) => {
 
 // Was the deceased person seen by a doctor after their death?
 router.post(/death-seen-by/, (req, res) => {
+    res.redirect('implant')
+});
+
+// Was any implant placed in the body which may become hazardous when the body is cremated?
+router.post(/implant/, (req, res) => {
+    
+    const implant = req.session.data['implant']
+    
+    if (implant == 'yes') {
+        res.redirect('implant-removed')
+    } else {
+        res.redirect('cya-death-circumstances')
+    }
+
+});
+
+// Has the implant/s been removed?
+router.post(/has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances')
 });
 
@@ -260,50 +278,13 @@ router.post(/check-your-answers-cod/, (req, res) => {
 });
 
 // ************************************************************
-// Your details section
-// ************************************************************
-
-// What is your name?
-router.post(/your-name/, (req, res) => {
-    res.redirect('gmc-number')
-});
-
-// What is your GMC number?
-router.post(/gmc-number/, (req, res) => {
-    res.redirect('qualifications')
-});
-
-// What are your qualifications?
-router.post(/qualifications/, (req, res) => {
-    res.redirect('your-residency')
-});
-
-// Where do you work?
-router.post(/your-residency/, (req, res) => {
-    res.redirect('cya-declare')
-});
-
-// check your answers
-router.post(/check-your-answers-declare/, (req, res) => {
-
-    req.session.data['your-details-section'] = 'completed'
-
-    res.redirect('mccd-tasklist')
-});
-
-// ************************************************************
 // Declaration
 // ************************************************************
 
 // Declaration
 router.post(/declaration/, (req, res) => {
-    res.redirect('send-mccd-copy')
-});
-
-// Send a copy of the MCCD
-router.post(/send-mccd-copy/, (req, res) => {
     res.redirect('notice-to-informant')
-}); 
+});
 
 // Where do you need to send the notice to informant?
 router.post(/send-notice-to-informant/, (req, res) => {
