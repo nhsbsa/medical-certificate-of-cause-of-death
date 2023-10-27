@@ -10,7 +10,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Your details</span>
-        Check your details before you start an MCCD
+        Check your details are correct before starting a certificate
     </h1>
       
     <dl class="govuk-summary-list">
@@ -22,7 +22,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {% if data['your-full-name-first'] and data['your-full-name-last'] %}
               {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
             {% else %}
-              Sarah Philips
+              
             {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
@@ -36,7 +36,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             GMC number
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data['gmc-number'] }}
+                     
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="#">
@@ -52,7 +52,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {% if data['primary-qualification'] == 'no' %}
               {{ data['other-qualification'] }}
             {% else %}
-              MB ChB 2010 University of Edinburgh
+            
             {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
@@ -66,11 +66,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Work location
             </dt>
             <dd class="govuk-summary-list__value">
-              {% if data['select-address'] %}
-                  {{ data['select-address'] }}
-              {% else %}
-                  Northern General Hospital,<br>Herries Road<br>SHEFFIELD<br>S5 7AU
-              {% endif %}
+
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">

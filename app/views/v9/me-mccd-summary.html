@@ -10,13 +10,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <div class="govuk-grid-column-full">
 
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">327463</span>
+            <span class="govuk-caption-l">#327463</span>
             MCCD summary
         </h1>
 
-        {% if data['me'] == 'yes' %} 
-        <p>Review the details provided by the attending practitioner and accept or reject the MCCD.</p>
-        {% endif %}
+
 
        
 
@@ -27,40 +25,64 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Over 28 days old at time of death?
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                    </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Thomas Robertson
+                            {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{ data['deceased-last-name']}}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Date of death
+                            NHS number
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            28 August 2023
+                            {{ data['nhs-number']}}
                         </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of birth
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['dob-day']}} {{ data['dob-month']}} {{ data['dob-year']}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Age
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['deceased-age']}}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Sex
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Male
+                            {{ data['what-is-their-sex']}}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Seen befored death?
+                            Ethnicity
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['ethnicity']}}
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['date-of-death']}}
+                        </dd>
+                    </div>
+                    
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Seen by attending practitioner before death?
                         </dt>
                         <dd class="govuk-summary-list__value">
                             Yes
@@ -77,7 +99,31 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Location of death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Epsom General Hospital
+                            {% if data['death-in-hospital'] == 'no' %}
+                            {% if data['location-of-death'] == 'no' %}
+                            {{ data['location-death']}}
+                            {% else %}
+                            {% if data['select-another-address'] %}
+                            {{ data['select-another-address'] }}
+                            {% else %}
+                            {{ data['address-line-1']}}
+                            {{ data['address-line-2']}}<br>
+                            {{ data['address-town']}}<br>
+                            {{ data['address-county']}}<br>
+                            {{ data['address-postcode']}}<br>
+                            {% endif %}
+                            {% endif %}
+                            {% else %}
+                            {% if data['select-hospital-address'] %}
+                            {{ data['select-hospital-address'] }}
+                            {% else %}
+                            {{ data['address-line-1']}}
+                            {{ data['address-line-2']}}<br>
+                            {{ data['address-town']}}<br>
+                            {{ data['address-county']}}<br>
+                            {{ data['address-postcode']}}<br>
+                            {% endif %}
+                            {% endif %}
                     </div>
                 </dl>
             </div>
@@ -94,17 +140,34 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Post-mortem?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            No
+                            {{ data ['death-circumstances']}}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Seen after death by a doctor?
+                            Implants in body?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Yes
+                            {{ data['implant']}}
                         </dd>
                     </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implant details
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['implant-details']}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants removed?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['implant-removed']}}
+                        </dd>
+                    </div>
+                    
                 </dl>
             </div>
         </div>
@@ -120,7 +183,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(a) Disease or condition directly leading to death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Heart attack
+                            {{ data['main-cause'] }}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -128,7 +191,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            1 day
+                            {{ data['duration1'] }}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -136,7 +199,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(b) Other disease or condition
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Other heart condition
+                            {{data ['secondary-cause']}}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -144,20 +207,69 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            5 years
+                            {{ data ['duration2'] }}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Affected by employment
+                            1(c) Other disease or condition
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Yes
+                            {{ data ['other-conditions-c'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Time between onset and death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration3'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            1(d) Other disease or condition
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['other-conditions-d'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Time between onset and death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration4'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            2 other signficant conditions
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['other-significant-conditions']}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Time between onset and death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration5'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Death affected by employment?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['caused-by-employment']}}
                         </dd>
                     </div>
                 </dl>
             </div>
         </div>
+        {% if data['role-type'] == 'me' or data['role-type'] == 'both' %}
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -201,6 +313,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dd>
                     </div>
                 </dl>
+                {% endif %}
             </div>
         </div>
         {% if data['role-type'] == 'me' or data['role-type'] == 'both' %}
@@ -215,7 +328,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                 Medical examiner declaration
                             </h2>
                         </legend>
-                        <p>I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated on the certificate.</p>
+                        
                         <div class="govuk-radios" data-module="govuk-radios">
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="declaration-approve-yes"
@@ -239,7 +352,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                         Provide reason for rejection
                                     </label>
                                     <div id="changedName-hint" class="govuk-hint">
-                                        Include any amends which are required and further discussions to be had if needed.
+                                        Include any amends required for the attending practitioner to review as well as further discussions to be had if needed
                                     </div>
                                     <textarea class="govuk-textarea" id="enter-details" name="rejectReason" rows="5" aria-describedby="more-detail-hint"></textarea>
                                 </div>

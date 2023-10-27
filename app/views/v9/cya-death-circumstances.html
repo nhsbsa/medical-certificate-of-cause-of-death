@@ -16,10 +16,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </h1>
 
 
-    <div class="govuk-inset-text">
-      <span class="govuk-visually-hidden">Information: </span>
-      <p>Check that all the details are correct before this is sent to the registrar</p>
-    </div>
+    
 
     <form action="check-your-answers-dc" method="post">
 
@@ -64,7 +61,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Implant in body?
+            Implants in body?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data['implant']}}
@@ -83,7 +80,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         {% if data['implant'] == 'yes' %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Implant details and location/s
+              Implant details
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['implant-details']}}
@@ -103,7 +100,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         {% if data['implant'] == 'yes' %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Is implant removed?
+              Implants removed?
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['implant-removed']}}
