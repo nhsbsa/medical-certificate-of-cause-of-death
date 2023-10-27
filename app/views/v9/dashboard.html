@@ -57,8 +57,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </thead>
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">Thomas Robertson</th>
-          <td class="govuk-table__cell">29 September 2023</td>
+          <th scope="row" class="govuk-table__header">
+            {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{ data['deceased-last-name']}}
+          </th>
+          <td class="govuk-table__cell">
+            {{ data['dod-day']}}/{{ data['dod-month']}}/{{ data['dod-year']}}
+          </td>
           <td class="govuk-table__cell">
             <a href="me-mccd-summary">
               View
@@ -89,7 +93,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </thead>
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <td class="govuk-table__cell" colspan="4">You do not currently have any MCCDs needing your attention.</td>
+          <td class="govuk-table__cell" colspan="4">You have not yet created any MCCDs</td>
         </tr>
       </tbody>
     </table>
@@ -137,9 +141,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </a>
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">
-            <strong class="govuk-tag govuk-tag--grey">
-              Not started
-            </strong>
+            {% if data['declaration-approve'] == 'yes' %}
+              <strong class="govuk-tag govuk-tag--blue">
+                Completed
+              </strong>
+            {% elif data['declaration-approve'] == 'no' %}
+              <strong class="govuk-tag govuk-tag--orange">
+                Amendments required
+              </strong>
+            {% else %}
+              <strong class="govuk-tag govuk-tag--grey">
+                Not started
+              </strong>
+            {% endif %}
           </td>
         </tr>
       </tbody>
@@ -162,7 +176,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <td class="govuk-table__cell">Jeff Moore</td>
           <td class="govuk-table__cell">29 September 2023</td>
           <td class="govuk-table__cell">
-            <a href="me-mccd-summary">
+            <a href="#">
               View
             </a>
           </td>
@@ -219,7 +233,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <td class="govuk-table__cell">Jeff Moore</td>
           <td class="govuk-table__cell">29 September 2023</td>
           <td class="govuk-table__cell">
-            <a href="me-mccd-summary">
+            <a href="#">
               Review
             </a>
           </td>
