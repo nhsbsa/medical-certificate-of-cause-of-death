@@ -16,7 +16,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 
 
-       
+
 
 
         <div class="govuk-summary-card">
@@ -25,67 +25,145 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
-                    
+
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{ data['deceased-last-name']}}
+                            {% if data['role-type'] == 'me' %}
+                            Jane Edwards
+                            {% endif %}
+
+                            {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{
+                            data['deceased-last-name']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             NHS number
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            123456789
+                            {% endif %}
                             {{ data['nhs-number']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
+                    
+                    <!--DATE OF BIRTH-->
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Date of birth
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            12 November 1976
+                            {% endif %}
                             {{ data['dob-day']}} {{ data['dob-month']}} {{ data['dob-year']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Age
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            47 years old
+                            {% endif %}
                             {{ data['deceased-age']}}
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Sex
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Female
+                            {% endif %}
                             {{ data['what-is-their-sex']}}
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Ethnicity
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            White
+                            {% endif %}
                             {{ data['ethnicity']}}
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Date of death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            28 October 2023
+                            {% endif %}
                             {{ data['date-of-death']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
-                    
+
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Seen by attending practitioner before death?
                         </dt>
                         <dd class="govuk-summary-list__value">
                             Yes
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
@@ -93,37 +171,74 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dt>
                         <dd class="govuk-summary-list__value">
                             Yes
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Location of death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Freeman Rd, High Heaton<br>
+                            Newcastle upon Tyne<br>
+                            NE7 7DN
+                            {% endif %}
+
                             {% if data['death-in-hospital'] == 'no' %}
+
                             {% if data['location-of-death'] == 'no' %}
+
                             {{ data['location-death']}}
+
                             {% else %}
+
                             {% if data['select-another-address'] %}
+
                             {{ data['select-another-address'] }}
+
                             {% else %}
+
                             {{ data['address-line-1']}}
-                            {{ data['address-line-2']}}<br>
-                            {{ data['address-town']}}<br>
-                            {{ data['address-county']}}<br>
-                            {{ data['address-postcode']}}<br>
+                            {{ data['address-line-2']}}
+                            {{ data['address-town']}}
+                            {{ data['address-county']}}
+                            {{ data['address-postcode']}}
+
                             {% endif %}
+
                             {% endif %}
+
                             {% else %}
+
                             {% if data['select-hospital-address'] %}
+
                             {{ data['select-hospital-address'] }}
+
                             {% else %}
+
                             {{ data['address-line-1']}}
-                            {{ data['address-line-2']}}<br>
-                            {{ data['address-town']}}<br>
-                            {{ data['address-county']}}<br>
-                            {{ data['address-postcode']}}<br>
+                            {{ data['address-line-2']}}
+                            {{ data['address-town']}}
+                            {{ data['address-county']}}
+                            {{ data['address-postcode']}}
+
                             {% endif %}
+
                             {% endif %}
+
+                        </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                 </dl>
             </div>
@@ -140,34 +255,70 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Post-mortem?
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Information from post-mortem may be available later
+                            {% endif %}
                             {{ data ['death-circumstances']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Implants in body?
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Yes
+                            {% endif %}
                             {{ data['implant']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Implant details
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Pacemaker, chest
+                            {% endif %}
                             {{ data['implant-details']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Implants removed?
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            No
+                            {% endif %}
                             {{ data['implant-removed']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
-                    
+
                 </dl>
             </div>
         </div>
@@ -183,88 +334,187 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(a) Disease or condition directly leading to death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Heart attack
+                            {% endif %}
                             {{ data['main-cause'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            1 hour
+                            {% endif %}
                             {{ data['duration1'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             1(b) Other disease or condition
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Pneumonia, aquired in hospital
+                            {% endif %}
                             {{data ['secondary-cause']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            2 weeks
+                            {% endif %}
                             {{ data ['duration2'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             1(c) Other disease or condition
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            N/A
+                            {% endif %}
                             {{ data ['other-conditions-c'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            N/A
+                            {% endif %}
                             {{ data ['duration3'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             1(d) Other disease or condition
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            N/A
+                            {% endif %}
                             {{ data ['other-conditions-d'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            N/A
+                            {% endif %}
                             {{ data ['duration4'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             2 other signficant conditions
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Chest pain, lung inflamation
+                            {% endif %}
                             {{ data['other-significant-conditions']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Time between onset and death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Not captured
+                            {% endif %}
                             {{ data ['duration5'] }}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Death affected by employment?
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            No
+                            {% endif %}
                             {{ data['caused-by-employment']}}
                         </dd>
+                        {% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}
                     </div>
                 </dl>
             </div>
@@ -282,7 +532,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            James Cameron
+                            Sarah Phillips
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -317,52 +567,53 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
         </div>
         {% if data['role-type'] == 'me' or data['role-type'] == 'both' %}
-            {% if data['declaration-approve'] %}
-                <a href="dashboard" class="govuk-button">Back to dashboard</a>
-            {% else %}
-            <form action="me-declaration" method="post">
-                <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                            <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
-                                Medical examiner declaration
-                            </h2>
-                        </legend>
-                        
-                        <div class="govuk-radios" data-module="govuk-radios">
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="declaration-approve-yes"
-                                    name="declaration-approve" type="radio" value="yes">
-                                <label class="govuk-label govuk-radios__label" for="declaration-approve-yes">
-                                    Approve certificate
+        {% if data['declaration-approve'] %}
+        <a href="dashboard" class="govuk-button">Back to dashboard</a>
+        {% else %}
+        <form action="me-declaration" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                            Medical examiner declaration
+                        </h2>
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="declaration-approve-yes" name="declaration-approve"
+                                type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="declaration-approve-yes">
+                                Approve certificate
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="declaration-approve-no" name="declaration-approve"
+                                type="radio" value="no" data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="declaration-approve-no">
+                                Reject certificate
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-contact">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="enter-details">
+                                    Provide reason for rejection
                                 </label>
-                            </div>
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="declaration-approve-no"
-                                    name="declaration-approve" type="radio" value="no"
-                                    data-aria-controls="conditional-contact">
-                                <label class="govuk-label govuk-radios__label" for="declaration-approve-no">
-                                    Reject certificate
-                                </label>
-                            </div>
-                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                id="conditional-contact">
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label" for="enter-details">
-                                        Provide reason for rejection
-                                    </label>
-                                    <div id="changedName-hint" class="govuk-hint">
-                                        Include any amends required for the attending practitioner to review as well as further discussions to be had if needed
-                                    </div>
-                                    <textarea class="govuk-textarea" id="enter-details" name="rejectReason" rows="5" aria-describedby="more-detail-hint"></textarea>
+                                <div id="changedName-hint" class="govuk-hint">
+                                    Include any amends required for the attending practitioner to review as well as
+                                    further discussions to be had if needed
                                 </div>
+                                <textarea class="govuk-textarea" id="enter-details" name="rejectReason" rows="5"
+                                    aria-describedby="more-detail-hint"></textarea>
                             </div>
                         </div>
-                    </fieldset>
-                </div>
-                <button class="govuk-button" type="submit">Continue</button>
-            </form>
-            {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" type="submit">Continue</button>
+        </form>
+        {% endif %}
         {% else %}
         <a href="dashboard" class="govuk-button">Back to dashboard</a>
         {% endif %}
