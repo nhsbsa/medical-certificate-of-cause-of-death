@@ -1,0 +1,76 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">{{ data['deceased-first-name']}} {{ data['deceased-last-name'] }}</span>Medical certificate of cause of death (MCCD)</h1>
+
+    <h3 class="app-task-list__section govuk-heading-m">About the deceased person</h3>
+    <table class="govuk-table">
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row" role="row">
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;">
+            <a class="govuk-link" href="cya-deceased">Deceased person's details</a>
+          </td>
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;"></td>
+          <td class="govuk-table__cell" style="text-align: right; padding: 8px 24px 8px 0px;">
+            <strong class="govuk-tag">Completed</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="app-task-list__section govuk-heading-m">About the death</h3>
+    <table class="govuk-table">
+      <tbody class="govuk-table__body">
+
+        <tr class="govuk-table__row" role="row">
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;">
+            {% if data['actions-after-death-section'] == 'completed' %}
+            <a class="govuk-link" href="cya-death-circumstances">Actions after death</a>
+            {% else %}
+            <a class="govuk-link" href="death-circumstances">Actions after death</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;"></td>
+          <td class="govuk-table__cell" style="text-align: right; padding: 8px 24px 8px 0px;">
+            {% if data['actions-after-death-section'] == 'completed' %}
+            <span class="govuk-tag">Completed</span>
+            {% else %}
+            <span class="govuk-tag govuk-tag--grey">Not started</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr class="govuk-table__row" role="row">
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;">
+            {% if data['cause-of-death-section'] == 'completed' %}
+            <a class="govuk-link" href="cya-cause-death">Cause of death</a>
+            {% else %}
+            <a class="govuk-link" href="cause-of-death">Cause of death</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell" style="padding: 8px 24px 8px 0px;"></td>
+          <td class="govuk-table__cell" style="text-align: right; padding: 8px 24px 8px 0px;">
+            {% if data['cause-of-death-section'] == 'completed' %}
+            <span class="govuk-tag">Completed</span>
+            {% else %}
+            <span class="govuk-tag govuk-tag--grey">Not started</span>
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    {% if data['actions-after-death-section'] == 'completed' and data['cause-of-death-section'] == 'completed' %}
+    <a href="declaration" class="govuk-button">Save and continue</a>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

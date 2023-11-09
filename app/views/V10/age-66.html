@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l">
+      <!--<span class="govuk-caption-l govuk-caption--bottom">
+        Deceased person's details
+      </span> -->
+      What was the deceased person's age?
+    </h1>
+
+    <form action="age-66" class="form" method="post">
+
+      <div class="govuk-form-group">
+        
+        <input class="govuk-input govuk-input--width-5" id="age-66" name="age-66" type="text">
+          <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
+            <option value="years">Years</option>
+            <option value="months">Months</option>
+            <option value="days">Days</option>
+            <option value="hours">Hours</option>
+            <option value="minutes">Minutes</option>
+          </select>
+        </div>
+        
+        <!--<div id="age-hint" class="govuk-hint">
+          For example, 67 years old
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="deceased-age" name="deceased-age" type="text">
+      </div> -->
+
+
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
