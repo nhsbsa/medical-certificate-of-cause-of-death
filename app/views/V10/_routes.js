@@ -6,7 +6,8 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
 // External dependencies
-const axios = require('axios')
+const axios = require('axios');
+const { router } = require('../../routes');
 
 // ************************************************************
 // MFA set up
@@ -520,3 +521,4 @@ router.post(/select-hospital-address/, (req, res) => {
 });
 
 module.exports = router;
+router.use('/v9', require('./views/v9/_routes'));
