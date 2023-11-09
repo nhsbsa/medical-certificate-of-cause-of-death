@@ -1,5 +1,5 @@
 // ************************************************************
-// CURRENT VERSION xxx
+// CURRENT VERSION
 // ************************************************************
 
 const govukPrototypeKit = require('govuk-prototype-kit')
