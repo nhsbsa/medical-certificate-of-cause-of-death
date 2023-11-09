@@ -520,4 +520,3 @@ router.post(/select-hospital-address/, (req, res) => {
 });
 
 module.exports = router;
-router.use('/v10', require('./views/v10/_routes'));
