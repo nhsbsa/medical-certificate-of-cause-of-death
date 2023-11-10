@@ -93,8 +93,10 @@ router.post(/me-declaration/, (req, res) => {
 
 
 // ************************************************************
+// SIGN IN 
+// ************************************************************
 
-// login page
+// Sign in page
 router.post(/login-page/, (req, res) => {
     res.redirect('enter-code')
 });
@@ -291,15 +293,22 @@ router.post(/check-your-answers-cod/, (req, res) => {
 // Declaration
 // ************************************************************
 
-// Declaration
+// Declaration page
 router.post(/declaration/, (req, res) => {
-    res.redirect('notice-to-informant')
+    res.redirect('send-mccd-copy')
 });
+
+// Share copy of MCCD
+router.post(/send-mccd-copy/, (req, res) => {
+    res.redirect('send-notice-to-informant')
+}); 
 
 // Where do you need to send the notice to informant?
 router.post(/send-notice-to-informant/, (req, res) => {
     res.redirect('cya-emails')
 }); 
+
+
 
 // Confirmation page
 router.post(/start-new-mccd/, (req, res) => {
