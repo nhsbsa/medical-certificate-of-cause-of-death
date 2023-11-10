@@ -300,11 +300,11 @@ router.post(/declaration/, (req, res) => {
 
 // Share copy of MCCD
 router.post(/send-mccd-copy/, (req, res) => {
-    res.redirect('send-notice-to-informant')
+    res.redirect('notice-to-informant')
 }); 
 
 // Where do you need to send the notice to informant?
-router.post(/send-notice-to-informant/, (req, res) => {
+router.post(/notice-to-informant/, (req, res) => {
     res.redirect('cya-emails')
 }); 
 
