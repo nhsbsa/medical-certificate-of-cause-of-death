@@ -22,28 +22,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
     </div>
 
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Cause of death (1)</h2>
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Cause of death</h2>
 
 
-    
+    <!-- SUMMARY OVER 28 DAYS -->
+
+    {% if data['over-under-28'] == 'yes' %} {% endif %}
 
     <form action="check-your-answers-cod" method="post">
 
       <dl class="govuk-summary-list">
 
+        <!-- [1a] + [Onset 1a] -->
         <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key" style="width:50%">
-            
-            {% if data['over-under-28'] == 'yes' %}
-            (a) Disease or condition directly leading to death
-            
-            {% else %}
-            (a) Main disease or condition in infant
-            
-            {% endif %}
-
+            1(a) Disease or condition directly leading to death
           </dt>
-
 
           <!--Testing unit read-->
 
@@ -53,265 +48,170 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
           <dd class="govuk-summary-list__actions">
-
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
-
           </dd>
 
         </div>
-<!--
-        {% if data['over-under-28'] == 'yes' %}
+
+        <!-- [1b] + [Onset 1b] -->
         <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key" style="width:50%">
-            Time between onset and death
+            1(b) Other disease or condition, if any, leading to 1(a)
           </dt>
+
+          <!--Testing unit read-->
+
           <dd class="govuk-summary-list__value">
-            {{ data['duration1']}} {{ data['time-unit-duration-1']}}
+            {{ data['secondary-cause']}}</br>
+            <p class="govuk-body-s">{{ data['duration2']}} {{ data['time-unit-duration-2']}} between onset and death</p>
           </dd>
 
           <dd class="govuk-summary-list__actions">
-
             <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> name</span>
+              Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
-
           </dd>
 
         </div>
-        {% endif %}
-      -->
-        
+
+        <!-- [1c] + [Onset 1c] -->
         <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            {% if data['over-under-28'] == 'yes' %}
-            (b) Other disease or condition, if any, leading to 1(a)
-            {% else %}
-            b. Other disease or conditions in infant
-            {% endif %}
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['secondary-cause']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> secondary cause</span>
-            </a>
-
-          </dd>
-
-        </div>
-        {% if data['over-under-28'] == 'yes' %}
-        <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key" style="width:50%">
-            Time between onset and death
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['duration2']}} {{ data['time-unit-duration-2']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-
-          </dd>
-
-        </div>
-        
-
-        {% endif %}
-
-        
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            {% if data['over-under-28'] == 'yes' %}
             1(c) Other disease or condition, if any, leading to 1(b)
-            {% else %}
-            c. Main maternal disease or conditions affecting infant
-            {% endif %}
           </dt>
+
+          <!--Testing unit read-->
+
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-c']}}
+            {{ data['other-conditions-c']}}</br>
+            <p class="govuk-body-s">{{ data['duration3']}} {{ data['time-unit-duration-3']}} between onset and death</p>
           </dd>
 
           <dd class="govuk-summary-list__actions">
-
             <a href="cause-of-death">
-              {% if data['over-under-28'] == 'yes' %}
-              Change<span class="govuk-visually-hidden"> name</span>
-              {% else %}
-              Change<span class="govuk-visually-hidden"> main maternal disease or conditions</span>
-              {% endif %}
+              Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
-
           </dd>
 
         </div>
 
-        {% if data['over-under-28'] == 'yes' %}
+        <!-- [1d] + [Onset 1d] -->
         <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key" style="width:50%">
-            Time between onset and death
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['duration3']}} {{ data['time-unit-duration-3']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-
-          </dd>
-
-        </div>
-        
-
-        {% endif %}
-
-        <!--  -->
-
-        
-        {% if data['over-under-28'] == 'yes' %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
             1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
+
+          <!--Testing unit read-->
+
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-d']}}
+            {{ data['other-conditions-d']}}</br>
+            <p class="govuk-body-s">{{ data['duration4']}} {{ data['time-unit-duration-4']}} between onset and death</p>
           </dd>
-        
 
           <dd class="govuk-summary-list__actions">
-
             <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> c</span>
+              Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
-
           </dd>
 
         </div>
-        {% endif %}
 
-        {% if data['over-under-28'] == 'yes' %}
+        <!-- [2] + [Onset 2] -->
         <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key" style="width:50%">
-            Time between onset and death
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['duration4']}} {{ data['time-unit-duration-4']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-
-          </dd>
-
-        </div>
-        
-
-        {% endif %}
-
-
-        <!--  -->
-
-
-
-        {% if data['over-under-28'] == 'no' %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key" style="width:50%">
-            d. Other maternal disease or conditions affecting infant
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-d']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> other maternal disease or conditions</span>
-            </a>
-
-          </dd>
-
-        </div>
-        {% endif %}
-        
-        {% if data['over-under-28'] == 'yes' %}
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
             2(a) Other significant conditions contributing to their death
           </dt>
+
+          <!--Testing unit read-->
+
           <dd class="govuk-summary-list__value">
-            {{ data['other-significant-conditions']}}
+            {{ data['other-significant-conditions']}}</br>
+            <p class="govuk-body-s">{{ data['duration5']}} {{ data['time-unit-duration-5']}} between onset and death</p>
           </dd>
 
           <dd class="govuk-summary-list__actions">
-
-            <a href="other-significant-conditions">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-
-          </dd>
-
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key" style="width:50%">
-            Time between onset and death
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['duration5']}} {{ data['time-unit-duration-5']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
             <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> name</span>
+              Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
-
           </dd>
 
         </div>
-        {% endif %}
+
+        </dl>
+
+        <h2 class="govuk-heading-s govuk-!-margin-top-5 govuk-!-margin-bottom-3">Contributing factors</h2>
+
+        <dl class="govuk-summary-list">
+
+          <!-- Employment -->
+          <div class="govuk-summary-list__row">
+            
+            <dt class="govuk-summary-list__key" style="width:50%">
+              Death affected by employment?
+            </dt>
+  
+            <dd class="govuk-summary-list__value">
+              {{ data['caused-by-employment']}}
+            </dd>
+  
+            <dd class="govuk-summary-list__actions">
+              <a href="caused-by-employment">
+                Change<span class="govuk-visually-hidden"> employment</span>
+              </a>
+            </dd>
+  
+          </div>
+
+          <!-- Pregnancy -->
+          <div class="govuk-summary-list__row">
+            
+            <dt class="govuk-summary-list__key" style="width:50%">
+              Pregnancy
+            </dt>
+  
+            <dd class="govuk-summary-list__value">
+              {{ data['pregnant-at-death']}}
+            </dd>
+  
+            <dd class="govuk-summary-list__actions">
+              <a href="caused-by-employment">
+                Change<span class="govuk-visually-hidden"> pregnancy</span>
+              </a>
+            </dd>
+  
+          </div>
+
+          <!-- Pregnancy Contributed? -->
+          <div class="govuk-summary-list__row">
+            
+            <dt class="govuk-summary-list__key" style="width:50%">
+              Death affected by pregnancy?
+            </dt>
+  
+            <dd class="govuk-summary-list__value">
+              {{ data['pregnancy-contributed']}}
+            </dd>
+  
+            <dd class="govuk-summary-list__actions">
+              <a href="pregnancy-contributed">
+                Change<span class="govuk-visually-hidden"> pregnancy-contributed</span>
+              </a>
+            </dd>
+  
+          </div>
         
-
-        {% if data['over-under-28'] == 'yes' %}
-        
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Death affected by employment?
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['caused-by-employment']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="caused-by-employment">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-
-          </dd>
-
-        </div>
-        
-        {% endif %}
-      </dl>
+        </dl>
 
       <button class="govuk-button" type="submit">
         Save and continue
       </button>
+
     </form>
 
   </div>

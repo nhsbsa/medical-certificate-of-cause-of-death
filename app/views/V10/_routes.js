@@ -104,7 +104,11 @@ router.post(/enter-code/, (req, res) => {
     res.redirect('66-or-65')
 });
 
-// MCCD Creation flow - Name, NHS number, DoD, Age, DoB, Ethnicity, Place of death, Consultant
+// ***************************************************************************************************
+// MCCD Creation flow
+// Details: Name, NHS number, DoD, Age, DoB, Ethnicity, Place of death, Consultant
+// Cause of death: CoD, Employment, Pregancy, Pregancy (contributed?)
+// ***************************************************************************************************
 
 // Was the death more than 28 days after the birth?
 router.post(/66-or-65/, (req, res) => {
@@ -190,28 +194,6 @@ router.post(/location-of-death/, (req, res) => {
     
 });
 
-
-// [NO LONGER NEEDED] Did you see the deceased person before they died?
-// router.post(/last-seen-alive/, (req, res) => {
-   //  
-    // const lastSeenAlive = req.session.data['last-seen-alive']
-    
-    // if (lastSeenAlive == 'yes') {
-    //     res.redirect('date-last-seen')
-    // } else {
-    //     res.redirect('death-hospital')
-   //  }
-    // 
-// });
-
-// [NO LONGER NEEDED] When did you last see them alive?
-//router.post(/date-last-seen/, (req, res) => {
-  //  res.redirect('death-hospital')
-//});
-
-
-
-
 // ************************************************************
 // Actions after death section
 // ************************************************************
@@ -220,11 +202,6 @@ router.post(/location-of-death/, (req, res) => {
 router.post(/death-circumstances/, (req, res) => {
     res.redirect('implant')
 });
-
-// [NO LONGER NEEDED] Was the deceased person seen by a doctor after their death?
-//router.post(/death-seen-by/, (req, res) => {
-    //res.redirect('implant')
-//});
 
 // Was any implant placed in the body which may become hazardous when the body is cremated?
 router.post(/implant/, (req, res) => {
@@ -271,6 +248,16 @@ router.post(/cause-of-death/, (req, res) => {
 
 // Could the deceased person's job have caused or contributed to their death?
 router.post(/caused-by-employment/, (req, res) => {
+    res.redirect('pregnant-at-death')
+});
+
+// Was the deceased pregnant within the year prior to their death?
+router.post(/pregnant-at-death/, (req, res) => {
+    res.redirect('pregnancy-contributed')
+});
+
+// Could the pregnancy have contributed to their death?
+router.post(/pregnancy-contributed/, (req, res) => {
     res.redirect('cya-cause-death')
 });
 
