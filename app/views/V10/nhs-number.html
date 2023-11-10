@@ -11,35 +11,50 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <form action="nhs-number" class="form" method="post">
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-heading-l">Did the deceased person have a NHS number?</h1>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="nhs-number-yes" name="nhs-number" type="radio" value="yes"
-                data-aria-controls="nhs-number">
-              <label class="govuk-label govuk-radios__label" for="nhs-number-yes">
-                Yes
-              </label>
-            </div>
-            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="nhs-number">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="nhs-number">
-                  Enter NHS number
+    <form action="nhs-number" method="post">
+
+      <fieldset class="govuk-fieldset">
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              
+              <h1 class="govuk-heading-l">
+                Did the deceased person have a NHS number?
+              </h1>
+
+            </legend>
+
+            <div class="govuk-radios" data-module="govuk-radios">
+
+              <div class="govuk-radios__item">
+
+                <input class="govuk-radios__input" id="nhs-number-yes" name="nhs-number" type="radio" value="Yes" data-aria-controls="nhs-number-input">
+                <label class="govuk-label govuk-radios__label" for="nhs-number-yes">
+                  Yes
                 </label>
-                <input class="govuk-input govuk-input--width-12" id="nhs-number" name="nhs-number" type="text">
               </div>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="nhs-number-no" name="nhs-number" type="radio"
-                value="no">
-              <label class="govuk-label govuk-radios__label" for="nhs-number-no">
-                No
-              </label>
-            </div>
+
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="nhs-number-input">
+                <div class="govuk-form-group">
+                  
+                  <label class="govuk-label" for="nhs-number">
+                    Enter NHS number
+                  </label>
+
+                  <input class="govuk-input govuk-input--width-12" id="nhs-number-input" name="nhs-number-input" type="number">
+                </div>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="nhs-number-no" name="nhs-number" type="radio" value="No">
+                
+                <label class="govuk-label govuk-radios__label" for="nhs-number-no">
+                  No
+                </label>
+
+              </div>
+
           </div>
         </fieldset>
       </div>
