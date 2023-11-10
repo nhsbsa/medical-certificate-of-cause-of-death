@@ -107,7 +107,6 @@ router.post(/enter-code/, (req, res) => {
 // ***************************************************************************************************
 // MCCD Creation flow
 // Details: Name, NHS number, DoD, Age, DoB, Ethnicity, Place of death, Consultant
-// Cause of death: CoD, Employment, Pregancy, Pregancy (contributed?)
 // ***************************************************************************************************
 
 // Was the death more than 28 days after the birth?
