@@ -11,9 +11,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Cause of death</span>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <!--<span class="govuk-caption-l govuk-caption--bottom">
+        Cause of death
+      </span> -->
       Check your answers
     </h1>
+
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
+    </div>
+
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Cause of death (1)</h2>
+
 
     
 
@@ -23,14 +33,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key" style="width:50%">
+            
             {% if data['over-under-28'] == 'yes' %}
-            1(a) disease or condition directly leading to death
+            (a) Disease or condition directly leading to death
+            
             {% else %}
-            a. Main disease or condition in infant
+            (a) Main disease or condition in infant
+            
             {% endif %}
+
           </dt>
+
+
+          <!--Testing unit read-->
+
           <dd class="govuk-summary-list__value">
-            {{ data['main-cause']}}
+            {{ data['main-cause']}}</br>
+            <p class="govuk-body-s">{{ data['duration1']}} {{ data['time-unit-duration-1']}} between onset and death</p>
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -42,7 +61,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
         </div>
-
+<!--
         {% if data['over-under-28'] == 'yes' %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key" style="width:50%">
@@ -62,12 +81,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
         {% endif %}
-
+      -->
         
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             {% if data['over-under-28'] == 'yes' %}
-            1(b) other disease or condition
+            (b) Other disease or condition, if any, leading to 1(a)
             {% else %}
             b. Other disease or conditions in infant
             {% endif %}
@@ -111,7 +130,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             {% if data['over-under-28'] == 'yes' %}
-            1(c) additional disease or condition
+            1(c) Other disease or condition, if any, leading to 1(b)
             {% else %}
             c. Main maternal disease or conditions affecting infant
             {% endif %}
@@ -159,13 +178,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!--  -->
 
         
+        {% if data['over-under-28'] == 'yes' %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            1(d) additional disease or condition
+            1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data['other-conditions-d']}}
           </dd>
+        
 
           <dd class="govuk-summary-list__actions">
 
@@ -176,6 +197,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
         </div>
+        {% endif %}
 
         {% if data['over-under-28'] == 'yes' %}
         <div class="govuk-summary-list__row">
@@ -223,31 +245,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
         {% endif %}
-
-        {% if data['over-under-28'] == 'no' %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key" style="width:50%">
-            d. Other relevant causes
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-e']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> other relevant causes</span>
-            </a>
-
-          </dd>
-
-        </div>
-        {% endif %}
-
         
+        {% if data['over-under-28'] == 'yes' %}
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            2 other signficant conditions
+            2(a) Other significant conditions contributing to their death
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data['other-significant-conditions']}}
@@ -262,6 +265,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
         </div>
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key" style="width:50%">
             Time between onset and death
@@ -279,6 +283,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
         </div>
+        {% endif %}
         
 
         {% if data['over-under-28'] == 'yes' %}
