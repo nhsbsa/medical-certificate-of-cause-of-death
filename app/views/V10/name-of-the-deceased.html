@@ -12,13 +12,15 @@
         <a href="javascript:history.back()" class="govuk-back-link">Back</a>
         
         <h1 class="govuk-heading-l">
-          <!--<span class="govuk-caption-l govuk-caption--bottom">
-            Deceased person's details
-          </span> -->
-          What is the deceased person's name?
+          {% if data['over-under-28'] == 'yes' %} What is the deceased person's name?
+          {% else %}
+          What is the child's name?
+          {% endif %}
         </h1>
     
         <form action="name-of-the-deceased" class="form" method="post">
+          
+          {% if data['over-under-28'] == 'yes' %}
     
           <div class="govuk-form-group">
             <label class="govuk-label" for="deceased-first-name">
@@ -40,6 +42,31 @@
             </label>
             <input class="govuk-input" id="deceased-last-name" name="deceased-last-name" type="text">
           </div>
+
+          {% else %}
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="child-first-name">
+              First name of child
+            </label>
+            <input class="govuk-input" id="child-first-name" name="child-first-name" type="text">
+          </div>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="child-middle-name">
+              Middle name/s of child (optional)
+            </label>
+            <input class="govuk-input" id="child-middle-name" name="child-middle-name" type="text">
+          </div>
+    
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="child-last-name">
+              Last name of child
+            </label>
+            <input class="govuk-input" id="child-last-name" name="child-last-name" type="text">
+          </div>
+
+          {% endif %}
     
           <button class="govuk-button" type="submit">
             Save and continue

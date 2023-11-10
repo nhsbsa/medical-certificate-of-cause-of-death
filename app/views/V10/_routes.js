@@ -106,7 +106,6 @@ router.post(/enter-code/, (req, res) => {
 
 // ***************************************************************************************************
 // MCCD Creation flow
-// Details: Name, NHS number, DoD, Age, DoB, Ethnicity, Place of death, Consultant
 // ***************************************************************************************************
 
 // Was the death more than 28 days after the birth?
@@ -137,15 +136,35 @@ router.post(/date-of-death/, (req, res) => {
     
 });
 
+// Over 28 Days - AGE
 // What was the deceased persons age?
 router.post(/age-66/, (req, res) => {
     res.redirect('date-of-birth')
 });
 
+        // Under 28 Days - AGE
+        // What was the child's age?
+        router.post(/deceased-persons-age/, (req, res) => {
+            res.redirect('../date-of-birth')
+    
+        });
+
 // What is their date of birth?
 router.post(/date-of-birth/, (req, res) => {
-    res.redirect('ethnicity')
+
+    const overUnder28 = req.session.data['over-under-28']
+    
+    if (overUnder28 == 'yes') {
+        res.redirect('ethnicity')
+    } else {
+        res.redirect('neo-natal-deaths/location-born')
+    }
 });
+        // Where were they born?
+        router.post(/location-born/, (req, res) => {
+            res.redirect('../ethnicity')
+    
+        });
 
 // What is their ethnicity?
 router.post(/ethnicity/, (req, res) => {
@@ -207,7 +226,7 @@ router.post(/implant/, (req, res) => {
     
     const implant = req.session.data['implant']
     
-    if (implant == 'yes') {
+    if (implant == 'Yes') {
         res.redirect('implant-removed')
     } else {
         res.redirect('cya-death-circumstances')
@@ -286,31 +305,6 @@ router.post(/send-notice-to-informant/, (req, res) => {
 router.post(/start-new-mccd/, (req, res) => {
     // req.session.data = {}
     res.redirect('dashboard')
-});
-
-// ************************************************************
-// Neo-Natal Deaths Journey
-// ************************************************************
-
-// What was the deceased person's age?
-router.post(/deceased-persons-age/, (req, res) => {
-    
-    res.redirect('what-is-their-sex')
-    
-});
-
-// What is their sex?
-router.post(/what-is-their-sex/, (req, res) => {
-    
-    res.redirect('../last-seen-alive')
-    
-});
-
-// Where were they born?
-router.post(/location-born/, (req, res) => {
-    
-    res.redirect('../cya-deceased')
-    
 });
 
 

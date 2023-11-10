@@ -13,23 +13,25 @@
 
         <form action="deceased-persons-age" method="post">
         
-            <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Deceased person's details</span> What was the deceased person's age?</h1>
+            <h1 class="govuk-heading-l">
+                What was the child's age?
+            </h1>
 
             <div class="govuk-form-group">
-                <label class="govuk-label" for="deceased-persons-age-day">
-                Days
-                </label>
-                <input class="govuk-input" id="deceased-persons-age-day" name="deceased-persons-age-days" type="text">
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-5 border-hidden" id="deceased-persons-age" name="deceased-persons-age" type="text">
+                    <select class="govuk-select govuk-select--width-5" id="65-age-time-unit" name="65-age-time-unit">
+                        <option value="days old" selected>days old</option>
+                        <option value="hours old">hours old</option>
+                        <option value="minutes old">minutes old</option>
+                    </select>
+                
             </div>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="deceased-persons-age-hour">
-                Hours
-                </label>
-                <input class="govuk-input" id="deceased-persons-age-hour" name="deceased-persons-age-hours" type="text">
+
             </div>
 
             <button class="govuk-button" type="submit">
-                Continue
+                Save and continue
             </button>
 
         </form>

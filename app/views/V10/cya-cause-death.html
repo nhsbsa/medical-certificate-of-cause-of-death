@@ -12,9 +12,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
+      <span class="govuk-caption-l govuk-caption--bottom">
         Cause of death
-      </span> -->
+      </span>
       Check your answers
     </h1>
 
@@ -22,14 +22,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
     </div>
 
-    <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Cause of death</h2>
-
-
-    <!-- SUMMARY OVER 28 DAYS -->
-
-    {% if data['over-under-28'] == 'yes' %} {% endif %}
 
     <form action="check-your-answers-cod" method="post">
+
+      <!-- OVER 28 DAYS --> 
+      {% if data['over-under-28'] == 'yes' %}
 
       <dl class="govuk-summary-list">
 
@@ -125,7 +122,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-summary-list__row">
           
           <dt class="govuk-summary-list__key" style="width:50%">
-            2(a) Other significant conditions contributing to their death
+            2 Other significant conditions contributing to their death
           </dt>
 
           <!--Testing unit read-->
@@ -143,70 +140,171 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
 
-        </dl>
-
-        <h2 class="govuk-heading-s govuk-!-margin-top-5 govuk-!-margin-bottom-3">Contributing factors</h2>
-
-        <dl class="govuk-summary-list">
-
-          <!-- Employment -->
-          <div class="govuk-summary-list__row">
+        <!-- Employment -->
+        <div class="govuk-summary-list__row">
             
-            <dt class="govuk-summary-list__key" style="width:50%">
-              Death affected by employment?
-            </dt>
-  
-            <dd class="govuk-summary-list__value">
-              {{ data['caused-by-employment']}}
-            </dd>
-  
-            <dd class="govuk-summary-list__actions">
-              <a href="caused-by-employment">
-                Change<span class="govuk-visually-hidden"> employment</span>
-              </a>
-            </dd>
-  
-          </div>
+          <dt class="govuk-summary-list__key" style="width:50%">
+            Death affected by employment?
+          </dt>
 
-          <!-- Pregnancy -->
-          <div class="govuk-summary-list__row">
-            
-            <dt class="govuk-summary-list__key" style="width:50%">
-              Pregnancy
-            </dt>
-  
-            <dd class="govuk-summary-list__value">
-              {{ data['pregnant-at-death']}}
-            </dd>
-  
-            <dd class="govuk-summary-list__actions">
-              <a href="caused-by-employment">
-                Change<span class="govuk-visually-hidden"> pregnancy</span>
-              </a>
-            </dd>
-  
-          </div>
+          <dd class="govuk-summary-list__value">
+            {{ data['caused-by-employment']}}
+          </dd>
 
-          <!-- Pregnancy Contributed? -->
-          <div class="govuk-summary-list__row">
-            
-            <dt class="govuk-summary-list__key" style="width:50%">
-              Death affected by pregnancy?
-            </dt>
-  
-            <dd class="govuk-summary-list__value">
-              {{ data['pregnancy-contributed']}}
-            </dd>
-  
-            <dd class="govuk-summary-list__actions">
-              <a href="pregnancy-contributed">
-                Change<span class="govuk-visually-hidden"> pregnancy-contributed</span>
-              </a>
-            </dd>
-  
-          </div>
+          <dd class="govuk-summary-list__actions">
+            <a href="caused-by-employment">
+              Change<span class="govuk-visually-hidden"> employment</span>
+            </a>
+          </dd>
+
+        </div>
+
+        <!-- Pregnancy -->
+        <div class="govuk-summary-list__row">
+          
+          <dt class="govuk-summary-list__key" style="width:50%">
+            Pregnancy
+          </dt>
+
+          <dd class="govuk-summary-list__value">
+            {{ data['pregnant-at-death']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="caused-by-employment">
+              Change<span class="govuk-visually-hidden"> pregnancy</span>
+            </a>
+          </dd>
+
+        </div>
+
+        <!-- Pregnancy Contributed? -->
+        <div class="govuk-summary-list__row">
+          
+          <dt class="govuk-summary-list__key" style="width:50%">
+            Death affected by pregnancy?
+          </dt>
+
+          <dd class="govuk-summary-list__value">
+            {{ data['pregnancy-contributed']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="pregnancy-contributed">
+              Change<span class="govuk-visually-hidden"> pregnancy-contributed</span>
+            </a>
+          </dd>
+
+        </div>
+      
+      </dl>
+
+          
+
+        {% else %}
+
+          <!-- UNDER 28 Days -->
+
+          <dl class="govuk-summary-list">
+
+            <div class="govuk-summary-list__row">
+              
+              <dt class="govuk-summary-list__key" style="width:50%">
+                (a) Main diseases or condition in infant
+              </dt>
+
+              <dd class="govuk-summary-list__value">
+                {{ data['main-cause']}}
+              </dd>
+
+              <dd class="govuk-summary-list__actions">
+                <a href="cause-of-death">
+                  Change<span class="govuk-visually-hidden"> main cause</span>
+                </a>
+              </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+              
+              <dt class="govuk-summary-list__key" style="width:50%">
+                (b) Other diseases or conditions in infant
+              </dt>
+
+              <dd class="govuk-summary-list__value">
+                {{ data['secondary-cause']}}
+              </dd>
+
+              <dd class="govuk-summary-list__actions">
+                <a href="cause-of-death">
+                  Change<span class="govuk-visually-hidden"> main cause</span>
+                </a>
+              </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+              
+              <dt class="govuk-summary-list__key" style="width:50%">
+                (c) Main maternal diseases or conditions affecting infant
+              </dt>
+
+              <dd class="govuk-summary-list__value">
+                {{ data['other-conditions-c']}}
+              </dd>
+
+              <dd class="govuk-summary-list__actions">
+                <a href="cause-of-death">
+                  Change<span class="govuk-visually-hidden"> main cause</span>
+                </a>
+              </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+              
+              <dt class="govuk-summary-list__key" style="width:50%">
+                (d) Other maternal diseases or conditions affecting infant
+              </dt>
+
+              <dd class="govuk-summary-list__value">
+                {{ data['other-conditions-d']}}
+              </dd>
+
+              <dd class="govuk-summary-list__actions">
+                <a href="cause-of-death">
+                  Change<span class="govuk-visually-hidden"> main cause</span>
+                </a>
+              </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+              
+              <dt class="govuk-summary-list__key" style="width:50%">
+                (e) Other relevant factors or circumstances (not diseases of infant or mother)
+              </dt>
+
+              <dd class="govuk-summary-list__value">
+                {{ data['other-conditions-e']}}
+              </dd>
+
+              <dd class="govuk-summary-list__actions">
+                <a href="cause-of-death">
+                  Change<span class="govuk-visually-hidden"> main cause</span>
+                </a>
+              </dd>
+
+            </div>
+
+
+
+            </dl>
         
-        </dl>
+        
+
+      {% endif %}
+
 
       <button class="govuk-button" type="submit">
         Save and continue

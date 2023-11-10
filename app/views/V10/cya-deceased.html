@@ -11,19 +11,29 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">
         Deceased person's details
-      </span> -->
+      </span>
       Check your answers
     </h1>
     
-    <p>Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.</p>
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
+    </div>
 
-    <h2 class="govuk-heading-m">Deceased person's details</h2>
+
+
+  <form action="check-your-answers-dec-details" method="post">
+
+      <!-- OVER 28 DAYS -->
+
+      {% if data['over-under-28'] == 'yes' %}
+
     <dl class="govuk-summary-list">
 
       <div class="govuk-summary-list__row">
+        
         <dt class="govuk-summary-list__key">
           Full name
         </dt>
@@ -82,11 +92,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Age
           </dt>
           <dd class="govuk-summary-list__value">
-            {% if data['over-under-28'] == 'yes' %}
-            {{ data['deceased-age']}}
-            {% else %}
-            {{ data['deceased-persons-age']}}
-            {% endif %}
+            {{ data['age-66']}} {{ data['age-time-unit']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -132,56 +138,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </dd>
       </div>
 
-      {% if data['over-under-28'] == 'no' %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Age
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['deceased-persons-age-days']}} Days, {{ data['deceased-persons-age-hours']}} Hours
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="neo-natal-deaths/deceased-persons-age">
-              Change<span class="govuk-visually-hidden"> age</span>
-            </a>
-
-          </dd>
-        </div>
-      {% endif %}
-
-      {% if data['over-under-28'] == 'no' %}
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Location of birth
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['location-of-birth']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="neo-natal-deaths/location-born">
-              Change<span class="govuk-visually-hidden"> location of birth</span>
-            </a>
-
-          </dd>
-        </div>
-      {% endif %}
-
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           Location of death
         </dt>
         <dd class="govuk-summary-list__value">
           {% if data['death-in-hospital'] == 'no' %}
-          {% if data['location-of-death'] == 'no' %}
-            {{ data['location-death']}}
 
-          {% else %}
-            {% if data['select-another-address'] %}
-              {{ data['select-another-address'] }}
+            {% if data['location-of-death'] == 'no' %}
+              {{ data['location-death']}}
+
+            {% else %}
+              {% if data['select-another-address'] %}
+                {{ data['select-another-address'] }}
 
               {% else %}
                 {{ data['address-line-1']}}
@@ -189,14 +158,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 {{ data['address-town']}}<br>
                 {{ data['address-county']}}<br>
                 {{ data['address-postcode']}}<br>
-          {% endif %}
+            {% endif %}
+            
           {% endif %}
           
           {% else %}
             {% if data['select-hospital-address'] %}
-            {{ data['select-hospital-address'] }}
+              {{ data['select-hospital-address'] }}
           
-              {% else %}
+            {% else %}
               {{ data['address-line-1']}}
               {{ data['address-line-2']}}<br>
               {{ data['address-town']}}<br>
@@ -204,6 +174,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['address-postcode']}}<br>
           {% endif %}
           {% endif %}
+        
         </dd>
 
         <dd class="govuk-summary-list__actions">
@@ -216,29 +187,236 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
       </div>
 
-      {% if data['death-in-hospital'] == 'yes' %}
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Consultant responsible for care
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ data['consultant']}}
-        </dd>
+          {% if data['death-in-hospital'] == 'yes' %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Consultant responsible for care
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['consultant']}}
+                </dd>
 
-        <dd class="govuk-summary-list__actions">
+                <dd class="govuk-summary-list__actions">
 
-          <a href="death-hospital">
-            Change<span class="govuk-visually-hidden"> consultant name</span>
-          </a>
+                  <a href="death-hospital">
+                    Change<span class="govuk-visually-hidden"> consultant name</span>
+                  </a>
 
-        </dd>
+                </dd>
 
-      </div>
-      {% endif %}
+              </div>
+          {% endif %}
+      </dl>
 
+
+<!-- UNDER 28 Days -->
       
+      {% else %} 
 
-    </dl>
+      <dl class="govuk-summary-list">
+
+        <div class="govuk-summary-list__row">
+          
+          <dt class="govuk-summary-list__key">
+            Full name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['child-first-name']}} {{ data['child-middle-name']}} {{ data['child-last-name']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="name-of-the-deceased">
+              Change<span class="govuk-visually-hidden"> name</span>
+            </a>
+  
+          </dd>
+  
+        </div>
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            NHS number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['nhs-number'] == 'Yes' %}
+            {{ data['nhs-number-input']}}
+            {% else %}
+            Not provided
+            {% endif %}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="nhs-number">
+              Change<span class="govuk-visually-hidden"> nhs number</span>
+            </a>
+  
+          </dd>
+  
+        </div>
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date of death
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="date-of-death">
+              Change<span class="govuk-visually-hidden"> date of death</span>
+            </a>
+  
+          </dd>
+  
+        </div>
+  
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Age
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['deceased-persons-age']}} {{ data['65-age-time-unit']}}
+            </dd>
+  
+            <dd class="govuk-summary-list__actions">
+  
+              <a href="deceased-persons-age">
+                Change<span class="govuk-visually-hidden"> age</span>
+              </a>
+  
+            </dd>
+          </div>
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date of birth
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['dob-day']}} {{ data['dob-month']}} {{ data['dob-year']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="age-66">
+              Change<span class="govuk-visually-hidden"> date of birth</span>
+            </a>
+  
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Place of birth
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['location-of-birth']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="age-66">
+              Change<span class="govuk-visually-hidden"> place of birth</span>
+            </a>
+  
+          </dd>
+        </div>
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Ethnicity
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['ethnicity']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="age-66">
+              Change<span class="govuk-visually-hidden"> ethnicity</span>
+            </a>
+  
+          </dd>
+        </div>
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Location of death
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['death-in-hospital'] == 'no' %}
+  
+              {% if data['location-of-death'] == 'no' %}
+                {{ data['location-death']}}
+  
+              {% else %}
+                {% if data['select-another-address'] %}
+                  {{ data['select-another-address'] }}
+  
+                {% else %}
+                  {{ data['address-line-1']}}
+                  {{ data['address-line-2']}}<br>
+                  {{ data['address-town']}}<br>
+                  {{ data['address-county']}}<br>
+                  {{ data['address-postcode']}}<br>
+              {% endif %}
+              
+            {% endif %}
+            
+            {% else %}
+              {% if data['select-hospital-address'] %}
+                {{ data['select-hospital-address'] }}
+            
+              {% else %}
+                {{ data['address-line-1']}}
+                {{ data['address-line-2']}}<br>
+                {{ data['address-town']}}<br>
+                {{ data['address-county']}}<br>
+                {{ data['address-postcode']}}<br>
+            {% endif %}
+            {% endif %}
+          
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="location-of-death">
+              Change<span class="govuk-visually-hidden"> location of death</span>
+            </a>
+  
+          </dd>
+  
+        </div>
+  
+            {% if data['death-in-hospital'] == 'yes' %}
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Consultant responsible for care
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ data['consultant']}}
+                  </dd>
+  
+                  <dd class="govuk-summary-list__actions">
+  
+                    <a href="death-hospital">
+                      Change<span class="govuk-visually-hidden"> consultant name</span>
+                    </a>
+  
+                  </dd>
+  
+                </div>
+            {% endif %}
+
+        </dl>
+      
+      
+      
+      {% endif %}
+  </form>
 
     <a class="govuk-button" href="mccd-tasklist">
       Save and continue

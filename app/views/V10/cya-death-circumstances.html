@@ -11,22 +11,28 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">
         Actions after death
-      </span> -->
+      </span>
       Check your answers
     </h1>
 
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
+    </div>    
 
     
-
+    
+    
+    
     <form action="check-your-answers-dc" method="post">
 
       <dl class="govuk-summary-list">
 
 
         <div class="govuk-summary-list__row">
+
           <dt class="govuk-summary-list__key">
             Post-mortem?
           </dt>
@@ -80,9 +86,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </dd>
 
           </div>
-        {% endif %}
+        
 
-        {% if data['implant'] == 'yes' %}
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Implants removed?
