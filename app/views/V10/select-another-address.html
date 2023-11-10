@@ -8,8 +8,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-    <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="find-address">Search again</a></p>
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <form action="select-hospital-address" method="post" novalidate>
     
@@ -24,6 +23,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                   Select an address
                 </h1>
               </label>
+
+              <div class="">
+                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="find-address">Search again</a></p>
+              </div>
+
               <select class="govuk-select" id="select-address" name="select-another-address">
                 <option value="choose" selected>Select address</option>
                 {% for anotherAddress in data['anotherAddresses'] %}
@@ -43,7 +47,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </form>
 
     <div class="govuk-form-group">
-      <p><a href="address">Enter your address manually</a></p>
+      <p>
+        <a href="address">Enter address manually</a>
+      </p>
     </div>
 
   </div>

@@ -20,12 +20,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-form-group">
               <label class="govuk-label" for="sort">
                 <h1 class="govuk-heading-l">
-                  Select an address
+                  Select a hospital address
                 </h1>
               </label>
+
               <div class="">
                 <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="hospital-postcode">Search again</a></p>
               </div>
+              
               <select class="govuk-select" id="select-address" name="select-hospital-address">
                 <option value="choose" selected>Select address</option>
                 {% for hospitalAddress in data['hospitalAddresses'] %}
