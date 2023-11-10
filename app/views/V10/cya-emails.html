@@ -11,20 +11,40 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">MCCD outputs</span>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">
+        MCCD outputs
+      </span>
       Check your answers
     </h1>
 
-    <div class="govuk-inset-text">
-      <span class="govuk-visually-hidden">Information: </span>
-      <p>Check that all the details are correct before submitting for scrutiny.</p>
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Check that all the details are correct before you submit this certificate for medical examiner’s scrutiny.
     </div>
 
     <dl class="govuk-summary-list">
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Email address notice to informant will be sent to
+          Your practice's email
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['mccd-email']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="name-of-the-deceased">
+            Change<span class="govuk-visually-hidden"> practice email address</span>
+          </a>
+
+        </dd>
+
+      </div>
+      
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Informant's email
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data['informant-email']}}
