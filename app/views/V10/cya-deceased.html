@@ -33,6 +33,24 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <dl class="govuk-summary-list">
 
       <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          NHS number
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['nhs-number-input']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="nhs-number">
+            Change<span class="govuk-visually-hidden"> nhs number</span>
+          </a>
+
+        </dd>
+
+      </div>
+
+      <div class="govuk-summary-list__row">
         
         <dt class="govuk-summary-list__key">
           Full name
@@ -53,59 +71,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          NHS number
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ data['nhs-number-input']}}
-        </dd>
-
-        <dd class="govuk-summary-list__actions">
-
-          <a href="nhs-number">
-            Change<span class="govuk-visually-hidden"> nhs number</span>
-          </a>
-
-        </dd>
-
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Date of death
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
-        </dd>
-
-        <dd class="govuk-summary-list__actions">
-
-          <a href="date-of-death">
-            Change<span class="govuk-visually-hidden"> date of death</span>
-          </a>
-
-        </dd>
-
-      </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Age
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['age-66']}} {{ data['age-time-unit']}}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-
-            <a href="age-66">
-              Change<span class="govuk-visually-hidden"> age</span>
-            </a>
-
-          </dd>
-        </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
           Date of birth
         </dt>
         <dd class="govuk-summary-list__value">
@@ -116,6 +81,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
           <a href="age-66">
             Change<span class="govuk-visually-hidden"> date of birth</span>
+          </a>
+
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Age
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['age-66']}} {{ data['age-time-unit']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="age-66">
+            Change<span class="govuk-visually-hidden"> age</span>
           </a>
 
         </dd>
@@ -136,6 +118,24 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </a>
 
         </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Date of death
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
+        </dd>
+
+        <dd class="govuk-summary-list__actions">
+
+          <a href="date-of-death">
+            Change<span class="govuk-visually-hidden"> date of death</span>
+          </a>
+
+        </dd>
+
       </div>
 
       <div class="govuk-summary-list__row">
@@ -215,25 +215,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
       <dl class="govuk-summary-list">
 
-        <div class="govuk-summary-list__row">
-          
-          <dt class="govuk-summary-list__key">
-            Full name
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['child-first-name']}} {{ data['child-middle-name']}} {{ data['child-last-name']}}
-          </dd>
-  
-          <dd class="govuk-summary-list__actions">
-  
-            <a href="name-of-the-deceased">
-              Change<span class="govuk-visually-hidden"> name</span>
-            </a>
-  
-          </dd>
-  
-        </div>
-  
+        
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             NHS number
@@ -255,42 +237,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
   
         </div>
-  
+
         <div class="govuk-summary-list__row">
+          
           <dt class="govuk-summary-list__key">
-            Date of death
+            Full name
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
+            {{ data['child-first-name']}} {{ data['child-middle-name']}} {{ data['child-last-name']}}
           </dd>
   
           <dd class="govuk-summary-list__actions">
   
-            <a href="date-of-death">
-              Change<span class="govuk-visually-hidden"> date of death</span>
+            <a href="name-of-the-deceased">
+              Change<span class="govuk-visually-hidden"> name</span>
             </a>
   
           </dd>
   
         </div>
-  
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Age
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['deceased-persons-age']}} {{ data['65-age-time-unit']}}
-            </dd>
-  
-            <dd class="govuk-summary-list__actions">
-  
-              <a href="deceased-persons-age">
-                Change<span class="govuk-visually-hidden"> age</span>
-              </a>
-  
-            </dd>
-          </div>
-  
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Date of birth
@@ -324,6 +290,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   
           </dd>
         </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Age
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['deceased-persons-age']}} {{ data['65-age-time-unit']}}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="deceased-persons-age">
+              Change<span class="govuk-visually-hidden"> age</span>
+            </a>
+
+          </dd>
+        </div>
   
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
@@ -341,6 +324,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   
           </dd>
         </div>
+  
+        
+  
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date of death
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
+          </dd>
+  
+          <dd class="govuk-summary-list__actions">
+  
+            <a href="date-of-death">
+              Change<span class="govuk-visually-hidden"> date of death</span>
+            </a>
+  
+          </dd>
+  
+        </div>       
   
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
