@@ -146,7 +146,7 @@ router.post(/age-66/, (req, res) => {
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
-        res.redirect('date-of-death')
+        res.redirect('death-hospital')
     
 });
 
