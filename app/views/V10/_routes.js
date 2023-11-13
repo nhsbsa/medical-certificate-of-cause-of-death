@@ -151,6 +151,11 @@ router.post(/age-66/, (req, res) => {
     
         });
 
+
+        // {% if (data['hospitalAddresses'] | length > 1)
+        // deceased-persons-age
+
+
 // What is their date of birth?
 router.post(/date-of-birth/, (req, res) => {
 
@@ -295,13 +300,13 @@ router.post(/check-your-answers-cod/, (req, res) => {
 
 // Declaration page
 router.post(/declaration/, (req, res) => {
-    res.redirect('send-mccd-copy')
+    res.redirect('notice-to-informant')
 });
 
 // Share copy of MCCD
-router.post(/send-mccd-copy/, (req, res) => {
-    res.redirect('notice-to-informant')
-}); 
+//router.post(/send-mccd-copy/, (req, res) => {
+//    res.redirect('notice-to-informant')
+//}); 
 
 // Where do you need to send the notice to informant?
 router.post(/notice-to-informant/, (req, res) => {

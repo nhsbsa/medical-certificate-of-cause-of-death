@@ -7,15 +7,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-three-quarters">
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
       <span class="govuk-caption-l govuk-caption--bottom">
-        Cause of death
+        Check your answers
       </span>
-      Check your answers
+      Cause of death
     </h1>
 
     <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
@@ -26,22 +26,52 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <form action="check-your-answers-cod" method="post">
 
       <!-- OVER 28 DAYS --> 
-      {% if data['over-under-28'] == 'yes' %}
+      {% if data['over-under-28'] == 'yes' %} 
 
       <dl class="govuk-summary-list">
 
         <!-- [1a] + [Onset 1a] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             1(a) Disease or condition directly leading to death
           </dt>
 
           <!--Testing unit read-->
 
+          <!--<dd class="govuk-summary-list__value">
+            
+            {% if data['main-cause'] %}
+              
+            {{ data['main-cause']}}
+            
+          </br>
+              
+            {% if data['duration1'] %}
+            
+                  <p class="govuk-body-s">
+                    {{ data['duration1']}} {{ data['time-unit-duration-1']}} between onset and death
+                  </p>
+              {% else %}
+              <p class="govuk-body-s sub-text govuk-!-margin-top-2">Time between onset and death not provided</p>
+              {% endif %}
+
+            {% else %}
+            <a href="cause-of-death">Add desease or condition<span class="govuk-visually-hidden"> main cause</span>
+            </a>
+
+            {% endif %}
+              
+          </dd>
+
+           -->
+
           <dd class="govuk-summary-list__value">
-            {{ data['main-cause']}}</br>
-            <p class="govuk-body-s">{{ data['duration1']}} {{ data['time-unit-duration-1']}} between onset and death</p>
+            {{ data['main-cause']}}
+          </dd>
+
+          <dd class="govuk-summary-list__value">
+            {{ data['duration1']}} {{ data['time-unit-duration-1']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -55,15 +85,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- [1b] + [Onset 1b] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             1(b) Other disease or condition, if any, leading to 1(a)
           </dt>
 
-          <!--Testing unit read-->
+          <dd class="govuk-summary-list__value">
+            {{ data['secondary-cause']}}
+          </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['secondary-cause']}}</br>
-            <p class="govuk-body-s">{{ data['duration2']}} {{ data['time-unit-duration-2']}} between onset and death</p>
+            {{ data['duration2']}} {{ data['time-unit-duration-2']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -77,15 +108,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- [1c] + [Onset 1c] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             1(c) Other disease or condition, if any, leading to 1(b)
           </dt>
 
-          <!--Testing unit read-->
+          <dd class="govuk-summary-list__value">
+            {{ data['other-conditions-c']}}
+          </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-c']}}</br>
-            <p class="govuk-body-s">{{ data['duration3']}} {{ data['time-unit-duration-3']}} between onset and death</p>
+            {{ data['duration3']}} {{ data['time-unit-duration-3']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -99,15 +131,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- [1d] + [Onset 1d] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
 
-          <!--Testing unit read-->
+          <dd class="govuk-summary-list__value">
+            {{ data['other-conditions-d']}}
+          </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-d']}}</br>
-            <p class="govuk-body-s">{{ data['duration4']}} {{ data['time-unit-duration-4']}} between onset and death</p>
+            {{ data['duration4']}} {{ data['time-unit-duration-4']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -121,15 +154,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- [2] + [Onset 2] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             2 Other significant conditions contributing to their death
           </dt>
 
-          <!--Testing unit read-->
+          <dd class="govuk-summary-list__value">
+            {{ data['other-significatn-conditions']}}
+          </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-significant-conditions']}}</br>
-            <p class="govuk-body-s">{{ data['duration5']}} {{ data['time-unit-duration-5']}} between onset and death</p>
+            {{ data['duration5']}} {{ data['time-unit-duration-5']}}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -143,13 +177,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- Employment -->
         <div class="govuk-summary-list__row">
             
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             Death affected by employment?
           </dt>
 
           <dd class="govuk-summary-list__value">
             {{ data['caused-by-employment']}}
           </dd>
+          <dd></dd>
 
           <dd class="govuk-summary-list__actions">
             <a href="caused-by-employment">
@@ -162,13 +197,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- Pregnancy -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             Pregnancy
           </dt>
 
           <dd class="govuk-summary-list__value">
             {{ data['pregnant-at-death']}}
           </dd>
+          <dd></dd>
 
           <dd class="govuk-summary-list__actions">
             <a href="caused-by-employment">
@@ -181,13 +217,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- Pregnancy Contributed? -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:50%">
+          <dt class="govuk-summary-list__key" style="width:35%">
             Death affected by pregnancy?
           </dt>
 
           <dd class="govuk-summary-list__value">
             {{ data['pregnancy-contributed']}}
           </dd>
+          <dd></dd>
 
           <dd class="govuk-summary-list__actions">
             <a href="pregnancy-contributed">
@@ -209,7 +246,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="govuk-summary-list__row">
               
-              <dt class="govuk-summary-list__key" style="width:50%">
+              <dt class="govuk-summary-list__key" style="width:35%">
                 (a) Main diseases or condition in infant
               </dt>
 
@@ -227,7 +264,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="govuk-summary-list__row">
               
-              <dt class="govuk-summary-list__key" style="width:50%">
+              <dt class="govuk-summary-list__key" style="width:35%">
                 (b) Other diseases or conditions in infant
               </dt>
 
@@ -245,7 +282,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="govuk-summary-list__row">
               
-              <dt class="govuk-summary-list__key" style="width:50%">
+              <dt class="govuk-summary-list__key" style="width:35%">
                 (c) Main maternal diseases or conditions affecting infant
               </dt>
 
@@ -263,7 +300,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="govuk-summary-list__row">
               
-              <dt class="govuk-summary-list__key" style="width:50%">
+              <dt class="govuk-summary-list__key" style="width:35%">
                 (d) Other maternal diseases or conditions affecting infant
               </dt>
 
@@ -281,7 +318,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="govuk-summary-list__row">
               
-              <dt class="govuk-summary-list__key" style="width:50%">
+              <dt class="govuk-summary-list__key" style="width:35%">
                 (e) Other relevant factors or circumstances (not diseases of infant or mother)
               </dt>
 

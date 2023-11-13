@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Medical Examiner Declaration</h1>
+
+    <form action="me-declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="me-declaration" name="me-declaration" type="checkbox" value="me-declaration"> <label class="govuk-label govuk-checkboxes__label" for="me-declaration">
+                I am a duly appointed medical examiner and I confirm that following my review the cause of death is as stated in this certificate to the best of my knowledge and belief.
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button class="govuk-button" type="submit">Complete MCCD</button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
