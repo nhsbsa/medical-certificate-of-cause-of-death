@@ -152,82 +152,26 @@ router.post(/ethnicity/, (req, res) => {
 
 // Was the death in a hospital?
 router.post(/date-of-death/, (req, res) => {
-    
-    const deathInHospital = req.session.data['death-in-hospital']
-    const consultantName = req.session.data['consultant']
-    
-    if (deathInHospital == 'yes') {
-        res.redirect('hospital-postcode')
-    } else {
-        res.redirect('location-of-death')
-    }
-    
+        res.redirect('death-hospital')
 });
 
-// At which hospital did the death occur?
-router.post(/death-location/, (req, res) => {
-    
-    const overUnder28 = req.session.data['over-under-28']
-
-    if ( overUnder28 == 'yes') {
-        res.redirect('cya-deceased')
-    } else {
-        res.redirect('neo-natal-deaths/location-born')
-    }
-    
+// X
+router.post(/death-hospital/, (req, res) => {
+        res.redirect('hospital-postcode')   
 
 });
 
-// Do you know the full address of the death?
-router.post(/location-of-death/, (req, res) => {
-    
-    const locationOfDeath = req.session.data['location-of-death']
-    
-    if (locationOfDeath == 'yes') {
-        res.redirect('another-location-postcode')
-    } else {
-        res.redirect('unknown-address')
-    }
-    
+// X
+router.post(/hospital-postcode/, (req, res) => {
+    res.redirect('select-hospital-address')   
+
 });
 
+// CYA - Deceased person's details
+router.post(/select-hospital-address/, (req, res) => {
+    res.redirect('cya-deceased')   
 
-        // Under 28 Days - AGE
-        // What was the child's age?
-        //router.post(/deceased-persons-age/, (req, res) => {
-          //  res.redirect('../date-of-birth')
-    
-        //});
-
-
-        // {% if (data['hospitalAddresses'] | length > 1)
-        // deceased-persons-age
-
-
-
-
-
-
-// What is their date of birth?
-//router.post(/date-of-birth/, (req, res) => {
-
-  //  const overUnder28 = req.session.data['over-under-28']
-    
-    //if (overUnder28 == 'yes') {
-       // res.redirect('ethnicity')
-    //} else {
-      //  res.redirect('neo-natal-deaths/location-born')
-    //}
-//});
-        // Where were they born?
-        //router.post(/location-born/, (req, res) => {
-          //  res.redirect('../ethnicity')
-    
-        //});
-
-
-
-
+});
 
 // ************************************************************
 // Actions after death section
