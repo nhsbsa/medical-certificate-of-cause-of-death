@@ -23,8 +23,31 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-summary-card__title-wrapper">
                 <h2 class="govuk-summary-card__title">Deceased person's details</h2>
             </div>
+
+            <!-- NHS Number -->
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            NHS number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            1234567890
+                            {% endif %}
+                            {{ data['nhs-number']}}
+                        </dd>
+                        <!--{% if data['role-type'] == 'ap' %}
+                        <dd class="govuk-summary-list__actions">
+                            <a href="#">Change
+                            </a>
+                        </dd>
+                        {% endif %}-->
+                    
+                    </div>
+
+                    <!-- NAME -->
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
@@ -38,30 +61,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{
                             data['deceased-last-name']}}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
+                        <!--{% if data['role-type'] == 'ap' %}
                         <dd class="govuk-summary-list__actions">
                             <a href="#">Change
                             </a>
                         </dd>
-                        {% endif %}
+                        {% endif %} -->
                     </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            NHS number
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            123456789
-                            {% endif %}
-                            {{ data['nhs-number']}}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
+                    
+                    
                     
                     <!--DATE OF BIRTH-->
                     
@@ -99,30 +107,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dd>
                         {% endif %}
                     </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Sex
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            Female
-                            {% endif %}
-                            {{ data['what-is-their-sex']}}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Ethnicity
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            White
+                            White - Any other mixed background
                             {% endif %}
                             {{ data['ethnicity']}}
                         </dd>
@@ -151,34 +143,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         {% endif %}
                     </div>
 
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Seen by attending practitioner before death?
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Was the death in a hospital?
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Location of death
@@ -233,13 +197,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {% endif %}
 
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
+                    
                     </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Consultant responsible for care
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Mary Smith
+                        </dd>
+                    </div>
+
+                        
                 </dl>
             </div>
         </div>
@@ -335,75 +305,39 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            Heart attack
+                            Myocardial infarction
                             {% endif %}
                             {{ data['main-cause'] }}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Time between onset and death
-                        </dt>
                         <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
                             1 hour
-                            {% endif %}
-                            {{ data['duration1'] }}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
+                        
                     </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            1(b) Other disease or condition
+                            1(b) Other disease or condition, if any, leading to 1(a)
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            Pneumonia, aquired in hospital
+                            Atherosclerosis
                             {% endif %}
                             {{data ['secondary-cause']}}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
+                        <dd class="govuk-summary-list__value">
+                            2 months
                         </dd>
-                        {% endif %}
+
                     </div>
+
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Time between onset and death
+                            1(c) Other disease or condition, if any, leading to 1(b)
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            2 weeks
-                            {% endif %}
-                            {{ data ['duration2'] }}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            1(c) Other disease or condition
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            N/A
+                            Not specified
                             {% endif %}
                             {{ data ['other-conditions-c'] }}
                         </dd>
@@ -414,64 +348,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dd>
                         {% endif %}
                     </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Time between onset and death
+                            1(d) Other disease or condition, if any, leading to 1(c)
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            N/A
-                            {% endif %}
-                            {{ data ['duration3'] }}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            1(d) Other disease or condition
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            N/A
+                            Not specified
                             {% endif %}
                             {{ data ['other-conditions-d'] }}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
+                        
                     </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Time between onset and death
+                            2 Other significant conditions contributing to their death
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {% if data['role-type'] == 'me' %}
-                            N/A
-                            {% endif %}
-                            {{ data ['duration4'] }}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            2 other signficant conditions
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            Chest pain, lung inflamation
+                            Diabetes type 2
                             {% endif %}
                             {{ data['other-significant-conditions']}}
                         </dd>
@@ -482,23 +379,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dd>
                         {% endif %}
                     </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Time between onset and death
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {% if data['role-type'] == 'me' %}
-                            Not captured
-                            {% endif %}
-                            {{ data ['duration5'] }}
-                        </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
-                    </div>
+                    
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Death affected by employment?
@@ -509,13 +390,33 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {% endif %}
                             {{ data['caused-by-employment']}}
                         </dd>
-                        {% if data['role-type'] == 'ap' %}
-                        <dd class="govuk-summary-list__actions">
-                            <a href="#">Change
-                            </a>
-                        </dd>
-                        {% endif %}
+                        
                     </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Pregnancy
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            Pregnant at time of death
+                            {% endif %}
+                            {{ data['pregnant-at-death']}}
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Death affected by pregnancy?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['role-type'] == 'me' %}
+                            No
+                            {% endif %}
+                            {{ data['pregnancy-contributed']}}
+                        </dd>
+                    </div>
+
                 </dl>
             </div>
         </div>
@@ -575,7 +476,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
-                            Medical examiner declaration
+                            Medical examiner decision
                         </h2>
                     </legend>
 
