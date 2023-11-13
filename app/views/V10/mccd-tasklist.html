@@ -68,6 +68,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     {% if data['actions-after-death-section'] == 'completed' and data['cause-of-death-section'] == 'completed' %}
     <a href="declaration" class="govuk-button">Save and continue</a>
+    {% else %}
+    <button disabled="disabled" aria-disabled="true" class="govuk-button govuk-button--disabled" data-module="govuk-button">
+      Save and continue
+    </button>
     {% endif %}
 
   </div>
