@@ -11,7 +11,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
             <h1 class="govuk-panel__title">
+                {% if data['declaration-approve'] == 'yes' %}
+                Medical certificate of cause of death approved
+                {% else %}
                 Medical certificate of cause of death reviewed
+                {% endif %}
             </h1>
         </div>
 
