@@ -113,11 +113,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-c']}}
+            {% if data['other-conditions-c'] %}
+              {{ data['other-conditions-c']}}
+            {% else %}
+              Not specified
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['duration3']}} {{ data['time-unit-duration-3']}}
+            {% if data['duration3'] %}
+              {{ data['duration3']}} {{ data['time-unit-duration-3']}}
+            {% else %}
+              
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -136,11 +144,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-d']}}
+            {% if data['other-conditions-d'] %}
+              {{ data['other-conditions-d']}}
+            {% else %}
+              Not specified
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['duration4']}} {{ data['time-unit-duration-4']}}
+            {% if data['duration4'] %}
+              {{ data['duration4']}} {{ data['time-unit-duration-4']}}
+            {% else %}
+              
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -159,7 +175,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-significatn-conditions']}}
+            {{ data['other-significant-conditions']}}
           </dd>
 
           <dd class="govuk-summary-list__value">
