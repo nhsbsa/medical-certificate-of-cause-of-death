@@ -146,12 +146,12 @@ router.post(/age-66/, (req, res) => {
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
-        res.redirect('death-hospital')
+        res.redirect('date-of-death')
     
 });
 
 // Was the death in a hospital?
-router.post(/death-hospital/, (req, res) => {
+router.post(/date-of-death/, (req, res) => {
     
     const deathInHospital = req.session.data['death-in-hospital']
     const consultantName = req.session.data['consultant']
