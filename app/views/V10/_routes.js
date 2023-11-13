@@ -112,70 +112,42 @@ router.post(/enter-code/, (req, res) => {
 
 // Was the death more than 28 days after the birth?
 router.post(/66-or-65/, (req, res) => {
-    res.redirect('name-of-the-deceased')
-});
-
-// What is the deceased person's name?
-router.post(/name-of-the-deceased/, (req, res) => {
     res.redirect('nhs-number')
 });
 
 // What is the deceased persons NHS Number
 router.post(/nhs-number/, (req, res) => {
-    res.redirect('date-of-death')
+    res.redirect('name-of-the-deceased')
 });
 
-// What is their date of death?
-router.post(/date-of-death/, (req, res) => {
-    
-    const overUnder28 = req.session.data['over-under-28']
-    
-    if (overUnder28 == 'yes') {
-        res.redirect('age-66')
-    } else {
-        res.redirect('neo-natal-deaths/deceased-persons-age')
-    }
-    
+// What is the deceased person's name?
+router.post(/name-of-the-deceased/, (req, res) => {
+    res.redirect('date-of-birth')
 });
 
 // Over 28 Days - AGE
 // What was the deceased persons age?
-router.post(/age-66/, (req, res) => {
-    res.redirect('date-of-birth')
-});
-
-        // Under 28 Days - AGE
-        // What was the child's age?
-        router.post(/deceased-persons-age/, (req, res) => {
-            res.redirect('../date-of-birth')
-    
-        });
-
-
-        // {% if (data['hospitalAddresses'] | length > 1)
-        // deceased-persons-age
-
-
-// What is their date of birth?
 router.post(/date-of-birth/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
-    
+
     if (overUnder28 == 'yes') {
-        res.redirect('ethnicity')
+        res.redirect('age-66')
     } else {
-        res.redirect('neo-natal-deaths/location-born')
+        res.redirect('neo-natal-deaths/deceased-persons-age')
+
     }
 });
-        // Where were they born?
-        router.post(/location-born/, (req, res) => {
-            res.redirect('../ethnicity')
-    
-        });
 
 // What is their ethnicity?
+router.post(/age-66/, (req, res) => {
+    res.redirect('ethnicity')
+});
+
+// What is their date of death?
 router.post(/ethnicity/, (req, res) => {
-    res.redirect('death-hospital')
+        res.redirect('date-of-death')
+    
 });
 
 // Was the death in a hospital?
@@ -218,6 +190,44 @@ router.post(/location-of-death/, (req, res) => {
     }
     
 });
+
+
+        // Under 28 Days - AGE
+        // What was the child's age?
+        //router.post(/deceased-persons-age/, (req, res) => {
+          //  res.redirect('../date-of-birth')
+    
+        //});
+
+
+        // {% if (data['hospitalAddresses'] | length > 1)
+        // deceased-persons-age
+
+
+
+
+
+
+// What is their date of birth?
+//router.post(/date-of-birth/, (req, res) => {
+
+  //  const overUnder28 = req.session.data['over-under-28']
+    
+    //if (overUnder28 == 'yes') {
+       // res.redirect('ethnicity')
+    //} else {
+      //  res.redirect('neo-natal-deaths/location-born')
+    //}
+//});
+        // Where were they born?
+        //router.post(/location-born/, (req, res) => {
+          //  res.redirect('../ethnicity')
+    
+        //});
+
+
+
+
 
 // ************************************************************
 // Actions after death section
