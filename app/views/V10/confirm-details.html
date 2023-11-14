@@ -10,11 +10,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
+      <span class="govuk-caption-l govuk-caption--bottom">
         Your details
-      </span> -->
+      </span>
       
-        Check your details are correct before starting a certificate
+        Check your details are correct before starting a new certificate
     </h1>
       
     <dl class="govuk-summary-list">
@@ -26,6 +26,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {% if data['your-full-name-first'] and data['your-full-name-last'] %}
               {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
             {% else %}
+            
+            Sarah Phillips
               
             {% endif %}
           </dd>
@@ -40,7 +42,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             GMC number
           </dt>
           <dd class="govuk-summary-list__value">
-                     
+            12345678          
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="#">
@@ -48,29 +50,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </a>
           </dd>
         </div>
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Primary qualification
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {% if data['primary-qualification'] == 'no' %}
-              {{ data['other-qualification'] }}
-            {% else %}
-            
-            {% endif %}
-          </dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="#">
-              Change<span class="govuk-visually-hidden"> primary qualification</span>
-            </a>
-          </dd>
-        </div>
+        
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Work location
             </dt>
             <dd class="govuk-summary-list__value">
-
+              123 Hospital Road, Wing 4<br>
+              Newcastle, Tyne and Wear<br>
+              NE12 3AB
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">

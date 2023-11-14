@@ -471,6 +471,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         {% if data['declaration-approve'] %}
         <a href="dashboard" class="govuk-button">Back to dashboard</a>
         {% else %}
+
         <form action="me-declaration" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
@@ -512,9 +513,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                 </fieldset>
             </div>
-            <button class="govuk-button" type="submit">Continue</button>
+            <button class="govuk-button govuk-button--primary" type="submit">Continue</button>
         </form>
         {% endif %}
+        
+        
         {% else %}
         <a href="dashboard" class="govuk-button">Back to dashboard</a>
         {% endif %}

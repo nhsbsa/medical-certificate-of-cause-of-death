@@ -88,7 +88,7 @@ router.post(/me-email-address/, (req, res) => {
 });
 
 router.post(/me-declaration/, (req, res) => {    
-    res.redirect('me-mccd-reviewed')
+  res.redirect('me-mccd-reviewed')
 });
 
 
@@ -125,7 +125,6 @@ router.post(/name-of-the-deceased/, (req, res) => {
     res.redirect('date-of-birth')
 });
 
-// Over 28 Days - AGE
 // What was the deceased persons age?
 router.post(/date-of-birth/, (req, res) => {
 
@@ -144,6 +143,10 @@ router.post(/age-66/, (req, res) => {
     res.redirect('ethnicity')
 });
 
+router.post(/deceased-persons-age/, (req, res) => {
+    res.redirect('../ethnicity')
+});
+
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
         res.redirect('date-of-death')
@@ -155,7 +158,7 @@ router.post(/date-of-death/, (req, res) => {
         res.redirect('death-hospital')
 });
 
-// X
+// Hospital
 router.post(/death-hospital/, (req, res) => {
         res.redirect('hospital-postcode')   
 
@@ -465,6 +468,18 @@ router.get(/another-location-lookup/, (req, res) => {
 
 router.post(/select-hospital-address/, (req, res) => {
     res.redirect('cya-deceased')
+});
+
+// ME Declaration
+router.post(/me-mccd-summary/, (req, res) => {
+    var MEApproveReject = req.session.data['me-declaration']
+
+if (MEApproveReject == 'yes') {
+    res.redirect('me-declaration')
+} else {
+    res.redirect('me-mccd-reviewed')
+
+}
 });
 
 module.exports = router;
