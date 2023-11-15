@@ -28,7 +28,7 @@ router.post(/login-page/, (req, res) => {
     if (accountCreationJourney == 'active') {
         res.redirect('../MFA/set-password')
     } else {
-        res.redirect('../auth/care-id-login')
+        res.redirect('../dashboard')
     }
 
 });
