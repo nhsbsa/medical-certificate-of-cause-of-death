@@ -11,6 +11,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <form action="login-page" method="post">
             <h1 class="govuk-heading-l">Sign in</h1>
+            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    <span class="visually-hidden"> </span>
+                    Once you have signed in, yours session will time out after 60 minutes of inactivity.
+                </span>
+            </div>
 
             <div class="govuk-form-group">
                 <label class="govuk-label" for="username">
@@ -25,20 +32,17 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </label>
                 <input class="govuk-input" id="password" name="password" type="password">
             </div>
+            <p><a class="govuk-link" href="#">Forgot your password?</a></p>
 
-            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <span class="govuk-warning-text__text">
-                    <span class="visually-hidden"> </span>
-                    Once you have signed in, yours session will time out after 60 minutes of inactivity.
-                </span>
-            </div>
+            
 
             <button class="govuk-button" type="submit">
                 Sign in
             </button>
-            <br>
-            <p><a class="govuk-link" href="#">Forgot your password?</a></p>
+            
+            <br><br>
+            <a href="v10/auth/care-id-login"><button class="nhslogin-button" type="submit">Sign in with Care ID</button></a><br>
+            
         </form>
 
     </div>

@@ -28,7 +28,7 @@ router.post(/login-page/, (req, res) => {
     if (accountCreationJourney == 'active') {
         res.redirect('../MFA/set-password')
     } else {
-        res.redirect('enter-code')
+        res.redirect('../auth/care-id-login')
     }
 
 });
@@ -85,6 +85,11 @@ router.post(/manual-work-address/, (req, res) => {
 
 router.post(/me-email-address/, (req, res) => {    
     res.redirect('../MFA/set-password')
+});
+
+router.post(/me-mccd-summary/, (req, res) => {
+    res.redirect('#')
+    
 });
 
 router.post(/me-declaration/, (req, res) => {    
@@ -471,15 +476,18 @@ router.post(/select-hospital-address/, (req, res) => {
 });
 
 // ME Declaration
-router.post(/me-mccd-summary/, (req, res) => {
-    var MEApproveReject = req.session.data['me-declaration']
+    //router.post(/me-mccd-summary/, (req, res) => {
+        
+      //  const MEApproveReject = req.session.data['declaration-approve']
 
-if (MEApproveReject == 'yes') {
-    res.redirect('me-declaration')
-} else {
-    res.redirect('me-mccd-reviewed')
-
-}
-});
+        
+        //    res.redirect('dashboard')
+        
+    
+      
+      
+        //req.session.data['me-declaration']
+        //res.redirect('me-declaration')
+//});
 
 module.exports = router;
