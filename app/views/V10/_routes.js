@@ -277,13 +277,29 @@ router.post(/check-your-answers-cod/, (req, res) => {
 });
 
 // ************************************************************
-// AP Declaration
+// Declaration
 // ************************************************************
 
 // Declaration page [AP]
+
 router.post(/ap-declaration/, (req, res) => {
+    res.redirect('confirmation')
+});
+router.post(/confirmation/, (req, res) => {
     res.redirect('dashboard?role-type=ap')
 });
+
+// Declaration page [ME Cert]
+
+router.post(/me-cert-declaration/, (req, res) => {
+    res.redirect('confirmation')
+});
+router.post(/confirmation/, (req, res) => {
+    res.redirect('dashboard?role-type=me')
+});
+
+// ************************************************************
+
 
 // ************************************************************
 // Notice to informant
@@ -501,7 +517,7 @@ if (meApproveReject == 'approve') {
 }
 });
 
-router.get(/me-declaration-check/, (req, res) => {
+router.get(/me-declaration-scrutiny/, (req, res) => {
     res.redirect('me-mccd-reviewed')
 });
 
