@@ -11,8 +11,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Deceased person's details</span>
-      What was the approximate location of the death?
+    <h1 class="govuk-heading-l">
+      Where approximately did the death take place?
     </h1>
 
     <form action="death-location" class="form" method="post">
@@ -23,6 +23,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <label class="govuk-label" for="location-death">
             Enter details
           </label>
+          <div id="approx-location-hint" class="govuk-hint">
+            For example, in Cliffe Castle Park, Keighley near the fountain
+          </div>
+
           <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
             aria-describedby="example-hint"></textarea>
         </div>
