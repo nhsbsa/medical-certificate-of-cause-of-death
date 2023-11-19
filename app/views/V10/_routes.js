@@ -139,11 +139,6 @@ router.post(/date-of-birth/, (req, res) => {
     }
 });
 
-    // Under 28 age
-    router.post(/location-born/, (req,res) => {
-        res.redirect('deceased-persons-age')
-});
-
 // What is their ethnicity?
 
 // Over 28
@@ -198,6 +193,18 @@ router.post(/location-of-death/, (req, res) => {
         res.redirect('another-location-postcode')
     }
 
+});
+
+// Exact address
+router.post(/location-born/, (req, res) => {
+    res.redirect('../cya-deceased')
+    
+});
+
+// Exact address
+router.post(/exact-address/, (req, res) => {
+    res.redirect('cya-deceased')
+    
 });
 
 // CYA - Deceased person's details
