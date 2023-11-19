@@ -122,16 +122,26 @@ router.post(/name-of-the-deceased/, (req, res) => {
 });
 
 // What was the deceased persons age?
+
+    // If Over 28 > Age
 router.post(/date-of-birth/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
 
     if (overUnder28 == 'yes') {
         res.redirect('age-66')
+
+    // If Under 28 > Location of birth
+
     } else {
-        res.redirect('neo-natal-deaths/deceased-persons-age')
+        res.redirect('neo-natal-deaths/location-born')
 
     }
+});
+
+    // Under 28 age
+    router.post(/location-born/, (req,res) => {
+        res.redirect('deceased-persons-age')
 });
 
 // What is their ethnicity?
