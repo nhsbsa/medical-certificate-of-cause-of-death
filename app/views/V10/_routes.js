@@ -201,7 +201,7 @@ router.post(/location-of-death/, (req, res) => {
 });
 
 // Exact address
-router.post(/exact-address/, (req, res) => {
+router.post(/death-location/, (req, res) => {
     res.redirect('cya-deceased')
     
 });
