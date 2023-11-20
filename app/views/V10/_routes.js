@@ -141,8 +141,20 @@ router.post(/date-of-birth/, (req, res) => {
 
 // Under 28 - Location of birth > Age
 router.post(/location-born/, (req, res) => {
-    res.redirect('deceased-persons-age')
+    res.redirect('triage-24-hours')
 });
+
+router.post(/triage-24-hours/, (req, res) => {
+
+    const oneDay = req.session.data['over-under-24']
+
+    if (oneDay == 'yes') {
+        res.redirect('deceased-persons-age')
+    } else {
+        res.redirect('age-65-hours')
+    }
+});
+
 
 // What is their ethnicity?
 
@@ -153,6 +165,10 @@ router.post(/age-66/, (req, res) => {
 
 // Under 28
 router.post(/deceased-persons-age/, (req, res) => {
+    res.redirect('../ethnicity')
+});
+
+router.post(/age-65-hours/, (req, res) => {
     res.redirect('../ethnicity')
 });
 
