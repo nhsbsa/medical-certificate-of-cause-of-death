@@ -13,6 +13,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <form action="login-page" method="post">
             <h1 class="govuk-heading-l">Sign in</h1>
 
+            <!-- Warning text -->
+            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    Once you have signed in, if you do not do anything for 60 minutes any information you have not saved will be deleted.
+                </span>
+            </div>
+
             <div class="govuk-form-group">
                 <label class="govuk-label" for="username">
                     Email address
@@ -27,22 +35,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <input class="govuk-input govuk-input--width-20" id="password" name="password" type="password">
             </div>
             <p><a class="govuk-link" href="#">Forgot your password?</a></p>
-            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <span class="govuk-warning-text__text">
-                    Once you have signed in, if you do not do anything for 60 minutes any information you have not saved will be deleted.
-                </span>
-            </div>
-            
-
-            
 
             <button class="govuk-button" type="submit">
                 Sign in
             </button>
             
-            <br><br>
-            <a href="dashboard"><button class="nhslogin-button">Sign in with Care ID</button></a><br>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+            <a href="care-id-select-login"class="nhslogin-button">Sign in with Care ID</a><br>
             
         </form>
 

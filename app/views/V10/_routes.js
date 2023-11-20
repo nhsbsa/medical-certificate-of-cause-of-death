@@ -33,6 +33,12 @@ router.post(/login-page/, (req, res) => {
 
 });
 
+// NHS Care ID
+router.post(/care-id-select-login/, (req, res) => {
+    res.redirect('../dashboard')
+});
+
+
 // Set your password
 router.post(/set-password/, (req, res) => {
     res.redirect('set-up-authenticator')
