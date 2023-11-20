@@ -151,14 +151,7 @@ router.post(/location-born/, (req, res) => {
 });
 
 router.post(/triage-24-hours/, (req, res) => {
-
-    const oneDay = req.session.data['over-under-24']
-
-    if (oneDay == 'yes') {
-        res.redirect('deceased-persons-age')
-    } else {
-        res.redirect('age-65-hours')
-    }
+    res.redirect('deceased-persons-age')
 });
 
 
