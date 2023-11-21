@@ -296,7 +296,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Age
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data['deceased-persons-age']}} {{ data['65-age-time-unit']}}
+            {% if data['over-under-24'] == 'yes' %} 
+            {{ data['deceased-persons-age']}} days old
+            {% else %}
+            {{ data['Hours']}} hours {{ data['Minutes']}} minutes old
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
