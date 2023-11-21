@@ -1,0 +1,80 @@
+{% extends "layouts/start-main.html" %}
+
+{% block pageTitle %}
+Start MCCD
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <a href="#" class="govuk-back-link">Home</a>
+  </div>
+  <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-6 govuk-!-margin-top-5">
+    
+    <h1 class="govuk-heading-xl">
+      Complete a medical certificate of cause of death (MCCD)
+    </h1>
+    <p>
+      Use this service to complete a medical certificate of cause of death (MCCD).
+    </p> 
+    <p>
+      When someone dies, a doctor involved in their care has to complete a medical certificate of cause of death (MCCD), which is then forwarded to the register office to register the death.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      Who can complete an MCCD
+    </h2>
+    <p>
+      When a patient dies it is the statutory duty of the doctor who has attended in the last illness to issue the MCCD. In hospital, there may be several doctors in a team caring for the patient. It is ultimately the responsibility of the consultant in charge of the patient’s care to ensure that the death is properly certified.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      When does an MCCD need to be completed
+    </h2>
+    <p>
+      An MCCD is required to register all non-coronial deaths in England and Wales. 
+    </p>
+    <p>
+      If no doctor who cared for the patient can be found, the death must be referred to the coroner to investigate and certify the cause. <br> <br>
+      If the attending doctor has not seen the patient within the 28 days preceding death, and has not seen the body after death either, the registrar is obliged to refer the death to the coroner before it can be registered. In these circumstances, the coroner may instruct the registrar to accept the attending doctor’s MCCD for registration, despite the prolonged interval.
+      <br><br>A doctor who has not been directly involved in the patient’s care at any time during the illness from which they died cannot certify under current legislation but should provide the coroner with any information that may help to determine the cause of death. The coroner may then provide this information to the registrar of deaths. It will be used for mortality statistics, but the death will be legally ‘uncertified’ if the coroner does not investigate through an autopsy, an inquest, or both.
+    </p>
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+        An MCCD is not required in the case of a stillbirth
+      </strong>
+    </div>
+    <p>
+      Registration of stillbirths is a separate process from death certification. Refer to the guidance for <a href="https://www.gov.uk/register-stillbirth" class="govuk-link" rel="noreferrer noopener" target="_blank">registering a stillbirth</a>.
+    </p>
+
+    <div class="govuk-!-margin-top-5">
+    <a href="/V10/index" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg></a>
+    </div>
+
+   
+  </div>
+  
+
+  <!-- ================================================ -->
+  <!-- Useful links -->
+  <!-- ================================================ -->
+
+  <div class="govuk-grid-column-one-third">
+    <div class="related-navigation govuk-!-margin-top-5">
+      <h2 class="govuk-heading-m">Related content</h2>
+      <p><a href="https://www.gov.uk/government/publications/guidance-notes-for-completing-a-medical-certificate-of-cause-of-death/guidance-for-doctors-completing-medical-certificates-of-cause-of-death-in-england-and-wales-accessible-version" class="govuk-link" rel="noreferrer noopener" target="_blank">
+        Guidance for doctors completing medical certificates of cause of death in England and Wales (opens in a new tab)</a></p>
+      <p><a href="https://www.england.nhs.uk/establishing-medical-examiner-system-nhs/non-coronial-deaths-in-the-community/"  class="govuk-link" rel="noreferrer noopener" target="_blank">Information for primary care on extending medical examiner scrutiny to non-coronial deaths in the community</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
