@@ -67,11 +67,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
            -->
 
           <dd class="govuk-summary-list__value">
-            {{ data['main-cause']}}
+            {{ data['main-cause'] or 'Intraperitoneal haemorrhage' }}
           </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['duration1']}} {{ data['time-unit-duration-1']}}
+            {% if data['duration1'] %}
+              {{ data['duration1']}} {{ data['time-unit-duration-1']}}
+            {% else %}
+              8 Minutes
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -90,11 +94,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['secondary-cause']}}
+            {{ data['secondary-cause'] or 'Ruptured metastatic deposit in liver' }}
           </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['duration2']}} {{ data['time-unit-duration-2']}}
+            {% if data['duration2'] %}
+              {{ data['duration2']}} {{ data['time-unit-duration-2']}}
+            {% else %}
+              3 hours
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -113,18 +121,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {% if data['other-conditions-c'] %}
-              {{ data['other-conditions-c']}}
-            {% else %}
-              Not specified
-            {% endif %}
+              {{ data['other-conditions-c'] or 'Primary adenocarinmoma of ascending colon' }}
+
           </dd>
 
           <dd class="govuk-summary-list__value">
             {% if data['duration3'] %}
               {{ data['duration3']}} {{ data['time-unit-duration-3']}}
             {% else %}
-              
+              2 years
             {% endif %}
           </dd>
 
@@ -145,7 +150,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
           <dd class="govuk-summary-list__value">
             {% if data['other-conditions-d'] %}
-              {{ data['other-conditions-d']}}
+              {{ data['other-conditions-d'] or 'Non-insulin dependent diabetes mellitus' }}
             {% else %}
               Not specified
             {% endif %}
@@ -175,11 +180,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['other-significant-conditions']}}
+              {{ data['other-significant-conditions'] or 'Non-insulin dependent diabetes mellitus' }}
+
           </dd>
 
           <dd class="govuk-summary-list__value">
-            {{ data['duration5']}} {{ data['time-unit-duration-5']}}
+            {% if data['duration5'] %}
+              {{ data['duration5']}} {{ data['time-unit-duration-5']}}
+            {% else %}
+              15 years
+            {% endif %}
           </dd>
 
           <dd class="govuk-summary-list__actions">
@@ -194,11 +204,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-summary-list__row">
             
           <dt class="govuk-summary-list__key" style="width:35%">
-            Death affected by employment?
+            Death affected by employment
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['caused-by-employment']}}
+            {{ data['caused-by-employment'] or 'No' }}
           </dd>
           <dd></dd>
 
@@ -218,12 +228,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['pregnant-at-death']}}
+            {{ data['pregnant-at-death'] or 'Not pregnant' }}
           </dd>
           <dd></dd>
 
           <dd class="govuk-summary-list__actions">
-            <a href="caused-by-employment">
+            <a href="pregnant-at-death">
               Change<span class="govuk-visually-hidden"> pregnancy</span>
             </a>
           </dd>
@@ -238,7 +248,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['pregnancy-contributed']}}
+            {{ data['pregnancy-contributed'] or 'No' }}
           </dd>
           <dd></dd>
 
