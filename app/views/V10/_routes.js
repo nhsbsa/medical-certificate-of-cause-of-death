@@ -554,4 +554,12 @@ router.get(/me-declaration-scrutiny/, (req, res) => {
 
 // ************************************************************
 
+// AP Amending MCCD
+router.post(/ap-mccd-summary/, (req, res) => {
+    res.redirect('confirmation')
+
+});
+
+// ************************************************************
+
 module.exports = router;
