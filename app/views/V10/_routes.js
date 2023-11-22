@@ -569,7 +569,7 @@ router.post(/ap-mccd-summary/, (req, res) => {
 
 // NHS - Care ID
 
-router.post(/care-id-method/, (req, res) => {
+router.post(/care-id-select/, (req, res) => {
     const careID = req.session.data['care-id-method']
     res.redirect('care-id-authentication')
     
@@ -593,7 +593,23 @@ router.post(/care-id-code/, (req, res) => {
 });
 
 router.post(/care-id-role/, (req, res) => {
-    res.redirect('../dashboard')
+    res.redirect('../dashboard?role-type=ap')
+});
+
+router.post(/care-id-authentication/, (req,res) => {
+    res.redirect('/v10/dashboard?role-type=ap')
+});
+
+router.post(/care-id-key/, (req,res) => {
+    res.redirect('/v10/dashboard?role-type=ap')
+});
+
+router.post(/care-id-windows/, (req,res) => {
+    res.redirect('/v10/dashboard?role-type=ap')
+});
+
+router.post(/care-id-smartcard/, (req,res) => {
+    res.redirect('/v10/dashboard?role-type=ap')
 });
 
 // ************************************************************

@@ -31,7 +31,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 Medical Examiner’s comment
                 </h2>
                     
-                <p class="govuk-body">Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean posuere ipsum augue, sed semper lorem gravida nec. Duis eu ipsum tortor.</p>
+                <p class="govuk-body">
+                    Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
+                </p>
             </div>
             
           </div>
@@ -61,7 +63,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dt>
 
                         <dd class="govuk-summary-list__value">
-                            {{ data['nhs-number']}}
+                            {{ data['nhs-number'] or '785 302 1445' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -77,7 +79,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['deceased-first-name']}} {{ data['deceased-middle-name']}} {{data['deceased-last-name']}}
+                            {{ data['deceased-first-name'] or 'Joseph' }} {{ data['deceased-middle-name'] or 'William' }} {{data['deceased-last-name'] or 'Doyle' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -93,7 +95,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Date of birth
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['dob-day']}} {{ data['dob-month']}} {{ data['dob-year']}}
+                            {{ data['dob-day'] or '11' }} {{ data['dob-month'] or 'June' }} {{ data['dob-year'] or '1984' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -108,7 +110,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Age
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['deceased-age']}}
+                            {{ data['deceased-age'] or '39' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -123,7 +125,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Ethnicity
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['ethnicity']}}
+                            {{ data['ethnicity'] or 'White - British' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -137,7 +139,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Date of death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['date-of-death']}}
+                            {{ data['date-of-death'] or '9 November 2023' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -152,7 +154,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Location of death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['location-death']}}
+                            {{ data['location-death'] or 'Leeds General Infirmary' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -192,7 +194,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Post-mortem?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data ['death-circumstances']}}
+                            {{ data ['death-circumstances'] or 'No' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -206,7 +208,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Implants in body?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['implant']}}
+                            {{ data['implant'] or 'No' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -220,7 +222,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Implant details
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['implant-details']}}
+                            {{ data['implant-details'] or 'Not applicable' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -234,7 +236,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Implants removed?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['implant-removed']}}
+                            {{ data['implant-removed'] or 'Not applicable' }}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -270,10 +272,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(a) Disease or condition directly leading to death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['main-cause'] }}
+                            {{ data['main-cause'] or 'Heart attack' }}
                         </dd>
                         <dd class="govuk-summary-list__value">
-                            1 hour
+                            20 minutes
                         </dd>
 
                     </div>
@@ -286,7 +288,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {{data ['secondary-cause']}}
                         </dd>
                         <dd class="govuk-summary-list__value">
-                            2 months
+                            
                         </dd>
 
                     </div>

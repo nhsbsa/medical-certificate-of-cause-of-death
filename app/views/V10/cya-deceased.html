@@ -167,12 +167,20 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['select-hospital-address'] }}
           
             {% else %}
-              {{ data['address-line-1'] or 'Guys and St Thomas NHS Foundation Trust' }}
+
+              {{ data['address-line-1']}}
+              {{ data['address-line-2']}}<br>
+              {{ data['address-town']}}<br>
+              {{ data['address-county']}}<br>
+              {{ data['address-postcode']}}<br>
+
+         <!--   {{ data['address-line-1'] or 'Guys and St Thomas NHS Foundation Trust' }}
               {{ data['address-line-2'] or 'Westminster Bridge Rd' }}<br>
               {{ data['address-town'] or 'London' }}<br>
               {{ data['address-county'] or 'Greater London' }}<br>
               {{ data['address-postcode'] or 'SE1 7EH' }}<br>
-          {% endif %}
+              -->  
+              {% endif %}
           {% endif %}
         
         </dd>
