@@ -1,4 +1,4 @@
-{% set pageName="Sign in using a Smartcard" %}
+{% set pageName="Sign in with an Authenticator App" %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -80,19 +80,30 @@
 
 
 {% block content %}
-      <form action="care-id-option" method="post">
-    <fieldset class="nhsuk-fieldset">
-      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-        <h1 class="nhsuk-fieldset__heading">
-          {{ pageName }}
-        </h1>
-      </legend>
 
-    </fieldset>
-    <button class="nhsuk-button" data-module="govuk-button">Continue</button>
-  </form>
+<form action="care-id-code" method="post">
 
-            
+  <fieldset class="nhsuk-fieldset">
+    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+      <h1 class="nhsuk-fieldset__heading">
+        {{ pageName }}
+      </h1>
+    </legend>
+
+    <div class="nhsuk-form-group">
+
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="example">
+          Enter verification code
+        </label>
+        <input class="nhsuk-input" id="example" name="example" type="text">
+      </div>
+
+  </fieldset>
+
+  <button class="nhsuk-button" data-module="govuk-button">Continue</button>
+
+</form>
 
 {% endblock %}
 
