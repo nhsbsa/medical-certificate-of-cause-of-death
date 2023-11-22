@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Select your login method
+{% endblock %}
+
+{% block content %}
+
+
+
+  <div class="nhsuk-grid-row">
+
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="login-method" method="post">
+
+      <h1>
+        Select your login method
+      </h1>
+
+      <p>Your choice will be saved as your preferred login method for this browser. You may have to repeat this step if you clear your browser’s cookies.</p>
+    
+      <div class="nhsuk-form-group">
+
+        <fieldset class="nhsuk-fieldset">
+
+          <div class="nhsuk-radios">
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="login-method-smartcard" name="login-method" type="radio" value="Smartcard">
+              <label class="nhsuk-label nhsuk-radios__label" for="login-method-smartcard">
+                Smartcard
+              </label>
+            </div>
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="login-method-windows-hello" name="login-method" type="radio" value="Windows Hello">
+              <label class="nhsuk-label nhsuk-radios__label" for="login-method-windows-hello">
+                Windows Hello
+              </label>
+            </div>
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="login-method-security-key" name="login-method" type="radio" value="Security Key">
+              <label class="nhsuk-label nhsuk-radios__label" for="login-method-security-key">
+                Security Key
+              </label>
+            </div>
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="login-method-auth-app" name="login-method" type="radio" value="Authentication App">
+              <label class="nhsuk-label nhsuk-radios__label" for="login-method-auth-app">
+                Authenticator App
+              </label>
+            </div>            
+
+          </div>
+        </fieldset>
+
+      </div><br>
+
+      <button class="nhsuk-button" type="submit">
+        Continue
+      </button>
+    
+    </form>
+    
+    </div> 
+    
+    
+  
+  </form>
+
+  </div>
+{% endblock %}
