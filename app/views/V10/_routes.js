@@ -33,7 +33,6 @@ router.post(/login-page/, (req, res) => {
 
 });
 
-
 // Set your password
 router.post(/set-password/, (req, res) => {
     res.redirect('set-up-authenticator')
@@ -571,15 +570,14 @@ router.post(/ap-mccd-summary/, (req, res) => {
 // NHS - Care ID
 
 router.post(/care-id-select-login/, (req, res) => {
-const CareIDloginMethod = req.session.data['me-decision']
+const CareIDloginMethod = req.session.data['care-id-select-login']
 
     if (CareIDloginMethod == 'Smartcard') {
         res.redirect('login-smartcard')
-    
     } else if (CareIDloginMethod == 'Windows Hello') {
     res.redirect('login-windows')
     } else if (CareIDloginMethod == 'Security Key') {
-        res.redirect('login-sec-key')
+        res.redirect('login-key')
     } else if (CareIDloginMethod == 'Security Key') {
         res.redirect('login-auth')
     }
