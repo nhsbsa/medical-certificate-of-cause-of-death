@@ -33,11 +33,6 @@ router.post(/login-page/, (req, res) => {
 
 });
 
-// NHS Care ID
-router.post(/care-id-select-login/, (req, res) => {
-    res.redirect('../dashboard')
-});
-
 
 // Set your password
 router.post(/set-password/, (req, res) => {
@@ -569,5 +564,33 @@ router.post(/ap-mccd-summary/, (req, res) => {
 });
 
 // ************************************************************
+
+
+// ************************************************************
+
+// NHS - Care ID
+
+router.post(/care-id-select-login/, (req, res) => {
+const CareIDloginMethod = req.session.data['me-decision']
+
+    if (CareIDloginMethod == 'Smartcard') {
+        res.redirect('login-smartcard')
+    
+    } else if (CareIDloginMethod == 'Windows Hello') {
+    res.redirect('login-windows')
+    } else if (CareIDloginMethod == 'Security Key') {
+        res.redirect('login-sec-key')
+    } else if (CareIDloginMethod == 'Security Key') {
+        res.redirect('login-auth')
+    }
+});
+
+//Select sign in method
+router.post(/select-method/, (req, res) => {
+    //  const loginMethod = req.session.data['login-method'];
+      res.redirect('login-smartcard');
+});
+// ************************************************************
+
 
 module.exports = router;
