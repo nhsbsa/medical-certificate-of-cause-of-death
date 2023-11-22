@@ -80,17 +80,13 @@
 
 
 {% block content %}
-      
-<form action="care-id-method" method="post">
-
-  <fieldset class="nhsuk-fieldset">
-
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-
-      <h1 class="nhsuk-fieldset__heading">
+      <form action="care-id-select" method="post">
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        <h1 class="nhsuk-fieldset__heading">
           {{ pageName }}
         </h1>
-    </legend>
+      </legend>
 
       <div class="nhsuk-hint">
         Your choice will be saved as your preferred login method for this browser. You may have to repeat this step if you clear your browser’s cookies.
@@ -132,10 +128,9 @@
       </div>
 
     </fieldset>
-
-    <button class="nhsuk-button" data-module="govuk-button">Continue</button>
-
   </form>
+
+            <button class="nhsuk-button" data-module="govuk-button">Continue</button>
 
 {% endblock %}
 
