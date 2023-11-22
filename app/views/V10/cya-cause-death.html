@@ -94,6 +94,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
+            {% if data['secondary-cause'] %}
+            {{ data['secondary-cause']}}
+            {% else %}
+            Not specified
+            {% endif %}
+
+        </dd>
+
+        <dd class="govuk-summary-list__value">
+          {% if data['duration2'] %}
+            {{ data['duration2']}} {{ data['time-unit-duration-2']}}
+          {% else %}
+       
+          {% endif %}
+
+        <!--
+          <dd class="govuk-summary-list__value">
             {{ data['secondary-cause'] or 'Ruptured metastatic deposit in liver' }}
           </dd>
 
@@ -110,6 +127,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
           </dd>
+        -->
 
         </div>
 
@@ -119,9 +137,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <dt class="govuk-summary-list__key" style="width:35%">
             1(c) Other disease or condition, if any, leading to 1(b)
           </dt>
-
+<!--
           <dd class="govuk-summary-list__value">
-              {{ data['other-conditions-c'] or 'Primary adenocarinmoma of ascending colon' }}
+            {{ data['other-conditions-c'] or 'Primary adenocarinmoma of ascending colon' }}
+
+        </dd>
+
+        <dd class="govuk-summary-list__value">
+          {% if data['duration3'] %}
+            {{ data['duration3']}} {{ data['time-unit-duration-3']}}
+          {% else %}
+            2 years
+          {% endif %}
+        </dd>
+-->
+          <dd class="govuk-summary-list__value">
+              {% if data['other-conditions-c'] %}
+              {{ data['other-conditions-c']}}
+              {% else %}
+              Not specified
+              {% endif %}
 
           </dd>
 
@@ -129,7 +164,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {% if data['duration3'] %}
               {{ data['duration3']}} {{ data['time-unit-duration-3']}}
             {% else %}
-              2 years
+         
             {% endif %}
           </dd>
 
@@ -148,9 +183,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
 
+          <!--
           <dd class="govuk-summary-list__value">
             {% if data['other-conditions-d'] %}
               {{ data['other-conditions-d'] or 'Non-insulin dependent diabetes mellitus' }}
+            {% else %}
+              Not specified
+            {% endif %}
+          </dd>
+
+          <dd class="govuk-summary-list__value">
+            {% if data['duration4'] %}
+              {{ data['duration4']}} {{ data['time-unit-duration-4']}}
+            {% else %}
+              
+            {% endif %}
+          </dd>
+          -->
+
+          <dd class="govuk-summary-list__value">
+            {% if data['other-conditions-d'] %}
+              {{ data['other-conditions-d']}}
             {% else %}
               Not specified
             {% endif %}
@@ -179,17 +232,36 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             2 Other significant conditions contributing to their death
           </dt>
 
+          <!--
           <dd class="govuk-summary-list__value">
-              {{ data['other-significant-conditions'] or 'Non-insulin dependent diabetes mellitus' }}
+            {{ data['other-significant-conditions'] or 'Non-insulin dependent diabetes mellitus' }}
+
+        </dd>
+
+        <dd class="govuk-summary-list__value">
+          {% if data['duration5'] %}
+            {{ data['duration5']}} {{ data['time-unit-duration-5']}}
+          {% else %}
+            15 years
+          {% endif %}
+        </dd>
+        -->
+          <dd class="govuk-summary-list__value">
+              {% if data['other-significant-conditions'] %}
+              {{ data['other-significant-conditions']}}
+            {% else %}
+              Not specified
+            {% endif %}
 
           </dd>
 
           <dd class="govuk-summary-list__value">
             {% if data['duration5'] %}
-              {{ data['duration5']}} {{ data['time-unit-duration-5']}}
+            {{ data['duration5']}} {{ data['time-unit-duration-5']}}
             {% else %}
-              15 years
+            
             {% endif %}
+
           </dd>
 
           <dd class="govuk-summary-list__actions">
