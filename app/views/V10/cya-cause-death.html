@@ -241,6 +241,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
 
         <!-- Pregnancy Contributed? -->
+       
         <div class="govuk-summary-list__row">
           
           <dt class="govuk-summary-list__key" style="width:35%">
@@ -248,7 +249,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['pregnancy-contributed'] or 'No' }}
+            {{ data['pregnancy-contributed'] or 'Not applicable' }}
           </dd>
           <dd></dd>
 
@@ -259,7 +260,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
         </div>
-      
+
       </dl>
 
           
