@@ -1,4 +1,4 @@
-{% set pageName="Select your login method" %}
+{% set pageName="Sign in with an Authenticator App" %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -80,62 +80,36 @@
 
 
 {% block content %}
-      
-<form action="care-id-method" method="post">
+
+<form action="care-id-authentication" method="post">
 
   <fieldset class="nhsuk-fieldset">
-
     <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-
       <h1 class="nhsuk-fieldset__heading">
-          {{ pageName }}
-        </h1>
+        {{ pageName }}
+      </h1>
     </legend>
 
-      <div class="nhsuk-hint">
-        Your choice will be saved as your preferred login method for this browser. You may have to repeat this step if you clear your browser’s cookies.
+    <div class="nhsuk-form-group">
+
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="example">
+          What is your email address?
+        </label>
+        <input class="nhsuk-input" id="example" name="example" type="text">
       </div>
 
       <div class="nhsuk-form-group">
-
-        <div class="nhsuk-radios">
-
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="care-id-method-1" name="care-id-method" type="radio" value="Smartcard">
-            <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-1">
-              Smartcard
-            </label>
-          </div>
-
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="care-id-method-2" name="care-id-method" type="radio" value="Windows Hello">
-            <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-2">
-              Windows Hello
-            </label>
-          </div>
-
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="care-id-method-3" name="care-id-method" type="radio" value="Security Key">
-            <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-3">
-              Security Key
-            </label>
-          </div>
-
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="care-id-method-4" name="care-id-method" type="radio" value="Authenticator App">
-            <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-4">
-              Authenticator App
-            </label>
-          </div>
-
-        </div>
+        <label class="nhsuk-label" for="example">
+          What is your password?
+        </label>
+        <input class="nhsuk-input" id="example" name="example" type="text">
       </div>
 
-    </fieldset>
+  </fieldset>
 
-    <button class="nhsuk-button" data-module="govuk-button">Continue</button>
-
-  </form>
+  <button class="nhsuk-button" data-module="govuk-button">Continue</button>
+</form>
 
 {% endblock %}
 
