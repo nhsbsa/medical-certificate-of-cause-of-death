@@ -322,6 +322,10 @@ router.post(/confirmation/, (req, res) => {
     res.redirect('dashboard?role-type=ap')
 });
 
+router.post(/give-feedback/, (req, res) => {
+    res.redirect('dashboard')
+});
+
 // Declaration page [ME Cert]
 
 router.post(/me-cert-declaration/, (req, res) => {
@@ -613,6 +617,7 @@ router.post(/care-id-smartcard/, (req,res) => {
 });
 
 // ************************************************************
+
 
 
 module.exports = router;
