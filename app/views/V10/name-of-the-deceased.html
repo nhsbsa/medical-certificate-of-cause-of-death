@@ -19,23 +19,27 @@
     
           <div class="govuk-form-group">
             <label class="govuk-label" for="deceased-first-name">
+              {% if data['over-under-28'] == 'yes' %}
               First name
+              {% else %}
+              First name (optional)
+              {% endif %}
             </label>
-            <input class="govuk-input" id="deceased-first-name" name="deceased-first-name" type="text">
+            <input class="govuk-input govuk-input govuk-input--width-20" id="deceased-first-name" name="deceased-first-name" type="text">
           </div>
 
           <div class="govuk-form-group">
             <label class="govuk-label" for="deceased-middle-name">
               Middle names (optional)
             </label>
-            <input class="govuk-input" id="deceased-middle-name" name="deceased-middle-name" type="text">
+            <input class="govuk-input govuk-input govuk-input--width-20" id="deceased-middle-name" name="deceased-middle-name" type="text">
           </div>
     
           <div class="govuk-form-group">
             <label class="govuk-label" for="deceased-last-name">
               Last name
             </label>
-            <input class="govuk-input" id="deceased-last-name" name="deceased-last-name" type="text">
+            <input class="govuk-input govuk-input govuk-input--width-20" id="deceased-last-name" name="deceased-last-name" type="text">
           </div>
     
           <button class="govuk-button" type="submit">
