@@ -22,11 +22,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     
     <h2 class="govuk-heading-m">What happens next</h2>
     <p>In the case that amendments are required by the medical examiner, you will be notified via email and asked to sign back in to edit the information on this certificate.</p>
-    <form action="dashboard" method="post">
+    <!--<form action="dashboard" method="post">
       <button class="govuk-button" type="submit">
         Return to dashboard
       </button>
-    </form>
+    </form>-->
 
     {% else %}
 
@@ -42,16 +42,78 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   <h2 class="govuk-heading-m">What happens next</h2>
   <p>The medical certificate of cause of death will now be sent to the registrar. You can still view the certificate in your dashboard under completed certificates.</p>
   
-  <form action="dashboard" method="post">
+  <!--<form action="dashboard" method="post">
     <button class="govuk-button" type="submit">
       Return to dashboard
     </button>
-  </form>
+  </form>-->
 
   {% endif %}
 
-    <h2 class="govuk-heading-m">Give feedback</h2>
-    <p><a href="#">What did you think of this service?</a> (takes about 5 minutes)</p>
+<!--FEEDBACK CAPTURE -->
+
+    <form action="give-feedback" class="form" method="post">
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-8">Give feedback (optional)</h2>
+        <h3 class="govuk-heading-s">Overall, how did you feel about using our service today?</h3>
+      
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="feedback-score-5" name="give-feedback" type="radio" value="Very satisfied">
+              <label class="govuk-label govuk-radios__label" for="feedback-score-5">
+                Very satisfied
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="feedback-score-4" name="give-feedback" type="radio" value="Satisfied">
+              <label class="govuk-label govuk-radios__label" for="feedback-score-4">
+                Satisfied
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="feedback-score-3" name="give-feedback" type="radio" value="Neither satisfied or dissatisfied">
+              <label class="govuk-label govuk-radios__label" for="feedback-score-3">
+                Neither satisfied or dissatisfied
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="feedback-score-2" name="give-feedback" type="radio" value="Dissatisfied">
+              <label class="govuk-label govuk-radios__label" for="feedback-score-2">
+                Dissatisfied
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="feedback-score-1" name="give-feedback" type="radio" value="Satisfied">
+              <label class="govuk-label govuk-radios__label" for="feedback-score-1">
+                Very dissatisfied
+              </label>
+            </div>
+
+          </div>
+
+        </fieldset>
+
+      </div>
+
+      <h5 class="govuk-heading-s govuk-!-margin-bottom-1">How can we improve this service?</h5>
+      <div class="govuk-hint govuk-!-margin-bottom-2" id="hint">Do not include confidential or medical information in your message.</div>
+      <textarea class="govuk-textarea" id="feedback-text" name="feedback-text" rows="3" aria-describedby="example-hint"></textarea>
+      
+      <button class="govuk-button" data-module="govuk-button">
+        Send feedback
+      </button>
+
+    </form>
+
   </div>
 </div>
 

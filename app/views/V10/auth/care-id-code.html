@@ -1,4 +1,4 @@
-{% set pageName="Sign in with an Authenticator App" %}
+{% set pageName="Enter the code shown on your authentication app" %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -80,6 +80,7 @@
 
 
 {% block content %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a><br><br>
 
 <form action="care-id-code" method="post">
 
@@ -94,9 +95,9 @@
 
       <div class="nhsuk-form-group">
         <label class="nhsuk-label" for="example">
-          Enter verification code
+          Verification code
         </label>
-        <input class="nhsuk-input" id="example" name="example" type="text">
+        <input class="nhsuk-input nhsuk-input--width-10" id="example" name="example" type="text">
       </div>
 
   </fieldset>
@@ -129,7 +130,7 @@
                     </li>
                     <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
                       <a class="nhsuk-footer__list-item-link" href="/page-example">Example page</a>
-                    </li>
+                    </li><br><br><br><br><br><br><br><br><br><br><br><br>
                 </ul>
                 <div>
                   <p class="nhsuk-footer__copyright">© Crown copyright</p>

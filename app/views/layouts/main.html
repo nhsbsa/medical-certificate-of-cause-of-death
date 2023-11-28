@@ -62,7 +62,8 @@
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
               <div class="account-signed-in">
-                  <p>dr.account@nhs.net</p>
+                  
+                {% if data ['role-type'] == 'ap' %}<p>attending.practitioner@nhs.net</p>{% else %}<p>medical.examiner@nhs.net</p>{% endif %}
                   |
                   <p><a href="#">Sign out</a></p>
               </div>

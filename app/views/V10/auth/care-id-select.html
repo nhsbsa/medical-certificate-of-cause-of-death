@@ -80,7 +80,8 @@
 
 
 {% block content %}
-      
+<a href="javascript:history.back()" class="govuk-back-link">Back</a><br><br>
+
 <form action="care-id-select" method="post">
 
   <fieldset class="nhsuk-fieldset">
@@ -110,7 +111,7 @@
           <div class="nhsuk-radios__item">
             <input class="nhsuk-radios__input" id="care-id-method-2" name="care-id-method" type="radio" value="Windows Hello">
             <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-2">
-              Windows Hello
+              Windows Hello for Business
             </label>
           </div>
 
@@ -124,7 +125,7 @@
           <div class="nhsuk-radios__item">
             <input class="nhsuk-radios__input" id="care-id-method-4" name="care-id-method" type="radio" value="Authenticator App">
             <label class="nhsuk-label nhsuk-radios__label" for="care-id-method-4">
-              Authenticator App
+              Microsoft Authenticator
             </label>
           </div>
 
@@ -133,7 +134,7 @@
 
     </fieldset>
 
-    <button class="nhsuk-button" data-module="govuk-button">Continue</button>
+    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-5" data-module="govuk-button">Continue</button>
 
   </form>
 
@@ -156,12 +157,9 @@
         <div class="nhsuk-footer">
             
                 <ul class="nhsuk-footer__list">
-                    <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
-                      <a class="nhsuk-footer__list-item-link" href="/">Home</a>
-                    </li>
-                    <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
-                      <a class="nhsuk-footer__list-item-link" href="/page-example">Example page</a>
-                    </li>
+                  <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
+                    <a class="nhsuk-footer__list-item-link" href="/manage-prototype/clear-data">Clear data</a>
+                  </li><br><br><br><br>
                 </ul>
                 <div>
                   <p class="nhsuk-footer__copyright">© Crown copyright</p>
