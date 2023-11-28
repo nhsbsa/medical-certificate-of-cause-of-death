@@ -1,4 +1,4 @@
-{% set pageName="Sign in with an Authenticator App" %}
+{% set pageName="What is your Care Identity email address?" %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -79,31 +79,35 @@
 
 
 {% block content %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a><br><br>
 
 <form action="care-id-authentication" method="post">
 
-  <fieldset class="nhsuk-fieldset">
+  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
     <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
       <h1 class="nhsuk-fieldset__heading">
         {{ pageName }}
       </h1>
     </legend>
+    <div class="nhsuk-hint" id="example-hint">
+      For example, dr.account@nhs.net
+    </div>
 
     <div class="nhsuk-form-group">
 
       <div class="nhsuk-form-group">
         <label class="nhsuk-label" for="example">
-          What is your email address?
+          Email address
         </label>
         <input class="nhsuk-input" id="example" name="example" type="text">
       </div>
 
-      <div class="nhsuk-form-group">
+      <!--<div class="nhsuk-form-group">
         <label class="nhsuk-label" for="example">
           What is your password?
         </label>
         <input class="nhsuk-input" id="example" name="example" type="text">
-      </div>
+      </div>-->
 
   </fieldset>
 
@@ -131,10 +135,7 @@
                 <ul class="nhsuk-footer__list">
                     <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
                       <a class="nhsuk-footer__list-item-link" href="/">Home</a>
-                    </li>
-                    <li class="nhsuk-footer__list-item nhsuk-footer-default__list-item">
-                      <a class="nhsuk-footer__list-item-link" href="/page-example">Example page</a>
-                    </li>
+                    </li><br><br><br><br><br><br><br><br>
                 </ul>
                 <div>
                   <p class="nhsuk-footer__copyright">© Crown copyright</p>
