@@ -128,7 +128,7 @@ router.post(/date-of-birth/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
 
-    if (overUnder28 == 'yes') {
+    if (overUnder28 == 'no') {
         res.redirect('age-66')
 
     // If Under 28 > Location of birth
