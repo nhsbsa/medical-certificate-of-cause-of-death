@@ -1,0 +1,61 @@
+{% extends "layouts/prototype-main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data['me-decision'] == 'approve' %}
+
+                        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+                            
+                            <h1 class="govuk-panel__title">
+                                Medical certificate of cause of death approved
+                            </h1>
+                        
+                        </div>
+
+                        <p>The medical certificate of cause of death has now been approved.</p>
+                        
+                        <h2 class="govuk-heading-m">
+                            What happens next
+                        </h2>
+                        
+                        <p>The medical certificate of cause of death will now be sent to the registrar. You can still view the certificate in your dashboard under completed certificates.</p>
+                        
+
+        {% else %}
+
+                        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+                            
+                            <h1 class="govuk-panel__title">
+                                Medical certificate of cause of death reviewed
+                            </h1>
+
+                        </div>
+        
+
+                        <p>The medical certificate of cause of death has now been reviewed.</p>
+                        
+                        <h2 class="govuk-heading-m">
+                            What happens next
+                        </h2>
+        
+                        <p>The attending practitioner involved will be notified of amendments needed and sent the comments you have provided.</p>
+        {% endif %}
+
+
+        <a class="govuk-button" href="dashboard?reviewed=yes">
+            Return to dashboard
+        </a>
+
+        </div>
+        </div>
+
+        
+
+{% endblock %}
