@@ -231,9 +231,26 @@ router.post(/unknown-address/, (req, res) => {
 // ************************************************************
 
 // Has a post-mortem been held?
-router.post(/death-circumstances/, (req, res) => {
+// AP MCCD
+router.post(/death-circumstances-ap/, (req, res) => {
     res.redirect('implant')
 });
+
+// Me MCCD
+router.post(/death-circumstances-me/, (req, res) => {
+    res.redirect('me-referring-mp-name')
+});
+
+// What is the full name of the referring medical practioner (ME CERT)
+router.post(/name-of-referring-mp/, (rep,res) => {
+    res.redirect('me-coroner-name')
+});
+
+// What is the senior coroners full name (ME CERT)
+router.post(/me-coroner-name/, (req, res) => {
+    res.redirect('implant')
+});
+
 
 // Was any implant placed in the body which may become hazardous when the body is cremated?
 router.post(/implant/, (req, res) => {

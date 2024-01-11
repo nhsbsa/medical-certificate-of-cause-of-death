@@ -17,10 +17,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </span> -->
       Has a post-mortem been held?
     </h1>
-
-    <form action="death-circumstances" method="post">
-
-      {% if data['role-type'] == 'ap' %}
+    {% if data['role-type'] == 'ap' %}
+    <form action="death-circumstances-ap" method="post">
 
       <fieldset class="govuk-fieldset">
 
@@ -66,6 +64,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </fieldset>
 
       {% else %}
+    <form action="death-circumstances-me" method="post">
 
       <fieldset class="govuk-fieldset">
 

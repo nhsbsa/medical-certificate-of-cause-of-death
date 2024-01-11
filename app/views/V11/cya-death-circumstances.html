@@ -50,6 +50,34 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
 
+        <!-- For the ME CERT -->
+        {% if data['role-type'] == 'me' %}
+      
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Referring medical practitioner
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Senior coroner
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+
+        {% endif %}
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Implants in body
@@ -74,7 +102,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Implant details
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['implant-details']}}
+              {{ data['implant-details'] or 'pacemaker' }}
             </dd>
 
             <dd class="govuk-summary-list__actions">
