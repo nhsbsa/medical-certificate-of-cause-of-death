@@ -238,10 +238,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </dl>
             </div>
         </div>
-
+        
+        {% if data['me-cert-declaration'] %}
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
-                <h2 class="govuk-summary-card__title">Attending practitioners information</h2>
+                <h2 class="govuk-summary-card__title">Completing medical examiner's information</h2>
             </div>
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
@@ -276,7 +277,50 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </dl>
             </div>
         </div>
-        
+
+        <a href="/V11/dashboard" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Return to dashboard
+           </a>
+        {% else %}
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">Attending practitioner's information</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Full name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Sarah Phillips
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            GMC number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            12345678
+                        </dd>
+                    </div>
+                    
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Work address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            123 Hospital Road, Wing 4,<br>
+                            Newcastle,<br>
+                            Tyne and Wear,<br>
+                            NE12 3AB
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
         <form action="me-decision" method="post">
 
             <div class="govuk-form-group">
@@ -323,6 +367,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
             <button class="govuk-button govuk-button--primary" type="submit">Continue</button>
         </form>
+        {% endif %}
     </div>
 </div>
 

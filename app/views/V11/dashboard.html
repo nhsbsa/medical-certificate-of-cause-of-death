@@ -267,6 +267,42 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </tbody>
       </table>
 
+        {% if data['me-cert-declaration'] %}
+        <table class="govuk-table">
+        
+          <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
+            Certificates reviewed by you
+          </caption>
+          
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Deceased name</th>
+              <th scope="col" class="govuk-table__header">Name of AP</th>
+              <th scope="col" class="govuk-table__header">Date submitted</th>
+              <th scope="col" class="govuk-table__header">Action</th>
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}</th> 
+              <td class="govuk-table__cell">N/A</td>
+              <td class="govuk-table__cell">10 January 2024</td>
+              <td class="govuk-table__cell">
+                <a href="me-mccd-summary">
+                  View
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Completed
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
       {% endif %}
 
     </div>
