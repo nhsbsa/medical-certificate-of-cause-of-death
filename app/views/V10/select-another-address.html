@@ -25,7 +25,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </label>
 
               <div class="">
-                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="find-address">Search again</a></p>
+                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. <a href="find-address">Search again</a></p>
               </div>
 
               <select class="govuk-select" id="select-address" name="select-another-address">
