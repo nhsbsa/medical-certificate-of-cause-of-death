@@ -108,9 +108,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       <div class="govuk-hint govuk-!-margin-bottom-2" id="hint">Do not include confidential or medical information in your message.</div>
       <textarea class="govuk-textarea" id="feedback-text" name="feedback-text" rows="3" aria-describedby="example-hint"></textarea>
       
-      <button class="govuk-button" data-module="govuk-button">
-        Send feedback
-      </button>
+      <div class="govuk-button-group">
+        <button class="govuk-button" data-module="govuk-button">
+          Send feedback
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Return to dashboard
+        </button>
+      </div>
+      
 
     </form>
 
