@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <form action="implant" method="post">
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            Did the deceased person have any medical devices or implants fitted during their lifetime?
+                        </h1>
+                        <div class="govuk-hint" id="hint">
+                            We need to know about medical devices or implants that have any kind of battery, radiation, pressurisation or silicone in its manufacture.
+                          </div>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="implant-yes" name="implant" type="radio" value="Yes"
+                                data-aria-controls="conditional-implant">
+                            <label class="govuk-label govuk-radios__label" for="implant-yes">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-implant">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="implant-details">
+                                    Enter the details and location of any implants
+                                </label>
+                                <textarea class="govuk-textarea" id="implant-details" name="implant-details" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="implant-no" name="implant" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="implant-no">
+                                No
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="implant-unknown" name="implant" type="radio" value="Unknown">
+                            <label class="govuk-label govuk-radios__label" for="implant-unknown">
+                                Unknown
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
+            <button class="govuk-button" type="submit">
+                Save and continue
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

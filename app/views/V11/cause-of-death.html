@@ -1,0 +1,264 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  {% if data['over-under-28'] == 'yes' %}
+  <div class="govuk-grid-column-full">
+    {% else %}
+    <div class="govuk-grid-column-two-thirds">
+      {% endif %}
+
+      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-2">
+        What caused the death?
+      </h1>
+      <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+        Do not use abbreviations, vague terms, or symptoms.
+      </div>
+
+
+      <form action="cause-of-death" method="post">
+
+        <!-- =========================================== -->
+        <!-- Over 28 days Form -->
+        <!-- =========================================== -->
+
+        {% if data['over-under-28'] == 'yes' %}
+
+        <h2 class="govuk-heading-m">Cause of death (1)</h2>
+
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="main-cause">
+              1(a) disease or condition directly leading to death
+            </label>
+            <input class="govuk-input" id="main-cause" name="main-cause" type="text">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="duration1">
+              Time between onset and death
+            </label>
+
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input border-hidden" id="duration1" name="duration1" type="text">
+
+              <!--SELECT TIME UNIT - Duration 1-->
+              <select class="govuk-select" id="time-unit-duration-1" name="time-unit-duration-1">
+                <option value="select unit" selected>Select unit</option>
+                <option value="years before death">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+                <option value="minutes">Unknown</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="secondary-cause">
+              1(b) other disease or condition leading to 1(a) (optional)
+            </label>
+            <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="duration2">
+              Time between onset and death
+            </label>
+
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input border-hidden" id="duration2" name="duration2" type="text">
+
+              <!--SELECT TIME UNIT - Duration 2-->
+              <select class="govuk-select" id="time-unit-duration-2" name="time-unit-duration-2">
+                <option value="select unit" selected>Select unit</option>
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+                <option value="minutes">Unknown</option>
+              </select>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="other-conditions-c">
+              1(c) other disease or condition leading to 1(b) (optional)
+            </label>
+            <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="duration3">
+              Time between onset and death
+            </label>
+
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input border-hidden" id="duration3" name="duration3" type="text">
+
+              <!-- SELECT TIME UNIT - Duration 3-->
+              <select class="govuk-select" id="time-unit-duration-3" name="time-unit-duration-3">
+                <option value="select unit" selected>Select unit</option>
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+                <option value="minutes">Unknown</option>
+              </select>
+
+          </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="other-conditions-d">
+              1(d) other disease or condition leading to 1(c) (optional)
+            </label>
+            <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="duration4">
+              Time between onset and death
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input border-hidden" id="duration4" name="duration4" type="text">
+              
+              <!-- SELECT TIME UNIT - Duration 4-->
+              <select class="govuk-select" id="time-unit-duration-4" name="time-unit-duration-4">
+                <option value="select unit" selected>Select unit</option>
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+                <option value="minutes">Unknown</option>
+              </select>
+
+          </div>
+
+
+          </div>
+        </div>
+
+        <h2 class="govuk-heading-m">Cause of death (2)</h2>
+
+
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="other-significant-conditions">
+              2 Other significant conditions contributing to their death (optional)
+            </label>
+            <input class="govuk-input" id="other-significant-conditions" name="other-significant-conditions"
+              type="text">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="duration5">
+              Time between onset and death
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input border-hidden" id="duration5" name="duration5" type="text">
+              
+              <!-- SELECT TIME UNIT - Duration 5-->
+              <select class="govuk-select" id="time-unit-duration-5" name="time-unit-duration-5">
+                <option value="select unit" selected>Select unit</option>
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+                <option value="minutes">Unknown</option>
+              </select>
+
+          </div>
+          </div>
+        </div>
+
+        {% else %}
+
+        <!-- =========================================== -->
+        <!-- Under 28 days Form -->
+        <!-- =========================================== -->
+
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="main-cause">
+            a. Main disease or condition in infant
+          </label>
+          <input class="govuk-input" id="main-cause" name="main-cause" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="secondary-cause">
+            b. Other disease or condition in infant (optional)
+          </label>
+          <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="other-conditions-c">
+            c. Main maternal disease or condition affecting infant (optional)
+          </label>
+          <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="other-conditions-d">
+            d. Other maternal diseases or conditions affecting infant (optional)
+          </label>
+          <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="other-conditions-e">
+            e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)
+          </label>
+          <input class="govuk-input" id="other-conditions-e" name="other-conditions-e" type="text">
+        </div>
+
+
+
+        {% endif %}
+
+
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+
+
+      </form>
+
+    </div>
+  </div>
+
+  {% endblock %}

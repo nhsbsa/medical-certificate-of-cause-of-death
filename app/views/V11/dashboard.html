@@ -1,0 +1,314 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row govuk-!-margin-top-7">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">
+      Your dashboard
+    </h1>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    {% if data['role-type'] == 'ap' %}
+    <a href="confirm-details" class="govuk-button align-right">Create a new MCCD</a>
+    {% else %}
+    <a href="confirm-details" class="govuk-button align-right">Create a new ME MCCD</a>
+    {% endif %}
+  </div>
+
+  <!-- =================================================== -->
+  <!-- AP -->
+  <!-- =================================================== -->
+
+  {% if data['role-type'] == 'ap' %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.
+    </p>
+    <p>This dashboard will list MCCDs that:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you have submitted to a medical examiner for approval</li>
+      <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
+      <li>have been rejected by a medical examiner and need amending</li>
+    </ul>
+
+  </div>
+
+  <div class="govuk-grid-column-full">
+
+    <!-- If AP Declaration ticked -->
+    {% if data['ap-declaration'] %}     
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">Certificates created by you</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Date of death</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+              {{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}
+            </th>
+            <td class="govuk-table__cell">
+              {{ data['dod-day'] or '15' }} {{ data['dod-month'] or 'November' }} {{ data['dod-year'] or '2023'}}
+            </td>
+            <td class="govuk-table__cell">
+              <a href="ap-mccd-summary">
+                View
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <strong class="govuk-tag govuk-tag--purple">
+                In scrutiny
+              </strong>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+              Joseph William Doyle
+            </th>
+            <td class="govuk-table__cell">
+              9 November 2023
+            </td>
+            <td class="govuk-table__cell">
+              <a href="ap-mccd-summary">
+                View
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <strong class="govuk-tag govuk-tag--orange">
+                Amendments required
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- If AP Declaration not ticked (Dash Empty State) -->
+      {% else %}
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">Certificates created by you</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Date of death</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" colspan="4">You have not yet created any certificates</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {% endif %}
+
+    </div>
+
+    
+
+    <!-- =================================================== -->
+    <!-- ME  -->
+    <!-- =================================================== -->
+    {% else %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) assigned to you for
+        review and approval.</p>
+      <p>An MCCD can only be approved when scrutiny of the proposed cause of death is complete.</p>
+
+    </div>
+
+    <div class="govuk-grid-column-full">
+
+      <!-- if the ME has approved OR rejected a certificate -->
+      {% if data['me-decision'] %}
+
+      <table class="govuk-table">
+
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
+          Certificates assigned to you for approval
+        </caption>
+
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Name of AP</th>
+            <th scope="col" class="govuk-table__header">Date submitted</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Thomas Robertson</th>
+            <td class="govuk-table__cell">Sarah Phillips</td>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell">
+              <a href="#">
+                Review
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <strong class="govuk-tag govuk-tag--grey">
+                Not started
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="govuk-table">
+        
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
+          Certificates reviewed by you
+        </caption>
+        
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Name of AP</th>
+            <th scope="col" class="govuk-table__header">Date submitted</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Jane Edwards</th>
+            <td class="govuk-table__cell">Sarah Phillips</td>
+            <td class="govuk-table__cell">05 October 2023</td>
+            <td class="govuk-table__cell">
+              <a href="me-mccd-summary">
+                View
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              {% if data['me-decision'] == 'approve' %}
+              <strong class="govuk-tag govuk-tag--blue">
+                Completed
+              </strong>
+              {% elif data['me-decision'] == 'reject' %}
+              <strong class="govuk-tag govuk-tag--orange">
+                Amendments required
+              </strong>
+              {% else %}
+              <strong class="govuk-tag govuk-tag--grey">
+                Not started
+              </strong>
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {% else %}
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">Certificates assigned to you for
+          approval</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Name of AP</th>
+            <th scope="col" class="govuk-table__header">Date submitted</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Jane Edwards</th>
+            <td class="govuk-table__cell">Sarah Phillips</td>
+            <td class="govuk-table__cell">05 October 2023</td>
+            <td class="govuk-table__cell">
+              <a href="me-mccd-summary">
+                Review
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <strong class="govuk-tag govuk-tag--grey">
+                Not started
+              </strong>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">Thomas Robertson</th>
+            <td class="govuk-table__cell">Sarah Phillips</td>
+            <td class="govuk-table__cell">29 September 2023</td>
+            <td class="govuk-table__cell">
+              <a href="#">
+                Review
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+
+              <strong class="govuk-tag govuk-tag--grey">
+                Not started
+              </strong>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+        {% if data['me-cert-declaration'] %}
+        <table class="govuk-table">
+        
+          <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
+            Certificates reviewed by you
+          </caption>
+          
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Deceased name</th>
+              <th scope="col" class="govuk-table__header">Name of AP</th>
+              <th scope="col" class="govuk-table__header">Date submitted</th>
+              <th scope="col" class="govuk-table__header">Action</th>
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}</th> 
+              <td class="govuk-table__cell">N/A</td>
+              <td class="govuk-table__cell">10 January 2024</td>
+              <td class="govuk-table__cell">
+                <a href="me-mccd-summary">
+                  View
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Completed
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+      {% endif %}
+
+    </div>
+
+    {% endif %}
+
+  </div>
+
+  {% endblock %}

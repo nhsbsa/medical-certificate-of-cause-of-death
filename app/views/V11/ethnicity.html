@@ -1,0 +1,175 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <h1 class="govuk-heading-l">
+            What was the ethnicity of the deceased person?
+        </h1>
+
+        <form action="ethnicity" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+                    <div class="govuk-radios">
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="asian-british-indian" name="ethnicity"
+                                type="radio" value="Asian or Asian British - Indian">
+                            <label class="govuk-label govuk-radios__label" for="asian-british-indian">
+                                Asian or Asian British - Indian
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="asian-british-pakistani" name="ethnicity"
+                                type="radio" value="Asian or Asian British - Pakistani">
+                            <label class="govuk-label govuk-radios__label" for="asian-british-pakistani">
+                                Asian or Asian British - Pakistani
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="asian-british-bangladeshi" name="ethnicity"
+                                type="radio" value="Asian or Asian British - Bangladeshi">
+                            <label class="govuk-label govuk-radios__label" for="asian-british-bangladeshi">
+                                Asian or Asian British - Bangladeshi
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="asian-british-other" name="ethnicity"
+                                type="radio" value="Asian or Asian British - Any other Asian background">
+                            <label class="govuk-label govuk-radios__label" for="asian-british-other">
+                                Asian or Asian British - Any other Asian background
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="black-british-caribbean" name="ethnicity"
+                                type="radio" value="Black or Black British - Caribbean">
+                            <label class="govuk-label govuk-radios__label" for="black-british-caribbean">
+                                Black or Black British - Caribbean
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="black-british-african" name="ethnicity"
+                                type="radio" value="Black or Black British - African">
+                            <label class="govuk-label govuk-radios__label" for="black-british-african">
+                                Black or Black British - African
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="black-british-other" name="ethnicity"
+                                type="radio" value="Black or Black British - Any other Black background">
+                            <label class="govuk-label govuk-radios__label" for="black-british-other">
+                                Black or Black British - Any other Black background
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="mixed-caribbean" name="ethnicity"
+                                type="radio" value="Mixed - White and Black Caribbean">
+                            <label class="govuk-label govuk-radios__label" for="mixed-caribbean">
+                                Mixed - White and Black Caribbean
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="mixed-african" name="ethnicity"
+                                type="radio" value="Mixed - White and Black African">
+                            <label class="govuk-label govuk-radios__label" for="mixed-african">
+                                Mixed - White and Black African
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="mixed-asian" name="ethnicity"
+                                type="radio" value="Mixed - White and Asian">
+                            <label class="govuk-label govuk-radios__label" for="mixed-asian">
+                                Mixed - White and Asian
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="mixed-other" name="ethnicity"
+                                type="radio" value="Mixed - Any other Mixed background">
+                            <label class="govuk-label govuk-radios__label" for="mixed-other">
+                                Mixed - Any other Mixed background
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="white-british" name="ethnicity"
+                                type="radio" value="White - British">
+                            <label class="govuk-label govuk-radios__label" for="white-british">
+                                White - British
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="white-irish" name="ethnicity"
+                                type="radio" value="White - Irish">
+                            <label class="govuk-label govuk-radios__label" for="white-irish">
+                                White - Irish
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="white-other" name="ethnicity"
+                                type="radio" value="White - Any other White background">
+                            <label class="govuk-label govuk-radios__label" for="white-other">
+                                White - Any other White background
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="chinese-or-other" name="ethnicity"
+                                type="radio" value="Chinese or other ethnic group - Chinese">
+                            <label class="govuk-label govuk-radios__label" for="chinese-or-other">
+                                Chinese
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="chinese-any-other" name="ethnicity"
+                                type="radio" value="Chinese or other ethnic group - Any other">
+                            <label class="govuk-label govuk-radios__label" for="chinese-any-other">
+                                Other ethnic group  
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="Unknown" name="ethnicity"
+                                type="radio" value="Unknown">
+                            <label class="govuk-label govuk-radios__label" for="Unknown">
+                                Unknown 
+                            </label>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+            </div>
+
+            <button class="govuk-button" type="submit">
+                Save and continue
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

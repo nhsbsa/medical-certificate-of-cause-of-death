@@ -1,0 +1,58 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="select-hospital-address" method="post" novalidate>
+    
+      <div class="govuk-form-group">
+    
+        <div class="govuk-radios">
+
+          
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="sort">
+                <h1 class="govuk-heading-l">
+                  Select an address
+                </h1>
+              </label>
+
+              <div class="">
+                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. <a href="find-address">Search again</a></p>
+              </div>
+
+              <select class="govuk-select" id="select-address" name="select-another-address">
+                <option value="choose" selected>Select address</option>
+                {% for anotherAddress in data['anotherAddresses'] %}
+                  <option value="{{ anotherAddress }}">{{ anotherAddress }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          
+    
+        </div>
+      </div>
+    
+    </fieldset>
+
+    <button class="govuk-button" type="submit">Use this address</button>
+
+    </form>
+
+    <div class="govuk-form-group">
+      <p>
+        <a href="exact-address">Enter address manually</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
