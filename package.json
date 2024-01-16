@@ -6,9 +6,11 @@
   },
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "1.1.1",
+    "@govuk-prototype-kit/step-by-step": "2.2.2",
+    "@govuk-prototype-kit/task-list": "2.0.0",
     "axios": "^1.5.1",
     "govuk-frontend": "4.6.0",
-    "govuk-prototype-kit": "13.7.0",
+    "govuk-prototype-kit": "13.16.0",
     "nhsuk-frontend": "^8.0.2"
   }
 }

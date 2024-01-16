@@ -7,7 +7,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  {% if data['over-under-28'] == 'yes' %}
+  {% if data['over-under-28'] == 'no' %}
   <div class="govuk-grid-column-full">
     {% else %}
     <div class="govuk-grid-column-two-thirds">
@@ -29,7 +29,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <!-- Over 28 days Form -->
         <!-- =========================================== -->
 
-        {% if data['over-under-28'] == 'yes' %}
+        {% if data['over-under-28'] == 'no' %}
 
         <h2 class="govuk-heading-m">Cause of death (1)</h2>
 
