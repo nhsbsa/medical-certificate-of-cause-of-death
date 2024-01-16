@@ -1,0 +1,82 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      Check the details below
+    </h1>
+    
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Make sure the information you entered is correct. Any incorrect information may delay registration of the death.
+    </div>
+
+
+
+  <form action="cya-share-mccd" method="post">
+
+    <dl class="govuk-summary-list">
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          NHS number
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data.nhs-number-input or '4857773456' }}
+        </dd>
+
+      </div>
+
+      <div class="govuk-summary-list__row">
+        
+        <dt class="govuk-summary-list__key">
+          Full name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}
+        </dd>
+
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Date of death
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['dod-day'] or '15' }} {{ data['dod-month'] or 'November' }} {{ data['dod-year'] or '2023'}}
+        </dd>
+
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Registration office details
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data.select-reg-office or 'Town Hall, Pinstone Street, Sheffield S1 2HH' }}
+        </dd>
+
+      </div>
+
+      </dl>
+
+      <button class="govuk-button govuk-button--primary">Share MCCD</button>
+
+  </form>
+
+    <!--<a class="govuk-button" href="meo-confirmation?shared=yes">
+      Share MCCD
+    </a>-->
+
+  </div>
+</div>
+
+{% endblock %}
