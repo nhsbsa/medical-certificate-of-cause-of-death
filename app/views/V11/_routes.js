@@ -153,22 +153,38 @@ router.post(/triage-24-hours/, (req, res) => {
 
 // Over 28
 router.post(/age-66/, (req, res) => {
-    res.redirect('ethnicity')
+    res.redirect('ethnicity/ethnic-group')
 });
 
 // Under 28
 router.post(/deceased-persons-age/, (req, res) => {
-    res.redirect('../ethnicity')
+    res.redirect('ethnicity/ethnic-group')
 });
 
 router.post(/age-65-hours/, (req, res) => {
-    res.redirect('../ethnicity')
+    res.redirect('ethnicity/ethnic-group')
+});
+
+router.post(/ethnic-group/, (req,res) => {
+    var ethnicGroup = req.session.data['ethnic-group']
+    if (ethnicGroup == 'white'){
+        res.redirect('ethnicity-white')
+    }else if (ethnicGroup == 'multiple'){
+        res.redirect('ethnicity-mixed')
+    }else if (ethnicGroup == 'asian'){
+        res.redirect('ethnicity-asian')
+    }else if (ethnicGroup == 'black'){
+        res.redirect('ethnicity-black')
+    }else if (ethnicGroup == 'skip'){
+        res.redirect('../date-of-death')
+    }else{
+    res.redirect('ethnicity-other')
+    }
 });
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
-    res.redirect('date-of-death')
-
+    res.redirect('../date-of-death')
 });
 
 // Was the death in a hospital?

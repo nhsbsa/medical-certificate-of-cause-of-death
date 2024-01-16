@@ -108,12 +108,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           Ethnicity
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ data['ethnicity'] or 'Asian or Asian British - Any other Asian background' }}
+          {% if data['ethnicityDetail'] %}
+          {{ data['ethnicityDetail'] }}
+          {% else %}
+          Unknown
+          {% endif %}
         </dd>
 
         <dd class="govuk-summary-list__actions">
 
-          <a href="ethnicity">
+          <a href="ethnicity/ethnic-group">
             Change<span class="govuk-visually-hidden"> ethnicity</span>
           </a>
 
