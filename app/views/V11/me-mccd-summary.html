@@ -61,7 +61,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Age
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['deceased-age']}}
+                            {% if data['age-66'] %}
+                            {{ data['age-66'] }}
+                            {% endif %}
+                            {% if data['deceased-persons-age'] %}
+                            {{ data['deceased-persons-age'] }} days old
+                            {% endif %}
+                            {% if data['Hours'] %}
+                            {{ data['Hours'] }} hours {{ data['Minutes'] }} minutes old
+                            {% endif %}
                         </dd>
                     </div>
 
@@ -78,7 +86,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Date of death
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['date-of-death']}}
+                            {{ data['dod-day']}} {{ data['dod-month']}} {{ data['dod-year']}}
                         </dd>
                     </div>
 
@@ -112,15 +120,35 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Post-mortem?
+                            Post-mortem
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data ['death-circumstances']}}
                         </dd>
                     </div>
+                {% if data['referring-mp-first-name'] %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants in body?
+                            Referring medical practitioner
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
+                        </dd>
+                    </div>
+                {% endif %}
+                {% if data['coroner-first-name'] %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Senior coroner
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
+                        </dd>
+                    </div>
+                {% endif %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants in body
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant']}}
@@ -160,7 +188,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {{ data['main-cause'] }}
                         </dd>
                         <dd class="govuk-summary-list__value">
-                            1 hour
+                            {{ data ['duration1'] or '1' }} {{ data ['time-unit-duration-1'] or 'hour' }}
                         </dd>
 
                     </div>
@@ -173,7 +201,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             {{data ['secondary-cause']}}
                         </dd>
                         <dd class="govuk-summary-list__value">
-                            2 months
+                            {{ data ['duration2'] or '2' }} {{ data ['time-unit-duration-2'] or 'months' }}
                         </dd>
 
                     </div>
@@ -185,6 +213,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <dd class="govuk-summary-list__value">
                             {{ data ['other-conditions-c'] }}
                         </dd>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration3']}} {{ data ['time-unit-duration-3']}}
+                        </dd>
                     </div>
 
                     <div class="govuk-summary-list__row">
@@ -194,7 +225,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <dd class="govuk-summary-list__value">
                             {{ data ['other-conditions-d'] }}
                         </dd>
-
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration4']}} {{ data ['time-unit-duration-4']}}
+                        </dd>
                     </div>
 
                     <div class="govuk-summary-list__row">
@@ -204,7 +237,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <dd class="govuk-summary-list__value">
                             {{ data['other-significant-conditions']}}
                         </dd>
-
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['duration5']}} {{ data ['time-unit-duration-5']}}
+                        </dd>
                     </div>
 
                     <div class="govuk-summary-list__row">
@@ -231,7 +266,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Death affected by pregnancy?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['pregnancy-contributed']}}
+                            {{ data['pregnancy-contributed'] or 'Not applicable' }}
                         </dd>
                     </div>
 
@@ -251,7 +286,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Sarah Phillips
+                            Alera Singh
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">

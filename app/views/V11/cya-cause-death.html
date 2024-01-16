@@ -7,7 +7,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-three-quarters">
+  <div class="govuk-grid-column-two-thirds">
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
@@ -21,19 +21,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
       Make sure the information you entered is correct. Any incorrect information may delay registration of the death.
     </div>
-
-
+  </div>
+  <div class="govuk-grid-column-full">
     <form action="check-your-answers-cod" method="post">
 
       <!-- OVER 28 DAYS --> 
-      {% if data['over-under-28'] == 'yes' %} 
-
+      {% if data['over-under-28'] == 'no' %} 
+       
       <dl class="govuk-summary-list">
 
         <!-- [1a] + [Onset 1a] -->
         <div class="govuk-summary-list__row">
           
-          <dt class="govuk-summary-list__key" style="width:35%">
+          <dt class="govuk-summary-list__key" style="width:30%">
             1(a) Disease or condition directly leading to death
           </dt>
 
@@ -66,19 +66,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
            -->
 
-          <dd class="govuk-summary-list__value">
+          <dd class="govuk-summary-list__value" style="width:35%">
             {{ data['main-cause'] or 'Intraperitoneal haemorrhage' }}
           </dd>
 
-          <dd class="govuk-summary-list__value">
+          <dd class="govuk-summary-list__value" style="width:10%">
             {% if data['duration1'] %}
               {{ data['duration1']}} {{ data['time-unit-duration-1']}}
             {% else %}
-              8 Minutes
+              45 minutes
             {% endif %}
           </dd>
 
-          <dd class="govuk-summary-list__actions">
+          <dd class="govuk-summary-list__actions" style="width:15%">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
@@ -93,7 +93,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             1(b) Other disease or condition, if any, leading to 1(a)
           </dt>
 
-          <dd class="govuk-summary-list__value">
+        <!--  <dd class="govuk-summary-list__value">
             {% if data['secondary-cause'] %}
             {{ data['secondary-cause']}}
             {% else %}
@@ -107,9 +107,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {{ data['duration2']}} {{ data['time-unit-duration-2']}}
           {% else %}
        
-          {% endif %}
+          {% endif %}-->
 
-        <!--
+        
           <dd class="govuk-summary-list__value">
             {{ data['secondary-cause'] or 'Ruptured metastatic deposit in liver' }}
           </dd>
@@ -127,7 +127,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
           </dd>
-        -->
+        
 
         </div>
 
@@ -137,7 +137,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <dt class="govuk-summary-list__key" style="width:35%">
             1(c) Other disease or condition, if any, leading to 1(b)
           </dt>
-<!--
+
           <dd class="govuk-summary-list__value">
             {{ data['other-conditions-c'] or 'Primary adenocarinmoma of ascending colon' }}
 
@@ -150,7 +150,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             2 years
           {% endif %}
         </dd>
--->
+    <!--
           <dd class="govuk-summary-list__value">
               {% if data['other-conditions-c'] %}
               {{ data['other-conditions-c']}}
@@ -167,7 +167,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
          
             {% endif %}
           </dd>
-
+    -->
           <dd class="govuk-summary-list__actions">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
@@ -177,30 +177,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
 
         <!-- [1d] + [Onset 1d] -->
-        <div class="govuk-summary-list__row">
+        <div class="govuk-summary-list__row ">
           
           <dt class="govuk-summary-list__key" style="width:35%">
             1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
 
-          <!--
+          
           <dd class="govuk-summary-list__value">
-            {% if data['other-conditions-d'] %}
               {{ data['other-conditions-d'] or 'Non-insulin dependent diabetes mellitus' }}
-            {% else %}
-              Not specified
-            {% endif %}
+
           </dd>
 
           <dd class="govuk-summary-list__value">
             {% if data['duration4'] %}
               {{ data['duration4']}} {{ data['time-unit-duration-4']}}
             {% else %}
-              
+              15 years
             {% endif %}
           </dd>
-          -->
-
+          
+    <!--
           <dd class="govuk-summary-list__value">
             {% if data['other-conditions-d'] %}
               {{ data['other-conditions-d']}}
@@ -216,13 +213,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               
             {% endif %}
           </dd>
-
+-->
           <dd class="govuk-summary-list__actions">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
             </a>
           </dd>
-
+    
         </div>
 
         <!-- [2] + [Onset 2] -->
@@ -334,7 +331,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
 
       </dl>
-
+      
           
 
         {% else %}
@@ -440,14 +437,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         
 
       {% endif %}
-
-
+    
+    
       <button class="govuk-button" type="submit">
         Save and continue
       </button>
 
     </form>
-
+    
   </div>
 </div>
 

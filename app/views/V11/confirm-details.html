@@ -28,12 +28,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Full name
           </dt>
           <dd class="govuk-summary-list__value">
-            {% if data['your-full-name-first'] and data['your-full-name-last'] %}
-              {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
-            {% else %}
-            
+            {% if data['role-type' == 'ap'] %}
             Sarah Phillips
-              
+            {% else %}
+            Alera Singh 
             {% endif %}
           </dd>
 

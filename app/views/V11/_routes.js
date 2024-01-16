@@ -287,7 +287,7 @@ router.post(/cause-of-death/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
 
-    if (overUnder28 == 'yes') {
+    if (overUnder28 == 'no') {
         res.redirect('caused-by-employment')
     } else {
         res.redirect('cya-cause-death')
