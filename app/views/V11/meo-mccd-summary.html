@@ -47,26 +47,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         {% endif %}
         
-        
 
-    <!--
-        
-
-        
-
-        
-
-        
-
-        <strong class="govuk-tag govuk-tag--default">
+        <!--<strong class="govuk-tag govuk-tag--default">
             Completed
-        </strong>
+        </strong>-->
 
-        
-
-    -->
 
         <h1 class="govuk-heading-l govuk-!-margin-top-2 govuk-!-margin-bottom-5">MCCD summary</h1>
+
+        {% if data['meo-review'] == 'propose-amendments' %}
+
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+            <span class="govuk-caption-m">18 January 2024</span>Medical Examiner Officer’s comment
+        </h2>
+            
+        <p class="govuk-body">
+            Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
+        </p>
+        {% else %}
+        {% endif %}
 
         <div class="govuk-summary-card">
 
@@ -378,6 +377,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </div>
         </div>
 
+        {% if data['meo-review'] %}
+        
+        <a href="dashboard?role-type=meo" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Return to dashboard
+        </a>
+        
+        {% else %}
         <form action="meo-review" method="post">
 
             <div class="govuk-form-group">
@@ -434,6 +440,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <button class="govuk-button govuk-button--primary" type="submit">Save and continue</button>
             <button class="govuk-button govuk-button--secondary" href="dashboard?role-type=meo" >Back to dashboard</button>
         </form>
+        {% endif %}
+
         {% endif %}
     </div>
 </div>
