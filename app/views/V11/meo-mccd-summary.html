@@ -403,13 +403,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="meo-review-approve" name="meo-review" type="radio" value="approve">
                             <label class="govuk-label govuk-radios__label" for="meo-review-approve">
-                                Approve certificate
+                                This certificate is ready for Medical Examiner sign off
                             </label>
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="meo-review-propose-amendments" name="meo-review" type="radio" value="propose-amendments" data-aria-controls="conditional-contact">
                             <label class="govuk-label govuk-radios__label" for="meo-review-propose-amendments">
-                                Propose amendments
+                                This certificate require amendments by the Attending Practitioner
                             </label>
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
@@ -418,10 +418,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                 <label class="govuk-label" for="proposed-amendments">
                                     Outline amendments required
                                 </label>
-                                <div id="proposed-amendments-hint" class="govuk-hint">
-                                    Include any amendments required for the attending practitioner to review as well as
-                                    further discussions to be had if needed
-                                </div>
                                 <textarea class="govuk-textarea" id="proposed-amendments" name="proposed-amendments" rows="5"
                                     aria-describedby="reject-reason-hint"></textarea>
                             </div>
