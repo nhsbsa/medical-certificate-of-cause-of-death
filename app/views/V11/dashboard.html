@@ -41,32 +41,24 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   <!-- =================================================== -->
 
   {% if data['role-type'] == 'meo' %}
-  <div class="govuk-grid-column-two-thirds">
-
-    <p>This dashboard gives you access to Medical certificates of cause of death (MCCDs) being produced. You can forward
-      complete certificates to the registrar.
-    </p>
+  <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-5">
+    <p>This dashboard gives you access to Medical certificates of cause of death (MCCDs) being produced across your
+      trust. You can view progress and, once ready, forward complete certificates to the registrar.</p>
   </div>
-  
+
   <div class="govuk-grid-column-full">
 
     <div class="govuk-tabs" data-module="govuk-tabs">
-      <h2 class="govuk-tabs__title">
-        Certificates
-      </h2>
+
       <ul class="govuk-tabs__list">
+
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#all">
-            All certificates
-          </a>
-        </li>
-        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#in-progress">
             In progress
           </a>
         </li>
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#on-hold">
+          <a class="govuk-tabs__tab" href="#ready-to-share">
             Ready to share
           </a>
         </li>
@@ -75,9 +67,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Completed
           </a>
         </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#all">
+            All certificates
+          </a>
+        </li>
       </ul>
-      <div class="govuk-tabs__panel" id="all">
-        
+
+      <div class="govuk-tabs__panel" id="in-progress">
+
         <table class="govuk-table">
 
           <thead class="govuk-table__head">
@@ -90,168 +88,172 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
             </tr>
           </thead>
-    
-    
-    
+
+
+
           <tbody class="govuk-table__body">
-    
+
             <tr class="govuk-table__row">
 
               {% if data['meo-review'] == 'approve' %}
-    
+
               <td scope="row" class="govuk-table__cell">
-                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
-                data['deceased-last-name'] or 'Abbas' }}</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-                </th>
-    
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{
+                  data.deceased-middle-name or 'Farah' }} {{
+                  data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 321 654 987</span>
+              </td>
+
               <td class="govuk-table__cell">
                 Community
               </td>
-    
+
               <td class="govuk-table__cell">
                 Sarah Phillips<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 17 Jan 2024
               </td>
-    
+
               <td class="govuk-table__cell">
                 <a href="meo-mccd-summary">
                   Review
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
-                
+
                 <strong class="govuk-tag govuk-tag--blue">
                   Ready for sign off
                 </strong>
-                
+
               </td>
 
               {% elseif data['meo-review'] == 'propose-amendments' %}
 
               <td scope="row" class="govuk-table__cell">
-                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
-                data['deceased-last-name'] or 'Abbas' }}</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-                </th>
-    
-              <td class="govuk-table__cell">
-                Community
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{
+                  data.deceased-middle-name or 'Farah' }} {{
+                  data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 455 667</span>
               </td>
-    
+
+              <td class="govuk-table__cell">
+                Hospital
+              </td>
+
               <td class="govuk-table__cell">
                 Sarah Phillips<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 17 Jan 2024
               </td>
-    
+
               <td class="govuk-table__cell">
                 <a href="meo-mccd-summary">
-                  Review
+                  View
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
-                
+
                 <strong class="govuk-tag govuk-tag--orange">
                   To be amended
-              </strong>
-                
+                </strong>
+
               </td>
 
               {% elseif data['meo-review'] == 'pause-mccd' %}
 
               <td scope="row" class="govuk-table__cell">
-                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
-                data['deceased-last-name'] or 'Abbas' }}</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-                </th>
-    
-              <td class="govuk-table__cell">
-                Community
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{
+                  data.deceased-middle-name or 'Farah' }} {{
+                  data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 455 667</span>
               </td>
-    
+
+              <td class="govuk-table__cell">
+                Hospital
+              </td>
+
               <td class="govuk-table__cell">
                 Sarah Phillips<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 17 Jan 2024
               </td>
-    
+
               <td class="govuk-table__cell">
                 <a href="meo-mccd-summary">
-                  Review
+                  View
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
-                
+
                 <strong class="govuk-tag govuk-tag--grey">
                   On hold
-              </strong>
-                
+                </strong>
+
               </td>
 
               {% else %}
 
               <td scope="row" class="govuk-table__cell">
-                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
-                data['deceased-last-name'] or 'Abbas' }}</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-                </th>
-    
-              <td class="govuk-table__cell">
-                Community
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{
+                  data.deceased-middle-name or 'Farah' }} {{
+                  data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 455 667</span>
               </td>
-    
+
+              <td class="govuk-table__cell">
+                Hospital
+              </td>
+
               <td class="govuk-table__cell">
                 Sarah Phillips<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 17 Jan 2024
               </td>
-    
+
               <td class="govuk-table__cell">
                 <a href="meo-mccd-summary">
-                  Review
+                  View
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
-                
+
                 <strong class="govuk-tag govuk-tag--blue">
                   Ready for review
-              </strong>
-                
+                </strong>
+
               </td>
 
               {% endif %}
 
             </tr>
-    
+
             <tr class="govuk-table__row">
               <td scope="row" class="govuk-table__cell">
                 <a href="meo-mccd-summary" class="govuk-link">Joseph William Doyle</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-              </th>
-    
+                <span class="govuk-body-s govuk">NHS: 321 654 987</span>
+              </td>
+
               <td class="govuk-table__cell">
                 Hospital
               </td>
-    
+
               <td class="govuk-table__cell">
                 Andrea Bartlett<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 12 Jan 2024
               </td>
@@ -266,54 +268,84 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </strong>
               </td>
             </tr>
-    
+
             <tr class="govuk-table__row">
+
               <td scope="row" class="govuk-table__cell">
-                <a href="#" class="govuk-link">Brooke Seidel</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-              </th>
-    
+                <a href="#" class="govuk-link">Milo Brett</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 456 322</span>
+              </td>
+
               <td class="govuk-table__cell">
                 Community
               </td>
-    
+
               <td class="govuk-table__cell">
                 Caleb Greenaway<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
+
               <td class="govuk-table__cell">
-                12 Jan 2024
+                14 Jan 2024
               </td>
+
               <td class="govuk-table__cell">
-                <a href="ap-mccd-summary">
+                <a href="#">
                   Review
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
                 <strong class="govuk-tag govuk-tag--blue">
-                  Ready for sign off
+                  Ready for review
                 </strong>
               </td>
+
             </tr>
-    
+
             <tr class="govuk-table__row">
+
+              {% if data['select-reg-office'] %}
+
               <td scope="row" class="govuk-table__cell">
-                <a href="#" class="govuk-link">Jude Perry</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-              </th>
-    
+                <a href="meo-mccd-summary" class="govuk-link">Idris Felba</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 456 723</span>
+              </td>
               <td class="govuk-table__cell">
                 Community
               </td>
-    
               <td class="govuk-table__cell">
                 Molly Knowles<br>
                 <span class="govuk-body-s govuk">AP</span>
               </td>
-    
               <td class="govuk-table__cell">
-                12 Jan 2024
+                17 Jan 2024
+              </td>
+              <td class="govuk-table__cell">
+                <a href="#">
+                  View
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <strong class="govuk-tag govuk-tag--default">
+                  Completed
+                </strong>
+              </td>
+
+              {% else %}
+
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary-idris" class="govuk-link">Idris Felba</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 456 723</span>
+              </td>
+              <td class="govuk-table__cell">
+                Community
+              </td>
+              <td class="govuk-table__cell">
+                Molly Knowles<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+              <td class="govuk-table__cell">
+                17 Jan 2024
               </td>
               <td class="govuk-table__cell">
                 <a href="share-mccd">
@@ -325,84 +357,32 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                   Ready to share
                 </strong>
               </td>
+
+              {% endif %}
+
             </tr>
 
             <tr class="govuk-table__row">
+
               <td scope="row" class="govuk-table__cell">
-                <a href="#" class="govuk-link">Andrea Garry Wilson</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-              </th>
-    
-              <td class="govuk-table__cell">
-                Community
+                <a href="#" class="govuk-link">Kia Ravi</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 456 720</span>
               </td>
-    
+
+              <td class="govuk-table__cell">
+                Hospital
+              </td>
+
               <td class="govuk-table__cell">
                 Myra Jari Adkins<br>
                 <span class="govuk-body-s govuk">ME</span>
               </td>
-    
+
               <td class="govuk-table__cell">
                 12 Jan 2024
               </td>
               <td class="govuk-table__cell">
-                <a href="ap-mccd-summary">
-                  Review
-                </a>
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                <strong class="govuk-tag govuk-tag--default">
-                  Completed
-                </strong>
-              </td>
-            </tr>
-
-            
-          </tbody>
-        </table>
-      </div>
-
-      <div class="govuk-tabs__panel" id="completed">
-        
-        <table class="govuk-table">
-
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">Patient details</th>
-              <th scope="col" class="govuk-table__header">Place of death</th>
-              <th scope="col" class="govuk-table__header">Written by</th>
-              <th scope="col" class="govuk-table__header">Date started</th>
-              <th scope="col" class="govuk-table__header">Action</th>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
-            </tr>
-          </thead>
-    
-    
-    
-          <tbody class="govuk-table__body">
-    
-            
-
-            <tr class="govuk-table__row">
-              <td scope="row" class="govuk-table__cell">
-                <a href="#" class="govuk-link">Andrea Garry Wilson</a><br>
-                <span class="govuk-body-s govuk">NHS: 1234556</span>
-              </th>
-    
-              <td class="govuk-table__cell">
-                Community
-              </td>
-    
-              <td class="govuk-table__cell">
-                Myra Jari Adkins<br>
-                <span class="govuk-body-s govuk">ME</span>
-              </td>
-    
-              <td class="govuk-table__cell">
-                12 Jan 2024
-              </td>
-              <td class="govuk-table__cell">
-                <a href="ap-mccd-summary">
+                <a href="#">
                   View
                 </a>
               </td>
@@ -413,40 +393,41 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </td>
             </tr>
 
-            
+
           </tbody>
         </table>
       </div>
-    
-  </div>
+
+    </div>
 
 
 
 
- <!-- =================================================== -->
-  <!-- AP -->
-  <!-- =================================================== -->
+    <!-- =================================================== -->
+    <!-- AP -->
+    <!-- =================================================== -->
 
-  {% elseif data['role-type'] == 'ap' %}
+    {% elseif data['role-type'] == 'ap' %}
 
-  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
 
-    <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.
-    </p>
-    <p>This dashboard will list MCCDs that:</p>
+      <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current
+        MCCDs.
+      </p>
+      <p>This dashboard will list MCCDs that:</p>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you have submitted to a medical examiner for approval</li>
-      <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
-      <li>have been rejected by a medical examiner and need amending</li>
-    </ul>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>you have submitted to a medical examiner for approval</li>
+        <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
+        <li>have been rejected by a medical examiner and need amending</li>
+      </ul>
 
-  </div>
+    </div>
 
-  <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-full">
 
-    <!-- If AP Declaration ticked -->
-    {% if data['ap-declaration'] %}     
+      <!-- If AP Declaration ticked -->
+      {% if data['ap-declaration'] %}
 
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">Certificates created by you</caption>
@@ -461,7 +442,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">
-              {{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}
+              {{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
+              data['deceased-last-name'] or 'Abbas' }}
             </th>
             <td class="govuk-table__cell">
               {{ data['dod-day'] or '15' }} {{ data['dod-month'] or 'November' }} {{ data['dod-year'] or '2023'}}
@@ -522,7 +504,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     </div>
 
-    
+
 
     <!-- =================================================== -->
     <!-- ME  -->
@@ -577,11 +559,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </table>
 
       <table class="govuk-table">
-        
+
         <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
           Certificates reviewed by you
         </caption>
-        
+
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th scope="col" class="govuk-table__header">Deceased name</th>
@@ -670,41 +652,42 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </tbody>
       </table>
 
-        {% if data['me-cert-declaration'] %}
-        <table class="govuk-table">
-        
-          <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
-            Certificates reviewed by you
-          </caption>
-          
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">Deceased name</th>
-              <th scope="col" class="govuk-table__header">Name of AP</th>
-              <th scope="col" class="govuk-table__header">Date submitted</th>
-              <th scope="col" class="govuk-table__header">Action</th>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">{{ data['deceased-first-name'] or 'Aaliyah' }} {{ data['deceased-middle-name'] or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}</th> 
-              <td class="govuk-table__cell">Alera Singh</td>
-              <td class="govuk-table__cell">10 January 2024</td>
-              <td class="govuk-table__cell">
-                <a href="me-mccd-summary">
-                  View
-                </a>
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                <strong class="govuk-tag govuk-tag--blue">
-                  Completed
-                </strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        {% endif %}
+      {% if data['me-cert-declaration'] %}
+      <table class="govuk-table">
+
+        <caption class="govuk-table__caption govuk-heading-m govuk-!-margin-top-5">
+          Certificates reviewed by you
+        </caption>
+
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Deceased name</th>
+            <th scope="col" class="govuk-table__header">Name of AP</th>
+            <th scope="col" class="govuk-table__header">Date submitted</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">{{ data['deceased-first-name'] or 'Aaliyah' }} {{
+              data['deceased-middle-name'] or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}</th>
+            <td class="govuk-table__cell">Alera Singh</td>
+            <td class="govuk-table__cell">10 January 2024</td>
+            <td class="govuk-table__cell">
+              <a href="me-mccd-summary">
+                View
+              </a>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <strong class="govuk-tag govuk-tag--blue">
+                Completed
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {% endif %}
 
       {% endif %}
 
