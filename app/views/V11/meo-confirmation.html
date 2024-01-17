@@ -1,0 +1,99 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            {% if data['select-reg-office'] %}
+
+            <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+
+                <h1 class="govuk-panel__title">
+                    Medical certificate of cause of death completed
+                </h1>
+
+            </div>
+
+            <p>You have shared and completed this certificate of cause of death.</p>
+
+            <h2 class="govuk-heading-m">
+                What happens next
+            </h2>
+
+            <p>There are no further actions for you.</p>
+
+            {% elseif data['meo-review'] == 'approve' %}
+
+            <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+
+                <h1 class="govuk-panel__title">
+                    Medical certificate of cause of death approved
+                </h1>
+
+            </div>
+
+            <p>You have approved this certificate of cause of death.</p>
+
+            <h2 class="govuk-heading-m">
+                What happens next
+            </h2>
+
+            <p>Medical examiners can now review this certificate and sign off their declaration. You can still view the
+                certificate in your dashboard.</p>
+
+
+            {% elseif data['meo-review'] == 'propose-amendments' %}
+
+            <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+
+                <h1 class="govuk-panel__title">
+                    Medical certificate of cause of death reviewed
+                </h1>
+
+            </div>
+
+
+            <p>The medical certificate of cause of death has now been reviewed.</p>
+
+            <h2 class="govuk-heading-m">
+                What happens next
+            </h2>
+
+            <p>The attending practitioner involved will be notified of amendments needed and sent the comments you have
+                provided.</p>
+
+            {% elseif data['meo-review'] == 'pause-mccd' %}
+
+            <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+
+                <h1 class="govuk-panel__title">
+                    Medical certificate of cause of death paused
+                </h1>
+
+            </div>
+
+            <p>You have paused this certificate of cause of death.</p>
+
+            <h2 class="govuk-heading-m">
+                What happens next
+            </h2>
+
+            <p>Once this certificate can be completed, you can reopen it from your dashboard.</p>
+
+            {% endif %}
+
+            <a href="dashboard?role-type=meo" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+                Return to dashboard
+            </a>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

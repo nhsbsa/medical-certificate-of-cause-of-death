@@ -649,6 +649,30 @@ router.post(/care-id-smartcard/, (req,res) => {
     res.redirect('/v10/dashboard?role-type=ap')
 });
 
+
+// ************************
+// MEO 
+
+
+router.post(/meo-review/, (req,res) => {
+    res.redirect('meo-confirmation')
+});
+
+router.post(/select-reg-office/, (req,res) => {
+    res.redirect('cya-share-mccd')
+});
+
+router.post(/cya-share-mccd/, (req,res) => {
+    res.redirect('meo-confirmation')
+});
+
+
+
+
+
+
+
+
 // ************************************************************
 
 
