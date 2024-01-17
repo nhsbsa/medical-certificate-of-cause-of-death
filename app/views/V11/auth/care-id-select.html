@@ -134,7 +134,11 @@
 
     </fieldset>
 
+    {% if data['role-type'] == 'meo' %}
+    <a href="../dashboard?role-type=meo" class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-5">Continue</a>
+    {% else %}
     <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-5" data-module="govuk-button">Continue</button>
+    {% endif %}
 
   </form>
 
