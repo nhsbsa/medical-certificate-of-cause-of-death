@@ -655,15 +655,15 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 
 router.post(/meo-review/, (req,res) => {
-    res.redirect('/meo-confirmation')
+    res.redirect('meo-confirmation')
 });
 
 router.post(/select-reg-office/, (req,res) => {
-    res.redirect('/cya-share-mccd')
+    res.redirect('cya-share-mccd')
 });
 
 router.post(/cya-share-mccd/, (req,res) => {
-    res.redirect('/meo-confirmation')
+    res.redirect('meo-confirmation')
 });
 
 
