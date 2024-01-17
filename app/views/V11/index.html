@@ -9,7 +9,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+        {% if data['role-type'] == 'meo' %}
+        <h1 class="govuk-heading-xl">Complete a Medical certificate of cause of death</h1>
+        {% else %}
         <h1 class="govuk-heading-xl">Medical certificate of cause of death (MCCD) service</h1>
+        {% endif %}
 
         <p class="govuk-body">You can use this service if you are an attending practitioner or a medical examiner.</p>
         
@@ -25,6 +29,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <li>accept or reject an MCCD</li>
         </ul>
         <p class="govuk-body">A medical examiner can also use this service to create and certify an MCCD. This situation occurs when a death is reported to the coroner, and the coroner is satisfied the death does not require a coronial investigation.</p>
+
+        <p class="govuk-body">If you are a medical examiner officer you can use this service to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>review an MCCD</li>
+            <li>share an MCCD with the registrar</li>
+        </ul>
         
         <h2 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-2">Before you register an account</h2>
         <p class="govuk-body">You'll need your work address, GMC number and qualifications.</p>
