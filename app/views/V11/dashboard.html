@@ -51,8 +51,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <div class="govuk-tabs" data-module="govuk-tabs">
 
       <ul class="govuk-tabs__list">
-
+        
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#all">
+            All certificates
+          </a>
+        </li>
+
+        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#in-progress">
             In progress
           </a>
@@ -67,14 +73,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Completed
           </a>
         </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#all">
-            All certificates
-          </a>
-        </li>
+        
       </ul>
 
-      <div class="govuk-tabs__panel" id="in-progress">
+      <div class="govuk-tabs__panel" id="all">
 
         <table class="govuk-table">
 
