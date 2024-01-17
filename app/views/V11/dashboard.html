@@ -96,6 +96,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <tbody class="govuk-table__body">
     
             <tr class="govuk-table__row">
+
+              {% if data['meo-review'] == 'approve' %}
     
               <td scope="row" class="govuk-table__cell">
                 <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
@@ -122,10 +124,117 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </a>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
+                
+                <strong class="govuk-tag govuk-tag--blue">
+                  Ready for sign off
+                </strong>
+                
+              </td>
+
+              {% elseif data['meo-review'] == 'propose-amendments' %}
+
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
+                data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 1234556</span>
+                </th>
+    
+              <td class="govuk-table__cell">
+                Community
+              </td>
+    
+              <td class="govuk-table__cell">
+                Sarah Phillips<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+    
+              <td class="govuk-table__cell">
+                17 Jan 2024
+              </td>
+    
+              <td class="govuk-table__cell">
+                <a href="meo-mccd-summary">
+                  Review
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                
+                <strong class="govuk-tag govuk-tag--orange">
+                  To be amended
+              </strong>
+                
+              </td>
+
+              {% elseif data['meo-review'] == 'pause-mccd' %}
+
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
+                data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 1234556</span>
+                </th>
+    
+              <td class="govuk-table__cell">
+                Community
+              </td>
+    
+              <td class="govuk-table__cell">
+                Sarah Phillips<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+    
+              <td class="govuk-table__cell">
+                17 Jan 2024
+              </td>
+    
+              <td class="govuk-table__cell">
+                <a href="meo-mccd-summary">
+                  Review
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                
+                <strong class="govuk-tag govuk-tag--grey">
+                  On hold
+              </strong>
+                
+              </td>
+
+              {% else %}
+
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary" class="govuk-link">{{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{
+                data['deceased-last-name'] or 'Abbas' }}</a><br>
+                <span class="govuk-body-s govuk">NHS: 1234556</span>
+                </th>
+    
+              <td class="govuk-table__cell">
+                Community
+              </td>
+    
+              <td class="govuk-table__cell">
+                Sarah Phillips<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+    
+              <td class="govuk-table__cell">
+                17 Jan 2024
+              </td>
+    
+              <td class="govuk-table__cell">
+                <a href="meo-mccd-summary">
+                  Review
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                
                 <strong class="govuk-tag govuk-tag--blue">
                   Ready for review
-                </strong>
+              </strong>
+                
               </td>
+
+              {% endif %}
+
             </tr>
     
             <tr class="govuk-table__row">
