@@ -282,11 +282,49 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </dl>
             </div>
         </div>
-        
-        
-        <a href="dashboard" role="button" draggable="false" class="govuk-button govuk-button--primary" data-module="govuk-button">Back to dashboard</a>
-        
 
+        <form action="meo-review" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                        <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                            Medical examiner officer review
+                        </h2>
+
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-approve" name="meo-review" type="radio" value="approve">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-approve">
+                                This certificate is ready for Medical Examiner sign off
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-propose-amendments" name="meo-review" type="radio" value="propose-amendments" data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-propose-amendments">
+                                This certificate require amendments by the Attending Practitioner
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-pause-mccd" name="meo-review" type="radio" value="pause-mccd">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-pause-mccd">
+                                Pause MCCD
+                            </label>
+                        </div>
+
+
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button govuk-button--primary" href="meo-confirmation" type="submit">Submit</button>
+            <button class="govuk-button govuk-button--secondary" href="dashboard?role-type=meo" >Back to dashboard</button>
+        </form>
         
     </div>
 </div>
