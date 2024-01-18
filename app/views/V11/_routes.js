@@ -158,7 +158,7 @@ router.post(/age-66/, (req, res) => {
 
 // Under 28
 router.post(/deceased-persons-age/, (req, res) => {
-    res.redirect('ethnicity/ethnic-group')
+    res.redirect('/V11/ethnicity/ethnic-group')
 });
 
 router.post(/age-65-hours/, (req, res) => {
