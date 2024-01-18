@@ -241,6 +241,40 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             </tr>
 
+            {% if data['joseph-review'] == 'propose-amendments' %}
+
+            <tr class="govuk-table__row">
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary-joseph" class="govuk-link">Joseph William Doyle</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 455 667</span>
+              </td>
+
+              <td class="govuk-table__cell">
+                Community
+              </td>
+
+              <td class="govuk-table__cell">
+                Andrea Bartlett<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+
+              <td class="govuk-table__cell">
+                12 Jan 2024
+              </td>
+              <td class="govuk-table__cell">
+                <a href="meo-mccd-summary-joseph">
+                  View
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <strong class="govuk-tag govuk-tag--orange">
+                  To be amended
+                </strong>
+              </td>
+            </tr>
+
+            {% else %}
+
             <tr class="govuk-table__row">
               <td scope="row" class="govuk-table__cell">
                 <a href="meo-mccd-summary-joseph" class="govuk-link">Joseph William Doyle</a><br>
@@ -270,6 +304,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </strong>
               </td>
             </tr>
+
+            {% endif %}
 
             <tr class="govuk-table__row">
               <td scope="row" class="govuk-table__cell">
