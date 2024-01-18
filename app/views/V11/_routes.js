@@ -658,6 +658,10 @@ router.post(/meo-review/, (req,res) => {
     res.redirect('meo-confirmation')
 });
 
+router.post(/joseph-review/, (req,res) => {
+    res.redirect('meo-confirmation')
+});
+
 router.post(/select-reg-office/, (req,res) => {
     res.redirect('cya-share-mccd')
 });
