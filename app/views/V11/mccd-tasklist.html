@@ -9,6 +9,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+    {% if data['validation'] == 'true' %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#">All sections must be completed before you continue</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">{{ data['deceased-first-name']}} {{ data['deceased-last-name'] }}</span>Medical certificate of cause of death (MCCD)</h1>
 
     <h3 class="app-task-list__section govuk-heading-m">About the deceased person</h3>
@@ -69,9 +86,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     {% if data['actions-after-death-section'] == 'completed' and data['cause-of-death-section'] == 'completed' %}
     <a href="declaration" class="govuk-button">Save and continue</a>
     {% else %}
-    <button disabled="disabled" aria-disabled="true" class="govuk-button govuk-button--disabled" data-module="govuk-button">
-      Save and continue
-    </button>
+    <a href="#" class="govuk-button">Save and continue</a>
     {% endif %}
 
   </div>
