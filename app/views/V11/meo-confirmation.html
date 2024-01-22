@@ -81,23 +81,40 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             {% elseif data['joseph-review'] == 'propose-amendments' %}
 
+                    <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
+
+                        <h1 class="govuk-panel__title">
+                            Medical certificate of cause of death reviewed
+                        </h1>
+
+                    </div>
+
+
+                    <p>The medical certificate of cause of death has now been reviewed.</p>
+
+                    <h2 class="govuk-heading-m">
+                        What happens next
+                    </h2>
+
+                    <p>The attending practitioner involved will be notified of amendments needed and sent the comments you have
+                        provided.</p>
+
+            {% elseif data['milo-review'] == 'approve' %}
+
             <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-5">
-
                 <h1 class="govuk-panel__title">
-                    Medical certificate of cause of death reviewed
+                Medical certificate of cause of death approved
                 </h1>
-
             </div>
 
-
-            <p>The medical certificate of cause of death has now been reviewed.</p>
+            <p>You have approved this certificate of cause of death.</p>
 
             <h2 class="govuk-heading-m">
                 What happens next
             </h2>
 
-            <p>The attending practitioner involved will be notified of amendments needed and sent the comments you have
-                provided.</p>
+            <p>Medical examiners can now review this certificate and sign off their declaration. You can still view the
+                certificate in your dashboard.</p>
 
             {% elseif data['meo-review'] == 'pause-mccd' %}
 

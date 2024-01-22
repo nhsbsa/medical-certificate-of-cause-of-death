@@ -308,6 +308,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {% endif %}
 
             <tr class="govuk-table__row">
+
               <td scope="row" class="govuk-table__cell">
                 <a href="#" class="govuk-link">Mika Low</a><br>
                 <span class="govuk-body-s govuk">NHS: 321 423 789</span>
@@ -337,10 +338,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </td>
             </tr>
 
-            <tr class="govuk-table__row">
+            
 
+            {% if data['milo-review'] == 'approve' %}
+            
+            <tr class="govuk-table__row">
+            
               <td scope="row" class="govuk-table__cell">
-                <a href="#" class="govuk-link">Milo Brett</a><br>
+                <a href="meo-mccd-summary-milo" class="govuk-link">Milo Brett</a><br>
                 <span class="govuk-body-s govuk">NHS: 123 456 322</span>
               </td>
 
@@ -358,7 +363,40 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </td>
 
               <td class="govuk-table__cell">
-                <a href="#">
+                <a href="meo-mccd-summary-milo">
+                  View
+                </a>
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Ready for sign off
+                </strong>
+              </td>
+
+            {% else %}
+
+            <tr class="govuk-table__row">
+
+              <td scope="row" class="govuk-table__cell">
+                <a href="meo-mccd-summary-milo" class="govuk-link">Milo Brett</a><br>
+                <span class="govuk-body-s govuk">NHS: 123 456 322</span>
+              </td>
+
+              <td class="govuk-table__cell">
+                Community
+              </td>
+
+              <td class="govuk-table__cell">
+                Caleb Greenaway<br>
+                <span class="govuk-body-s govuk">AP</span>
+              </td>
+
+              <td class="govuk-table__cell">
+                14 Jan 2024
+              </td>
+
+              <td class="govuk-table__cell">
+                <a href="meo-mccd-summary-milo">
                   Review
                 </a>
               </td>
@@ -370,6 +408,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             </tr>
             
+            {% endif %}
+
             <tr class="govuk-table__row">
               <td scope="row" class="govuk-table__cell">
                 <a href="#" class="govuk-link">Jude Perry</a><br>
