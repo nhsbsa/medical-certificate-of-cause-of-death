@@ -65,7 +65,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
            -->
+           <dd class="govuk-summary-list__value" style="width:35%">
+            {% if data['main-cause'] %}
+            {{ data['main-cause']}}
+            {% else %}
+            Not specified
+            {% endif %}
 
+        </dd>
+
+        <dd class="govuk-summary-list__value" style="width:10%">
+          {% if data['duration1'] %}
+            {{ data['duration1']}} {{ data['time-unit-duration-2']}}
+          {% else %}
+       
+          {% endif %}
+          </dd>
+<!--
           <dd class="govuk-summary-list__value" style="width:35%">
             {{ data['main-cause'] or 'Intraperitoneal haemorrhage' }}
           </dd>
@@ -77,7 +93,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               45 minutes
             {% endif %}
           </dd>
-
+-->
           <dd class="govuk-summary-list__actions" style="width:15%">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
@@ -93,7 +109,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             1(b) Other disease or condition, if any, leading to 1(a)
           </dt>
 
-        <!--  <dd class="govuk-summary-list__value">
+        <dd class="govuk-summary-list__value" style="width:35%">
             {% if data['secondary-cause'] %}
             {{ data['secondary-cause']}}
             {% else %}
@@ -102,14 +118,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </dd>
 
-        <dd class="govuk-summary-list__value">
+        <dd class="govuk-summary-list__value" style="width:10%">
           {% if data['duration2'] %}
             {{ data['duration2']}} {{ data['time-unit-duration-2']}}
           {% else %}
        
-          {% endif %}-->
-
-        
+          {% endif %}
+          </dd>
+        <!--  
           <dd class="govuk-summary-list__value">
             {{ data['secondary-cause'] or 'Ruptured metastatic deposit in liver' }}
           </dd>
@@ -121,7 +137,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               3 hours
             {% endif %}
           </dd>
-
+        -->
           <dd class="govuk-summary-list__actions">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
@@ -137,7 +153,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <dt class="govuk-summary-list__key" style="width:35%">
             1(c) Other disease or condition, if any, leading to 1(b)
           </dt>
-
+<!--
           <dd class="govuk-summary-list__value">
             {{ data['other-conditions-c'] or 'Primary adenocarinmoma of ascending colon' }}
 
@@ -150,7 +166,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             2 years
           {% endif %}
         </dd>
-    <!--
+ -->    
           <dd class="govuk-summary-list__value">
               {% if data['other-conditions-c'] %}
               {{ data['other-conditions-c']}}
@@ -167,7 +183,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
          
             {% endif %}
           </dd>
-    -->
+   
           <dd class="govuk-summary-list__actions">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>
@@ -183,7 +199,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             1(d) Other disease or condition, if any, leading to 1(c)
           </dt>
 
-          
+ <!--         
           <dd class="govuk-summary-list__value">
               {{ data['other-conditions-d'] or 'Non-insulin dependent diabetes mellitus' }}
 
@@ -196,8 +212,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               15 years
             {% endif %}
           </dd>
-          
-    <!--
+  -->        
+    
           <dd class="govuk-summary-list__value">
             {% if data['other-conditions-d'] %}
               {{ data['other-conditions-d']}}
@@ -213,7 +229,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               
             {% endif %}
           </dd>
--->
+
           <dd class="govuk-summary-list__actions">
             <a href="cause-of-death">
               Change<span class="govuk-visually-hidden"> main cause</span>

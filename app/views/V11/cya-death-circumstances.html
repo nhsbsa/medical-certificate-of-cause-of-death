@@ -58,7 +58,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Referring medical practitioner
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }}
+            <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
+              {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
@@ -69,7 +70,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Senior coroner
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}
+           <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
+              {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
@@ -102,7 +104,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Implant details
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['implant-details'] or 'pacemaker' }}
+              {{ data['implant-details'] }}
             </dd>
 
             <dd class="govuk-summary-list__actions">
