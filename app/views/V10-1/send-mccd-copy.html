@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      Share a copy of this certificate
+    </h1>
+
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      To support visibility of your work, we recommend sharing a copy of this certificate with your admin staff.
+    </div>
+
+
+
+    <h2 class="govuk-heading-m">Places you can send this:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>administration team or your secretary if you work in a community setting</li>
+      <li>bereavement team if you work in a trust</li>
+      <li>local registry service (LRS)</li>
+    </ul>
+
+    <form action="send-mccd-copy" method="post">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="mccd-email">Practice email address</label>
+        <input class="govuk-input" id="mccd-email" name="mccd-email" type="text">
+      </div>
+      <button class="govuk-button" type="submit">Continue</button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

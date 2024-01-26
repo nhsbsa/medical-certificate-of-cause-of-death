@@ -1,0 +1,52 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <p>{{ data['addresses'] | length }} {% if (data['addresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['postcode'] }}. <a href="find-address">Search again</a></p>
+
+    <form action="select-address" method="post" novalidate>
+    
+      <div class="govuk-form-group">
+    
+        <div class="govuk-radios">
+
+          
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="sort">
+                <h1 class="govuk-heading-l">
+                  Select an address
+                </h1>
+              </label>
+              <select class="govuk-select" id="select-address" name="select-address">
+                <option value="choose" selected>Select address</option>
+                {% for address in data['addresses'] %}
+                  <option value="{{ address }}">{{ address }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          
+    
+        </div>
+      </div>
+    
+    </fieldset>
+
+    <button class="govuk-button" type="submit">Use this address</button>
+
+    </form>
+
+    <div class="govuk-form-group">
+      <p><a href="address">Enter your address manually</a></p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

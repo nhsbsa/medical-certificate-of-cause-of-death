@@ -17,10 +17,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </span> -->
       Has a post-mortem been held?
     </h1>
-    
-    {% if data['role-type'] == 'ap' %}
-    
-    <form action="death-circumstances-ap" method="post">
+
+    <form action="death-circumstances" method="post">
 
       <fieldset class="govuk-fieldset">
 
@@ -65,45 +63,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
       </fieldset>
 
-      {% else %}
-    <form action="death-circumstances-me" method="post">
-
-      <fieldset class="govuk-fieldset">
-
-        <div class="govuk-form-group">
-
-          <div class="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
-                value="The certified cause of death takes account of information obtained from a post-mortem">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
-                The certified cause of death takes account of information obtained from a post-mortem
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
-                value="Information from post-mortem may be available later">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
-                Information from post-mortem may be available later
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
-                value="A post-mortem is not being held">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
-                A post-mortem is not being held
-              </label>
-            </div>
-
-          </div>
-        </div>
-
-      </fieldset>
-
-      {% endif %}
       <button class="govuk-button" type="submit">
         Save and continue
       </button>

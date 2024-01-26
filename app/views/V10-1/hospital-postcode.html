@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <form action="hospital-lookup" class="form" method="get">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="event-name">
+          What is the name or postcode of the hospital?
+        </label>
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General Infirmary or LS1 3EX.
+      </div>
+        <input class="govuk-input govuk-!-width-full" id="hospital-postcode" name="hospital-postcode" type="text">
+      </div>
+
+      <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">Enter address manually</a></p>
+
+      <button class="govuk-button" type="submit">
+        Find address
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
