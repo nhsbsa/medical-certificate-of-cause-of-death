@@ -1,0 +1,78 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <h1 class="govuk-heading-l">
+            What was the ethnic group of the deceased person?
+        </h1>
+        <p>
+          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+        </p>
+
+        <form action="ethnic-group" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-1" name="ethnic-group" type="radio" value="white">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-1">
+                            White
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-2" name="ethnic-group" type="radio" value="multiple">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-2">
+                            Mixed or multiple ethnic groups
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-3" name="ethnic-group" type="radio" value="asian">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-3">
+                            Asian or Asian British
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-4" name="ethnic-group" type="radio" value="black">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-4">
+                            Black, African, Caribbean or Black British
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-5" name="ethnic-group" type="radio" value="other">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-5">
+                            Other ethnic group
+                          </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicity-6" name="ethnic-group" type="radio" value="skip">
+                          <label class="govuk-label govuk-radios__label" for="ethnicity-6">
+                            Unknown
+                          </label>
+                        </div>
+                      </div>
+                </fieldset>
+
+            </div>
+
+            <button class="govuk-button" type="submit">
+                Save and continue
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

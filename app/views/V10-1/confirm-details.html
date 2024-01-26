@@ -1,0 +1,74 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
+      <span class="govuk-caption-l govuk-caption--bottom">
+        Your details
+      </span>
+      
+        Check your details are correct before starting a new certificate
+    </h1>
+    <div class="govuk-hint govuk-!-margin-top-3 govuk-!-margin-bottom-7" id="hint">
+      Changes to your work address won't be reflected in your profile. To make permanent changes, contact the Care Identity management team.
+    </div>
+      
+    <dl class="govuk-summary-list govuk-!-margin-top-5">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Full name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['your-full-name-first'] and data['your-full-name-last'] %}
+              {{ data['your-full-name-first'] }} {{ data['your-full-name-last'] }}
+            {% else %}
+            
+            Sarah Phillips
+              
+            {% endif %}
+          </dd>
+
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            GMC number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12345678          
+          </dd>
+
+        </div>
+        
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              123 Hospital Road, Wing 4<br>
+              Newcastle, Tyne and Wear<br>
+              NE12 3AB
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">
+                Change<span class="govuk-visually-hidden"> address</span>
+              </a>
+            </dd>
+          </div>
+      </dl>
+      
+      <a href="66-or-65" class="govuk-button">Save and continue</a>
+      
+
+  </div>
+</div>
+
+{% endblock %}

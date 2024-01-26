@@ -1,0 +1,76 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <h1 class="govuk-heading-l">
+            What was the ethnicity of the deceased person?
+        </h1>
+        <p>
+          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+        </p>
+        <form action="ethnicity" method="post">
+        
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+                    
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                            Indian
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Asian or Asian British - Pakistani">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                            Pakistani
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Asian or Asian British - Bangladeshi">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
+                            Bangladeshi
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Asian or Asian British - Chinese">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                            Chinese
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Asian or Asian British - Other" data-aria-controls="conditional-ethnicityDetail-5">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-5">
+                            Any other Asian background
+                          </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-7" name="ethnicityDetail" type="radio" value="Asian or Asian British - Unknown">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-7">
+                            Unknown
+                          </label>
+                        </div>
+                      </div>
+                    
+                </fieldset>
+              </div> 
+            <button class="govuk-button" type="submit">
+                Save and continue
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
