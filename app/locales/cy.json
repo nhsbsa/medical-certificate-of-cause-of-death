@@ -1,0 +1,9 @@
+{
+	"home.title": "C'est le page d'acceuil",
+	"home.p": "Choisissez la langue",
+	"lng.english": "Anglais",
+	"lng.french": "Francais",
+	"lng.german": "Allemand",
+	"lng.rus": "Russe",
+	"server.date": "<small>Server time: {{ date }}</small>"
+}

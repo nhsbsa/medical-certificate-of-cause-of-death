@@ -5,6 +5,7 @@
   
   {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
   
+  
   {% block header %}
   <header class="govuk-header " role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
@@ -54,9 +55,47 @@
                   </span>
                   </p>
               </div>
+              {% if data['lang'] == "en" %}
+              <nav class="dwp-language-toggle" aria-label="Language toggle">
+                <ul class="dwp-language-toggle__list">
+                <li class="dwp-language-toggle__list-item">
+                    English
+                </li>
+                <li lang="cy" class="dwp-language-toggle__list-item">
+                    <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
+                    <a href="?lang=cy" class="govuk-link">Cymraeg</a>
+                </li>
+                </ul>
+                </nav> 
+                {% elseif data['lang'] == "cy" %}
+                <nav class="dwp-language-toggle" aria-label="Language toggle">
+                  <ul class="dwp-language-toggle__list">
+                  <li lang="en" class="dwp-language-toggle__list-item">
+                      <span class="govuk-visually-hidden">Change the language to English</span>
+                      <a href="?lang=en" class="govuk-link">English</a>
+                  </li>
+                  <li class="dwp-language-toggle__list-item">
+                    Cymraeg
+                   </li>
+                  </ul>
+                  </nav> 
+                {% else %}
+                <nav class="dwp-language-toggle" aria-label="Language toggle">
+                  <ul class="dwp-language-toggle__list">
+                  <li class="dwp-language-toggle__list-item">
+                      English
+                  </li>
+                  <li lang="cy" class="dwp-language-toggle__list-item">
+                      <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
+                      <a href="?lang=cy" class="govuk-link">Cymraeg</a>
+                  </li>
+                  </ul>
+                  </nav> 
+                {% endif %}
           </div>
       </div>
     </div>
+ 
     
     
   {% endblock %}

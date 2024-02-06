@@ -1,0 +1,10 @@
+
+{
+	"home.title": "This is home page",
+	"home.p": "Select the language",
+	"lng.english": "English",
+	"lng.french": "French",
+	"lng.german": "German",
+	"lng.rus": "Russian",
+	"server.date": "<small>Server time: {{ date }}</small>"
+}
