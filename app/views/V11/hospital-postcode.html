@@ -9,22 +9,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
+
+
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
-      Deceased person's details
-      </span> -->
-      What is the hospital's postcode?
-    </h1>
-
     <form action="hospital-lookup" class="form" method="get">
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="hospital-postcode">
-          Postcode
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="event-name">
+          What is the name or postcode of the hospital?
         </label>
-        <input class="govuk-input govuk-input--width-10" id="hospital-postcode" name="hospital-postcode" type="text">
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General Infirmary or LS1 3EX.
+      </div>
+        <input class="govuk-input govuk-!-width-full" id="hospital-postcode" name="hospital-postcode" type="text">
       </div>
 
       <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">Enter address manually</a></p>
@@ -33,6 +34,59 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Find address
       </button>
     </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+    
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="hospital-lookup" class="form" method="get">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="event-name">
+          Beth yw enw neu god post yr ysbyty?
+        </label>
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        Rhowch enw llawn neu god post yr ysbyty lle digwyddodd y farwolaeth. Er enghraifft, Ysbyty Cyffredinol Leeds neu LS1 3EX.
+      </div>
+        <input class="govuk-input govuk-!-width-full" id="hospital-postcode" name="hospital-postcode" type="text">
+      </div>
+
+      <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">Rhowch y cyfeiriad â llaw</a></p>
+
+      <button class="govuk-button" type="submit">
+        Dod o hyd i gyfeiriad
+      </button>
+    </form>
+
+
+<!-- Default En language -->
+{% else %}
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="hospital-lookup" class="form" method="get">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="event-name">
+          What is the name or postcode of the hospital?
+        </label>
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General Infirmary or LS1 3EX.
+      </div>
+        <input class="govuk-input govuk-!-width-full" id="hospital-postcode" name="hospital-postcode" type="text">
+      </div>
+
+      <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">Enter address manually</a></p>
+
+      <button class="govuk-button" type="submit">
+        Find address
+      </button>
+    </form>
+{% endif %}
+
 
   </div>
 </div>

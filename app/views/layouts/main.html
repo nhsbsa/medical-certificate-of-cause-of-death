@@ -50,9 +50,19 @@
                   <strong class="govuk-tag govuk-phase-banner__content__tag">
                       Beta
                   </strong>
+                  {% if data['lang'] == "en" %}
                   <span class="govuk-phase-banner__text">
                       This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
                   </span>
+                  {% elseif data['lang'] == "cy" %}
+                  <span>
+                    Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="#">adborth</a> yn ein helpu i’w wella.
+                  </span>
+                  {% else %}
+                  <span class="govuk-phase-banner__text">
+                    This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+                </span>
+                {% endif %}
                   </p>
               </div>
           </div>
@@ -62,14 +72,72 @@
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
               <div class="account-signed-in">
-                  
-                {% if data ['role-type'] == 'ap' %}<p>attending.practitioner@nhs.net</p>{% elseif data ['role-type'] == 'me' %}<p>medical.examiner@nhs.net</p>{% else %}<p>your.name@nhs.net</p>{% endif %}
-                  |
-                  <p><a href="#">Sign out</a></p>
+                <ul class="account-signed-in__list">
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                    Sarah Phillips
+                  </li>
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                    GMC no: 12345678
+                  </li>
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                    {% if data ['role-type'] == 'ap' %}
+                      attending.practitioner@nhs.net
+                    {% elseif data ['role-type'] == 'me' %}
+                      medical.examiner@nhs.net
+                    {% else %}
+                      your.name@nhs.net
+                    {% endif %}
+                  </li>
+                  <li class="account-signed-in__list-item">
+                    <a href="../index">Sign out</a>
+                  </li>
+                  </ul>
               </div>
           </div>
       </div>
     </div>
-    
+    <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+              {% if data['lang'] == "en" %}
+              <nav class="dwp-language-toggle" aria-label="Language toggle">
+                <ul class="dwp-language-toggle__list">
+                <li class="dwp-language-toggle__list-item">
+                    English
+                </li>
+                <li lang="cy" class="dwp-language-toggle__list-item">
+                    <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
+                    <a href="?lang=cy" class="govuk-link">Cymraeg</a>
+                </li>
+                </ul>
+                </nav> 
+                {% elseif data['lang'] == "cy" %}
+                <nav class="dwp-language-toggle" aria-label="Language toggle">
+                  <ul class="dwp-language-toggle__list">
+                  <li lang="en" class="dwp-language-toggle__list-item">
+                      <span class="govuk-visually-hidden">Change the language to English</span>
+                      <a href="?lang=en" class="govuk-link">English</a>
+                  </li>
+                  <li class="dwp-language-toggle__list-item">
+                    Cymraeg
+                   </li>
+                  </ul>
+                  </nav> 
+                {% else %}
+                <nav class="dwp-language-toggle" aria-label="Language toggle">
+                  <ul class="dwp-language-toggle__list">
+                  <li class="dwp-language-toggle__list-item">
+                      English
+                  </li>
+                  <li lang="cy" class="dwp-language-toggle__list-item">
+                      <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
+                      <a href="?lang=cy" class="govuk-link">Cymraeg</a>
+                  </li>
+                  </ul>
+                  </nav> 
+                {% endif %}
+          </div>
+      </div>
+    </div>
     
   {% endblock %}

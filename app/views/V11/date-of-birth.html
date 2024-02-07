@@ -8,24 +8,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-    <h1 class="govuk-heading-l">
-      What was the deceased person's date of birth?
-    </h1>
 
     <form action="date-of-birth" class="form" method="post">
 
       <div class="govuk-form-group">
 
-        <fieldset class="govuk-fieldset" aria-describedby="example-hint" role="group">
+        <fieldset class="govuk-fieldset" aria-describedby="DoB-hint" role="group">
 
-          <div class="govuk-hint" id="contact-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What was the deceased person's date of birth?
+            </h1>
+          </legend>
+
+          <div class="govuk-hint" id="DoB-hint">
             For example, 21 8 2021 or 8 2021 if day of birth is not available
           </div>
 
-          <div class="govuk-date-input" id="example">
+          <div class="govuk-date-input" id="DoB">
 
             <div class="govuk-date-input__item">
               <div class="govuk-form-group">
@@ -62,7 +65,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               <div class="govuk-checkboxes__divider">or</div>
 
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="dob-unregistered" name="dob-unregistered" type="checkbox"
+                <input class="govuk-checkboxes__input" id="dob-unregistered" name="dob-day" type="checkbox"
                   value="The deceased person did not have a registered date of birth">
                 <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">
                   The deceased person did not have a registered date of birth
@@ -81,6 +84,165 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Save and continue
       </button>
     </form>
+
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="date-of-birth" class="form" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset" aria-describedby="example-hint" role="group">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Beth oedd dyddiad geni'r person ymadawedig?
+        </h1>
+      </legend>
+
+      <div class="govuk-hint" id="DoB-hint">
+        Er enghraifft, 21 8 2021 neu 8 2021 os nad yw diwrnod y mis yn hysbys
+      </div>
+
+      <div class="govuk-date-input" id="DoB">
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-day">
+              Diwrnod
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-day" name="dob-day"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+        
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-month">
+              Mis
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-month" name="dob-month"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+        
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-year">
+              Blwyddyn
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-year" name="dob-year"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="govuk-checkboxes govuk-!-margin-top-3">
+          
+          <div class="govuk-checkboxes__divider">Neu</div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="dob-unregistered" name="dob-day" type="checkbox"
+              value="Nid oedd gan y person ymadawedig ddyddiad geni cofrestredig">
+            <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">
+              Nid oedd gan y person ymadawedig ddyddiad geni cofrestredig
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+    
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Achub a pharhau
+    </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="date-of-birth" class="form" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset" aria-describedby="example-hint" role="group">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          What was the deceased person's date of birth?
+        </h1>
+      </legend>
+
+      <div class="govuk-hint" id="DoB-hint">
+        For example, 21 8 2021 or 8 2021 if day of birth is not available
+      </div>
+
+      <div class="govuk-date-input" id="DoB">
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-day" name="dob-day"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+        
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-month" name="dob-month"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+        
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-year" name="dob-year"
+              type="text" pattern="[0-9]*" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="govuk-checkboxes govuk-!-margin-top-3">
+          
+          <div class="govuk-checkboxes__divider">or</div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="dob-unregistered" name="dob-day" type="checkbox"
+              value="The deceased person did not have a registered date of birth">
+            <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">
+              The deceased person did not have a registered date of birth
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+    
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Save and continue
+  </button>
+</form>
+
+{% endif %}
+
 
   </div>
 </div>

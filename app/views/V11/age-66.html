@@ -8,19 +8,28 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <form action="age-66" class="form" method="post">
-
-      <h1 class="govuk-heading-l">
-        What was the deceased person's age?
-      </h1>
-
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            What was the deceased person's age?
+          </h1>
+        </legend>
       <div class="govuk-form-group">
         <div class="govuk-input__wrapper">
+          <label class="govuk-label govuk-visually-hidden" for="age-66">
+            Enter age number
+          </label>
           <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66" name="age-66" type="text">
+          <label class="govuk-label govuk-visually-hidden" for="age-time-unit">
+            Select age unit
+          </label>
             <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
+              <option value="select unit">Select time unit</option>
               <option value="years old">years old</option>
               <option value="months old">months old</option>
               <option value="days old">days old</option>
@@ -35,6 +44,85 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Save and continue
       </button>
     </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="age-66" class="form" method="post">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Beth oedd oedran y person ymadawedig?
+      </h1>
+    </legend>
+  <div class="govuk-form-group">
+    <div class="govuk-input__wrapper">
+      <label class="govuk-label govuk-visually-hidden" for="age-66">
+        rhowch rif oedran
+      </label>
+      <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66" name="age-66" type="text">
+      <label class="govuk-label govuk-visually-hidden" for="age-time-unit">
+        dewis uned oedran
+      </label>
+        <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
+          <option value="select unit">Dewiswch uned amser</option>
+          <option value="years old">flwydd oed</option>
+          <option value="months old">mis oed</option>
+          <option value="days old">dyddiau oed</option>
+          
+        </select>
+      
+    </div>
+
+    </div>
+
+  <button class="govuk-button" type="submit">
+    Achub a pharhau
+  </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="age-66" class="form" method="post">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        What was the deceased person's age?
+      </h1>
+    </legend>
+  <div class="govuk-form-group">
+    <div class="govuk-input__wrapper">
+      <label class="govuk-label govuk-visually-hidden" for="age-66">
+        Enter age number
+      </label>
+      <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66" name="age-66" type="text">
+      <label class="govuk-label govuk-visually-hidden" for="age-time-unit">
+        Select age unit
+      </label>
+        <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
+          <option value="select unit">Select time unit</option>
+          <option value="years old">years old</option>
+          <option value="months old">months old</option>
+          <option value="days old">days old</option>
+          
+        </select>
+      
+    </div>
+
+    </div>
+
+  <button class="govuk-button" type="submit">
+    Save and continue
+  </button>
+</form>
+
+{% endif %}
+
 
   </div>
 </div>
