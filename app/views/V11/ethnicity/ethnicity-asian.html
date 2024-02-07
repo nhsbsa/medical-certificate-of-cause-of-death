@@ -9,20 +9,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
+
+
         <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-        <h1 class="govuk-heading-l">
-            What was the ethnicity of the deceased person?
-        </h1>
-        <p>
-          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
-        </p>
         <form action="ethnicity" method="post">
         
             <div class="govuk-form-group">
 
-                <fieldset class="govuk-fieldset">
-                    
+                <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                      What was the ethnicity of the deceased person?
+                    </h1>
+                  </legend>
+                  <div id="ethnicity-hint" class="govuk-hint">
+                    Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+                  </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                           <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian">
@@ -69,6 +74,139 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 Save and continue
             </button>
         </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+      <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+        <form action="ethnicity" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                      Beth oedd ethnigrwydd y person ymadawedig?
+                    </h1>
+                  </legend>
+                  <div id="ethnicity-hint" class="govuk-hint">
+                    Dewiswch ethnigrwydd yr ymadawedig fel y'i cofnodir ar gofnod y claf. Os nad oes cyfatebiaeth â'r rhestr, neu os na chofnodir ethnigrwydd ar gofnod y claf, dewiswch 'anhysbys'.
+                  </div>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                            Indiaidd
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Asian or Asian British - Pakistani">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                            Pacistanaidd
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Asian or Asian British - Bangladeshi">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
+                            Bangladeshaidd
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Asian or Asian British - Chinese">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                            Tseiniaidd
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Asian or Asian British - Other" data-aria-controls="conditional-ethnicityDetail-5">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-5">
+                            Unrhyw gefndir Asiaidd arall
+                          </label>
+                        </div>
+                        <div class="govuk-radios__divider">neu</div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-7" name="ethnicityDetail" type="radio" value="Asian or Asian British - Unknown">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-7">
+                            Anhysbys
+                          </label>
+                        </div>
+                      </div>
+                    
+                </fieldset>
+              </div> 
+            <button class="govuk-button" type="submit">
+                Achub a pharhau
+            </button>
+        </form>
+
+<!-- Default En language -->
+{% else %}
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <form action="ethnicity" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                      What was the ethnicity of the deceased person?
+                    </h1>
+                  </legend>
+                  <div id="ethnicity-hint" class="govuk-hint">
+                    Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+                  </div>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                            Indian
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Asian or Asian British - Pakistani">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                            Pakistani
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Asian or Asian British - Bangladeshi">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
+                            Bangladeshi
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Asian or Asian British - Chinese">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                            Chinese
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Asian or Asian British - Other" data-aria-controls="conditional-ethnicityDetail-5">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-5">
+                            Any other Asian background
+                          </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="ethnicityDetail-7" name="ethnicityDetail" type="radio" value="Asian or Asian British - Unknown">
+                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-7">
+                            Unknown
+                          </label>
+                        </div>
+                      </div>
+                    
+                </fieldset>
+              </div> 
+            <button class="govuk-button" type="submit">
+                Save and continue
+            </button>
+        </form>
+
+{% endif %}
+
 
     </div>
 </div>

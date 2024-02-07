@@ -73,7 +73,13 @@
           <div class="govuk-grid-column-full">
               <div class="account-signed-in">
                 <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item">
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                    Sarah Phillips
+                  </li>
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                    GMC no: 12345678
+                  </li>
+                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
                     {% if data ['role-type'] == 'ap' %}
                       attending.practitioner@nhs.net
                     {% elseif data ['role-type'] == 'me' %}

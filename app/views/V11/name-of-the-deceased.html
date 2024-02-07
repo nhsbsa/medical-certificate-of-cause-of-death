@@ -1,8 +1,10 @@
 {% extends "layouts/main.html" %}
 
+
 {% block pageTitle %}
   GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
+
 
 {% block content %}
 
@@ -49,10 +51,10 @@
         </form>
       <!--Welsh language selected -->
       {% elseif data['lang'] == "cy" %}
-      <a href="javascript:history.back()" class="govuk-back-link">Retour</a>
+      <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
         
       <h1 class="govuk-heading-l">
-        Quel est le nom du décédé?
+        Beth yw enw'r ymadawedig?
       </h1>
       
       <form action="name-of-the-deceased" class="form" method="post">
@@ -60,9 +62,9 @@
         <div class="govuk-form-group">
           <label class="govuk-label" for="deceased-first-name">
             {% if data['over-under-28'] == 'no' %}
-            Prénom
+            Enw cyntaf
             {% else %}
-            Prénom (optionnel)
+            Enw cyntaf (dewisol)
             {% endif %}
           </label>
           <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="deceased-first-name" name="deceased-first-name" type="text">
@@ -70,22 +72,23 @@
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="deceased-middle-name">
-            Deuxième prénom (optionnel)
+            Enwau canol (dewisol)
           </label>
           <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="deceased-middle-name" name="deceased-middle-name" type="text">
         </div>
   
         <div class="govuk-form-group">
           <label class="govuk-label" for="deceased-last-name">
-            Nom de Famille
+            Cyfenw
           </label>
           <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="deceased-last-name" name="deceased-last-name" type="text">
         </div>
   
         <button class="govuk-button" type="submit">
-          Enregistrer et continuer
+           Achub a pharhau
         </button>
       </form>
+      
       {% else %}
       <!--no language selected default to english -->
       <a href="javascript:history.back()" class="govuk-back-link">Back</a>
