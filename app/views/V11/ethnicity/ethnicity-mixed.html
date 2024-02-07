@@ -9,20 +9,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
         <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-        <h1 class="govuk-heading-l">
-            What was the ethnicity of the deceased person?
-        </h1>
-        <p>
-          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
-        </p>
         <form action="ethnicity" method="post">
         
             <div class="govuk-form-group">
 
-                <fieldset class="govuk-fieldset">
-                
+                <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                      What was the ethnicity of the deceased person?
+                    </h1>
+                  </legend>
+                  <div id="ethnicity-hint" class="govuk-hint">
+                    Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+                  </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                           <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black Caribbean">
@@ -65,6 +68,130 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 Save and continue
             </button>
         </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="ethnicity" method="post">
+
+    <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Beth oedd ethnigrwydd y person ymadawedig?
+            </h1>
+          </legend>
+          <div id="ethnicity-hint" class="govuk-hint">
+            Dewiswch ethnigrwydd yr ymadawedig fel y'i cofnodir ar gofnod y claf. Os nad oes cyfatebiaeth â'r rhestr, neu os na chofnodir ethnigrwydd ar gofnod y claf, dewiswch 'anhysbys'.
+          </div>
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black Caribbean">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                    Gwyn a Du Caribïaidd
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black African">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                    Gwyn a Du Affricanaidd
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Asian">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
+                    Gwyn ac Asiaidd
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Mixed and multiple - Other" data-aria-controls="conditional-ethnicityDetail-4">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                    Unrhyw gefndir ethnig cymysg neu luosog arall
+                  </label>
+                </div>
+                <div class="govuk-radios__divider">neu</div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="Mixed and multiple - Unknown">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-6">
+                    Anhysbys
+                  </label>
+                </div>
+              </div>
+          
+        </fieldset>
+
+    </div>
+
+    <button class="govuk-button" type="submit">
+      Achub a pharhau
+    </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="ethnicity" method="post">
+
+    <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What was the ethnicity of the deceased person?
+            </h1>
+          </legend>
+          <div id="ethnicity-hint" class="govuk-hint">
+            Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'unknown'.
+          </div>
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black Caribbean">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                    White and Black Caribbean
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black African">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                    White and Black African
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Asian">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
+                    White and Asian
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Mixed and multiple - Other" data-aria-controls="conditional-ethnicityDetail-4">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                    Any other mixed or multiple ethnic background
+                  </label>
+                </div>
+                <div class="govuk-radios__divider">or</div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="Mixed and multiple - Unknown">
+                  <label class="govuk-label govuk-radios__label" for="ethnicityDetail-6">
+                    Unknown
+                  </label>
+                </div>
+              </div>
+          
+        </fieldset>
+
+    </div>
+
+    <button class="govuk-button" type="submit">
+        Save and continue
+    </button>
+</form>
+
+{% endif %}
 
     </div>
 </div>
