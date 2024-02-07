@@ -7,109 +7,322 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <!-- English language selected-->
+    {% if data['lang'] == "en" %}
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
-        Actions after death
-      </span> -->
-      Has a post-mortem been held?
-    </h1>
-    
-    {% if data['role-type'] == 'ap' %}
-    
-    <form action="death-circumstances-ap" method="post">
+    <div class="govuk-grid-column-two-thirds">
 
-      <fieldset class="govuk-fieldset">
-
-        <div class="govuk-form-group">
-
-          <div class="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
-                value="The certified cause of death takes account of information obtained from a post-mortem">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
-                The certified cause of death takes account of information obtained from a post-mortem
-              </label>
+      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+  
+      <h1 class="govuk-heading-l">
+        Has a post-mortem been held?
+      </h1>
+  
+      {% if data['role-type'] == 'ap' %}
+  
+      <form action="death-circumstances-ap" method="post">
+  
+        <fieldset class="govuk-fieldset">
+  
+          <div class="govuk-form-group">
+  
+            <div class="govuk-radios">
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                  value="The certified cause of death takes account of information obtained from a post-mortem">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                  The certified cause of death takes account of information obtained from a post-mortem
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                  value="Information from post-mortem may be available later">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                  Information from post-mortem may be available later
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                  value="A post-mortem is not being held">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                  A post-mortem is not being held
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-4" name="death-circumstances" type="radio"
+                  value="I have reported this death to the coroner for further action">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-4">
+                  I have reported this death to the coroner for further action
+                </label>
+              </div>
+  
             </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
-                value="Information from post-mortem may be available later">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
-                Information from post-mortem may be available later
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
-                value="A post-mortem is not being held">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
-                A post-mortem is not being held
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-4" name="death-circumstances" type="radio"
-                value="I have reported this death to the coroner for further action">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-4">
-                I have reported this death to the coroner for further action
-              </label>
-            </div>
-
           </div>
-        </div>
-
-      </fieldset>
-
-      {% else %}
-    <form action="death-circumstances-me" method="post">
-
-      <fieldset class="govuk-fieldset">
-
-        <div class="govuk-form-group">
-
-          <div class="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
-                value="The certified cause of death takes account of information obtained from a post-mortem">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
-                The certified cause of death takes account of information obtained from a post-mortem
-              </label>
+  
+        </fieldset>
+  
+        {% else %}
+        <form action="death-circumstances-me" method="post">
+  
+          <fieldset class="govuk-fieldset">
+  
+            <div class="govuk-form-group">
+  
+              <div class="govuk-radios">
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                    value="The certified cause of death takes account of information obtained from a post-mortem">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                    The certified cause of death takes account of information obtained from a post-mortem
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                    value="Information from post-mortem may be available later">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                    Information from post-mortem may be available later
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                    value="A post-mortem is not being held">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                    A post-mortem is not being held
+                  </label>
+                </div>
+  
+              </div>
             </div>
+  
+          </fieldset>
+  
+          {% endif %}
+          <button class="govuk-button" type="submit">
+            Save and continue
+          </button>
+        </form>
+  
+    </div>
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
-                value="Information from post-mortem may be available later">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
-                Information from post-mortem may be available later
-              </label>
+
+    <!--Welsh language selected-->
+    {% elseif data['lang'] == "cy" %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+  
+      <h1 class="govuk-heading-l">
+        A oes post-mortem wedi'i gynnal?
+      </h1>
+  
+      {% if data['role-type'] == 'ap' %}
+  
+      <form action="death-circumstances-ap" method="post">
+  
+        <fieldset class="govuk-fieldset">
+  
+          <div class="govuk-form-group">
+  
+            <div class="govuk-radios">
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                  value="Mae achos ardystiedig y farwolaeth yn ystyried gwybodaeth a gafwyd o bost-mortem">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                  Mae achos ardystiedig y farwolaeth yn ystyried gwybodaeth a gafwyd o bost-mortem
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                  value="Mae’n bosibl y bydd gwybodaeth o’r post-mortem ar gael yn ddiweddarach">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                  Mae’n bosibl y bydd gwybodaeth o’r post-mortem ar gael yn ddiweddarach
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                  value="Nid yw post-mortem yn cael ei gynnal">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                  Nid yw post-mortem yn cael ei gynnal
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-4" name="death-circumstances" type="radio"
+                  value="Rwyf wedi rhoi gwybod am y farwolaeth hon i'r crwner ar gyfer gweithredu pellach">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-4">
+                  Rwyf wedi rhoi gwybod am y farwolaeth hon i'r crwner ar gyfer gweithredu pellach
+                </label>
+              </div>
+  
             </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
-                value="A post-mortem is not being held">
-              <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
-                A post-mortem is not being held
-              </label>
-            </div>
-
           </div>
-        </div>
+  
+        </fieldset>
+  
+        {% else %}
+        <form action="death-circumstances-me" method="post">
+  
+          <fieldset class="govuk-fieldset">
+  
+            <div class="govuk-form-group">
+  
+              <div class="govuk-radios">
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                    value="Mae achos ardystiedig y farwolaeth yn ystyried gwybodaeth a gafwyd o bost-mortem">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                    Mae achos ardystiedig y farwolaeth yn ystyried gwybodaeth a gafwyd o bost-mortem
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                    value="Mae’n bosibl y bydd gwybodaeth o’r post-mortem ar gael yn ddiweddarach">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                    Mae’n bosibl y bydd gwybodaeth o’r post-mortem ar gael yn ddiweddarach
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                    value="Nid yw post-mortem yn cael ei gynnal">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                    Nid yw post-mortem yn cael ei gynnal
+                  </label>
+                </div>
+  
+              </div>
+            </div>
+  
+          </fieldset>
+  
+          {% endif %}
+          <button class="govuk-button" type="submit">
+            Achub a pharhau
+          </button>
+        </form>
+  
+    </div>
 
-      </fieldset>
+    <!-- Default En language -->
+    {% else %}
 
-      {% endif %}
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
-    </form>
+    <div class="govuk-grid-column-two-thirds">
 
-  </div>
+      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+  
+      <h1 class="govuk-heading-l">
+        Has a post-mortem been held?
+      </h1>
+  
+      {% if data['role-type'] == 'ap' %}
+  
+      <form action="death-circumstances-ap" method="post">
+  
+        <fieldset class="govuk-fieldset">
+  
+          <div class="govuk-form-group">
+  
+            <div class="govuk-radios">
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                  value="The certified cause of death takes account of information obtained from a post-mortem">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                  The certified cause of death takes account of information obtained from a post-mortem
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                  value="Information from post-mortem may be available later">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                  Information from post-mortem may be available later
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                  value="A post-mortem is not being held">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                  A post-mortem is not being held
+                </label>
+              </div>
+  
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="death-circumstances-4" name="death-circumstances" type="radio"
+                  value="I have reported this death to the coroner for further action">
+                <label class="govuk-label govuk-radios__label" for="death-circumstances-4">
+                  I have reported this death to the coroner for further action
+                </label>
+              </div>
+  
+            </div>
+          </div>
+  
+        </fieldset>
+  
+        {% else %}
+        <form action="death-circumstances-me" method="post">
+  
+          <fieldset class="govuk-fieldset">
+  
+            <div class="govuk-form-group">
+  
+              <div class="govuk-radios">
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-1" name="death-circumstances" type="radio"
+                    value="The certified cause of death takes account of information obtained from a post-mortem">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-1">
+                    The certified cause of death takes account of information obtained from a post-mortem
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-2" name="death-circumstances" type="radio"
+                    value="Information from post-mortem may be available later">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-2">
+                    Information from post-mortem may be available later
+                  </label>
+                </div>
+  
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="death-circumstances-3" name="death-circumstances" type="radio"
+                    value="A post-mortem is not being held">
+                  <label class="govuk-label govuk-radios__label" for="death-circumstances-3">
+                    A post-mortem is not being held
+                  </label>
+                </div>
+  
+              </div>
+            </div>
+  
+          </fieldset>
+  
+          {% endif %}
+          <button class="govuk-button" type="submit">
+            Save and continue
+          </button>
+        </form>
+  
+    </div>
+
+    {% endif %}
+
 </div>
 
 {% endblock %}

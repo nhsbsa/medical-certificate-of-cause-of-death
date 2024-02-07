@@ -7,52 +7,149 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+  <!-- English language selected-->
+{% if data['lang'] == "en" %}
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
-        Deceased person's details
-      </span> -->
-        Have the implants been removed?
-    </h1>
+<div class="govuk-grid-column-two-thirds">
 
-    <form action="has-been-removed" method="post">
+  <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-      <div class="govuk-form-group">
+  <h1 class="govuk-heading-l">
+    Have the implants been removed?
+  </h1>
 
-        <fieldset class="govuk-fieldset">
+  <form action="has-been-removed" method="post">
 
-          <div class="govuk-radios">
+    <div class="govuk-form-group">
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio"
-                value="Yes">
-              <label class="govuk-label govuk-radios__label" for="implant-removed-yes">
-                Yes
-              </label>
-            </div>
+      <fieldset class="govuk-fieldset">
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio"
-                value="No">
-              <label class="govuk-label govuk-radios__label" for="implant-removed-no">
-                No
-              </label>
-            </div>
+        <div class="govuk-radios">
 
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio"
+              value="Yes">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-yes">
+              Yes
+            </label>
           </div>
-        </fieldset>
 
-      </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio" value="No">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-no">
+              No
+            </label>
+          </div>
 
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
-    </form>
+        </div>
+      </fieldset>
 
-  </div>
+    </div>
+
+    <button class="govuk-button" type="submit">
+      Save and continue
+    </button>
+  </form>
+
+</div>
+
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<div class="govuk-grid-column-two-thirds">
+
+  <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+  <h1 class="govuk-heading-l">
+    Ydy'r mewnblaniadau wedi'u tynnu?
+  </h1>
+
+  <form action="has-been-removed" method="post">
+
+    <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset">
+
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio"
+              value="Oes">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-yes">
+              Oes
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio" value="Nac oes">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-no">
+              Nac oes
+            </label>
+          </div>
+
+        </div>
+      </fieldset>
+
+    </div>
+
+    <button class="govuk-button" type="submit">
+      Achub a pharhau
+    </button>
+  </form>
+
+</div>
+
+<!-- Default En language -->
+{% else %}
+
+<div class="govuk-grid-column-two-thirds">
+
+  <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+  <h1 class="govuk-heading-l">
+    Have the implants been removed?
+  </h1>
+
+  <form action="has-been-removed" method="post">
+
+    <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset">
+
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio"
+              value="Yes">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-yes">
+              Yes
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio" value="No">
+            <label class="govuk-label govuk-radios__label" for="implant-removed-no">
+              No
+            </label>
+          </div>
+
+        </div>
+      </fieldset>
+
+    </div>
+
+    <button class="govuk-button" type="submit">
+      Save and continue
+    </button>
+  </form>
+
+</div>
+
+{% endif %}
+
+  
 </div>
 
 {% endblock %}
