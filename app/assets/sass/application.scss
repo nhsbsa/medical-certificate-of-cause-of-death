@@ -334,3 +334,18 @@
   margin-bottom: 0
 }
 
+
+ .govuk-checkboxes__conditional {
+    @include govuk-responsive-margin(4, "bottom");
+    margin-left: conditional-margin-left;
+    padding-left: conditional-padding-left;
+    border-left: conditional-border-width solid govuk-border-colour;
+
+    .govuk-frontend-supported &--hidden {
+      display: none;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
