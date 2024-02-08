@@ -7,6 +7,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
+
+  <!-- English language selected-->
+  {% if data['lang'] == "en" %}
+
   <div class="govuk-grid-column-two-thirds">
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
     {% if data['role-type'] == 'ap' %}
@@ -63,6 +67,131 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     {% endif %}
 
   </div>
+
+
+  <!--Welsh language selected-->
+  {% elseif data['lang'] == "cy" %}
+
+  <div class="govuk-grid-column-two-thirds">
+    <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+    {% if data['role-type'] == 'ap' %}
+
+    <h1 class="govuk-heading-l">Datganiad Ymarferydd sy'n Mynychu</h1>
+
+    <form action="ap-declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="ap-declaration" name="ap-declaration" type="checkbox" value="ap-declaration">
+                
+                <label class="govuk-label govuk-checkboxes__label" for="ap-declaration">
+                  Cadarnhaf fy mod wedi mynychu’r ymadawedig cyn ei farwolaeth a bod achos y farwolaeth fel y’i nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a’m cred.
+                </label>
+                
+                
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" type="submit">Cyflwyno ar gyfer craffu</button>
+
+    </form>
+
+    {% else %}
+
+    <h1 class="govuk-heading-l">Datganiad yr Archwiliwr Meddygol</h1>
+
+    <form action="me-cert-declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="me-cert-declaration" name="me-cert-declaration" type="checkbox" value="me-cert-declaration">
+                
+                <label class="govuk-label govuk-checkboxes__label" for="me-cert-declaration">
+                  Rwyf yn archwiliwr meddygol a benodwyd yn briodol ac rwy’n cadarnhau yn dilyn fy adolygiad bod achos y farwolaeth fel y’i nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a’m cred.
+                </label>
+                
+                
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" type="submit">MCCD cyflawn</button>
+
+    </form>
+    {% endif %}
+
+  </div>
+
+  <!-- Default En language -->
+  {% else %}
+  <div class="govuk-grid-column-two-thirds">
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    {% if data['role-type'] == 'ap' %}
+
+    <h1 class="govuk-heading-l">Attending Practitioner Declaration</h1>
+
+    <form action="ap-declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="ap-declaration" name="ap-declaration" type="checkbox" value="ap-declaration">
+                
+                <label class="govuk-label govuk-checkboxes__label" for="ap-declaration">
+                  I confirm that I attended the deceased before their death and that the cause of death is as stated in this certificate to the best of my knowledge and belief.
+                </label>
+                
+                
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" type="submit">Submit for scrutiny</button>
+
+    </form>
+
+    {% else %}
+
+    <h1 class="govuk-heading-l">Medical Examiner Declaration</h1>
+
+    <form action="me-cert-declaration" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="me-cert-declaration" name="me-cert-declaration" type="checkbox" value="me-cert-declaration">
+                
+                <label class="govuk-label govuk-checkboxes__label" for="me-cert-declaration">
+                  I am a duly appointed medical examiner and I confirm that following my review the cause of death is as stated in this certificate to the best of my knowledge and belief.
+                </label>
+                
+                
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" type="submit">Complete MCCD</button>
+
+    </form>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+  
+  
+
 </div>
 
 {% endblock %}
