@@ -7,69 +7,66 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
+
   <div class="govuk-grid-column-two-thirds">
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
-      Check the details below
+      Share MCCD
     </h1>
 
-  <form action="cya-share-mccd" method="post">
+    <form action="cya-share-mccd" method="post">
 
-    <dl class="govuk-summary-list">
+      <dl class="govuk-summary-list">
 
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          NHS number
-        </dt>
-        <dd class="govuk-summary-list__value">
-          123 456 723
-        </dd>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            NHS number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            123 456 723
+          </dd>
 
-      </div>
+        </div>
 
-      <div class="govuk-summary-list__row">
-        
-        <dt class="govuk-summary-list__key">
-          Full name
-        </dt>
-        <dd class="govuk-summary-list__value">
-          Idris Felba
-        </dd>
+        <div class="govuk-summary-list__row">
 
-      </div>
+          <dt class="govuk-summary-list__key">
+            Full name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Idris Felba
+          </dd>
 
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Date of death
-        </dt>
-        <dd class="govuk-summary-list__value">
-          12 January 2024
-        </dd>
+        </div>
 
-      </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date of death
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 January 2024
+          </dd>
 
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Registration office details
-        </dt>
-        <dd class="govuk-summary-list__value">
-          Shefield<br>
-          Town Hall, Pinstone Street, Sheffield S1 2HH
-        </dd>
+        </div>
 
-      </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Registration office details
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Shefield<br>
+            Town Hall, Pinstone Street, Sheffield S1 2HH
+          </dd>
+
+        </div>
 
       </dl>
 
-      <button class="govuk-button govuk-button--primary">Share MCCD</button>
+      <button class="govuk-button">Share MCCD</button>
 
-  </form>
-
-    <!--<a class="govuk-button" href="meo-confirmation?shared=yes">
-      Share MCCD
-    </a>-->
+    </form>
 
   </div>
 </div>

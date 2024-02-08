@@ -7,6 +7,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
+
+
+  <!-- English language selected-->
+  {% if data['lang'] == "en" %}
+
   <div class="govuk-grid-column-two-thirds">
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
@@ -19,18 +24,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </h1>
 
     <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
-      Make sure the information you entered is correct. Any incorrect information may delay registration of the death.
-    </div>    
-
-    
-    
-    
+      Check that all the details are correct before you submit this Medical certificate of cause of death for scrutiny by a medical examiner.
+    </div>
     
     <form action="check-your-answers-dc" method="post">
 
       <dl class="govuk-summary-list">
-
-
         <div class="govuk-summary-list__row">
 
           <dt class="govuk-summary-list__key">
@@ -41,7 +40,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </dd>
 
           <dd class="govuk-summary-list__actions">
-
             <a href="death-circumstances">
               Change<span class="govuk-visually-hidden"> post-mortem</span>
             </a>
@@ -147,6 +145,285 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </form>
 
   </div>
+
+
+  <!--Welsh language selected-->
+  {% elseif data['lang'] == "cy" %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">
+        Gweithredoedd ar ôl marwolaeth
+      </span>
+      Gwiriwch eich atebion
+    </h1>
+
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Gwiriwch fod yr holl fanylion yn gywir cyn i chi gyflwyno'r Dystysgrif Feddygol hon o achos marwolaeth i'w harchwilio gan archwiliwr meddygol.
+    </div>
+    
+    <form action="check-your-answers-dc" method="post">
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+
+          <dt class="govuk-summary-list__key">
+            Post-mortem
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['death-circumstances'] or 'Nid yw post-mortem yn cael ei gynnal' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="death-circumstances">
+              Newid<span class="govuk-visually-hidden"> post-mortem</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        <!-- For the ME CERT -->
+        {% if data['role-type'] == 'me' %}
+      
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              [missing welsh] Referring medical practitioner
+            </dt>
+            <dd class="govuk-summary-list__value">
+            <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
+              {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Newid<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              [missing welsh] Senior coroner
+            </dt>
+            <dd class="govuk-summary-list__value">
+           <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
+              {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Newid<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+
+        {% endif %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Mewnblaniadau yn y corff
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['implant'] or 'Nac oes' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="implant">
+              Newid<span class="govuk-visually-hidden"> whether there was an implant in the body or not</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        {% if data['implant'] == 'Yes' %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Manylion mewnblaniad
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['implant-details'] }}
+            </dd>
+
+            <dd class="govuk-summary-list__actions">
+
+              <a href="death-seen-by">
+                Newid<span class="govuk-visually-hidden"> manylion mewnblaniad</span>
+              </a>
+
+            </dd>
+
+          </div>
+        
+
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Mewnblaniadau wedi'u tynnu
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['implant-removed']}}
+            </dd>
+
+            <dd class="govuk-summary-list__actions">
+
+              <a href="death-seen-by">
+                Newid<span class="govuk-visually-hidden"> if the implant has been removed or not</span>
+              </a>
+
+            </dd>
+
+          </div>
+        {% endif %}
+
+
+      </dl>
+      <button class="govuk-button" type="submit">
+        Achub a pharhau
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- Default En language -->
+  {% else %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">
+        Actions after death
+      </span>
+      Check your answers
+    </h1>
+
+    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
+      Check that all the details are correct before you submit this Medical certificate of cause of death for scrutiny by a medical examiner.
+    </div>
+    
+    <form action="check-your-answers-dc" method="post">
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+
+          <dt class="govuk-summary-list__key">
+            Post-mortem
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['death-circumstances'] or 'A post-mortem is not being held' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="death-circumstances">
+              Change<span class="govuk-visually-hidden"> post-mortem</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        <!-- For the ME CERT -->
+        {% if data['role-type'] == 'me' %}
+      
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Referring medical practitioner
+            </dt>
+            <dd class="govuk-summary-list__value">
+            <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
+              {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Senior coroner
+            </dt>
+            <dd class="govuk-summary-list__value">
+           <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
+              {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+
+        {% endif %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Implants in body
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['implant'] or 'No' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+            <a href="implant">
+              Change<span class="govuk-visually-hidden"> whether there was an implant in the body or not</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+        {% if data['implant'] == 'Yes' %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Implant details
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['implant-details'] }}
+            </dd>
+
+            <dd class="govuk-summary-list__actions">
+
+              <a href="death-seen-by">
+                Change<span class="govuk-visually-hidden"> implant details</span>
+              </a>
+
+            </dd>
+
+          </div>
+        
+
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Implants removed?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['implant-removed']}}
+            </dd>
+
+            <dd class="govuk-summary-list__actions">
+
+              <a href="death-seen-by">
+                Change<span class="govuk-visually-hidden"> if the implant has been removed or not</span>
+              </a>
+
+            </dd>
+
+          </div>
+        {% endif %}
+
+
+      </dl>
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
+
+    </form>
+
+  </div>
+
+  {% endif %}
+
+
 </div>
 
 {% endblock %}
