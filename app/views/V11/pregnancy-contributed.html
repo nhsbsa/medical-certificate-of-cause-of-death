@@ -9,19 +9,22 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
+
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">
-      <!--<span class="govuk-caption-l govuk-caption--bottom">
-        Cause of death
-      </span> -->
-      Did the pregnancy contribute to their death?
-    </h1>
     <form action="pregnancy-contributed" method="post">
 
       <div class="govuk-form-group">
 
         <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Did the deceased’s pregnancy contribute to their death?
+            </h1>
+          </legend>
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
@@ -57,6 +60,111 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Save and continue
       </button>
     </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="pregnancy-contributed" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          A gyfrannodd beichiogrwydd yr ymadawedig at ei farwolaeth?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-yes" name="pregnancy-contributed" type="radio"
+            value="Yes">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-yes">
+            Oes
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-no" name="pregnancy-contributed" type="radio"
+            value="No">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-no">
+            Nac oes
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-unknown" name="pregnancy-contributed" type="radio"
+            value="Unknown">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-unknown">
+            Anhysbys
+          </label>
+        </div>
+
+      </div>
+    </fieldset>
+
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Achub a pharhau
+  </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="pregnancy-contributed" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Did the deceased’s pregnancy contribute to their death?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-yes" name="pregnancy-contributed" type="radio"
+            value="Yes">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-yes">
+            Yes
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-no" name="pregnancy-contributed" type="radio"
+            value="No">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-no">
+            No
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-contributed-unknown" name="pregnancy-contributed" type="radio"
+            value="Unknown">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-unknown">
+            Unknown
+          </label>
+        </div>
+
+      </div>
+    </fieldset>
+
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Save and continue
+  </button>
+</form>
+
+{% endif %}
+
 
   </div>
 </div>
