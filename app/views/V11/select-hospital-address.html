@@ -75,7 +75,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </label>
 
           <div class="">
-            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. <a href="find-address">Chwiliwch eto</a></p>
+            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. <a href="hospital-postcode">Chwiliwch eto</a></p>
           </div>
           
           <select class="govuk-select" id="select-address" name="select-hospital-address">
