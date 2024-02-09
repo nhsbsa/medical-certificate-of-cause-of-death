@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -30,7 +30,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </label>
 
               <div class="">
-                <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="hospital-postcode">Search again</a></p>
+                <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. If you can't find the hospital, check the spelling or postcode of the hospital and <a href="another-location-postcode">search again</a>, or enter the address manually.</p>
               </div>
               
               <select class="govuk-select" id="select-address" name="select-hospital-address">
@@ -75,7 +75,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </label>
 
           <div class="">
-            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. <a href="hospital-postcode">Chwiliwch eto</a></p>
+            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. Os na allwch ddod o hyd i'r ysbyty, gwiriwch sillafu neu god post yr ysbyty a <a href="hospital-postcode">chwiliwch eto</a>, neu rhowch y cyfeiriad â llaw.</p>
           </div>
           
           <select class="govuk-select" id="select-address" name="select-hospital-address">
@@ -120,7 +120,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </label>
 
           <div class="">
-            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. <a href="hospital-postcode">Search again</a></p>
+            <p>{{ data['hospitalAddresses'] | length }} {% if (data['hospitalAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['hospital-postcode'] }}. If you can't find the hospital, check the spelling or postcode of the hospital and <a href="another-location-postcode">search again</a>, or enter the address manually.</p>
           </div>
           
           <select class="govuk-select" id="select-address" name="select-hospital-address">

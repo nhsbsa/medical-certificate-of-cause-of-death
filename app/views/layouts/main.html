@@ -50,7 +50,10 @@
                   <strong class="govuk-tag govuk-phase-banner__content__tag">
                       Beta
                   </strong>
-                  {% if data['lang'] == "en" %}
+                  <span class="govuk-phase-banner__text">
+                    This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+                   </span>
+                  <!-- {% if data['lang'] == "en" %}
                   <span class="govuk-phase-banner__text">
                       This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
                   </span>
@@ -58,11 +61,9 @@
                   <span>
                     Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="#">adborth</a> yn ein helpu i’w wella.
                   </span>
-                  {% else %}
-                  <span class="govuk-phase-banner__text">
-                    This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
-                </span>
-                {% endif %}
+                  {% else %} -->
+
+                <!-- {% endif %} -->
                   </p>
               </div>
           </div>
@@ -73,12 +74,12 @@
           <div class="govuk-grid-column-full">
               <div class="account-signed-in">
                 <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                  <!-- <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
                     Sarah Phillips
                   </li>
                   <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
                     GMC no: 12345678
-                  </li>
+                  </li> -->
                   <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
                     {% if data ['role-type'] == 'ap' %}
                       attending.practitioner@nhs.net
@@ -96,7 +97,7 @@
           </div>
       </div>
     </div>
-    <div class="govuk-width-container">
+    <!-- <div class="govuk-width-container">
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
               {% if data['lang'] == "en" %}
@@ -138,6 +139,6 @@
                 {% endif %}
           </div>
       </div>
-    </div>
+    </div> -->
     
   {% endblock %}
