@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -28,7 +28,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </label>
 
               <div class="">
-                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. <a href="find-address">Search again</a></p>
+                <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. If you can't find the address, check the postcode and <a href="another-location-postcode">search again</a>, or enter the address manually.</p>
               </div>
 
               <select class="govuk-select" id="select-address" name="select-another-address">
@@ -73,7 +73,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </label>
 
           <div class="">
-            <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. <a href="find-address">Chwiliwch eto</a></p>
+            <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}cyfeiriadau{% else %}cyfeiriad{% endif %} a ddarganfuwyd ar gyfer {{ data['another-location-postcode'] }}. Os na allwch ddod o hyd i'r cyfeiriad, gwiriwch sillafu'r cod post a <a href="another-location-postcode"></a>chwiliwch eto</a>, neu rhowch y cyfeiriad â llaw.</p>
           </div>
 
           <select class="govuk-select" id="select-address" name="select-another-address">
@@ -118,7 +118,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </label>
 
           <div class="">
-            <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. <a href="find-address">Search again</a></p>
+            <p>{{ data['anotherAddresses'] | length }} {% if (data['anotherAddresses'] | length > 1)  %}addresses{% else %}address{% endif %} found for {{ data['another-location-postcode'] }}. If you can't find the address, check the postcode and <a href="another-location-postcode">search again</a>, or enter the address manually.</p>
           </div>
 
           <select class="govuk-select" id="select-address" name="select-another-address">

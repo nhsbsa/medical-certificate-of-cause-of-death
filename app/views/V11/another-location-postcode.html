@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -9,27 +9,90 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
+
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">
-      What is the postcode of where the death took place?
-    </h1>
-
     <form action="another-location-lookup" class="form" method="get">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            What is the postcode of where the death took place?
+          </h1>
+        </legend>
+      
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="another-location-postcode">
+            Postcode
+          </label>
+          <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
+        </div>
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="another-location-postcode">
-          Postcode
-        </label>
-        <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
-      </div>
-
-      <p class="govuk-!-margin-bottom-6"><a href="exact-address">Enter address manually</a></p>
+        <p class="govuk-!-margin-bottom-6"><a href="exact-address">Enter address manually</a></p>
+      </fieldset>
 
       <button class="govuk-button" type="submit">
         Find address
       </button>
     </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="another-location-lookup" class="form" method="get">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Beth yw'r cod post lle digwyddodd y farwolaeth?
+      </h1>
+    </legend>
+  
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="another-location-postcode">
+        Côd post
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
+    </div>
+
+    <p class="govuk-!-margin-bottom-6"><a href="exact-address">Rhowch y cyfeiriad â llaw</a></p>
+  </fieldset>
+
+  <button class="govuk-button" type="submit">
+    Dod o hyd i gyfeiriad
+  </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="another-location-lookup" class="form" method="get">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        What is the postcode of where the death took place?
+      </h1>
+    </legend>
+  
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="another-location-postcode">
+        Postcode
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
+    </div>
+
+    <p class="govuk-!-margin-bottom-6"><a href="exact-address">Enter address manually</a></p>
+  </fieldset>
+
+  <button class="govuk-button" type="submit">
+    Find address
+  </button>
+</form>
+
+{% endif %}
+
 
   </div>
 </div>

@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -648,7 +648,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             {{ data['address-line-2']}}<br>
             {{ data['address-town']}}<br>
             {{ data['address-county']}}<br>
-            {{ data['address-postcode']}}<br>
+            {{ data['address-postcode']}}<br><br>
+            {{ data['address-line-1-cy']}}<br>
+            {{ data['address-line-2-cy']}}<br>
+            {{ data['address-town-cy']}}<br>
+            {{ data['address-county-cy']}}<br>
+            {{ data['address-postcode-cy']}}<br>
           
           {% endif %}
 
