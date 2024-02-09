@@ -1,0 +1,142 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <!-- English language selected-->
+  {% if data['lang'] == "en" %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="death-circumstances-boxB" method="post">
+
+      <div class="govuk-form-group">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Will you be in a position to further inform the cause of death?
+          </h1>
+        </legend>
+
+        <div id="boxB-hint" class="govuk-hint govuk-!-margin-bottom-5">
+          Tick if applicable.
+        </div>
+
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox" value="I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.">
+              <label class="govuk-label govuk-checkboxes__label" for="boxB">
+                I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
+              </label>
+            </div>
+
+          </div>
+
+      </div>
+
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+      </form>
+
+  </div>
+
+
+  <!--Welsh language selected-->
+  {% elseif data['lang'] == "cy" %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+    <form action="death-circumstances-boxB" method="post">
+
+      <div class="govuk-form-group">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            A fyddwch mewn sefyllfa i hysbysu achos y farwolaeth ymhellach?
+          </h1>
+        </legend>
+
+        <div id="boxB-hint" class="govuk-hint govuk-!-margin-bottom-5">
+          Ticiwch os yn berthnasol.
+        </div>
+
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox" value="Efallai y byddaf mewn sefyllfa yn ddiweddarach i roi, ar gais y Cofrestrydd Cyffredinol, wybodaeth ychwanegol am yr achos marwolaeth at ddiben dosbarthiad ystadegol mwy manwl gywir.">
+              <label class="govuk-label govuk-checkboxes__label" for="boxB">
+                Efallai y byddaf mewn sefyllfa yn ddiweddarach i roi, ar gais y Cofrestrydd Cyffredinol, wybodaeth ychwanegol am yr achos marwolaeth at ddiben dosbarthiad ystadegol mwy manwl gywir.
+              </label>
+            </div>
+
+          </div>
+
+      </div>
+
+        <button class="govuk-button" type="submit">
+          Achub a pharhau
+        </button>
+      </form>
+
+  </div>
+
+  <!-- Default En language -->
+  {% else %}
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="death-circumstances-boxB" method="post">
+
+      <div class="govuk-form-group">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Will you be in a position to further inform the cause of death?
+          </h1>
+        </legend>
+
+        <div id="boxB-hint" class="govuk-hint govuk-!-margin-bottom-5">
+          Tick if applicable.
+        </div>
+
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox" value="I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.">
+              <label class="govuk-label govuk-checkboxes__label" for="boxB">
+                I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
+              </label>
+            </div>
+
+          </div>
+
+      </div>
+
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+      </form>
+
+  </div>
+
+  {% endif %}
+
+    
+
+
+</div>
+
+{% endblock %}
