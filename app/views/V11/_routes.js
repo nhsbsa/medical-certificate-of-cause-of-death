@@ -280,6 +280,8 @@ router.post(/implant/, (req, res) => {
 
     if (implant == 'Yes') {
         res.redirect('implant-removed')
+    } else if (implant == 'Oes') {
+        res.redirect('implant-removed')
     } else {
         res.redirect('cya-death-circumstances')
     }
