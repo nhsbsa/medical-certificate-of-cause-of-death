@@ -60,7 +60,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-referring-mp-name">Change<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -72,7 +72,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-coroner-name">Change<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
 
@@ -191,26 +191,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              [missing welsh] Referring medical practitioner
+              Ymarferydd meddygol sy'n cyfeirio
             </dt>
             <dd class="govuk-summary-list__value">
             <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
               {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Newid<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-referring-mp-name">Newid<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              [missing welsh] Senior coroner
+              Uwch grwner
             </dt>
             <dd class="govuk-summary-list__value">
            <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
               {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Newid<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-coroner-name">Newid<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
 
@@ -234,7 +234,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
 
-        {% if data['implant'] == 'Yes' %}
+        {% if data['implant'] == 'Oes' %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Manylion mewnblaniad
@@ -335,7 +335,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-referring-mp-name">Change<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -347,7 +347,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="me-coroner-name">Change<span class="govuk-visually-hidden"> name</span></a>
             </dd>
           </div>
 
