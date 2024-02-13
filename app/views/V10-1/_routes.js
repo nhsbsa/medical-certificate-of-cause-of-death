@@ -251,8 +251,7 @@ router.post(/death-circumstances/, (req, res) => {
     res.redirect('box-b')
 });
 
-// Box B [ONS requirement]
-router.post(/death-circumstances-boxB/, (req, res) => {
+router.post(/box-b/, (req, res) => {
     res.redirect('implant')
 });
 

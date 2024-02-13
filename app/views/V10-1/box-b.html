@@ -13,7 +13,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <form action="death-circumstances-boxB" method="post">
+    <form action="box-b" method="post">
 
       <div class="govuk-form-group">
 
@@ -27,24 +27,28 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           Tick if applicable.
         </div>
 
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox" value="I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.">
-              <label class="govuk-label govuk-checkboxes__label" for="boxB">
-                I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
-              </label>
-            </div>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
 
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox"
+              value="I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.">
+            <label class="govuk-label govuk-checkboxes__label" for="boxB">
+              I may be in a position later to give, on application by the Registrar General, additional information as
+              to the cause of death for the purpose of more precise statistical classification.
+            </label>
           </div>
+
+        </div>
 
       </div>
 
-        <button class="govuk-button" type="submit">
-          Save and continue
-        </button>
-      </form>
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
 
+    </form>
   </div>
+
+</div>
 
 {% endblock %}
