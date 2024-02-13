@@ -8,7 +8,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
-  
+
   <div class="govuk-grid-column-two-thirds">
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
@@ -19,30 +19,24 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading">
-            I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
+            Provide additional information
           </h1>
         </legend>
 
-        <fieldset class="govuk-fieldset">
+        <div id="boxB-hint" class="govuk-hint govuk-!-margin-bottom-5">
+          Tick if applicable.
+        </div>
 
-          <div class="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="box-b-yes" name="box-b" type="radio" value="yes">
-              <label class="govuk-label govuk-radios__label" for="box-b-yes">
-                Yes
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="box-b-no" name="box-b" type="radio" value="no">
-              <label class="govuk-label govuk-radios__label" for="box-b-no">
-                No
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="boxB" name="boxB" type="checkbox" value="I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.">
+              <label class="govuk-label govuk-checkboxes__label" for="boxB">
+                I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
               </label>
             </div>
 
           </div>
-        </fieldset>
 
       </div>
 
@@ -52,8 +46,5 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </form>
 
   </div>
-
-
-</div>
 
 {% endblock %}
