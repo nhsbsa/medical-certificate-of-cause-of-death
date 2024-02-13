@@ -249,12 +249,17 @@ router.post(/unknown-address/, (req, res) => {
 // Has a post-mortem been held?
 // AP MCCD
 router.post(/death-circumstances-ap/, (req, res) => {
-    res.redirect('implant')
+    res.redirect('box-b')
 });
 
 // Me MCCD
 router.post(/death-circumstances-me/, (req, res) => {
-    res.redirect('me-referring-mp-name')
+    res.redirect('box-b')
+});
+
+// Box B [ONS requirement]
+router.post(/death-circumstances-boxB/, (req, res) => {
+    res.redirect('implant')
 });
 
 // What is the full name of the referring medical practioner (ME CERT)

@@ -248,6 +248,11 @@ router.post(/unknown-address/, (req, res) => {
 
 // Has a post-mortem been held?
 router.post(/death-circumstances/, (req, res) => {
+    res.redirect('box-b')
+});
+
+// Box B [ONS requirement]
+router.post(/death-circumstances-boxB/, (req, res) => {
     res.redirect('implant')
 });
 
