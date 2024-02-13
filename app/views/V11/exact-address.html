@@ -9,8 +9,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-  <!-- English language selected-->
-{% if data['lang'] == "en" %}
+    <!-- English language selected-->
+    {% if data['lang'] == "en" %}
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <form action="death-location" class="form" method="post">
@@ -20,70 +20,71 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
               At what address did the death take place?
-              </h1>
-            </legend>
-            <!-- <div id="hospital-hint" class="govuk-hint">
+            </h1>
+          </legend>
+          <!-- <div id="hospital-hint" class="govuk-hint">
               
             </div> -->
-            <div class="govuk-form-group">
-              <label class="govuk-label" for="address-line-1">
-                Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>
-              </label>
-              <input class="govuk-input" id="address-line-1" name="address-line-1" type="text">
-            </div>
-    
-            <div class="govuk-form-group">
-              <label class="govuk-label" for="address-line-2">
-                Address line 2 (optional)<span class="govuk-visually-hidden">Building and street line 2 of 2</span>
-              </label>
-              <input class="govuk-input" id="address-line-2" name="address-line-2" type="text">
-            </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-line-1">
+              Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>
+            </label>
+            <input class="govuk-input" id="address-line-1" name="address-line-1" type="text">
+          </div>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-town">
-            Town or city (optional)
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="address-town" name="address-town" type="text">
-        </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-line-2">
+              Address line 2 (optional)<span class="govuk-visually-hidden">Building and street line 2 of 2</span>
+            </label>
+            <input class="govuk-input" id="address-line-2" name="address-line-2" type="text">
+          </div>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-county">
-            County (optional)
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="address-county" name="address-county" type="text">
-        </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-town">
+              Town or city (optional)
+            </label>
+            <input class="govuk-input govuk-input--width-20" id="address-town" name="address-town" type="text">
+          </div>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-postcode">
-            Postcode
-          </label>
-          <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
-        </div>
-        <p class="govuk-!-margin-bottom-6"><a href="another-location-postcode">Or find the address using postcode</a></p>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-county">
+              County (optional)
+            </label>
+            <input class="govuk-input govuk-input--width-20" id="address-county" name="address-county" type="text">
+          </div>
 
-      </fieldset>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-postcode">
+              Postcode
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
+          </div>
+          <p class="govuk-!-margin-bottom-6"><a href="another-location-postcode">Or find the address using postcode</a>
+          </p>
 
-     <!-- <a href="cya-deceased" class="govuk-button">Save and continue</a> -->
-     <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
+        </fieldset>
+
+        <!-- <a href="cya-deceased" class="govuk-button">Save and continue</a> -->
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
     </form>
-    
-<!--Welsh language selected-->
-{% elseif data['lang'] == "cy" %}
+
+    <!--Welsh language selected-->
+    {% elseif data['lang'] == "cy" %}
     <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
 
     <form action="death-location" class="form" method="post">
 
-    <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
-          Nodwch y cyfeiriad lle digwyddodd y farwolaeth
-        </h1>
-      </legend>
-      <div id="hospital-hint" class="govuk-hint">
-        Rhowch y cyfeiriad yn Saesneg. Gallwch hefyd ysgrifennu'r cyfeiriad yn Gymraeg isod.
-      </div>
+      <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Nodwch y cyfeiriad lle digwyddodd y farwolaeth
+          </h1>
+        </legend>
+        <div id="hospital-hint" class="govuk-hint">
+          Rhowch y cyfeiriad yn Saesneg. Gallwch hefyd ysgrifennu'r cyfeiriad yn Gymraeg isod.
+        </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="address-line-1">
@@ -120,122 +121,133 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
         </div>
 
+        <div class="govuk-form-group">
+          <p class="govuk-body govuk-!-margin-bottom-4">
+            <a href="another-location-postcode">
+              Neu dewch o hyd i'r cyfeiriad gan ddefnyddio cod post
+            </a>
+          </p>
+        </div>
+
         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
           <div class="govuk-checkboxes__item" style="margin-bottom: 10px;">
-            <input class="govuk-checkboxes__input" id="add-welsh-hospital" name="add-welsh-hospital" type="checkbox" value="Welsh address" data-aria-controls="conditional-contact">
+            <input class="govuk-checkboxes__input" id="add-welsh-hospital" name="add-welsh-hospital" type="checkbox"
+              value="Welsh address" data-aria-controls="conditional-contact">
             <label class="govuk-label govuk-checkboxes__label" for="organisation">
               Rhowch gyfeiriad yr ysbyty yn Gymraeg (dewisol)
             </label>
           </div>
           <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact">
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-line-1">
-            Llinell Cyfeiriad 1 (dewisol)<span class="govuk-visually-hidden">llinell 1 o 2</span>
-          </label>
-          <input class="govuk-input" id="address-line-1-cy" name="address-line-1-cy" type="text">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="address-line-1">
+                Llinell Cyfeiriad 1 (dewisol)<span class="govuk-visually-hidden">llinell 1 o 2</span>
+              </label>
+              <input class="govuk-input" id="address-line-1-cy" name="address-line-1-cy" type="text">
+            </div>
+
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="address-line-2">
+                Llinell cyfeiriad 2 (dewisol)<span class="govuk-visually-hidden">Adeilad a llinell stryd 2 o 2</span>
+              </label>
+              <input class="govuk-input" id="address-line-2-cy" name="address-line-2-cy" type="text">
+            </div>
+
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="address-town">
+                Tref neu ddinas (dewisol)
+              </label>
+              <input class="govuk-input govuk-input--width-20" id="address-town-cy" name="address-town-cy" type="text">
+            </div>
+
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="address-county">
+                Sir (dewisol)
+              </label>
+              <input class="govuk-input govuk-input--width-20" id="address-county-cy" name="address-county-cy"
+                type="text">
+            </div>
+
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="address-postcode">
+                Côd post (dewisol)
+              </label>
+              <input class="govuk-input govuk-input--width-10" id="address-postcode-cy" name="address-postcod-cy"
+                type="text">
+            </div>
+          </div>
         </div>
-    
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-line-2">
-            Llinell cyfeiriad 2 (dewisol)<span class="govuk-visually-hidden">Adeilad a llinell stryd 2 o 2</span>
-          </label>
-          <input class="govuk-input" id="address-line-2-cy" name="address-line-2-cy" type="text">
-        </div>
-    
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-town">
-            Tref neu ddinas (dewisol)
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="address-town-cy" name="address-town-cy" type="text">
-        </div>
-    
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-county">
-            Sir (dewisol)
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="address-county-cy" name="address-county-cy" type="text">
-        </div>
-    
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-postcode">
-            Côd post (dewisol)
-          </label>
-          <input class="govuk-input govuk-input--width-10" id="address-postcode-cy" name="address-postcod-cy" type="text">
-        </div>
-      </div>
-    </div>
-    <p class="govuk-!-margin-bottom-6"><a href="another-location-postcode">Neu dewch o hyd i'r cyfeiriad gan ddefnyddio cod post</a></p>
 
-    </fieldset>
+      </fieldset>
 
-    <button class="govuk-button" type="submit" style="padding-top: 10px;">
-      Achub a pharhau
-    </button>
-  </form>
+      <button class="govuk-button" type="submit" style="padding-top: 10px;">
+        Achub a pharhau
+      </button>
+    </form>
 
-<!-- Default En language -->
-{% else %}
+    <!-- Default En language -->
+    {% else %}
 
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-<form action="death-location" class="form" method="post">
+    <form action="death-location" class="form" method="post">
 
-  <fieldset class="govuk-fieldset">
-    <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
-          At what address did the death take place?
-          </h1>
-        </legend>
-        <!-- <div id="hospital-hint" class="govuk-hint">
+      <fieldset class="govuk-fieldset">
+        <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              At what address did the death take place?
+            </h1>
+          </legend>
+          <!-- <div id="hospital-hint" class="govuk-hint">
           
         </div> -->
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-line-1">
-            Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>
-          </label>
-          <input class="govuk-input" id="address-line-1" name="address-line-1" type="text">
-        </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-line-1">
+              Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>
+            </label>
+            <input class="govuk-input" id="address-line-1" name="address-line-1" type="text">
+          </div>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="address-line-2">
-            Address line 2 (optional)<span class="govuk-visually-hidden">Building and street line 2 of 2</span>
-          </label>
-          <input class="govuk-input" id="address-line-2" name="address-line-2" type="text">
-        </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-line-2">
+              Address line 2 (optional)<span class="govuk-visually-hidden">Building and street line 2 of 2</span>
+            </label>
+            <input class="govuk-input" id="address-line-2" name="address-line-2" type="text">
+          </div>
 
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="address-town">
-        Town or city (optional)
-      </label>
-      <input class="govuk-input govuk-input--width-20" id="address-town" name="address-town" type="text">
-    </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-town">
+              Town or city (optional)
+            </label>
+            <input class="govuk-input govuk-input--width-20" id="address-town" name="address-town" type="text">
+          </div>
 
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="address-county">
-        County (optional)
-      </label>
-      <input class="govuk-input govuk-input--width-20" id="address-county" name="address-county" type="text">
-    </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-county">
+              County (optional)
+            </label>
+            <input class="govuk-input govuk-input--width-20" id="address-county" name="address-county" type="text">
+          </div>
 
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="address-postcode">
-        Postcode
-      </label>
-      <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
-    </div>
-    <p class="govuk-!-margin-bottom-6"><a href="another-location-postcode">Or find the address using postcode</a></p>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="address-postcode">
+              Postcode
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
+          </div>
+          <p class="govuk-!-margin-bottom-6"><a href="another-location-postcode">Or find the address using postcode</a>
+          </p>
 
-  </fieldset>
+        </fieldset>
 
- <!-- <a href="cya-deceased" class="govuk-button">Save and continue</a> -->
- <button class="govuk-button" type="submit">
-    Save and continue
-  </button>
-</form>
+        <!-- <a href="cya-deceased" class="govuk-button">Save and continue</a> -->
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+    </form>
 
-{% endif %}
+    {% endif %}
 
   </div>
 </div>
