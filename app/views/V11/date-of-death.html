@@ -13,7 +13,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% if data['lang'] == "en" %}
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-    <form action="date-of-death" class="form" method="post">
+    <form action="date-of-death" role="form" method="post">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="DoD-hint" role="group">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -66,7 +66,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% elseif data['lang'] == "cy" %}
 
     <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
-    <form action="date-of-death" class="form" method="post">
+    <form action="date-of-death" role="form" method="post">
       <div class="govuk-form-group">
          <fieldset class="govuk-fieldset" aria-describedby="DoD-hint" role="group">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -117,7 +117,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% else %}
 
         <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-        <form action="date-of-death" class="form" method="post">
+        <form action="date-of-death" role="form" method="post">
           <div class="govuk-form-group">
             <fieldset class="govuk-fieldset" aria-describedby="DoD-hint" role="group">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

@@ -14,7 +14,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <form action="death-location" class="form" method="post">
+    <form action="death-location" role="form" method="post">
 
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-describedby="approx-location-hint">
@@ -45,7 +45,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% elseif data['lang'] == "cy" %}
 <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
 
-<form action="death-location" class="form" method="post">
+<form action="death-location" role="form" method="post">
 
   <fieldset class="govuk-fieldset">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-describedby="approx-location-hint">
@@ -76,7 +76,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% else %}
 <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-<form action="death-location" class="form" method="post">
+<form action="death-location" role="form" method="post">
 
   <fieldset class="govuk-fieldset">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-describedby="approx-location-hint">
