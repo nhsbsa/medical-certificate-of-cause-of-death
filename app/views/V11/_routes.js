@@ -111,7 +111,7 @@ router.get('/cya-deceased', function (req, res) {
     // set data store variable
     req.session.data.complete = 'true'
     // render the page
-    return res.redirect('cya-deceased')
+    return res.render('/V11/cya-deceased')
   })
 
 // Was the death more than 28 days after the birth?
