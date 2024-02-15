@@ -14,7 +14,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <form action="death-location" class="form" method="post">
+    <form action="death-location" role="form" method="post">
 
       <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -74,7 +74,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     {% elseif data['lang'] == "cy" %}
     <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
 
-    <form action="death-location" class="form" method="post">
+    <form action="death-location" role="form" method="post">
 
       <fieldset class="govuk-fieldset" aria-describedby="hospital-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -122,7 +122,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
         </div>
 
-          <div class="govuk-form-group">
+          <div class="govuk-body">
             <p class="govuk-body govuk-!-margin-bottom-4">
               <a href="hospital-postcode">
                 Neu dewch o hyd i'r cyfeiriad gan ddefnyddio enw'r ysbyty neu god post
@@ -190,7 +190,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     {% else %}
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <form action="death-location" class="form" method="post">
+    <form action="death-location" role="form" method="post">
 
       <fieldset class="govuk-fieldset">
 

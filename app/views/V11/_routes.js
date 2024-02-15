@@ -106,19 +106,45 @@ router.post(/enter-code/, (req, res) => {
 // MCCD Creation flow
 // ***************************************************************************************************
 
+// Set journey as complete
+router.get('/cya-deceased', function (req, res) {
+    // set data store variable
+    req.session.data.complete = 'true'
+    // render the page
+    return res.redirect('cya-deceased')
+  })
+
 // Was the death more than 28 days after the birth?
-router.post(/66-or-65/, (req, res) => {
-    res.redirect('nhs-number')
+router.post("/66-or-65", function (req, res) {
+  // grab value from the data store
+  let completeDeceased = req.session.data.complete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('cya-deceased')
+  } else {
+    res.redirect('nhs-number')}
 });
 
 // What is the deceased persons NHS Number
-router.post(/nhs-number/, (req, res) => {
-    res.redirect('name-of-the-deceased')
+router.post("/nhs-number", function (req, res) {
+    // grab value from the data store
+  let completeDeceased = req.session.data.complete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('cya-deceased')
+  } else {
+    res.redirect('name-of-the-deceased')}
 });
 
 // What is the deceased person's name?
 router.post(/name-of-the-deceased/, (req, res) => {
-    res.redirect('date-of-birth')
+    // grab value from the data store
+  let completeDeceased = req.session.data.complete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('cya-deceased')
+  } else {
+    res.redirect('date-of-birth')}
 });
 
 // What was the deceased persons age?
@@ -330,6 +356,10 @@ router.post(/pregnant-at-death/, (req, res) => {
     if (notPregnant == 'Not pregnant') {
         res.redirect('cya-cause-death')
     } else if (notPregnant == 'Not applicable') {
+        res.redirect('cya-cause-death')
+    } else if (notPregnant == 'Ddim yn berthnasol') {
+        res.redirect('cya-cause-death')
+    } else if (notPregnant == 'Ddim yn feichiog') {
         res.redirect('cya-cause-death')
     } else {
     res.redirect('pregnancy-contributed')
@@ -578,7 +608,7 @@ router.get(/another-location-lookup/, (req, res) => {
 })
 
 router.post(/select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect("/cya-deceased")
 });
 
 // ************************************************************
