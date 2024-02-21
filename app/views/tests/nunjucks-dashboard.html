@@ -1,0 +1,45 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
+        <p>This dashboard gives you access to Medical certificates of cause of death (MCCDs) being produced across your trust. You can view progress and, once ready, forward complete certificates to the registrar.</p>
+    </div>
+
+    <div class="govuk-grid-column-full">
+
+
+        {% import 'tests/data-patients.html' as patientData %}
+
+        {{ govukTable({
+          caption: "All certificates",
+          captionClasses: "govuk-table__caption--m govuk-!-margin-top-5",
+          firstCellIsHeader: true,
+          head: [
+            { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' },
+            { text: "Place of death" },
+            { text: "Date of death" },
+            { text: "Action" },
+            { text: "Status" }
+          ],
+          rows: patientData.data | generateDashboardTableRows(data.rowsPerPage)
+        }) }}
+
+
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+
+{% endblock %}

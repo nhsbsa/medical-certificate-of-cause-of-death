@@ -22,6 +22,9 @@ router.use('/v8', require('./views/v8/_routes'));
 router.use('/v7', require('./views/v7/_routes'));
 router.use('/v6', require('./views/v6/_routes'));
 
+// Tests
+router.use('/tests', require('./views/tests/_routes'));
+
 
 
 module.exports = router;
