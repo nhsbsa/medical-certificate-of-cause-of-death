@@ -6,19 +6,8 @@ const addFilter = govukPrototypeKit.views.addFilter;
 //
 addFilter('debugData', function(content) {
     // content: the session data object
-    return (this.ctx.data.debug === 'true') ? '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><h2 class="govuk-heading-m govuk-!-margin-top-9">Debugging information</h2><textarea class="govuk-textarea">' + JSON.stringify(content) + '</textarea><p><a class="govuk-link" href="?debug=false">Remove</a></p></div></div>' : '';
+    return (this.ctx.data.debug === 'true') ? '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><h2 class="govuk-heading-m govuk-!-margin-top-9">Session data</h2><textarea class="govuk-textarea">' + JSON.stringify(content) + '</textarea><p><a class="govuk-link" href="?debug=false">Remove</a></p></div></div>' : '';
 });
-
-//
-// TEST DATA FUNCTION
-//
-addFilter('testData', function(content) {
-
-    console.log(this);
-    return '<textarea>'+JSON.stringify(content)+'</textarea>';
-
-});
-
 
 //
 // GENERATE DASHBOARD TABLE ROWS
@@ -60,6 +49,11 @@ addFilter('generateDashboardTableRows', function( content, noOfRows ) {
         } else {
             break;
         }
+    }
+
+    // If rows is empty, display an error message
+    if( rows.length === 0 ){
+        rows.push( [{ html:'<span class="govuk-body">No certificates found</span>', colspan: 5}] );
     }
     
    return rows;
