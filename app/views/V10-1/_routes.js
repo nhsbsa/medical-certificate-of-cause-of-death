@@ -309,8 +309,10 @@ router.post(/pregnant-at-death/, (req, res) => {
     const notPregnant = req.session.data['pregnant-at-death']
     if (notPregnant == 'Not pregnant') {
         res.redirect('cya-cause-death')
+    } else if (notPregnant == 'Not applicable') {
+        res.redirect('cya-cause-death')
     } else {
-        res.redirect('pregnancy-contributed')
+    res.redirect('pregnancy-contributed')
     }
 });
 
