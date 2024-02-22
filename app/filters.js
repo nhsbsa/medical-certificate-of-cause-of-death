@@ -109,12 +109,8 @@ addFilter('getDashboardTableRows', function( content ) {
     };
 
 
-
-
     // Perform the filtering
     let rows = _filterContentBySearchTerm( content, searchTerm );
-
-    console.log( rows );
 
     // Truncate if over the noOfRows
     if( rows.length > noOfRows ){
