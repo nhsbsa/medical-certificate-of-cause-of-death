@@ -532,3 +532,37 @@
   "statuses": ["Ready for MEO review", "To be amended", "Ready for ME sign off", "Ready to share", "On hold for coroner", "On hold"]
 }
 ] %}
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Patient data
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds govuk-!-margin-top-8">
+      
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="patient-data">
+          Patient data
+        </label>
+      </h1>
+      <div id="patient-data-hint" class="govuk-hint">
+        Information stored in the variable "data", passed to the page <a href="nunjucks-dashboard">nunjucks dashboard</a>.
+      </div>
+      <textarea class="govuk-textarea" id="patient-data" name="moreDetail" rows="5" aria-describedby="patient-data-hint">{{ data | dump }}</textarea>
+    </div>
+
+  </div>
+
+  </div>
+
+
+{% endblock %}
+
+
+
