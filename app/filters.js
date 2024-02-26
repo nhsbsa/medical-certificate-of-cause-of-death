@@ -1,6 +1,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit');
 const addFilter = govukPrototypeKit.views.addFilter;
 
+const dashboard = require('./dashboard');
+
 //
 // DEBUG DATA
 //
@@ -13,6 +15,27 @@ addFilter('debugData', function(content) {
 });
 
 //
+// GET STATUS FILTER OPTIONS
+//
+addFilter( 'getStatusFilterOptions', function( content ){
+
+    // content: statusFilter variable
+
+    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Ready to share','Shared'];
+
+    let html = '<option value="">Show all statuses</option>';
+    statuses.forEach(function( status ){
+
+        html += ( content === status ) ? '<option selected>' : '<option>';
+        html += status + '</option>';
+
+    });
+
+    return html;
+
+} );
+
+//
 // GENERATE DASHBOARD CAPTION
 //
 addFilter( 'getDashboardCaption', function( content ){
@@ -20,104 +43,49 @@ addFilter( 'getDashboardCaption', function( content ){
     // content: blank string
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const caption = ( searchTerm ) ? 'Certificates for "'+searchTerm+'"' : 'All certificates';
+    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+
+    let caption = 'All certificates';
+
+    const regex = /^[0-9\s]+$/;
+    const isNHSNumber = regex.test(searchTerm);
+    const spaceLessSearchTerm = searchTerm.split(' ').join('');
+
+    if( searchTerm ){
+
+        if( isNHSNumber ){
+            if( spaceLessSearchTerm.length === 10 ){
+                caption = 'Certificates with NHS number "'+searchTerm+'"';
+            } else {
+                caption = 'Certificates with NHS number beginning with "'+searchTerm+'"';
+            }
+        } else {
+            caption = 'Certificates containing "'+searchTerm+'"';
+        }
+
+    }
+
+    if( statusFilter ){
+        caption += ' with status "' + statusFilter + '"';
+    }
 
     return caption;
 
 });
 
-
-
-
-//
-// FILTER CONTENT BY SEARCH TERM FUNCTION
-//
-const _filterContentBySearchTerm = function( content, searchTerm ) {
-
-    const rows = [];
-    const noOfRecords = ( Array.isArray( content ) && content.length > 0 ) ? content.length : 0;
-
-    for( let i = 0; i < noOfRecords; i++ ){
-
-        let patient = content[i];
-
-        if (searchTerm) {
-
-            const regex = /^[0-9\s]+$/;
-
-            if (regex.test(searchTerm)) {
-
-                // NHS Number (only push if it matches, or is the first few digits...)
-                const spaceLessSearchTerm = searchTerm.split(' ').join('');
-                if (patient.nhsNo.split(' ').join('').indexOf(searchTerm) === 0 ) {
-                    rows.push(_getRow(patient));
-                }
-
-            } else {
-
-                // Name (allows partial matches)
-                const lowerCaseSearchTerm = searchTerm.toLowerCase();
-
-                if (patient.name.toLowerCase().indexOf(lowerCaseSearchTerm) > -1) {
-                    rows.push(_getRow(patient));
-                }
-
-            }
-
-        } else {
-
-            // No searchTerm
-            rows.push(_getRow(patient));
-
-        }
-
-
-    }
-
-    return rows;
-
-};
-
-
-//
-// GET ROW FUNCTION
-//
-const _getRow = function( patient ){
-
-    const statuses = [ 
-        '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
-        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
-        '<span class="govuk-tag govuk-tag--green">For sign-off by Medical Examiner</span>',
-        '<span class="govuk-tag govuk-tag--purple">Ready to share</span>',
-        '<span class="govuk-tag">Shared</span>'
-    ];
-
-    let arr = [];
-
-    arr.push( { html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
-    arr.push( { html: patient.placeOfDeath } );
-    arr.push( { text: patient.dateOfDeath } );
-    arr.push( { html: '<a href="#">View</a>' } ); // Temp
-    arr.push( { html: statuses[Math.round(Math.random()*(statuses.length-1))] } ); // Temp
-
-    return arr;
-
-};
-
-
-
 //
 // GET DASHBOARD TABLE ROWS
 //
-addFilter('getDashboardTableRows', function( content ) {
+addFilter( 'getDashboardTableRows', function( content ) {
    
     // content: patient data from 'tests/data-patients.html'
 
     const noOfRows = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
+    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
 
-    // Perform the filtering
-    let rows = _filterContentBySearchTerm( content, searchTerm );
+    // Perform the filtering, search term first, then status filters, then orders by date...
+    let rows = dashboard.filterByDate( dashboard.filterByStatus( dashboard.filterBySearchTerm( content, searchTerm ), statusFilter ) );
 
     // Truncate if over the noOfRows
     if( rows.length > noOfRows ){
@@ -128,7 +96,6 @@ addFilter('getDashboardTableRows', function( content ) {
     if( rows.length === 0 ){
         rows.push( [{ html:'<span class="govuk-body">No certificates found</span>', colspan: 5}] );
     }
-
     
    return rows;
 
