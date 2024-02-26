@@ -8,54 +8,91 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 {% block content %}
 
+<!-- INTRO ROW -->
 <div class="govuk-grid-row">
-
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
-        <p>This dashboard gives you access to Medical certificates of cause of death (MCCDs) being produced across your trust. You can view progress and, once ready, forward complete certificates to the registrar.</p>
+        <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and forward approved MCCDs to the registrar.</p>
     </div>
+</div>
 
-    <div class="govuk-grid-column-two-thirds">
+<!-- SEARCH ROW -->
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-      <style>
-        .input-button-group {
-          display: flex;
-          justify-content: space-between;
-          margin: 0;
-        }
-        .input-button-group > .govuk-button {
-          margin: 0 0 0 10px;
-        }
-      </style>
-      
-      <form class="govuk-!-margin-top-5" action="nunjucks-dashboard" method="post" novalidate>
-
-
-        <div class="govuk-form-group">
-
-          <label class="govuk-table__caption--m" for="searchTerm">
-            Find a certificate
-          </label>
+    <style>
+      .input-button-group {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+      }
+      .input-button-group > .govuk-button {
+        margin: 0 0 0 10px;
+      }
+    </style>
     
-          <div id="search-hint" class="govuk-hint">
-            You can search by name or NHS number
-          </div>
-    
-          <div class="input-button-group">
-            <input class="govuk-input" id="searchTerm" name="searchTerm" type="search" value="{{ data.searchTerm }}" aria-describedby="search-hint">
-            <button type="submit" class="govuk-button" data-module="govuk-button">Search</button>
-          </div>
-    
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard" method="post" novalidate>
+
+      <div class="govuk-form-group">
+
+        <label class="govuk-table__caption--m" for="searchTerm">
+          Search for a certificate
+        </label>
+  
+        <div id="search-hint" class="govuk-hint">
+          You can search by name or NHS number
         </div>
-    
+  
+        <div class="input-button-group">
+          <input class="govuk-input" id="searchTerm" name="searchTerm" type="search" value="{{ data.searchTerm }}" aria-describedby="search-hint">
+          <button type="submit" class="govuk-button" data-module="govuk-button">Search</button>
+        </div>
+  
+      </div>
+  
+    </form>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard" method="post" novalidate>
+
+      <div class="govuk-form-group">
+
+
         
+        <label class="govuk-table__caption--m" for="statusFilter">
+          Filter by status
+        </label>
+  
+        <div id="filter-hint" class="govuk-hint">
+          &nbsp;
+        </div>
+  
+        <div class="input-button-group">
+          
+          <select class="govuk-select" id="statusFilter" name="statusFilter">
+
+            {{ data.statusFilter | getStatusFilterOptions | safe }}
+
+          </select>
+
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">Filter</button>
+        </div>
+  
+      </div>
+  
+    </form>
+  </div>
+
+
+</div>
+
+
+<!-- TABLE ROW -->
+<div class="govuk-grid-row">
     
-      </form>
-
-    </div>
-
     <div class="govuk-grid-column-full">
-
 
         {% import 'tests/data-patients.html' as patientData %}
 
@@ -72,10 +109,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           ],
           rows: patientData.data | getDashboardTableRows
         }) }}
-
-
-
     </div>
+
 </div>
 
 {{ data | debugData | safe }}
