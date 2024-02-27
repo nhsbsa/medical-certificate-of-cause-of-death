@@ -52,8 +52,6 @@ function _filterBySearchTerm( content, searchTerm ) {
 //
 function _filterByStatus( rows, statusFilter ) {
 
-    console.log('Looking for: ' + statusFilter);
-
     let arr = [];
     rows.forEach(function( row ){
         if( row[4].html.indexOf(statusFilter) > -1 ){
@@ -66,10 +64,11 @@ function _filterByStatus( rows, statusFilter ) {
 }
 
 //
-// FILTER BY DATE FUNCTION
+// FILTER BY SORT BY FUNCTION
 //
-function _filterByDate( rows ){
+function _filterBySortBy( rows ){
 
+    // Only date ATM...
     let arr = Array.from(rows);
     arr.sort(function( a, b ){
 
@@ -88,8 +87,6 @@ function _filterByDate( rows ){
         return check;
 
     });
-
-    console.log( arr );
 
     return arr;
 
@@ -171,10 +168,17 @@ function _getRow( patient ){
 }
 
 //
+// GET FILTERED RESULTS FUNCTION
+//
+function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
+
+    return _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
+
+}
+
+//
 // EXPORT EVERYTHING
 //
 module.exports = {
-    filterBySearchTerm: _filterBySearchTerm,
-    filterByDate: _filterByDate,
-    filterByStatus: _filterByStatus
+    getFilteredResults: _getFilteredResults
 }

@@ -47,6 +47,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <input class="govuk-input" id="searchTerm" name="searchTerm" type="search" value="{{ data.searchTerm }}" aria-describedby="search-hint">
           <button type="submit" class="govuk-button" data-module="govuk-button">Search</button>
         </div>
+
+        {% if data.searchTerm %}
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=">Clear search</a></p>
+        {% endif %}
   
       </div>
   
@@ -66,19 +70,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </label>
   
         <div id="filter-hint" class="govuk-hint">
-          &nbsp;
+          Show results with a chosen status
         </div>
   
         <div class="input-button-group">
           
           <select class="govuk-select" id="statusFilter" name="statusFilter">
-
             {{ data.statusFilter | getStatusFilterOptions | safe }}
-
           </select>
 
           <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">Filter</button>
+
         </div>
+
+        {% if data.statusFilter %}
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=">Clear filter</a></p>
+        {% endif %}
+        
   
       </div>
   
@@ -109,6 +117,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           ],
           rows: patientData.data | getDashboardTableRows
         }) }}
+
     </div>
 
 </div>
