@@ -54,9 +54,16 @@ function _filterByStatus( rows, statusFilter ) {
 
     let arr = [];
     rows.forEach(function( row ){
-        if( row[4].html.indexOf(statusFilter) > -1 ){
+
+        if( statusFilter ){
+            if( row[4].html.indexOf(statusFilter) > -1 ){
+                arr.push( row);
+            }
+        } else {
             arr.push( row);
         }
+
+        
     });
 
     return arr;
@@ -131,17 +138,17 @@ function _getActionForStatus( status ){
     
         case 'For officer review':
         case 'To be amended':
-            html = '<a class="govuk-link" href="">Review</a>';
+            html = '<a class="govuk-link" href="#">Review</a>';
             break;
 
         case 'Ready to share':
-            html = '<a class="govuk-link" href="">Download</a>';
+            html = '<a class="govuk-link" href="#">Download</a>';
             break;
 
         case 'Amended':
         case 'For sign off by medical examiner':
         case 'Shared':
-            html = '<a class="govuk-link" href="">View</a>';
+            html = '<a class="govuk-link" href="#">View</a>';
             break;
 
     }
@@ -170,9 +177,35 @@ function _getRow( patient ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
+function _getFilteredResults( rows, searchTerm, statusFilter, sortBy, rowsPerPage, currentPage ){
 
-    return _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
+    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
+    
+    return filteredRows;
+
+}
+
+//
+// GET PAGINATED RESULTS FUNCTION
+//
+function _getPaginatedResults( rows, rowsPerPage, currentPage ) {
+
+    let paginatedRows = [];
+
+    if( rows.length > rowsPerPage ){
+
+        let start = currentPage*rowsPerPage;
+        let end = start + rowsPerPage;
+
+        paginatedRows = rows.slice( start, end );
+
+    } else {
+
+        paginatedRows = rows;
+
+    }
+
+    return paginatedRows;
 
 }
 
@@ -180,5 +213,6 @@ function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
 // EXPORT EVERYTHING
 //
 module.exports = {
-    getFilteredResults: _getFilteredResults
+    getFilteredResults: _getFilteredResults,
+    getPaginatedResults: _getPaginatedResults
 }
