@@ -26,8 +26,14 @@ addFilter( 'getStatusFilterOptions', function( content ){
     let html = '<option value="">Show all statuses</option>';
     statuses.forEach(function( status ){
 
-        html += ( content === status ) ? '<option selected>' : '<option>';
-        html += status + '</option>';
+        // Add a unique value for ME
+        if( status === 'For sign off by medical examiner' ){
+            html += ( content === status ) ? '<option selected value="For sign off by medical examiner">' : '<option value="For sign off by medical examiner">';
+            html += 'For sign off by ME</option>';
+        } else {
+            html += ( content === status ) ? '<option selected>' : '<option>';
+            html += status + '</option>';
+        }
 
     });
 
@@ -83,9 +89,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const noOfRows = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
 
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.filterByDate( dashboard.filterByStatus( dashboard.filterBySearchTerm( content, searchTerm ), statusFilter ) );
+    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy );
 
     // Truncate if over the noOfRows
     if( rows.length > noOfRows ){
