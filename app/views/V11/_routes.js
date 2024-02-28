@@ -285,7 +285,12 @@ router.post(/death-circumstances-me/, (req, res) => {
 
 // Box B [ONS requirement]
 router.post(/box-b/, (req, res) => {
-    res.redirect('implant')
+    var userRole = req.session.data['role-type']
+
+    if (userRole == 'me'){
+        res.redirect('me-referring-mp-name')
+    }else{
+    res.redirect('implant')}
 });
 
 // What is the full name of the referring medical practioner (ME CERT)
