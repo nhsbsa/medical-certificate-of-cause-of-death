@@ -86,18 +86,18 @@ addFilter( 'getDashboardTableRows', function( content ) {
    
     // content: patient data from 'tests/data-patients.html'
 
-    const noOfRows = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
+
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
     const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
 
     // Perform the filtering, search term first, then status filters, then orders by date...
     let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy );
+    this.ctx.data.noOfFilteredRows = rows.length;
 
-    // Truncate if over the noOfRows
-    if( rows.length > noOfRows ){
-        rows = rows.slice( 0, noOfRows );
-    }
+    rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
 
     // If rows is empty, display an error message
     if( rows.length === 0 ){
@@ -107,3 +107,48 @@ addFilter( 'getDashboardTableRows', function( content ) {
    return rows;
 
 });
+
+//
+// GET DASHBOARD PAGINATION LINKS FUNCTION
+//
+addFilter( 'getDashboardPaginationLinks', function( content ){
+
+    // content: blank string
+
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
+    
+    const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
+    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
+    
+    const noOfFilteredRows = ( Number.isInteger(this.ctx.data.noOfFilteredRows) ) ? this.ctx.data.noOfFilteredRows : 0;
+    const noOfPages = Math.ceil( noOfFilteredRows / rowsPerPage );
+
+    let obj = {};
+
+    if( noOfFilteredRows > rowsPerPage ){
+
+        if( currentPage !== 0 ){
+            obj.previous = { 'href' : '?currentPage='+(currentPage-1) }
+        }
+        if( currentPage !== ( noOfPages - 1 ) ){
+            obj.next = { 'href' : '?currentPage='+(currentPage+1) }
+        }
+
+        obj.items = [];
+        for( let i = 0; i < noOfPages; i++ ){
+
+            let itemObj = {'number': (i+1), 'href':'?currentPage='+i };
+            if( i === currentPage ){
+                itemObj.current = true;
+            }
+
+            obj.items.push( itemObj );
+        }
+
+    }
+
+    return obj;
+
+} );

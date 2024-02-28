@@ -1,7 +1,8 @@
 module.exports = {
 
   // Insert values here
-  debug: 'true',
-  rowsPerPage: 999
+  debug: 'false',
+  rowsPerPage: 10,
+  currentPage: 0
 
 }

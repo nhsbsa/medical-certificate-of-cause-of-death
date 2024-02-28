@@ -31,7 +31,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       }
     </style>
     
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard" method="post" novalidate>
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
 
@@ -49,7 +49,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
 
         {% if data.searchTerm %}
-          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=">Clear search</a></p>
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=&currentPage=0">Clear search</a></p>
         {% endif %}
   
       </div>
@@ -59,11 +59,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   </div>
 
   <div class="govuk-grid-column-one-third">
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard" method="post" novalidate>
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
-
-
         
         <label class="govuk-table__caption--m" for="statusFilter">
           Filter by status
@@ -84,7 +82,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
 
         {% if data.statusFilter %}
-          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=">Clear filter</a></p>
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filter</a></p>
         {% endif %}
         
   
@@ -118,6 +116,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           rows: patientData.data | getDashboardTableRows
         }) }}
 
+    </div>
+
+    <div class="govuk-grid-column-full">
+      {{ govukPagination( '' | getDashboardPaginationLinks ) }}
     </div>
 
 </div>
