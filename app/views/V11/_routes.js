@@ -109,7 +109,7 @@ router.post(/enter-code/, (req, res) => {
 // Set journey as complete
 router.get('/cya-deceased', function (req, res) {
     // set data store variable
-    req.session.data.complete = 'true'
+    req.session.data.deceasedComplete = 'true'
     // render the page
     return res.render('/V11/cya-deceased')
   })
@@ -117,7 +117,7 @@ router.get('/cya-deceased', function (req, res) {
 // Was the death more than 28 days after the birth?
 router.post("/66-or-65", function (req, res) {
   // grab value from the data store
-  let completeDeceased = req.session.data.complete
+  let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
     res.redirect('cya-deceased')
@@ -128,7 +128,7 @@ router.post("/66-or-65", function (req, res) {
 // What is the deceased persons NHS Number
 router.post("/nhs-number", function (req, res) {
     // grab value from the data store
-  let completeDeceased = req.session.data.complete
+  let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
     res.redirect('cya-deceased')
@@ -139,7 +139,7 @@ router.post("/nhs-number", function (req, res) {
 // What is the deceased person's name?
 router.post(/name-of-the-deceased/, (req, res) => {
     // grab value from the data store
-  let completeDeceased = req.session.data.complete
+  let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
     res.redirect('cya-deceased')
@@ -151,14 +151,19 @@ router.post(/name-of-the-deceased/, (req, res) => {
 
     // If Over 28 > Age
 router.post(/date-of-birth/, (req, res) => {
-
+    // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
     const overUnder28 = req.session.data['over-under-28']
-
-    if (overUnder28 == 'no') {
+    
+    if (overUnder28 == 'no' && completeDeceased === 'true') {
+        res.redirect('cya-deceased')
+    } else if (overUnder28 == 'no') {
         res.redirect('age-66')
 
     // If Under 28 > Location of birth
 
+    } else if (overUnder28 == 'yes' && completeDeceased === 'true') { 
+        res.redirect('cya-deceased') 
     } else {
         res.redirect('neo-natal-deaths/location-born')
 
@@ -167,7 +172,14 @@ router.post(/date-of-birth/, (req, res) => {
 
 // Under 28 - Location of birth > Age
 router.post(/location-born/, (req, res) => {
+      // grab value from the data store
+  let completeDeceased = req.session.data.deceasedComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('/v11/cya-deceased')
+  } else {
     res.redirect('triage-24-hours')
+  }
 });
 
 router.post(/triage-24-hours/, (req, res) => {
@@ -179,16 +191,37 @@ router.post(/triage-24-hours/, (req, res) => {
 
 // Over 28
 router.post(/age-66/, (req, res) => {
+          // grab value from the data store
+  let completeDeceased = req.session.data.deceasedComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('cya-deceased')
+  } else {
     res.redirect('ethnicity/ethnic-group')
+  }
 });
 
 // Under 28
 router.post(/deceased-persons-age/, (req, res) => {
+          // grab value from the data store
+  let completeDeceased = req.session.data.deceasedComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('/v11/cya-deceased')
+  } else {
     res.redirect('/V11/ethnicity/ethnic-group')
+  }
 });
 
 router.post(/age-65-hours/, (req, res) => {
+              // grab value from the data store
+  let completeDeceased = req.session.data.deceasedComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('/v11/cya-deceased')
+  } else {
     res.redirect('ethnicity/ethnic-group')
+  }
 });
 
 router.post(/ethnic-group/, (req,res) => {
@@ -210,12 +243,25 @@ router.post(/ethnic-group/, (req,res) => {
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
+              // grab value from the data store
+  let completeDeceased = req.session.data.deceasedComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeDeceased === 'true') {
+    res.redirect('/v11/cya-deceased')
+  } else {
     res.redirect('../date-of-death')
+  }
 });
 
 // Was the death in a hospital?
 router.post(/date-of-death/, (req, res) => {
+    let completeDeceased = req.session.data.deceasedComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+      res.redirect('cya-deceased')
+    } else {
     res.redirect('death-hospital')
+    }
 });
 
 // Hospital - postcode lookup
@@ -272,35 +318,76 @@ router.post(/unknown-address/, (req, res) => {
 // Actions after death section
 // ************************************************************
 
+// Set journey as complete
+router.get('/cya-death-circumstances', function (req, res) {
+    // set data store variable
+    req.session.data.afterDeathComplete = 'true'
+    // render the page
+    return res.render('/V11/cya-death-circumstances')
+  })
+
 // Has a post-mortem been held?
 // AP MCCD
 router.post(/death-circumstances-ap/, (req, res) => {
+  // grab value from the data store
+  let completeAfterDeath = req.session.data.afterDeathComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeAfterDeath === 'true') {
+    res.redirect('cya-death-circumstances')
+  } else {
     res.redirect('box-b')
+  }
 });
 
 // Me MCCD
 router.post(/death-circumstances-me/, (req, res) => {
+  // grab value from the data store
+  let completeAfterDeath = req.session.data.afterDeathComplete
+  // if the journey is complete send back to the 'check-your-details' page
+  if (completeAfterDeath === 'true') {
+    res.redirect('cya-death-circumstances')
+  } else {
     res.redirect('box-b')
+  }
 });
 
 // Box B [ONS requirement]
 router.post(/box-b/, (req, res) => {
+    // grab value from the data store
+    let completeAfterDeath = req.session.data.afterDeathComplete
     var userRole = req.session.data['role-type']
 
-    if (userRole == 'me'){
+    if (userRole == 'me' && completeAfterDeath === 'true'){
+        res.redirect('cya-death-circumstances') 
+    }else if (userRole == 'me'){
         res.redirect('me-referring-mp-name')
+    }else if (userRole == 'ap' && completeAfterDeath === 'true'){
+        res.redirect('cya-death-circumstances') 
     }else{
     res.redirect('implant')}
 });
 
 // What is the full name of the referring medical practioner (ME CERT)
-router.post(/name-of-referring-mp/, (rep,res) => {
+router.post(/name-of-referring-mp/, (req,res) => {
+      // grab value from the data store
+    let completeAfterDeath = req.session.data.afterDeathComplete
+      // if the journey is complete send back to the 'check-your-details' page
+    if (completeAfterDeath === 'true') {
+    res.redirect('cya-death-circumstances')
+    } else {
     res.redirect('me-coroner-name')
+    }
 });
 
 // What is the senior coroners full name (ME CERT)
 router.post(/me-coroner-name/, (req, res) => {
-    res.redirect('implant')
+    // grab value from the data store
+        let completeAfterDeath = req.session.data.afterDeathComplete
+    // if the journey is complete send back to the 'check-your-details' page
+        if (completeAfterDeath === 'true') {
+        res.redirect('cya-death-circumstances')
+        } else {
+    res.redirect('implant')}
 });
 
 
@@ -308,8 +395,12 @@ router.post(/me-coroner-name/, (req, res) => {
 router.post(/implant/, (req, res) => {
 
     const implant = req.session.data['implant']
-
-    if (implant == 'Yes') {
+    // grab value from the data store
+    let completeAfterDeath = req.session.data.afterDeathComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeAfterDeath === 'true') {
+        res.redirect('cya-death-circumstances')
+    }else if (implant == 'Yes') {
         res.redirect('implant-removed')
     } else if (implant == 'Oes') {
         res.redirect('implant-removed')
@@ -336,12 +427,25 @@ router.post(/check-your-answers-dc/, (req, res) => {
 // Cause of death section
 // ************************************************************
 
+// Set journey as complete
+router.get('/cya-cause-death', function (req, res) {
+    // set data store variable
+    req.session.data.causeDeathComplete = 'true'
+    // render the page
+    return res.render('/V11/cya-cause-death')
+  })
+
 // What caused the death?
 router.post(/cause-of-death/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
-
-    if (overUnder28 == 'no') {
+// grab value from the data store
+    let completeCauseDeath = req.session.data.causeDeathComplete
+// if the journey is complete send back to the 'check-your-details' page
+    if (overUnder28 == 'no' && completeCauseDeath === 'true') {
+    res.redirect('cya-cause-death')
+    }
+    else if (overUnder28 == 'no') {
         res.redirect('caused-by-employment')
     } else {
         res.redirect('cya-cause-death')
@@ -351,20 +455,22 @@ router.post(/cause-of-death/, (req, res) => {
 
 // Could the deceased person's job have caused or contributed to their death?
 router.post(/caused-by-employment/, (req, res) => {
-    res.redirect('pregnant-at-death')
+    // grab value from the data store
+    let completeCauseDeath = req.session.data.causeDeathComplete
+// if the journey is complete send back to the 'check-your-details' page
+    if (completeCauseDeath === 'true') {
+    res.redirect('cya-cause-death')
+    }else{
+    res.redirect('pregnant-at-death')}
 });
 
 // Was the deceased pregnant within the year prior to their death?
 router.post(/pregnant-at-death/, (req, res) => {
 
-    const notPregnant = req.session.data['pregnant-at-death']
-    if (notPregnant == 'Not pregnant') {
-        res.redirect('cya-cause-death')
-    } else if (notPregnant == 'Not applicable') {
-        res.redirect('cya-cause-death')
-    } else if (notPregnant == 'Ddim yn berthnasol') {
-        res.redirect('cya-cause-death')
-    } else if (notPregnant == 'Ddim yn feichiog') {
+    let notPregnant = req.session.data['pregnant-at-death']
+    if (notPregnant == 'Pregnant at time of death' || 'Yn feichiog ar adeg marwolaeth' || 'Pregnant 1 to 42 days before death' || 'Yn feichiog 1 i 42 diwrnod cyn marwolaeth' || 'Pregnant 43 days to a year before death' || 'Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth') {
+        res.redirect('pregnancy-contributed')
+    } else if (notPregnant == 'Not applicable' || 'Ddim yn berthnasol' || 'Not pregnant' || 'Ddim yn feichiog') {
         res.redirect('cya-cause-death')
     } else {
     res.redirect('pregnancy-contributed')
