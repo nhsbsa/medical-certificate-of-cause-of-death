@@ -56,11 +56,11 @@ function _filterByStatus( rows, statusFilter ) {
     rows.forEach(function( row ){
 
         if( statusFilter ){
-            if( row[4].html.indexOf(statusFilter) > -1 ){
-                arr.push( row);
+            if( row[row.length-1].html.indexOf(statusFilter) > -1 ){
+                arr.push( row );
             }
         } else {
-            arr.push( row);
+            arr.push( row );
         }
 
         
@@ -110,8 +110,8 @@ function _getTagForStatus( status ){
         '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
         '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
         '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
-        '<span class="govuk-tag govuk-tag--purple">Ready to share</span>',
-        '<span class="govuk-tag">Shared</span>'
+        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
+        '<span class="govuk-tag">Sent to registrar</span>'
     ];
 
     let html = '';
@@ -138,17 +138,17 @@ function _getActionForStatus( status ){
     
         case 'For officer review':
         case 'To be amended':
-            html = '<a class="govuk-link" href="#">Review</a>';
+            html = '<a class="govuk-link" href="#">Review certificate</a>';
             break;
 
-        case 'Ready to share':
-            html = '<a class="govuk-link" href="#">Download</a>';
+        case 'Review complete - send to registrar':
+            html = '<a class="govuk-link" href="#">Download certificate</a>';
             break;
 
         case 'Amended':
         case 'For sign off by medical examiner':
-        case 'Shared':
-            html = '<a class="govuk-link" href="#">View</a>';
+        case 'Sent to registrar':
+            html = '<a class="govuk-link" href="#">View certificate</a>';
             break;
 
     }
@@ -165,7 +165,6 @@ function _getRow( patient ){
     let arr = [];
 
     arr.push( { html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
-    arr.push( { html: patient.placeOfDeath } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status ) } );
     arr.push( { html: _getTagForStatus( patient.status ) });
@@ -177,7 +176,7 @@ function _getRow( patient ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, searchTerm, statusFilter, sortBy, rowsPerPage, currentPage ){
+function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
 
     let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
     

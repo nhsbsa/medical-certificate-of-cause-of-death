@@ -20,8 +20,9 @@ addFilter('debugData', function(content) {
 addFilter( 'getStatusFilterOptions', function( content ){
 
     // content: statusFilter variable
+    content = ( content ) ? content : '';
 
-    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Ready to share','Shared'];
+    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Review complete - send to registrar','Sent to registrar'];
 
     let html = '<option value="">Show all statuses</option>';
     statuses.forEach(function( status ){
@@ -30,6 +31,9 @@ addFilter( 'getStatusFilterOptions', function( content ){
         if( status === 'For sign off by medical examiner' ){
             html += ( content === status ) ? '<option selected value="For sign off by medical examiner">' : '<option value="For sign off by medical examiner">';
             html += 'For sign off by ME</option>';
+        } else if( status === 'Review complete - send to registrar' ){
+            html += ( content === status ) ? '<option selected value="Review complete - send to registrar">' : '<option value="Review complete - send to registrar">';
+            html += 'Send to registrar</option>';
         } else {
             html += ( content === status ) ? '<option selected>' : '<option>';
             html += status + '</option>';
