@@ -14,16 +14,18 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       {% endif %}
 
       <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-2">
-        What caused the death?
-      </h1>
-      <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
-        Do not use abbreviations, vague terms, or symptoms.
-      </div>
-
-
+      
       <form action="cause-of-death" method="post">
+
+        <fieldset class="govuk-fieldset" aria-describedby="cause-death-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What caused the death?
+            </h1>
+          </legend>
+          <div id="cause-death-hint" class="govuk-hint">
+            Do not use abbreviations, vague terms, or symptoms.
+          </div>
 
         <!-- =========================================== -->
         <!-- Over 28 days Form -->
@@ -34,18 +36,22 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <h2 class="govuk-heading-m">Cause of death (1)</h2>
 
         <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+
           <div class="govuk-form-group">
             <label class="govuk-label" for="main-cause">
-              1(a) disease or condition directly leading to death
+              <span class="govuk-visually-hidden">Enter </span>1(a) disease or condition directly leading to death
             </label>
             <input class="govuk-input" id="main-cause" name="main-cause" type="text">
           </div>
+        
         </div>
 
         <div class="govuk-grid-column-one-third">
+
           <div class="govuk-form-group">
+
             <label class="govuk-label" for="duration1">
-              Time between onset and death
+              <span class="govuk-visually-hidden">Enter time and select the appropriate time unit for </span>Time between onset and death<span class="govuk-visually-hidden">, 1(a)</span>
             </label>
 
             <div class="govuk-input__wrapper">
@@ -69,7 +75,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-two-thirds" style="padding: 0;">
           <div class="govuk-form-group">
             <label class="govuk-label" for="secondary-cause">
-              1(b) other disease or condition leading to 1(a) (optional)
+              <span class="govuk-visually-hidden">Enter </span>1(b) other disease or condition leading to 1(a) (optional)
             </label>
             <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
           </div>
@@ -78,7 +84,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-one-third">
           <div class="govuk-form-group">
             <label class="govuk-label" for="duration2">
-              Time between onset and death
+              <span class="govuk-visually-hidden">Enter time and select the appropriate time unit for </span>Time between onset and death<span class="govuk-visually-hidden">, 1(b)</span>
             </label>
 
             <div class="govuk-input__wrapper">
@@ -103,7 +109,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-two-thirds" style="padding: 0;">
           <div class="govuk-form-group">
             <label class="govuk-label" for="other-conditions-c">
-              1(c) other disease or condition leading to 1(b) (optional)
+              <span class="govuk-visually-hidden">Enter </span>1(c) other disease or condition leading to 1(b) (optional)
             </label>
             <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
           </div>
@@ -112,7 +118,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-one-third">
           <div class="govuk-form-group">
             <label class="govuk-label" for="duration3">
-              Time between onset and death
+              <span class="govuk-visually-hidden">Enter time and select the appropriate time unit for </span>Time between onset and death<span class="govuk-visually-hidden">, 1(c)</span>
             </label>
 
             <div class="govuk-input__wrapper">
@@ -137,7 +143,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-two-thirds" style="padding: 0;">
           <div class="govuk-form-group">
             <label class="govuk-label" for="other-conditions-d">
-              1(d) other disease or condition leading to 1(c) (optional)
+              <span class="govuk-visually-hidden">Enter </span>1(d) other disease or condition leading to 1(c) (optional)
             </label>
             <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
           </div>
@@ -146,7 +152,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-one-third">
           <div class="govuk-form-group">
             <label class="govuk-label" for="duration4">
-              Time between onset and death
+              <span class="govuk-visually-hidden">Enter time and select the appropriate time unit for </span>Time between onset and death<span class="govuk-visually-hidden">, 1(d)</span>
             </label>
             <div class="govuk-input__wrapper">
               <input class="govuk-input border-hidden" id="duration4" name="duration4" type="text">
@@ -174,7 +180,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-two-thirds" style="padding: 0;">
           <div class="govuk-form-group">
             <label class="govuk-label" for="other-significant-conditions">
-              2 Other significant conditions contributing to their death (optional)
+              <span class="govuk-visually-hidden">Enter </span>2 Other significant conditions contributing to their death (optional)
             </label>
             <input class="govuk-input" id="other-significant-conditions" name="other-significant-conditions"
               type="text">
@@ -184,7 +190,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-one-third">
           <div class="govuk-form-group">
             <label class="govuk-label" for="duration5">
-              Time between onset and death
+              <span class="govuk-visually-hidden">Enter time and select the appropriate time unit for </span>Time between onset and death<span class="govuk-visually-hidden">, 2</span>
             </label>
             <div class="govuk-input__wrapper">
               <input class="govuk-input border-hidden" id="duration5" name="duration5" type="text">
@@ -213,35 +219,35 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="main-cause">
-            a. Main disease or condition in infant
+            <span class="govuk-visually-hidden">Enter </span>a. Main disease or condition in infant
           </label>
           <input class="govuk-input" id="main-cause" name="main-cause" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="secondary-cause">
-            b. Other disease or condition in infant (optional)
+            <span class="govuk-visually-hidden">Enter </span>b. Other disease or condition in infant (optional)
           </label>
           <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-c">
-            c. Main maternal disease or condition affecting infant (optional)
+            <span class="govuk-visually-hidden">Enter </span>c. Main maternal disease or condition affecting infant (optional)
           </label>
           <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-d">
-            d. Other maternal diseases or conditions affecting infant (optional)
+            <span class="govuk-visually-hidden">Enter </span>d. Other maternal diseases or conditions affecting infant (optional)
           </label>
           <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-e">
-            e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)
+            <span class="govuk-visually-hidden">Enter </span>e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)
           </label>
           <input class="govuk-input" id="other-conditions-e" name="other-conditions-e" type="text">
         </div>
@@ -249,6 +255,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 
         {% endif %}
+
+      </fieldset>
 
 
         <button class="govuk-button" type="submit">

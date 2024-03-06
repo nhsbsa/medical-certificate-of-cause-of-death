@@ -1,0 +1,129 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block content %}
+
+<!-- INTRO ROW -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
+        <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download approved MCCDs to send to the registrar.</p>
+    </div>
+</div>
+
+<!-- SEARCH ROW -->
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <style>
+      .input-button-group {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+      }
+      .input-button-group > .govuk-button {
+        margin: 0 0 0 10px;
+      }
+    </style>
+    
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
+
+      <div class="govuk-form-group">
+
+        <label class="govuk-table__caption--m" for="searchTerm">
+          Search for a certificate
+        </label>
+  
+        <div id="search-hint" class="govuk-hint">
+          You can search by name or NHS number
+        </div>
+  
+        <div class="input-button-group">
+          <input class="govuk-input" id="searchTerm" name="searchTerm" type="search" value="{{ data.searchTerm }}" aria-describedby="search-hint">
+          <button type="submit" class="govuk-button" data-module="govuk-button">Search</button>
+        </div>
+
+        {% if data.searchTerm %}
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=&currentPage=0">Clear search</a></p>
+        {% endif %}
+  
+      </div>
+  
+    </form>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
+
+      <div class="govuk-form-group">
+        
+        <label class="govuk-table__caption--m" for="statusFilter">
+          Filter by status
+        </label>
+  
+        <div id="filter-hint" class="govuk-hint">
+          Show results with a chosen status
+        </div>
+  
+        <div class="input-button-group">
+          
+          <select class="govuk-select" id="statusFilter" name="statusFilter">
+            {{ data.statusFilter | getStatusFilterOptions | safe }}
+          </select>
+
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">Filter</button>
+
+        </div>
+
+        {% if data.statusFilter %}
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filter</a></p>
+        {% endif %}
+        
+  
+      </div>
+  
+    </form>
+  </div>
+
+
+</div>
+
+
+<!-- TABLE ROW -->
+<div class="govuk-grid-row">
+    
+    <div class="govuk-grid-column-full">
+
+        {% import 'tests/data-patients.html' as patientData %}
+
+        {{ govukTable({
+          caption: '' | getDashboardCaption,
+          captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
+          firstCellIsHeader: true,
+          head: [
+            { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' },
+            { text: 'Date of death' },
+            { text: 'Action' },
+            { text: 'Status' }
+          ],
+          rows: patientData.data | getDashboardTableRows
+        }) }}
+
+    </div>
+
+    <div class="govuk-grid-column-full">
+      {{ govukPagination( '' | getDashboardPaginationLinks ) }}
+    </div>
+
+</div>
+
+{{ data | debugData | safe }}
+
+
+{% endblock %}

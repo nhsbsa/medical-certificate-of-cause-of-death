@@ -13,6 +13,7 @@
     "@govuk-prototype-kit/step-by-step": "2.2.2",
     "@govuk-prototype-kit/task-list": "2.0.0",
     "axios": "^1.5.1",
+    "convert-excel-to-json": "^1.7.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "govuk-frontend": "4.6.0",
