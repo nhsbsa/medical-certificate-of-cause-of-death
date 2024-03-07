@@ -50,6 +50,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
 
+
+        <div class="govuk-summary-list__row">
+
+          <dt class="govuk-summary-list__key">
+            Additional information
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['boxB'] or 'Not applicable' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="box-b">
+              Change<span class="govuk-visually-hidden"> provide additional information later</span>
+            </a>
+
+          </dd>
+
+        </div>
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Implants in body
