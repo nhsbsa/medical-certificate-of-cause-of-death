@@ -137,18 +137,27 @@ function _getActionForStatus( status ){
     switch ( status ){
     
         case 'For officer review':
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20officer%20review">Review certificate</a>';
+            break;
+
         case 'To be amended':
-            html = '<a class="govuk-link" href="#">Review certificate</a>';
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=To%20be%20amended">View certificate</a>';
             break;
 
         case 'Review complete - send to registrar':
-            html = '<a class="govuk-link" href="#">Download certificate</a>';
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Review%20complete%20-%20send%20to%20registrar">Download certificate</a>';
             break;
 
         case 'Amended':
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Amended">Review certificate</a>';
+            break;
+
         case 'For sign off by medical examiner':
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20sign%20off%20by%20medical%20examiner">View certificate</a>';
+            break;
+
         case 'Sent to registrar':
-            html = '<a class="govuk-link" href="#">View certificate</a>';
+            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Sent%20to%20registrar">View certificate</a>';
             break;
 
     }

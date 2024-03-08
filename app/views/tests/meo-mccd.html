@@ -1,0 +1,447 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-width-container">
+
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+        <main class="govuk-main-wrapper">
+
+            <!-- MEOfficer Statuses -->
+
+            {% if data.statusFilter == 'For officer review' %}
+            <span class="govuk-tag govuk-tag--blue">For officer review</span>
+
+            {% elseif data.statusFilter == 'To be amended' %}
+            <span class="govuk-tag govuk-tag--orange">To be amended</span>
+
+            {% elseif data.statusFilter == 'Amended' %}
+            <span class="govuk-tag govuk-tag--yellow">Amended</span>
+
+            {% elseif data.statusFilter == 'For sign off by medical examiner' %}
+            <span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>
+
+            {% elseif data.statusFilter == 'Review complete - send to registrar' %}
+            <span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>
+
+            {% elseif data.statusFilter == 'Sent to registrar' %}
+            <span class="govuk-tag">Sent to registrar</span>
+
+            {% endif %}
+
+            <h1 class="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-bottom-2">Medical certificate of cause of
+                death (MCCD)</h1>
+            <p class="govuk-body govuk-!-margin-bottom-6">Reference number: 123456</p>
+
+
+            <div class="govuk-summary-card">
+
+                <div class="govuk-summary-card__title-wrapper">
+
+                    <h2 class="govuk-summary-card__title">
+                        Deceased person's details
+                    </h2>
+
+                </div>
+
+                <div class="govuk-summary-card__content">
+
+                    <dl class="govuk-summary-list">
+
+                        <div class="govuk-summary-list__row">
+
+                            <dt class="govuk-summary-list__key">
+                                NHS number
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Full name
+                            </dt>
+
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Date of birth
+                            </dt>
+
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Age
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Ethnicity
+                            </dt>
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Date of death
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Location of death
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Consultant responsible for care
+                            </dt>
+
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+                    <h2 class="govuk-summary-card__title">Actions after death</h2>
+                </div>
+                <div class="govuk-summary-card__content">
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Post-mortem
+                            </dt>
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Implants in body
+                            </dt>
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Implant details
+                            </dt>
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Implants removed
+                            </dt>
+
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+
+                    <h2 class="govuk-summary-card__title">Cause of death</h2>
+
+                </div>
+                <div class="govuk-summary-card__content">
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                1(a) Disease or condition directly leading to death
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                1(b) Other disease or condition, if any, leading to 1(a)
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                1(c) Other disease or condition, if any, leading to 1(b)
+                            </dt>
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                1(d) Other disease or condition, if any, leading to 1(c)
+                            </dt>
+
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                2 Other significant conditions contributing to their death
+                            </dt>
+
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Death affected by employment
+                            </dt>
+
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Pregnancy
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Death affected by pregnancy
+                            </dt>
+
+                        </div>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+                    <h2 class="govuk-summary-card__title">Attending practitioners information</h2>
+                </div>
+                <div class="govuk-summary-card__content">
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Full name
+                            </dt>
+
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                GMC number
+                            </dt>
+
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Work address
+                            </dt>
+
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- MEO Review Widget -->
+
+            {% if data.statusFilter == 'For officer review' %}
+        
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                        <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                            Medical examiner officer decision
+                        </h2>
+
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="officer-review-ready" name="officer-review"
+                                type="radio" value="This MCCD is ready to be signed off by a medical examiner">
+                            <label class="govuk-label govuk-radios__label" for="officer-review-ready">
+                                This MCCD is ready to be signed off by a medical examiner
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="officer-review-amend" name="officer-review"
+                                type="radio" value="The attending practitioner must amend this MCCD"
+                                data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="officer-review-amend">
+                                The attending practitioner must amend this MCCD
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-contact">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="officer-review-amend">
+                                    Give details of the amendments required
+                                </label>
+                                <textarea class="govuk-textarea" id="amend-reason" name="officer-review-amend" rows="5"
+                                    aria-describedby="officer-review-amend"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                
+                </fieldset>
+            </div>
+
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Submit review
+                    </button>
+    
+                    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                        Back to dashboard
+                    </button>
+                </div>
+
+
+            {% elseif data.statusFilter == 'To be amended' %}
+            
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Back to dashboard
+            </button>
+
+            {% elseif data.statusFilter == 'Amended' %}
+            
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                        <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                            Medical examiner officer decision
+                        </h2>
+
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="officer-review-ready" name="officer-review"
+                                type="radio" value="This MCCD is ready to be signed off by a medical examiner">
+                            <label class="govuk-label govuk-radios__label" for="officer-review-ready">
+                                This MCCD is ready to be signed off by a medical examiner
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="officer-review-amend" name="officer-review"
+                                type="radio" value="The attending practitioner must amend this MCCD"
+                                data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="officer-review-amend">
+                                The attending practitioner must amend this MCCD
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-contact">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="officer-review-amend">
+                                    Give details of the amendments required
+                                </label>
+                                <textarea class="govuk-textarea" id="amend-reason" name="officer-review-amend" rows="5"
+                                    aria-describedby="officer-review-amend"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                
+                </fieldset>
+            </div>
+
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Submit review
+                    </button>
+    
+                    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                        Back to dashboard
+                    </button>
+                </div>
+            
+
+            {% elseif data.statusFilter == 'For sign off by medical examiner' %}
+            
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Back to dashboard
+            </button>
+
+            {% elseif data.statusFilter == 'Review complete - send to registrar' %}
+
+            
+                <div class="govuk-form-group">
+                
+                    <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                            <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                Download certificate
+                            </h2>
+
+                            <p class="govuk-body">Download this certificate to your computer and share it with the registrar via email. Once you are ready, come back to this screen to mark this certificate as shared by ticking the checkbox below.</p>
+
+                            <button type="submit" class="govuk-button" data-module="govuk-button">
+                                Download certificate
+                            </button>
+                        </fieldset>
+
+                        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                            
+                            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+                                <h3 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                    Share certificate
+                                </h3>
+              
+                                <div class="govuk-checkboxes__item">
+                                  <input class="govuk-checkboxes__input" id="SharedWithRegistrar" name="SharedWithRegistrar" type="checkbox" value="I have shared this certificate with the registrar">
+                                  <label class="govuk-label govuk-checkboxes__label" for="SharedWithRegistrar">
+                                    I have shared this certificate with the registrar
+                                  </label>
+                                </div><br>
+
+                                <div class="govuk-button-group">
+                                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                                        Confirm you shared the certificate
+                                    </button>
+                    
+                                    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                                        Back to dashboard
+                                    </button>
+                                </div>
+                    
+                              </div>
+
+                        </fieldset>
+
+                        </legend>
+                    
+                    </fieldset>
+                </div>
+                </div>
+
+
+
+            {% elseif data.statusFilter == 'Sent to registrar' %}
+            
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Back to dashboard
+            </button>
+
+            {% endif %}
+
+        </main>
+
+    </div>
+</div>
+
+{% endblock %}
