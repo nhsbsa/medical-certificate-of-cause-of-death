@@ -9,7 +9,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        <h1 class="govuk-heading-l govuk-!-margin-bottom-1">MCCD summary</h1>
+        <h1 class="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-1">Medical certificate of cause of death (MCCD)</h1>
             <p class="govuk-!-margin-bottom-7">MCCD reference number: 327463</p>
 
         <div class="govuk-summary-card">
@@ -112,7 +112,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Post-mortem?
+                            Post-mortem
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data ['death-circumstances']}}
@@ -120,7 +120,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants in body?
+                          Additional information
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                          {{ data['boxB'] or 'Not applicable' }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants in body
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant']}}
