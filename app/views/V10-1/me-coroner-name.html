@@ -1,0 +1,149 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <!-- English language selected-->
+    {% if data['lang'] == "en" %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+  
+      <h1 class="govuk-heading-l">
+        What is the referring senior coroner's name?
+      </h1>
+  
+      <form action="me-coroner-name" role="form" method="post">
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-first-name">
+            First name
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-first-name"
+            name="coroner-first-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-middle-name">
+            Middle names (optional)
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-middle-name"
+            name="coroner-middle-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-last-name">
+            Last name
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-last-name"
+            name="coroner-last-name" type="text">
+        </div>
+  
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+      </form>
+  
+    </div>
+
+
+    <!--Welsh language selected-->
+    {% elseif data['lang'] == "cy" %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+  
+      <h1 class="govuk-heading-l">
+        Beth yw enw'r uwch grwner sy'n cyfeirio?
+      </h1>
+  
+      <form action="me-coroner-name" role="form" method="post">
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-first-name">
+            Enw cyntaf
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-first-name"
+            name="coroner-first-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-middle-name">
+            Enwau canol (dewisol)
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-middle-name"
+            name="coroner-middle-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-last-name">
+            Cyfenw
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-last-name"
+            name="coroner-last-name" type="text">
+        </div>
+  
+        <button class="govuk-button" type="submit">
+          Achub a pharhau
+        </button>
+      </form>
+  
+    </div>
+
+    <!-- Default En language -->
+    {% else %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+  
+      <h1 class="govuk-heading-l">
+        What is the referring senior coroner's name?
+      </h1>
+  
+      <form action="me-coroner-name" role="form" method="post">
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-first-name">
+            First name
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-first-name"
+            name="coroner-first-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-middle-name">
+            Middle names (optional)
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-middle-name"
+            name="coroner-middle-name" type="text">
+        </div>
+  
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="coroner-last-name">
+            Last name
+          </label>
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-last-name"
+            name="coroner-last-name" type="text">
+        </div>
+  
+        <button class="govuk-button" type="submit">
+          Save and continue
+        </button>
+      </form>
+  
+    </div>
+
+    {% endif %}
+
+  
+</div>
+
+{% endblock %}
