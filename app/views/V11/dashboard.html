@@ -17,8 +17,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     {% if data['role-type'] == 'meo' %}
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-2">Office dashboard</h1>
-    <p>This dashboard gives you access to Medical certificates of cause of death (MCCDs) being produced across your
-      trust. You can view progress and, once ready, forward complete certificates to the registrar.</p>
+    <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust.
+      You can view the progress of MCCDs and download signed-off MCCDs to send to the registrar.</p>
 
     {% else %}
 
@@ -118,8 +118,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <ul class="govuk-list govuk-list--bullet">
       <li>you have submitted to a medical examiner for approval</li>
-      <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
-      <li>have been rejected by a medical examiner and need amending</li>
+      <li>a medical examiner has rejected and you must now amend</li>
+      <li>a medical examiner has approved and will be forwarded to the registrar’s office by a medical examiner officer</li>
     </ul>
 
   </div>

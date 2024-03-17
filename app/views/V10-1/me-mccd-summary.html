@@ -9,8 +9,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        <h1 class="govuk-heading-l govuk-!-margin-bottom-1">MCCD summary</h1>
-            <p class="govuk-!-margin-bottom-7">MCCD reference number: #327463</p>
+        <h1 class="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-1">Medical certificate of cause of death (MCCD)</h1>
+            <p class="govuk-!-margin-bottom-7">MCCD reference number: 327463</p>
 
         <div class="govuk-summary-card">
 
@@ -112,7 +112,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Post-mortem?
+                            Post-mortem
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data ['death-circumstances']}}
@@ -120,7 +120,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants in body?
+                          Additional information
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                          {{ data['boxB'] or 'Not applicable' }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants in body
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant']}}
@@ -136,7 +144,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants removed?
+                            Implants removed
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant-removed']}}
@@ -209,7 +217,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by employment?
+                            Death affected by employment
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['caused-by-employment']}}
@@ -228,7 +236,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by pregnancy?
+                            Death affected by pregnancy
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['pregnancy-contributed']}}
@@ -295,13 +303,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="decision-approve" name="me-decision" type="radio" value="approve">
                             <label class="govuk-label govuk-radios__label" for="decision-approve">
-                                Approve certificate
+                                Approve and sign off the MCCD
                             </label>
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="decision-reject" name="me-decision" type="radio" value="reject" data-aria-controls="conditional-contact">
                             <label class="govuk-label govuk-radios__label" for="decision-reject">
-                                Reject certificate
+                                Reject the MCCD
                             </label>
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
@@ -311,8 +319,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                     Provide reason for rejection
                                 </label>
                                 <div id="reject-reason-hint" class="govuk-hint">
-                                    Include any amends required for the attending practitioner to review as well as
-                                    further discussions to be had if needed
+                                    Include any amendments that the attending practitioner must do 
+                                    or any further discussions that must take place before the MCCD can be signed off.
                                 </div>
                                 <textarea class="govuk-textarea" id="reject-reason" name="decision-reject" rows="5"
                                     aria-describedby="reject-reason-hint"></textarea>

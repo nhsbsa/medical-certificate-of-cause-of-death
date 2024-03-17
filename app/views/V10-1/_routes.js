@@ -251,9 +251,45 @@ router.post(/death-circumstances/, (req, res) => {
     res.redirect('box-b')
 });
 
+// Box B [ONS requirement]
 router.post(/box-b/, (req, res) => {
-    res.redirect('implant')
+    // grab value from the data store
+    let completeAfterDeath = req.session.data.afterDeathComplete
+    var userRole = req.session.data['role-type']
+
+    if (userRole == 'me' && completeAfterDeath === 'true'){
+        res.redirect('cya-death-circumstances') 
+    }else if (userRole == 'me'){
+        res.redirect('me-referring-mp-name')
+    }else if (userRole == 'ap' && completeAfterDeath === 'true'){
+        res.redirect('cya-death-circumstances') 
+    }else{
+    res.redirect('implant')}
 });
+
+// What is the full name of the referring medical practioner (ME CERT)
+router.post(/name-of-referring-mp/, (req,res) => {
+      // grab value from the data store
+    let completeAfterDeath = req.session.data.afterDeathComplete
+      // if the journey is complete send back to the 'check-your-details' page
+    if (completeAfterDeath === 'true') {
+    res.redirect('cya-death-circumstances')
+    } else {
+    res.redirect('me-coroner-name')
+    }
+});
+
+// What is the senior coroners full name (ME CERT)
+router.post(/me-coroner-name/, (req, res) => {
+    // grab value from the data store
+        let completeAfterDeath = req.session.data.afterDeathComplete
+    // if the journey is complete send back to the 'check-your-details' page
+        if (completeAfterDeath === 'true') {
+        res.redirect('cya-death-circumstances')
+        } else {
+    res.redirect('implant')}
+});
+
 
 // Was any implant placed in the body which may become hazardous when the body is cremated?
 router.post(/implant/, (req, res) => {

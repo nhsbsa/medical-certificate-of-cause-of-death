@@ -50,6 +50,56 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         </div>
 
+
+        <div class="govuk-summary-list__row">
+
+          <dt class="govuk-summary-list__key">
+            Additional information
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['boxB'] or 'Not applicable' }}
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="box-b">
+              Change<span class="govuk-visually-hidden"> provide additional information later</span>
+            </a>
+
+          </dd>
+
+        </div>
+
+
+        <!-- For the ME CERT -->
+        {% if data['role-type'] == 'me' %}
+      
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Referring medical practitioner
+            </dt>
+            <dd class="govuk-summary-list__value">
+            <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
+              {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="me-referring-mp-name">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Senior coroner
+            </dt>
+            <dd class="govuk-summary-list__value">
+          <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
+              {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="me-coroner-name">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+
+        {% endif %}
+
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Implants in body
