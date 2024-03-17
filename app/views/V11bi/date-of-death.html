@@ -1,0 +1,82 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+{{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+<div class="govuk-grid-column-two-thirds">
+
+    <form action="date-of-death" method="post" novalidate>
+
+
+      {% call govukFieldset({
+        legend: {
+          text: data.translations.dpdDoDPageTitle[data.lang],
+          classes: 'govuk-fieldset__legend--l',
+          isPageHeading: true
+        }
+      }) %}
+
+        <div class="govuk-hint">{{ data.translations.dpdDoDHint[data.lang] }}</div>
+        <style>.govuk-input__wrapper .govuk-form-group + .govuk-form-group { margin-left: 20px; }</style>
+
+        <div class="govuk-input__wrapper">
+                      
+          {{ govukInput({
+              label: { 
+                text: data.translations.globalDateInputDay[data.lang]
+              },
+              classes: 'govuk-input--width-2',
+              value: data['dod-day'],
+              id: 'dod-day',
+              name: 'dod-day',
+              pattern: '[0-9]*'
+          }) }}
+
+          {{ govukInput({
+            label: { 
+              text: data.translations.globalDateInputMonth[data.lang]
+             },
+            classes: 'govuk-input--width-2',
+            value: data['dod-month'],
+            id: 'dod-month',
+            name: 'dod-month',
+            pattern: '[0-9]*'
+        }) }}
+
+            {{ govukInput({
+              label: { 
+                text: data.translations.globalDateInputYear[data.lang]
+              },
+              classes: 'govuk-input--width-4',
+              value: data['dod-year'],
+              id: 'dod-year',
+              name: 'dod-year',
+              pattern: '[0-9]*'
+          }) }}
+
+      </div>
+
+      {% endcall %}
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

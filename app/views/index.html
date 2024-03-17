@@ -1,7 +1,5 @@
 {% extends "layouts/prototype-main.html" %}
 
-{% set pageName="Home" %}
-
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -63,7 +61,10 @@
 
         </ul>
 
-        <a href="V11/govuk-start" class="govuk-button govuk-button--secondary">Start</a>
+        <div class="govuk-button-group">
+          <a href="V11/govuk-start" class="govuk-button govuk-button--secondary">Start</a>
+          <a href="V11bi/govuk-start" class="govuk-link">Start (dynamic translations)</a>
+        </div>
 
       </div>
     </details>

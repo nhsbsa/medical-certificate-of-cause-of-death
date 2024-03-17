@@ -1,0 +1,310 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="pregnant-at-death" method="post" novalidate>
+
+      {{ govukRadios({
+        name: 'pregnancy-contributed',
+        value: data['pregnancy-contributed'],
+        fieldset: {
+          legend: {
+            text: data.translations.pregnancyPageTitle[data.lang],
+            isPageHeading: true,
+            classes: 'govuk-fieldset__legend--l'
+          }
+        },
+        items: [
+          {
+            value: 'pregnancyInputNA',
+            text: data.translations.pregnancyInputNA[data.lang]
+          },
+          {
+            value: 'pregnancyInputPregnantAtDeath',
+            text: data.translations.pregnancyInputPregnantAtDeath[data.lang]
+          },
+          {
+            value: 'pregnancyInputPregnant1to42PriorToDeath',
+            text: data.translations.pregnancyInputPregnant1to42PriorToDeath[data.lang]
+          },
+          {
+            value: 'pregnancyInputPregnant43toYearPriorToDeath',
+            text: data.translations.pregnancyInputPregnant43toYearPriorToDeath[data.lang]
+          },
+          {
+            value: 'pregnancyInputNotPregnant',
+            text: data.translations.pregnancyInputNotPregnant[data.lang]
+          },
+          {
+            value: 'pregnancyInputUnknown',
+            text: data.translations.pregnancyInputUnknown[data.lang]
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+
+
+
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+<!-- English language selected-->
+{% if data['lang'] == "en" %}
+
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="pregnant-at-death" role="form" method="post">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Was the deceased pregnant within the year prior to their death?
+            </h1>
+          </legend>
+          
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-not-applicable" name="pregnant-at-death" type="radio"
+                value="Not applicable">
+              <label class="govuk-label govuk-radios__label" for="pregnant-not-applicable">
+                Not applicable
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-at-death-yes" name="pregnant-at-death" type="radio"
+                value="Pregnant at time of death">
+              <label class="govuk-label govuk-radios__label" for="pregnant-at-death-yes">
+                Pregnant at time of death
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-1-42-days" name="pregnant-at-death" type="radio"
+                value="Pregnant 1 to 42 days before death">
+              <label class="govuk-label govuk-radios__label" for="pregnant-1-42-days">
+                Pregnant 1 to 42 days before death
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-43-days-and-over" name="pregnant-at-death" type="radio"
+                value="Pregnant 43 days to a year before death">
+              <label class="govuk-label govuk-radios__label" for="pregnant-43-days-and-over">
+                Pregnant 43 days to a year before death
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-no" name="pregnant-at-death" type="radio"
+                value="Not pregnant">
+              <label class="govuk-label govuk-radios__label" for="pregnant-no">
+                Not pregnant
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnant-unknown" name="pregnant-at-death" type="radio"
+                value="Unknown">
+              <label class="govuk-label govuk-radios__label" for="pregnant-unknown">
+                Unknown
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+
+      </div>
+
+      <button class="govuk-button" type="submit">
+        Save and continue
+      </button>
+    </form>
+
+<!--Welsh language selected-->
+{% elseif data['lang'] == "cy" %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Yn ôl</a>
+
+<form action="pregnant-at-death" role="form" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset" aria-describedby="employment-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          A oedd yr ymadawedig yn feichiog o fewn y flwyddyn cyn ei farwolaeth?
+        </h1>
+      </legend>
+      
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-not-applicable" name="pregnant-at-death" type="radio"
+            value="Ddim yn berthnasol">
+          <label class="govuk-label govuk-radios__label" for="pregnant-not-applicable">
+            Ddim yn berthnasol
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-at-death-yes" name="pregnant-at-death" type="radio"
+            value="Yn feichiog ar adeg marwolaeth">
+          <label class="govuk-label govuk-radios__label" for="pregnant-at-death-yes">
+            Yn feichiog ar adeg marwolaeth
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-1-42-days" name="pregnant-at-death" type="radio"
+            value="Yn feichiog 1 i 42 diwrnod cyn marwolaeth">
+          <label class="govuk-label govuk-radios__label" for="pregnant-1-42-days">
+            Yn feichiog 1 i 42 diwrnod cyn marwolaeth
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-43-days-and-over" name="pregnant-at-death" type="radio"
+            value="Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth">
+          <label class="govuk-label govuk-radios__label" for="pregnant-43-days-and-over">
+            Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-no" name="pregnant-at-death" type="radio"
+            value="Ddim yn feichiog">
+          <label class="govuk-label govuk-radios__label" for="pregnant-no">
+            Ddim yn feichiog
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-unknown" name="pregnant-at-death" type="radio"
+            value="Anhysbys">
+          <label class="govuk-label govuk-radios__label" for="pregnant-unknown">
+            Anhysbys
+          </label>
+        </div>
+
+      </div>
+    </fieldset>
+
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Achub a pharhau
+  </button>
+</form>
+
+<!-- Default En language -->
+{% else %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+<form action="pregnant-at-death" role="form" method="post">
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset" aria-describedby="employment-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Was the deceased pregnant within the year prior to their death?
+        </h1>
+      </legend>
+      
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-not-applicable" name="pregnant-at-death" type="radio"
+            value="Not applicable">
+          <label class="govuk-label govuk-radios__label" for="pregnant-not-applicable">
+            Not applicable
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-at-death-yes" name="pregnant-at-death" type="radio"
+            value="Pregnant at time of death">
+          <label class="govuk-label govuk-radios__label" for="pregnant-at-death-yes">
+            Pregnant at time of death
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-1-42-days" name="pregnant-at-death" type="radio"
+            value="Pregnant 1 to 42 days before death">
+          <label class="govuk-label govuk-radios__label" for="pregnant-1-42-days">
+            Pregnant 1 to 42 days before death
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-43-days-and-over" name="pregnant-at-death" type="radio"
+            value="Pregnant 43 days to a year before death">
+          <label class="govuk-label govuk-radios__label" for="pregnant-43-days-and-over">
+            Pregnant 43 days to a year before death
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-no" name="pregnant-at-death" type="radio"
+            value="Not pregnant">
+          <label class="govuk-label govuk-radios__label" for="pregnant-no">
+            Not pregnant
+          </label>
+        </div>
+
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnant-unknown" name="pregnant-at-death" type="radio"
+            value="Unknown">
+          <label class="govuk-label govuk-radios__label" for="pregnant-unknown">
+            Unknown
+          </label>
+        </div>
+
+      </div>
+    </fieldset>
+
+  </div>
+
+  <button class="govuk-button" type="submit">
+    Save and continue
+  </button>
+</form>
+
+{% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

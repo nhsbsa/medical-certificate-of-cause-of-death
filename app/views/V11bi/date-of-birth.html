@@ -1,0 +1,98 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+{{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="date-of-birth" method="post" novalidate>
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="DoB-hint" role="group">
+
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">{{ data.translations.dpdDoBPageTitle[data.lang] }}</h1>
+          </legend>
+
+          <div class="govuk-hint" id="DoB-hint">{{data.translations.dpdDoBHint[data.lang]}}</div>
+
+          <div class="govuk-date-input" id="DoB">
+
+            <div class="govuk-date-input__item">
+
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="dob-day">{{ data.translations.dpdDoBDay[data.lang] }}</label>
+                
+                {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-day" name="dob-day" type="text" inputmode="numeric">
+                {% else %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-day" name="dob-day" type="text" inputmode="numeric" value="{{ data['dob-day'] }}">
+                {% endif %}
+              
+                </div>
+            </div>
+            
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="dob-month">{{ data.translations.dpdDoBMonth[data.lang] }}</label>
+
+                {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-month" name="dob-month" type="text" inputmode="numeric">
+                {% else %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-month" name="dob-month" type="text" inputmode="numeric" value="{{ data['dob-month'] }}">
+                {% endif %}
+
+              </div>
+            </div>
+            
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="dob-year">{{ data.translations.dpdDoBYear[data.lang] }}</label>
+
+                {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-year" name="dob-year" type="text" inputmode="numeric">
+                {% else %}
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-year" name="dob-year" type="text" inputmode="numeric" value="{{ data['dob-year'] }}">
+                {% endif %}
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
+              
+              <div class="govuk-checkboxes__divider">{{ data.translations.dpdDoBOr[data.lang] }}</div>
+
+              <div class="govuk-checkboxes__item">
+                <input {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}checked {% endif %}class="govuk-checkboxes__input" id="dob-unregistered" name="dob-none" type="checkbox" value="dpdDoBNoRegisteredDoB">
+                <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">{{ data.translations.dpdDoBNoRegisteredDoB[data.lang] }}</label>
+              </div>
+
+          </div>
+        
+        </fieldset>
+
+      </div>
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

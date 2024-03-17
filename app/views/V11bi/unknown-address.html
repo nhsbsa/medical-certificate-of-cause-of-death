@@ -1,0 +1,55 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+  {{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="death-location" method="post" novalidate>
+
+        {% call govukFieldset({
+        legend: {
+          text: data.translations.dpdApproximateLocationPageTitle[data.lang],
+          classes: 'govuk-fieldset__legend--l',
+          isPageHeading: true
+        }
+      }) %}
+
+        {{ govukTextarea({
+              label: { 
+                text: data.translations.dpdApproximateLocationEnterDetails[data.lang]
+              },
+              hint: {
+                text: data.translations.dpdApproximateLocationHint[data.lang]
+              },
+              value: data['location-death'],
+              id: 'location-death',
+              name: 'location-death'
+          }) }}
+
+        {% endcall %}
+
+
+        {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+  {{ data | debugData | safe }}
+  
+
+{% endblock %}

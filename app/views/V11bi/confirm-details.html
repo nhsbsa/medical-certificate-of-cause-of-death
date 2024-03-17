@@ -1,0 +1,71 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block content %}
+
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
+      <span class="govuk-caption-l govuk-caption--bottom">{{ data.translations.dpdConfirmDetailsTitleCaption[data.lang] }}</span>
+      {{ data.translations.dpdConfirmDetailsPageTitle[data.lang] }}
+    </h1>
+    <div class="govuk-hint govuk-!-margin-top-3 govuk-!-margin-bottom-7" id="hint">{{ data.translations.dpdConfirmDetailsDescription[data.lang] }}</div>
+
+    <dl class="govuk-summary-list govuk-!-margin-top-5">
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          {{ data.translations.dpdConfirmDetailsFullName[data.lang] }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if data['role-type'] == 'ap' %}
+            Sarah Phillips
+          {% else %}
+            Alera Singh
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          {{ data.translations.dpdConfirmDetailsGMC[data.lang] }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12345678
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          {{ data.translations.dpdConfirmDetailsWorkAddress[data.lang] }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          123 Hospital Road, Wing 4<br>
+          Newcastle, Tyne and Wear<br>
+          NE12 3AB
+        </dd>
+      </div>
+      
+    </dl>
+
+    {{ govukButton({
+      text: data.translations.globalSaveContinue[data.lang],
+      href: '66-or-65'
+    }) }}
+
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+
+{% endblock %}
