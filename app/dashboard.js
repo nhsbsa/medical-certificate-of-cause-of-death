@@ -91,6 +91,11 @@ function _filterBySortBy( rows, sortType, sortDirection ){
 
         let dateA = a[num].text;
         let dateB = b[num].text;
+
+        if( sortType === 'status' ){
+            dateA = parseInt(dateA);
+            dateB = parseInt(dateB);
+        }
         
         let check = 0;
         
@@ -121,6 +126,8 @@ function _filterBySortBy( rows, sortType, sortDirection ){
 //
 function _getTagForStatus( status ){
 
+    status = parseInt( status );
+
     const statuses = [ 
         '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
         '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
@@ -130,16 +137,7 @@ function _getTagForStatus( status ){
         '<span class="govuk-tag">Sent to registrar</span>'
     ];
 
-    let html = '';
-    const loop = statuses.length;
-    for( let i = 0; i < loop; i++ ){
-        if( statuses[i].indexOf(status) > -1 ){
-            html = statuses[i];
-            break;
-        }
-    }
-
-    return html;
+    return statuses[status];
 
 };
 
@@ -148,31 +146,38 @@ function _getTagForStatus( status ){
 //
 function _getActionForStatus( status ){
 
-    let html = '';
+    status = parseInt( status );
 
+    let html = '';
     switch ( status ){
     
         case 'For officer review':
+        case 0:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20officer%20review">Review certificate</a>';
             break;
 
         case 'To be amended':
+        case 1:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=To%20be%20amended">View certificate</a>';
             break;
 
         case 'Review complete - send to registrar':
+        case 2:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Review%20complete%20-%20send%20to%20registrar">Download certificate</a>';
             break;
 
         case 'Amended':
+        case 3:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Amended">Review certificate</a>';
             break;
 
         case 'For sign off by medical examiner':
+        case 4:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20sign%20off%20by%20medical%20examiner">View certificate</a>';
             break;
 
         case 'Sent to registrar':
+        case 5:
             html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Sent%20to%20registrar">View certificate</a>';
             break;
 
