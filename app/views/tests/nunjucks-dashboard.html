@@ -16,11 +16,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </div>
 </div>
 
-<!-- SEARCH ROW -->
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    <style>
+<style>
       .input-button-group {
         display: flex;
         justify-content: space-between;
@@ -30,9 +26,18 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         margin: 0 0 0 10px;
       }
     </style>
+
+<!-- SEARCH ROW -->
+<div class="govuk-grid-row">
+
+
+  {% if data.useSearch == 'true' %}
+
+  <!-- SEARCH FORM -->
+  <div class="govuk-grid-column-two-thirds">
     
     <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
-
+      
       <div class="govuk-form-group">
 
         <label class="govuk-table__caption--m" for="searchTerm">
@@ -57,6 +62,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </form>
 
   </div>
+  {% endif %}
 
   <div class="govuk-grid-column-one-third">
     <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
@@ -106,12 +112,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           caption: '' | getDashboardCaption,
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
-          head: [
-            { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' },
-            { text: 'Date of death' },
-            { text: 'Action' },
-            { text: 'Status' }
-          ],
+          head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
           rows: patientData.data | getDashboardTableRows
         }) }}
 

@@ -73,14 +73,24 @@ function _filterByStatus( rows, statusFilter ) {
 //
 // FILTER BY SORT BY FUNCTION
 //
-function _filterBySortBy( rows ){
+function _filterBySortBy( rows, sortType, sortDirection ){
+
+    let num = 1; // date
+    switch( sortType ){
+        case 'name':
+            num = 0;
+            break;
+        case 'status':
+            num = 3;
+            break;
+    }
 
     // Only date ATM...
     let arr = Array.from(rows);
     arr.sort(function( a, b ){
 
-        let dateA = a[2].text;
-        let dateB = b[2].text;
+        let dateA = a[num].text;
+        let dateB = b[num].text;
         
         let check = 0;
         
@@ -94,6 +104,12 @@ function _filterBySortBy( rows ){
         return check;
 
     });
+
+    if( sortDirection === 'descending' ){
+        arr = arr.reverse();
+    }
+
+    
 
     return arr;
 
@@ -173,10 +189,10 @@ function _getRow( patient ){
 
     let arr = [];
 
-    arr.push( { html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
+    arr.push( { text: patient.name, html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status ) } );
-    arr.push( { html: _getTagForStatus( patient.status ) });
+    arr.push( { text: patient.status, html: _getTagForStatus( patient.status ) });
 
     return arr;
 
@@ -185,9 +201,9 @@ function _getRow( patient ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
+function _getFilteredResults( rows, searchTerm, statusFilter, sortBy, sortDirection ){
 
-    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
+    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy, sortDirection );
     
     return filteredRows;
 

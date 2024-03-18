@@ -211,6 +211,52 @@ addFilter( 'getDashboardCaption', function( content ){
 });
 
 //
+// GET DASHBOARD TABLE HEAD
+//
+addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
+
+    // content:         blank string
+    // sortBy:          name, date, status    ( defaults to date )
+    // sortDirection:   ascending, descending ( defaults to ascending )
+
+    let baseLink = '?currentPage=0';
+    let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
+
+    // Name
+    let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
+    let nameObj = {
+        html: '<a href="'+nameLink+'">Deceased name</a><br /><span class="govuk-body-s">NHS number</span>',
+        attributes: {
+            'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
+        } 
+    };
+
+    // Date
+    let dateLink = ( sortBy === 'date' ) ? baseLink + '&sortBy=date&sortDirection=' + opposite : baseLink + '&sortBy=date&sortDirection=ascending';
+    let dateObj = {
+        html: '<a href="'+dateLink+'">Date of death</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'date' ) ? sortDirection : 'none'
+        } 
+    };
+
+    // Action
+    let actionObj = { text: 'Action' };
+
+    // Status
+    let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
+    let statusObj = {
+        html: '<a href="'+statusLink+'">Status</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+        } 
+    };
+
+    return [ nameObj, dateObj, actionObj, statusObj ];
+
+} );
+
+//
 // GET DASHBOARD TABLE ROWS
 //
 addFilter( 'getDashboardTableRows', function( content ) {
@@ -222,10 +268,12 @@ addFilter( 'getDashboardTableRows', function( content ) {
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
-    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
+    
+    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : 'date';
+    const sortDirection = ( this.ctx.data.sortDirection ) ? this.ctx.data.sortDirection : 'descending';
 
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy );
+    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy, sortDirection );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
@@ -248,10 +296,6 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
-    
-    const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
-    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
     
     const noOfFilteredRows = ( Number.isInteger(this.ctx.data.noOfFilteredRows) ) ? this.ctx.data.noOfFilteredRows : 0;
     const noOfPages = Math.ceil( noOfFilteredRows / rowsPerPage );
