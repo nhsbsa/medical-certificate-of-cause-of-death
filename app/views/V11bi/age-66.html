@@ -1,0 +1,86 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="age-66" method="post" novalidate>
+
+      {% call govukFieldset({
+        legend: {
+          text: data.translations.dpdAgePageTitle[data.lang],
+          classes: 'govuk-fieldset__legend--l',
+          isPageHeading: true
+        }
+      }) %}
+
+        <div class="govuk-input__wrapper">
+                      
+          {{ govukInput({
+              label: { 
+                text: data.translations.dpdAgeNumberTitle[data.lang],
+                classes: 'govuk-visually-hidden'
+              },
+              classes: 'govuk-input--width-5 border-hidden',
+              value: data['age-66'],
+              id: 'age-66',
+              name: 'age-66'
+          }) }}
+
+          {{ govukSelect({
+            id: 'age-time-unit',
+            name: 'age-time-unit',
+            value: data['age-time-unit'],
+            label: {
+              text: data.translations.dpdAgeUnitSelectTitle[data.lang],
+              classes: 'govuk-visually-hidden'
+            },
+            items: [
+              {
+                value: '',
+                text: data.translations.dpdAgeUnitSelectTitle[data.lang]
+              },
+              {
+                value: 'dpdAgeYearsOld',
+                text: data.translations.dpdAgeYearsOld[data.lang],
+                selected: ( data['age-time-unit'] === 'dpdAgeYearsOld' )
+              },
+              {
+                value: 'dpdAgeMonthsOld',
+                text: data.translations.dpdAgeMonthsOld[data.lang],
+                selected: ( data['age-time-unit'] === 'dpdAgeMonthsOld' )
+              },
+              {
+                value: 'dpdAgeDaysOld',
+                text: data.translations.dpdAgeDaysOld[data.lang],
+                selected: ( data['age-time-unit'] === 'dpdAgeDaysOld' )
+              }
+            ]
+          }) }}
+
+      {% endcall %}
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

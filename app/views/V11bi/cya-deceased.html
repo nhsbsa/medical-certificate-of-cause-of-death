@@ -1,0 +1,205 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block content %}
+
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+          <span class="govuk-caption-l govuk-caption--bottom">{{ data.translations.dpdCheckAnswersTitleCaption[data.lang] }}</span>
+          {{ data.translations.dpdCheckAnswersPageTitle[data.lang] }}
+        </h1>
+
+        <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.dpdCheckAnswersDescription[data.lang] }}</div>
+
+        <form action="mccd-tasklist" method="post" novalidate>
+
+          <dl class="govuk-summary-list">
+          
+            <!-- NHS NUMBER -->
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersNHSNumber[data.lang] }}</dt>
+                <dd class="govuk-summary-list__value">{{ data['nhs-number-input'] or data.translations.dpdNoNHSNumber[data.lang] }}</dd>
+                <dd class="govuk-summary-list__actions">
+                  <a href="nhs-number">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersNHSNumber[data.lang] }}</span></a>
+                </dd>
+            </div>
+
+            <!-- FULL NAME -->
+            {% set fullName = [ data['deceased-first-name'], data['deceased-middle-name'], data['deceased-last-name'] ] %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersFullName[data.lang] }}</dt>
+                <dd class="govuk-summary-list__value">{{ fullName | join(' ') }}</dd>
+                <dd class="govuk-summary-list__actions">
+                  <a href="name-of-the-deceased">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersFullName[data.lang] | lower  }}</span></a>
+                </dd>
+            </div>
+
+            <!-- DATE OF BIRTH -->
+            {% set dateOfBirth = [ data['dob-day'], data['dob-month'], data['dob-year'] ] %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersDoB[data.lang] }}</dt>
+                
+                {% if data['dob-none'] %}
+                  <!-- UNKNOWN DATE OF BIRTH -->
+                  <dd class="govuk-summary-list__value">{{ data.translations.dpdDoBNoRegisteredDoB[data.lang] }}</dd>
+                {% else %}
+                  <dd class="govuk-summary-list__value">{{ dateOfBirth | join(' ') }}</dd>
+                {% endif %}
+
+                <dd class="govuk-summary-list__actions">
+                  <a href="date-of-birth">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersDoB[data.lang] | lower }}</span></a>
+                </dd>
+            </div>
+
+
+            <!-- PLACE OF BIRTH (OPTIONAL FOR INFANT ROUTE ) -->
+            {% if data['over-under-24'] == 'globalRadioYes' %}
+              {% if data['location-of-birth'] %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersBirthLocation[data.lang] }}</dt>
+                    <dd class="govuk-summary-list__value">{{ data['location-of-birth'] }}</dd>
+                    <dd class="govuk-summary-list__actions">
+                      <a href="./neo-natal-deaths/location-born">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersBirthLocation[data.lang] | lower }}</span></a>
+                    </dd>
+                </div>
+              {% endif %}
+            {% endif %}
+
+
+
+            <!-- AGE -->
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }}</dt>
+                
+                {% if data['over-under-28'] == 'dpd66Or65RadioNo' %}
+
+                  <!-- ADULT DEATH -->
+                  <dd class="govuk-summary-list__value">{{ data['age-66'] }} {{ data.translations[data['age-time-unit']][data.lang] }}</dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a href="age-66">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersAgeAtDeath[data.lang] | lower }}</span></a>
+                  </dd>
+
+                {% else %}
+
+                  <!-- INFANT DEATH -->
+                  {% if data['over-under-24'] == 'globalRadioYes' %}
+                      <!-- OVER 24 HOURS (DAYS) -->
+                      <dd class="govuk-summary-list__value">{{ data['deceased-persons-age-days'] }} {{ data.translations.dpdAgeDaysOld[data.lang] }}</dd>
+
+                  {% else %}
+                      <!-- UNDER 24 HOURS (HOURS, MINS) -->
+                      <dd class="govuk-summary-list__value">{{ data['deceased-persons-age-hours'] }} {{ data.translations.dpdAgeHours[data.lang] }}, {{ data['deceased-persons-age-minutes'] }} {{ data.translations.dpdAgeMinutes[data.lang] }} </dd>
+
+                  {% endif %}
+
+                  <dd class="govuk-summary-list__actions">
+                    <a href="./neo-natal-deaths/deceased-persons-age">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersAgeAtDeath[data.lang] | lower }}</span></a>
+                  </dd>
+                {% endif %}
+                
+                
+            </div>
+
+            <!-- ETHNICITY -->
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersEthnicity[data.lang] }}</dt>
+                <dd class="govuk-summary-list__value">{{ data.translations[data['ethnicityDetail']][data.lang] or data.translations.dpdEthnicGroupUnknown[data.lang] }}</dd>
+                <dd class="govuk-summary-list__actions">
+                  <a href="./ethnicity/ethnic-group">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersEthnicity[data.lang] | lower }}</span></a>
+                </dd>
+            </div>
+
+            <!-- DATE OF DEATH -->
+            {% set dateOfDeath = [ data['dod-day'], data['dod-month'], data['dod-year'] ] %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersDoD[data.lang] }}</dt>
+                <dd class="govuk-summary-list__value">{{ dateOfDeath | join(' ') }}</dd>
+                <dd class="govuk-summary-list__actions">
+                  <a href="date-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersDoD[data.lang] | lower }}</span></a>
+                </dd>
+              </div>
+
+
+            <!-- PLACE OF DEATH -->
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersDeathLocation[data.lang] }}</dt>
+                
+                {% if data['location-of-death'] == 'globalRadioNo' %}
+
+                  <!-- UNKNOWN ADDRESS -->
+                  <dd class="govuk-summary-list__value">{{ data['location-death'] }}</dd>
+                  {% set deathLocationBackLink = 'unknown-address' %}
+                
+                {% else %}
+
+                  {% set fullAddress = [data['address-line-1'],data['address-line-2'],data['address-town'],data['address-county'],data['address-postcode']] %}
+                  
+                  {% if data['death-in-hospital'] == 'globalRadioYes' %}
+
+                    <!-- DEATH IN HOSPITAL -->
+                    {% if data['select-hospital-address'] %}
+
+                      <!-- POSTCODE SEARCH -->
+                      <dd class="govuk-summary-list__value">{{ data['select-hospital-address'].split(',') | join('<br />') | safe }}</dd>
+                      {% set deathLocationBackLink = 'select-hospital-address' %}
+
+                    {% else %}
+
+                      <!-- MANUAL ENTRY -->
+                      <dd class="govuk-summary-list__value">{{ fullAddress | join('<br />') | safe }}</dd>
+                      {% set deathLocationBackLink = 'location-death-hospital' %}
+
+                    {% endif %}
+
+                  {% else %}
+
+                    <!-- COMMUNITY DEATH -->
+                    {% if data['select-another-address'] %}
+
+                      <!-- POSTCODE SEARCH -->
+                      <dd class="govuk-summary-list__value">{{ data['select-another-address'].split(',') | join('<br />') | safe }}</dd>
+                      {% set deathLocationBackLink = 'select-another-address' %}
+
+                    {% else %}
+
+                      <!-- MANUAL ENTRY -->
+                      <dd class="govuk-summary-list__value">{{ fullAddress | join('<br />') | safe }}</dd>
+                      {% set deathLocationBackLink = 'exact-address' %}
+
+                    {% endif %}
+
+                  {% endif %}
+
+                {% endif %}
+                
+                
+                <dd class="govuk-summary-list__actions">
+                  <a href="{{ deathLocationBackLink }}">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersDeathLocation[data.lang] | lower  }}</span></a>
+                </dd>
+            
+            </div>
+
+          </dl>
+
+          {{ govukButton({
+            text: data.translations.globalSaveContinue[data.lang]
+          }) }}
+
+        </form>
+
+      </div>
+</div>
+
+
+{{ data | debugData | safe }}
+
+{% endblock %}

@@ -1,0 +1,446 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+<div class="govuk-grid-row">
+    
+    <div class="govuk-grid-column-full govuk-!-margin-top-5">
+
+        <!-- TAGS -->
+
+        {% if data['meo-review'] == 'approve' %}
+        
+        <strong class="govuk-tag govuk-tag--blue">
+            Ready for sign off
+        </strong>
+
+        {% elseif data['meo-review'] == 'propose-amendments' %}
+        
+        <strong class="govuk-tag govuk-tag--orange">
+            To be amended
+        </strong>
+
+        {% elseif data['meo-review'] == 'pause-mccd' %}
+        
+        <strong class="govuk-tag govuk-tag--grey">
+            On hold
+        </strong>
+
+        {% else %}
+
+        {% if data['me-declaration'] %}
+        <strong class="govuk-tag govuk-tag--blue">
+            Ready to share
+        </strong>
+        {% endif %}
+
+
+        <strong class="govuk-tag govuk-tag--blue govuk-!-margin-bottom-2">
+            Ready for review
+        </strong>
+
+
+        {% endif %}
+        
+
+        <!--<strong class="govuk-tag govuk-tag--default">
+            Completed
+        </strong>-->
+
+
+        <h1 class="govuk-heading-l govuk-!-margin-top-2 govuk-!-margin-bottom-5">MCCD summary</h1>
+
+        {% if data['meo-review'] == 'propose-amendments' %}
+
+
+        <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+                <span class="govuk-caption-m">18 January 2024</span>Medical Examiner Officer’s comment
+            </h2>
+            Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
+          </div>
+
+        {% else %}
+        {% endif %}
+
+        <div class="govuk-summary-card">
+
+            <div class="govuk-summary-card__title-wrapper">
+
+                <h2 class="govuk-summary-card__title">
+                    Deceased person's details
+                </h2>
+
+            </div>
+
+            <div class="govuk-summary-card__content">
+
+                <dl class="govuk-summary-list">
+
+                    <div class="govuk-summary-list__row">
+
+                        <dt class="govuk-summary-list__key">
+                            NHS number
+                        </dt>
+
+                        <dd class="govuk-summary-list__value">
+                            {{ data.nhs-number or '123 456 7890' }}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Full name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            
+                            {{ data.deceased-first-name or 'Aaliyah' }} {{ data.deceased-middle-name or 'Farah' }} {{ data['deceased-last-name'] or 'Abbas' }}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of birth
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.dob-day or '12' }} {{ data.dob-month or 'October' }} {{ data.dob-year or '1965' }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Age
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.deceased-age or '59 years old' }}
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Ethnicity
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.ethnicity or 'White' }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.date-of-death or '12 January 2024' }}
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Location of death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.location-death or '187 Deans Lane, Surrey, KT20 7TP' }}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Consultant responsible for care
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Mary Smith
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">Actions after death</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Post-mortem
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.death-circumstances or 'No'}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants in body
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.implant or 'Yes'}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implant details
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.implant-details or 'Pacemaker, chest'}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants removed
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.implant-removed or 'No'}}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">Cause of death</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            1(a) Disease or condition directly leading to death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.main-cause or 'Heart attack' }}
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            1 hour between onset and death
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            1(b) Other disease or condition, if any, leading to 1(a)
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{data.secondary-cause or 'Arteriosclerosis'}}
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            2 months between onset and death
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            1(c) Other disease or condition, if any, leading to 1(b)
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['other-conditions-c'] }}
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            1(d) Other disease or condition, if any, leading to 1(c)
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data ['other-conditions-d'] }}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            2 Other significant conditions contributing to their death
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['other-significant-conditions']}}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Death affected by employment?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['caused-by-employment']}}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Pregnancy
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['pregnant-at-death']}}
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Death affected by pregnancy?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['pregnancy-contributed']}}
+                        </dd>
+                    </div>
+
+                </dl>
+            </div>
+        </div>
+        
+        {% if data['me-cert-declaration'] %}
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">Completing medical examiner's information</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Full name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Sarah Phillips
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            GMC number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            12345678
+                        </dd>
+                    </div>
+                    
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Work address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            123 Hospital Road, Wing 4,<br>
+                            Newcastle,<br>
+                            Tyne and Wear,<br>
+                            NE12 3AB
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <a href="/V11/dashboard" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Return to dashboard
+           </a>
+        {% else %}
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">Attending practitioner's information</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Full name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Sarah Phillips
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            GMC number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            12345678
+                        </dd>
+                    </div>
+                    
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Work address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            123 Hospital Road, Wing 4,<br>
+                            Newcastle,<br>
+                            Tyne and Wear,<br>
+                            NE12 3AB
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        {% if data['meo-review'] %}
+        
+        <a href="dashboard?role-type=meo" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Return to dashboard
+        </a>
+        
+        {% else %}
+        <form action="meo-review" method="post">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                        <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                            Medical examiner officer review
+                        </h2>
+
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-approve" name="meo-review" type="radio" value="approve">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-approve">
+                                This certificate is ready for Medical Examiner sign off
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-propose-amendments" name="meo-review" type="radio" value="propose-amendments" data-aria-controls="conditional-contact">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-propose-amendments">
+                                This certificate require amendments by the Attending Practitioner
+                            </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-contact">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="proposed-amendments">
+                                    Outline amendments required
+                                </label>
+                                <textarea class="govuk-textarea" id="proposed-amendments" name="proposed-amendments" rows="5"
+                                    aria-describedby="reject-reason-hint"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="meo-review-pause-mccd" name="meo-review" type="radio" value="pause-mccd">
+                            <label class="govuk-label govuk-radios__label" for="meo-review-pause-mccd">
+                                Pause MCCD
+                            </label>
+                        </div>
+
+
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button govuk-button--primary" type="submit">Save and continue</button>
+            <button class="govuk-button govuk-button--secondary" href="dashboard?role-type=meo" >Back to dashboard</button>
+        </form>
+        {% endif %}
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

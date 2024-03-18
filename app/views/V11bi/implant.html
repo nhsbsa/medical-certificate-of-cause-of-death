@@ -1,0 +1,78 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="implant" method="post" novalidate>
+        
+            {% call govukFieldset({
+            legend: {
+                text: data.translations.implantsPageTitle[data.lang],
+                classes: 'govuk-fieldset__legend--l',
+                isPageHeading: true
+            }
+            }) %}
+
+                {{ govukDetails({
+                    summaryText: data.translations.implantsPageHint[data.lang],
+                    html: data.translations.implantsPageExamples[data.lang]
+                }) }}
+
+                {% set implantDetailsHtml %}
+                    {{ govukTextarea({
+                    id: 'implant-details',
+                    name: 'implant-details',
+                    value: data['implant-details'],
+                    label: {
+                        text: data.translations.implantsYesDetails[data.lang]
+                    }
+                    }) }}
+                {% endset -%}
+
+
+            {{ govukRadios({
+                name: 'implant',
+                value: data['implant'],
+                items: [
+                {
+                    value: 'globalRadioYes',
+                    text: data.translations.globalRadioYes[data.lang],
+                    conditional: {
+                        html: implantDetailsHtml
+                    }
+                },
+                {
+                    value: 'globalRadioNo',
+                    text: data.translations.globalRadioNo[data.lang]
+                }          
+                ]
+            }) }}
+
+
+            {% endcall %}
+
+            {{ govukButton({
+                text: data.translations.globalSaveContinue[data.lang]
+            }) }}
+        
+        </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

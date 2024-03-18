@@ -1,0 +1,62 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+{{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="ethnicity" method="post" novalidate>
+
+        {{ govukRadios({
+          name: 'ethnicityDetail',
+          value: data['ethnicityDetail'],
+          hint: {
+            text: data.translations.dpdEthnicityHint[data.lang]
+          },
+          fieldset: {
+            legend: {
+              text: data.translations.dpdEthnicity[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'dpdEthnicityArab',
+              text: data.translations.dpdEthnicityArab[data.lang]
+            },
+            {
+              value: 'dpdEthnicityAnyOtherEthnicGroup',
+              text: data.translations.dpdEthnicityAnyOtherEthnicGroup[data.lang]
+            },
+            {
+              divider: data.translations.dpdEthnicGroupOr[data.lang]
+            },
+            {
+              value: 'dpdEthnicityNotStated',
+              text: data.translations.dpdEthnicityNotStated[data.lang]
+            }
+          ]
+        }) }}
+      
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang]
+        }) }}
+
+      </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

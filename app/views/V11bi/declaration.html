@@ -1,0 +1,89 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+{{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  
+    <form action="declaration" method="post" novalidate>
+
+      {% if data['role-type'] === 'me' %}
+
+        <!-- MEDICAL EXAMINER FORM -->
+
+        {{ govukCheckboxes({
+          name: 'me-cert-declaration',
+          fieldset: {
+            legend: {
+              text: data.translations.meScrutinyDeclarationPageTitle[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'meCertDeclarationContent',
+              text: data.translations.meCertDeclarationContent[data.lang],
+              checked: ( data['me-cert-declaration'] )
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: data.translations.meCertDeclarationCTA[data.lang]
+        }) }}
+
+      {% elseif data['role-type'] === 'ap' %}
+
+        <!-- ATTENDING PRACTITIONER FORM -->
+
+        {{ govukCheckboxes({
+          name: 'ap-cert-declaration',
+          fieldset: {
+            legend: {
+              text: data.translations.apDeclarationPageTitle[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'apDeclarationContent',
+              text: data.translations.apDeclarationContent[data.lang],
+              checked: ( data['ap-cert-declaration'] )
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: data.translations.apDeclarationSubmitForScrutiny[data.lang]
+        }) }}
+
+      {% else %}
+
+        {{ govukInsetText({
+          text: 'Only a medical examiner or attending practitioner would see this screen. Please select a role from the footer.'
+        }) }}
+
+      {% endif %}
+
+      
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

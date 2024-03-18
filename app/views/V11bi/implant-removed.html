@@ -1,0 +1,52 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="has-been-removed" method="post" novalidate>
+
+      {{ govukRadios({
+        name: 'implant-removed',
+        value: data['implant-removed'],
+        fieldset: {
+          legend: {
+            text: data.translations.implantsRemovedPageTitle[data.lang],
+            isPageHeading: true,
+            classes: 'govuk-fieldset__legend--l'
+          }
+        },
+        items: [
+          {
+            value: 'globalRadioYes',
+            text: data.translations.globalRadioYes[data.lang]
+          },
+          {
+            value: 'globalRadioNo',
+            text: data.translations.globalRadioNo[data.lang]
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

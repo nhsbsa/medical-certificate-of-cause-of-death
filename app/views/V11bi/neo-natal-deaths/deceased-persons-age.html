@@ -1,0 +1,111 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="deceased-persons-age" method="post">
+
+        <!-- OVER 24 HOURS, AGE IN DAYS -->
+        {% if data['over-under-24'] === 'globalRadioYes' %} 
+
+          {% call govukFieldset({
+              legend: {
+                text: data.translations.dpdAgePageTitle[data.lang],
+                classes: 'govuk-fieldset__legend--l',
+                isPageHeading: true
+              }
+            }) %}
+
+              {{ govukInput({
+                label: {
+                  text: data.translations.dpdAgeDaysOld[data.lang] | capitalize,
+                  classes: 'govuk-visually-hidden'
+                },
+                classes: 'govuk-input--width-2',
+                value: data['deceased-persons-age-days'],
+                id: 'deceased-persons-age-days',
+                name: 'deceased-persons-age-days',
+                suffix: {
+                  'text' : data.translations.dpdAgeDaysOld[data.lang]
+                }
+            }) }}
+
+            {% endcall %}
+
+
+        {% else %} 
+
+          
+          <!-- UNDER 24 HOURS, AGE IN HOURS / MINS -->
+
+          {% call govukFieldset({
+            legend: {
+              text: data.translations.dpdAgePageTitle[data.lang],
+              classes: 'govuk-fieldset__legend--l',
+              isPageHeading: true
+            }
+          }) %}
+
+            <style>.govuk-input__wrapper .govuk-form-group + .govuk-form-group:not(:first-child) { margin-left: 20px; }</style>
+
+            <div class="govuk-input__wrapper">
+                          
+              {{ govukInput({
+                  label: { 
+                    text: data.translations.dpdAgeHours[data.lang] | capitalize,
+                    classes: 'govuk-visually-hidden'
+                  },
+                  classes: 'govuk-input--width-2',
+                  value: data['deceased-persons-age-hours'],
+                  id: 'deceased-persons-age-hours',
+                  name: 'deceased-persons-age-hours',
+                  suffix: { 'text' : data.translations.dpdAgeHours[data.lang] }
+              }) }}
+
+              {{ govukInput({
+                label: { 
+                  text: data.translations.dpdAgeMinutes[data.lang] | capitalize,
+                  classes: 'govuk-visually-hidden'
+                 },
+                classes: 'govuk-input--width-2',
+                value: data['deceased-persons-age-minutes'],
+                id: 'deceased-persons-age-minutes',
+                name: 'deceased-persons-age-minutes',
+                suffix: { 'text' : data.translations.dpdAgeMinutes[data.lang] }
+            }) }}
+
+          </div>
+
+          {% endcall %}
+
+
+        {% endif %}
+
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang]
+        }) }}
+
+
+      </form>
+
+
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

@@ -7,7 +7,7 @@
   {% set mainClasses = "govuk-!-padding-top-0" %}
   
   {% block header %}
-  <header class="govuk-header " role="banner" data-module="govuk-header">
+  <header class="govuk-header" role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
           <a href="/" class="govuk-header__link govuk-header__link--homepage">
@@ -73,13 +73,13 @@
           <div class="govuk-grid-column-full">
               <div class="account-signed-in">
                 <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                  <li class="account-signed-in__list-item">
                     Sarah Phillips
                   </li>
-                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                  <li class="account-signed-in__list-item">
                     {% if data['lang'] == "cy" %}Rhif CMC: 12345678 {% else %}GMC no: 12345678 {% endif %}
                   </li>
-                  <li class="account-signed-in__list-item" style="border-right: 1px solid #0b0c0c;">
+                  <li class="account-signed-in__list-item">
                     {% if data ['role-type'] == 'ap' %}
                       attending.practitioner@nhs.net
                     {% elseif data ['role-type'] == 'me' %}
@@ -140,4 +140,51 @@
       </div>
     </div>
     
+  {% endblock %}
+
+
+  {% block footer %}
+
+  {% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: '/manage-prototype',
+          text: 'Manage prototype'
+        },
+        {
+          href: '/manage-prototype/clear-data',
+          text: 'Clear data'
+        },
+        {
+          href: '?role-type=ap',
+          text: 'Role: AP'
+        },
+        {
+          href: '?role-type=meo',
+          text: 'Role: MEO'
+        },
+        {
+          href: '?role-type=me',
+          text: 'Role: ME'
+        },
+        {
+          href: '?over-under-28=dpd66Or65RadioYes',
+          text: 'Path: Infant'
+        },
+        {
+          href: '?over-under-28=dpd66Or65RadioNo',
+          text: 'Path: Adult'
+        }
+      ],
+      html : '' | getFooterStatus
+    }
+  }) }}
+
+  {% endblock %}
+
+  {% block pageScripts %}
+  <script src="/public/javascripts/extras.js"></script>
   {% endblock %}

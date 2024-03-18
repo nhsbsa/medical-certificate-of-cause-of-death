@@ -1,0 +1,74 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+{{ govukBackLink({
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="ethnic-group" method="post" novalidate>
+
+        {{ govukRadios({
+          name: 'ethnic-group',
+          value: data['ethnic-group'],
+          hint: {
+            text: data.translations.dpdEthnicGroupHint[data.lang]
+          },
+          fieldset: {
+            legend: {
+              text: data.translations.dpdEthnicGroup[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'dpdEthnicGroupWhite',
+              text: data.translations.dpdEthnicGroupWhite[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupMixedOrMultiple',
+              text: data.translations.dpdEthnicGroupMixedOrMultiple[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupAsianOrAsianBritish',
+              text: data.translations.dpdEthnicGroupAsianOrAsianBritish[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish',
+              text: data.translations.dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupOtherEthnicGroup',
+              text: data.translations.dpdEthnicGroupOtherEthnicGroup[data.lang]
+            },
+            {
+              divider: data.translations.dpdEthnicGroupOr[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupUnknown',
+              text: data.translations.dpdEthnicGroupUnknown[data.lang]
+            }
+          ]
+        }) }}
+      
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang]
+        }) }}
+      
+      </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

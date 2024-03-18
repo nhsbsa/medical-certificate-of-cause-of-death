@@ -1,0 +1,97 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if data['role-type'] == 'ap' %}
+
+      <!-- ATTENDING PRACTITIONER -->
+      <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
+        <h1 class="govuk-panel__title">{{ data.translations.apConfirmationPageTitle[data.lang] }}</h1>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m" />
+
+      <p class="govuk-body">{{ data.translations.apConfirmationPageContent[data.lang] }}</p>
+      <h2 class="govuk-heading-m">{{ data.translations.apConfirmationPageSubheadingOne[data.lang] }}</h2>
+      <p class="govuk-body">{{ data.translations.apConfirmationPageWhatHappensNextContent[data.lang] }}</p>
+
+
+    {% else %}
+
+      <!-- MEDICAL EXAMINER / MEDICAL EXAMINER OFFICER -->
+      <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
+        <h1 class="govuk-panel__title">{{ data.translations.confirmationPageTitle[data.lang] }}</h1>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m" />
+
+      <p class="govuk-body">{{ data.translations.confirmationPageContent[data.lang] }}</p>
+      <h2 class="govuk-heading-m">{{ data.translations.confirmationPageSubheadingOne[data.lang] }}</h2>
+      <p class="govuk-body">{{ data.translations.confirmationPageWhatHappensNextContent[data.lang] }}</p>
+
+
+    {% endif %}
+
+    <!-- FEEDBACK FORM -->
+    <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ data.translations.confirmationPageSubheadingTwo[data.lang] }}</h2>
+
+    <form action="give-feedback" method="post" novalidate>
+
+
+      {{ govukRadios({
+        name: 'give-feedback',
+        value: data['give-feedback'],
+        fieldset: {
+          legend: {
+            text: data.translations.confirmationPageGiveFeedbackQuestionOne[data.lang],
+            classes: 'govuk-heading-s govuk-!-font-weight-bold'
+          }
+        },
+        items: [
+          { value: 'confirmationPageGiveFeedbackRadioOne', text: data.translations.confirmationPageGiveFeedbackRadioOne[data.lang] },
+          { value: 'confirmationPageGiveFeedbackRadioTwo', text: data.translations.confirmationPageGiveFeedbackRadioTwo[data.lang] },
+          { value: 'confirmationPageGiveFeedbackRadioThree', text: data.translations.confirmationPageGiveFeedbackRadioThree[data.lang] },
+          { value: 'confirmationPageGiveFeedbackRadioFour', text: data.translations.confirmationPageGiveFeedbackRadioFour[data.lang] },
+          { value: 'confirmationPageGiveFeedbackRadioFive', text: data.translations.confirmationPageGiveFeedbackRadioFive[data.lang] }
+        ]
+      }) }}
+
+      {{ govukTextarea({
+        name: 'feedback-text', id: 'feedback-text', value: data['feedback-text'],
+        label: {
+          text: data.translations.confirmationPageGiveFeedbackQuestionTwo[data.lang],
+          classes: 'govuk-heading-s govuk-!-font-weight-bold'
+        },
+        hint: { text: data.translations.confirmationPageGiveFeedbackQuestionTwoHint[data.lang] }
+      }) }}
+
+    
+      <div class="govuk-button-group">
+
+        {{ govukButton({
+          text: data.translations.confirmationPageCTAprimary[data.lang]
+        }) }}
+
+        {{ govukButton({
+          text: data.translations.confirmationPageCTAsecondary[data.lang],
+          classes: 'govuk-button--secondary'
+        }) }}
+
+      </div>
+    
+    </form>
+
+  </div>
+</div>
+
+
+{{ data | debugData | safe }}
+
+
+{% endblock %}
