@@ -147,9 +147,7 @@
 
   {% from "govuk/components/footer/macro.njk" import govukFooter %}
 
-  {{ govukFooter({
-    meta: {
-      items: [
+  {% set footerItems = [
         {
           href: '/manage-prototype',
           text: 'Manage prototype'
@@ -157,8 +155,13 @@
         {
           href: '/manage-prototype/clear-data',
           text: 'Clear data'
-        },
-        {
+        }
+      ] 
+  %}
+
+  {% if data.debug == 'true' %}
+    
+    {% set footerItems = (footerItems.push({
           href: '?role-type=ap',
           text: 'Role: AP'
         },
@@ -177,8 +180,14 @@
         {
           href: '?over-under-28=dpd66Or65RadioNo',
           text: 'Path: Adult'
-        }
-      ],
+        }), footerItems) %}
+
+  {% endif %}
+
+
+  {{ govukFooter({
+    meta: {
+      items: footerItems,
       html : '' | getFooterStatus
     }
   }) }}
