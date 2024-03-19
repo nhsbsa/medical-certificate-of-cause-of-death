@@ -147,22 +147,25 @@ addFilter('getTranslationTableRows', function(content) {
 addFilter( 'getStatusFilterOptions', function( content ){
 
     // content: statusFilter variable
-    content = ( content ) ? content : '';
+    content = parseInt(content);
+    if( Number.isNaN(content) ){
+        content = '';
+    }
 
-    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Review complete - send to registrar','Sent to registrar'];
+    const statuses = dashboard.getStatuses();
 
     let html = '<option value="">Show all statuses</option>';
-    statuses.forEach(function( status ){
+    statuses.forEach(function( status, i ){
 
         // Add a unique value for ME
         if( status === 'For sign off by medical examiner' ){
-            html += ( content === status ) ? '<option selected value="For sign off by medical examiner">' : '<option value="For sign off by medical examiner">';
+            html += ( content === 3 ) ? '<option selected value="3">' : '<option value="3">';
             html += 'For sign off by ME</option>';
         } else if( status === 'Review complete - send to registrar' ){
-            html += ( content === status ) ? '<option selected value="Review complete - send to registrar">' : '<option value="Review complete - send to registrar">';
+            html += ( content === 4 ) ? '<option selected value="4">' : '<option value="4">';
             html += 'Send to registrar</option>';
         } else {
-            html += ( content === status ) ? '<option selected>' : '<option>';
+            html += ( content === i ) ? '<option selected value="'+i+'">' : '<option value="'+i+'">';
             html += status + '</option>';
         }
 
@@ -203,12 +206,58 @@ addFilter( 'getDashboardCaption', function( content ){
     }
 
     if( statusFilter ){
-        caption += ' with status "' + statusFilter + '"';
+        caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
     }
 
     return caption;
 
 });
+
+//
+// GET DASHBOARD TABLE HEAD
+//
+addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
+
+    // content:         blank string
+    // sortBy:          name, date, status    ( defaults to date )
+    // sortDirection:   ascending, descending ( defaults to ascending )
+
+    let baseLink = '?currentPage=0';
+    let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
+
+    // Name
+    let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
+    let nameObj = {
+        html: '<a href="'+nameLink+'">Deceased name</a><br /><span class="govuk-body-s">NHS number</span>',
+        attributes: {
+            'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
+        } 
+    };
+
+    // Date
+    let dateLink = ( sortBy === 'date' ) ? baseLink + '&sortBy=date&sortDirection=' + opposite : baseLink + '&sortBy=date&sortDirection=ascending';
+    let dateObj = {
+        html: '<a href="'+dateLink+'">Date of death</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'date' ) ? sortDirection : 'none'
+        } 
+    };
+
+    // Action
+    let actionObj = { text: 'Action' };
+
+    // Status
+    let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
+    let statusObj = {
+        html: '<a href="'+statusLink+'">Status</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+        } 
+    };
+
+    return [ nameObj, dateObj, actionObj, statusObj ];
+
+} );
 
 //
 // GET DASHBOARD TABLE ROWS
@@ -222,10 +271,12 @@ addFilter( 'getDashboardTableRows', function( content ) {
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
-    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
+    
+    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : 'date';
+    const sortDirection = ( this.ctx.data.sortDirection ) ? this.ctx.data.sortDirection : 'descending';
 
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy );
+    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy, sortDirection );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
@@ -248,10 +299,6 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
-    
-    const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
-    const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : '';
     
     const noOfFilteredRows = ( Number.isInteger(this.ctx.data.noOfFilteredRows) ) ? this.ctx.data.noOfFilteredRows : 0;
     const noOfPages = Math.ceil( noOfFilteredRows / rowsPerPage );
@@ -283,3 +330,43 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
     return obj;
 
 } );
+
+
+//
+// GET PATIENT DATA BY ID
+//
+addFilter( 'getPatientDataByID', function( content, id ){
+
+    // content: patient data from 'tests/data-patients.html'
+    
+    const noOfRecords = ( Array.isArray( content ) && content.length > 0 ) ? content.length : 0;
+    let patient = false;
+
+    for( let i = 0; i < noOfRecords; i++ ){
+        if( content[i].id === id ){
+            patient = content[i];
+            break;
+        }
+    }
+
+    return patient;
+
+} );
+
+//
+// GET STATUS TAG
+//
+addFilter( 'getStatusTag', function( content ){
+
+    // content: status id
+    
+    let html = '';
+
+    content = parseInt(content);
+    if( !Number.isNaN( content ) ){
+        html = dashboard.getStatuses(content, true);    
+    }
+
+    return html;
+
+});
