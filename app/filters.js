@@ -147,22 +147,25 @@ addFilter('getTranslationTableRows', function(content) {
 addFilter( 'getStatusFilterOptions', function( content ){
 
     // content: statusFilter variable
-    content = ( content ) ? content : '';
+    content = parseInt(content);
+    if( Number.isNaN(content) ){
+        content = '';
+    }
 
-    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Review complete - send to registrar','Sent to registrar'];
+    const statuses = dashboard.getStatuses();
 
     let html = '<option value="">Show all statuses</option>';
-    statuses.forEach(function( status ){
+    statuses.forEach(function( status, i ){
 
         // Add a unique value for ME
         if( status === 'For sign off by medical examiner' ){
-            html += ( content === status ) ? '<option selected value="For sign off by medical examiner">' : '<option value="For sign off by medical examiner">';
+            html += ( content === 3 ) ? '<option selected value="3">' : '<option value="3">';
             html += 'For sign off by ME</option>';
         } else if( status === 'Review complete - send to registrar' ){
-            html += ( content === status ) ? '<option selected value="Review complete - send to registrar">' : '<option value="Review complete - send to registrar">';
+            html += ( content === 4 ) ? '<option selected value="4">' : '<option value="4">';
             html += 'Send to registrar</option>';
         } else {
-            html += ( content === status ) ? '<option selected>' : '<option>';
+            html += ( content === i ) ? '<option selected value="'+i+'">' : '<option value="'+i+'">';
             html += status + '</option>';
         }
 
@@ -203,7 +206,7 @@ addFilter( 'getDashboardCaption', function( content ){
     }
 
     if( statusFilter ){
-        caption += ' with status "' + statusFilter + '"';
+        caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
     }
 
     return caption;
@@ -327,3 +330,43 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
     return obj;
 
 } );
+
+
+//
+// GET PATIENT DATA BY ID
+//
+addFilter( 'getPatientDataByID', function( content, id ){
+
+    // content: patient data from 'tests/data-patients.html'
+    
+    const noOfRecords = ( Array.isArray( content ) && content.length > 0 ) ? content.length : 0;
+    let patient = false;
+
+    for( let i = 0; i < noOfRecords; i++ ){
+        if( content[i].id === id ){
+            patient = content[i];
+            break;
+        }
+    }
+
+    return patient;
+
+} );
+
+//
+// GET STATUS TAG
+//
+addFilter( 'getStatusTag', function( content ){
+
+    // content: status id
+    
+    let html = '';
+
+    content = parseInt(content);
+    if( !Number.isNaN( content ) ){
+        html = dashboard.getStatuses(content, true);    
+    }
+
+    return html;
+
+});

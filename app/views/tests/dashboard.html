@@ -1,37 +1,80 @@
-{% extends "layouts/main.html" %}
-
-{% block pageTitle %}
-GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
-{% endblock %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
 {% block content %}
 
-<!-- INTRO ROW -->
+{% if data['role-type'] == 'ap' %}
+
+  <!-- AP DASHBOARD -->
+
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
-        <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download approved MCCDs to send to the registrar.</p>
+  <div class="govuk-grid-column-two-thirds">
+
+     <h1 class="govuk-heading-l">
+      Your dashboard
+    </h1>
+
+    <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>
+    <p>This dashboard will list MCCDs that:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you have submitted to a medical examiner for approval</li>
+      <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
+      <li>have been rejected by a medical examiner and need amending</li>
+    </ul>
+
+  </div>
+  </div>
+
+{% elseif data['role-type'] == 'me' %}
+
+<!-- ME DASHBOARD -->
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+ <h1 class="govuk-heading-l">
+      Your dashboard
+    </h1>
     </div>
-</div>
+  </div>
+
+  
+
+{% else %}
+
+  <!-- MEO DASHBOARD -->
+
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
+          <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download approved MCCDs to send to the registrar.</p>
+      </div>
+  </div>
+
+{% endif %}
+
+
+
+{% if data.useSearch == 'true' or data.useFilters == 'true' %}
 
 <style>
-      .input-button-group {
-        display: flex;
-        justify-content: space-between;
-        margin: 0;
-      }
-      .input-button-group > .govuk-button {
-        margin: 0 0 0 10px;
-      }
-    </style>
+
+  .input-button-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  .input-button-group > .govuk-button {
+    margin: 0 0 0 10px;
+  }
+
+</style>
 
 <!-- SEARCH ROW -->
 <div class="govuk-grid-row">
 
 
-  {% if data.useSearch == 'true' %}
+{% if data.useSearch == 'true' %}
 
   <!-- SEARCH FORM -->
   <div class="govuk-grid-column-two-thirds">
@@ -64,6 +107,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   </div>
   {% endif %}
 
+
+  {% if data.useFilters == 'true' %}
   <div class="govuk-grid-column-one-third">
     <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
 
@@ -96,9 +141,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   
     </form>
   </div>
+  {% endif %}
 
 
 </div>
+{% endif %}
 
 
 <!-- TABLE ROW -->
