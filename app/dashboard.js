@@ -216,7 +216,7 @@ function _getRow( patient ){
 
     let arr = [];
 
-    arr.push( { text: patient.name, html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
+    arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
     arr.push( { text: patient.status, html: _getStatuses( patient.status, true ) });
