@@ -4,22 +4,54 @@ const router = govukPrototypeKit.requests.setupRouter();
 module.exports = router;
 
 
-// Officer review
-router.post(/officer-review/, (req, res) => {
-    res.redirect('confirmation?role-type=meo')
+// MCCD SUMMARY
+router.post( /mccd-summary/, (req, res) => {
+
+    switch( req.session.data['role-type'] ){
+
+        case 'ap':
+        case 'me':
+             // AP OR ME
+
+             if( req.session.data['me-signoff'] === 'amend' || req.session.data['ap-signoff'] === 'amend' ){
+
+                // Certificate needs amendments from the AP...
+                res.redirect('confirmation')
+
+             } else {
+                
+                // Certificate can be sent to registrar by MEO...
+                res.redirect('confirm-your-details');
+
+             }
+
+             break;
+
+        default:
+            // MEO
+            res.redirect('confirmation')
+
+            break;
+
+    }
+
 });
 
-// ME signoff > Qualifications
-router.post(/me-signoff/, (req, res) => {
-    res.redirect('qualifications')
+// DECLARATION
+router.post( /declaration/, (req, res) => {
+    res.redirect('confirmation');
 });
 
-    // > Qualifications > Declaration
-    router.post(/qualifications/, (req, res) => {
-        res.redirect('declaration')
-    });
+// CONFIRMATION
+router.post( /confirmation/, (req, res) => {
 
-        // > Declaration > Confirmation page
-        router.post(/me-signoff-dec/, (req, res) => {
-            res.redirect('confirmation?role-type=me')
-        });
+    // Reset the temporary demo filters...
+    delete req.session.data['ap-signoff'];
+    delete req.session.data['me-signoff'];
+    delete req.session.data['meo-review'];
+    delete req.session.data['ap-cert-declaration'];
+    delete req.session.data['me-cert-declaration'];
+
+    res.redirect('dashboard');
+
+});

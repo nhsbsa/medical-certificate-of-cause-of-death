@@ -1,46 +1,89 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block content %}
 
 {{ govukBackLink({
-text: data.translations.globalBackLink[data.lang],
-href: 'javascript:history.back()'
+  text: data.translations.globalBackLink[data.lang],
+  href: 'javascript:history.back()'
 }) }}
 
-
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-two-thirds">
+  
+    <form action="declaration" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Medical Examiner Declaration</h1>
+      {% if data['role-type'] === 'me' %}
 
-        <form action="me-signoff-dec" method="post">
+        <!-- MEDICAL EXAMINER FORM -->
 
-            <div class="govuk-form-group">
-                <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
-                    <div class="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="me-signoff-dec" name="me-signoff-dec"
-                                type="checkbox" value="me-signoff-dec">
+        {{ govukCheckboxes({
+          name: 'me-cert-declaration',
+          fieldset: {
+            legend: {
+              text: data.translations.meScrutinyDeclarationPageTitle[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'meCertDeclarationContent',
+              text: data.translations.meCertDeclarationContent[data.lang],
+              checked: ( data['me-cert-declaration'] )
+            }
+          ]
+        }) }}
 
-                            <label class="govuk-label govuk-checkboxes__label" for="me-signoff-dec">
-                                I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated on the certificate.
-                            </label>
+        {{ govukButton({
+          text: data.translations.meCertDeclarationCTA[data.lang]
+        }) }}
 
+      {% elseif data['role-type'] === 'ap' %}
 
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+        <!-- ATTENDING PRACTITIONER FORM -->
 
-            <button class="govuk-button" type="submit">Submit sign off</button>
+        {{ govukCheckboxes({
+          name: 'ap-cert-declaration',
+          fieldset: {
+            legend: {
+              text: data.translations.apDeclarationPageTitle[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'apDeclarationContent',
+              text: data.translations.apDeclarationContent[data.lang],
+              checked: ( data['ap-cert-declaration'] )
+            }
+          ]
+        }) }}
 
-        </form>
+        {{ govukButton({
+          text: data.translations.apDeclarationSubmitForScrutiny[data.lang]
+        }) }}
 
-    </div>
+      {% else %}
+
+        {{ govukInsetText({
+          text: 'Only a medical examiner or attending practitioner would see this screen. Please select a role from the footer.'
+        }) }}
+
+      {% endif %}
+
+      
+
+    </form>
+
+  </div>
 </div>
+
+{{ data | debugData | safe }}
 
 {% endblock %}

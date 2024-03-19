@@ -1,4 +1,4 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
@@ -7,43 +7,37 @@
 {% if data['role-type'] == 'ap' %}
 
   <!-- AP DASHBOARD -->
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">
+        Your dashboard
+      </h1>
 
-     <h1 class="govuk-heading-l">
-      Your dashboard
-    </h1>
+      <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>
+      <p>This dashboard will list MCCDs that:</p>
 
-    <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>
-    <p>This dashboard will list MCCDs that:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>you have submitted to a medical examiner for approval</li>
+        <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
+        <li>have been rejected by a medical examiner and need amending</li>
+      </ul>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you have submitted to a medical examiner for approval</li>
-      <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
-      <li>have been rejected by a medical examiner and need amending</li>
-    </ul>
-
-  </div>
+    </div>
   </div>
 
 {% elseif data['role-type'] == 'me' %}
 
-<!-- ME DASHBOARD -->
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
- <h1 class="govuk-heading-l">
-      Your dashboard
-    </h1>
+  <!-- ME DASHBOARD -->
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Your dashboard</h1>
     </div>
   </div>
-
-  
 
 {% else %}
 
   <!-- MEO DASHBOARD -->
-
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
@@ -79,7 +73,7 @@
   <!-- SEARCH FORM -->
   <div class="govuk-grid-column-two-thirds">
     
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
+    <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
       
       <div class="govuk-form-group">
 
@@ -110,7 +104,7 @@
 
   {% if data.useFilters == 'true' %}
   <div class="govuk-grid-column-one-third">
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
+    <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
         

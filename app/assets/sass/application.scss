@@ -5,6 +5,8 @@
 
 // Custom addition to header following HMRC header
 // https://design.tax.service.gov.uk/examples/sign-out/example/
+
+
 .hmrc-sign-out-nav, .align-right {
     float: right;
 }
@@ -33,6 +35,7 @@
  //       margin-bottom: 0;
  //   }
 // }
+
 .account-signed-in {
   font-family: "GDS Transport", arial, sans-serif;
   font-size: 19px;
@@ -40,10 +43,6 @@
   border-bottom-style: solid;
   border-bottom-color: #b1b4b6;
   margin-bottom: 0;
-}
-
-.account-signed-in__list {
-  margin-top: 1em;
   text-align: right;
 }
 
@@ -62,6 +61,36 @@
 
 .service-account {
     background-color: #f3f2f1;
+}
+
+.account-signed-in.updated-version  {
+  font-size: 16px;
+}
+
+.updated-version .account-signed-in__list {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.updated-version .account-signed-in__list-item {
+  display: block;
+}
+
+.updated-version .account-signed-in__list-item:not(:first-child) {
+  line-height: 16px;
+  padding: 5px 10px 4px 10px;
+}
+
+.updated-version .account-signed-in__list-item:first-child {
+  margin-right: auto;
+  padding: 0;
+  border: none;
+}
+
+.updated-version .account-signed-in__list-item:last-child {
+  padding-right: 0;
 }
 
 // Custom Input + Select in wrapper - used in Age Page 
