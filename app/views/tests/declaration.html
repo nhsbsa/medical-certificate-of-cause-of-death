@@ -1,0 +1,46 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">Medical Examiner Declaration</h1>
+
+        <form action="me-signoff-dec" method="post">
+
+            <div class="govuk-form-group">
+                <fieldset aria-describedby="contact-hint" class="govuk-fieldset">
+                    <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="me-signoff-dec" name="me-signoff-dec"
+                                type="checkbox" value="me-signoff-dec">
+
+                            <label class="govuk-label govuk-checkboxes__label" for="me-signoff-dec">
+                                I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated on the certificate.
+                            </label>
+
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <button class="govuk-button" type="submit">Submit sign off</button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -117,22 +117,130 @@
 
             {% if data['role-type'] == 'ap' %}
 
-                {{ govukInsetText({
-                    text: 'Attending practitioner actions go here.'
-                }) }}
+            <button class="govuk-button govuk-button--secondary" type="submit">Back to dashboard</button>
 
             {% elseif data['role-type'] == 'me' %}
+            <!-- IF STATUS = For sign off by Medical Examiner -->
+            <form action="me-signoff" method="post">
 
-                {{ govukInsetText({
-                    text: 'Medical examiner actions go here.'
-                }) }}
+                <div class="govuk-form-group">
+            
+                    <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+            
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            
+                            <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                Medical examiner sign off
+                            </h2>
+            
+                        </legend>
+            
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="me-signoff-amend" name="me-signoff" type="radio"
+                                    value="This certificate requires amendments by the attending practitioner">
+                                <label class="govuk-label govuk-radios__label" for="me-signoff-amend">
+                                    This certificate requires amendments by the attending practitioner
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="me-signoff-registrar" name="me-signoff" type="radio"
+                                    value="This certificate is ready to be sent to the registrar">
+                                <label class="govuk-label govuk-radios__label" for="me-signoff-registrar">
+                                    This certificate is ready to be sent to the registrar
+                                </label>
+                            </div>
+            
+                        </div>
+            
+                    </fieldset>
+                </div>
+            
+                <button class="govuk-button govuk-button--primary" type="submit">Save and continue</button>
+                <button class="govuk-button govuk-button--secondary" type="submit">Back to dashboard</button>
+                
+            </form>
+
+
+            <!--IF ANY OTHER STATUS -->
+            <button class="govuk-button govuk-button--secondary" type="submit">Back to dashboard</button>
 
             {% else %}
 
-                {{ govukInsetText({
-                    text: 'Medical examiner officer actions go here.'
-                }) }}
+            <!-- IF STATUS = For officer review OR Amended-->
+            <form action="officer-review" method="post">
 
+                <div class="govuk-form-group">
+            
+                    <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+            
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            
+                            <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                Medical examiner officer review
+                            </h2>
+            
+                        </legend>
+            
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="officer-review-amend" name="officer-review" type="radio"
+                                    value="1">
+                                <label class="govuk-label govuk-radios__label" for="officer-review-amend">
+                                    This certificate requires amendments by the attending practitioner
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="officer-review-signoff" name="officer-review" type="radio"
+                                    value="2">
+                                <label class="govuk-label govuk-radios__label" for="officer-review-signoff">
+                                    This certificate is ready for medical examiner sign off
+                                </label>
+                            </div>
+            
+                        </div>
+            
+                    </fieldset>
+                </div>
+            
+                <button class="govuk-button govuk-button--primary" type="submit">Save and continue</button>
+                <button class="govuk-button govuk-button--secondary" type="submit">Back to dashboard</button>
+            
+            </form>
+
+            <!--IF STATUS = Review complete - send to registrar-->
+            <form action="download-share" method="post">
+
+                <div class="govuk-form-group">
+            
+                    <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+            
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            
+                            <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                Download certificate
+                            </h2>
+                            <p>Download this certificate to your computer and send it to the registrar via email. Once you are ready, come back to this screen to mark this certificate as sent by ticking the checkbox below.</p>
+                            <button class="govuk-button govuk-button--primary" type="submit">Download certificate</button>
+            
+                        </legend>
+            
+                        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
+                                <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">
+                                    I have sent this certificate to the registrar
+                                </label>
+                            </div>
+                        </div>
+            
+                    </fieldset>
+                </div>
+            
+                <button class="govuk-button govuk-button--primary" type="submit">Mark MCCD as sent to registrar</button>
+                <button class="govuk-button govuk-button--secondary" type="submit">Back to dashboard</button>
+                
+            </form>
             {% endif %}
 
 
