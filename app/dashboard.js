@@ -91,7 +91,7 @@ function _filterByStatus( rows, statusFilter ) {
 
     statusFilter = parseInt( statusFilter );
 
-    let arr = [];
+    const arr = [];
 
     rows.forEach(function( row ){
 
@@ -154,6 +154,48 @@ function _filterBySortBy( rows, sortType, sortDirection ){
         arr = arr.reverse();
     }
 
+    
+
+    return arr;
+
+}
+
+//
+// FILTER BY ROLE TYPE FUNCTION 
+//
+function _filterByRoleType( rows, roleType ){
+
+    let filterByRoleType = true; // You can toggle to switch this on/off
+
+    let arr = rows;
+
+    if( filterByRoleType ){
+
+        if(roleType === 'ap' | roleType === 'me' ){
+
+            arr = [];
+
+            rows.forEach(function( row ){
+
+                if( roleType === 'ap' ){
+                    // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
+                    if( row.belongsToAP ){
+                        arr.push(row);
+                    }
+
+                } else {
+                    // ME - for the demo, only show ones that require
+                    if( row.status === 3 ){
+                        arr.push(row);
+                    }
+                    
+                }
+
+                
+            });
+
+        } 
+    }
     
 
     return arr;
@@ -228,9 +270,9 @@ function _getRow( patient ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, searchTerm, statusFilter, sortBy, sortDirection ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection ){
 
-    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy, sortDirection );
+    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( rows, roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
     
     return filteredRows;
 
