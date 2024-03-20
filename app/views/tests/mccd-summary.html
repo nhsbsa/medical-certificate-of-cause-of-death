@@ -1,8 +1,11 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
 
 {% block content %}
 
@@ -39,8 +42,6 @@
             {{ patient.status | getStatusTag | safe }}
             <h1 class="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-bottom-2">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
-
-            {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 
             <!-- DECEASED PERSONS DETAILS -->
             {{ govukSummaryList({
@@ -97,9 +98,12 @@
                 rows: [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: '' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '' } },
-                    {  key: { text: data.translations.dpdConfirmDetailsWorkAddress[data.lang] }, value: { html: '' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsWorkAddress[data.lang] }, value: { html: '' } },
+                    {  key: { text: 'Qualifications' }, value: { html: '' } }
                 ]
             }) }}
+
+        </main>
 
             <!--
 
@@ -115,28 +119,167 @@
 
             -->
 
+        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
+
             {% if data['role-type'] == 'ap' %}
 
-                {{ govukInsetText({
-                    text: 'Attending practitioner actions go here.'
+                <!-- AP -->
+
+                <!-- BACK TO DASHBOARD -->
+                {{ govukButton({
+                    text: data.translations.globalBackToDashboard[data.lang],
+                    href: 'dashboard',
+                    classes: 'govuk-button--secondary'
                 }) }}
 
             {% elseif data['role-type'] == 'me' %}
 
-                {{ govukInsetText({
-                    text: 'Medical examiner actions go here.'
-                }) }}
+                <!-- ME -->
+            
+                {% if patient.status == '3' %}
+
+                    <!-- IF STATUS = For sign off by Medical Examiner -->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        {{ govukRadios({
+                            name: 'me-signoff',
+                            value: data['me-signoff'],
+                            fieldset: {
+                                legend: {
+                                    text: 'Medical examiner sign off',
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                { text: 'This certificate requires amendments by the attending practitioner', value: 'amend' },
+                                { text: 'This certificate is ready to be sent to the registrar',  value: 'registrar' }
+                            ]
+                        }) }}
+                    
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.globalSaveContinue[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                        
+                    </form>
+
+                {% else %}
+
+                    <!-- ELSE: BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalBackToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button--secondary'
+                    }) }}
+
+                {% endif %}
 
             {% else %}
 
-                {{ govukInsetText({
-                    text: 'Medical examiner officer actions go here.'
-                }) }}
+                <!-- MEO -->
+
+                <!-- IF STATUS = For officer review OR Amended-->
+                {% if patient.status == '0' or patient.status == '2' %}
+
+                    <form action="mccd-summary" method="post" novalidate>
+
+
+                        {{ govukRadios({
+                            name: 'meo-review',
+                            value: data['meo-review'],
+                            fieldset: {
+                                legend: {
+                                    text: 'Medical examiner officer review',
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                { text: 'This certificate requires amendments by the attending practitioner', value: 'amend' },
+                                { text: 'This certificate is ready for medical examiner sign off',  value: 'medical-examiner' }
+                            ]
+                        }) }}
+                    
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.globalSaveContinue[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                        
+                    </form>
+
+                {% elseif patient.status == '4' %}
+
+                    <!--IF STATUS = Review complete - send to registrar-->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        <div class="govuk-form-group">
+                    
+                            <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    
+                                    <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                        Download certificate
+                                    </h2>
+                                    <p>Download this certificate to your computer and send it to the registrar via email. Once you are ready, come back to this screen to mark this certificate as sent by ticking the checkbox below.</p>
+                                    <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--primary">Download certificate</span>
+                    
+                                </legend>
+                    
+                                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
+                                        <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">
+                                            I have sent this certificate to the registrar
+                                        </label>
+                                    </div>
+                                </div>
+                    
+                            </fieldset>
+                        </div>
+
+
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: 'Mark MCCD as sent to registrar'
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                    
+                    </form>
+
+                {% else %}
+
+                    <!-- BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalBackToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button--secondary'
+                    }) }}
+                    
+                {% endif %}
 
             {% endif %}
 
 
-        </main>
+        
 
         {% else %}
 
@@ -147,6 +290,8 @@
             }) }}
 
         {% endif %}
+
+        </div>
 
     </div>
 </div>

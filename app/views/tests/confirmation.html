@@ -1,0 +1,111 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="confirmation" method="post" novalidate>
+
+            {% if data['role-type'] == 'ap' %}
+                
+                <!-- AP -->
+
+            {% elseif data['role-type'] == 'me' %}
+
+                <!-- ME -->
+                {% if data['me-signoff'] == 'amend' %}
+
+                    <!-- Certificate needs amendments from the AP... -->
+                    <div class="govuk-panel govuk-panel--confirmation">
+                        <h1 class="govuk-panel__title">Certificate returned to the attending practitioner</h1>
+                    </div>
+
+                    <hr class="govuk-section-break govuk-section-break--m" />
+
+                    <h2 class="govuk-heading-m">What happens next</h2>
+                    <p class="govuk-body">You will need to contact the attending practitioner to inform them of the changes you need.</p>
+                
+                {% else %}
+
+                    <!-- Certificate can be sent to registrar by MEO... -->
+                    <div class="govuk-panel govuk-panel--confirmation">
+                        <h1 class="govuk-panel__title">Certificate signed off</h1>
+                    </div>
+
+                    <hr class="govuk-section-break govuk-section-break--m" />
+
+                    <h2 class="govuk-heading-m">What happens next</h2>
+                    <p class="govuk-body">Medical examiner officers in your organisation can now send this certificate to the appropriate registrar. There are no further actions for you.</p>
+
+                {% endif %}
+
+            {% else %}
+
+                <!-- MEO -->
+
+                {% if data['sent-to-registrar'] %}
+
+                    <!-- Sent to registrar -->
+                    <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Certificate sent to registrar</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">You’ll still have access to this certificate from your dashboard for 3 months. There are no further actions for you.</p>
+
+                {% else %}
+
+                    {% if data['meo-review'] == 'amend' %}
+
+                        <!-- Certificate needs amendments from the AP... -->
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Certificate returned to the attending practitioner</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">You will need to contact the attending practitioner to inform them of the changes you need. Once they have submitted their amendments, you will get a notification.</p>
+                    
+                    {% else %}
+
+                        <!-- Certificate sent to ME... -->
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Certificate sent to medical examiners for scrutiny</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">Medical examiners will now see this certificate on their dashboard and will be able to sign it off as part of their scrutiny process.</p>
+
+                    {% endif %}
+
+                {% endif %}
+
+
+                
+
+            {% endif %}
+
+            <hr class="govuk-section-break govuk-section-break--m" />
+
+            {{ govukButton({
+                text: data.translations.globalBackToDashboard[data.lang],
+                classes: 'govuk-button--secondary'
+            }) }}
+
+        </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

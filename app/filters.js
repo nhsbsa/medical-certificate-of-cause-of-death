@@ -185,7 +185,9 @@ addFilter( 'getDashboardCaption', function( content ){
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
 
-    let caption = 'All certificates';
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+
+    let caption = ( roleType === 'ap' ) ? 'Your certificates' : 'All certificates';
 
     const regex = /^[0-9\s]+$/;
     const isNHSNumber = regex.test(searchTerm);
@@ -225,6 +227,8 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
     let baseLink = '?currentPage=0';
     let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
 
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+
     // Name
     let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
     let nameObj = {
@@ -248,12 +252,14 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
-    let statusObj = {
+    let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
         html: '<a href="'+statusLink+'">Status</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         } 
     };
+
+    console.log(statusObj);
 
     return [ nameObj, dateObj, actionObj, statusObj ];
 
@@ -275,8 +281,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : 'date';
     const sortDirection = ( this.ctx.data.sortDirection ) ? this.ctx.data.sortDirection : 'descending';
 
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, searchTerm, statusFilter, sortBy, sortDirection );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
