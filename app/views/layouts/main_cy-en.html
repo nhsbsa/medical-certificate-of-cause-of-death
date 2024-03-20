@@ -123,6 +123,7 @@
 
 
 
+    {% if data['bilingual'] == "true" %}
     <div class="govuk-width-container">
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
@@ -147,7 +148,7 @@
                   </li>
                   <li class="dwp-language-toggle__list-item">
                     Cymraeg
-                   </li>
+                  </li>
                   </ul>
                   </nav> 
                 {% else %}
@@ -166,7 +167,7 @@
           </div>
       </div>
     </div>
-    
+    {% endif %}
   {% endblock %}
 
 
@@ -202,11 +203,11 @@
         },
         {
           href: '?over-under-28=dpd66Or65RadioYes',
-          text: 'Path: Infant'
+          text: 'Path: Neo-natal'
         },
         {
           href: '?over-under-28=dpd66Or65RadioNo',
-          text: 'Path: Adult'
+          text: 'Path: General'
         }), footerItems) %}
 
   {% endif %}

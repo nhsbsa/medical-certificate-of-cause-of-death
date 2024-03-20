@@ -20,11 +20,33 @@
    
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                  <h1 class="govuk-fieldset__heading">
+                <h1 class="govuk-fieldset__heading">
                     Where was the deceased person born?
                 </h1>
                 </legend>
-            </fieldset>
+                <p class="govuk-body">
+                    If entering place of birth, complete both fields in Welsh and English, or in English only. 
+                </p>
+        {% if data['bilingual'] == "true" %}
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="location-of-birth">
+                    Enter place of birth <span><strong>in English</strong></span> (optional)
+                </label>
+                <div id="passport-issued-hint" class="govuk-hint">
+                    For example, University Hospital of Wales, Cardiff
+                </div>
+                <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="location-of-birth">
+                    Enter place of birth <span><strong>in Welsh</strong></span> (optional)
+                </label>
+                <div id="passport-issued-hint" class="govuk-hint">
+                    For example, Ysbyty Athrofaol Cymru, Caerdydd
+                </div>
+                <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
+            </div>
+        {% else %}
             <div class="govuk-form-group">
                 <label class="govuk-label" for="location-of-birth">
                 Enter place of birth (optional)
@@ -34,7 +56,8 @@
                 </div>
                 <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
             </div>
-
+        {% endif %}
+            </fieldset>
             <button class="govuk-button" type="submit">
                 Save and continue
             </button>
@@ -51,54 +74,35 @@
 
     <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-fieldset__heading">
-            Ble cafodd y person ymadawedig ei eni?
+        <h1 class="govuk-fieldset__heading">
+            Ble cafodd y person ymadawedig eu geni? 
         </h1>
         </legend>
-    </fieldset>
+        <p class="govuk-body">
+            Os ydych yn rhoi lleoliad geni, cwblhewch y ddau faes yn Gymraeg a Saesneg, neu yn Saesneg yn unig. 
+        </p>
+    
     <div class="govuk-form-group">
         <label class="govuk-label" for="location-of-birth">
-            Rhowch y man geni (dewisol)
+            Rhowch y man geni <span><strong>yn Saesneg</strong></span> (dewisol)
         </label>
         <div id="passport-issued-hint" class="govuk-hint">
-            Er enghraifft, Ysbyty Brenhinol Victoria, Newcastle
+            Er enghraifft, University Hospital of Wales, Cardiff
         </div>
         <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
     </div>
-
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="location-of-birth">
+            Rhowch y man geni <span><strong>yn Gymraeg</strong></span> (dewisol)
+        </label>
+        <div id="passport-issued-hint" class="govuk-hint">
+            Er enghraifft, Ysbyty Athrofaol Cymru, Caerdydd
+        </div>
+        <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
+    </div>
+    </fieldset>
     <button class="govuk-button" type="submit">
         Achub a pharhau
-    </button>
-
-</form>
-
-<!-- Default En language -->
-{% else %}
-
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-<form action="location-born" method="post">
-
-
-    <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-fieldset__heading">
-            Where was the deceased person born?
-        </h1>
-        </legend>
-    </fieldset>
-    <div class="govuk-form-group">
-        <label class="govuk-label" for="location-of-birth">
-        Enter place of birth (optional)
-        </label>
-        <div id="passport-issued-hint" class="govuk-hint">
-            For example, Royal Victoria Infirmary, Newcastle
-        </div>
-        <input class="govuk-input" id="location-of-birth" name="location-of-birth" type="text">
-    </div>
-
-    <button class="govuk-button" type="submit">
-        Save and continue
     </button>
 
 </form>

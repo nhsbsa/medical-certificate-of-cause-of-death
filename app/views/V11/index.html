@@ -32,25 +32,44 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner officer you can use this service to:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>review an MCCD</li>
-            <li>share an MCCD with the registrar</li>
+            <li>download a completed MCCD to send to the registrar</li>
         </ul>
         
+        <p>
+            The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD. 
+        </p>
+
+        {% if data['bilingual'] == "true" %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+            The bilingual Welsh and English MCCD service 
+        </h2>
+        <p class="govuk-body">
+            As you complete the bilingual version of the MCCD service you must give your answers in both English and Welsh when requested.    
+        </p>
+        <p class="govuk-body"> 
+            An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only. The registrar will generate a Welsh death certificate automatically from the English content of the MCCD. Your local register office will not use the Welsh content of the MCCD. 
+        </p>
+        {% else %}
+        <p class="govuk-body">
+            This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.  
+        </p>
+        {% endif %}
         <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you start</h2>
         <p class="govuk-body">You’ll need a Care Identity profile created for you by your NHS organisation.</p>
-        <p class="govuk-body">You will be able able to sign in using an authenticator such as your smartcard.</p>
+        <p class="govuk-body">You can sign in using an authenticator such as your smartcard.</p>
         
         <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
-        <p class="govuk-body">You’ll need to register an account with the MCCD service.</p>
+
         <p class="govuk-body">You'll need personal details of the deceased person, and medical information relating to the cause of death.</p>
 
 
         <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
             <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
-              Sign in
+                Sign in
             </a>
-            <a href="#" class="govuk-button govuk-button--secondary">
-              Register an account
-            </a>
+            <!-- <a href="#" class="govuk-button govuk-button--secondary">
+                Register an account
+            </a> -->
         </div>
 
     </div>
@@ -62,87 +81,69 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Gwasanaeth tystysgrif feddygol o achos marwolaeth (MCCD).</h1>
     
-            <p class="govuk-body-l govuk-!-margin-bottom-6">Gallwch ddefnyddio'r gwasanaeth hwn os ydych yn ymarferydd sy'n mynychu neu'n archwiliwr meddygol.</p>
+            <p class="govuk-body-l govuk-!-margin-bottom-6">Gallwch ddefnyddio'r gwasanaeth hwn os ydych yn ymarferydd a fu’n gweini archwilydd meddygol neu'n swyddog archwilio meddygol.</p>
             
-            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn ymarferydd sy’n mynychu gallwch ddefnyddio’r gwasanaeth hwn i:</p>
+            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn marferydd a fu’n gweini gallwch ddefnyddio’r gwasanaeth hwn i:</p>
             <ul class="govuk-list govuk-list--bullet">
-                <li>creu MCCD</li>
-                <li>golygu MCCD ar ôl i archwiliwr meddygol graffu arno</li>
+                <li>greu MCCD</li>
+                <li>golygu MCCD ar ôl i archwilydd meddygol graffu arno</li>
             </ul>
 
-            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn archwiliwr meddygol gallwch ddefnyddio'r gwasanaeth hwn i:</p>
+            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn archwilydd meddygol gallwch ddefnyddio'r gwasanaeth hwn i:</p>
             <ul class="govuk-list govuk-list--bullet">
                 <li>adolygu MCCD</li>
                 <li>derbyn neu wrthod MCCD</li>
             </ul>
+
+            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn swyddog archwilio meddygol gallwch ddefnyddio'r gwasanaeth hwn i:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>adolygu MCCD</li>
+                <li>lawrlwytho MCCD wedi'i chwblhau i'w hanfon at y cofrestrydd </li>
+            </ul>
             
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi gofrestru cyfrif</h2>
-            <p class="govuk-body">Bydd angen eich cyfeiriad gwaith, rhif CMC a chymwysterau arnoch.</p>
-            <p class="govuk-body">Mae'n cymryd tua 10 munud i gofrestru cyfrif gyda gwasanaeth MCCD.</p>
+            <p class="govuk-body">
+                Bydd y swyddfa gofrestru leol yn defnyddio'r MCCD wedi'i chwblhau i gofrestru marwolaeth person sydd wedi marw. Ni fydd teulu person sydd wedi marw yn gweld yr MCCD. 
+            </p>
             
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi greu neu adolygu MCCD</h2>
-            <p class="govuk-body">Bydd angen i chi gofrestru cyfrif gyda gwasanaeth MCCD.</p>
-            <p class="govuk-body">Bydd angen i chi gael manylion personol y person sydd wedi marw, a gwybodaeth feddygol yn ymwneud ag achos y farwolaeth.</p>
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+                Y gwasanaeth MCCD dwyieithog Cymraeg a Saesneg 
+            </h2>
+            <p class="govuk-body">
+                Wrth i chi gwblhau fersiwn dwyieithog y o’r gwasanaeth MCCD rhaid i chi roi eich atebion yn Gymraeg ac yn Saesneg pan ofynnir amdanynt. Gallwch newid rhwng ieithoedd unrhyw bryd yn ystod y daith.     
+            </p>
+            <p class="govuk-body"> 
+                Gall hysbysydd ofyn am dystysgrif marwolaeth Gymraeg gan y cofrestrydd hyd yn oed os yw ymarferydd a fu’n gweini cymwys yn cwblhau’r MCCD yn Saesneg yn unig. Bydd y cofrestrydd yn cynhyrchu tystysgrif marwolaeth Gymraeg yn awtomatig o gynnwys Saesneg yr MCCD. Ni fydd eich swyddfa gofrestru leol yn defnyddio cynnwys Cymraeg yr MCCD.  
+            </p>
+
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+                Cyn i chi ddechrau 
+            </h2>
+            <p class="govuk-body">
+                Byddwch angen y proffil Hunaniaeth Gofal a grëwyd ar eich cyfer gan eich sefydliad GIG.
+            </p>
+            <p class="govuk-body">
+                Gallwch fewngofnodi gan ddefnyddio dilysydd fel eich cerdyn clyfar. 
+            </p>
+            
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+                Cyn i chi greu neu adolygu MCCD
+            </h2>
+            <p class="govuk-body">
+                Byddwch angen cael manylion personol y person sydd wedi marw, a gwybodaeth feddygol yn ymwneud ag achos y farwolaeth. 
+            </p>
     
     
             <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
                 <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
                   Mewngofnodi
                 </a>
-                <a href="#" class="govuk-button govuk-button--secondary">
+                <!-- <a href="#" class="govuk-button govuk-button--secondary">
                   Cofrestru cyfrif
-                </a>
+                </a> -->
             </div>
     
         </div>
         
-        
-        <!-- Default En language -->
-        {% else %}
-
-        <div class="govuk-grid-column-two-thirds">
-
-            <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Medical certificate of cause of death (MCCD) service</h1>
-    
-            <p class="govuk-body-l govuk-!-margin-bottom-6">You can use this service if you are an attending practitioner, a medical examiner or a medical examiner officer.</p>
-    
-            <p class="govuk-body govuk-!-margin-bottom-1">If you are an attending practitioner you can use this service to:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>create an MCCD</li>
-                <li>edit an MCCD after scrutiny by a medical examiner</li>
-            </ul>
-    
-            <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner you can use this service to:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>review an MCCD</li>
-                <li>accept or reject an MCCD</li>
-            </ul>
-    
-            <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner officer you can use this service to:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>review an MCCD</li>
-                <li>share an MCCD with the registrar</li>
-            </ul>
-            
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you register an account</h2>
-            <p class="govuk-body">You'll need your work address, GMC number and qualifications.</p>
-            <p class="govuk-body">It takes about 10 minutes to register an account with the MCCD service.</p>
-            
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
-            <p class="govuk-body">You’ll need to register an account with the MCCD service.</p>
-            <p class="govuk-body">You'll need personal details of the deceased person, and medical information relating to the cause of death.</p>
-    
-    
-            <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
-                <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
-                  Sign in
-                </a>
-                <a href="#" class="govuk-button govuk-button--secondary">
-                  Register an account
-                </a>
-            </div>
-    
-        </div>
 
         {% endif %}
 

@@ -55,6 +55,7 @@
                   </span>
                   </p>
               </div>
+            {% if data['bilingual'] == "true" %}
               {% if data['lang'] == "en" %}
               <nav class="dwp-language-toggle" aria-label="Language toggle">
                 <ul class="dwp-language-toggle__list">
@@ -92,6 +93,7 @@
                   </ul>
                   </nav> 
                 {% endif %}
+              {% endif %}
           </div>
       </div>
     </div>

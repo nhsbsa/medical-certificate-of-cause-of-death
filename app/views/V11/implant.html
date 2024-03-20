@@ -90,11 +90,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                             id="conditional-implant">
                             <div class="govuk-form-group">
+                                <div id="implant-details-hint" class="govuk-hint">
+                                    Enter details in English and Welsh, or in English only.  
+                                  </div>
                                 <label class="govuk-label" for="implant-details">
-                                    Enter the details and location of any implants
+                                    Enter the details and location of any implants <span><strong>in English</strong></span>
                                 </label>
                                 <textarea class="govuk-textarea" id="implant-details" name="implant-details"
                                     rows="3"></textarea>
+                                    <label class="govuk-label" for="implant-details">
+                                        Enter the details and location of any implants <span><strong>in Welsh</strong></span> (optional)
+                                    </label>
+                                    <textarea class="govuk-textarea" id="implant-details" name="implant-details"
+                                        rows="3"></textarea>
                             </div>
                         </div>
                         <div class="govuk-radios__item">
@@ -130,7 +138,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            A oedd gan y person ymadawedig unrhyw ddyfeisiadau meddygol y gellir eu mewnblannu wedi'u gosod yn ystod ei oes?
+                            A oedd gan y person ymadawedig unrhyw ddyfeisiadau meddygol wedi eu mewnblannu wedi'u gosod yn ystod eu hoes? 
                         </h1>
 
                     </legend>
@@ -198,11 +206,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                             id="conditional-implant">
                             <div class="govuk-form-group">
+                                <div id="implant-details-hint" class="govuk-hint">
+                                    Rhowch fanylion yn Saesneg a Gymraeg, neu yn Saesneg yn unig. 
+                                  </div>
                                 <label class="govuk-label" for="implant-details">
-                                    Rhowch fanylion a lleoliad unrhyw fewnblaniadau
+                                    Rhowch fanylion a lleoliad unrhyw fewnblaniadau <span><strong>yn Saesneg</strong></span>
                                 </label>
                                 <textarea class="govuk-textarea" id="implant-details" name="implant-details"
                                     rows="3"></textarea>
+                                    <label class="govuk-label" for="implant-details">
+                                        Rhowch fanylion a lleoliad unrhyw fewnblaniadau <span><strong>yn Gymraeg</strong></span> (devisol)
+                                    </label>
+                                    <textarea class="govuk-textarea" id="implant-details" name="implant-details"
+                                        rows="3"></textarea>
                             </div>
                         </div>
                         <div class="govuk-radios__item">
@@ -219,114 +235,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <button class="govuk-button" type="submit">
                 Achub a pharhau
-            </button>
-        </form>
-
-    </div>
-
-    <!-- Default En language -->
-    {% else %}
-
-    <div class="govuk-grid-column-two-thirds">
-
-        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-        <form action="implant" method="post">
-
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
-                            Did the deceased person have any implantable medical devices fitted during their lifetime?
-                        </h1>
-
-                    </legend>
-                    <details class="govuk-details">
-                        <summary class="govuk-details__summary">
-                            <span class="govuk-details__summary-text">
-                                Examples of implantable medical devices
-                            </span>
-                        </summary>
-                        <div class="govuk-details__text">
-                            <p class="govuk-body">
-                                Implantable medical devices include:
-                            </p>
-                            <ul class="govuk-list govuk-list--bullet">
-                                <li>
-                                    pacemakers
-                                </li>
-                                <li>
-                                    implantable cardioverter defibrillators (ICDs)
-                                </li>
-                                <li>
-                                    cardiac resynchronization therapy devices (CRTDs)
-                                </li>
-                                <li>
-                                    implantable loop recorders
-                                </li>
-                                <li>
-                                    ventricular assist devices (VADs): left ventricular assist devices (LVADs), right
-                                    ventricular assist devices (RVADs), or biventricular assist devices BiVADs)
-                                </li>
-                                <li>
-                                    implantable drug pumps including intrathecal pumps
-                                </li>
-                                <li>
-                                    neurostimulators (including for pain and functional electrical stimulation)
-                                </li>
-                                <li>
-                                    bone growth stimulators
-                                </li>
-                                <li>
-                                    hydrocephalus programmable shunts
-                                </li>
-                                <li>
-                                    fixion nails
-                                </li>
-                                <li>
-                                    any other battery powered or pressurised implant
-                                </li>
-                                <li>
-                                    radioactive implants
-                                </li>
-                                <li>
-                                    radiopharmaceutical treatment (via injection)
-                                </li>
-                            </ul>
-                        </div>
-                    </details>
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="implant-yes" name="implant" type="radio" value="Yes"
-                                data-aria-controls="conditional-implant">
-                            <label class="govuk-label govuk-radios__label" for="implant-yes">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                            id="conditional-implant">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label" for="implant-details">
-                                    Enter the details and location of any implants
-                                </label>
-                                <textarea class="govuk-textarea" id="implant-details" name="implant-details"
-                                    rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="implant-no" name="implant" type="radio" value="No">
-                            <label class="govuk-label govuk-radios__label" for="implant-no">
-                                No
-                            </label>
-                        </div>
-
-                    </div>
-                </fieldset>
-            </div>
-
-
-            <button class="govuk-button" type="submit">
-                Save and continue
             </button>
         </form>
 
