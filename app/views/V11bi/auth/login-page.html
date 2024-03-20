@@ -1,0 +1,97 @@
+{% extends "layouts/prototype-main_cy-en.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <!-- English language selected-->
+    {% if data['lang'] == "en" %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="login-page" method="post">
+            <h1 class="govuk-heading-l">Sign in</h1>
+
+            <!-- Warning text -->
+            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    Once you have signed in, if you do not do anything for 60 minutes any information you have not saved
+                    will be deleted.
+                </span>
+            </div>
+
+            <a href="care-id-select" class="nhslogin-button">Sign in with my Care Identity</a>
+
+            <div class="govuk-hint" id="SignInHint">
+                If your NHS organisation has created a Care Identity profile for you, you will be able to sign in using
+                an authenticator such as your smartcard.</p><br>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!--Welsh language selected-->
+    {% elseif data['lang'] == "cy" %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="login-page" method="post">
+            <h1 class="govuk-heading-l">Mewngofnodi</h1>
+
+            <!-- Warning text -->
+            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    Unwaith y byddwch wedi mewngofnodi, os na wnewch unrhyw beth am 60 munud bydd unrhyw wybodaeth nad ydych wedi'i chadw yn cael ei dileu.
+                </span>
+            </div>
+
+            <a href="care-id-select" class="nhslogin-button">Mewngofnodwch gyda fy Care Identity</a>
+
+            <div class="govuk-hint" id="SignInHint">
+                Os yw eich sefydliad GIG wedi creu proffil Care Identity ar eich cyfer, byddwch yn gallu mewngofnodi gan ddefnyddio dilysydd fel eich cerdyn call.</p><br>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Default En language -->
+    {% else %}
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="login-page" method="post">
+            <h1 class="govuk-heading-l">Sign in</h1>
+
+            <!-- Warning text -->
+            <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <span class="govuk-warning-text__text">
+                    Once you have signed in, if you do not do anything for 60 minutes any information you have not saved
+                    will be deleted.
+                </span>
+            </div>
+
+            <a href="care-id-select" class="nhslogin-button">Sign in with my Care Identity</a>
+
+            <div class="govuk-hint" id="SignInHint">
+                If your NHS organisation has created a Care Identity profile for you, you will be able to sign in using
+                an authenticator such as your smartcard.</p><br>
+            </div>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+
+    
+
+</div>
+
+{% endblock %}

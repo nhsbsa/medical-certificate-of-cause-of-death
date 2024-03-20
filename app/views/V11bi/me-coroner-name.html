@@ -1,0 +1,71 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="me-coroner-name" method="post" novalidate>
+    
+      {% call govukFieldset({
+          legend: {
+            text: data.translations.referringSeniorCoronerPageTitle[data.lang],
+            classes: 'govuk-fieldset__legend--l',
+            isPageHeading: true
+          }
+        }) %}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalFirstName[data.lang]
+            },
+            id: 'coroner-first-name',
+            name: 'coroner-first-name',
+            value: data['coroner-first-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalMiddleName[data.lang] + ' ' + data.translations.globalOptional[data.lang]
+            },
+            id: 'coroner-middle-name',
+            name: 'coroner-middle-name',
+            value: data['coroner-middle-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalLastName[data.lang]
+            },
+            id: 'coroner-last-name',
+            name: 'coroner-last-name',
+            value: data['coroner-last-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+        {% endcall %}
+
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang]
+        }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

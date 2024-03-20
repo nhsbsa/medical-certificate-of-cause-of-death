@@ -1,38 +1,75 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
-{% endblock %}
-
 {% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block content %}
 
-<!-- INTRO ROW -->
-<div class="govuk-grid-row">
+ <!-- AP DASHBOARD -->
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
-        <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download approved MCCDs to send to the registrar.</p>
-    </div>
-</div>
+
+{% if data['role-type'] == 'ap' %}
+
+  <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Your dashboard</h1>
+
+  <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>
+  <p>This dashboard will list MCCDs that:</p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>you have submitted to a medical examiner for approval</li>
+    <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
+    <li>have been rejected by a medical examiner and need amending</li>
+  </ul>
+
+{% elseif data['role-type'] == 'me' %}
+
+  <!-- ME DASHBOARD -->
+  <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Your dashboard</h1>
+
+{% else %}
+
+  <!-- MEO DASHBOARD -->
+  <h1 class="govuk-heading-l govuk-!-margin-bottom-2 govuk-!-margin-top-8">Office dashboard</h1>
+  <p>This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download approved MCCDs to send to the registrar.</p>
+
+{% endif %}
+
+  </div>
+ </div>
+
+{{ govukInsetText({
+  text: 'You will be logged out of the system after 15 minues of inactivity.'
+}) }}
+
+
+
+{% if data.useSearch == 'true' or data.useFilters == 'true' %}
+
+<style>
+
+  .input-button-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  .input-button-group > .govuk-button {
+    margin: 0 0 0 10px;
+  }
+
+</style>
 
 <!-- SEARCH ROW -->
 <div class="govuk-grid-row">
+
+
+{% if data.useSearch == 'true' %}
+
+  <!-- SEARCH FORM -->
   <div class="govuk-grid-column-two-thirds">
-
-    <style>
-      .input-button-group {
-        display: flex;
-        justify-content: space-between;
-        margin: 0;
-      }
-      .input-button-group > .govuk-button {
-        margin: 0 0 0 10px;
-      }
-    </style>
     
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
-
+    <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
+      
       <div class="govuk-form-group">
 
         <label class="govuk-table__caption--m" for="searchTerm">
@@ -57,9 +94,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </form>
 
   </div>
+  {% endif %}
 
+
+  {% if data.useFilters == 'true' %}
   <div class="govuk-grid-column-one-third">
-    <form class="govuk-!-margin-top-5" action="nunjucks-dashboard?currentPage=0" method="post" novalidate>
+    <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
         
@@ -90,9 +130,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   
     </form>
   </div>
+  {% endif %}
 
 
 </div>
+{% endif %}
 
 
 <!-- TABLE ROW -->
@@ -106,12 +148,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           caption: '' | getDashboardCaption,
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
-          head: [
-            { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' },
-            { text: 'Date of death' },
-            { text: 'Action' },
-            { text: 'Status' }
-          ],
+          head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
           rows: patientData.data | getDashboardTableRows
         }) }}
 

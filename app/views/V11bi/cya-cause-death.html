@@ -1,0 +1,276 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block content %}
+
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
+
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible" />' %}
+
+{% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
+{% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
+{% set timeBetweenOnsetAndDeathLabel = '<strong>'+data.translations.codTimeBetweenOnsetDeath[data.lang]+'</strong><br />' %}
+
+<style>
+  .govuk-summary-list__value .govuk-section-break { margin: 10px 0; }
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+      <span class="govuk-caption-l govuk-caption--bottom">{{ data.translations.CYAcodTitleCaption[data.lang] }}</span>
+      {{ data.translations.CYAcodPageTitle[data.lang] }}
+    </h1>
+
+    <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.CYAcodHint[data.lang] }}</div>
+
+    <form action="check-your-answers-cod" method="post" novalidate>
+      
+      <dl class="govuk-summary-list">
+
+          {% if data['over-under-28'] === 'dpd66Or65RadioYes' %}
+
+          <!--
+
+
+ _____  ____  _____  ________    _       ____  _____  _________  
+|_   _||_   \|_   _||_   __  |  / \     |_   \|_   _||  _   _  | 
+  | |    |   \ | |    | |_ \_| / _ \      |   \ | |  |_/ | | \_| 
+  | |    | |\ \| |    |  _|   / ___ \     | |\ \| |      | |     
+ _| |_  _| |_\   |_  _| |_  _/ /   \ \_  _| |_\   |_    _| |_    
+|_____||_____|\____||_____||____| |____||_____|\____|  |_____|   
+                                                                 
+
+
+          -->
+        
+
+          <!-- INFANT, MAIN CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28aMainDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['main-cause'] }}
+              {% if data.lang == 'cy' and data['main-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+          <!-- INFANT, SECONDARY CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28bOtherDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['secondary-cause'] }}
+              {% if data.lang == 'cy' and data['secondary-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- INFANT, 1(c) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28cMainMaternalDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-c'] }}
+              {% if data.lang == 'cy' and data['other-conditions-c-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- INFANT, 1(d) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28dOtherMaternalDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-d'] }}
+              {% if data.lang == 'cy' and data['other-conditions-d-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+          <!-- INFANT, 1(e) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28eOtherRelevantFactors[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-e'] }}
+              {% if data.lang == 'cy' and data['other-conditions-e-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-e-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+     
+
+
+
+
+          
+
+          {% else %}
+
+            <!-- 
+
+
+      _       ______   _____  _____  _____   _________  
+     / \     |_   _ `.|_   _||_   _||_   _| |  _   _  | 
+    / _ \      | | `. \ | |    | |    | |   |_/ | | \_| 
+   / ___ \     | |  | | | '    ' |    | |   _   | |     
+ _/ /   \ \_  _| |_.' /  \ \__/ /    _| |__/ | _| |_    
+|____| |____||______.'    `.__.'    |________||_____|   
+                                                        
+
+
+            -->
+            
+            <!-- ADULT, MAIN CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281aMainDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['main-cause'] }}
+              {% if data.lang == 'cy' and data['main-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration1'] and data['time-unit-duration-1'] %}
+                {{ data['duration1'] }} {{ data.translations[data['time-unit-duration-1']][data.lang] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+          <!-- ADULT, SECONDARY CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281bDiseaseLeadingTo1a[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['secondary-cause'] }}
+              {% if data.lang == 'cy' and data['secondary-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration2'] and data['time-unit-duration-2'] %}
+                {{ data['duration2'] }} {{ data.translations[data['time-unit-duration-2']][data.lang] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- ADULT, 1(c) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281cDiseaseLeadingTo1b[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-c'] }}
+              {% if data.lang == 'cy' and data['other-conditions-c-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration3'] and data['time-unit-duration-3'] %}
+                {{ data['duration3'] }} {{ data.translations[data['time-unit-duration-3']][data.lang] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- ADULT, 1(d) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281dDiseaseLeadingTo1c[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-d'] }}
+              {% if data.lang == 'cy' and data['other-conditions-d-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration4'] and data['time-unit-duration-4'] %}
+                {{ data['duration4'] }} {{ data.translations[data['time-unit-duration-4']][data.lang] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+          <!-- ADULT, 2 CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO282OtherConditions[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-significant-conditions'] }}
+              {% if data.lang == 'cy' and data['other-significant-conditions-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-significant-conditions-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration5'] and data['time-unit-duration-5'] %}
+                {{ data['duration5'] }} {{ data.translations[data['time-unit-duration-5']][data.lang] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+
+          {% endif %}
+
+
+
+      </dl>
+
+      {{ govukButton({
+            text: data.translations.globalSaveContinue[data.lang]
+          }) }}
+
+
+    </form>
+
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% set name = [ data['deceased-first-name'], data['deceased-last-name'] ] %}
+
+    <h1 class="govuk-heading-l">
+      <span class="govuk-caption-l govuk-caption--bottom">{{ name | join(' ') | safe }}</span>
+      {{ data.translations.mccdTasklistPageTitle[data.lang] }}
+    </h1>
+
+    <!-- SET VARIABLES -->
+    {% set deceasedLink = '66-or-65' %}
+    {% set actionsAfterDeathLink = 'death-circumstances' %}
+    {% set causeOfDeathLink = 'cause-of-death' %}
+
+    {% set notStarted = '<span class="govuk-tag govuk-tag--grey">'+data.translations.sectionStatusNotStarted[data.lang]+'</span>' %}
+    {% set completed = '<span class="govuk-tag">'+data.translations.sectionStatusCompleted[data.lang]+'</span>' %}
+
+    {% set deceasedTag = notStarted %}
+    {% set actionsAfterDeathTag = notStarted %}
+    {% set causeOfDeathTag = notStarted %}
+
+    {% if data['deceasedComplete'] %}
+      {% set deceasedLink = 'cya-deceased' %}
+      {% set deceasedTag = completed %}
+    {% endif %}
+
+    {% if data['afterDeathComplete'] %}
+      {% set actionsAfterDeathLink = 'cya-death-circumstances' %}
+      {% set actionsAfterDeathTag = completed %}
+    {% endif %}
+
+    {% if data['causeDeathComplete'] %}
+      {% set causeOfDeathLink = 'cya-cause-death' %}
+      {% set causeOfDeathTag = completed %}
+    {% endif %}
+
+
+    <!-- DECEASED PERSON -->
+    {{ govukTable({
+      caption: data.translations.mccdTasklistH2SectionTitleAboutDeceased[data.lang],
+      captionClasses: 'govuk-table__caption--m',
+      rows: [
+        [
+          { html: '<a class="govuk-link" href="'+deceasedLink+'">'+data.translations.linkToSectionAboutDeceased[data.lang]+'</a>' },
+          { html: deceasedTag, classes: 'govuk-!-text-align-right' }
+        ]
+      ]
+    }) }}
+
+    <!-- ABOUT THE DEATH -->
+    {{ govukTable({
+      caption: data.translations.mccdTasklistH2SectionTitleAboutDeath[data.lang],
+      captionClasses: 'govuk-table__caption--m',
+      rows: [
+        [
+          { html: '<a class="govuk-link" href="'+actionsAfterDeathLink+'">'+data.translations.linkToSectionActionsAfterDeath[data.lang]+'</a>' },
+          { html: actionsAfterDeathTag, classes: 'govuk-!-text-align-right' }
+        ],
+        [
+          { html: '<a class="govuk-link" href="'+causeOfDeathLink+'">'+data.translations.linkToSectionCauseDeath[data.lang]+'</a>' },
+          { html: causeOfDeathTag, classes: 'govuk-!-text-align-right' }
+        ]
+      ]
+    }) }}
+
+      <!-- BUTTON (DISABLED UNLESS EVERYTHING IS APPROVED) -->
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang],
+          href: 'declaration',
+          disabled: false if ( data['deceasedComplete'] and data['afterDeathComplete'] and data['causeDeathComplete'] ) else true
+        }) }}
+
+    
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

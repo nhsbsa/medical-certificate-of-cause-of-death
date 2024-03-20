@@ -1,0 +1,68 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="nhs-number" method="post" novalidate>
+
+      {% set NHSNumberHTML %}
+        {{ govukInput({
+          id: 'nhs-number-input',
+          name: 'nhs-number-input',
+          value: data['nhs-number-input'],
+          classes: 'govuk-!-width-one-third',
+          label: {
+            text: data.translations.dpdNHSNumberEnterNumber[data.lang]
+          }
+        }) }}
+      {% endset -%}
+      
+      {{ govukRadios({
+        name: 'nhs-number',
+        value: data['nhs-number'],
+        fieldset: {
+          legend: {
+            text: data.translations.dpdNHSNumberPageTitle[data.lang],
+            isPageHeading: true,
+            classes: 'govuk-fieldset__legend--l'
+          }
+        },
+        items: [
+          {
+            value: 'globalRadioYes',
+            text: data.translations.globalRadioYes[data.lang],
+            conditional: {
+              html: NHSNumberHTML
+            }
+          },
+          {
+            value: 'globalRadioNo',
+            text: data.translations.globalRadioNo[data.lang]
+          }          
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

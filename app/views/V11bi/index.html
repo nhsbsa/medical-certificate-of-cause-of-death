@@ -1,0 +1,41 @@
+{% extends "layouts/prototype-main_cy-en.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">{{ data.translations.globalServiceName[data.lang] }}</h1>
+      
+      {{ data.translations.startPageDescription[data.lang] | safe }}
+
+      <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
+
+          {{ govukButton({
+            text: data.translations.globalSignIn[data.lang],
+            href: 'auth/login-page?account-creation-journey=no'
+          }) }}
+
+          {{ govukButton({
+              text: data.translations.globalRegisterAccount[data.lang],
+              href: '#',
+              classes: 'govuk-button--secondary'
+            }) }}
+
+      </div>
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+
+{% endblock %}

@@ -49,9 +49,12 @@ function _getTranslations(){
 
 module.exports = {
 
-  debug: 'true',
+  debug: 'false',
+  useSearch: 'false',
   rowsPerPage: 10,
   currentPage: 0,
+  sortBy: 'date',
+  sortDirection: 'ascending',
   lang: 'en',
   translations: _getTranslations()
 

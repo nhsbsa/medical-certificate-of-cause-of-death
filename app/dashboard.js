@@ -1,3 +1,40 @@
+
+//
+// GET STATUSES FUNCTION
+// Now all calls for statuses come via here - should make updating stuff easier...
+//
+function _getStatuses( num, returnTag ){
+
+    // num: a number to return, else return everything
+    // returnTag: boolean, whether to return the status(es) or tag(s)
+
+    num = parseInt(num);
+
+    const statuses = [
+        'For officer review',
+        'To be amended',
+        'Amended',
+        'For sign off by medical examiner',
+        'Review complete - send to registrar',
+        'Sent to registrar'
+    ];
+
+    const tags = [ 
+        '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
+        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
+        '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
+        '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
+        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
+        '<span class="govuk-tag">Sent to registrar</span>'
+    ];
+
+    const arr = ( returnTag ) ? tags : statuses;
+
+    return ( Number.isNaN(num) ) ? arr : arr[num];
+
+}
+
+
 //
 // FILTER BY SEARCH TERM FUNCTION
 //
@@ -52,15 +89,18 @@ function _filterBySearchTerm( content, searchTerm ) {
 //
 function _filterByStatus( rows, statusFilter ) {
 
-    let arr = [];
+    statusFilter = parseInt( statusFilter );
+
+    const arr = [];
+
     rows.forEach(function( row ){
 
-        if( statusFilter ){
-            if( row[row.length-1].html.indexOf(statusFilter) > -1 ){
+        if( Number.isNaN(statusFilter) ){
+            arr.push( row );
+        } else {
+            if( parseInt(row[row.length-1].text) === statusFilter ){
                 arr.push( row );
             }
-        } else {
-            arr.push( row );
         }
 
         
@@ -73,14 +113,29 @@ function _filterByStatus( rows, statusFilter ) {
 //
 // FILTER BY SORT BY FUNCTION
 //
-function _filterBySortBy( rows ){
+function _filterBySortBy( rows, sortType, sortDirection ){
+
+    let num = 1; // date
+    switch( sortType ){
+        case 'name':
+            num = 0;
+            break;
+        case 'status':
+            num = 3;
+            break;
+    }
 
     // Only date ATM...
     let arr = Array.from(rows);
     arr.sort(function( a, b ){
 
-        let dateA = a[2].text;
-        let dateB = b[2].text;
+        let dateA = a[num].text;
+        let dateB = b[num].text;
+
+        if( sortType === 'status' ){
+            dateA = parseInt(dateA);
+            dateB = parseInt(dateB);
+        }
         
         let check = 0;
         
@@ -95,69 +150,99 @@ function _filterBySortBy( rows ){
 
     });
 
+    if( sortDirection === 'descending' ){
+        arr = arr.reverse();
+    }
+
+    
+
     return arr;
 
 }
 
-
 //
-// GET TAG FOR STATUS FUNCTION
+// FILTER BY ROLE TYPE FUNCTION 
 //
-function _getTagForStatus( status ){
+function _filterByRoleType( rows, roleType ){
 
-    const statuses = [ 
-        '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
-        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
-        '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
-        '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
-        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
-        '<span class="govuk-tag">Sent to registrar</span>'
-    ];
+    let filterByRoleType = true; // You can toggle to switch this on/off
 
-    let html = '';
-    const loop = statuses.length;
-    for( let i = 0; i < loop; i++ ){
-        if( statuses[i].indexOf(status) > -1 ){
-            html = statuses[i];
-            break;
-        }
+    let arr = rows;
+
+    if( filterByRoleType ){
+
+        if(roleType === 'ap' | roleType === 'me' ){
+
+            arr = [];
+
+            rows.forEach(function( row ){
+
+                if( roleType === 'ap' ){
+                    // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
+                    if( row.belongsToAP ){
+                        arr.push(row);
+                    }
+
+                } else {
+                    // ME - for the demo, only show ones that require
+                    if( row.status === 3 ){
+                        arr.push(row);
+                    }
+                    
+                }
+
+                
+            });
+
+        } 
     }
+    
 
-    return html;
+    return arr;
 
-};
+}
 
 //
 // GET ACTION FOR STATUS FUNCTION
 //
-function _getActionForStatus( status ){
+function _getActionForStatus( status, id ){
+
+    status = parseInt( status );
+
+    let link = '../tests/mccd-summary?id='+id;
 
     let html = '';
 
     switch ( status ){
     
-        case 'For officer review':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20officer%20review">Review certificate</a>';
+        // For officer review
+        case 0:
+            html = '<a class="govuk-link" href="'+link+'">Review certificate</a>';
             break;
 
-        case 'To be amended':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=To%20be%20amended">View certificate</a>';
+        // To be amended
+        case 1:
+            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
+            break;
+        
+        // Amended
+        case 2:
+            html = '<a class="govuk-link" href="'+link+'">Review certificate</a>';
             break;
 
-        case 'Review complete - send to registrar':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Review%20complete%20-%20send%20to%20registrar">Download certificate</a>';
+        // For sign off by medical examiner
+        case 3:
+            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
             break;
 
-        case 'Amended':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Amended">Review certificate</a>';
+        // Review complete - send to registrar
+        case 4:
+            html = '<a class="govuk-link" href="'+link+'">Download certificate</a>';
             break;
 
-        case 'For sign off by medical examiner':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=For%20sign%20off%20by%20medical%20examiner">View certificate</a>';
-            break;
-
-        case 'Sent to registrar':
-            html = '<a class="govuk-link" href="../tests/meo-mccd?statusFilter=Sent%20to%20registrar">View certificate</a>';
+        // Sent to registrar
+        case 5:
+            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
             break;
 
     }
@@ -173,10 +258,10 @@ function _getRow( patient ){
 
     let arr = [];
 
-    arr.push( { html: patient.name + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
+    arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
-    arr.push( { html: _getActionForStatus( patient.status ) } );
-    arr.push( { html: _getTagForStatus( patient.status ) });
+    arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
+    arr.push( { text: patient.status, html: _getStatuses( patient.status, true ) });
 
     return arr;
 
@@ -185,9 +270,9 @@ function _getRow( patient ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, searchTerm, statusFilter, sortBy ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection ){
 
-    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( rows, searchTerm ), statusFilter ), sortBy );
+    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( rows, roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
     
     return filteredRows;
 
@@ -222,5 +307,6 @@ function _getPaginatedResults( rows, rowsPerPage, currentPage ) {
 //
 module.exports = {
     getFilteredResults: _getFilteredResults,
-    getPaginatedResults: _getPaginatedResults
+    getPaginatedResults: _getPaginatedResults,
+    getStatuses: _getStatuses
 }

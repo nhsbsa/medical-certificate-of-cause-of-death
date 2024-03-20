@@ -1,0 +1,53 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="select-hospital-address" role="form" method="post" novalidate>
+    
+      <div class="govuk-form-group">
+        <div class="govuk-radios">
+
+              <label class="govuk-label" for="select-address">
+                <h1 class="govuk-heading-l">{{ data.translations.dpdHospitalPostcodeSelectPageTitle[data.lang] }}</h1>
+              </label>
+                
+                <p>{{ data['hospitalAddresses'] | getPostCodeSearchStatus('hospital') | safe }}</p>
+
+                {% if (data['hospitalAddresses'] | length > 0)  %}
+
+                  {{ data['hospitalAddresses'] | getPostCodeSearchSelect('hospital') | safe }}
+
+                  {{ govukButton({
+                    text: data.translations.globalUseAddress[data.lang]
+                  }) }}
+
+                {% endif %}
+    
+        </div>
+      </div>
+
+    
+
+    <p><a href="location-death-hospital">{{ data.translations.dpdHospitalPostcodeSelectLink[data.lang] }}</a></p>
+
+    </form>
+    
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

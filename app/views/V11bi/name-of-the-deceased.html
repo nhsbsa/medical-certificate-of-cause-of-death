@@ -1,0 +1,71 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form action="name-of-the-deceased" method="post" novalidate>
+
+        {% call govukFieldset({
+          legend: {
+            text: data.translations.dpdFullNamePageTitle[data.lang],
+            classes: 'govuk-fieldset__legend--l',
+            isPageHeading: true
+          }
+        }) %}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalFirstName[data.lang] + ' ' + data.translations.globalOptional[data.lang]
+            },
+            id: 'deceased-first-name',
+            name: 'deceased-first-name',
+            value: data['deceased-first-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalMiddleName[data.lang] + ' ' + data.translations.globalOptional[data.lang]
+            },
+            id: 'deceased-middle-name',
+            name: 'deceased-middle-name',
+            value: data['deceased-middle-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: data.translations.globalLastName[data.lang]
+            },
+            id: 'deceased-last-name',
+            name: 'deceased-last-name',
+            value: data['deceased-last-name'],
+            classes: 'govuk-input--width-20'
+          }) }}
+        
+        {% endcall %}
+
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang]
+        }) }}
+
+      </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

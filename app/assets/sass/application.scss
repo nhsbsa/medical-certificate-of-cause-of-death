@@ -5,6 +5,8 @@
 
 // Custom addition to header following HMRC header
 // https://design.tax.service.gov.uk/examples/sign-out/example/
+
+
 .hmrc-sign-out-nav, .align-right {
     float: right;
 }
@@ -33,6 +35,7 @@
  //       margin-bottom: 0;
  //   }
 // }
+
 .account-signed-in {
   font-family: "GDS Transport", arial, sans-serif;
   font-size: 19px;
@@ -40,10 +43,6 @@
   border-bottom-style: solid;
   border-bottom-color: #b1b4b6;
   margin-bottom: 0;
-}
-
-.account-signed-in__list {
-  margin-top: 1em;
   text-align: right;
 }
 
@@ -51,11 +50,47 @@
   display: inline-block;
   padding-left: 5px;
   padding-right: 5px;
+  border-right: 1px solid #0b0c0c;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
+.account-signed-in__list-item:last-child {
+  padding-right: 0;
+  border-right: none;
+}
 
 .service-account {
     background-color: #f3f2f1;
+}
+
+.account-signed-in.updated-version  {
+  font-size: 16px;
+}
+
+.updated-version .account-signed-in__list {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.updated-version .account-signed-in__list-item {
+  display: block;
+}
+
+.updated-version .account-signed-in__list-item:not(:first-child) {
+  line-height: 16px;
+  padding: 5px 10px 4px 10px;
+}
+
+.updated-version .account-signed-in__list-item:first-child {
+  margin-right: auto;
+  padding: 0;
+  border: none;
+}
+
+.updated-version .account-signed-in__list-item:last-child {
+  padding-right: 0;
 }
 
 // Custom Input + Select in wrapper - used in Age Page 
@@ -96,15 +131,15 @@
 
 .dwp-language-toggle__list-item {
   display: inline-block;
+  padding: 0 5px;
+  border-right: 1px solid #0b0c0c;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.dwp-language-toggle__list-item:first-child:after {
-  content: "";
-  display: inline-block;
-  border-right: 1px solid #0b0c0c;
-  position: relative;
-  top: .1875em;
-  height: 1em;
+.dwp-language-toggle__list-item:last-child {
+  border-right: none;
+  padding-right: 0;
 }
 
 // NHS login button for Care ID
@@ -349,3 +384,74 @@
       margin-bottom: 0;
     }
   }
+
+
+  /* TABLE SORTER STYLES */
+
+[aria-sort] a,
+[aria-sort] a:hover {
+  background-color: transparent;
+  border-width: 0;
+  -webkit-box-shadow: 0 0 0 0;
+  -moz-box-shadow: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+  color: #005ea5;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0 10px 0 0;
+  position: relative;
+  text-align: inherit;
+  font-size: 1em;
+  margin: 0;
+  text-decoration: none;
+}
+
+[aria-sort] a:focus {
+  background-color: $govuk-focus-colour;
+  color: $govuk-focus-text-colour;
+  box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
+  outline: none;
+}
+
+[aria-sort]:first-child a {
+  right: auto;
+}
+
+[aria-sort] a:before {
+  content: " \25bc";
+  position: absolute;
+  right: -1px;
+  top: 9px;
+  font-size: 0.5em;
+}
+
+[aria-sort] a:after {
+  content: " \25b2";
+  position: absolute;
+  right: -1px;
+  top: 1px;
+  font-size: 0.5em;
+}
+
+[aria-sort="ascending"] a:before,
+[aria-sort="descending"] a:before {
+  content: none;
+}
+
+[aria-sort="ascending"] a:after {
+  content: " \25b2";
+  font-size: .8em;
+  position: absolute;
+  right: -5px;
+  top: 2px;
+}
+
+[aria-sort="descending"] a:after {
+  content: " \25bc";
+  font-size: .8em;
+  position: absolute;
+  right: -5px;
+  top: 2px;
+}
