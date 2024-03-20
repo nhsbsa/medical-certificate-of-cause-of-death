@@ -1,6 +1,6 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
-{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block content %}
@@ -26,20 +26,24 @@
 
                     <hr class="govuk-section-break govuk-section-break--m" />
 
+                    <p class="govuk-body-l">You must contact the attending practitioner to inform them that the MCCD needs amending.</p>
+                    
                     <h2 class="govuk-heading-m">What happens next</h2>
-                    <p class="govuk-body">You will need to contact the attending practitioner to inform them of the changes you need.</p>
+                    <p class="govuk-body">When the attending practitioner has amended this MCCD you will receive an email. You must then sign back in to the MCCD service and approve and sign-off this certificate.</p>
                 
                 {% else %}
 
-                    <!-- Certificate can be sent to registrar by MEO... -->
+                    <!-- Certificate can be submitted to registrar by MEO... -->
                     <div class="govuk-panel govuk-panel--confirmation">
                         <h1 class="govuk-panel__title">Certificate signed off</h1>
                     </div>
 
                     <hr class="govuk-section-break govuk-section-break--m" />
 
+                    <p class="govuk-body-l">Medical examiner officers in your organisation can now submit this certificate to the appropriate registrar.</p>
+
                     <h2 class="govuk-heading-m">What happens next</h2>
-                    <p class="govuk-body">Medical examiner officers in your organisation can now send this certificate to the appropriate registrar. There are no further actions for you.</p>
+                    <p class="govuk-body">There are no further actions for you.</p>
 
                 {% endif %}
 
@@ -49,9 +53,9 @@
 
                 {% if data['sent-to-registrar'] %}
 
-                    <!-- Sent to registrar -->
+                    <!-- Submitted to registrar -->
                     <div class="govuk-panel govuk-panel--confirmation">
-                            <h1 class="govuk-panel__title">Certificate sent to registrar</h1>
+                            <h1 class="govuk-panel__title">Certificate submitted to registrar</h1>
                         </div>
 
                         <hr class="govuk-section-break govuk-section-break--m" />
@@ -70,20 +74,24 @@
 
                         <hr class="govuk-section-break govuk-section-break--m" />
 
+                        <p class="govuk-body-l">You must contact the attending practitioner to inform them that the MCCD needs amending.</p>
+
                         <h2 class="govuk-heading-m">What happens next</h2>
-                        <p class="govuk-body">You will need to contact the attending practitioner to inform them of the changes you need. Once they have submitted their amendments, you will get a notification.</p>
+                        <p class="govuk-body">You will receive an email when the attending practitioner has amended this certificate. You must then sign back in to the MCCD service and change the status of this certificate to 'For sign off by a medical examiner'.</p>
                     
                     {% else %}
 
                         <!-- Certificate sent to ME... -->
                         <div class="govuk-panel govuk-panel--confirmation">
-                            <h1 class="govuk-panel__title">Certificate sent to medical examiners for scrutiny</h1>
+                            <h1 class="govuk-panel__title">Certificate sent to medical examiners for sign-off</h1>
                         </div>
 
                         <hr class="govuk-section-break govuk-section-break--m" />
 
+                        <p class="govuk-body-l">Medical examiners in your organisation will now be able to access this certificate from their dashboard. They can review and sign off this certificate as part of the scrutiny process.</p>
+
                         <h2 class="govuk-heading-m">What happens next</h2>
-                        <p class="govuk-body">Medical examiners will now see this certificate on their dashboard and will be able to sign it off as part of their scrutiny process.</p>
+                        <p class="govuk-body">You will receive an email when the medical examiner has signed off this certificate. You must then sign back in to the MCCD service, download the signed-off certificate and send it to the registrar.</p>
 
                     {% endif %}
 
