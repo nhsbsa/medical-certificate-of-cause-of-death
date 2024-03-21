@@ -283,8 +283,12 @@ addFilter( 'getDashboardTableRows', function( content ) {
 
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
+    const meSignOff = this.ctx.data['me-signoff'];
+    const meoReview = this.ctx.data['meo-review'];
+    const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
+
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );

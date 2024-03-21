@@ -21,7 +21,39 @@
         {% import 'tests/data-patients.html' as patientData %}
         {% set patient = patientData.data | getPatientDataByID( data.id ) %}
 
+        {% set patientStatus = patient.status %}
+
+        <!-- DUMMY ME -->
+        {% if patient.id == '0002' %}
+            {% if data['me-signoff'] == 'amend' %}
+                {% set patientStatus = '1' %}
+            {% elseif data['me-signoff'] == 'registrar' %}
+                {% set patientStatus = '4' %}
+            {% endif %}
+        {% endif %}
+
+        <!-- DUMMY MEO -->
+        {% if patient.id == '0028' %}
+            {% if data['meo-review'] == 'amend' %}
+                {% set patientStatus = '1' %}
+            {% elseif data['meo-review'] == 'medical-examiner' %}
+                {% set patientStatus = '3' %}
+            {% endif %}
+        {% endif %}
+
+        <!-- DUMMY MEO -->
+        {% if patient.id == '0010' %}
+            {% if data['sent-to-registrar']  %}
+                {% set patientStatus = '5' %}
+            {% endif %}
+        {% endif %}
+
+
+
         {% if patient %}
+
+
+
 
         <!--
 
@@ -39,7 +71,7 @@
 
         <main class="govuk-main-wrapper">
             
-            {{ patient.status | getStatusTag | safe }}
+            {{ patientStatus | getStatusTag | safe }}
             <h1 class="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-bottom-2">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
 
@@ -136,7 +168,7 @@
 
                 <!-- ME -->
             
-                {% if patient.status == '3' %}
+                {% if patientStatus == '3' %}
 
                     <!-- IF STATUS = For sign off by Medical Examiner -->
                     <form action="mccd-summary" method="post" novalidate>
@@ -186,10 +218,9 @@
                 <!-- MEO -->
 
                 <!-- IF STATUS = For officer review OR Amended-->
-                {% if patient.status == '0' or patient.status == '2' %}
+                {% if patientStatus == '0' or patientStatus == '2' %}
 
                     <form action="mccd-summary" method="post" novalidate>
-
 
                         {{ govukRadios({
                             name: 'meo-review',
@@ -220,7 +251,7 @@
                         
                     </form>
 
-                {% elseif patient.status == '4' %}
+                {% elseif patientStatus == '4' %}
 
                     <!--IF STATUS = Review complete - send to registrar-->
                     <form action="mccd-summary" method="post" novalidate>

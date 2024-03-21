@@ -1,0 +1,41 @@
+{% extends "layouts/prototype-main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Medical certificate of cause of death (MCCD) service</h1>
+
+        <p class="govuk-body">You can use this service if you are an attending practitioner or a medical examiner.</p>
+        
+        <p class="govuk-body">If you are an attending practitioner you can use this service to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>create an MCCD</li>
+            <li>edit an MCCD after scrutiny by a medical examiner</li>
+        </ul>
+
+        <p class="govuk-body">If you are a medical examiner you can use this service to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>review an MCCD</li>
+            <li>accept or reject an MCCD</li>
+        </ul>
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-2">Before you start</h2>
+        <p class="govuk-body">You’ll need a Care Identity profile created for you by your NHS organisation.</p>
+        <p class="govuk-body">You will be able able to sign in using an authenticator such as your smartcard.</p>
+        
+        <h2 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-2">Before you create or review an MCCD</h2>
+        <p class="govuk-body">You’ll need to register an account with the MCCD service.</p>
+        <p class="govuk-body govuk-!-margin-bottom-7">You'll need personal details of the deceased person, and medical information relating to the cause of death.</p>
+
+        <a class="govuk-button govuk-!-margin-top-5 govuk-!-margin-right-2" href="/tests/auth/login-page">Sign in</a> <a class="govuk-button govuk-button--secondary govuk-!-margin-top-5" href="me-registration/role-assignment">Register an account</a>
+
+    </div>
+</div>
+
+{% endblock %}
