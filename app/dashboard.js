@@ -258,6 +258,8 @@ function _getRow( patient ){
 
     let arr = [];
 
+
+
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
@@ -268,11 +270,66 @@ function _getRow( patient ){
 }
 
 //
+// OVERRIDE ROWS FOR TESTING FUNCTION
+//
+function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
+
+    // ME 
+    // me-signoff, amend > 1 or registrar > 4
+    // Dickson, Adrian - 0002
+
+    // MEO 
+    // meo-review, amend > 1 or medical-examiner > 3
+    // Doyle, Joseph William - 0028
+
+    // sent-to-registrar (boolean) > 5
+    // Frost, Charley Angeli - 0010
+
+    let arr = [];
+    rows.forEach(function( row ){
+
+        if( row.id === '0002' ){
+
+            // ME
+            if( meSignOff === 'amend' ){
+                row.status = 1;
+            } else if( meSignOff === 'registrar' ){
+                row.status = 4;
+            }
+
+        } else if( row.id === '0028' ){
+
+            // MEO
+            if( meoReview === 'amend' ){
+                row.status = 1;
+            } else if( meoReview === 'medical-examiner' ){
+                row.status = 3;
+            }
+
+        } else if( row.id === '0010' ){
+
+            // MEO
+            if( sentToRegistrar ){
+                row.status = 5;
+            }
+
+        }
+
+        arr.push( row );
+
+    });
+
+
+    return arr;
+
+}
+
+//
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar ){
 
-    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( rows, roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
+    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
     
     return filteredRows;
 
