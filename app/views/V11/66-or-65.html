@@ -29,14 +29,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="over-under-28-yes" name="over-under-28" type="radio" value="yes">
               <label class="govuk-label govuk-radios__label" for="over-under-28-yes">
-                Yes
+                Yes, the deceased was less than 28 days old
               </label>
             </div>
 
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="over-under-28-no" name="over-under-28" type="radio" value="no">
               <label class="govuk-label govuk-radios__label" for="over-under-28-no">
-                No
+                No, the deceased was 28 days old or over
               </label>
             </div>
 
@@ -73,14 +73,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="over-under-28-yes" name="over-under-28" type="radio" value="yes">
               <label class="govuk-label govuk-radios__label" for="over-under-28-yes">
-                Oes
+                Oedd, roedd yr ymadawedig yn llai na 28 diwrnod oed
               </label>
             </div>
 
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="over-under-28-no" name="over-under-28" type="radio" value="no">
               <label class="govuk-label govuk-radios__label" for="over-under-28-no">
-                Nac oes
+                Na, roedd yr ymadawedig yn 28 diwrnod oed neu drosodd
               </label>
             </div>
 
@@ -95,47 +95,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     </form>
 
-    <!-- Default En language -->
-{% else %}
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-    <form action="66-or-65" role="form" method="post">
-
-      <div class="govuk-form-group">
-
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">
-              Was the death less than 28 days after the birth?
-            </h1>
-          </legend>
-
-          <div class="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="over-under-28-yes" name="over-under-28" type="radio" value="yes">
-              <label class="govuk-label govuk-radios__label" for="over-under-28-yes">
-                Yes
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="over-under-28-no" name="over-under-28" type="radio" value="no">
-              <label class="govuk-label govuk-radios__label" for="over-under-28-no">
-                No
-              </label>
-            </div>
-
-          </div>
-        </fieldset>
-
-      </div>
-
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
-
-    </form>
 
 {% endif %}
 
