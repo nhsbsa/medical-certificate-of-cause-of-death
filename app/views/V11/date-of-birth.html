@@ -23,10 +23,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               What was the deceased person's date of birth?
             </h1>
           </legend>
-
+          {% if data['over-under-28'] == 'no' %}
           <div class="govuk-hint" id="DoB-hint">
             For example, 21 8 2021 or 8 2021 if day of birth is not available
           </div>
+          {% else %}
+          <div class="govuk-hint" id="DoB-hint">
+            For example, 21 1 2024
+          </div>
+          {% endif %}
 
           <div class="govuk-date-input" id="DoB">
 
@@ -60,7 +65,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               </div>
             </div>
           </div>
-
+          {% if data['over-under-28'] == 'no' %}
           <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
               
               <div class="govuk-checkboxes__divider">or</div>
@@ -73,7 +78,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </label>
               </div>
           </div>
-
+          {% endif %}
           
 
         </fieldset>
@@ -103,10 +108,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           Beth oedd dyddiad geni'r person ymadawedig?
         </h1>
       </legend>
-
+      {% if data['over-under-28'] == 'no' %}
       <div class="govuk-hint" id="DoB-hint">
         Er enghraifft, 21 8 2021 neu 8 2021 os nad yw diwrnod y mis yn hysbys
       </div>
+      {% else %}
+      <div class="govuk-hint" id="DoB-hint">
+        Er enghraifft, 21 1 2024
+      </div>
+      {% endif %}
 
       <div class="govuk-date-input" id="DoB">
 
@@ -140,7 +150,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </div>
         </div>
       </div>
-
+      {% if data['over-under-28'] == 'no' %}
       <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
           
           <div class="govuk-checkboxes__divider">or</div>
@@ -153,7 +163,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </label>
           </div>
       </div>
-
+      {% endif %}
       
 
     </fieldset>
