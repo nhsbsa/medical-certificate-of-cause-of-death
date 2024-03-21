@@ -4,6 +4,19 @@ const router = govukPrototypeKit.requests.setupRouter();
 module.exports = router;
 
 
+// SIGN IN JOURNEY
+
+// GOV.UK Start > Index
+router.post( /govuk-start/, (req, res) => {
+    res.redirect('index');
+});
+
+router.post( /index/, (req, res) => {
+    res.redirect('./login-page');
+});
+
+
+
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
 
@@ -20,7 +33,7 @@ router.post( /mccd-summary/, (req, res) => {
 
              } else {
                 
-                // Certificate can be sent to registrar by MEO...
+                // Certificate can be submitted to registrar by MEO...
                 res.redirect('confirm-your-details');
 
              }

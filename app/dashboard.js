@@ -16,7 +16,7 @@ function _getStatuses( num, returnTag ){
         'Amended',
         'For sign off by medical examiner',
         'Review complete - send to registrar',
-        'Sent to registrar'
+        'Submitted to registrar'
     ];
 
     const tags = [ 
@@ -25,7 +25,7 @@ function _getStatuses( num, returnTag ){
         '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
         '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
         '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
-        '<span class="govuk-tag">Sent to registrar</span>'
+        '<span class="govuk-tag">Submitted to registrar</span>'
     ];
 
     const arr = ( returnTag ) ? tags : statuses;
@@ -240,7 +240,7 @@ function _getActionForStatus( status, id ){
             html = '<a class="govuk-link" href="'+link+'">Download certificate</a>';
             break;
 
-        // Sent to registrar
+        // Submitted to registrar
         case 5:
             html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
             break;
