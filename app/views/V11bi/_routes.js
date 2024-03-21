@@ -111,7 +111,7 @@ router.get( /cya-deceased/, function (req, res) {
     // set data store variable
     req.session.data.deceasedComplete = 'true'
     // render the page
-    return res.render('/v11bi/cya-deceased')
+    return res.render('/V11bi/cya-deceased')
   })
 
 // Was the death more than 28 days after the birth?
@@ -178,7 +178,7 @@ router.post( /location-born/, (req, res) => {
   let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
-    res.redirect('/v11bi/cya-deceased')
+    res.redirect('/V11bi/cya-deceased')
   } else {
     res.redirect('triage-24-hours')
   }
@@ -211,9 +211,9 @@ router.post( /deceased-persons-age/, (req, res) => {
   let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
-    res.redirect('/v11bi/cya-deceased')
+    res.redirect('/V11bi/cya-deceased')
   } else {
-    res.redirect('/v11bi/ethnicity/ethnic-group')
+    res.redirect('/V11bi/ethnicity/ethnic-group')
   }
 });
 
@@ -222,7 +222,7 @@ router.post( /age-65-hours/, (req, res) => {
   let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
-    res.redirect('/v11bi/cya-deceased')
+    res.redirect('/V11bi/cya-deceased')
   } else {
     res.redirect('ethnicity/ethnic-group')
   }
@@ -260,7 +260,7 @@ router.post( /ethnicity/, (req, res) => {
         let completeDeceased = req.session.data.deceasedComplete
         // if the journey is complete send back to the 'check-your-details' page
         if (completeDeceased === 'true') {
-            res.redirect('/v11bi/cya-deceased')
+            res.redirect('/V11bi/cya-deceased')
         } else {
             res.redirect('../date-of-death')
         }
@@ -337,7 +337,7 @@ router.get( /cya-death-circumstances/, function (req, res) {
     // set data store variable
     req.session.data.afterDeathComplete = 'true';
     // render the page
-    return res.render('/v11bi/cya-death-circumstances');
+    return res.render('/V11bi/cya-death-circumstances');
   })
 
 // Has a post-mortem been held?
@@ -435,7 +435,7 @@ router.get( /cya-cause-death/, function (req, res) {
     // set data store variable
     req.session.data.causeDeathComplete = 'true';
     // render the page
-    return res.render('/v11bi/cya-cause-death');
+    return res.render('/V11bi/cya-cause-death');
   })
 
 // What caused the death?
@@ -778,19 +778,19 @@ router.post( /care-id-role/, (req, res) => {
 });
 
 router.post( /care-id-authentication/, (req,res) => {
-    res.redirect('/v11bi/dashboard?role-type=ap')
+    res.redirect('/V11bi/dashboard?role-type=ap')
 });
 
 router.post( /care-id-key/, (req,res) => {
-    res.redirect('/v11bi/dashboard?role-type=ap')
+    res.redirect('/V11bi/dashboard?role-type=ap')
 });
 
 router.post( /care-id-windows/, (req,res) => {
-    res.redirect('/v11bi/dashboard?role-type=ap')
+    res.redirect('/V11bi/dashboard?role-type=ap')
 });
 
 router.post( /care-id-smartcard/, (req,res) => {
-    res.redirect('/v11bi/dashboard?role-type=ap')
+    res.redirect('/V11bi/dashboard?role-type=ap')
 });
 
 
