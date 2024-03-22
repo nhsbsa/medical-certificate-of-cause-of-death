@@ -34,7 +34,14 @@ Patient data
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    const statuses = ['For officer review','To be amended','Amended','For sign off by medical examiner','Review complete - send to registrar','Submitted to registrar'];
+    //
+    // PLEASE NOTE:
+    // This code take the data from above and modifies it, outputting the result into
+    // the textarea shown when you view the page. It is used to tweak stuff (like the dates) 
+    // for testing
+    //
+    // If you want to update the data, you can copy/pase from the textarea into the first line above 
+    //
 
     const textArea = document.querySelector('#patient-data');
     const json = JSON.parse(textArea.innerHTML);
@@ -53,9 +60,11 @@ Patient data
 
       const currentDates = ['29 March 2023', '28 March 2023', '27 March 2023', '26 March 2023'];
 
-      row.nhsNo = _generateNHSNumber();
-      row.status = Math.round(Math.random()*5); // Should generate a random number between 0-5
-      row.dateOfDeath = currentDates[Math.round(Math.random()*(currentDates.length-1))];
+      // Feel free to uncomment these if you want to regenerate stuff, like dates, statuses etc...
+
+      //row.nhsNo = _generateNHSNumber();
+      //row.status = Math.round(Math.random()*5); // Should generate a random number between 0-5
+      //row.dateOfDeath = currentDates[Math.round(Math.random()*(currentDates.length-1))];
 
       let nameArr = ( row.name ) ? row.name.split(' ') : ['First','Last'];
       nameArr.unshift(nameArr.pop());
@@ -63,9 +72,9 @@ Patient data
       row.lastNameFirst = nameArr[0];
       nameArr.shift();
 
-      row.lastNameFirst += ', ' + nameArr.join(' ');
+      //row.lastNameFirst += ', ' + nameArr.join(' ');
 
-      row.belongsToAP = ( Math.round(Math.random()*3) === 0 ) ? true : false;
+      //row.belongsToAP = ( Math.round(Math.random()*3) === 0 ) ? true : false;
 
       delete row.statuses;
       delete row.actions;
