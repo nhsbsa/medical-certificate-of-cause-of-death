@@ -90,6 +90,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                             id="conditional-implant">
                             <div class="govuk-form-group">
+                            {% if data['bilingual'] == "true" %}
                                 <div id="implant-details-hint" class="govuk-hint">
                                     Enter details in English and Welsh, or in English only.  
                                   </div>
@@ -103,6 +104,13 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                     </label>
                                     <textarea class="govuk-textarea" id="implant-details" name="implant-details"
                                         rows="3"></textarea>
+                            {% else %}
+                                <label class="govuk-label" for="implant-details">
+                                    Enter the details and location of any implants
+                                </label>
+                                <textarea class="govuk-textarea" id="implant-details" name="implant-details" rows="3">
+                                </textarea>
+                            {% endif %}
                             </div>
                         </div>
                         <div class="govuk-radios__item">

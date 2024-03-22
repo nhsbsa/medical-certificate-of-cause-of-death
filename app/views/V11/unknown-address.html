@@ -22,17 +22,49 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Where approximately did the death take place?
           </h1>
         </legend>
+        {% if data['bilingual'] == "true" %}
+        <div id="hospital-hint" class="govuk-hint">
+          Enter location in English and Welsh, or in English only. 
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="location-death">
+            Enter details <span><strong>in English</strong></span>
+          </label>
+          <div id="approx-location-hint" class="govuk-hint">
+            For example, in Hendre Lake Park, Cardiff near the lookout
+          </div>
+
+          <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
+            aria-describedby="example-hint">
+          </textarea>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="location-death">
+              Enter details <span><strong>in Welsh</strong></span>
+            </label>
+            <div id="approx-location-hint" class="govuk-hint">
+              For example, in Parc Llyn Hendre, Caerdydd yn agos at mannau gwylio
+            </div>
+  
+            <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
+              aria-describedby="example-hint">
+            </textarea>
+        {% else %}
         <div class="govuk-form-group">
           <label class="govuk-label" for="location-death">
             Enter details
           </label>
+          
           <div id="approx-location-hint" class="govuk-hint">
             For example, in Cliffe Castle Park, Keighley near the fountain
           </div>
 
           <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
-            aria-describedby="example-hint"></textarea>
-        </div>
+            aria-describedby="example-hint">
+          </textarea>
+          {% endif %}
+          </div>
 
       </fieldset>
 
@@ -53,53 +85,37 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Ble yn fras y digwyddodd y farwolaeth?
       </h1>
     </legend>
+    <div id="location-death-hint" class="govuk-hint">
+      Rhowch leoliad yn Gymraeg a Saesneg, neu yn Saesneg yn unig. 
+    </div>
+
     <div class="govuk-form-group">
       <label class="govuk-label" for="location-death">
-        Rhowch fanylion
+        Rhowch fanylion <span><strong>yn Saesneg</strong></span>
       </label>
       <div id="approx-location-hint" class="govuk-hint">
-        Er enghraifft, ym Mharc y Castell, Bingley ger y ffynnon
+        Er enghraifft, Hendre Lake Park, Cardiff near the lookout
       </div>
 
       <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
         aria-describedby="example-hint"></textarea>
+    
+      <label class="govuk-label" for="location-death">
+        Rhowch fanylion <span><strong>yn Gymraeg</strong></span> (dewisol)
+      </label>
+      <div id="approx-location-hint" class="govuk-hint">
+        Er enghraifft, Parc Llyn Hendre, Caerdydd yn agos at mannau gwylio
+      </div>
+
+      <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
+        aria-describedby="example-hint">
+      </textarea>
     </div>
 
   </fieldset>
 
   <button class="govuk-button" type="submit">
     Achub a pharhau
-  </button>
-</form>
-
-<!-- Default En language -->
-{% else %}
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-<form action="death-location" role="form" method="post">
-
-  <fieldset class="govuk-fieldset">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-describedby="approx-location-hint">
-      <h1 class="govuk-fieldset__heading">
-        Where approximately did the death take place?
-      </h1>
-    </legend>
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="location-death">
-        Enter details
-      </label>
-      <div id="approx-location-hint" class="govuk-hint">
-        For example, in Cliffe Castle Park, Keighley near the fountain
-      </div>
-
-      <textarea class="govuk-textarea" id="location-death" name="location-death" rows="5"
-        aria-describedby="example-hint"></textarea>
-    </div>
-
-  </fieldset>
-
-  <button class="govuk-button" type="submit">
-    Save and continue
   </button>
 </form>
 
