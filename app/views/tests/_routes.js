@@ -58,14 +58,12 @@ router.post( /declaration/, (req, res) => {
 // CONFIRMATION
 router.post( /confirmation/, (req, res) => {
 
-    // Reset the temporary demo filters...
-    /*
+    delete req.session.data['sent-to-registrar'];
     delete req.session.data['ap-signoff'];
     delete req.session.data['me-signoff'];
     delete req.session.data['meo-review'];
     delete req.session.data['ap-cert-declaration'];
     delete req.session.data['me-cert-declaration'];
-    */
 
     res.redirect('dashboard');
 
