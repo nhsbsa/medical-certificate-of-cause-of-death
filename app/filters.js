@@ -106,9 +106,10 @@ addFilter('getFooterStatus', function(content) {
             break;
     }
 
-    let lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
+    const lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
+    const returnStr = ( this.ctx.data.debug === 'true' ) ? 'Currently acting ' + roleType + ' ' + path + ' ' + lang : '';
 
-    return 'Currently acting ' + roleType + ' ' + path + ' ' + lang;
+    return returnStr;
 
 });
 
@@ -187,7 +188,7 @@ addFilter( 'getDashboardCaption', function( content ){
 
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
-    let caption = ( roleType === 'ap' ) ? 'Your certificates' : 'All certificates';
+    let caption = ( roleType === 'ap' ) ? 'Certificates created by you' : 'All certificates';
 
     const regex = /^[0-9\s]+$/;
     const isNHSNumber = regex.test(searchTerm);
