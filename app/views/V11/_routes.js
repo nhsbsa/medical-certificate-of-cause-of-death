@@ -492,6 +492,21 @@ router.post(/check-your-answers-cod/, (req, res) => {
 // Declaration
 // ************************************************************
 
+//Confirm AP/ ME details 
+router.get(/confirm-details/, (req, res) => {
+    var qualifications = req.session.data['qualifications']
+    if (qualifications === null ){
+        res.redirect('qualifications')
+    } else {
+        res.render('V11/confirm-details')
+    }
+});
+
+// Add qualification
+router.post(/qualifications/, (req,res) =>{
+    res.redirect('confirm-details')
+});
+
 // Declaration page [AP]
 
 router.post(/ap-declaration/, (req, res) => {
