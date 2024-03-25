@@ -18,7 +18,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         Your details
       </span>
       
-        Check your details are correct before starting a new certificate
+        Check your details are correct before submitting the certificate
     </h1>
     <!--<div class="govuk-hint govuk-!-margin-top-3 govuk-!-margin-bottom-7" id="hint">
       Changes to your work address won't be reflected in your profile. To make permanent changes, contact the Care Identity management team.
@@ -45,10 +45,24 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <dd class="govuk-summary-list__value">
             12345678          
           </dd>
-
         </div>
         
         <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Qualification
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data ['qualifications'] }}         
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="qualifications">
+              Change<span class="govuk-visually-hidden"> primary qualification</span>
+            </a>
+          </dd>
+        </div>
+
+        <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Work address
             </dt>
@@ -57,15 +71,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Newcastle, Tyne and Wear<br>
               NE12 3AB
             </dd>
-            <!-- <dd class="govuk-summary-list__actions">
+            <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">
                 Change<span class="govuk-visually-hidden"> address</span>
               </a>
-            </dd> -->
-          </div>
+            </dd>
+          </div> -->
       </dl>
       
-      <a href="66-or-65" class="govuk-button">Save and continue</a>
+      <a href="declaration" class="govuk-button">Save and continue</a>
       
 
   </div>
@@ -112,6 +126,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
         
         <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Cymhwyster
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data ['qualifications'] }}         
+          </dd>
+
+          <dd class="govuk-summary-list__actions">
+            <a href="qualifications">
+              Newid<span class="govuk-visually-hidden"> cymhwyster</span>
+            </a>
+          </dd>
+        </div>
+
+        <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Cyfeiriad gwaith
             </dt>
@@ -120,82 +149,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               Newcastle, Tyne and Wear<br>
               NE12 3AB
             </dd>
-            <!-- <dd class="govuk-summary-list__actions">
+          <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">
                 Newid<span class="govuk-visually-hidden"> cyfeiriad</span>
               </a>
-            </dd> -->
-          </div>
+            </dd> 
+          </div>-->
       </dl>
       
-      <a href="66-or-65" class="govuk-button">Achub a pharhau</a>
+      <a href="declaration" class="govuk-button">Achub a pharhau</a>
       
-
-  </div>
-</div>
-
-{% else %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
-      <span class="govuk-caption-l govuk-caption--bottom">
-        Your details
-      </span>
-      
-        Check your details are correct before starting a new certificate
-    </h1>
-    <!--<div class="govuk-hint govuk-!-margin-top-3 govuk-!-margin-bottom-7" id="hint">
-      Changes to your work address won't be reflected in your profile. To make permanent changes, contact the Care Identity management team.
-    </div>-->
-      
-    <dl class="govuk-summary-list govuk-!-margin-top-5">
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Full name
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {% if data['role-type'] == 'ap' %}
-            Sarah Phillips
-            {% else %}
-            Alera Singh 
-            {% endif %}
-          </dd>
-
-        </div>
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            GMC number
-          </dt>
-          <dd class="govuk-summary-list__value">
-            12345678          
-          </dd>
-
-        </div>
-        
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Work address
-            </dt>
-            <dd class="govuk-summary-list__value">
-              123 Hospital Road, Wing 4<br>
-              Newcastle, Tyne and Wear<br>
-              NE12 3AB
-            </dd>
-            <!-- <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> address</span>
-              </a>
-            </dd> -->
-          </div>
-      </dl>
-      
-      <a href="66-or-65" class="govuk-button">Save and continue</a>
-      
-
   </div>
 </div>
 

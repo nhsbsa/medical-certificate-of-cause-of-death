@@ -400,9 +400,7 @@ router.post(/implant/, (req, res) => {
     // if the journey is complete send back to the 'check-your-details' page
     if (completeAfterDeath === 'true') {
         res.redirect('cya-death-circumstances')
-    }else if (implant == 'Yes') {
-        res.redirect('implant-removed')
-    } else if (implant == 'Oes') {
+    }else if (implant == 'Yes' || implant == 'Oes' ) {
         res.redirect('implant-removed')
     } else {
         res.redirect('cya-death-circumstances')
@@ -465,17 +463,17 @@ router.post(/caused-by-employment/, (req, res) => {
 });
 
 // Was the deceased pregnant within the year prior to their death?
-router.post(/pregnant-at-death/, (req, res) => {
-
-    let notPregnant = req.session.data['pregnant-at-death']
-    if (notPregnant == 'Pregnant at time of death' || 'Yn feichiog ar adeg marwolaeth' || 'Pregnant 1 to 42 days before death' || 'Yn feichiog 1 i 42 diwrnod cyn marwolaeth' || 'Pregnant 43 days to a year before death' || 'Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth') {
+router.post(/pregnant-at-death/, (req,res) => {
+    const preggo = ['Pregnant at time of death', 'Yn feichiog ar adeg marwolaeth', 'Pregnant 1 to 42 days before death', 'Yn feichiog 1 i 42 diwrnod cyn marwolaeth', 'Pregnant 43 days to a year before death', 'Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth']
+    const notPreggo = ['Not applicable', 'Ddim yn berthnasol', 'Not pregnant', 'Ddim yn feichiog', 'Unknown', 'Anhysbys']
+    var pregnantAtDeath = req.session.data['pregnant-at-death']
+    if (preggo.includes(pregnantAtDeath)) {
         res.redirect('pregnancy-contributed')
-    } else if (notPregnant == 'Not applicable' || 'Ddim yn berthnasol' || 'Not pregnant' || 'Ddim yn feichiog') {
-        res.redirect('cya-cause-death')
-    } else {
-    res.redirect('pregnancy-contributed')
     }
-});
+    if (notPreggo.includes(pregnantAtDeath)) {
+        res.redirect('cya-cause-death')
+    }
+})
 
 // Could the pregnancy have contributed to their death?
 router.post(/pregnancy-contributed/, (req, res) => {
@@ -493,6 +491,21 @@ router.post(/check-your-answers-cod/, (req, res) => {
 // ************************************************************
 // Declaration
 // ************************************************************
+
+//Confirm AP/ ME details 
+router.get(/confirm-details/, (req, res) => {
+    var qualifications = req.session.data['qualifications']
+    if (qualifications === null ){
+        res.redirect('qualifications')
+    } else {
+        res.render('V11/confirm-details')
+    }
+});
+
+// Add qualification
+router.post(/qualifications/, (req,res) =>{
+    res.redirect('confirm-details')
+});
 
 // Declaration page [AP]
 

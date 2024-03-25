@@ -35,12 +35,34 @@
 
 {% endif %}
 
-  </div>
- </div>
+  {{ govukInsetText({
+    text: 'You will be logged out of the system after 15 minues of inactivity.'
+  }) }}
 
-{{ govukInsetText({
-  text: 'You will be logged out of the system after 15 minues of inactivity.'
-}) }}
+  </div>
+
+  {% if data['role-type'] == 'ap' or data['role-type'] == 'me' %}
+    <!-- CREATE MCCD BUTTON -->
+    <div class="govuk-grid-column-one-third">
+
+      {% if data['role-type'] == 'ap' %}
+        {{ govukButton({
+              text: 'Create a new MCCD',
+              href: 'dashboard',
+              classes: 'govuk-!-margin-top-8'
+        }) }}
+      {% elseif data['role-type'] == 'me' %}
+        {{ govukButton({
+              text: 'Create a new ME MCCD',
+              href: 'dashboard',
+              classes: 'govuk-!-margin-top-8'
+        }) }}
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+ </div>
 
 
 
