@@ -78,8 +78,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </dd>
           </div> -->
       </dl>
-      
+      {% if data['hasQualification'] === 'true' %}
       <a href="declaration" class="govuk-button">Save and continue</a>
+      {% else %}
+      <a href="#" class="govuk-button">Save and continue</a>
+      {% endif %}
       
 
   </div>
@@ -156,8 +159,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </dd> 
           </div>-->
       </dl>
-      
+      {% if data['hasQualification'] === 'true' %}
       <a href="declaration" class="govuk-button">Achub a pharhau</a>
+      {% else %}
+      <a href="#" class="govuk-button">Achub a pharhau</a>
+      {% endif %}
       
   </div>
 </div>
