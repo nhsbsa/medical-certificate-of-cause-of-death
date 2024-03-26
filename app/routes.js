@@ -14,10 +14,10 @@ const router = govukPrototypeKit.requests.setupRouter()
 router.use('/current', require('./views/current/_routes'));
 
 // Iterations
-router.use('/v11bi', require('./views/V11bi/_routes'));
-router.use('/v11', require('./views/V11/_routes'));
-router.use('/v10-1', require('./views/V10-1/_routes'));
-router.use('/v10', require('./views/V10/_routes'));
+router.use('/V11bi', require('./views/V11bi/_routes'));
+router.use('/V11', require('./views/V11/_routes'));
+router.use('/V10-1', require('./views/V10-1/_routes'));
+router.use('/V10', require('./views/V10/_routes'));
 router.use('/v9', require('./views/v9/_routes'));
 router.use('/v8', require('./views/v8/_routes'));
 router.use('/v7', require('./views/v7/_routes'));
