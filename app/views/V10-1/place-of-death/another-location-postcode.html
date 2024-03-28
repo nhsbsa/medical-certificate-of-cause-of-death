@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+    <form action="another-location-lookup" role="form" method="get">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="event-name">
+          What is the postcode of where the death took place?
+        </label>
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        Enter the postcode of where the death occurred, for example, LS1 3EX.
+      </div>
+        <input class="govuk-input govuk-input--width-10" id="hospital-postcode" name="hospital-postcode" type="text">
+      </div>
+
+      <button class="govuk-button govuk-!-margin-bottom-4" type="submit">
+        Find address
+      </button>
+
+      <p><a href="exact-address">Enter address manually</a></p>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
