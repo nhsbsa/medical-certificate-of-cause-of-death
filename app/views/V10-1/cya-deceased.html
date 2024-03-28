@@ -143,125 +143,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           Place of death
         </dt>
         <dd class="govuk-summary-list__value">
-          {% if data['death-in-hospital'] == 'no' %}
-
-            {% if data['location-of-death'] == 'no' %}
-              {{ data['location-death']}}
-
-            {% else %}
-              {% if data['select-another-address'] %}
-                {{ data['select-another-address'] }}
-
-              {% else %}
-                {{ data['address-line-1']}}
-                {{ data['address-line-2']}}<br>
-                {{ data['address-town']}}<br>
-                {{ data['address-county']}}<br>
-                {{ data['address-postcode']}}<br>
-            {% endif %}
-            
-          {% endif %}
-          
-          {% else %}
-            {% if data['select-hospital-address'] %}
-              {{ data['select-hospital-address'] }}
-          
-            {% else %}
-
-              {{ data['address-line-1']}}
-              {{ data['address-line-2']}}<br>
-              {{ data['address-town']}}<br>
-              {{ data['address-county']}}<br>
-              {{ data['address-postcode']}}<br>
-
-         <!--   {{ data['address-line-1'] or 'Guys and St Thomas NHS Foundation Trust' }}
-              {{ data['address-line-2'] or 'Westminster Bridge Rd' }}<br>
-              {{ data['address-town'] or 'London' }}<br>
-              {{ data['address-county'] or 'Greater London' }}<br>
-              {{ data['address-postcode'] or 'SE1 7EH' }}<br>
-              -->  
-              {% endif %}
-          {% endif %}
-        
+          {% data['death-in-hospital'] or data['postcode'] or 'A' %}
         </dd>
 
-      {% if data['death-in-hospital'] == 'no' %}
-
-        {% if data['location-of-death'] == 'no' %}
-          <dd class="govuk-summary-list__actions">
-
-            <a href=unknown-address>
-              Change<span class="govuk-visually-hidden"> place of death</span>
-            </a>
-
-          </dd>
-
-        {% else %}
-          {% if data['select-another-address'] %}
-            
-          <dd class="govuk-summary-list__actions">
-
-            <a href=select-another-address>
-              Change<span class="govuk-visually-hidden"> place of death</span>
-            </a>
-
-          </dd>
-
-        {% else %}
-          <dd class="govuk-summary-list__actions">
-
-      <a href=exact-address>
-        Change<span class="govuk-visually-hidden"> place of death</span>
-      </a>
-
-    </dd>
-        {% endif %}
-        
-      {% endif %}
-      
-      {% else %}
-        {% if data['select-hospital-address'] %}
         <dd class="govuk-summary-list__actions">
-
-          <a href=select-hospital-address>
+          <a href="death-hospital">
             Change<span class="govuk-visually-hidden"> place of death</span>
           </a>
-
         </dd>
-      
-        {% else %}
-          <dd class="govuk-summary-list__actions">
-
-            <a href=exact-address>
-              Change<span class="govuk-visually-hidden"> place of death</span>
-            </a>
-
-          </dd>
-      {% endif %}
-      {% endif %}
-
-
       </div>
 
-          {% if data['death-in-hospital'] == 'yes' %}
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Consultant responsible for care
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  {{ data['consultant'] or 'Barbara Matel' }}
-                </dd>
-
-                <dd class="govuk-summary-list__actions">
-
-                  <a href="death-hospital">
-                    Change<span class="govuk-visually-hidden"> consultant name</span>
-                  </a>
-
-                </dd>
-
-              </div>
-          {% endif %}
       </dl>
 
 
@@ -410,116 +301,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             Place of death
           </dt>
           <dd class="govuk-summary-list__value">
-            {% if data['death-in-hospital'] == 'no' %}
-  
-              {% if data['location-of-death'] == 'no' %}
-                {{ data['location-death'] or 'The vicinity of The Oracle, Reading'}}
-  
-              {% else %}
-                {% if data['select-another-address'] %}
-                  {{ data['select-another-address'] or '54 Rosewood Ave, Reading, Berkshire, RG4 8LD' }}
-  
-                {% else %}
-                  {{ data['address-line-1'] or '54 Rosewood Ave' }}
-                  {{ data['address-line-2']}}<br>
-                  {{ data['address-town'] or 'Reading' }}<br>
-                  {{ data['address-county'] or 'Berkshire' }}<br>
-                  {{ data['address-postcode'] or 'RG4 8LD' }}<br>
-              {% endif %}
-              
-            {% endif %}
-            
-            {% else %}
-              {% if data['select-hospital-address'] %}
-                {{ data['select-hospital-address'] or 'Guys and St Thomas NHS Foundation Trust, Westminster Bridge Rd, London, Greater London, SE1 7EH' }}
-            
-              {% else %}
-                {{ data['address-line-1'] or 'Guys and St Thomas NHS Foundation Trust' }}
-                {{ data['address-line-2'] or 'Westminster Bridge Rd' }}<br>
-                {{ data['address-town'] or 'London' }}<br>
-                {{ data['address-county'] or 'Greater London' }}<br>
-                {{ data['address-postcode'] or 'SE1 7EH' }}<br>
-            {% endif %}
-            {% endif %}
-          
+            {{ hospitalAddress or 'Sample' }}
           </dd>
   
-            {% if data['death-in-hospital'] == 'no' %}
-
-            {% if data['location-of-death'] == 'no' %}
-              <dd class="govuk-summary-list__actions">
-    
-                <a href=unknown-address>
-                  Change<span class="govuk-visually-hidden"> place of death</span>
-                </a>
-    
-              </dd>
-    
-            {% else %}
-              {% if data['select-another-address'] %}
-                
-              <dd class="govuk-summary-list__actions">
-    
-                <a href=select-another-address>
-                  Change<span class="govuk-visually-hidden"> place of death</span>
-                </a>
-    
-              </dd>
-    
-            {% else %}
-              <dd class="govuk-summary-list__actions">
-    
-          <a href=exact-address>
-            Change<span class="govuk-visually-hidden"> place of death</span>
-          </a>
-    
-        </dd>
-            {% endif %}
-            
-          {% endif %}
-          
-          {% else %}
-            {% if data['select-hospital-address'] %}
-            <dd class="govuk-summary-list__actions">
-    
-              <a href=select-hospital-address>
-                Change<span class="govuk-visually-hidden"> place of death</span>
-              </a>
-    
-            </dd>
-          
-            {% else %}
-              <dd class="govuk-summary-list__actions">
-    
-                <a href=exact-address>
-                  Change<span class="govuk-visually-hidden"> place of death</span>
-                </a>
-    
-              </dd>
-          {% endif %}
-          {% endif %}
-  
+          <dd class="govuk-summary-list__actions">
+            <a href="death-hospital">
+              Change<span class="govuk-visually-hidden"> place of death</span>
+            </a>
+          </dd>
         </div>
-  
-            {% if data['death-in-hospital'] == 'yes' %}
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Consultant responsible for care
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ data['consultant'] or 'Barbara Matel' }}
-                  </dd>
-  
-                  <dd class="govuk-summary-list__actions">
-  
-                    <a href="death-hospital">
-                      Change<span class="govuk-visually-hidden"> consultant name</span>
-                    </a>
-  
-                  </dd>
-  
-                </div>
-            {% endif %}
 
         </dl>
       

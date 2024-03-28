@@ -187,6 +187,8 @@ router.post(/ethnicity/, (req, res) => {
     res.redirect('../date-of-death')
 });
 
+// PLACE OF DEATH
+
 // Was the death in a hospital?
 router.post(/date-of-death/, (req, res) => {
     res.redirect('death-hospital')
@@ -198,9 +200,9 @@ router.post(/death-hospital/, (req, res) => {
     const DeathHospital = req.session.data['death-in-hospital']
 
     if (DeathHospital == 'yes') {
-        res.redirect('hospital-postcode')
+        res.redirect('./place-of-death/hospital-postcode')
     } else {
-        res.redirect('location-of-death')
+        res.redirect('./place-of-death/location-of-death')
 
     }
 });
@@ -229,12 +231,6 @@ router.post(/location-of-death/, (req, res) => {
 router.post(/death-location/, (req, res) => {
     res.redirect('cya-deceased')
     
-});
-
-// CYA - Deceased person's details
-router.post(/select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
-
 });
 
 router.post(/unknown-address/, (req, res) => {
@@ -407,10 +403,10 @@ router.post(/confirmation/, (req, res) => {
 
 
 // ************************************************************
-// Postcode Lookup - registraion, hospital and known address
+// Postcode Lookup - registration, hospital and known address
 // ************************************************************
 
-// Registraion
+// Registration
 router.get(/postcode-lookup/, (req, res) => {
 
     // Get the 'postcode' data from the submitted form
@@ -530,8 +526,15 @@ router.get(/hospital-lookup/, (req, res) => {
 
 })
 
+// Confirm hospital address
 router.post(/select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect('confirm-address')
+});
+
+
+// CYA Deceased
+router.post(/confirm-address/, (req, res) => {
+    res.redirect('../cya-deceased')
 });
 
 // =======================================================
@@ -593,10 +596,6 @@ router.get(/another-location-lookup/, (req, res) => {
 
 })
 
-router.post(/select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
-});
-
 // ************************************************************
 
 // ME Review 
@@ -632,16 +631,6 @@ router.post(/ap-mccd-summary/, (req, res) => {
 router.post(/care-id-select/, (req, res) => {
     const careID = req.session.data['care-id-method']
     res.redirect('care-id-authentication')
-    
-    //if (careID == 'Smartcard') {
-      //  res.redirect('care-id-smartcard')
-    //} else if (careID == 'Windows Hello') {
-    //res.redirect('care-id-windows')
-    //} else if (careID == 'Security Key') {
-      //  res.redirect('care-id-key')
-    //} else if (careID == 'Authenticator App') {
-      //  res.redirect('care-id-authentication')
-    //}
 });
 
 router.post(/care-id-authentication/, (req, res) => {

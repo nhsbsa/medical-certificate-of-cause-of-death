@@ -1,0 +1,78 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <form action="select-hospital-address" method="post" novalidate>
+
+      <div class="govuk-form-group">
+
+        <div class="govuk-radios">
+
+
+          <div class="govuk-form-group">
+
+            <div class="">
+              <p><b>{{ data['hospitalAddresses'] | length }}</b> {% if (data['hospitalAddresses'] | length > 1)
+                %}addresses{% else %}address{% endif %} found for <b>{{ data['hospital-postcode'] or '[postcode]' }}</b>. If
+                you can't find the hospital, check the spelling or postcode and <a href="hospital-postcode">search
+                  again</a>, or enter the address manually.</p>
+            </div>
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                  <h1 class="govuk-fieldset__heading">
+                    Select a hospital address
+                  </h1>
+                </legend>
+                <div class="govuk-radios" data-module="govuk-radios">
+
+
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="hospital-address-1" name="select-hospital-address"
+                      type="radio" value="{{ hospitalAddress }}">
+                    <label class="govuk-label govuk-radios__label" for="hospital-address-1">
+                      {% for hospitalAddress in data['hospitalAddresses'] %}
+                      {{ hospitalAddress or 'Sample' }}
+                      {% endfor %}
+                    </label>
+                  </div>
+
+              </fieldset>
+            </div>
+
+
+            <!--<select class="govuk-select" id="select-address" name="select-hospital-address">
+                <option value="choose" selected>Select address</option>
+                {% for hospitalAddress in data['hospitalAddresses'] %}
+                  <option value="{{ hospitalAddress }}">{{ hospitalAddress }}</option>
+                {% endfor %}
+              </select>-->
+          </div>
+
+
+        </div>
+      </div>
+
+      </fieldset>
+
+      <button class="govuk-button" type="submit">Use this address</button>
+
+    </form>
+
+    <div class="govuk-form-group">
+      <p><a href="location-death-hospital">Enter address manually</a></p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
