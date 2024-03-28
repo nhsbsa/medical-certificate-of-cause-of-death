@@ -163,11 +163,80 @@ href: 'javascript:history.back()'
                 {  value: 'globalTimeUnitUnknown', text: data.translations.globalTimeUnitUnknown[data.lang] }
               ] %}
 
+        {% if data.showErrors === 'true' %}
 
+
+           {{ govukErrorSummary({
+            titleText: 'There is a problem',
+            errorList: [
+              {
+                text: 'Time between onset and death must include a unit of time',
+                href: '#time-unit-duration-1'
+              }
+            ]
+          }) }}
+
+          <style>
+
+              .govuk-form-group--error {
+                margin-bottom: 30px;
+              }
+
+              .govuk-form-group--error .govuk-input__wrapper .govuk-form-group {
+                margin-bottom: 0;
+              }
+
+            </style>
+
+
+        {% endif %}
 
         <h2 class="govuk-heading-m">{{ data.translations.codO28SectionTitleOne[data.lang] }}</h2>
 
-        <!-- MAIN CAUSE -->
+        {% if data.showErrors === 'true' %}
+
+        <p id="time-unit-duration-1-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Time between onset and death must include a unit of time
+        </p>
+
+        <div class="govuk-form-group govuk-form-group--error">
+
+          <!-- MAIN CAUSE w/ ERROR  -->
+          <div class="govuk-grid-column-two-thirds no-padding">
+            {{ govukInput({
+                label: {
+                  html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + writeInEnglish
+                },
+                id: 'main-cause', name: 'main-cause', value: data['main-cause']
+              }) }}
+          </div>
+
+          <!-- MAIN CAUSE TIME UNIT w/ ERROR -->
+          <div class="govuk-grid-column-one-third no-padding">
+              <p id="duration1label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
+              <div class="govuk-input__wrapper">
+
+                {{ govukInput({
+                  id: 'duration1', name: 'duration1', value: data['duration1'],
+                  classes: 'border-hidden', attributes: { 'labelled-by': 'duration1label' }
+                }) }}
+
+                {{ govukSelect({
+                  classes: 'govuk-select--error',
+                  id: 'time-unit-duration-1', name: 'time-unit-duration-1', value: data['time-unit-duration-1'],
+                  items: timeItems,
+                  label: { text: data.translations.globalTimeUnitLabel[data.lang] + ', 1(a)', classes: 'govuk-visually-hidden' }
+                }) }}
+
+              </div>
+            </div>
+
+          </div>
+
+          {% else %}
+
+
+          <!-- MAIN CAUSE -->
         <div class="govuk-grid-column-two-thirds no-padding">
           {{ govukInput({
               label: {
@@ -196,19 +265,23 @@ href: 'javascript:history.back()'
             </div>
           </div>
 
+
+          {% endif %}
+
+
           <!-- EXTRA WELSH MAIN CAUSE FIELD -->
           {% if data.lang == 'cy' %}
-          <div class="govuk-grid-column-full no-padding">
-            <div class="govuk-grid-column-two-thirds no-padding">
-              {{ govukInput({
-                  label: {
-                    html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + ' ' + data.translations.globalOptional[data.lang] + writeInWelsh
-                  },
-                  id: 'main-cause-welsh', name: 'main-cause-welsh', value: data['main-cause-welsh']
-                }) }}
+            <div class="govuk-grid-column-full no-padding">
+              <div class="govuk-grid-column-two-thirds no-padding">
+                {{ govukInput({
+                    label: {
+                      html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + ' ' + data.translations.globalOptional[data.lang] + writeInWelsh
+                    },
+                    id: 'main-cause-welsh', name: 'main-cause-welsh', value: data['main-cause-welsh']
+                  }) }}
+              </div>
             </div>
-          </div>
-        {% endif %}
+          {% endif %}
 
 
 
