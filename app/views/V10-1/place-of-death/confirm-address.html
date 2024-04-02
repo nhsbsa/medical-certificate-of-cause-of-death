@@ -20,20 +20,20 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </div>
 
     <div class="govuk-form-group">
-      {% if data['hospitalAddresses'] %}
+      {% if data['hospital-postcode'] %}
       <h1 class="govuk-heading-l">Confirm hospital address</h1>
-      <div class="govuk-inset-text">123 Hospital Lane<br>Worcester<br>WR1 1NL</div>
+      <div class="govuk-inset-text">{{ hospitalAddress }}</div>
       
       {% else %}
       <h1 class="govuk-heading-l">Confirm address</h1>
-      <div class="govuk-inset-text">321 Community Road<br>Sheffield<br>S1 1EQ</div>
+      <div class="govuk-inset-text">{{ anotherAddresses }}</div>
 
       
       {% endif %}
 
       <button class="govuk-button"> Use this address</button>
       
-      <p class="govuk-body"><a href="#" class="govuk-link">Select a different address</a></p>
+      <p class="govuk-body"><a href="javascript:history.back()">Select a different address</a></p>
       <p class="govuk-body govuk-!-margin-bottom-0"><a href="#" class="govuk-link">Enter address manually</a></p>
     
     </form>
