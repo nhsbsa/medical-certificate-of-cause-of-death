@@ -7,35 +7,75 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
+
     <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-xl">Medical certificate of cause of death (MCCD) service</h1>
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Complete a medical certificate of cause of death</h1>
 
-        <p class="govuk-body">You can use this service if you are an attending practitioner or a medical examiner.</p>
-        
-        <p class="govuk-body">If you are an attending practitioner you can use this service to:</p>
+        <p class="govuk-body-l govuk-!-margin-bottom-6">You can use this service if you are an attending practitioner, a medical examiner or a medical examiner officer.</p>
+
+        <p class="govuk-body govuk-!-margin-bottom-1">If you are an attending practitioner you can use this service to:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>create an MCCD</li>
             <li>edit an MCCD after scrutiny by a medical examiner</li>
         </ul>
 
-        <p class="govuk-body">If you are a medical examiner you can use this service to:</p>
+        <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner you can use this service to:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>review an MCCD</li>
             <li>accept or reject an MCCD</li>
         </ul>
 
-        <h2 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-2">Before you start</h2>
-        <p class="govuk-body">You’ll need a Care Identity profile created for you by your NHS organisation.</p>
-        <p class="govuk-body">You will be able able to sign in using an authenticator such as your smartcard.</p>
+        <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner officer you can use this service to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>review an MCCD</li>
+            <li>download a completed MCCD to send to the registrar</li>
+        </ul>
         
-        <h2 class="govuk-heading-m govuk-!-margin-top-5 govuk-!-margin-bottom-2">Before you create or review an MCCD</h2>
-        <p class="govuk-body">You’ll need to register an account with the MCCD service.</p>
-        <p class="govuk-body govuk-!-margin-bottom-7">You'll need personal details of the deceased person, and medical information relating to the cause of death.</p>
+        <p>
+            The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD. 
+        </p>
 
-        <a class="govuk-button govuk-!-margin-top-5 govuk-!-margin-right-2" href="auth/login-page?account-creation-journey=no">Sign in</a> <a class="govuk-button govuk-button--secondary govuk-!-margin-top-5" href="me-registration/role-assignment">Register an account</a>
+        {% if data['bilingual'] == "true" %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+            The bilingual Welsh and English MCCD service 
+        </h2>
+        <p class="govuk-body">
+            As you complete the bilingual version of the MCCD service you must give your answers in both English and Welsh when requested.    
+        </p>
+        <p class="govuk-body"> 
+            An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only. The registrar will generate a Welsh death certificate automatically from the English content of the MCCD. Your local register office will not use the Welsh content of the MCCD. 
+        </p>
+        {% else %}
+        <p class="govuk-body">
+            This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.  
+        </p>
+        {% endif %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you start</h2>
+        <p class="govuk-body">You’ll need a Care Identity profile created for you by your NHS organisation.</p>
+        <p class="govuk-body">You can sign in using an authenticator such as your smartcard.</p>
+        
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
+
+        <p class="govuk-body">You'll need personal details of the deceased person, and medical information relating to the cause of death.</p>
+
+
+        <!-- Warning text -->
+        <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <span class="govuk-warning-text__text">
+                Once you have signed in, if you do not do anything for 15 minutes any information you have not saved will be deleted.
+            </span>
+        </div>
+
+        <!--<div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
+            <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
+                Sign in
+            </a>
+        </div>-->
+
+        <a href="auth/care-id-select" class="nhslogin-button">Sign in with Care ID</a>
 
     </div>
-</div>
 
 {% endblock %}
