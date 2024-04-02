@@ -29,11 +29,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       <div class="govuk-form-group">
         {% if data['hospital-postcode'] %}
         <h1 class="govuk-heading-l">Confirm hospital address</h1>
-        <div class="govuk-inset-text">{{ hospitalAddress }}</div>
+        <div class="govuk-inset-text">[Selected hospital address displayed here]</div>
 
         {% else %}
         <h1 class="govuk-heading-l">Confirm address</h1>
-        <div class="govuk-inset-text">{{ anotherAddress }}</div>
+        <div class="govuk-inset-text">[Selected community address displayed here]</div>
 
 
         {% endif %}
