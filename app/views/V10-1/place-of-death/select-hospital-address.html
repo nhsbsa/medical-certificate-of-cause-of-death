@@ -35,16 +35,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </legend>
                 <div class="govuk-radios" data-module="govuk-radios">
 
-
+                  {% for hospitalAddress in data['hospitalAddresses'] %}
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="hospital-address-1" name="select-hospital-address"
+                    <input class="govuk-radios__input" id="{{ hospitalAddress }}" name="select {{ hospitalAddress }}"
                       type="radio" value="{{ hospitalAddress }}">
-                    <label class="govuk-label govuk-radios__label" for="hospital-address-1">
-                      {% for hospitalAddress in data['hospitalAddresses'] %}
+                    <label class="govuk-label govuk-radios__label" for="{{ hospitalAddress }}">
                       {{ hospitalAddress or 'Sample' }}
-                      {% endfor %}
                     </label>
                   </div>
+                  {% endfor %}
 
               </fieldset>
             </div>
