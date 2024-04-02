@@ -12,35 +12,40 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
     <form action="confirm-address" method="post">
 
-      <div class="">
-        <p><b>{{ data['hospitalAddresses'] | length }}</b> {% if (data['hospitalAddresses'] | length > 1)
-          %}addresses{% else %}address{% endif %} found for <b>{{ data['hospital-postcode'] or '[postcode]' }}</b>. If
-          you can't find the hospital, check the spelling or postcode and <a href="hospital-postcode">search
-            again</a>, or enter the address manually.</p>
+      <div>
+
+        {% if data['hospital-postcode'] %}
+
+        <p><b>{{ data['hospitalAddresses'] | length }}</b> {% if (data['hospitalAddresses'] | length > 1) %}addresses{% else %}address{% endif %} found for <b>{{ data['hospital-postcode'] or '[hospital postcode here]' }}</b>. If you can't find the hospital, check the spelling or postcode and <a href="hospital-postcode">search again</a>, or enter the address manually.</p>
+        
+        {% else %}
+
+        <p><b>{{ data['anotherAddresses'] | length }}</b> {% if (data['anotherAddresses'] | length > 1) %}addresses{% else %}address{% endif %} found for <b>{{ data['another-location-postcode'] or '[community postcode here]' }}</b>. If you can't find the address, check the postcode and <a href="another-location-postcode">search again</a>, or enter the address manually.</p>
+
+        {% endif %}
+
       </div>
 
-    <div class="govuk-form-group">
-      {% if data['hospital-postcode'] %}
-      <h1 class="govuk-heading-l">Confirm hospital address</h1>
-      <div class="govuk-inset-text">{{ hospitalAddress }}</div>
-      
-      {% else %}
-      <h1 class="govuk-heading-l">Confirm address</h1>
-      <div class="govuk-inset-text">{{ anotherAddresses }}</div>
+      <div class="govuk-form-group">
+        {% if data['hospital-postcode'] %}
+        <h1 class="govuk-heading-l">Confirm hospital address</h1>
+        <div class="govuk-inset-text">{{ hospitalAddress }}</div>
 
-      
-      {% endif %}
+        {% else %}
+        <h1 class="govuk-heading-l">Confirm address</h1>
+        <div class="govuk-inset-text">{{ anotherAddress }}</div>
 
-      <button class="govuk-button"> Use this address</button>
-      
-      <p class="govuk-body"><a href="javascript:history.back()">Select a different address</a></p>
-      <p class="govuk-body govuk-!-margin-bottom-0"><a href="#" class="govuk-link">Enter address manually</a></p>
-    
+
+        {% endif %}
+
+        <button class="govuk-button"> Use this address</button>
+
+        <p class="govuk-body"><a href="javascript:history.back()">Select a different address</a></p>
+        <p class="govuk-body govuk-!-margin-bottom-0"><a href="#" class="govuk-link">Enter address manually</a></p>
+
     </form>
 
   </div>
 </div>
 
 {% endblock %}
-
-  
