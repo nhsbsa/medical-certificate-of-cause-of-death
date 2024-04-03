@@ -11,17 +11,29 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <a href="javascript:history.back()" class="govuk-back-link">Back</a>
     <form action="hospital-lookup" role="form" method="get">
-    <div class="govuk-form-group">
-      <h1 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="event-name">
-          What is the name or postcode of the hospital?
-        </label>
-      </h1>
-      <div id="event-name-hint" class="govuk-hint">
-        Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General Infirmary or LS1 3EX.
+
+      <div class="govuk-form-group">
+
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="event-name">
+              What is the name or postcode of the hospital?
+            </label>
+          </h1>
+
+          <div id="hospital-death-hint" class="govuk-hint">
+            Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General
+            Infirmary or LS1 3EX.
+          </div>
+
+          <label class="govuk-label" for="hospital-name">Enter hospital name</label>
+          <input class="govuk-input govuk-!-width-full govuk-!-margin-bottom-4" id="hospital-name" name="hospital-name" type="text">
+
+          <label class="govuk-label" for="hospital-name">Or enter hospital postcode</label>
+          <input class="govuk-input govuk-input--width-10" id="hospital-postcode" name="hospital-postcode" type="text">
+
       </div>
-        <input class="govuk-input govuk-!-width-full" id="hospital-postcode" name="hospital-postcode" type="text">
-      </div>
+
+
 
       <button class="govuk-button govuk-!-margin-bottom-4" type="submit">
         Find address
