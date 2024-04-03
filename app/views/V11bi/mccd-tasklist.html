@@ -8,6 +8,8 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+    <form action="mccd-tasklist" method="post" novalidate>
+
     {% set name = [ data['deceased-first-name'], data['deceased-last-name'] ] %}
 
     <h1 class="govuk-heading-l">
@@ -71,14 +73,19 @@
       ]
     }) }}
 
-      <!-- BUTTON (DISABLED UNLESS EVERYTHING IS APPROVED) -->
-        {{ govukButton({
-          text: data.translations.globalSaveContinue[data.lang],
-          href: 'declaration',
-          disabled: false if ( data['deceasedComplete'] and data['afterDeathComplete'] and data['causeDeathComplete'] ) else true
-        }) }}
+      <!-- BUTTONS -->
+      <div class="govuk-button-group">
+          {{ govukButton({
+            text: data.translations.globalSaveContinue[data.lang]
+          }) }}
+          {{ govukButton({
+              text: data.translations.globalBackToDashboard[data.lang],
+              href: 'dashboard',
+              classes: 'govuk-button--secondary'
+          }) }} 
+        </div>
 
-    
+    </form>
 
   </div>
 </div>

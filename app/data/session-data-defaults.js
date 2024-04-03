@@ -50,12 +50,18 @@ function _getTranslations(){
 module.exports = {
 
   debug: 'false',
+
   useSearch: 'false',
+  useFilters: 'false',
+
   rowsPerPage: 10,
   currentPage: 0,
   sortBy: 'date',
   sortDirection: 'ascending',
+  
   lang: 'en',
+  bilingual: 'true',
+  
   translations: _getTranslations()
 
 }
