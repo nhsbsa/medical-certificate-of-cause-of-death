@@ -229,13 +229,12 @@ router.post(/location-of-death/, (req, res) => {
 
 // Exact address
 router.post(/death-location/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect('../cya-deceased')
     
 });
 
 router.post(/unknown-address/, (req, res) => {
     res.redirect('cya-deceased')
-
 });
 
 // ************************************************************
