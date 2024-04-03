@@ -106,13 +106,6 @@ router.post( /enter-code/, (req, res) => {
 // MCCD Creation flow
 // ***************************************************************************************************
 
-// Set journey as complete
-router.get( /cya-deceased/, function (req, res) {
-    // set data store variable
-    req.session.data.deceasedComplete = 'true'
-    // render the page
-    return res.render('/V11bi/cya-deceased')
-  })
 
 // Was the death more than 28 days after the birth?
 router.post( /66-or-65/, function (req, res) {
@@ -326,19 +319,17 @@ router.post( /unknown-address/, (req, res) => {
 });
 
 
+// Check your answers
+router.post( /check-your-answers-d/, (req, res) => {
+    req.session.data['deceasedComplete'] = 'true';
+    res.redirect('mccd-tasklist');
+});
 
 
 // ************************************************************
 // Actions after death section
 // ************************************************************
 
-// Set journey as complete
-router.get( /cya-death-circumstances/, function (req, res) {
-    // set data store variable
-    req.session.data.afterDeathComplete = 'true';
-    // render the page
-    return res.render('/V11bi/cya-death-circumstances');
-  })
 
 // Has a post-mortem been held?
 router.post( /death-circumstances/, (req, res) => {
@@ -420,9 +411,9 @@ router.post( /has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances');
 });
 
-// Check your answers
-router.post( /check-your-answers-dc/, (req, res) => {
-    req.session.data['actions-after-death-section'] = 'completed';
+// Check your answers (Actions After Death)
+router.post( /check-your-answers-aad/, (req, res) => {
+    req.session.data['afterDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
@@ -430,13 +421,6 @@ router.post( /check-your-answers-dc/, (req, res) => {
 // Cause of death section
 // ************************************************************
 
-// Set journey as complete
-router.get( /cya-cause-death/, function (req, res) {
-    // set data store variable
-    req.session.data.causeDeathComplete = 'true';
-    // render the page
-    return res.render('/V11bi/cya-cause-death');
-  })
 
 // What caused the death?
 router.post( /cause-of-death/, (req, res) => {
@@ -490,7 +474,7 @@ router.post( /pregnancy-contributed/, (req, res) => {
 
 // Check your answers
 router.post( /check-your-answers-cod/, (req, res) => {
-    req.session.data['cause-of-death-section'] = 'completed';
+    req.session.data['causeDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
@@ -771,6 +755,10 @@ router.post( /care-id-smartcard/, (req,res) => {
 
 
 // ************************************************************
+
+
+
+
 
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
