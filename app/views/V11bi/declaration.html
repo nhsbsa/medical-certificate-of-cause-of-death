@@ -1,4 +1,4 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -19,33 +19,65 @@
 
       {% if data['role-type'] === 'me' %}
 
-        <!-- MEDICAL EXAMINER FORM -->
+        <!-- MEDICAL EXAMINER (ME) MCCD SUBMIT -->
 
-        {{ govukCheckboxes({
-          name: 'me-cert-declaration',
-          fieldset: {
-            legend: {
-              text: data.translations.meScrutinyDeclarationPageTitle[data.lang],
-              isPageHeading: true,
-              classes: 'govuk-fieldset__legend--l'
-            }
-          },
-          items: [
-            {
-              value: 'meCertDeclarationContent',
-              text: data.translations.meCertDeclarationContent[data.lang],
-              checked: ( data['me-cert-declaration'] )
-            }
-          ]
-        }) }}
+        {% if data['me-mccd'] %}
 
-        {{ govukButton({
-          text: data.translations.meCertDeclarationCTA[data.lang]
-        }) }}
+          {{ govukCheckboxes({
+            name: 'me-cert-declaration',
+            fieldset: {
+              legend: {
+                text: data.translations.meCertDeclarationPageTitle[data.lang],
+                isPageHeading: true,
+                classes: 'govuk-fieldset__legend--l'
+              }
+            },
+            items: [
+              {
+                value: 'meCertDeclarationContent',
+                text: data.translations.meCertDeclarationContent[data.lang],
+                checked: ( data['me-cert-declaration'] )
+              }
+            ]
+          }) }}
+
+          {{ govukButton({
+            text: data.translations.meCertDeclarationCTA[data.lang]
+          }) }}
+
+        {% else %}
+
+            <!-- MEDICAL EXAMINER (ME) MCCD SCRUTINY -->
+
+            {{ govukCheckboxes({
+            name: 'me-scrutiny-declaration',
+            fieldset: {
+              legend: {
+                text: data.translations.meScrutinyDeclarationPageTitle[data.lang],
+                isPageHeading: true,
+                classes: 'govuk-fieldset__legend--l'
+              }
+            },
+            items: [
+              {
+                value: 'meScrutinyDeclarationContent',
+                text: data.translations.meScrutinyDeclarationContent[data.lang],
+                checked: ( data['me-cert-declaration'] )
+              }
+            ]
+          }) }}
+
+          {{ govukButton({
+            text: data.translations.meScrutinyReadyForRegistrar[data.lang]
+          }) }}
+
+
+        {% endif %}
+
 
       {% elseif data['role-type'] === 'ap' %}
 
-        <!-- ATTENDING PRACTITIONER FORM -->
+        <!-- ATTENDING PRACTITIONER MCCD SUBMIT -->
 
         {{ govukCheckboxes({
           name: 'ap-cert-declaration',
@@ -67,12 +99,6 @@
 
         {{ govukButton({
           text: data.translations.apDeclarationSubmitForScrutiny[data.lang]
-        }) }}
-
-      {% else %}
-
-        {{ govukInsetText({
-          text: 'Only a medical examiner or attending practitioner would see this screen. Please select a role from the footer.'
         }) }}
 
       {% endif %}

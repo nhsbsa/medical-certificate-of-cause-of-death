@@ -21,7 +21,7 @@ href: 'javascript:history.back()'
 
       <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.aadCheckAnswersDescription[data.lang] }}</div>
 
-      <form action="check-your-answers-dc" role="form" method="post">
+      <form action="check-your-answers-aad" method="post" novalidate>
 
         <dl class="govuk-summary-list">
 
@@ -102,7 +102,8 @@ href: 'javascript:history.back()'
         </dl>
 
         {{ govukButton({
-            text: data.translations.globalSaveContinue[data.lang]
+            text: data.translations.globalSaveContinue[data.lang],
+            attributes: { type: 'submit' }
           }) }}
 
 

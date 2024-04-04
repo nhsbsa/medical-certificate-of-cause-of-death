@@ -1,3 +1,8 @@
+//
+// INTERNAL VARIABLES
+//
+const _debug = false;
+let _roleType = '';
 
 //
 // GET STATUSES FUNCTION
@@ -9,6 +14,10 @@ function _getStatuses( num, returnTag ){
     // returnTag: boolean, whether to return the status(es) or tag(s)
 
     num = parseInt(num);
+
+    /* 
+
+    PREVIOUS VERSION
 
     const statuses = [
         'For officer review',
@@ -23,6 +32,25 @@ function _getStatuses( num, returnTag ){
         '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
         '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
         '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
+        '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
+        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
+        '<span class="govuk-tag">Submitted to registrar</span>'
+    ];
+    */
+
+    const statuses = [
+        'Draft',
+        'For review by MEO',
+        'To be amended',
+        'For sign off by medical examiner',
+        'Review complete - send to registrar',
+        'Submitted to registrar'
+    ];
+
+    const tags = [ 
+        '<span class="govuk-tag govuk-tag--grey">Draft</span>',
+        '<span class="govuk-tag govuk-tag--blue">For review by MEO</span>',
+        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
         '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
         '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
         '<span class="govuk-tag">Submitted to registrar</span>'
@@ -80,6 +108,10 @@ function _filterBySearchTerm( content, searchTerm ) {
 
     }
 
+    if( _debug ){
+        console.log( '_filterBySearchTerm(); Rows remaining: ' + rows.length );
+    }
+
     return rows;
 
 }
@@ -106,6 +138,10 @@ function _filterByStatus( rows, statusFilter ) {
         
     });
 
+    if( _debug ){
+        console.log( '_filterByStatus(); Rows remaining: ' + rows.length );
+    }
+
     return arr;
 
 }
@@ -125,7 +161,7 @@ function _filterBySortBy( rows, sortType, sortDirection ){
             break;
     }
 
-    // Only date ATM...
+
     let arr = Array.from(rows);
     arr.sort(function( a, b ){
 
@@ -154,7 +190,9 @@ function _filterBySortBy( rows, sortType, sortDirection ){
         arr = arr.reverse();
     }
 
-    
+    if( _debug ){
+        console.log( '_filterBySortBy(); Rows remaining: ' + arr.length );
+    }
 
     return arr;
 
@@ -171,30 +209,42 @@ function _filterByRoleType( rows, roleType ){
 
     if( filterByRoleType ){
 
-        if(roleType === 'ap' | roleType === 'me' ){
-
             arr = [];
 
             rows.forEach(function( row ){
 
-                if( roleType === 'ap' ){
-                    // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
-                    if( row.belongsToAP ){
-                        arr.push(row);
-                    }
+                switch( roleType ){
 
-                } else {
-                    // ME - for the demo, only show ones that require
-                    if( row.status === 3 ){
-                        arr.push(row);
-                    }
-                    
+                    case 'ap':
+                        // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
+                        if( row.belongsToAP ){
+                            arr.push(row);
+                        } 
+                        break;
+
+                    case 'me':
+                        // ME - for the demo, only show ones that require scrutiny
+                        if( row.status === 3 ){
+                            arr.push(row);
+                        }
+                        break;
+
+                    case 'meo':
+                        // MEO - basically anything except drafts
+                        if( row.status !== 0 ){
+                            arr.push(row);
+                        }
+                        break;
+
                 }
 
                 
             });
 
-        } 
+    }
+
+    if( _debug ){
+        console.log( '_filterByRoleType(); Rows remaining: ' + arr.length );
     }
     
 
@@ -209,40 +259,25 @@ function _getActionForStatus( status, id ){
 
     status = parseInt( status );
 
-    let link = '../tests/mccd-summary?id='+id;
+    const link = 'mccd-summary?id='+id;
+
+    const actions = {
+        ap: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
+        me: ['Finish certificate','View certificate','View certificate','Review certificate','View certificate','View certificate'],
+        meo: ['Finish certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
+    }
 
     let html = '';
 
     switch ( status ){
     
-        // For officer review
+        // Draft
         case 0:
-            html = '<a class="govuk-link" href="'+link+'">Review certificate</a>';
+            html = '<a class="govuk-link" href="mccd-tasklist">'+actions[_roleType][status]+'</a>';
             break;
 
-        // To be amended
-        case 1:
-            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
-            break;
-        
-        // Amended
-        case 2:
-            html = '<a class="govuk-link" href="'+link+'">Review certificate</a>';
-            break;
-
-        // For sign off by medical examiner
-        case 3:
-            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
-            break;
-
-        // Review complete - send to registrar
-        case 4:
-            html = '<a class="govuk-link" href="'+link+'">Download certificate</a>';
-            break;
-
-        // Submitted to registrar
-        case 5:
-            html = '<a class="govuk-link" href="'+link+'">View certificate</a>';
+        default: 
+            html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][status]+'</a>';
             break;
 
     }
@@ -258,8 +293,6 @@ function _getRow( patient ){
 
     let arr = [];
 
-
-
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
@@ -274,6 +307,12 @@ function _getRow( patient ){
 //
 function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
 
+    let overrideRows = false;
+
+    if( _debug ){
+        console.log( '_overrideRowsForTesting(); Rows: ' + rows.length );
+    }
+
     // ME 
     // me-signoff, amend > 1 or registrar > 4
     // Dickson, Adrian - 0002
@@ -285,40 +324,66 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
     // sent-to-registrar (boolean) > 5
     // Frost, Charley Angeli - 0010
 
-    let arr = [];
-    rows.forEach(function( row ){
+    let arr = ( overrideRows ) ? [] : rows;
 
-        if( row.id === '0002' ){
+    if( overrideRows ){
+        rows.forEach(function( row ){
 
-            // ME
-            if( meSignOff === 'amend' ){
-                row.status = 1;
-            } else if( meSignOff === 'registrar' ){
-                row.status = 4;
+            if( row.id === '0002' ){
+
+                // ME
+                if( meSignOff === 'amend' ){
+                    row.status = 2;
+                } else if( meSignOff === 'registrar' ){
+                    row.status = 4;
+                }
+
+            } else if( row.id === '0028' ){
+
+                // MEO
+                if( meoReview === 'amend' ){
+                    row.status = 1;
+                } else if( meoReview === 'medical-examiner' ){
+                    row.status = 3;
+                }
+
+            } else if( row.id === '0010' ){
+
+                // MEO
+                if( sentToRegistrar ){
+                    row.status = 5;
+                }
+
             }
 
-        } else if( row.id === '0028' ){
+            arr.push( row );
 
-            // MEO
-            if( meoReview === 'amend' ){
-                row.status = 1;
-            } else if( meoReview === 'medical-examiner' ){
-                row.status = 3;
+        });
+    }
+
+
+    return arr;
+
+}
+
+//
+// FILTER DRAFTS FUNCTION
+//
+function _filterDrafts( rows ){
+    
+    const filterDrafts = true;
+
+    const arr = ( filterDrafts ) ? [] : rows;
+    
+    if( filterDrafts ){
+
+        rows.forEach(function( row ){
+            if( row.status !== 0 ){
+                arr.push(row);
             }
+        });
 
-        } else if( row.id === '0010' ){
-
-            // MEO
-            if( sentToRegistrar ){
-                row.status = 5;
-            }
-
-        }
-
-        arr.push( row );
-
-    });
-
+    }
 
     return arr;
 
@@ -329,8 +394,18 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
 //
 function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar ){
 
-    let filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
-    
+    if( _debug ){
+        console.log( 'START FILTERING ----------------' ); 
+    }
+
+    _roleType = roleType;
+
+    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts(rows), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
+
+    if( _debug ){
+        console.log( 'END FILTERING ----------------' );
+    }
+
     return filteredRows;
 
 }
@@ -360,9 +435,34 @@ function _getPaginatedResults( rows, rowsPerPage, currentPage ) {
 }
 
 //
+// GET DRAFT RESULTS FUNCTION
+//
+function _getDraftResults( rows, roleType ){
+
+    const arr = [];
+
+    _roleType = roleType;
+
+    rows.forEach(function( row ){
+        if( row.status === 0 ){
+            if( roleType === 'me' && !row.belongsToAP ){
+                arr.push( _getRow(row) );
+            } else if( roleType === 'ap' && row.belongsToAP ) {
+                arr.push( _getRow(row) );
+            }
+        }
+    });
+
+    return arr;
+
+}
+
+
+//
 // EXPORT EVERYTHING
 //
 module.exports = {
+    getDraftResults: _getDraftResults,
     getFilteredResults: _getFilteredResults,
     getPaginatedResults: _getPaginatedResults,
     getStatuses: _getStatuses

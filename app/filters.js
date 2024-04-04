@@ -260,8 +260,6 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
         } 
     };
 
-    console.log(statusObj);
-
     return [ nameObj, dateObj, actionObj, statusObj ];
 
 } );
@@ -302,6 +300,21 @@ addFilter( 'getDashboardTableRows', function( content ) {
    return rows;
 
 });
+
+//
+// GET DASHBOARD TABLE ROWS
+//
+addFilter( 'getDashboardTableDraftRows', function( content ) {
+   
+    // content: patient data from 'tests/data-patients.html'
+
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+
+    return dashboard.getDraftResults( content, roleType );
+
+});
+
+
 
 //
 // GET DASHBOARD PAGINATION LINKS FUNCTION

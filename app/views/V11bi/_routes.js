@@ -106,13 +106,6 @@ router.post( /enter-code/, (req, res) => {
 // MCCD Creation flow
 // ***************************************************************************************************
 
-// Set journey as complete
-router.get( /cya-deceased/, function (req, res) {
-    // set data store variable
-    req.session.data.deceasedComplete = 'true'
-    // render the page
-    return res.render('/V11bi/cya-deceased')
-  })
 
 // Was the death more than 28 days after the birth?
 router.post( /66-or-65/, function (req, res) {
@@ -326,19 +319,17 @@ router.post( /unknown-address/, (req, res) => {
 });
 
 
+// Check your answers
+router.post( /check-your-answers-d/, (req, res) => {
+    req.session.data['deceasedComplete'] = 'true';
+    res.redirect('mccd-tasklist');
+});
 
 
 // ************************************************************
 // Actions after death section
 // ************************************************************
 
-// Set journey as complete
-router.get( /cya-death-circumstances/, function (req, res) {
-    // set data store variable
-    req.session.data.afterDeathComplete = 'true';
-    // render the page
-    return res.render('/V11bi/cya-death-circumstances');
-  })
 
 // Has a post-mortem been held?
 router.post( /death-circumstances/, (req, res) => {
@@ -420,9 +411,9 @@ router.post( /has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances');
 });
 
-// Check your answers
-router.post( /check-your-answers-dc/, (req, res) => {
-    req.session.data['actions-after-death-section'] = 'completed';
+// Check your answers (Actions After Death)
+router.post( /check-your-answers-aad/, (req, res) => {
+    req.session.data['afterDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
@@ -430,13 +421,6 @@ router.post( /check-your-answers-dc/, (req, res) => {
 // Cause of death section
 // ************************************************************
 
-// Set journey as complete
-router.get( /cya-cause-death/, function (req, res) {
-    // set data store variable
-    req.session.data.causeDeathComplete = 'true';
-    // render the page
-    return res.render('/V11bi/cya-cause-death');
-  })
 
 // What caused the death?
 router.post( /cause-of-death/, (req, res) => {
@@ -490,21 +474,10 @@ router.post( /pregnancy-contributed/, (req, res) => {
 
 // Check your answers
 router.post( /check-your-answers-cod/, (req, res) => {
-    req.session.data['cause-of-death-section'] = 'completed';
+    req.session.data['causeDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
-// ************************************************************
-// Declaration
-// ************************************************************
-
-
-router.post( /declaration/, (req, res) => {
-    res.redirect('confirmation')
-});
-router.post( /confirmation/, (req, res) => {
-    res.redirect('dashboard')
-});
 router.post( /give-feedback/, (req, res) => {
     res.redirect('dashboard')
 });
@@ -735,16 +708,6 @@ router.get( /me-declaration-scrutiny/, (req, res) => {
     res.redirect('me-mccd-reviewed')
 });
 
-// ************************************************************
-
-// AP Amending MCCD
-router.post( /ap-mccd-summary/, (req, res) => {
-    res.redirect('confirmation')
-
-});
-
-// ************************************************************
-
 
 // ************************************************************
 
@@ -773,59 +736,132 @@ router.post( /care-id-code/, (req, res) => {
     res.redirect('care-id-role')
 });
 
-router.post( /care-id-role/, (req, res) => {
-    res.redirect('../dashboard?role-type=ap')
-});
-
 router.post( /care-id-authentication/, (req,res) => {
-    res.redirect('/V11bi/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post( /care-id-key/, (req,res) => {
-    res.redirect('/V11bi/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post( /care-id-windows/, (req,res) => {
-    res.redirect('/V11bi/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post( /care-id-smartcard/, (req,res) => {
-    res.redirect('/V11bi/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
-
-
-// ************************
-// MEO 
-
-
-router.post( /meo-review/, (req,res) => {
-    res.redirect('meo-confirmation')
-});
-
-router.post( /joseph-review/, (req,res) => {
-    res.redirect('meo-confirmation')
-});
-
-router.post( /milo-review/, (req,res) => {
-    res.redirect('meo-confirmation')
-});
-
-router.post( /select-reg-office/, (req,res) => {
-    res.redirect('cya-share-mccd')
-});
-
-router.post( /cya-share-mccd/, (req,res) => {
-    res.redirect('meo-confirmation')
-});
-
-
-
-
-
 
 
 
 // ************************************************************
+
+
+
+
+
+// BACK TO DASHBOARD
+router.post( /care-id-role/, (req, res) => {
+    
+    const roleType = req.session.data['role-type'];
+     
+    if( !req.session.data['qualifications'] ){
+        if( roleType === 'ap' || roleType === 'me' ){
+            res.redirect('../qualifications');
+        } else {
+            res.redirect('../dashboard');
+        }
+    } else {
+        res.redirect('../dashboard');
+        
+    }
+
+});
+
+// QUALIFCATIONS
+router.post( /qualifications/, (req, res) => {
+    
+    if( req.session.data['return-to-dashboard'] ){
+        delete req.session.data['return-to-dashboard'];
+        res.redirect('dashboard');
+    } else {
+        res.redirect('confirm-your-details');
+    }
+
+});
+
+// MCCD SUMMARY
+router.post( /mccd-summary/, (req, res) => {
+
+    switch( req.session.data['role-type'] ){
+
+        case 'ap':
+        case 'me':
+
+             if( req.session.data['me-signoff'] === 'amend' ){
+
+                // Certificate needs amendments from the AP...
+                res.redirect('confirmation')
+
+             } else {
+                
+                // Certificate can be submitted to registrar by MEO...
+                res.redirect('confirm-your-details');
+
+             }
+
+             break;
+
+        default:
+            // MEO
+            res.redirect('confirmation')
+
+            break;
+
+    }
+
+});
+
+
+
+// MCCD TASKLIST
+router.post( /mccd-tasklist/, (req, res) => {
+    
+    // This variable lets the declaration page know that it's an ME MCCD 
+    if( req.session.data['role-type'] === 'me' ){
+        req.session.data['me-mccd'] = true;
+    }
+
+    res.redirect('confirm-your-details');
+
+});
+
+
+// DECLARATION
+router.post( /declaration/, (req, res) => {
+    res.redirect('confirmation');
+});
+
+// CONFIRMATION
+router.post( /confirmation/, (req, res) => {
+
+    // This clears all the possible 
+
+    delete req.session.data['ap-cert-declaration'];
+    delete req.session.data['me-cert-declaration'];
+    delete req.session.data['me-scrutiny-declaration'];
+    delete req.session.data['meo-scrutiny-declaration'];
+
+    delete req.session.data['me-signoff'];
+    delete req.session.data['give-feedback'];
+    delete req.session.data['feedback-text'];
+
+    delete req.session.data['me-mccd'];
+    delete req.session.data['sent-to-registrar'];
+
+    res.redirect('dashboard');
+
+});
 
 
 

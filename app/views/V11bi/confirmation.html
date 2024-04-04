@@ -1,97 +1,166 @@
 {% extends "layouts/main_cy-en.html" %}
 
-{% from "govuk/components/button/macro.njk" import govukButton %}
-
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
 
-    {% if data['role-type'] == 'ap' %}
+        <form action="confirmation" method="post" novalidate>
 
-      <!-- ATTENDING PRACTITIONER -->
-      <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
-        <h1 class="govuk-panel__title">{{ data.translations.apConfirmationPageTitle[data.lang] }}</h1>
-      </div>
+            {% if data['role-type'] == 'ap' %}
+                
+                <!-- AP MCCD CREATED (OR RESUBMITTED AFTER AMENDS) -->
+                <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
+                    <h1 class="govuk-panel__title">{{ data.translations.apConfirmationPageTitle[data.lang] }}</h1>
+                </div>
 
-      <hr class="govuk-section-break govuk-section-break--m" />
+                <hr class="govuk-section-break govuk-section-break--m" />
 
-      <p class="govuk-body">{{ data.translations.apConfirmationPageContent[data.lang] }}</p>
-      <h2 class="govuk-heading-m">{{ data.translations.apConfirmationPageSubheadingOne[data.lang] }}</h2>
-      <p class="govuk-body">{{ data.translations.apConfirmationPageWhatHappensNextContent[data.lang] }}</p>
-
-
-    {% else %}
-
-      <!-- MEDICAL EXAMINER / MEDICAL EXAMINER OFFICER -->
-      <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
-        <h1 class="govuk-panel__title">{{ data.translations.confirmationPageTitle[data.lang] }}</h1>
-      </div>
-
-      <hr class="govuk-section-break govuk-section-break--m" />
-
-      <p class="govuk-body">{{ data.translations.confirmationPageContent[data.lang] }}</p>
-      <h2 class="govuk-heading-m">{{ data.translations.confirmationPageSubheadingOne[data.lang] }}</h2>
-      <p class="govuk-body">{{ data.translations.confirmationPageWhatHappensNextContent[data.lang] }}</p>
+                <p class="govuk-body-l">{{ data.translations.apConfirmationPageContent[data.lang] }}</p>
+                <h2 class="govuk-heading-m">{{ data.translations.apConfirmationPageSubheadingOne[data.lang] }}</h2>
+                <p class="govuk-body">{{ data.translations.apConfirmationPageWhatHappensNextContent[data.lang] }}</p>
 
 
-    {% endif %}
+            {% elseif data['role-type'] == 'me' %}
 
-    <!-- FEEDBACK FORM -->
-    <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ data.translations.confirmationPageSubheadingTwo[data.lang] }}</h2>
+                <!-- ME -->
+                {% if data['me-signoff'] == 'amend' %}
 
-    <form action="give-feedback" method="post" novalidate>
+                    <!-- AP MCCD NEEDS AMENDS -->
+                    <div class="govuk-panel govuk-panel--confirmation">
+                        <h1 class="govuk-panel__title">Certificate returned to the attending practitioner</h1>
+                    </div>
+
+                    <hr class="govuk-section-break govuk-section-break--m" />
+
+                    <p class="govuk-body-l">You must contact the attending practitioner to inform them that the MCCD needs amending.</p>
+                    
+                    <h2 class="govuk-heading-m">What happens next</h2>
+                    <p class="govuk-body">When the attending practitioner has amended this MCCD your medical examiner officer will receive an email. They must review the amendments and, if appropriate, mark this certificate as 'Ready for sign off by a medical examiner'. At that point, you must sign back in to the MCCD service to sign-off this certificate.</p>
+                
+                {% else %}
+
+                    {% if data['me-mccd'] %}
+
+                        <!-- ME MCCD CREATED  -->
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Medical certificate of cause of death completed</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <p class="govuk-body-l">Medical examiner officers in your organisation can now submit this certificate to the appropriate registrar.</p>
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">There are no further actions for you.</p>
+
+                    {% else %}
+
+                        <!-- AP MCCD SIGNED OFF  -->
+                        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
+                            <h1 class="govuk-panel__title">{{ data.translations.confirmationPageTitle[data.lang] }}</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <p class="govuk-body-l">{{ data.translations.confirmationPageContent[data.lang] }}</p>
+                        <h2 class="govuk-heading-m">{{ data.translations.confirmationPageSubheadingOne[data.lang] }}</h2>
+                        <p class="govuk-body">{{ data.translations.confirmationPageWhatHappensNextContent[data.lang] }}</p>
+
+                    {% endif %}
+
+                {% endif %}
+
+            {% else %}
+
+                <!-- MEO -->
+
+                {% if data['sent-to-registrar'] %}
+
+                    <!-- MCCD CONFIRMED AS SENT TO REGISTRAR -->
+                    <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Certificate submitted to registrar</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">You’ll still have access to this certificate from your dashboard for 3 months. There are no further actions for you.</p>
+
+                {% else %}
+
+                        <!-- AP MCCD SENT TO ME FOR REVIEW -->
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Certificate sent to medical examiners for sign-off</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <p class="govuk-body-l">Medical examiners in your organisation will now be able to access this certificate from their dashboard. They can review and sign off this certificate as part of the scrutiny process.</p>
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">You will receive an email when the medical examiner has signed off this certificate. You must then sign back in to the MCCD service, download the signed-off certificate and send it to the registrar.</p>
+
+                {% endif %}
 
 
-      {{ govukRadios({
-        name: 'give-feedback',
-        value: data['give-feedback'],
-        fieldset: {
-          legend: {
-            text: data.translations.confirmationPageGiveFeedbackQuestionOne[data.lang],
-            classes: 'govuk-heading-s govuk-!-font-weight-bold'
-          }
-        },
-        items: [
-          { value: 'confirmationPageGiveFeedbackRadioOne', text: data.translations.confirmationPageGiveFeedbackRadioOne[data.lang] },
-          { value: 'confirmationPageGiveFeedbackRadioTwo', text: data.translations.confirmationPageGiveFeedbackRadioTwo[data.lang] },
-          { value: 'confirmationPageGiveFeedbackRadioThree', text: data.translations.confirmationPageGiveFeedbackRadioThree[data.lang] },
-          { value: 'confirmationPageGiveFeedbackRadioFour', text: data.translations.confirmationPageGiveFeedbackRadioFour[data.lang] },
-          { value: 'confirmationPageGiveFeedbackRadioFive', text: data.translations.confirmationPageGiveFeedbackRadioFive[data.lang] }
-        ]
-      }) }}
+                
 
-      {{ govukTextarea({
-        name: 'feedback-text', id: 'feedback-text', value: data['feedback-text'],
-        label: {
-          text: data.translations.confirmationPageGiveFeedbackQuestionTwo[data.lang],
-          classes: 'govuk-heading-s govuk-!-font-weight-bold'
-        },
-        hint: { text: data.translations.confirmationPageGiveFeedbackQuestionTwoHint[data.lang] }
-      }) }}
+            {% endif %}
 
-    
-      <div class="govuk-button-group">
+            <!-- FEEDBACK FORM -->
+            <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ data.translations.confirmationPageSubheadingTwo[data.lang] }}</h2>
 
-        {{ govukButton({
-          text: data.translations.confirmationPageCTAprimary[data.lang]
-        }) }}
 
-        {{ govukButton({
-          text: data.translations.confirmationPageCTAsecondary[data.lang],
-          classes: 'govuk-button--secondary'
-        }) }}
+            {{ govukRadios({
+                name: 'give-feedback',
+                value: data['give-feedback'],
+                fieldset: {
+                legend: {
+                    text: data.translations.confirmationPageGiveFeedbackQuestionOne[data.lang],
+                    classes: 'govuk-heading-s govuk-!-font-weight-bold'
+                }
+                },
+                items: [
+                { value: 'confirmationPageGiveFeedbackRadioOne', text: data.translations.confirmationPageGiveFeedbackRadioOne[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioTwo', text: data.translations.confirmationPageGiveFeedbackRadioTwo[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioThree', text: data.translations.confirmationPageGiveFeedbackRadioThree[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioFour', text: data.translations.confirmationPageGiveFeedbackRadioFour[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioFive', text: data.translations.confirmationPageGiveFeedbackRadioFive[data.lang] }
+                ]
+            }) }}
 
-      </div>
-    
-    </form>
+            {{ govukTextarea({
+                name: 'feedback-text', id: 'feedback-text', value: data['feedback-text'],
+                label: {
+                text: data.translations.confirmationPageGiveFeedbackQuestionTwo[data.lang],
+                classes: 'govuk-heading-s govuk-!-font-weight-bold'
+                },
+                hint: { text: data.translations.confirmationPageGiveFeedbackQuestionTwoHint[data.lang] }
+            }) }}
 
-  </div>
+            
+            <div class="govuk-button-group">
+
+                {{ govukButton({
+                    text: data.translations.confirmationPageCTAprimary[data.lang]
+                }) }}
+
+                {{ govukButton({
+                    text: data.translations.confirmationPageCTAsecondary[data.lang],
+                    classes: 'govuk-button--secondary'
+                }) }}
+
+            </div>
+
+        </form>
+
+    </div>
 </div>
 
-
 {{ data | debugData | safe }}
-
 
 {% endblock %}
