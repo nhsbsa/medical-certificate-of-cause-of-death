@@ -12,7 +12,9 @@
   {% else %}
     <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
     <script>
-      window.location.href = 'qualifications?return-to-dashboard=true';
+      window.addEventListener('DOMContentLoaded', function(){
+        window.location.href = 'qualifications?return-to-dashboard=true';
+      });
     </script>
   {% endif%}
 

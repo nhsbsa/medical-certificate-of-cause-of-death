@@ -12,7 +12,9 @@
   {% else %}
     <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
     <script>
-      window.location.href = 'qualifications?return-to-dashboard=true';
+      window.addEventListener('DOMContentLoaded', function(){
+        window.location.href = 'qualifications?return-to-dashboard=true';
+      });
     </script>
   {% endif%}
 
@@ -184,7 +186,7 @@
     
     <div class="govuk-grid-column-full">
 
-        {% import 'V11bi/data-patients.html' as patientData %}
+        {% import 'V10-1/data-patients.html' as patientData %}
 
         <style>
 
