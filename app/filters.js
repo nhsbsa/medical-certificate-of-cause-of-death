@@ -269,7 +269,7 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 //
 addFilter( 'getDashboardTableRows', function( content ) {
    
-    // content: patient data from 'tests/data-patients.html'
+    // content: patient data from 'data-patients.html'
 
     const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
@@ -306,7 +306,7 @@ addFilter( 'getDashboardTableRows', function( content ) {
 //
 addFilter( 'getDashboardTableDraftRows', function( content ) {
    
-    // content: patient data from 'tests/data-patients.html'
+    // content: patient data from 'data-patients.html'
 
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
@@ -363,7 +363,7 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 //
 addFilter( 'getPatientDataByID', function( content, id ){
 
-    // content: patient data from 'tests/data-patients.html'
+    // content: patient data from 'data-patients.html'
     
     const noOfRecords = ( Array.isArray( content ) && content.length > 0 ) ? content.length : 0;
     let patient = false;
