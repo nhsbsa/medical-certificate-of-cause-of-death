@@ -1,35 +1,42 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
-{% endblock %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
 
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+        <form action="qualifications" role="form" method="post" novalidate>
 
-    <h1 class="govuk-heading-l"><span class="govuk-caption-l govuk-caption--bottom">Your details</span>
-      What are your qualifications?
-    </h1>
+            {{ govukInput({
+                label: {
+                    html: 'What is your primary qualification?',
+                    classes: 'govuk-label--l',
+                    isPageHeading: true
+                },
+                hint: { text: 'As registered by the GMC, for example MB ChB' },
+                id: 'qualifications',
+                name: 'qualifications',
+                value: data['qualifications'],
+                classes: 'govuk-input--width-10'
+            }) }}
 
-    <form action="qualifications" role="form" method="post">
+            {{ govukButton({
+                text: data.translations.globalSaveContinue[data.lang]
+            }) }}
+            
+        </form>
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="example">
-          Enter details
-        </label>
-        <input class="govuk-input" id="example" name="qualifications" type="text">
-      </div>
-
-      <button class="govuk-button" type="submit">
-        Continue
-      </button>
-    </form>
-
-  </div>
+    </div>
 </div>
+
+{{ data | debugData | safe }}
 
 {% endblock %}

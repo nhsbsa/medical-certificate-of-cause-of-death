@@ -1,0 +1,401 @@
+{% extends "layouts/main.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+  }) }}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        {% import 'V11bi/data-patients.html' as patientData %}
+        {% set patient = patientData.data | getPatientDataByID( data.id ) %}
+
+        {% set patientStatus = patient.status %}
+
+
+
+        {% if patient %}
+
+
+        <!--
+
+
+ ______   ________  _________     _       _____  _____      ______   
+|_   _ `.|_   __  ||  _   _  |   / \     |_   _||_   _|   .' ____ \  
+  | | `. \ | |_ \_||_/ | | \_|  / _ \      | |    | |     | (___ \_| 
+  | |  | | |  _| _     | |     / ___ \     | |    | |   _  _.____`.  
+ _| |_.' /_| |__/ |   _| |_  _/ /   \ \_  _| |_  _| |__/ || \____) | 
+|______.'|________|  |_____||____| |____||_____||________| \______.' 
+                                                                     
+
+
+        -->
+
+        <main class="govuk-main-wrapper govuk-!-padding-top-6">
+            
+            {{ patientStatus | getStatusTag | safe }}
+            <h1 class="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-bottom-2">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
+            <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
+
+
+            {% if data['role-type'] === 'ap' and patient.status === 1 %}
+
+                <!-- 
+
+                    CHANGABLE 
+
+                -->
+
+                <!-- DECEASED PERSONS DETAILS -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo }, actions: { items: [{ href: 'nhs-number', text: 'Change', visuallyHiddenText: 'NHS number' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name }, actions: { items: [{ href: 'name-of-the-deceased', text: 'Change', visuallyHiddenText: 'name' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-referring-mp-name', text: 'Change', visuallyHiddenText: 'consultant name' }] } }
+                    ]
+                }) }}
+
+                <!-- ACTIONS AFTER DEATH -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
+                    ]
+                }) }}
+
+
+            {% else %}
+
+                <!-- 
+                    
+                    NON CHANGEABLE 
+                    
+                -->
+
+                <!-- DECEASED PERSONS DETAILS -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo } },
+                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } },
+                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' } }
+                    ]
+                }) }}
+
+                <!-- ACTIONS AFTER DEATH -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' } }
+                    ]
+                }) }}
+
+            {% endif %}
+
+
+            {% if data['role-type'] === 'ap' and ( patient.status === 1 or patient.status === 2 ) %}
+
+                <!-- 
+                    
+                    CHANGEABLE 
+                    
+                -->
+
+
+                <!-- CAUSE OF DEATH  -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'caused-by-employment', text: 'Change', visuallyHiddenText: 'whether employment affected the death' }] } },
+                        {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } },
+                        {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnancy-contributed', text: 'Change', visuallyHiddenText: 'whether the pregnancy contributed to the death' }] } }
+                    ]
+                }) }}
+
+            {% else %}
+
+                <!-- 
+                    
+                    NON CHANGEABLE 
+                    
+                -->
+
+
+                <!-- CAUSE OF DEATH  -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
+                    },
+                    rows: [
+                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' } }
+                    ]
+                }) }}
+
+            {% endif %}
+
+
+            <!-- ATTENDING PRACTITIONERS INFORMATION -->
+            {{ govukSummaryList({
+                card: {
+                    title: { text: data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] }
+                },
+                rows: [
+                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: '' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '' } },
+                    {  key: { text: 'Qualification' }, value: { html: '' } }
+                ]
+            }) }}
+
+        </main>
+
+            <!--
+
+
+      _        ______  _________  _____   ___   ____  _____   ______   
+     / \     .' ___  ||  _   _  ||_   _|.'   `.|_   \|_   _|.' ____ \  
+    / _ \   / .'   \_||_/ | | \_|  | | /  .-.  \ |   \ | |  | (___ \_| 
+   / ___ \  | |           | |      | | | |   | | | |\ \| |   _.____`.  
+ _/ /   \ \_\ `.___.'\   _| |_    _| |_\  `-'  /_| |_\   |_ | \____) | 
+|____| |____|`.____ .'  |_____|  |_____|`.___.'|_____|\____| \______.' 
+                                                                       
+
+
+            -->
+
+        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
+
+            {% if data['role-type'] == 'ap' %}
+
+                <!-- AP -->
+
+                <!-- BACK TO DASHBOARD -->
+                {{ govukButton({
+                    text: data.translations.globalBackToDashboard[data.lang],
+                    href: 'dashboard',
+                    classes: 'govuk-button--secondary'
+                }) }}
+
+            {% elseif data['role-type'] == 'me' %}
+
+                <!-- ME -->
+            
+                {% if patientStatus == '3' %}
+
+                    <!-- IF STATUS = For sign off by Medical Examiner -->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        {{ govukRadios({
+                            name: 'me-signoff',
+                            value: data['me-signoff'],
+                            fieldset: {
+                                legend: {
+                                    text: 'Medical examiner sign off',
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                { text: 'This certificate requires amendments by the attending practitioner', value: 'amend' },
+                                { text: 'This certificate is ready to be sent to the registrar',  value: 'registrar' }
+                            ]
+                        }) }}
+                    
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.globalSaveContinue[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                        
+                    </form>
+
+                {% else %}
+
+                    <!-- ELSE: BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalBackToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button--secondary'
+                    }) }}
+
+                {% endif %}
+
+            {% else %}
+
+                <!-- MEO -->
+
+                <!-- IF STATUS = For officer review -->
+                {% if patientStatus == '1'  %}
+
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        {{ govukCheckboxes({
+                            name: 'meo-scrutiny-declaration',
+                            fieldset: {
+                                legend: {
+                                text: data.translations.meoDeclarationPageTitle[data.lang],
+                                isPageHeading: true,
+                                classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                {
+                                value: 'meoDeclarationContent',
+                                text: data.translations.meoDeclarationContent[data.lang],
+                                checked: ( data['meo-cert-declaration'] )
+                                }
+                            ]
+                            }) }}
+
+       
+                    
+                        <div class="govuk-button-group">
+
+                            {{ govukButton({
+                            text: data.translations.meoDeclarationSubmitForScrutiny[data.lang]
+                            }) }}
+
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+
+                        </div>
+                        
+                    </form>
+
+                {% elseif patientStatus == '4' %}
+
+                    <!--IF STATUS = Review complete - send to registrar-->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        <div class="govuk-form-group">
+                    
+                            <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    
+                                    <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
+                                        Download certificate
+                                    </h2>
+                                    <p>Download this certificate to your computer and send it to the registrar via email. Once you are ready, come back to this screen to mark this certificate as sent by ticking the checkbox below.</p>
+                                    <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--primary">Download certificate</span>
+                    
+                                </legend>
+                    
+                                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
+                                        <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">
+                                            I have sent this certificate to the registrar
+                                        </label>
+                                    </div>
+                                </div>
+                    
+                            </fieldset>
+                        </div>
+
+
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: 'Mark MCCD as sent to registrar'
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalBackToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                    
+                    </form>
+
+                {% else %}
+
+                    <!-- BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalBackToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button--secondary'
+                    }) }}
+                    
+                {% endif %}
+
+            {% endif %}
+
+
+        
+
+        {% else %}
+
+            <h1 class="govuk-heading-l">Patient not found</h1>
+
+            {{ govukInsetText({
+                text: 'No patient information could be found for that ID.'
+            }) }}
+
+        {% endif %}
+
+        </div>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}
