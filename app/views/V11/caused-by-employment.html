@@ -71,7 +71,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </h1>
     </legend>
     <div id="employment-hint" class="govuk-hint">
-      Gallai’r farwolaeth fod wedi’i hachosi neu wedi cyfrannu ati gan y gyflogaeth a ddilynwyd ar ryw adeg gan yr ymadawedig.
+      Gallai’r farwolaeth hon fod o ganlyniad i’r gyflogaeth a ddilynwyd ar ryw adeg gan yr ymadawedig, neu gallai’r gyflogaeth fod wedi cyfrannu at y farwolaeth.
     </div>
 
     <div class="govuk-form-group">
@@ -79,17 +79,17 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <div class="govuk-radios__item">
           <input class="govuk-radios__input" id="caused-by-employment-yes" name="caused-by-employment" type="radio"
-            value="Oes">
+            value="Gallai">
           <label class="govuk-label govuk-radios__label" for="caused-by-employment-yes">
-            Oes
+            Gallai
           </label>
         </div>
 
         <div class="govuk-radios__item">
           <input class="govuk-radios__input" id="caused-by-employment-no" name="caused-by-employment" type="radio"
-            value="Nac oes">
+            value="Na allai">
           <label class="govuk-label govuk-radios__label" for="caused-by-employment-no">
-            Nac oes
+            Na allai
           </label>
         </div>
 
@@ -102,51 +102,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   </button>
 </form>
 
-<!-- Default En language -->
-{% else %}
-
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-<form action="caused-by-employment" role="form" method="post">
-
-  <fieldset class="govuk-fieldset" aria-describedby="employment-hint">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 class="govuk-fieldset__heading">
-        Could the deceased person's job have caused or contributed to their death?
-      </h1>
-    </legend>
-    <div id="employment-hint" class="govuk-hint">
-      The death might have been due to or contributed to by the employment followed at some time by the deceased.
-    </div>
-
-    <div class="govuk-form-group">
-
-      <div class="govuk-radios">
-
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="caused-by-employment-yes" name="caused-by-employment" type="radio"
-            value="Yes">
-          <label class="govuk-label govuk-radios__label" for="caused-by-employment-yes">
-            Yes
-          </label>
-        </div>
-
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="caused-by-employment-no" name="caused-by-employment" type="radio"
-            value="No">
-          <label class="govuk-label govuk-radios__label" for="caused-by-employment-no">
-            No
-          </label>
-        </div>
-
-      </div>
-    </div>
-  </fieldset>  
-
-  <button class="govuk-button" type="submit">
-    Save and continue
-  </button>
-</form>
 
 {% endif %}
 
