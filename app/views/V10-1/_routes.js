@@ -685,7 +685,7 @@ router.post( /qualifications/, (req, res) => {
         delete req.session.data['return-to-dashboard'];
         res.redirect('dashboard');
     } else {
-        res.redirect('confirm-your-details');
+        res.redirect('confirm-details');
     }
 
 });

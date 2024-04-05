@@ -6,6 +6,22 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 {% block content %}
 
+{% if data['role-type'] === 'ap' or data['role-type'] === 'me'%}
+  
+  {% if data['qualifications'] %}
+    <!-- NOTHING -->
+  {% else %}
+    <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){
+        window.location.href = 'qualifications?return-to-dashboard=true';
+      });
+    </script>
+  {% endif%}
+
+  
+{% endif %}
+
 <div class="govuk-grid-row govuk-!-margin-top-7">
 
 

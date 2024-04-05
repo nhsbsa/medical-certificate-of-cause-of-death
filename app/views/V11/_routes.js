@@ -107,7 +107,7 @@ router.post(/enter-code/, (req, res) => {
 router.post( /care-id-role/, (req, res) => {
     
     const roleType = req.session.data['role-type'];
-     
+    
     if( !req.session.data['qualifications'] ){
         if( roleType === 'ap' || roleType === 'me' ){
             res.redirect('../qualifications');
@@ -128,7 +128,7 @@ router.post( /qualifications/, (req, res) => {
         delete req.session.data['return-to-dashboard'];
         res.redirect('dashboard');
     } else {
-        res.redirect('confirm-your-details');
+        res.redirect('confirm-details');
     }
 
 });
