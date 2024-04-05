@@ -7,11 +7,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% block content %}
 
 <div class="govuk-grid-row">
+    
 
     <div class="govuk-width-container">
         
         <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
+        <div style="background-color: rgb(250, 123, 155);"><h2 class="govuk-heading-m">This is an old page. For the most up to date version, visit <a href="https://mccd-govuk.herokuapp.com/V10-1/mccd-summary?id=0003">Certiticate page</a></h2></div>
+        
         <main class="govuk-main-wrapper">
           
             <div class="govuk-grid-row">
@@ -24,7 +27,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     MCCD reference #327463
                 </h1>
 
-                <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+                <!--<h2 class="govuk-heading-m govuk-!-margin-bottom-2">
                     <span class="govuk-caption-m">
                         21 November 2023
                     </span>
@@ -33,7 +36,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     
                 <p class="govuk-body">
                     Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
-                </p>
+                </p>-->
             </div>
             
           </div>
@@ -191,7 +194,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Post-mortem?
+                            Post-mortem
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data ['death-circumstances'] or 'No' }}
@@ -203,9 +206,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             </a>
                           </dd>
                     </div>
+
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants in body?
+                            Additional information
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['boxB'] or 'Not applicable' }}
+                        </dd>
+
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="death-circumstances">
+                              Change<span class="govuk-visually-hidden"> death circumstances</span>
+                            </a>
+                          </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Implants in body
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant'] or 'No' }}
@@ -233,7 +252,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants removed?
+                            Implants removed
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['implant-removed'] or 'Not applicable' }}
@@ -324,7 +343,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by employment?
+                            Death affected by employment
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['caused-by-employment']}}
@@ -343,7 +362,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by pregnancy?
+                            Death affected by pregnancy
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['pregnancy-contributed']}}
