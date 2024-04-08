@@ -321,6 +321,20 @@ router.post(/check-your-answers-aad/, (req, res) => {
 // ************************************************************
 
 // What caused the death?
+router.post(/testing-cause-of-death/, (req, res) => {
+
+    // Rigging stuff so it definitely works...
+    req.session.data['deceasedComplete'] = 'true';
+    req.session.data['afterDeathComplete'] = 'true';
+    req.session.data['causeDeathComplete'] = 'true';
+    req.session.data['over-under-28'] = 'no';
+
+    res.redirect('cya-cause-death');
+
+});
+
+
+// What caused the death?
 router.post(/cause-of-death/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
