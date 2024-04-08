@@ -19,9 +19,9 @@
 
                 <hr class="govuk-section-break govuk-section-break--m" />
 
-                <p class="govuk-body-l">{{ data.translations.apConfirmationPageContent[data.lang] }}</p>
+                <p class="govuk-body-l">{{ data.translations.apConfirmationPageContent[data.lang] | safe }}</p>
                 <h2 class="govuk-heading-m">{{ data.translations.apConfirmationPageSubheadingOne[data.lang] }}</h2>
-                <p class="govuk-body">{{ data.translations.apConfirmationPageWhatHappensNextContent[data.lang] }}</p>
+                <p class="govuk-body">{{ data.translations.apConfirmationPageWhatHappensNextContent[data.lang] | safe }}</p>
 
 
             {% elseif data['role-type'] == 'me' %}
