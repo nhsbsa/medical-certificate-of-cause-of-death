@@ -78,7 +78,7 @@
               <div class="account-signed-in updated-version">
                 <ul class="account-signed-in__list">
                   <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
-                  <li class="account-signed-in__list-item">{% if data['role-type'] == 'ap' %}Sarah Phillips{% else %}Alera Singh{% endif %}</li>
+                  <li class="account-signed-in__list-item">{% if data['role-type'] == 'ap' %}Ashley Phillips{% else %}Alera Singh{% endif %}</li>
                   {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">GMC no: 12345678</li>{% endif %}                  
                   <li class="account-signed-in__list-item">{% if data['role-type'] == 'ap' %}Royal Manchester Children's Hospital{% else %}North Manchester General Hospital{% endif %}</li>
                   <li class="account-signed-in__list-item"><a href="../index">Sign out</a></li>
@@ -99,7 +99,7 @@
               <div class="account-signed-in">
                 <ul class="account-signed-in__list">
                   <li class="account-signed-in__list-item">
-                    {% if data ['role-type'] == 'ap' %}Sarah Phillips{% else %}Alera Singh{% endif %}
+                    {% if data ['role-type'] == 'ap' %}Ashley Phillips{% else %}Alera Singh{% endif %}
                   </li>
                   <li class="account-signed-in__list-item">{% if data['lang'] == "cy" %}Rhif CMC: 12345678 {% else %}GMC no: 12345678 {% endif %}</li>
                   <li class="account-signed-in__list-item">
