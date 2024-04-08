@@ -25,7 +25,7 @@
                 
                 <p>{{ data['hospitalAddresses'] | getPostCodeSearchStatus('hospital') | safe }}</p>
 
-                {% if (data['hospitalAddresses'] | length > 0)  %}
+                {% if ( data['hospitalAddresses'] | length > 0 )  %}
 
                   {{ data['hospitalAddresses'] | getPostCodeSearchSelect('hospital') | safe }}
 
