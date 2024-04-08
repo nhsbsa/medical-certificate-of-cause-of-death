@@ -66,9 +66,9 @@
                     rows: [
                         {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo }, actions: { items: [{ href: 'nhs-number', text: 'Change', visuallyHiddenText: 'NHS number' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name }, actions: { items: [{ href: 'name-of-the-deceased', text: 'Change', visuallyHiddenText: 'name' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '9 January 1937' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '87' }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: 'White - English, Welsh, Scottish, Northern Irish or British' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-referring-mp-name', text: 'Change', visuallyHiddenText: 'consultant name' }] } }
@@ -106,12 +106,12 @@
                     rows: [
                         {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo } },
                         {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '9 January 1937' } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '87' } },
+                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: 'White - English, Welsh, Scottish, Northern Irish or British' } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
                         {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' } }
+                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: 'Sarah Smith' } }
                     ]
                 }) }}
 
@@ -121,12 +121,21 @@
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
                     rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: 'A post-mortem is not being held' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'No' } }
+                    ]
+                }) }}
+
+                <!-- 
+
+                    [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: 'A post-mortem is not being held' } },
                         {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' } },
                         {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' } },
                         {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' } }
                     ]
-                }) }}
+
+                    -->
 
             {% endif %}
 
@@ -146,6 +155,19 @@
                         title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
                     },
                     rows: [
+                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { html: '<p class="govuk-body">Ischaemic heart disease</p><p class="govuk-body">5 hours</p>' }, actions: { items: [{ href: 'cause-of-death-testing', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: 'Myocardial infarction' }, actions: { items: [{ href: 'cause-of-death-testing', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: 'No' }, actions: { items: [{ href: 'caused-by-employment', text: 'Change', visuallyHiddenText: 'whether employment affected the death' }] } },
+                        {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: 'Not applicable' }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } }
+        
+                    ]
+                }) }}
+
+                <!--
+
+                    BLANK VERSION (changing for testing...)
+               
+               rows: [
                         {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
                         {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
                         {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
@@ -155,7 +177,8 @@
                         {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } },
                         {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnancy-contributed', text: 'Change', visuallyHiddenText: 'whether the pregnancy contributed to the death' }] } }
                     ]
-                }) }}
+                       
+                        -->
 
             {% else %}
 
@@ -192,9 +215,9 @@
                     title: { text: data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] }
                 },
                 rows: [
-                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: '' } },
-                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '' } },
-                    {  key: { text: 'Qualification' }, value: { html: '' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Ashley Phillips' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: 'GMC no: 12345678' } },
+                    {  key: { text: 'Qualification' }, value: { html: data.qualifications } }
                 ]
             }) }}
 
