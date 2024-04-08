@@ -199,6 +199,10 @@
 
         {% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
 
+          {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
+
+          {% if draftRows.length > 0 %}
+
           <!-- DRAFTS TABLE -->
             {{ govukTable({
             caption: 'Your drafts',
@@ -211,8 +215,10 @@
               { text: 'Action' },
               { text: 'Status' }
             ],
-            rows: patientData.data | getDashboardTableDraftRows(data['role-type'])
+            rows: draftRows
           }) }}
+          
+          {% endif %}
 
         {% endif %}
 

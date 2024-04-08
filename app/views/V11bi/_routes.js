@@ -276,9 +276,9 @@ router.post( /death-hospital/, (req, res) => {
     const deathHospital = req.session.data['death-in-hospital'];
 
     if ( deathHospital === 'globalRadioYes' ) {
-        res.redirect('hospital-postcode');
+        res.redirect('place-of-death/hospital-postcode');
     } else {
-        res.redirect('location-of-death');
+        res.redirect('place-of-death/location-of-death');
 
     }
 });
@@ -305,17 +305,17 @@ router.post( /location-of-death/, (req, res) => {
 
 // Exact address
 router.post( /death-location/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect('../cya-deceased')
 });
 
 // CYA - Deceased person's details
 router.post( /select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect('../cya-deceased')
 
 });
 
 router.post( /unknown-address/, (req, res) => {
-    res.redirect('cya-deceased')
+    res.redirect('../cya-deceased')
 });
 
 
@@ -581,6 +581,7 @@ router.get( /hospital-lookup/, (req, res) => {
         // Check if the 'postcodeLookup' matches the specified 'regular expression'
         if (regex.test(postcodeLookup) === true) {
 
+            
             // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
             axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
                 .then(response => {
@@ -607,7 +608,12 @@ router.get( /hospital-lookup/, (req, res) => {
                     req.session.data['hospitalAddresses'] = titleCaseAddresses;
 
                     // Redirect to the 'Select Address' page
-                    res.redirect('select-hospital-address')
+                    if( Array.isArray(titleCaseAddresses) && titleCaseAddresses.length > 0 ){
+                        res.redirect('select-hospital-address')
+                    } else {
+                        res.redirect('no-address-found')
+                    }
+                    
                 })
                 .catch(error => {
                     console.log(JSON.stringify(error));
@@ -615,6 +621,8 @@ router.get( /hospital-lookup/, (req, res) => {
                     res.redirect('no-address-found')
                 });
 
+                //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
+                res.redirect('select-hospital-address')
         }
 
     } else {
@@ -644,6 +652,8 @@ router.get( /another-location-lookup/, (req, res) => {
 
         // Check if the 'postcodeLookup' matches the specified 'regular expression'
         if (regex.test(postcodeLookup) === true) {
+
+            
 
             // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
             axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
@@ -677,6 +687,11 @@ router.get( /another-location-lookup/, (req, res) => {
                     // Redirect in case of an error
                     res.redirect('no-address-found')
                 });
+
+                
+
+                //req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
+                res.redirect('select-another-address')
 
         }
 
@@ -826,13 +841,27 @@ router.post( /mccd-summary/, (req, res) => {
 
 // MCCD TASKLIST
 router.post( /mccd-tasklist/, (req, res) => {
-    
-    // This variable lets the declaration page know that it's an ME MCCD 
-    if( req.session.data['role-type'] === 'me' ){
-        req.session.data['me-mccd'] = true;
-    }
 
-    res.redirect('confirm-your-details');
+    // Need everything there to proceed
+    if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
+
+        // This variable lets the declaration page know that it's an ME MCCD 
+        if( req.session.data['role-type'] === 'me' ){
+            req.session.data['me-mccd'] = true;
+        }
+
+        delete req.session.data.showTaskListError;
+
+        res.redirect('confirm-your-details');
+
+
+    } else {
+
+        res.redirect('mccd-tasklist?showTaskListError=true');
+
+    }
+    
+    
 
 });
 

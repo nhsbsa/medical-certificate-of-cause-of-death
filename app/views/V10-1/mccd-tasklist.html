@@ -45,6 +45,22 @@
     {% endif %}
 
 
+    {% if data.showTaskListError === 'true' %}
+    
+      <!-- ERROR MESSAGE -->
+       {{ govukErrorSummary({
+            titleText: 'There is a problem',
+            errorList: [
+              {
+                text: 'You must complete all sections of the MCCD',
+                href: '#about-the-death-header'
+              }
+            ]
+          }) }}
+
+    {% endif %}
+
+
     <!-- DECEASED PERSON -->
     {{ govukTable({
       caption: data.translations.mccdTasklistH2SectionTitleAboutDeceased[data.lang],
@@ -61,6 +77,7 @@
     {{ govukTable({
       caption: data.translations.mccdTasklistH2SectionTitleAboutDeath[data.lang],
       captionClasses: 'govuk-table__caption--m',
+      attributes: { id: 'about-the-death-header' },
       rows: [
         [
           { html: '<a class="govuk-link" href="'+actionsAfterDeathLink+'">'+data.translations.linkToSectionActionsAfterDeath[data.lang]+'</a>' },

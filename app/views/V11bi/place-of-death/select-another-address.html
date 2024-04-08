@@ -25,9 +25,13 @@
                 
                 <p>{{ data['anotherAddresses'] | getPostCodeSearchStatus('another') | safe }}</p>
 
-                {% if (data['hospitalAddresses'] | length > 0)  %}
+                {% if (data['anotherAddresses'] | length > 0)  %}
 
                   {{ data['anotherAddresses'] | getPostCodeSearchSelect('another') | safe }}
+
+
+                  
+
 
                   {{ govukButton({
                     text: data.translations.globalUseAddress[data.lang]

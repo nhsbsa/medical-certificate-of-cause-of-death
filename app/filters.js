@@ -33,10 +33,7 @@ addFilter('getPostCodeSearchSelect', function( content, type ) {
         html += ( currentValue === el ) ? '<option selected>'+el+'</option>' : '<option>'+el+'</option>';
     });
 
-
     html += '</select>';
-
-    
     return html;
 
 });
