@@ -75,13 +75,14 @@
                     ]
                 }) }}
 
-                <!-- ACTIONS AFTER DEATH -->
+                <!-- POST-MORTEM AND IMPLANTS -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
                     rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: 'Yes' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersAdditionalInformation[data.lang] }, value: { text: 'Not applicable' }, actions: { items: [{ href: 'box-b', text: 'Change', visuallyHiddenText: 'whether you might be in a position to provide additional information later' }] } },
                         {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
                         {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
                         {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }

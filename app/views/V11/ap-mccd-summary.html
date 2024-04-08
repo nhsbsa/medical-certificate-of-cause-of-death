@@ -10,20 +10,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <div class="govuk-width-container">
         
-        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
+        
+<!--         
+        <div style="background-color: rgb(250, 123, 155);"><h2 class="govuk-heading-m">This is an old page. For the most up to date version, visit <a href="https://mccd-govuk.herokuapp.com/V10-1/mccd-summary?id=0003">Certiticate page</a></h2></div>
+         -->
+    {% if data['lang'] == "en" %}
         <main class="govuk-main-wrapper">
-          
+            <a href="javascript:history.back()" class="govuk-back-link">Back</a>
             <div class="govuk-grid-row">
             
             <div class="govuk-grid-column-two-thirds">
                 
-                <span class="govuk-tag govuk-tag--orange">To be amended</span>
+                
+                <span class="govuk-tag govuk-tag--blue">For review by MEO</span>
                 
                 <h1 class="govuk-heading-l govuk-!-margin-top-2">
-                    MCCD reference #327463
+                    Medical certificate of cause of death (MCCD)
                 </h1>
-
+                <p>
+                    Reference number: XX-1234-XX-56
+                </p>
+<!-- 
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
                     <span class="govuk-caption-m">
                         21 November 2023
@@ -33,7 +40,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     
                 <p class="govuk-body">
                     Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
-                </p>
+                </p> -->
             </div>
             
           </div>
@@ -63,7 +70,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         </dt>
 
                         <dd class="govuk-summary-list__value">
-                            {{ data['nhs-number'] or '785 302 1445' }}
+                            {% if data['ur1'] == "true" %}
+                            785 304 1445
+                            {% else %}
+                            {{ data['nhs-number-input'] or '785 302 1445' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -79,7 +90,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Full name
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Joseph William Doyle
+                            {% else %}
                             {{ data['deceased-first-name'] or 'Joseph' }} {{ data['deceased-middle-name'] or 'William' }} {{data['deceased-last-name'] or 'Doyle' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -95,7 +110,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Date of birth
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            1 April 1974
+                            {% else %}
                             {{ data['dob-day'] or '11' }} {{ data['dob-month'] or 'June' }} {{ data['dob-year'] or '1984' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -110,7 +129,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Age
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            50 years old
+                            {% else %}
                             {{ data['deceased-age'] or '39' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -125,7 +148,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Ethnicity
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            White: English, Welsh, Scottish, Northern Irish or British
+                            {% else %}
                             {{ data['ethnicity'] or 'White - British' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -139,7 +166,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Date of death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            6 April 2024
+                            {% else %}
                             {{ data['date-of-death'] or '9 November 2023' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -151,10 +182,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Location of death
+                            Place of death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            University Hospital Cardiff
+                            {% else %}
                             {{ data['location-death'] or 'Leeds General Infirmary' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -165,12 +200,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     </div>
 
-                    <div class="govuk-summary-list__row">
+                    <!-- <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Consultant responsible for care
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
                             Mary Smith
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -178,23 +217,27 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                               Change<span class="govuk-visually-hidden"> consultant</span>
                             </a>
                           </dd>
-                    </div>
+                    </div> -->
                 </dl>
             </div>
         </div>
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
-                <h2 class="govuk-summary-card__title">Actions after death</h2>
+                <h2 class="govuk-summary-card__title">Post-mortem and implants</h2>
             </div>
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Post-mortem?
+                            Post-mortem
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            No
+                            {% else %}
                             {{ data ['death-circumstances'] or 'No' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -205,10 +248,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants in body?
+                            Implants in body
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            No
+                            {% else %}
                             {{ data['implant'] or 'No' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -222,7 +269,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Implant details
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Not applicable
+                            {% else %}
                             {{ data['implant-details'] or 'Not applicable' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -233,10 +284,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Implants removed?
+                            Implants removed
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Not applicable
+                            {% else %}
                             {{ data['implant-removed'] or 'Not applicable' }}
+                            {% endif %}
                         </dd>
 
                         <dd class="govuk-summary-list__actions">
@@ -268,14 +323,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-summary-card__content">
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
+                        <dt class="govuk-summary-list__key" style="width:35%">
                             1(a) Disease or condition directly leading to death
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Myocardial infarction <br>
+                            Cnawdnychiant myocardaidd
+                            {% else %}
                             {{ data['main-cause'] or 'Heart attack' }}
+                            {% endif %}
                         </dd>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            1 hour
+                            {% else %}
                             20 minutes
+                            {% endif %}
                         </dd>
 
                     </div>
@@ -285,10 +349,18 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(b) Other disease or condition, if any, leading to 1(a)
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
                             {{data ['secondary-cause']}}
+                            {% endif %}
                         </dd>
                         <dd class="govuk-summary-list__value">
-                            
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
+
+                            {% endif %}
                         </dd>
 
                     </div>
@@ -298,7 +370,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(c) Other disease or condition, if any, leading to 1(b)
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data ['other-conditions-c'] }}
+                            <dd class="govuk-summary-list__value">
+                                {% if data['ur1'] == "true" %}
+    
+                                {% else %}
+                                {{ data ['other-conditions-c'] }}
+                                {% endif %}
+                            </dd>
+                            
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
+
+                            {% endif %}
                         </dd>
                     </div>
 
@@ -307,27 +393,55 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             1(d) Other disease or condition, if any, leading to 1(c)
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data ['other-conditions-d'] }}
-                        </dd>
+                            {% if data['ur1'] == "true" %}
 
+                            {% else %}
+                            {{ data ['other-conditions-d'] }}
+                            {% endif %}
+                            
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
+
+                            {% endif %}
+                        </dd>
                     </div>
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             2 Other significant conditions contributing to their death
                         </dt>
-                        <dd class="govuk-summary-list__value">
+                        <dd class="govuk-summary-list__value" style="width:35%">
+                            {% if data['ur1'] == "true" %}
+                            Diabetes mellitus<br>
+                        Diabetes mellitus
+                            {% else %}
                             {{ data['other-significant-conditions']}}
+                            {% endif %}
+                            
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            15 years
+                            {% else %}
+
+                            {% endif %}
                         </dd>
 
                     </div>
 
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by employment?
+                            Death affected by employment
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            No
+                            {% else %}
                             {{ data['caused-by-employment']}}
+                            {% endif %}
                         </dd>
 
                     </div>
@@ -337,18 +451,28 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                             Pregnancy
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Not applicable
+                            {% else %}
                             {{ data['pregnant-at-death']}}
+                            {% endif %}
                         </dd>
                     </div>
 
+                    {% if data['pregnancy-contributed'] %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Death affected by pregnancy?
+                            Death affected by pregnancy
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+                            Not applicable
+                            {% else %}
                             {{ data['pregnancy-contributed']}}
+                            {% endif %}
                         </dd>
                     </div>
+                    {% endif %}
 
                 </dl>
             </div>
@@ -379,13 +503,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Work address
+                            Qualification
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            123 Hospital Road, Wing 4,<br>
-                            Newcastle,<br>
-                            Tyne and Wear,<br>
-                            NE12 3AB
+                            {{ data['qualifications']}}
                         </dd>
                     </div>
                 </dl>
@@ -393,10 +514,527 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </div>
         
         <form action="ap-mccd-summary" method="post">
-            <button class="govuk-button govuk-button--primary" type="submit">
-                Complete MCCD
-            </button>
+            <div class="govuk-button-group">
+                <button class="govuk-button govuk-button--primary" type="submit">
+                    Submit changes to MCCD
+                </button>
+                <a href="dashboard" class="govuk-button govuk-button--secondary">
+                    Return to dashboard
+                </a>
+            </div>
         </form>
+
+        <!-- Welsh version -->
+    {% elseif data['lang'] == "cy" %}
+    <main class="govuk-main-wrapper">
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+        <div class="govuk-grid-row">
+        
+        <div class="govuk-grid-column-two-thirds">
+            
+            
+            <span class="govuk-tag govuk-tag--blue">For review by MEO</span>
+            
+            <h1 class="govuk-heading-l govuk-!-margin-top-2">
+                Tystysgrifau Meddygol Achos Marwolaeth (MCCD)
+            </h1>
+            <p>
+                Rhif Adnabod Unigryw: XX-1234-XX-56
+            </p>
+<!-- 
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+                <span class="govuk-caption-m">
+                    21 November 2023
+                </span>
+            Medical Examiner’s comment
+            </h2>
+                
+            <p class="govuk-body">
+                Heart attack is not an acceptable cause of death. Please change it to myocardial infarction.
+            </p> -->
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+<div class="govuk-grid-column-full">        
+
+    <div class="govuk-summary-card">
+
+        <div class="govuk-summary-card__title-wrapper">
+
+            <h2 class="govuk-summary-card__title">
+                Deceased person's details
+            </h2>
+
+        </div>
+
+        <div class="govuk-summary-card__content">
+
+            <dl class="govuk-summary-list">
+
+                <div class="govuk-summary-list__row">
+
+                    <dt class="govuk-summary-list__key">
+                        Rhif GIG
+                    </dt>
+
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        785 304 1445
+                        {% else %}
+                        {{ data['nhs-number-input'] or '785 302 1445' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="nhs-number">
+                            Newid<span class="govuk-visually-hidden"> rhif gig</span>
+                        </a>
+                      </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Enw llawn
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Joseph William Doyle
+                        {% else %}
+                        {{ data['deceased-first-name'] or 'Joseph' }} {{ data['deceased-middle-name'] or 'William' }} {{data['deceased-last-name'] or 'Doyle' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="name-of-the-deceased">
+                          Newid<span class="govuk-visually-hidden"> Enw llawn</span>
+                        </a>
+                      </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Dyddiad Geni
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        1 Ebrill 1974
+                        {% else %}
+                        {{ data['dob-day'] or '11' }} {{ data['dob-month'] or 'June' }} {{ data['dob-year'] or '1984' }}
+                        {% endif %}
+                    </dd>
+                        
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="date-of-birth">
+                          Newid<span class="govuk-visually-hidden"> Dyddiad Geni</span>
+                        </a>
+                      </dd>
+
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Oed
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        50 mlwydd oed
+                        {% else %}
+                        {{ data['deceased-age'] or '39 years old' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="age-66">
+                          Newid<span class="govuk-visually-hidden"> oed</span>
+                        </a>
+                      </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Ethnigrwydd
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Gwyn: Seisnig, Cymreig, Albanaidd, Gwyddelig Gogledd Iwerddon neu Brydeinig
+                        {% else %}
+                        {{ data['ethnicity'] or 'White - British' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="ethnicity">
+                          Newid<span class="govuk-visually-hidden"> Ethnigrwydd</span>
+                        </a>
+                      </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Dyddiad marw
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        6 Ebrill 2024
+                        {% else %}
+                        {{ data['date-of-death'] or '9 November 2023' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="date-of-death">
+                          Newid<span class="govuk-visually-hidden"> Dyddiad marw</span>
+                        </a>
+                      </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Man marwolaeth
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Ysbyty Athrofaol Cymru, Caerdydd
+                        {% else %}
+                        {{ data['location-death'] or 'Leeds General Infirmary' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="location-death-hospital">
+                          Newid<span class="govuk-visually-hidden"> Man marwolaeth</span>
+                        </a>
+                      </dd>
+
+                </div>
+
+                <!-- <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Consultant responsible for care
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+                        Mary Smith
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="location-death-hospital">
+                          Change<span class="govuk-visually-hidden"> consultant</span>
+                        </a>
+                      </dd>
+                </div> -->
+            </dl>
+        </div>
+    </div>
+
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">Post-mortem and implants</h2>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Post-mortem
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Ni chynhelir post-mortem 
+                        {% else %}
+                        {{ data ['death-circumstances'] or 'No' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="death-circumstances">
+                          Newid<span class="govuk-visually-hidden"> post-mortem</span>
+                        </a>
+                      </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Mewnblaniadau yn y corff
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Na do
+                        {% else %}
+                        {{ data['implant'] or 'No' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="implant">
+                          Newid<span class="govuk-visually-hidden"> implant</span>
+                        </a>
+                      </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Manylion mewnblaniad
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Amherthnasol
+                        {% else %}
+                        {{ data['implant-details'] or 'Not applicable' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="implant">
+                          Newid<span class="govuk-visually-hidden"> implant details</span>
+                        </a>
+                      </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Manylion mewnblaniad
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Amherthnasol
+                        {% else %}
+                        {{ data['implant-removed'] or 'Not applicable' }}
+                        {% endif %}
+                    </dd>
+
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="implant-removed">
+                          Newid<span class="govuk-visually-hidden"> implant removed</span>
+                        </a>
+                      </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+            
+            <h2 class="govuk-summary-card__title">Cause of death</h2>
+            
+            <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                    <a class="govuk-link" href="cause-of-death">
+                    Newid
+                        <span class="govuk-visually-hidden">
+                            cause of death
+                        </span>
+                  </a>
+                </li>
+              </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        1(a) Clefyd neu gyflwr sy'n arwain yn uniongyrchol at farwolaeth
+                    </dt>
+                    <dd class="govuk-summary-list__value" style="width:35%" >
+                        {% if data['ur1'] == "true" %}
+                        Myocardial infarction <br>
+                        Cnawdnychiant myocardaidd
+                        {% else %}
+                        {{ data['main-cause'] or 'Heart attack' }}
+                        {% endif %}
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        1 oriau
+                        {% else %}
+                        20 minutes
+                        {% endif %}
+                    </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        1(b) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(a)
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+                        {{data ['secondary-cause']}}
+                        {% endif %}
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+
+                        {% endif %}
+                    </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        1(c) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(b)
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        <dd class="govuk-summary-list__value">
+                            {% if data['ur1'] == "true" %}
+
+                            {% else %}
+                            {{ data ['other-conditions-c'] }}
+                            {% endif %}
+                        </dd>
+                        
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        1(d) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(c)
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+                        {{ data ['other-conditions-d'] }}
+                        {% endif %}
+                        
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+
+                        {% else %}
+
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        2 Cyflyrau arwyddocaol eraill sy'n cyfrannu at eu farwolaeth
+                    </dt>
+                    <dd class="govuk-summary-list__value" style="width:35%">
+                        {% if data['ur1'] == "true" %}
+                        Diabetes mellitus<br>
+                        Diabetes mellitus
+                        {% else %}
+                        {{ data['other-significant-conditions']}}
+                        {% endif %}
+                        
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        15 mlynedd
+                        {% else %}
+
+                        {% endif %}
+                    </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Marwolaeth yr effeithir arni gan gyflogaeth
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Na allai
+                        {% else %}
+                        {{ data['caused-by-employment']}}
+                        {% endif %}
+                    </dd>
+
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Pregnancy
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Amherthnasol
+                        {% else %}
+                        {{ data['pregnant-at-death']}}
+                        {% endif %}
+                    </dd>
+                </div>
+
+                {% if data['pregnancy-contributed'] %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Death affected by pregnancy
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data['ur1'] == "true" %}
+                        Amherthnasol
+                        {% else %}
+                        {{ data['pregnancy-contributed']}}
+                        {% endif %}
+                    </dd>
+                </div>
+                {% endif %}
+
+            </dl>
+        </div>
+    </div>
+
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">Attending practitioners information</h2>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Full name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Sarah Phillips
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        GMC number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        12345678
+                    </dd>
+                </div>
+                
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Qualification
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['qualifications']}}
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+    
+    <form action="ap-mccd-summary" method="post">
+        <div class="govuk-button-group">
+            <button class="govuk-button govuk-button--primary" type="submit">
+                Submit changes to MCCD
+            </button>
+            <a href="dashboard" class="govuk-button govuk-button--secondary">
+                Return to dashboard
+            </a>
+        </div>
+    </form>
+    {% endif %}
     </div>
 </div>
 

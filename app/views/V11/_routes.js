@@ -102,6 +102,36 @@ router.post(/enter-code/, (req, res) => {
     res.redirect('66-or-65')
 });
 
+// Qualification set
+
+router.post( /care-id-role/, (req, res) => {
+    
+    const roleType = req.session.data['role-type'];
+    
+    if( !req.session.data['qualifications'] ){
+        if( roleType === 'ap' || roleType === 'me' ){
+            res.redirect('../qualifications');
+        } else {
+            res.redirect('../dashboard');
+        }
+    } else {
+        res.redirect('../dashboard');
+        
+    }
+
+});
+
+// QUALIFCATIONS
+router.post( /qualifications/, (req, res) => {
+    
+    if( req.session.data['return-to-dashboard'] ){
+        delete req.session.data['return-to-dashboard'];
+        res.redirect('dashboard');
+    } else {
+        res.redirect('confirm-details');
+    }
+
+});
 // ***************************************************************************************************
 // MCCD Creation flow
 // ***************************************************************************************************
@@ -400,7 +430,7 @@ router.post(/implant/, (req, res) => {
     // if the journey is complete send back to the 'check-your-details' page
     if (completeAfterDeath === 'true') {
         res.redirect('cya-death-circumstances')
-    }else if (implant == 'Yes' || implant == 'Oes' ) {
+    }else if (implant == 'Yes' || implant == 'Do' ) {
         res.redirect('implant-removed')
     } else {
         res.redirect('cya-death-circumstances')
@@ -464,8 +494,8 @@ router.post(/caused-by-employment/, (req, res) => {
 
 // Was the deceased pregnant within the year prior to their death?
 router.post(/pregnant-at-death/, (req,res) => {
-    const preggo = ['Pregnant at time of death', 'Yn feichiog ar adeg marwolaeth', 'Pregnant 1 to 42 days before death', 'Yn feichiog 1 i 42 diwrnod cyn marwolaeth', 'Pregnant 43 days to a year before death', 'Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth']
-    const notPreggo = ['Not applicable', 'Ddim yn berthnasol', 'Not pregnant', 'Ddim yn feichiog', 'Unknown', 'Anhysbys']
+    const preggo = ['Pregnant at time of death', 'Beichiog adeg y farwolaeth', 'Pregnant 1 to 42 days before death', 'Beichiog 1 i 42 o ddiwrnodau cyn y farwolaeth', 'Pregnant 43 days to a year before death', 'Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth']
+    const notPreggo = ['Not applicable', 'Amherthnasol', 'Not pregnant', 'Nid oedd yn feichiog', 'Unknown', 'Anhysbys']
     var pregnantAtDeath = req.session.data['pregnant-at-death']
     if (preggo.includes(pregnantAtDeath)) {
         res.redirect('pregnancy-contributed')
@@ -492,15 +522,9 @@ router.post(/check-your-answers-cod/, (req, res) => {
 // Declaration
 // ************************************************************
 
-// //Confirm AP/ ME details 
-// router.post(/confirm-details/, (req, res) => {
-//     var qualifications = req.session.data['qualifications']
-//     if (qualifications === null ){
-//         res.redirect('qualifications')
-//     } else {
-//         res.render('V11/confirm-details')
-//     }
-// });
+
+
+// const qualification = 
 
 // Add qualification
 router.post(/qualifications/, (req,res) =>{
@@ -756,7 +780,7 @@ router.get(/me-declaration-scrutiny/, (req, res) => {
 
 // AP Amending MCCD
 router.post(/ap-mccd-summary/, (req, res) => {
-    res.redirect('confirmation')
+    res.redirect('declaration')
 
 });
 

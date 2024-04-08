@@ -47,12 +47,12 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             As you complete the bilingual version of the MCCD service you must give your answers in both English and Welsh when requested.    
         </p>
         <p class="govuk-body"> 
-            An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only. The registrar will generate a Welsh death certificate automatically from the English content of the MCCD. Your local register office will not use the Welsh content of the MCCD. 
+            An informant can request a bilingual death certificate in Welsh and English from the registrar even if an attending practitioner completes the MCCD in English only. 
         </p>
         {% else %}
-        <p class="govuk-body">
+        <div class="govuk-inset-text">
             This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.  
-        </p>
+        </div>
         {% endif %}
         <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you start</h2>
         <p class="govuk-body">You’ll need a Care Identity profile created for you by your NHS organisation.</p>
