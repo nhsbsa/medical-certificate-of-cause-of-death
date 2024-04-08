@@ -3,6 +3,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 
 {% block content %}
 
@@ -16,18 +17,38 @@
 
     <form action="hospital-lookup" method="get" novalidate>
 
+      
+
+      {% call govukFieldset({
+        legend: {
+          text: data.translations.dpdHospitalPostcodeSearchPageTitle[data.lang],
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
+      }) %}
+
+      <p class="govuk-hint">{{data.translations.dpdHospitalPostcodeSearchHelp[data.lang]}}</p>
+
+      {{ govukInput({
+          label: {
+            text: data.translations.dpdHospitalName[data.lang]
+          },
+          id: 'hospital-name',
+          name: 'hospital-name',
+          value: data['hospital-name']
+        }) }}
+
         {{ govukInput({
           label: {
-            text: data.translations.dpdHospitalPostcodeSearchPageTitle[data.lang],
-            classes: 'govuk-label--l',
-            isPageHeading: true
+            text: data.translations.dpdHospitalPostcode[data.lang]
           },
-          hint: { text: data.translations.dpdHospitalPostcodeSearchHelp[data.lang] },
           id: 'hospital-postcode',
           name: 'hospital-postcode',
           value: data['hospital-postcode'],
           classes: 'govuk-input--width-10'
         }) }}
+
+        {% endcall %}
 
       <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">{{ data.translations.globalEnterAddress[data.lang] }}</a></p>
 
