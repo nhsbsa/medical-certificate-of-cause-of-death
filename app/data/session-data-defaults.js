@@ -60,7 +60,7 @@ module.exports = {
   sortDirection: 'ascending',
   
   lang: 'en',
-  bilingual: 'true',
+  bilingual: 'false',
   
   translations: _getTranslations()
 
