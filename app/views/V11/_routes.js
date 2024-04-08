@@ -780,7 +780,7 @@ router.get(/me-declaration-scrutiny/, (req, res) => {
 
 // AP Amending MCCD
 router.post(/ap-mccd-summary/, (req, res) => {
-    res.redirect('confirmation')
+    res.redirect('declaration')
 
 });
 
