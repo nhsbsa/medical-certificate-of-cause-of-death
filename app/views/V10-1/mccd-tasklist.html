@@ -12,7 +12,7 @@
 
     {% set name = [ data['deceased-first-name'], data['deceased-last-name'] ] %}
 
-    <h1 class="govuk-heading-l">
+    <h1 class="govuk-heading-l govuk-!-margin-top-9">
       <span class="govuk-caption-l govuk-caption--bottom">{{ name | join(' ') | safe }}</span>
       {{ data.translations.mccdTasklistPageTitle[data.lang] }}
     </h1>
@@ -29,19 +29,27 @@
     {% set actionsAfterDeathTag = notStarted %}
     {% set causeOfDeathTag = notStarted %}
 
+    {% set taskListErrors = [] %}
+
     {% if data['deceasedComplete'] %}
       {% set deceasedLink = 'cya-deceased' %}
       {% set deceasedTag = completed %}
+    {% else %}
+      {% set taskListErrors = ( taskListErrors.push({ text: "Complete the section Deceased person's details", href: '#link-d' }), taskListErrors ) %}
     {% endif %}
 
     {% if data['afterDeathComplete'] %}
       {% set actionsAfterDeathLink = 'cya-death-circumstances' %}
       {% set actionsAfterDeathTag = completed %}
+    {% else %}
+      {% set taskListErrors = ( taskListErrors.push({ text: 'Complete the section Actions after death', href: '#link-aad' }), taskListErrors ) %}
     {% endif %}
 
     {% if data['causeDeathComplete'] %}
       {% set causeOfDeathLink = 'cya-cause-death' %}
       {% set causeOfDeathTag = completed %}
+    {% else %}
+      {% set taskListErrors = ( taskListErrors.push({ text: 'Complete the section Cause of death', href: '#link-cod' }), taskListErrors ) %}
     {% endif %}
 
 
@@ -50,12 +58,7 @@
       <!-- ERROR MESSAGE -->
        {{ govukErrorSummary({
             titleText: 'There is a problem',
-            errorList: [
-              {
-                text: 'You must complete all sections of the MCCD',
-                href: '#about-the-death-header'
-              }
-            ]
+            errorList: taskListErrors
           }) }}
 
     {% endif %}
@@ -67,7 +70,7 @@
       captionClasses: 'govuk-table__caption--m',
       rows: [
         [
-          { html: '<a class="govuk-link" href="'+deceasedLink+'">'+data.translations.linkToSectionAboutDeceased[data.lang]+'</a>' },
+          { html: '<a class="govuk-link" href="'+deceasedLink+'">'+data.translations.linkToSectionAboutDeceased[data.lang]+'</a>', attributes: { id: 'link-d' } },
           { html: deceasedTag, classes: 'govuk-!-text-align-right' }
         ]
       ]
@@ -77,14 +80,13 @@
     {{ govukTable({
       caption: data.translations.mccdTasklistH2SectionTitleAboutDeath[data.lang],
       captionClasses: 'govuk-table__caption--m',
-      attributes: { id: 'about-the-death-header' },
       rows: [
         [
-          { html: '<a class="govuk-link" href="'+actionsAfterDeathLink+'">'+data.translations.linkToSectionActionsAfterDeath[data.lang]+'</a>' },
+          { html: '<a class="govuk-link" href="'+actionsAfterDeathLink+'">'+data.translations.linkToSectionActionsAfterDeath[data.lang]+'</a>' , attributes: { id: 'link-aad' } },
           { html: actionsAfterDeathTag, classes: 'govuk-!-text-align-right' }
         ],
         [
-          { html: '<a class="govuk-link" href="'+causeOfDeathLink+'">'+data.translations.linkToSectionCauseDeath[data.lang]+'</a>' },
+          { html: '<a class="govuk-link" href="'+causeOfDeathLink+'">'+data.translations.linkToSectionCauseDeath[data.lang]+'</a>', attributes: { id: 'link-cod' } },
           { html: causeOfDeathTag, classes: 'govuk-!-text-align-right' }
         ]
       ]
