@@ -68,9 +68,9 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       </label>
         <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
           <option value="select unit">Dewiswch uned amser</option>
-          <option value="years old">flwydd oed</option>
-          <option value="months old">mis oed</option>
-          <option value="days old">dyddiau oed</option>
+          <option value="flwydd oed">flwydd oed</option>
+          <option value="mis oed">mis oed</option>
+          <option value="dyddiau oed">dyddiau oed</option>
           
         </select>
       
@@ -83,43 +83,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   </button>
 </form>
 
-<!-- Default En language -->
-{% else %}
 
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-<form action="age-66" role="form" method="post">
-  <fieldset class="govuk-fieldset">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 class="govuk-fieldset__heading">
-        What was the deceased person's age?
-      </h1>
-    </legend>
-  <div class="govuk-form-group">
-    <div class="govuk-input__wrapper">
-      <label class="govuk-label govuk-visually-hidden" for="age-66">
-        Enter age number
-      </label>
-      <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66" name="age-66" type="text">
-      <label class="govuk-label govuk-visually-hidden" for="age-time-unit">
-        Select age unit
-      </label>
-        <select class="govuk-select govuk-select--width-5" id="age-time-unit" name="age-time-unit">
-          <option value="select unit">Select time unit</option>
-          <option value="years old">years old</option>
-          <option value="months old">months old</option>
-          <option value="days old">days old</option>
-          
-        </select>
-      
-    </div>
-
-    </div>
-
-  <button class="govuk-button" type="submit">
-    Save and continue
-  </button>
-</form>
 
 {% endif %}
 
