@@ -201,7 +201,7 @@
 
           {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
 
-          {% if draftRows.length > 0 %}
+          {% if draftRows.length > 0 and data.separateDraftsTable === 'true' %}
 
           <!-- DRAFTS TABLE -->
             {{ govukTable({
@@ -229,7 +229,7 @@
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
           head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
-          rows: patientData.data | getDashboardTableRows('')
+          rows: patientData.data | getDashboardTableRows()
         }) }}
 
     </div>

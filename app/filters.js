@@ -286,8 +286,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const meoReview = this.ctx.data['meo-review'];
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
+    const filterDrafts = ( this.ctx.data.separateDraftsTable === 'true' ) ? true : false;
+
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );

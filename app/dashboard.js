@@ -1,5 +1,8 @@
 //
 // INTERNAL VARIABLES
+
+const { separateDraftsTable } = require("./data/session-data-defaults");
+
 //
 const _debug = false;
 let _roleType = '';
@@ -224,7 +227,7 @@ function _filterByRoleType( rows, roleType ){
 
                     case 'me':
                         // ME - for the demo, only show ones that require scrutiny
-                        if( row.status === 3 ){
+                        if( row.status === 3 || row.status === 0 ){
                             arr.push(row);
                         }
                         break;
@@ -369,9 +372,9 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
 //
 // FILTER DRAFTS FUNCTION
 //
-function _filterDrafts( rows ){
-    
-    const filterDrafts = true;
+function _filterDrafts( rows, filterDrafts ){
+
+    console.log( 'SHOULD I FILTER DRAFTS...' + filterDrafts );
 
     const arr = ( filterDrafts ) ? [] : rows;
     
@@ -392,7 +395,7 @@ function _filterDrafts( rows ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts ){
 
     if( _debug ){
         console.log( 'START FILTERING ----------------' ); 
@@ -400,7 +403,7 @@ function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, 
 
     _roleType = roleType;
 
-    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts(rows), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
+    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 
     if( _debug ){
         console.log( 'END FILTERING ----------------' );

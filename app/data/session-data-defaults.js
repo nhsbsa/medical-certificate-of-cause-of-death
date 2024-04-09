@@ -53,6 +53,7 @@ module.exports = {
 
   useSearch: 'false',
   useFilters: 'false',
+  separateDraftsTable: 'false',
 
   rowsPerPage: 10,
   currentPage: 0,
