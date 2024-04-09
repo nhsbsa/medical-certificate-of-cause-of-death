@@ -1,0 +1,38 @@
+{
+    "id": "MCCD-V11",
+    "viewports": [
+        {
+            "label": "desktop",
+            "width": 1000,
+            "height": 730
+        }
+    ],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "scenarios": [
+        {
+            "label": "Gov-uk-start",
+            "url": "http://localhost:3000/V11/govuk-start"
+        },
+        {
+            "label": "screenshot name",
+            "url": "http://localhost:3000/V11/index?bilingual=true&lang=cy"
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "backstop_data/bitmaps_reference",
+        "bitmaps_test": "backstop_data/bitmaps_test",
+        "engine_scripts": "backstop_data/engine_scripts",
+        "html_report": "backstop_data/html_report",
+        "ci_report": "backstop_data/ci_report"
+    },
+    "report": ["browser"],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debug": false,
+    "debugWindow": false
+}
