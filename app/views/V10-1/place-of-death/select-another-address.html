@@ -36,13 +36,10 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <div class="govuk-radios" data-module="govuk-radios">
 
                   {% for anotherAddress in data['anotherAddresses'] %}
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="{{ anotherAddress }}" name="select {{ anotherAddress }}"
-                      type="radio" value="{{ anotherAddress }}">
-                    <label class="govuk-label govuk-radios__label" for="{{ anotherAddress }}">
-                      {{ anotherAddress or 'Sample community address' }}
-                    </label>
-                  </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="another-address-{{loop.index}}" name="another-address" type="radio" value="{{ anotherAddress }}">
+                      <label class="govuk-label govuk-radios__label" for="another-address-{{loop.index}}">{{ anotherAddress or 'Sample community address' }}</label>
+                    </div>
                   {% endfor %}
 
               </fieldset>
