@@ -52,8 +52,8 @@ addFilter('getPostCodeSearchStatus', function(content, type) {
     const noOfResults = ( Array.isArray( content ) ) ? content.length : 0;
     const postCode = ( this.ctx.data[type+'-postcode'] ) ? this.ctx.data[type+'-postcode'] : 'LS1 3EX';
 
-    status = status.replace('[# results]', noOfResults);
-    status = status.replace('[postcode]', postCode);
+    status = status.replace('[# results]', '<strong>'+noOfResults+'</strong>');
+    status = status.replace('[postcode]', '<strong>'+postCode+'</strong>');
 
     if( noOfResults !== 1 ){
         status = status.replace('address', 'addresses');

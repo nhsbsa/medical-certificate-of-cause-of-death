@@ -308,12 +308,6 @@ router.post( /death-location/, (req, res) => {
     res.redirect('../cya-deceased')
 });
 
-// CYA - Deceased person's details
-router.post( /select-hospital-address/, (req, res) => {
-    res.redirect('../cya-deceased')
-
-});
-
 router.post( /unknown-address/, (req, res) => {
     res.redirect('../cya-deceased')
 });
@@ -560,17 +554,28 @@ router.get( /postcode-lookup/, (req, res) => {
 })
 
 router.post( /select-another-address/, (req, res) => {
-    res.redirect('details-cya')
+
+    req.session.data.addressPath = 'another';
+    res.redirect('confirm-address');
+
 });
+
+router.post(/confirm-address/, (req, res) => {
+
+    delete req.session.data.addressPath;
+    res.redirect('../cya-deceased');
+
+});
+
 
 // =======================================================
 
 // Hospital address
 router.get( /hospital-lookup/, (req, res) => {
 
+
     // Get the 'postcode' data from the submitted form
     var postcodeLookup = req.session.data['hospital-postcode'];
-
 
     // Define a 'regular expression' to validate the postcode format
     const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
@@ -621,25 +626,32 @@ router.get( /hospital-lookup/, (req, res) => {
                     res.redirect('no-address-found')
                 });
 
-                //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
-                res.redirect('select-hospital-address')
         }
 
     } else {
         // Redirect if 'postcodeLookup' is empty
         res.redirect('hospital-postcode')
     }
+    
+
+    //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
+    //res.redirect('select-hospital-address')
 
 })
 
 router.post( /select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
+
+    req.session.data.addressPath = 'hospital';
+    res.redirect('confirm-address')
+
+
 });
 
 // =======================================================
 
 // Non hospital address
 router.get( /another-location-lookup/, (req, res) => {
+
 
     // Get the 'postcode' data from the submitted form
     var postcodeLookup = req.session.data['another-location-postcode']
@@ -688,23 +700,18 @@ router.get( /another-location-lookup/, (req, res) => {
                     res.redirect('no-address-found')
                 });
 
-                
-
-                //req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
-                res.redirect('select-another-address')
-
         }
 
     } else {
         // Redirect if 'postcodeLookup' is empty
         res.redirect('another-location-postcode')
     }
+    
+
+    req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
+    res.redirect('select-another-address')
 
 })
-
-router.post( /select-hospital-address/, (req, res) => {
-    res.redirect("/cya-deceased")
-});
 
 // ************************************************************
 
