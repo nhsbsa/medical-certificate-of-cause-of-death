@@ -50,7 +50,7 @@
             <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
 
 
-            {% if data['role-type'] === 'ap' and patient.status === 1 %}
+            {% if ( data['role-type'] === 'ap' and patient.status === 1 ) or ( data['role-type'] === 'me' and patient.status === 4 ) %}
 
                 <!-- 
 

@@ -253,12 +253,21 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
+    let statusObj = {
+        html: '<a href="'+statusLink+'">Status</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+        }
+    };
+
+    /*
     let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
         html: '<a href="'+statusLink+'">Status</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         } 
     };
+    */
 
     return [ nameObj, dateObj, actionObj, statusObj ];
 
