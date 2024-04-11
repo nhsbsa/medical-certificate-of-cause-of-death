@@ -1,6 +1,12 @@
-var NotifyClient = require('notifications-node-client').NotifyClient,
-    notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 
+// ************************************************************
+// ONLY USE NOTIFY ON HEROKU
+// ************************************************************
+
+if( process.env.NOTIFYAPIKEY ){
+    const NotifyClient = require('notifications-node-client').NotifyClient;
+    const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+}
 
 // ************************************************************
 // CURRENT VERSION
@@ -801,15 +807,17 @@ module.exports = router;
 // when they type in their email address
 router.post('/email-address-page', function (req, res) {
 
-    notify.sendEmail(
-      // this long string is the template ID, copy it from the template
-      // page in GOV.UK Notify. It’s not a secret so it’s fine to put it
-      // in your code.
-      'f9cd32e9-af3c-495a-86f0-59d157c25c22',
-      // `emailAddress` here needs to match the name of the form field in
-      // your HTML page
-      req.body.emailAddress
-    );
+    if( notify ){
+        notify.sendEmail(
+        // this long string is the template ID, copy it from the template
+        // page in GOV.UK Notify. It’s not a secret so it’s fine to put it
+        // in your code.
+        'f9cd32e9-af3c-495a-86f0-59d157c25c22',
+        // `emailAddress` here needs to match the name of the form field in
+        // your HTML page
+        req.body.emailAddress
+        );
+    }
   
     // This is the URL the users will be redirected to once the email
     // has been sent
