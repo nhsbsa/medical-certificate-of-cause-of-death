@@ -52,8 +52,8 @@ addFilter('getPostCodeSearchStatus', function(content, type) {
     const noOfResults = ( Array.isArray( content ) ) ? content.length : 0;
     const postCode = ( this.ctx.data[type+'-postcode'] ) ? this.ctx.data[type+'-postcode'] : 'LS1 3EX';
 
-    status = status.replace('[# results]', noOfResults);
-    status = status.replace('[postcode]', postCode);
+    status = status.replace('[# results]', '<strong>'+noOfResults+'</strong>');
+    status = status.replace('[postcode]', '<strong>'+postCode+'</strong>');
 
     if( noOfResults !== 1 ){
         status = status.replace('address', 'addresses');
@@ -286,8 +286,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const meoReview = this.ctx.data['meo-review'];
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
+    const filterDrafts = ( this.ctx.data.separateDraftsTable === 'true' ) ? true : false;
+
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );

@@ -7,6 +7,7 @@ const router = govukPrototypeKit.requests.setupRouter();
 
 // External dependencies
 const axios = require('axios');
+const { urlencoded } = require('express');
 
 // ************************************************************
 // MFA set up
@@ -308,12 +309,6 @@ router.post( /death-location/, (req, res) => {
     res.redirect('../cya-deceased')
 });
 
-// CYA - Deceased person's details
-router.post( /select-hospital-address/, (req, res) => {
-    res.redirect('../cya-deceased')
-
-});
-
 router.post( /unknown-address/, (req, res) => {
     res.redirect('../cya-deceased')
 });
@@ -560,86 +555,115 @@ router.get( /postcode-lookup/, (req, res) => {
 })
 
 router.post( /select-another-address/, (req, res) => {
-    res.redirect('details-cya')
+
+    req.session.data.addressPath = 'another';
+    res.redirect('confirm-address');
+
 });
+
+router.post(/confirm-address/, (req, res) => {
+
+    delete req.session.data.addressPath;
+    res.redirect('../cya-deceased');
+
+});
+
 
 // =======================================================
 
 // Hospital address
-router.get( /hospital-lookup/, (req, res) => {
+router.get(/hospital-lookup/, (req, res) => {
 
-    // Get the 'postcode' data from the submitted form
-    var postcodeLookup = req.session.data['hospital-postcode'];
+    // https://osdatahub.os.uk/docs/places/gettingStarted
 
+    // Get the 'hospital-postcode' or 'hospital-name' data from the submitted form
+    const postcodeLookup = req.session.data['hospital-postcode'];
+    const hospitalName = req.session.data['hospital-name'];
+
+    // Get the vars ready
+    let queryString, url;
 
     // Define a 'regular expression' to validate the postcode format
     const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
 
-    // Check if 'postcodeLookup' has a value
-    if (postcodeLookup) {
+    if (postcodeLookup && regex.test(postcodeLookup)) {
+    
+        queryString = postcodeLookup;
+        url = 'https://api.os.uk/search/places/v1/postcode?postcode=';
+    
+    } else if ( hospitalName && hospitalName.trim().length > 2 ) {
 
-        // Check if the 'postcodeLookup' matches the specified 'regular expression'
-        if (regex.test(postcodeLookup) === true) {
+        queryString = hospitalName;
+        url = 'https://api.os.uk/search/places/v1/find?maxresults=10&query=';
 
-            
-            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
-            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
-                .then(response => {
-                    // Extract and map the addresses from the API response
-                    var hospitalAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+    }
 
-                    // Format the addresses in title case
-                    const titleCaseAddresses = hospitalAddresses.map(hospitalAddress => {
-                        const parts = hospitalAddress.split(', ');
-                        const formattedParts = parts.map((part, index) => {
-                            if (index === parts.length - 1) {
-                                // Preserve postcode (SW1A 2AA) in uppercase
-                                return part.toUpperCase();
-                            }
-                            return part
-                                .split(' ')
-                                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                                .join(' ');
-                        });
-                        return formattedParts.join(', ');
+    // Check if we have found a query string
+    if ( queryString ) {
+
+        // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the query string
+        axios.get(url + encodeURI(queryString) + "&key=" + process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var hospitalAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = hospitalAddresses.map(hospitalAddress => {
+                    const parts = hospitalAddress.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
                     });
-
-                    // Store the formatted addresses in the session data
-                    req.session.data['hospitalAddresses'] = titleCaseAddresses;
-
-                    // Redirect to the 'Select Address' page
-                    if( Array.isArray(titleCaseAddresses) && titleCaseAddresses.length > 0 ){
-                        res.redirect('select-hospital-address')
-                    } else {
-                        res.redirect('no-address-found')
-                    }
-                    
-                })
-                .catch(error => {
-                    console.log(JSON.stringify(error));
-                    // Redirect in case of an error
-                    res.redirect('no-address-found')
+                    return formattedParts.join(', ');
                 });
 
-                //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
-                res.redirect('select-hospital-address')
-        }
+                // Store the formatted addresses in the session data
+                req.session.data['hospitalAddresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                if (Array.isArray(titleCaseAddresses) && titleCaseAddresses.length > 0) {
+                    res.redirect('select-hospital-address')
+                } else {
+                    res.redirect('no-address-found')
+                }
+
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
 
     } else {
-        // Redirect if 'postcodeLookup' is empty
+        // Redirect if 'queryString' is empty
         res.redirect('hospital-postcode')
     }
 
-})
+
+    //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
+    //res.redirect('select-hospital-address')
+
+});
 
 router.post( /select-hospital-address/, (req, res) => {
-    res.redirect('cya-deceased')
+
+    req.session.data.addressPath = 'hospital';
+    res.redirect('confirm-address')
+
+
 });
 
 // =======================================================
 
 // Non hospital address
 router.get( /another-location-lookup/, (req, res) => {
+
 
     // Get the 'postcode' data from the submitted form
     var postcodeLookup = req.session.data['another-location-postcode']
@@ -688,23 +712,18 @@ router.get( /another-location-lookup/, (req, res) => {
                     res.redirect('no-address-found')
                 });
 
-                
-
-                //req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
-                res.redirect('select-another-address')
-
         }
 
     } else {
         // Redirect if 'postcodeLookup' is empty
         res.redirect('another-location-postcode')
     }
+    
+
+    req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
+    res.redirect('select-another-address')
 
 })
-
-router.post( /select-hospital-address/, (req, res) => {
-    res.redirect("/cya-deceased")
-});
 
 // ************************************************************
 

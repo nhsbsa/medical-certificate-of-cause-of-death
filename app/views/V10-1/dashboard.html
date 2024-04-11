@@ -39,6 +39,8 @@
     <li>have been rejected by a medical examiner and need amending</li>
   </ul>
 
+  <p>Completed MCCDs will be removed after three months.</p>
+
 {% elseif data['role-type'] == 'me' %}
 
   <!-- ME DASHBOARD -->
@@ -204,7 +206,7 @@
 
           {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
 
-          {% if draftRows.length > 0 %}
+          {% if draftRows.length > 0 and data.separateDraftsTable === 'true' %}
 
           <!-- DRAFTS TABLE -->
             {{ govukTable({
@@ -232,7 +234,7 @@
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
           head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
-          rows: patientData.data | getDashboardTableRows('')
+          rows: patientData.data | getDashboardTableRows()
         }) }}
 
     </div>
