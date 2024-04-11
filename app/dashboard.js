@@ -219,6 +219,7 @@ function _filterByRoleType( rows, roleType ){
                 switch( roleType ){
 
                     case 'ap':
+
                         // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
                         if( row.belongsToAP ){
                             arr.push(row);
@@ -226,13 +227,20 @@ function _filterByRoleType( rows, roleType ){
                         break;
 
                     case 'me':
-                        // ME - for the demo, only show ones that require scrutiny
-                        if( row.status === 3 || row.status === 0 ){
-                            arr.push(row);
+
+                        // ME - filter for those patients with the "belongs to AP" flag (just used for demo)
+                        if( row.status === 3 || row.belongsToME ){
+
+                            // MEs would never go round the AP-ME approval loop
+                            if( row.status !== 1 && row.status !== 2 ){
+                                arr.push(row);
+                            }
+                            
                         }
                         break;
 
                     case 'meo':
+
                         // MEO - basically anything except drafts
                         if( row.status !== 0 ){
                             arr.push(row);
@@ -266,8 +274,8 @@ function _getActionForStatus( status, id ){
 
     const actions = {
         ap: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
-        me: ['Finish certificate','View certificate','View certificate','Review certificate','View certificate','View certificate'],
-        meo: ['Finish certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
+        me: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
+        meo: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
     }
 
     let html = '';
