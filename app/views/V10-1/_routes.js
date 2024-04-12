@@ -686,30 +686,56 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
-    
+
     const roleType = req.session.data['role-type'];
-     
-    if( !req.session.data['qualifications'] ){
-        if( roleType === 'ap' || roleType === 'me' ){
-            res.redirect('../qualifications');
+
+    if( roleType === 'ap' || roleType === 'me' ){
+
+        if( !req.session.data['qualifications'] ){
+             // Do they have a qualifications value set?
+            res.redirect('../onboarding/qualifications');
+        } else if( !req.session.data['contact-method'] ){
+            // Do they have a contact-method value set?
+            res.redirect('../onboarding/contact-method');
         } else {
             res.redirect('../dashboard');
         }
+       
     } else {
         res.redirect('../dashboard');
-        
     }
+     
+    
 
 });
+
 
 // QUALIFCATIONS
 router.post( /qualifications/, (req, res) => {
     
     if( req.session.data['onboardingPath'] ){
-        delete req.session.data['onboardingPath'];
-        res.redirect('dashboard');
+        
+        if( !req.session.data['contact-method'] ){
+            // Do they have a contact-method value set?
+            res.redirect('contact-method');
+        } else {
+            res.redirect('../dashboard');
+        }
+        
     } else {
-        res.redirect('confirm-your-details');
+        res.redirect('../confirm-your-details');
+    }
+
+});
+
+// CONTACT METHOD
+router.post( /contact-method/, (req, res) => {
+    
+    if( req.session.data['onboardingPath'] ){
+        delete req.session.data['onboardingPath'];
+        res.redirect('../dashboard');
+    } else {
+        res.redirect('../confirm-your-details');
     }
 
 });
@@ -751,22 +777,31 @@ router.post( /mccd-summary/, (req, res) => {
 // MCCD TASKLIST
 router.post( /mccd-tasklist/, (req, res) => {
 
-    // Need everything there to proceed
-    if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
-
-        // This variable lets the declaration page know that it's an ME MCCD 
-        if( req.session.data['role-type'] === 'me' ){
-            req.session.data['me-mccd'] = true;
-        }
-
-        delete req.session.data.showTaskListError;
+    // This variable is set in the session data and allows you to toggle the requirement to have filled out the entire form...
+    if( req.session.data.requireAllTaskListSections === 'false' ){
 
         res.redirect('confirm-your-details');
 
-
     } else {
 
-        res.redirect('mccd-tasklist?showTaskListError=true');
+        // Need everything there to proceed
+        if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
+
+            // This variable lets the declaration page know that it's an ME MCCD 
+            if( req.session.data['role-type'] === 'me' ){
+                req.session.data['me-mccd'] = true;
+            }
+
+            delete req.session.data.showTaskListError;
+
+            res.redirect('confirm-your-details');
+
+
+        } else {
+
+            res.redirect('mccd-tasklist?showTaskListError=true');
+
+        }
 
     }
     
