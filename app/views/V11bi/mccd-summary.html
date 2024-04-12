@@ -23,6 +23,9 @@
         {% set patient = patientData.data | getPatientDataByID( data.id ) %}
 
         {% set patientStatus = patient.status %}
+        {% if data.overrideStatus %}
+            {% set patientStatus = data.overrideStatus | int %}
+        {% endif %}
 
 
 
@@ -50,7 +53,7 @@
             <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
 
 
-            {% if ( data['role-type'] === 'ap' and patient.status === 1 ) or ( data['role-type'] === 'me' and patient.status === 4 ) %}
+            {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
 
                 <!-- 
 
@@ -130,7 +133,7 @@
             {% endif %}
 
 
-            {% if data['role-type'] === 'ap' and ( patient.status === 1 or patient.status === 2 ) %}
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
 
                 <!-- 
                     
@@ -191,9 +194,10 @@
                     title: { text: data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] }
                 },
                 rows: [
-                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: '' } },
-                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '' } },
-                    {  key: { text: 'Qualification' }, value: { html: '' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123 46764' } },
+                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } },
+                    {  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }
                 ]
             }) }}
 
