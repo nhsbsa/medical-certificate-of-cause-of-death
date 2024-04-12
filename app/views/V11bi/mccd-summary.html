@@ -234,7 +234,7 @@
 
                 <!-- ME -->
             
-                {% if patientStatus == '3' %}
+                {% if patientStatus === 3 %}
 
                     <!-- IF STATUS = For sign off by Medical Examiner -->
                     <form action="mccd-summary" method="post" novalidate>
@@ -284,7 +284,7 @@
                 <!-- MEO -->
 
                 <!-- IF STATUS = For officer review -->
-                {% if patientStatus == '1'  %}
+                {% if patientStatus === 1  %}
 
                     <form action="mccd-summary" method="post" novalidate>
 
@@ -324,7 +324,7 @@
                         
                     </form>
 
-                {% elseif patientStatus == '4' %}
+                {% elseif patientStatus === 4 %}
 
                     <!--IF STATUS = Review complete - send to registrar-->
                     <form action="mccd-summary" method="post" novalidate>
