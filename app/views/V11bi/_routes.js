@@ -278,8 +278,10 @@ router.post( /death-hospital/, (req, res) => {
     const deathHospital = req.session.data['death-in-hospital'];
 
     if ( deathHospital === 'globalRadioYes' ) {
+        req.session.data.addressPath = 'hospital';
         res.redirect('place-of-death/hospital-postcode');
     } else {
+        req.session.data.addressPath = 'another';
         res.redirect('place-of-death/location-of-death');
 
     }
@@ -556,17 +558,11 @@ router.get( /postcode-lookup/, (req, res) => {
 })
 
 router.post( /select-another-address/, (req, res) => {
-
-    req.session.data.addressPath = 'another';
     res.redirect('confirm-address');
-
 });
 
 router.post(/confirm-address/, (req, res) => {
-
-    delete req.session.data.addressPath;
     res.redirect('../cya-deceased');
-
 });
 
 
@@ -601,6 +597,8 @@ router.get(/hospital-lookup/, (req, res) => {
 
     // Check if we have found a query string
     if ( queryString ) {
+
+        req.session.data.queryString = queryString;
 
         // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the query string
         axios.get(url + encodeURI(queryString) + "&key=" + process.env.POSTCODEAPIKEY)
@@ -672,13 +670,13 @@ router.get( /another-location-lookup/, (req, res) => {
     // Define a 'regular expression' to validate the postcode format
     const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
 
-    // Check if 'postcodeLookup' has a value
+    // Check if 'postcodeLookup' has a valaue
     if (postcodeLookup) {
 
         // Check if the 'postcodeLookup' matches the specified 'regular expression'
         if (regex.test(postcodeLookup) === true) {
 
-            
+            req.session.data.queryString = postcodeLookup;
 
             // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
             axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)

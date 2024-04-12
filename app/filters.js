@@ -50,7 +50,7 @@ addFilter('getPostCodeSearchStatus', function(content, type) {
     let status = ( type === 'hospital' ) ? this.ctx.data.translations.dpdHospitalPostcodeSelectResultDescription[this.ctx.data.lang] : this.ctx.data.translations.dpdOtherLocationPostcodeSelectResultDescription[this.ctx.data.lang];
    
     const noOfResults = ( Array.isArray( content ) ) ? content.length : 0;
-    const postCode = ( this.ctx.data[type+'-postcode'] ) ? this.ctx.data[type+'-postcode'] : 'LS1 3EX';
+    const postCode = this.ctx.data.queryString;
 
     status = status.replace('[# results]', '<strong>'+noOfResults+'</strong>');
     status = status.replace('[postcode]', '<strong>'+postCode+'</strong>');
