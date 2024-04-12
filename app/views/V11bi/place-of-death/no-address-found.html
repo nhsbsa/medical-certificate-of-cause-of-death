@@ -24,24 +24,14 @@
           {% set reselectLink = 'hospital-postcode' %}
           {% set manualLink = 'location-death-hospital' %}
 
-          {% if data['hospital-postcode'] %}
-            {% set query = data['hospital-postcode'] %}
-          {% elseif data['hospital-name'] %}
-            {% set query = data['hospital-name'] %}
-          {% endif %}
-
         {% else %}
 
           {% set reselectLink = 'another-location-postcode' %}
           {% set manualLink = 'exact-address' %}
 
-          {% if data['another-postcode'] %}
-            {% set query = data['another-postcode'] %}
-          {% endif %}
-
         {% endif %}
 
-        <p class="govuk-body">We could not find an address that matches <strong>{{ query }}</strong>.</p>
+        <p class="govuk-body">We could not find an address that matches <strong>{{ data.queryString }}</strong>.</p>
 
          <p class="govuk-body"><a href="{{ reselectLink }}">{{ data.translations.globalSelectDifferentAddress[data.lang] }}</a></p>
         <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{ manualLink }}" class="govuk-link">{{ data.translations.globalEnterAddressManually[data.lang] }}</a></p>

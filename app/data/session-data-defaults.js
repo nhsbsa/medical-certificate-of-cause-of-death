@@ -62,6 +62,8 @@ module.exports = {
   
   lang: 'en',
   bilingual: 'false',
+
+  requireAllTaskListSections: 'false',
   
   translations: _getTranslations()
 

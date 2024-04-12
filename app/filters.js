@@ -50,7 +50,7 @@ addFilter('getPostCodeSearchStatus', function(content, type) {
     let status = ( type === 'hospital' ) ? this.ctx.data.translations.dpdHospitalPostcodeSelectResultDescription[this.ctx.data.lang] : this.ctx.data.translations.dpdOtherLocationPostcodeSelectResultDescription[this.ctx.data.lang];
    
     const noOfResults = ( Array.isArray( content ) ) ? content.length : 0;
-    const postCode = ( this.ctx.data[type+'-postcode'] ) ? this.ctx.data[type+'-postcode'] : 'LS1 3EX';
+    const postCode = this.ctx.data.queryString;
 
     status = status.replace('[# results]', '<strong>'+noOfResults+'</strong>');
     status = status.replace('[postcode]', '<strong>'+postCode+'</strong>');
@@ -401,9 +401,28 @@ addFilter( 'getStatusTag', function( content ){
 
     content = parseInt(content);
     if( !Number.isNaN( content ) ){
-        html = dashboard.getStatuses(content, true);    
+        html = dashboard.getStatuses(content, 'tags' );    
     }
 
     return html;
+
+});
+
+//
+// GET STATUS EXPLANATION ROWS
+//
+addFilter('getStatusExplanationRows', function(content) {
+
+     // content: blank string
+    
+    const tags = dashboard.getStatuses( '', 'tags' );
+    const explanations = dashboard.getStatuses( '', 'explanations' );
+
+    const rows = [];
+    tags.forEach(function( tag, i ){
+        rows.push( [ { html: tag }, { text: explanations[i] } ] );
+    });
+    
+    return rows;
 
 });

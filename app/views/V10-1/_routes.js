@@ -497,59 +497,90 @@ router.post(/select-address/, (req, res) => {
 // Hospital address
 router.get(/hospital-lookup/, (req, res) => {
 
-    // Get the 'postcode' data from the submitted form
-    var postcodeLookup = req.session.data['hospital-postcode']
+    // https://osdatahub.os.uk/docs/places/gettingStarted
+
+    // Get the 'hospital-postcode' or 'hospital-name' data from the submitted form
+    const postcodeLookup = req.session.data['hospital-postcode'];
+    const hospitalName = req.session.data['hospital-name'];
+
+    // Get the vars ready
+    let queryString, url;
 
     // Define a 'regular expression' to validate the postcode format
     const regex = RegExp('^([A-PR-UWYZa-pr-uwyz](([0-9](([0-9]|[A-HJKSTUW])?)?)|([A-HK-Ya-hk-y][0-9]([0-9]|[ABEHMNPRVWXY])?)) ?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})$', 'i');
 
-    // Check if 'postcodeLookup' has a value
-    if (postcodeLookup) {
+    if (postcodeLookup && regex.test(postcodeLookup)) {
+    
+        queryString = postcodeLookup;
+        url = 'https://api.os.uk/search/places/v1/postcode?postcode=';
+    
+    } else if ( hospitalName && hospitalName.trim().length > 2 ) {
 
-        // Check if the 'postcodeLookup' matches the specified 'regular expression'
-        if (regex.test(postcodeLookup) === true) {
+        queryString = hospitalName;
+        url = 'https://api.os.uk/search/places/v1/find?maxresults=10&query=';
 
-            // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
-            axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
-                .then(response => {
-                    // Extract and map the addresses from the API response
-                    var hospitalAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+    }
 
-                    // Format the addresses in title case
-                    const titleCaseAddresses = hospitalAddresses.map(hospitalAddress => {
-                        const parts = hospitalAddress.split(', ');
-                        const formattedParts = parts.map((part, index) => {
-                            if (index === parts.length - 1) {
-                                // Preserve postcode (SW1A 2AA) in uppercase
-                                return part.toUpperCase();
-                            }
-                            return part
-                                .split(' ')
-                                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                                .join(' ');
-                        });
-                        return formattedParts.join(', ');
+    // Check if we have found a query string
+    if ( queryString ) {
+
+        // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the query string
+        axios.get(url + encodeURI(queryString) + "&key=" + process.env.POSTCODEAPIKEY)
+            .then(response => {
+                // Extract and map the addresses from the API response
+                var hospitalAddresses = response.data.results.map(result => result.DPA.ADDRESS);
+
+                // Format the addresses in title case
+                const titleCaseAddresses = hospitalAddresses.map(hospitalAddress => {
+                    const parts = hospitalAddress.split(', ');
+                    const formattedParts = parts.map((part, index) => {
+                        if (index === parts.length - 1) {
+                            // Preserve postcode (SW1A 2AA) in uppercase
+                            return part.toUpperCase();
+                        }
+                        return part
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(' ');
                     });
-
-                    // Store the formatted addresses in the session data
-                    req.session.data['hospitalAddresses'] = titleCaseAddresses;
-
-                    // Redirect to the 'Select Address' page
-                    res.redirect('select-hospital-address')
-                })
-                .catch(error => {
-                    // Redirect in case of an error
-                    res.redirect('no-address-found')
+                    return formattedParts.join(', ');
                 });
 
-        }
+                // Store the formatted addresses in the session data
+                req.session.data['hospitalAddresses'] = titleCaseAddresses;
+
+                // Redirect to the 'Select Address' page
+                if (Array.isArray(titleCaseAddresses) && titleCaseAddresses.length > 0) {
+                    res.redirect('select-hospital-address')
+                } else {
+                    res.redirect('no-address-found')
+                }
+
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                // Redirect in case of an error
+                res.redirect('no-address-found')
+            });
 
     } else {
-        // Redirect if 'postcodeLookup' is empty
+        // Redirect if 'queryString' is empty
         res.redirect('hospital-postcode')
     }
 
-})
+
+    //req.session.data['hospitalAddresses'] = ['Hospital address 01','Hospital address 02','Hospital address 03'];
+    //res.redirect('select-hospital-address')
+
+});
+
+router.post( /select-hospital-address/, (req, res) => {
+
+    req.session.data.addressPath = 'hospital';
+    res.redirect('confirm-address')
+
+
+});
 
 // Confirm hospital address
 router.post(/select-hospital-address/, (req, res) => {
@@ -686,30 +717,56 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
-    
+
     const roleType = req.session.data['role-type'];
-     
-    if( !req.session.data['qualifications'] ){
-        if( roleType === 'ap' || roleType === 'me' ){
-            res.redirect('../qualifications');
+
+    if( roleType === 'ap' || roleType === 'me' ){
+
+        if( !req.session.data['qualifications'] ){
+             // Do they have a qualifications value set?
+            res.redirect('../onboarding/qualifications');
+        } else if( !req.session.data['contact-method'] ){
+            // Do they have a contact-method value set?
+            res.redirect('../onboarding/contact-method');
         } else {
             res.redirect('../dashboard');
         }
+       
     } else {
         res.redirect('../dashboard');
-        
     }
+     
+    
 
 });
+
 
 // QUALIFCATIONS
 router.post( /qualifications/, (req, res) => {
     
-    if( req.session.data['return-to-dashboard'] ){
-        delete req.session.data['return-to-dashboard'];
-        res.redirect('dashboard');
+    if( req.session.data['onboardingPath'] ){
+        
+        if( !req.session.data['contact-method'] ){
+            // Do they have a contact-method value set?
+            res.redirect('contact-method');
+        } else {
+            res.redirect('../dashboard');
+        }
+        
     } else {
-        res.redirect('confirm-details');
+        res.redirect('../confirm-your-details');
+    }
+
+});
+
+// CONTACT METHOD
+router.post( /contact-method/, (req, res) => {
+    
+    if( req.session.data['onboardingPath'] ){
+        delete req.session.data['onboardingPath'];
+        res.redirect('../dashboard');
+    } else {
+        res.redirect('../confirm-your-details');
     }
 
 });
@@ -751,22 +808,31 @@ router.post( /mccd-summary/, (req, res) => {
 // MCCD TASKLIST
 router.post( /mccd-tasklist/, (req, res) => {
 
-    // Need everything there to proceed
-    if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
-
-        // This variable lets the declaration page know that it's an ME MCCD 
-        if( req.session.data['role-type'] === 'me' ){
-            req.session.data['me-mccd'] = true;
-        }
-
-        delete req.session.data.showTaskListError;
+    // This variable is set in the session data and allows you to toggle the requirement to have filled out the entire form...
+    if( req.session.data.requireAllTaskListSections === 'false' ){
 
         res.redirect('confirm-your-details');
 
-
     } else {
 
-        res.redirect('mccd-tasklist?showTaskListError=true');
+        // Need everything there to proceed
+        if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
+
+            // This variable lets the declaration page know that it's an ME MCCD 
+            if( req.session.data['role-type'] === 'me' ){
+                req.session.data['me-mccd'] = true;
+            }
+
+            delete req.session.data.showTaskListError;
+
+            res.redirect('confirm-your-details');
+
+
+        } else {
+
+            res.redirect('mccd-tasklist?showTaskListError=true');
+
+        }
 
     }
     
