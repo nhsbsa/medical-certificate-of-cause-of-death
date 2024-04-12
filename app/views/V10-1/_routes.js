@@ -705,11 +705,11 @@ router.post( /care-id-role/, (req, res) => {
 // QUALIFCATIONS
 router.post( /qualifications/, (req, res) => {
     
-    if( req.session.data['return-to-dashboard'] ){
-        delete req.session.data['return-to-dashboard'];
+    if( req.session.data['onboardingPath'] ){
+        delete req.session.data['onboardingPath'];
         res.redirect('dashboard');
     } else {
-        res.redirect('confirm-details');
+        res.redirect('confirm-your-details');
     }
 
 });

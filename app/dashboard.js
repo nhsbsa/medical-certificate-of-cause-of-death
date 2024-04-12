@@ -394,8 +394,6 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
 //
 function _filterDrafts( rows, filterDrafts ){
 
-    console.log( 'SHOULD I FILTER DRAFTS...' + filterDrafts );
-
     const arr = ( filterDrafts ) ? [] : rows;
     
     if( filterDrafts ){

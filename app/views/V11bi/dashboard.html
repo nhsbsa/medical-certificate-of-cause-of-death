@@ -5,29 +5,13 @@
 
 {% block content %}
 
-{% if data['role-type'] === 'ap' or data['role-type'] === 'me'%}
-  
-  {% if data['qualifications'] %}
-    <!-- NOTHING -->
-  {% else %}
-    <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
-    <script>
-      window.addEventListener('DOMContentLoaded', function(){
-        window.location.href = 'qualifications?return-to-dashboard=true';
-      });
-    </script>
-  {% endif%}
 
-  
-{% endif %}
-
-
- <!-- AP DASHBOARD -->
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
 {% if data['role-type'] == 'ap' %}
 
+ <!-- AP DASHBOARD -->
   <h1 class="govuk-heading-l">Your dashboard</h1>
 
   <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>

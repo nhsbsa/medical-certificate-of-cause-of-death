@@ -796,7 +796,7 @@ router.post( /care-id-smartcard/, (req,res) => {
 
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
-    
+
     const roleType = req.session.data['role-type'];
      
     if( !req.session.data['qualifications'] ){
@@ -812,11 +812,14 @@ router.post( /care-id-role/, (req, res) => {
 
 });
 
+
+
+
 // QUALIFCATIONS
 router.post( /qualifications/, (req, res) => {
     
-    if( req.session.data['return-to-dashboard'] ){
-        delete req.session.data['return-to-dashboard'];
+    if( req.session.data['onboardingPath'] ){
+        delete req.session.data['onboardingPath'];
         res.redirect('dashboard');
     } else {
         res.redirect('confirm-your-details');
