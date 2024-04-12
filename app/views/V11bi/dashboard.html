@@ -224,6 +224,14 @@
 
         {% endif %}
 
+        <!-- DETAILS -->
+        {{ govukDetails({
+            summaryText: 'Explanation of statuses',
+            html: govukTable({
+              rows: '' | getStatusExplanationRows
+            })
+        }) }}
+
         <!-- MAIN TABLE -->
         {{ govukTable({
           caption: '' | getDashboardCaption,

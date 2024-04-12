@@ -401,9 +401,28 @@ addFilter( 'getStatusTag', function( content ){
 
     content = parseInt(content);
     if( !Number.isNaN( content ) ){
-        html = dashboard.getStatuses(content, true);    
+        html = dashboard.getStatuses(content, 'tags' );    
     }
 
     return html;
+
+});
+
+//
+// GET STATUS EXPLANATION ROWS
+//
+addFilter('getStatusExplanationRows', function(content) {
+
+     // content: blank string
+    
+    const tags = dashboard.getStatuses( '', 'tags' );
+    const explanations = dashboard.getStatuses( '', 'explanations' );
+
+    const rows = [];
+    tags.forEach(function( tag, i ){
+        rows.push( [ { html: tag }, { text: explanations[i] } ] );
+    });
+    
+    return rows;
 
 });

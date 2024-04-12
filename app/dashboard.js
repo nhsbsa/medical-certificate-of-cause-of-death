@@ -11,10 +11,13 @@ let _roleType = '';
 // GET STATUSES FUNCTION
 // Now all calls for statuses come via here - should make updating stuff easier...
 //
-function _getStatuses( num, returnTag ){
+function _getStatuses( num, returnType ){
 
     // num: a number to return, else return everything
-    // returnTag: boolean, whether to return the status(es) or tag(s)
+    // returnType: string - either 'statuses', 'tags' or 'explanations'
+
+    const returnTypes = ['statuses','tags','explanations'];
+    returnType = ( returnTypes.indexOf(returnType) > -1 ) ? returnType : 'statuses';
 
     num = parseInt(num);
 
@@ -41,7 +44,9 @@ function _getStatuses( num, returnTag ){
     ];
     */
 
-    const statuses = [
+    const values = {};
+
+    values.statuses = [
         'Draft',
         'For review by MEO',
         'To be amended',
@@ -50,7 +55,7 @@ function _getStatuses( num, returnTag ){
         'Submitted to registrar'
     ];
 
-    const tags = [ 
+    values.tags = [ 
         '<span class="govuk-tag govuk-tag--grey">Draft</span>',
         '<span class="govuk-tag govuk-tag--blue">For review by MEO</span>',
         '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
@@ -59,9 +64,16 @@ function _getStatuses( num, returnTag ){
         '<span class="govuk-tag">Submitted to registrar</span>'
     ];
 
-    const arr = ( returnTag ) ? tags : statuses;
+    values.explanations = [
+        'The MCCD has not been submitted.',
+        'An AP has submitted the MCCD and it has been passed to a medical examiner office for review by an MEO.',
+        'A ME has reviewed the MCCD and requires the AP to make changes.',
+        'The MCCD requires scrutiny from an ME.',
+        'The MCCD is ready to be sent to the register office by an MEO.',
+        'The MCCD has been sent to the register office.'
+    ];
 
-    return ( Number.isNaN(num) ) ? arr : arr[num];
+    return ( Number.isNaN(num) ) ? values[returnType] : values[returnType][num];
 
 }
 
@@ -307,7 +319,7 @@ function _getRow( patient ){
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
-    arr.push( { text: patient.status, html: _getStatuses( patient.status, true ) });
+    arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags' ) });
 
     return arr;
 
