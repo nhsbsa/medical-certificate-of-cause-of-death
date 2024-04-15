@@ -23,19 +23,59 @@
           classes: 'govuk-fieldset__legend--l',
           isPageHeading: true
         }
+        
       }) %}
 
-        {{ govukTextarea({
-              label: { 
-                text: data.translations.dpdApproximateLocationEnterDetails[data.lang]
-              },
-              hint: {
-                text: data.translations.dpdApproximateLocationHint[data.lang]
-              },
-              value: data['location-death'],
-              id: 'location-death',
-              name: 'location-death'
-          }) }}
+        {% if data.bilingual == 'true' %}
+
+          <p class="govuk-hint">Enter location in English and Welsh, or in English only.</p>
+
+          <!-- BILINGUAL -->
+          {{ govukTextarea({
+                label: { 
+                  html: data.translations.dpdApproximateLocationEnterDetails[data.lang] + '<br /><strong>'+data.translations.globalWriteInEnglish[data.lang]+'</strong>'
+                },
+                hint: {
+                  text: data.translations.dpdApproximateLocationHint[data.lang]
+                },
+                value: data['location-death'],
+                id: 'location-death',
+                name: 'location-death'
+            }) }}
+
+
+
+             {{ govukTextarea({
+                label: { 
+                  html: data.translations.dpdApproximateLocationEnterDetails[data.lang]+ ' ' + data.translations.globalOptional[data.lang] + '<br /><strong>'+data.translations.globalWriteInWelsh[data.lang]+'</strong>'
+                },
+                hint: {
+                  text: data.translations.dpdApproximateLocationHintWelsh[data.lang]
+                },
+                value: data['location-death-welsh'],
+                id: 'location-death-welsh',
+                name: 'location-death-welsh'
+            }) }}
+
+          {% else %}
+
+
+                 <!-- ENGLISH ONLY -->
+          {{ govukTextarea({
+                label: { 
+                  text: data.translations.dpdApproximateLocationEnterDetails[data.lang]
+                },
+                hint: {
+                  text: data.translations.dpdApproximateLocationHint[data.lang]
+                },
+                value: data['location-death'],
+                id: 'location-death',
+                name: 'location-death'
+            }) }}
+
+
+
+          {% endif %}
 
         {% endcall %}
 

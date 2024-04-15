@@ -10,15 +10,10 @@ text: data.translations.globalBackLink[data.lang],
 href: 'javascript:history.back()'
 }) }}
 
-{% set hr = '<hr class="govuk-section-break govuk-section-break--visible" />' %}
-
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
 {% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
 {% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
 {% set timeBetweenOnsetAndDeathLabel = '<strong>'+data.translations.codTimeBetweenOnsetDeath[data.lang]+'</strong><br />' %}
-
-<style>
-  .govuk-summary-list__value .govuk-section-break { margin: 10px 0; }
-</style>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -55,9 +50,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codU28aMainDisease[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['main-cause'] }}
-              {% if data.lang == 'cy' and data['main-cause-welsh'] %}
+              {% if data.bilingual == 'true' and data['main-cause-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
               {% endif %}
             </dd>
@@ -71,9 +66,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codU28bOtherDisease[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['secondary-cause'] }}
-              {% if data.lang == 'cy' and data['secondary-cause-welsh'] %}
+              {% if data.bilingual == 'true' and data['secondary-cause-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
               {% endif %}
             </dd>
@@ -86,9 +81,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codU28cMainMaternalDisease[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-conditions-c'] }}
-              {% if data.lang == 'cy' and data['other-conditions-c-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-conditions-c-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
               {% endif %}
             </dd>
@@ -101,9 +96,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codU28dOtherMaternalDisease[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-conditions-d'] }}
-              {% if data.lang == 'cy' and data['other-conditions-d-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-conditions-d-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
               {% endif %}
             </dd>
@@ -117,9 +112,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codU28eOtherRelevantFactors[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-conditions-e'] }}
-              {% if data.lang == 'cy' and data['other-conditions-e-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-conditions-e-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-e-welsh'] }}
               {% endif %}
             </dd>
@@ -154,9 +149,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO281aMainDisease[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['main-cause'] }}
-              {% if data.lang == 'cy' and data['main-cause-welsh'] %}
+              {% if data.bilingual == 'true' and data['main-cause-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
               {% endif %}
             </dd>
@@ -175,9 +170,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO281bDiseaseLeadingTo1a[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['secondary-cause'] }}
-              {% if data.lang == 'cy' and data['secondary-cause-welsh'] %}
+              {% if data.bilingual == 'true' and data['secondary-cause-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
               {% endif %}
             </dd>
@@ -195,9 +190,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO281cDiseaseLeadingTo1b[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-conditions-c'] }}
-              {% if data.lang == 'cy' and data['other-conditions-c-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-conditions-c-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
               {% endif %}
             </dd>
@@ -215,9 +210,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO281dDiseaseLeadingTo1c[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-conditions-d'] }}
-              {% if data.lang == 'cy' and data['other-conditions-d-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-conditions-d-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
               {% endif %}
             </dd>
@@ -236,9 +231,9 @@ href: 'javascript:history.back()'
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO282OtherConditions[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {% if data.lang == 'cy' %}{{ englishLabel | safe }}{% endif %}
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
                 {{ data['other-significant-conditions'] }}
-              {% if data.lang == 'cy' and data['other-significant-conditions-welsh'] %}
+              {% if data.bilingual == 'true' and data['other-significant-conditions-welsh'] %}
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-significant-conditions-welsh'] }}
               {% endif %}
             </dd>

@@ -18,6 +18,40 @@ addFilter('debugData', function(content) {
 
 
 //
+// GET MONTH STRING
+//
+addFilter('getMonthString', function(content) {
+
+    // content: string, the month in the format 01 to 12
+
+    let month = 'January';
+    let months = { 
+        en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        cy: ['Ionawr','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr']
+    };
+    let num = parseInt( content );
+
+    if( !Number.isNaN(num) ){
+
+        if( num < 1 ){
+            num = 1;
+        }
+
+        if( num > 12 ){
+            num = 12;
+        }
+
+        month = months[this.ctx.data.lang][num-1];
+
+    }
+    
+
+    return month;
+
+});
+
+
+//
 // GET POSTCODE SEARCH SELECT
 //
 addFilter('getPostCodeSearchSelect', function( content, type ) {
