@@ -18,6 +18,17 @@ addFilter('debugData', function(content) {
 
 
 //
+// GENERATE STATIC SESSION DATA
+//
+addFilter('generateStaticSessionData', function(content){
+
+     // content: the session data object
+     return '<p class="govuk-body">You can copy this entire block of code into the \'session-data-defaults.js\' file for more robust testing. Remember to keep a copy of the dynamic version though.</p><textarea class="govuk-textarea">module.exports = '+JSON.stringify(content)+'</textarea>';
+
+});
+
+
+//
 // GET MONTH STRING
 //
 addFilter('getMonthString', function(content) {
