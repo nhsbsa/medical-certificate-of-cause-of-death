@@ -10,6 +10,10 @@ text: data.translations.globalBackLink[data.lang],
 href: 'javascript:history.back()'
 }) }}
 
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
+{% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
+{% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -82,7 +86,15 @@ href: 'javascript:history.back()'
           <!-- IMPLANT DETAILS -->
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersImplantDetails[data.lang] }}</dt>
-            <dd class="govuk-summary-list__value">{{ data['implant-details'] }}</dd>
+            <dd class="govuk-summary-list__value">
+              
+               {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['implant-details'] }}
+                {% if data.bilingual == 'true' and data['implant-details-welsh'] %}
+                  {{ hr | safe }}{{ welshLabel | safe }}{{ data['implant-details-welsh'] }}
+                {% endif %}
+              
+              </dd>
             <dd class="govuk-summary-list__actions">
               <a href="implant">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersImplantDetails[data.lang] | lower }}</span></a>
             </dd>

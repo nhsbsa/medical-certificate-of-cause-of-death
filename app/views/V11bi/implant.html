@@ -32,14 +32,45 @@
                 }) }}
 
                 {% set implantDetailsHtml %}
-                    {{ govukTextarea({
-                    id: 'implant-details',
-                    name: 'implant-details',
-                    value: data['implant-details'],
-                    label: {
-                        text: data.translations.implantsYesDetails[data.lang]
-                    }
-                    }) }}
+
+                    <p class="govuk-hint">In some cases, it may be difficult to know with certainty all of the implantable medical devices that the deceased had fitted. Enter details of any implants using the records and information that you have available. You must enter details in English and Welsh, or in English only.</p>
+
+                    {% if( data.bilingual == 'true' ) %}
+
+                        <!-- BILINGUAL -->
+                        {{ govukTextarea({
+                            id: 'implant-details',
+                            name: 'implant-details',
+                            value: data['implant-details'],
+                            label: {
+                                html: data.translations.implantsYesDetails[data.lang] + '<br /><strong>' + data.translations.globalWriteInEnglish[data.lang] + '</strong>'
+                            }
+                        }) }}
+
+                        {{ govukTextarea({
+                            id: 'implant-details-welsh',
+                            name: 'implant-details-welsh',
+                            value: data['implant-details-welsh'],
+                            label: {
+                                html: data.translations.implantsYesDetails[data.lang] + ' ' + data.translations.globalOptional[data.lang] + '<br /><strong>'+data.translations.globalWriteInWelsh[data.lang]+'</strong>'
+                            }
+                        }) }}
+
+                        
+                    {% else %}
+                    
+                        <!-- ENGLISH ONLY -->
+                        {{ govukTextarea({
+                            id: 'implant-details',
+                            name: 'implant-details',
+                            value: data['implant-details'],
+                            label: {
+                                text: data.translations.implantsYesDetails[data.lang]
+                            }
+                        }) }}
+
+                    {% endif %}
+
                 {% endset -%}
 
 

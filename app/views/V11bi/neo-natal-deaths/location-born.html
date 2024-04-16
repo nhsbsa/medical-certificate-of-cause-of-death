@@ -25,18 +25,38 @@
                 }
               }) %}
 
+              {% if data.bilingual == 'true' %}
+
+                <!-- BILINGUAL -->
                 {{ govukInput({
-                    label: {
-                    text: data.translations.dpdPlaceOfBirthInput[data.lang],
-                    isPageHeading: false
-                    },
-                    hint: {
-                    text: data.translations.dpdPlaceOfBirthHint[data.lang]
-                    },
+                    label: { html: data.translations.dpdPlaceOfBirthInput[data.lang] + '<br /><strong>'+data.translations.globalWriteInEnglish[data.lang]+'</strong>' },
+                    hint: { text: data.translations.dpdPlaceOfBirthHint[data.lang] },
                     value: data['location-of-birth'],
                     id: 'location-of-birth',
                     name: 'location-of-birth'
                 }) }}
+
+                {{ govukInput({
+                    label: { html: data.translations.dpdPlaceOfBirthInput[data.lang] + '<br /><strong>'+data.translations.globalWriteInWelsh[data.lang]+'</strong>' },
+                    hint: { text: data.translations.dpdPlaceOfBirthHintWelsh[data.lang] },
+                    value: data['location-of-birth-welsh'],
+                    id: 'location-of-birth-welsh',
+                    name: 'location-of-birth-welsh'
+                }) }}
+
+                {% else %}
+
+                <!-- ENGLISH ONLY -->
+                {{ govukInput({
+                    label: { text: data.translations.dpdPlaceOfBirthInput[data.lang] },
+                    hint: { text: data.translations.dpdPlaceOfBirthHint[data.lang] },
+                    value: data['location-of-birth'],
+                    id: 'location-of-birth',
+                    name: 'location-of-birth'
+                }) }}
+
+                {% endif %}
+
 
               {% endcall %}
 

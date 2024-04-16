@@ -35,7 +35,7 @@ href: 'javascript:history.back()'
       {% set writeInEnglish = '' %}
       {% set writeInWelsh = '<br /><strong>'+data.translations.globalWriteInWelsh[data.lang]+'</strong>' %}
       
-      {% if data.lang == 'cy' %}
+      {% if data.bilingual == 'true' %}
           {% set writeInEnglish = '<br /><strong>'+data.translations.globalWriteInEnglish[data.lang]+'</strong>' %}
       {% endif %}
 
@@ -64,7 +64,7 @@ href: 'javascript:history.back()'
           id: 'main-cause', name: 'main-cause', value: data['main-cause']
         }) }}
 
-        {% if data.lang == 'cy' %}
+        {% if data.bilingual == 'true' %}
           {{ govukInput({
               label: { html: data.translations.codU28aMainDisease[data.lang] + ' ' + data.translations.globalOptional[data.lang] + writeInWelsh },
               id: 'main-cause-welsh', name: 'main-cause-welsh', value: data['main-cause-welsh']
@@ -78,7 +78,7 @@ href: 'javascript:history.back()'
           id: 'secondary-cause', name: 'secondary-cause', value: data['secondary-cause']
         }) }}
 
-        {% if data.lang == 'cy' %}
+        {% if data.bilingual == 'true' %}
           {{ govukInput({
             label: { html: data.translations.codU28bOtherDisease[data.lang] + writeInWelsh },
             id: 'secondary-cause-welsh', name: 'secondary-cause-welsh', value: data['secondary-cause-welsh']
@@ -92,7 +92,7 @@ href: 'javascript:history.back()'
           id: 'other-conditions-c', name: 'other-conditions-c', value: data['other-conditions-c']
         }) }}
 
-        {% if data.lang == 'cy' %}
+        {% if data.bilingual == 'true' %}
           {{ govukInput({
             label: { html: data.translations.codU28cMainMaternalDisease[data.lang] + writeInWelsh },
             id: 'other-conditions-c-welsh', name: 'other-conditions-c-welsh', value: data['other-conditions-c-welsh']
@@ -106,7 +106,7 @@ href: 'javascript:history.back()'
           id: 'other-conditions-d', name: 'other-conditions-d', value: data['other-conditions-d']
         }) }}
 
-        {% if data.lang == 'cy' %}
+        {% if data.bilingual == 'true' %}
           {{ govukInput({
             label: { html: data.translations.codU28dOtherMaternalDisease[data.lang] + writeInWelsh },
             id: 'other-conditions-d-welsh', name: 'other-conditions-d-welsh', value: data['other-conditions-d-welsh']
@@ -120,7 +120,7 @@ href: 'javascript:history.back()'
           id: 'other-conditions-e', name: 'other-conditions-e', value: data['other-conditions-e']
         }) }}
 
-        {% if data.lang == 'cy' %}
+        {% if data.bilingual == 'true' %}
           {{ govukInput({
             label: { html: data.translations.codU28eOtherRelevantFactors[data.lang] + writeInWelsh },
             id: 'other-conditions-e-welsh', name: 'other-conditions-e-welsh', value: data['other-conditions-e-welsh']
@@ -213,7 +213,7 @@ href: 'javascript:history.back()'
 
           <!-- MAIN CAUSE TIME UNIT w/ ERROR -->
           <div class="govuk-grid-column-one-third no-padding">
-              <p id="duration1label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
+              <p id="duration1label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
               <div class="govuk-input__wrapper">
 
                 {{ govukInput({
@@ -248,7 +248,7 @@ href: 'javascript:history.back()'
 
         <!-- MAIN CAUSE TIME UNIT -->
         <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration1label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
+            <p id="duration1label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
             <div class="govuk-input__wrapper">
 
               {{ govukInput({
@@ -270,7 +270,7 @@ href: 'javascript:history.back()'
 
 
           <!-- EXTRA WELSH MAIN CAUSE FIELD -->
-          {% if data.lang == 'cy' %}
+          {% if data.bilingual == 'true' %}
             <div class="govuk-grid-column-full no-padding">
               <div class="govuk-grid-column-two-thirds no-padding">
                 {{ govukInput({
@@ -295,7 +295,7 @@ href: 'javascript:history.back()'
 
         <!-- SECONDARY CAUSE TIME UNIT -->
         <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration2label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(b)</span></p>
+            <p id="duration2label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(b)</span></p>
             <div class="govuk-input__wrapper">
 
               {{ govukInput({
@@ -313,7 +313,7 @@ href: 'javascript:history.back()'
           </div>
 
           <!-- EXTRA WELSH SECONDARY CAUSE FIELD -->
-          {% if data.lang == 'cy' %}
+          {% if data.bilingual == 'true' %}
           <div class="govuk-grid-column-full no-padding">
             <div class="govuk-grid-column-two-thirds no-padding">
               {{ govukInput({
@@ -337,7 +337,7 @@ href: 'javascript:history.back()'
 
           <!-- MEDICAL CAUSE, 1(C) TIME UNIT -->
           <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration3label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(c)</span></p>
+            <p id="duration3label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(c)</span></p>
             <div class="govuk-input__wrapper">
 
               {{ govukInput({
@@ -355,7 +355,7 @@ href: 'javascript:history.back()'
           </div>
 
           <!-- EXTRA WELSH MEDICAL CAUSE, 1(C) FIELD -->
-          {% if data.lang == 'cy' %}
+          {% if data.bilingual == 'true' %}
           <div class="govuk-grid-column-full no-padding">
             <div class="govuk-grid-column-two-thirds no-padding">
               {{ govukInput({
@@ -379,7 +379,7 @@ href: 'javascript:history.back()'
 
           <!-- MEDICAL CAUSE, 1(D) TIME UNIT -->
           <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration4label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(d)</span></p>
+            <p id="duration4label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(d)</span></p>
             <div class="govuk-input__wrapper">
 
               {{ govukInput({
@@ -397,7 +397,7 @@ href: 'javascript:history.back()'
           </div>
 
           <!-- EXTRA WELSH MEDICAL CAUSE, 1(D) FIELD -->
-          {% if data.lang == 'cy' %}
+          {% if data.bilingual == 'true' %}
           <div class="govuk-grid-column-full no-padding">
             <div class="govuk-grid-column-two-thirds no-padding">
               {{ govukInput({
@@ -427,7 +427,7 @@ href: 'javascript:history.back()'
 
           <!-- MEDICAL CAUSE, 2 TIME UNITS -->
           <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration5label" class="govuk-label{% if data.lang == 'cy' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 2</span></p>
+            <p id="duration5label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 2</span></p>
             <div class="govuk-input__wrapper">
 
               {{ govukInput({
@@ -445,7 +445,7 @@ href: 'javascript:history.back()'
           </div>
 
           <!-- EXTRA WELSH MEDICAL CAUSE, 2 FIELD -->
-          {% if data.lang == 'cy' %}
+          {% if data.bilingual == 'true' %}
           <div class="govuk-grid-column-full no-padding">
             <div class="govuk-grid-column-two-thirds no-padding">
               {{ govukInput({
