@@ -715,6 +715,9 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 // ************************************************************
 
+// Do we actually want to redirect to the contact method screen (since it's...experimental)
+const showContactMethodScreen = true;
+
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
 
@@ -723,11 +726,19 @@ router.post( /care-id-role/, (req, res) => {
     if( roleType === 'ap' || roleType === 'me' ){
 
         if( !req.session.data['qualifications'] ){
+
              // Do they have a qualifications value set?
             res.redirect('../onboarding/qualifications');
+
         } else if( !req.session.data['contact-method'] ){
+
             // Do they have a contact-method value set?
-            res.redirect('../onboarding/contact-method');
+            if( showContactMethodScreen === true ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }
@@ -747,8 +758,14 @@ router.post( /qualifications/, (req, res) => {
     if( req.session.data['onboardingPath'] ){
         
         if( !req.session.data['contact-method'] ){
-            // Do they have a contact-method value set?
-            res.redirect('contact-method');
+
+           // Do they have a contact-method value set?
+           if( showContactMethodScreen ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }

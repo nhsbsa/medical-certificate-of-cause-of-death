@@ -15,13 +15,19 @@
 
         <form action="contact-method" role="form" method="post" novalidate>
 
+            {% if data['role-type'] == 'me' %}
+                {% set hintText = data.translations.contactPageHintME[data.lang] %}
+            {% else %}
+                {% set hintText = data.translations.contactPageHint[data.lang] %}
+            {% endif %}
+
             {{ govukInput({
                 label: {
                     html: data.translations.contactPageTitle[data.lang],
                     classes: 'govuk-label--l',
                     isPageHeading: true
                 },
-                hint: { html: data.translations.contactPageHint[data.lang] },
+                hint: { html: hintText },
                 id: 'contact-method',
                 name: 'contact-method',
                 value: data['contact-method'],
