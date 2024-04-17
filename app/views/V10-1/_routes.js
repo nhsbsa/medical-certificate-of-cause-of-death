@@ -716,7 +716,7 @@ router.post(/care-id-smartcard/, (req,res) => {
 // ************************************************************
 
 // Do we actually want to redirect to the contact method screen (since it's...experimental)
-const showContactMethodScreen = true;
+const showContactMethodScreen = false;
 
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
