@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -17,11 +17,11 @@
 
             {{ govukInput({
                 label: {
-                    html: 'How should people contact you?',
+                    html: data.translations.contactPageTitle[data.lang],
                     classes: 'govuk-label--l',
                     isPageHeading: true
                 },
-                hint: { text: 'Provide an email address or phone number in case someone needs to contact you about your MCCD' },
+                hint: { html: data.translations.contactPageHint[data.lang] },
                 id: 'contact-method',
                 name: 'contact-method',
                 value: data['contact-method'],
