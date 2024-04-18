@@ -20,7 +20,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
     </div>
 
 
-    <form action="check-your-answers-cod" method="post">
+    <form action="check-your-answers-cod" method="post" novalidate>
 
       <!-- OVER 28 DAYS --> 
       {% if data['over-under-28'] == 'yes' or data['over-under-28'] == 'dpd66Or65RadioYes' %} 
