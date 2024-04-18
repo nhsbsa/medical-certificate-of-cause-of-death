@@ -10,6 +10,11 @@ text: data.translations.globalBackLink[data.lang],
 href: 'javascript:history.back()'
 }) }}
 
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
+{% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
+{% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
+
+
 <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 
@@ -44,7 +49,7 @@ href: 'javascript:history.back()'
             </div>
 
             <!-- DATE OF BIRTH -->
-            {% set dateOfBirth = [ data['dob-day'], data['dob-month'], data['dob-year'] ] %}
+            {% set dateOfBirth = [ data['dob-day'], data['dob-month'] | getMonthString, data['dob-year'] ] %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersDoB[data.lang] }}</dt>
                 
@@ -61,12 +66,20 @@ href: 'javascript:history.back()'
             </div>
 
 
-            <!-- PLACE OF BIRTH (OPTIONAL FOR INFANT ROUTE ) -->
-            {% if data['over-under-24'] == 'globalRadioYes' %}
+            <!-- PLACE OF BIRTH (OPTIONAL FOR NEO-NATAL ROUTE ) -->
+            {% if data['over-under-28'] == 'dpd66Or65RadioYes' %}
               {% if data['location-of-birth'] %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersBirthLocation[data.lang] }}</dt>
-                    <dd class="govuk-summary-list__value">{{ data['location-of-birth'] }}</dd>
+                    <dd class="govuk-summary-list__value">
+
+                      {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                        {{ data['location-of-birth'] }}
+                      {% if data.bilingual == 'true' and data['location-of-birth-welsh'] %}
+                        {{ hr | safe }}{{ welshLabel | safe }}{{ data['location-of-birth-welsh'] }}
+                      {% endif %}
+
+                    </dd>
                     <dd class="govuk-summary-list__actions">
                       <a href="./neo-natal-deaths/location-born">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersBirthLocation[data.lang] | lower }}</span></a>
                     </dd>
@@ -90,14 +103,14 @@ href: 'javascript:history.back()'
 
                 {% else %}
 
-                  <!-- INFANT DEATH -->
+                  <!-- NEO-NATAL DEATH -->
                   {% if data['over-under-24'] == 'globalRadioYes' %}
                       <!-- OVER 24 HOURS (DAYS) -->
-                      <dd class="govuk-summary-list__value">{{ data['deceased-persons-age-days'] }} {{ data.translations.dpdAgeDaysOld[data.lang] }}</dd>
+                      <dd class="govuk-summary-list__value">{% if data['deceased-persons-age-days'] %}{{ data['deceased-persons-age-days'] }} {{ data.translations.dpdAgeDaysOld[data.lang] }}{% endif %}</dd>
 
                   {% else %}
                       <!-- UNDER 24 HOURS (HOURS, MINS) -->
-                      <dd class="govuk-summary-list__value">{{ data['deceased-persons-age-hours'] }} {{ data.translations.dpdAgeHours[data.lang] }}, {{ data['deceased-persons-age-minutes'] }} {{ data.translations.dpdAgeMinutes[data.lang] }} </dd>
+                      <dd class="govuk-summary-list__value">{% if data['deceased-persons-age-hours'] or data['deceased-persons-age-minutes'] %}{{ data['deceased-persons-age-hours'] or '0' }} {{ data.translations.dpdAgeHours[data.lang] }}, {{ data['deceased-persons-age-minutes'] or '0' }} {{ data.translations.dpdAgeMinutes[data.lang] }}{% endif %}</dd>
 
                   {% endif %}
 
@@ -119,7 +132,7 @@ href: 'javascript:history.back()'
             </div>
 
             <!-- DATE OF DEATH -->
-            {% set dateOfDeath = [ data['dod-day'], data['dod-month'], data['dod-year'] ] %}
+            {% set dateOfDeath = [ data['dod-day'], data['dod-month'] | getMonthString, data['dod-year'] ] %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersDoD[data.lang] }}</dt>
                 <dd class="govuk-summary-list__value">{{ dateOfDeath | join(' ') }}</dd>
@@ -136,7 +149,15 @@ href: 'javascript:history.back()'
                 {% if data['location-of-death'] == 'globalRadioNo' %}
 
                   <!-- UNKNOWN ADDRESS -->
-                  <dd class="govuk-summary-list__value">{{ data['location-death'] }}</dd>
+                  <dd class="govuk-summary-list__value">
+
+                    {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                      {{ data['location-death'] }}
+                    {% if data.bilingual == 'true' and data['location-death-welsh'] %}
+                      {{ hr | safe }}{{ welshLabel | safe }}{{ data['location-death-welsh'] }}
+                    {% endif %}
+
+                  </dd>
                   {% set deathLocationBackLink = 'place-of-death/unknown-address' %}
                 
                 {% else %}
@@ -146,10 +167,10 @@ href: 'javascript:history.back()'
                   {% if data['death-in-hospital'] == 'globalRadioYes' %}
 
                     <!-- DEATH IN HOSPITAL -->
-                    {% if data['select-hospital-address'] %}
+                    {% if data['hospital-address'] %}
 
                       <!-- POSTCODE SEARCH -->
-                      <dd class="govuk-summary-list__value">{{ data['select-hospital-address'].split(',') | join('<br />') | safe }}</dd>
+                      <dd class="govuk-summary-list__value">{{ data['hospital-address'].split(',') | join('<br />') | safe }}</dd>
                       {% set deathLocationBackLink = 'place-of-death/select-hospital-address' %}
 
                     {% else %}
@@ -163,10 +184,10 @@ href: 'javascript:history.back()'
                   {% else %}
 
                     <!-- COMMUNITY DEATH -->
-                    {% if data['select-another-address'] %}
+                    {% if data['another-address'] %}
 
                       <!-- POSTCODE SEARCH -->
-                      <dd class="govuk-summary-list__value">{{ data['select-another-address'].split(',') | join('<br />') | safe }}</dd>
+                      <dd class="govuk-summary-list__value">{{ data['another-address'].split(',') | join('<br />') | safe }}</dd>
                       {% set deathLocationBackLink = 'place-of-death/select-another-address' %}
 
                     {% else %}

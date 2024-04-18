@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="contact-method" role="form" method="post" novalidate>
+
+            {{ govukInput({
+                label: {
+                    html: 'How should people contact you?',
+                    classes: 'govuk-label--l',
+                    isPageHeading: true
+                },
+                hint: { text: 'Provide an email address or phone number in case someone needs to contact you about your MCCD' },
+                id: 'contact-method',
+                name: 'contact-method',
+                value: data['contact-method'],
+                classes: 'govuk-input--width-10'
+            }) }}
+
+            {{ govukButton({
+                text: data.translations.globalSaveContinue[data.lang]
+            }) }}
+            
+        </form>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

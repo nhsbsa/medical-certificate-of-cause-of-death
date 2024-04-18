@@ -25,12 +25,23 @@
                 
                 <p>{{ data['anotherAddresses'] | getPostCodeSearchStatus('another') | safe }}</p>
 
-                {% if (data['anotherAddresses'] | length > 0)  %}
+                {% if ( data['anotherAddresses'] | length > 0 )  %}
 
-                  {{ data['anotherAddresses'] | getPostCodeSearchSelect('another') | safe }}
+                  {% for anotherAddress in data['anotherAddresses'] %}
+                    <div class="govuk-radios__item">
 
+                      {% if data['another-address'] == anotherAddress %}
+                        <!-- CHECKED -->
+                        <input checked class="govuk-radios__input" id="another-address-{{loop.index}}" name="another-address" type="radio" value="{{ anotherAddress }}">
+                      {% else %}
+                        <input class="govuk-radios__input" id="another-address-{{loop.index}}" name="another-address" type="radio" value="{{ anotherAddress }}">
+                      {% endif %}
 
-                  
+                      <label class="govuk-label govuk-radios__label" for="another-address-{{loop.index}}">{{ anotherAddress or 'Sample community address' }}</label>
+                    </div>
+                  {% endfor %}
+
+                  <hr class="govuk-section-break govuk-section-break--m" />
 
 
                   {{ govukButton({
@@ -41,8 +52,6 @@
     
         </div>
       </div>
-
-    
 
     <p><a href="exact-address">{{ data.translations.dpdHospitalPostcodeSelectLink[data.lang] }}</a></p>
 

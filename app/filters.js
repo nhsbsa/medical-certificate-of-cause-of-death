@@ -18,6 +18,51 @@ addFilter('debugData', function(content) {
 
 
 //
+// GENERATE STATIC SESSION DATA
+//
+addFilter('generateStaticSessionData', function(content){
+
+     // content: the session data object
+     return '<p class="govuk-body">You can copy this entire block of code into the \'session-data-defaults.js\' file for more robust testing. Remember to keep a copy of the dynamic version though.</p><textarea class="govuk-textarea">module.exports = '+JSON.stringify(content)+'</textarea>';
+
+});
+
+
+//
+// GET MONTH STRING
+//
+addFilter('getMonthString', function(content) {
+
+    // content: string, the month in the format 01 to 12
+
+    let month = 'January';
+    let months = { 
+        en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        cy: ['Ionawr','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr']
+    };
+    let num = parseInt( content );
+
+    if( !Number.isNaN(num) ){
+
+        if( num < 1 ){
+            num = 1;
+        }
+
+        if( num > 12 ){
+            num = 12;
+        }
+
+        month = months[this.ctx.data.lang][num-1];
+
+    }
+    
+
+    return month;
+
+});
+
+
+//
 // GET POSTCODE SEARCH SELECT
 //
 addFilter('getPostCodeSearchSelect', function( content, type ) {
@@ -50,10 +95,10 @@ addFilter('getPostCodeSearchStatus', function(content, type) {
     let status = ( type === 'hospital' ) ? this.ctx.data.translations.dpdHospitalPostcodeSelectResultDescription[this.ctx.data.lang] : this.ctx.data.translations.dpdOtherLocationPostcodeSelectResultDescription[this.ctx.data.lang];
    
     const noOfResults = ( Array.isArray( content ) ) ? content.length : 0;
-    const postCode = ( this.ctx.data[type+'-postcode'] ) ? this.ctx.data[type+'-postcode'] : 'LS1 3EX';
+    const postCode = this.ctx.data.queryString;
 
-    status = status.replace('[# results]', noOfResults);
-    status = status.replace('[postcode]', postCode);
+    status = status.replace('[# results]', '<strong>'+noOfResults+'</strong>');
+    status = status.replace('[postcode]', '<strong>'+postCode+'</strong>');
 
     if( noOfResults !== 1 ){
         status = status.replace('address', 'addresses');
@@ -253,12 +298,21 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
+    let statusObj = {
+        html: '<a href="'+statusLink+'">Status</a>',
+        attributes: {
+            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+        }
+    };
+
+    /*
     let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
         html: '<a href="'+statusLink+'">Status</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         } 
     };
+    */
 
     return [ nameObj, dateObj, actionObj, statusObj ];
 
@@ -286,8 +340,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const meoReview = this.ctx.data['meo-review'];
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
+    const filterDrafts = ( this.ctx.data.separateDraftsTable === 'true' ) ? true : false;
+
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
@@ -390,9 +446,28 @@ addFilter( 'getStatusTag', function( content ){
 
     content = parseInt(content);
     if( !Number.isNaN( content ) ){
-        html = dashboard.getStatuses(content, true);    
+        html = dashboard.getStatuses(content, 'tags' );    
     }
 
     return html;
+
+});
+
+//
+// GET STATUS EXPLANATION ROWS
+//
+addFilter('getStatusExplanationRows', function(content) {
+
+     // content: blank string
+    
+    const tags = dashboard.getStatuses( '', 'tags' );
+    const explanations = dashboard.getStatuses( '', 'explanations' );
+
+    const rows = [];
+    tags.forEach(function( tag, i ){
+        rows.push( [ { html: tag }, { text: explanations[i] } ] );
+    });
+    
+    return rows;
 
 });

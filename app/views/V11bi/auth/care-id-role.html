@@ -89,13 +89,39 @@
       </h1>
     </legend>
 
+    <style>
+    
+      .nhsuk-card__link {
+        background: none;
+        border: none;
+        font-size: 19px;
+        color: #005eb8;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+        cursor: hand;
+      }
+
+      .nhsuk-card__link:hover,
+      .nhsuk-card__link:focus {
+        text-decoration: none;
+      }
+    
+    </style>
+
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full-width nhsuk-card-group__item">
     
         <div class="nhsuk-card nhsuk-card--clickable">
           <div class="nhsuk-card__content">
             <h5 class="nhsuk-card__heading nhsuk-heading-xs">
-              <a class="nhsuk-card__link" href="../dashboard?role-type=ap">Royal Manchester Children's Hospital</a>
+              
+              <form action="care-id-role" method="post" novalidate>
+                <input type="hidden" value="ap" name="role-type" />
+                <input type="hidden" value="true" name="onboardingPath" />
+                <button type="submit" class="nhsuk-card__link">Royal Manchester Children's Hospital</button>
+              </form>
+
             </h5>
               <p class="nhsuk-body-m">Attending practitioner</p>
           </div>
@@ -108,7 +134,13 @@
         <div class="nhsuk-card nhsuk-card--clickable">
           <div class="nhsuk-card__content">
             <h5 class="nhsuk-card__heading nhsuk-heading-xs">
-              <a class="nhsuk-card__link" href="../dashboard?role-type=me">North Manchester General Hospital</a>
+
+              <form action="care-id-role" method="post" novalidate>
+                <input type="hidden" value="me" name="role-type" />
+                <input type="hidden" value="true" name="onboardingPath" />
+                <button type="submit" class="nhsuk-card__link">North Manchester General Hospital</button>
+              </form>
+
             </h5>
             <p class="nhsuk-body-m">Medical examiner</p>
           </div>
@@ -121,7 +153,13 @@
         <div class="nhsuk-card nhsuk-card--clickable">
           <div class="nhsuk-card__content">
             <h5 class="nhsuk-card__heading nhsuk-heading-xs">
-              <a class="nhsuk-card__link" href="../dashboard?role-type=meo">North Manchester General Hospital</a>
+
+               <form action="care-id-role" method="post" novalidate>
+                <input type="hidden" value="meo" name="role-type" />
+                <input type="hidden" value="true" name="onboardingPath" />
+                <button type="submit" class="nhsuk-card__link">North Manchester General Hospital</button>
+              </form>
+            
             </h5>
             <p class="nhsuk-body-m">Medical examiner officer</p>
           </div>

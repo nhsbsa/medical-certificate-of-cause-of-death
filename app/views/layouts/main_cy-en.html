@@ -190,6 +190,10 @@
   {% if data.debug == 'true' %}
     
     {% set footerItems = (footerItems.push({
+          href: '?debug=false',
+          text: 'Debug'
+        },
+        {
           href: '?role-type=ap',
           text: 'Role: AP'
         },
@@ -208,6 +212,13 @@
         {
           href: '?over-under-28=dpd66Or65RadioNo',
           text: 'Path: General'
+        }), footerItems) %}
+
+  {% else %}
+
+  {% set footerItems = (footerItems.push({
+          href: '?debug=true',
+          text: 'Debug'
         }), footerItems) %}
 
   {% endif %}

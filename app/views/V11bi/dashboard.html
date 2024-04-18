@@ -5,29 +5,13 @@
 
 {% block content %}
 
-{% if data['role-type'] === 'ap' or data['role-type'] === 'me'%}
-  
-  {% if data['qualifications'] %}
-    <!-- NOTHING -->
-  {% else %}
-    <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
-    <script>
-      window.addEventListener('DOMContentLoaded', function(){
-        window.location.href = 'qualifications?return-to-dashboard=true';
-      });
-    </script>
-  {% endif%}
 
-  
-{% endif %}
-
-
- <!-- AP DASHBOARD -->
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
 {% if data['role-type'] == 'ap' %}
 
+ <!-- AP DASHBOARD -->
   <h1 class="govuk-heading-l">Your dashboard</h1>
 
   <p>This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.</p>
@@ -38,6 +22,8 @@
     <li>have been approved by a medical examiner and need forwarding to the registrar’s office</li>
     <li>have been rejected by a medical examiner and need amending</li>
   </ul>
+
+  <p>Completed MCCDs will be removed after three months.</p>
 
 {% elseif data['role-type'] == 'me' %}
 
@@ -201,7 +187,7 @@
 
           {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
 
-          {% if draftRows.length > 0 %}
+          {% if draftRows.length > 0 and data.separateDraftsTable === 'true' %}
 
           <!-- DRAFTS TABLE -->
             {{ govukTable({
@@ -222,6 +208,14 @@
 
         {% endif %}
 
+        <!-- DETAILS -->
+        {{ govukDetails({
+            summaryText: 'Explanation of statuses',
+            html: govukTable({
+              rows: '' | getStatusExplanationRows
+            })
+        }) }}
+
         <!-- MAIN TABLE -->
         {{ govukTable({
           caption: '' | getDashboardCaption,
@@ -229,7 +223,7 @@
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
           head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
-          rows: patientData.data | getDashboardTableRows('')
+          rows: patientData.data | getDashboardTableRows()
         }) }}
 
     </div>

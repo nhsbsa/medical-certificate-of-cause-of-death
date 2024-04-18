@@ -1,5 +1,8 @@
 //
 // INTERNAL VARIABLES
+
+const { separateDraftsTable } = require("./data/session-data-defaults");
+
 //
 const _debug = false;
 let _roleType = '';
@@ -8,10 +11,13 @@ let _roleType = '';
 // GET STATUSES FUNCTION
 // Now all calls for statuses come via here - should make updating stuff easier...
 //
-function _getStatuses( num, returnTag ){
+function _getStatuses( num, returnType ){
 
     // num: a number to return, else return everything
-    // returnTag: boolean, whether to return the status(es) or tag(s)
+    // returnType: string - either 'statuses', 'tags' or 'explanations'
+
+    const returnTypes = ['statuses','tags','explanations'];
+    returnType = ( returnTypes.indexOf(returnType) > -1 ) ? returnType : 'statuses';
 
     num = parseInt(num);
 
@@ -38,7 +44,9 @@ function _getStatuses( num, returnTag ){
     ];
     */
 
-    const statuses = [
+    const values = {};
+
+    values.statuses = [
         'Draft',
         'For review by MEO',
         'To be amended',
@@ -47,7 +55,7 @@ function _getStatuses( num, returnTag ){
         'Submitted to registrar'
     ];
 
-    const tags = [ 
+    values.tags = [ 
         '<span class="govuk-tag govuk-tag--grey">Draft</span>',
         '<span class="govuk-tag govuk-tag--blue">For review by MEO</span>',
         '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
@@ -56,9 +64,16 @@ function _getStatuses( num, returnTag ){
         '<span class="govuk-tag">Submitted to registrar</span>'
     ];
 
-    const arr = ( returnTag ) ? tags : statuses;
+    values.explanations = [
+        'The MCCD has not been submitted.',
+        'An AP has submitted the MCCD and it has been passed to a medical examiner office for review by an MEO.',
+        'A ME has reviewed the MCCD and requires the AP to make changes.',
+        'The MCCD requires scrutiny from an ME.',
+        'The MCCD is ready to be sent to the register office by an MEO.',
+        'The MCCD has been sent to the register office.'
+    ];
 
-    return ( Number.isNaN(num) ) ? arr : arr[num];
+    return ( Number.isNaN(num) ) ? values[returnType] : values[returnType][num];
 
 }
 
@@ -216,6 +231,7 @@ function _filterByRoleType( rows, roleType ){
                 switch( roleType ){
 
                     case 'ap':
+
                         // AP - filter for those patients with the "belongs to AP" flag (just used for demo)
                         if( row.belongsToAP ){
                             arr.push(row);
@@ -223,13 +239,20 @@ function _filterByRoleType( rows, roleType ){
                         break;
 
                     case 'me':
-                        // ME - for the demo, only show ones that require scrutiny
-                        if( row.status === 3 ){
-                            arr.push(row);
+
+                        // ME - filter for those patients with the "belongs to AP" flag (just used for demo)
+                        if( row.status === 3 || row.belongsToME ){
+
+                            // MEs would never go round the AP-ME approval loop
+                            if( row.status !== 1 && row.status !== 2 ){
+                                arr.push(row);
+                            }
+                            
                         }
                         break;
 
                     case 'meo':
+
                         // MEO - basically anything except drafts
                         if( row.status !== 0 ){
                             arr.push(row);
@@ -263,8 +286,8 @@ function _getActionForStatus( status, id ){
 
     const actions = {
         ap: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
-        me: ['Finish certificate','View certificate','View certificate','Review certificate','View certificate','View certificate'],
-        meo: ['Finish certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
+        me: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
+        meo: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
     }
 
     let html = '';
@@ -296,7 +319,7 @@ function _getRow( patient ){
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
-    arr.push( { text: patient.status, html: _getStatuses( patient.status, true ) });
+    arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags' ) });
 
     return arr;
 
@@ -369,9 +392,7 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
 //
 // FILTER DRAFTS FUNCTION
 //
-function _filterDrafts( rows ){
-    
-    const filterDrafts = true;
+function _filterDrafts( rows, filterDrafts ){
 
     const arr = ( filterDrafts ) ? [] : rows;
     
@@ -392,7 +413,7 @@ function _filterDrafts( rows ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts ){
 
     if( _debug ){
         console.log( 'START FILTERING ----------------' ); 
@@ -400,7 +421,7 @@ function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, 
 
     _roleType = roleType;
 
-    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts(rows), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
+    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 
     if( _debug ){
         console.log( 'END FILTERING ----------------' );

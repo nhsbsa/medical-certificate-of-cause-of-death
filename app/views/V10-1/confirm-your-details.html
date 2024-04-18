@@ -42,9 +42,14 @@ href: 'javascript:history.back()'
                 value: { html: '123 Hospital Road<br />Wing 4<br />Newcastle<br />Tyne and Wear<br />NE12 3AB' }
             },
             {
-                key: { text: 'Qualifications' },
+                key: { text: 'Primary qualification' },
                 value: { html: data['qualifications'] or 'Not specified' },
-                actions: { items: [ {  href: 'qualifications', text: 'Change' } ] }
+                actions: { items: [ {  href: 'onboarding/qualifications', text: 'Change' } ] }
+            },
+            {
+                key: { text: 'Contact method' },
+                value: { html: data['contact-method'] or 'Not specified' },
+                actions: { items: [ {  href: 'onboarding/contact-method', text: 'Change' } ] }
             }
         ]
         }) }}
