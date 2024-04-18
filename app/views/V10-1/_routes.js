@@ -818,11 +818,6 @@ router.post( /mccd-tasklist/, (req, res) => {
         // Need everything there to proceed
         if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
 
-            // This variable lets the declaration page know that it's an ME MCCD 
-            if( req.session.data['role-type'] === 'me' ){
-                req.session.data['me-mccd'] = true;
-            }
-
             delete req.session.data.showTaskListError;
 
             res.redirect('confirm-your-details');
