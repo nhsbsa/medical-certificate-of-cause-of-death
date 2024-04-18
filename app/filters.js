@@ -35,14 +35,14 @@ addFilter('getMonthString', function(content) {
 
     // content: string, the month in the format 01 to 12
 
-    let month = 'January';
+    let month = ( content && typeof content === 'string' ) ? 'January' : '';
     let months = { 
         en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
         cy: ['Ionawr','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr']
     };
     let num = parseInt( content );
 
-    if( !Number.isNaN(num) ){
+    if( !Number.isNaN(num) && month ){
 
         if( num < 1 ){
             num = 1;
@@ -141,17 +141,23 @@ addFilter('getFooterStatus', function(content) {
     let path;
     switch( this.ctx.data['over-under-28'] ) {
         case 'dpd66Or65RadioYes':
-            path = 'on an infant MCCD path';
+        case 'yes':
+            path = 'on a neo-natal MCCD path';
             break;
         case 'dpd66Or65RadioNo':
-            path = 'on an adult MCCD path';
+        case 'no':
+            path = 'on a general MCCD path';
             break;
         default:
             path = 'on an undetermined MCCD path'
             break;
     }
 
-    const lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
+    let lang = '';
+    if( this.ctx.data.bilingual === 'true' ){
+        lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
+    }
+
     const returnStr = ( this.ctx.data.debug === 'true' ) ? 'Currently acting ' + roleType + ' ' + path + ' ' + lang : '';
 
     return returnStr;

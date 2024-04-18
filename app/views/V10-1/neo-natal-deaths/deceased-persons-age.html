@@ -15,13 +15,13 @@
             {% if data['over-under-24'] == 'yes' %} 
             <div class="govuk-form-group">
                 <h1 class="govuk-label-wrapper">
-                  <label class="govuk-label govuk-label--l" for="deceased-persons-age">
+                  <label class="govuk-label govuk-label--l" for="deceased-persons-age-days">
                     What was the deceased person's age?
                   </label>
                 </h1>
                 <div class="govuk-input__wrapper">
-                    <input class="govuk-input govuk-input--width-5" id="deceased-persons-age" name="deceased-persons-age" type="text" spellcheck="false">
-                  <div class="govuk-input__suffix" aria-hidden="true">days old</div>
+                    <input class="govuk-input govuk-input--width-5" id="deceased-persons-age-days" name="deceased-persons-age-days" type="text" spellcheck="false">
+                  <div class="govuk-input__suffix" aria-hidden="true">days</div>
                 </div>
               </div>
             {% else %}
@@ -35,12 +35,12 @@
                   <div class="govuk-input__wrapper" id="ageHoursMinutes">
                     <div class="govuk-input__wrapper">
                       <div class="govuk-form-group">
-                        <label class="govuk-label govuk-label govuk-visually-hidden" for="Hours">
+                        <label class="govuk-label govuk-label govuk-visually-hidden" for="deceased-persons-age-hours">
                           Hours
                         </label>
                         <div class="govuk-input__wrapper govuk-!-margin-right-5">
                                       
-                          <input class="govuk-input govuk-input--width-3" id="Hours" name="Hours" type="text">
+                          <input class="govuk-input govuk-input--width-3" id="deceased-persons-age-hours" name="deceased-persons-age-hours" type="text">
                             
                                 <div class="govuk-input__suffix" aria-hidden="true">
                                   Hours
@@ -50,12 +50,12 @@
                     </div>
                     <div class="govuk-date-input__item">
                       <div class="govuk-form-group">
-                        <label class="govuk-label govuk-date-input__label govuk-visually-hidden" for="Minutes">
+                        <label class="govuk-label govuk-date-input__label govuk-visually-hidden" for="deceased-persons-age-minutes">
                           Minutes
                         </label>
                         <div class="govuk-input__wrapper govuk-!-margin-right-5">
                                       
-                          <input class="govuk-input govuk-input--width-3" id="Minutes" name="Minutes" type="text">
+                          <input class="govuk-input govuk-input--width-3" id="deceased-persons-age-minutes" name="deceased-persons-age-minutes" type="text">
                             
                                 <div class="govuk-input__suffix" aria-hidden="true">
                                   Minutes
