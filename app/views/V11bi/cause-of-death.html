@@ -27,7 +27,7 @@ href: 'javascript:history.back()'
         }
       }) %}
 
-      <p class="govuk-hint">{{ data.translations.codPageHint[data.lang] }}</p>
+      <p id="pre-error" class="govuk-hint">{{ data.translations.codPageHint[data.lang] }}</p>
 
 
 
@@ -148,13 +148,330 @@ href: 'javascript:history.back()'
 
             -->
 
+
+          <script>
+
+
+            //
+            // GET ERROR MESSAGE FUNCTION
+            //
+            function _getErrorMessage( err, num ){
+
+              let errorMessage = '';
+              const errors = {};
+
+              /* CAUSE ERRORS */
+
+              errors.noCauseEntered = [
+                'Enter disease or condition directly leading to death',
+                'Enter other disease or condition leading to 1(a)',
+                'Enter other disease or condition leading to 1(b)',
+                'Enter other disease or condition leading to 1(c)',
+                'Enter other significant conditions contributing to their death'
+              ];
+              errors.noCauseEntered.reverse();
+
+              errors.causeTooShort = [
+                'Disease or condition directly leading to death must be 2 characters or more',
+                'Other disease or condition leading to 1(a) must be 2 characters or more',
+                'Other disease or condition leading to 1(b) must be 2 characters or more',
+                'Other disease or condition leading to 1(c) must be 2 characters or more',
+                'Other significant conditions contributing to their death must be 2 characters or more'
+              ];
+              errors.causeTooShort.reverse();
+
+              errors.causeTooLong = [
+                'Disease or condition directly leading to death must be 170 characters or less',
+                'Other disease or condition leading to 1(a) must be 170 characters or less',
+                'Other disease or condition leading to 1(b) must be 170 characters or less',
+                'Other disease or condition leading to 1(c) must be 170 characters or less',
+                'Other significant conditions contributing to their death must be 170 characters or less'
+              ];
+              errors.causeTooShort.reverse();
+
+              errors.causeWrongCharacters = [
+                'Disease or condition directly leading to death must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /',
+                'Other disease or condition leading to 1(a) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /',
+                'Other disease or condition leading to 1(b) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /',
+                'Other disease or condition leading to 1(c) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /',
+                'Other significant conditions contributing to their death must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /'
+              ];
+              errors.causeWrongCharacters.reverse();
+
+
+              /* TIME ERRORS */
+              errors.timeUnknown = 'Time between onset of disease must be empty if setting to Unknown'
+              errors.noTimeEntered = 'Enter time between onset of disease or condition';
+              errors.timeIncorrect = 'Time between onset of disease or condition and death must only include digits 0 to 9, and be between 1 and 999'
+
+
+              /* UNIT ERRORS */
+              errors.noUnitSelected = 'Select a unit of time';
+
+
+
+              if( err && !Number.isNaN(parseInt(num)) ){
+                if( Array.isArray( errors[err] ) ){
+                  errorMessage = errors[err][num];
+                } else{
+                  errorMessage = errors[err];
+                }
+              }
+
+              return errorMessage;
+
+            };
+
+
+            //
+            // VALIDATE FORM FUNCTION
+            //
+            function _validateForm(){
+
+              // Remove existing errors
+              document.querySelectorAll('.govuk-error-summary,.govuk-error-message').forEach(function(el){
+                el.remove();
+              });
+
+              document.querySelectorAll('.govuk-select--error,.govuk-input--error,.govuk-form-group--error').forEach(function(el){
+                el.classList.remove('govuk-select--error','govuk-input--error','govuk-form-group--error');
+              });
+
+              // Define the groupings
+              const groups = [];
+              groups.push(['main-cause','duration1','time-unit-duration-1']); // 4
+              groups.push(['secondary-cause','duration2','time-unit-duration-2']); // 3
+              groups.push(['other-conditions-c','duration3','time-unit-duration-3']); // 2
+              groups.push(['other-conditions-d','duration4','time-unit-duration-4']); // 1
+              groups.push(['other-significant-conditions','duration5','time-unit-duration-5']); //0
+
+
+              // We loop over them in reverse
+              groups.reverse();
+
+
+              // Begin the loops
+              const noOfGroups = groups.length;
+              const errors = [];
+
+              let errorLevel = -1;
+
+              groups.forEach( function( group, i ){ 
+
+                const cause = document.querySelector( '#' + group[0] );
+                const time = document.querySelector( '#' + group[1] );
+                const unit = document.querySelector( '#' + group[2] );
+
+                const causeValue = cause.value.trim();
+                const timeValue = time.value.trim();
+                const unitValue = unit.options[unit.selectedIndex].value.trim();
+
+                console.log(i + ': ' + causeValue + ' | ' + timeValue + ' | ' + unitValue );
+
+                if( !causeValue && !timeValue && !unitValue ){
+                    
+                    // All fields are empty, cool...unless you're on the main-cause row, or the errorLevel has been set...
+                    if( i === (noOfGroups - 1) || errorLevel > -1 ){
+                        errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('noCauseEntered', i) } );
+                    } 
+
+                } else {
+
+                    const causeRegex = /^[a-zA-Z'&@:;,.\s\/-]*$/;
+                    const timeRegex = /^(0*[1-9][0-9]{0,2})$/;
+
+                    const currentErrorsLength = errors.length;
+                    
+                    if( !causeValue ){
+
+                        // First, check if cause is empty...
+                        errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('noCauseEntered', i) } );
+
+                    } else if( causeValue.length < 2 ){
+
+                        // Check if cause is too short...
+                        errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeTooShort', i) } );
+
+                    } else if( causeValue.length > 170 ){
+
+                         // Check if cause is too long...
+                        errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeTooLong', i) } );
+
+                    } else if( !causeRegex.test(causeValue) ){
+
+                        // Check if cause contains special characters 
+                        errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeWrongCharacters', i) } );
+
+                    } else if( unitValue === 'Unknown' || unitValue === 'globalTimeUnitUnknown' ){
+
+                        if( timeValue ){
+
+                          // If there's an unknown value, remove the time unit value
+                          errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('timeUnknown', i) } );
+
+                        }
+
+                    } else if( !timeValue ){
+
+                        // Time is empty
+                        errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('noTimeEntered', i) } );
+                    
+                    } else if( !timeRegex.test( timeValue ) ) {
+
+                        // Check if the value is 1 - 999 (inclusive of leading zeros)
+                        errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('timeIncorrect', i) } );
+
+                    } else if( !unitValue ){
+
+                        // Unit is empty
+                        errors.push( { group: group[0] + '-group', field: group[2], error: _getErrorMessage('noUnitSelected', i) } );
+
+                    }
+
+
+
+                    if( errors.length > currentErrorsLength && errorLevel === -1 && i !== 0 ){
+
+                      // An error must have been added to the list, and the level can't have been set yet, and it can't be on 0 = Secondary cause...
+                      errorLevel = i;
+                      
+                    }
+
+                }
+                
+
+              });
+
+              // Reverse them back so the errors show up in the right order...
+              errors.reverse();
+
+              return errors;
+
+            };
+
+            //
+            // DRAW ERROR SUMMARY FUNCTION
+            //
+            function _drawErrorSummary( errors ){
+
+                // Draw summary
+                const summary = document.createElement('div');
+                summary.classList.add('govuk-error-summary');
+                summary.setAttribute('id','error-summary');
+                summary.setAttribute('data-module','govuk-error-summary');
+
+                let html = '<div role="alert"><h2 class="govuk-error-summary__title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list">';
+        
+                errors.forEach(function( err ){
+                  html += '<li><a href="#'+err.group+'">'+err.error+'</a></li>';
+                });
+        
+                html += '</ul></div></div>';
+
+                summary.innerHTML = html;
+
+                document.querySelector('#pre-error').insertAdjacentElement('afterEnd', summary);
+
+                return true;
+
+            };
+
+            //
+            // MARK ERRORS FUNCTION
+            //
+            function _markErrors( errors ){
+
+                errors.forEach(function( err ){
+                    
+                    const group = document.querySelector('#' + err.group );
+                    const field = document.querySelector('#' + err.field );
+
+                    const p = document.createElement('p');
+                    p.classList.add('govuk-error-message');
+                    p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
+
+                    if( group ){
+                      group.classList.add('govuk-form-group--error');
+                      group.insertAdjacentElement('beforeBegin', p);
+                    }
+
+                    if( field ){
+                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                      field.classList.add(errorClass);
+                    }
+
+                });
+
+                return true;
+
+            };
+
+
+            //
+            // INIT PAGE
+            //
+            document.addEventListener('DOMContentLoaded',function(){
+
+                const submitButton = document.querySelector('#submit-button');
+
+                submitButton.addEventListener('click',function(e){
+
+                  const errors = _validateForm();
+
+                  if ( errors.length > 0 ) {
+
+                    _drawErrorSummary( errors );
+                    _markErrors( errors );
+                
+                    window.scrollTo( { top: 0, behavior: 'instant' });
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                  } 
+                  
+                  
+
+                });
+              
+            });
+
+          </script>
+
+
         <style> 
+
           .no-padding { padding: 0; }
           .govuk-grid-column-two-thirds.no-padding { padding: 0 20px 0 0; }  
+          .govuk-form-group .govuk-input__wrapper .govuk-form-group { margin-bottom: 0; }
+
+          @media ( max-width: 900px  ){
+
+            .govuk-form-group .govuk-grid-column-two-thirds {
+              max-width: 620px;
+            }
+
+          }
+
+          @media ( max-width: 900px  ){
+
+            .govuk-grid-column-one-third .govuk-label {
+              margin-top: 10px;
+            }
+
+            .govuk-form-group .govuk-grid-column-one-third,
+            .govuk-form-group .govuk-grid-column-two-thirds {
+              width: 100%;
+            }
+
+          }
+
         </style>
 
+        <!-- {  value: '', text: data.translations.globalTimeUnitTitle[data.lang] }, -->
+
         {% set timeItems = [
-                {  value: '', text: data.translations.globalTimeUnitTitle[data.lang] },
+                {  value: '', text: 'Select unit or unknown' },
                 {  value: 'globalTimeUnitYears', text: data.translations.globalTimeUnitYears[data.lang] },
                 {  value: 'globalTimeUnitMonths', text: data.translations.globalTimeUnitMonths[data.lang] },
                 {  value: 'globalTimeUnitDays', text: data.translations.globalTimeUnitDays[data.lang] },
@@ -163,9 +480,10 @@ href: 'javascript:history.back()'
                 {  value: 'globalTimeUnitUnknown', text: data.translations.globalTimeUnitUnknown[data.lang] }
               ] %}
 
+
         {% if data.showErrors === 'true' %}
 
-
+          <!-- ERROR SUMMARY -->
            {{ govukErrorSummary({
             titleText: 'There is a problem',
             errorList: [
@@ -176,43 +494,30 @@ href: 'javascript:history.back()'
             ]
           }) }}
 
-          <style>
-
-              .govuk-form-group--error {
-                margin-bottom: 30px;
-              }
-
-              .govuk-form-group--error .govuk-input__wrapper .govuk-form-group {
-                margin-bottom: 0;
-              }
-
-            </style>
-
-
         {% endif %}
 
         <h2 class="govuk-heading-m">{{ data.translations.codO28SectionTitleOne[data.lang] }}</h2>
 
         {% if data.showErrors === 'true' %}
 
-        <p id="time-unit-duration-1-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Time between onset and death must include a unit of time
-        </p>
+          <p id="time-unit-duration-1-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Time between onset and death must include a unit of time
+          </p>
 
-        <div class="govuk-form-group govuk-form-group--error">
+          <div id="main-cause-group" class="govuk-form-group govuk-form-group--error">
 
-          <!-- MAIN CAUSE w/ ERROR  -->
-          <div class="govuk-grid-column-two-thirds no-padding">
+            <!-- MAIN CAUSE w/ ERROR  -->
+            <div class="govuk-grid-column-two-thirds no-padding">
             {{ govukInput({
                 label: {
                   html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + writeInEnglish
                 },
                 id: 'main-cause', name: 'main-cause', value: data['main-cause']
               }) }}
-          </div>
+            </div>
 
-          <!-- MAIN CAUSE TIME UNIT w/ ERROR -->
-          <div class="govuk-grid-column-one-third no-padding">
+            <!-- MAIN CAUSE TIME UNIT w/ ERROR -->
+            <div class="govuk-grid-column-one-third no-padding">
               <p id="duration1label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
               <div class="govuk-input__wrapper">
 
@@ -233,36 +538,40 @@ href: 'javascript:history.back()'
 
           </div>
 
-          {% else %}
 
+        {% else %}
 
-          <!-- MAIN CAUSE -->
-        <div class="govuk-grid-column-two-thirds no-padding">
-          {{ govukInput({
-              label: {
-                html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + writeInEnglish
-              },
-              id: 'main-cause', name: 'main-cause', value: data['main-cause']
-            }) }}
-        </div>
+          <div id="main-cause-group" class="govuk-form-group">
 
-        <!-- MAIN CAUSE TIME UNIT -->
-        <div class="govuk-grid-column-one-third no-padding">
-            <p id="duration1label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
-            <div class="govuk-input__wrapper">
-
+            <!-- MAIN CAUSE -->
+            <div class="govuk-grid-column-two-thirds no-padding">
               {{ govukInput({
-                id: 'duration1', name: 'duration1', value: data['duration1'],
-                classes: 'border-hidden', attributes: { 'labelled-by': 'duration1label' }
-              }) }}
-
-              {{ govukSelect({
-                id: 'time-unit-duration-1', name: 'time-unit-duration-1', value: data['time-unit-duration-1'],
-                items: timeItems,
-                label: { text: data.translations.globalTimeUnitLabel[data.lang] + ', 1(a)', classes: 'govuk-visually-hidden' }
-              }) }}
-
+                  label: {
+                    html: '<span class="govuk-visually-hidden">'+data.translations.globalTimeUnitEnterShort[data.lang]+'</span>' + data.translations.codO281aMainDisease[data.lang] + writeInEnglish
+                  },
+                  id: 'main-cause', name: 'main-cause', value: data['main-cause']
+                }) }}
             </div>
+
+            <!-- MAIN CAUSE TIME UNIT -->
+            <div class="govuk-grid-column-one-third no-padding">
+              <p id="duration1label" class="govuk-label{% if data.bilingual == 'true' %} govuk-!-width-two-thirds{% endif %}"><span class="govuk-visually-hidden">{{ data.translations.globalTimeUnitEnterLong[data.lang] }}</span>{{ data.translations.codTimeBetweenOnsetDeath[data.lang] }}<span class="govuk-visually-hidden">, 1(a)</span></p>
+              <div class="govuk-input__wrapper">
+
+                {{ govukInput({
+                  id: 'duration1', name: 'duration1', value: data['duration1'],
+                  classes: 'border-hidden', attributes: { 'labelled-by': 'duration1label' }
+                }) }}
+
+                {{ govukSelect({
+                  id: 'time-unit-duration-1', name: 'time-unit-duration-1', value: data['time-unit-duration-1'],
+                  items: timeItems,
+                  label: { text: data.translations.globalTimeUnitLabel[data.lang] + ', 1(a)', classes: 'govuk-visually-hidden' }
+                }) }}
+
+              </div>
+            </div>
+
           </div>
 
 
@@ -284,7 +593,7 @@ href: 'javascript:history.back()'
           {% endif %}
 
 
-
+        <div id="secondary-cause-group" class="govuk-form-group">
         <!-- SECONDARY CAUSE -->
         <div class="govuk-grid-column-two-thirds no-padding">
           {{ govukInput({
@@ -311,6 +620,7 @@ href: 'javascript:history.back()'
               
             </div>
           </div>
+          
 
           <!-- EXTRA WELSH SECONDARY CAUSE FIELD -->
           {% if data.bilingual == 'true' %}
@@ -323,10 +633,11 @@ href: 'javascript:history.back()'
             </div>
           </div>
           {% endif %}
+          </div>
 
 
 
-
+          <div id="other-conditions-c-group" class="govuk-form-group">
            <!-- MEDICAL CAUSE, 1(C) -->
           <div class="govuk-grid-column-two-thirds no-padding">
             {{ govukInput({
@@ -365,10 +676,10 @@ href: 'javascript:history.back()'
             </div>
           </div>
           {% endif %}
+          </div>
 
 
-
-
+        <div id="other-conditions-d-group" class="govuk-form-group">
           <!-- MEDICAL CAUSE, 1(D) -->
           <div class="govuk-grid-column-two-thirds no-padding">
             {{ govukInput({
@@ -407,6 +718,7 @@ href: 'javascript:history.back()'
             </div>
           </div>
           {% endif %}
+          </div>
 
 
 
@@ -417,6 +729,7 @@ href: 'javascript:history.back()'
 
         <h2 class="govuk-heading-m">{{ data.translations.codO28SectionTitleTwo[data.lang] }}</h2>
 
+          <div id="other-significant-conditions-group" class="govuk-form-group">
           <!-- MEDICAL CAUSE, 2 -->
           <div class="govuk-grid-column-two-thirds no-padding">
             {{ govukInput({
@@ -455,6 +768,7 @@ href: 'javascript:history.back()'
             </div>
           </div>
           {% endif %}
+          </div>
 
 
 
@@ -463,7 +777,8 @@ href: 'javascript:history.back()'
       {% endcall %}
 
         {{ govukButton({
-        text: data.translations.globalSaveContinue[data.lang]
+        text: data.translations.globalSaveContinue[data.lang],
+        attributes: { id: 'submit-button' }
       }) }}
 
     </form>
