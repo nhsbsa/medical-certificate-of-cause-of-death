@@ -447,22 +447,24 @@ router.post( /caused-by-employment/, (req, res) => {
     let completeCauseDeath = req.session.data.causeDeathComplete
 // if the journey is complete send back to the 'check-your-details' page
     if (completeCauseDeath === 'true') {
-    res.redirect('cya-cause-death')
+        res.redirect('cya-cause-death')
     }else{
-    res.redirect('pregnant-at-death')}
+        res.redirect('pregnant-at-death')
+    }
 });
 
 // Was the deceased pregnant within the year prior to their death?
 router.post( /pregnant-at-death/, (req, res) => {
 
-    let notPregnant = req.session.data['pregnant-at-death'];
-    if (notPregnant == 'Pregnant at time of death' || 'Yn feichiog ar adeg marwolaeth' || 'Pregnant 1 to 42 days before death' || 'Yn feichiog 1 i 42 diwrnod cyn marwolaeth' || 'Pregnant 43 days to a year before death' || 'Yn feichiog 43 diwrnod i flwyddyn cyn marwolaeth') {
-        res.redirect('pregnancy-contributed');
-    } else if (notPregnant == 'Not applicable' || 'Ddim yn berthnasol' || 'Not pregnant' || 'Ddim yn feichiog') {
+    // Can't answer the next question if N/A, Not pregnant, or Unknown
+    let answers = ['pregnancyInputNA','pregnancyInputNotPregnant','pregnancyInputUnknown'];
+
+    if( answers.indexOf(req.session.data['pregnant-at-death']) > -1 ){
         res.redirect('cya-cause-death');
     } else {
-    res.redirect('pregnancy-contributed');
+        res.redirect('pregnancy-contributed');
     }
+
 });
 
 // Could the pregnancy have contributed to their death?
@@ -615,7 +617,7 @@ router.get(/hospital-lookup/, (req, res) => {
                             return part.toUpperCase();
                         }
                         return part
-                            .split(' ')
+cya-cause-death                            .split(' ')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                             .join(' ');
                     });
@@ -719,8 +721,8 @@ router.get( /another-location-lookup/, (req, res) => {
     }
     
 
-    req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
-    res.redirect('select-another-address')
+    // req.session.data['anotherAddresses'] = ['Another address 01','Another address 02','Another address 03'];
+    // res.redirect('select-another-address')
 
 })
 

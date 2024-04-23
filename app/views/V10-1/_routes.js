@@ -524,6 +524,8 @@ router.get(/hospital-lookup/, (req, res) => {
     // Check if we have found a query string
     if ( queryString ) {
 
+        req.session.data.queryString = queryString;
+
         // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the query string
         axios.get(url + encodeURI(queryString) + "&key=" + process.env.POSTCODEAPIKEY)
             .then(response => {
@@ -609,6 +611,8 @@ router.get(/another-location-lookup/, (req, res) => {
 
         // Check if the 'postcodeLookup' matches the specified 'regular expression'
         if (regex.test(postcodeLookup) === true) {
+
+            req.session.data.queryString = postcodeLookup;
 
             // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
             axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
@@ -715,6 +719,9 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 // ************************************************************
 
+// Do we actually want to redirect to the contact method screen (since it's...experimental)
+const showContactMethodScreen = false;
+
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
 
@@ -723,11 +730,19 @@ router.post( /care-id-role/, (req, res) => {
     if( roleType === 'ap' || roleType === 'me' ){
 
         if( !req.session.data['qualifications'] ){
+
              // Do they have a qualifications value set?
             res.redirect('../onboarding/qualifications');
+
         } else if( !req.session.data['contact-method'] ){
+
             // Do they have a contact-method value set?
-            res.redirect('../onboarding/contact-method');
+            if( showContactMethodScreen === true ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }
@@ -747,8 +762,14 @@ router.post( /qualifications/, (req, res) => {
     if( req.session.data['onboardingPath'] ){
         
         if( !req.session.data['contact-method'] ){
-            // Do they have a contact-method value set?
-            res.redirect('contact-method');
+
+           // Do they have a contact-method value set?
+           if( showContactMethodScreen ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }

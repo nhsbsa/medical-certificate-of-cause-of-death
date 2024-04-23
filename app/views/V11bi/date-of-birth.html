@@ -23,7 +23,14 @@
             <h1 class="govuk-fieldset__heading">{{ data.translations.dpdDoBPageTitle[data.lang] }}</h1>
           </legend>
 
-          <div class="govuk-hint" id="DoB-hint">{{data.translations.dpdDoBHint[data.lang]}}</div>
+          {% if data['over-under-28'] == 'dpd66Or65RadioNo' %}
+            <!-- ADULT (ALLOW UNKNOWN) -->
+            <div class="govuk-hint" id="DoB-hint">{{data.translations.dpdDoBHint[data.lang]}}</div>
+          {% else %}
+            <!-- NEO-NATAL -->
+            <div class="govuk-hint" id="DoB-hint">{{data.translations.dpdDoBHintNeoNatal[data.lang]}}</div>
+          {% endif %}
+
 
           <div class="govuk-date-input" id="DoB">
 
@@ -69,16 +76,21 @@
 
           </div>
 
-          <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
-              
-              <div class="govuk-checkboxes__divider">{{ data.translations.dpdDoBOr[data.lang] }}</div>
+          {% if data['over-under-28'] == 'dpd66Or65RadioNo' %}
 
-              <div class="govuk-checkboxes__item">
-                <input {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}checked {% endif %}class="govuk-checkboxes__input" id="dob-unregistered" name="dob-none" type="checkbox" value="dpdDoBNoRegisteredDoB">
-                <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">{{ data.translations.dpdDoBNoRegisteredDoB[data.lang] }}</label>
-              </div>
+            <!-- ONLY ALLOW UNKNOWN FOR ADULTS -->
+            <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
+                
+                <div class="govuk-checkboxes__divider">{{ data.translations.dpdDoBOr[data.lang] }}</div>
 
-          </div>
+                <div class="govuk-checkboxes__item">
+                  <input {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}checked {% endif %}class="govuk-checkboxes__input" id="dob-unregistered" name="dob-none" type="checkbox" value="dpdDoBNoRegisteredDoB">
+                  <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">{{ data.translations.dpdDoBNoRegisteredDoB[data.lang] }}</label>
+                </div>
+
+            </div>
+
+          {% endif %}
         
         </fieldset>
 

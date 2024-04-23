@@ -49,12 +49,13 @@
         }) }}
 
         {% endcall %}
-
-      <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">{{ data.translations.globalEnterAddress[data.lang] }}</a></p>
+        
 
       {{ govukButton({
         text: data.translations.globalFindAddress[data.lang]
       }) }}
+
+      <p class="govuk-!-margin-bottom-6"><a href="location-death-hospital">{{ data.translations.globalEnterAddress[data.lang] }}</a></p>
 
     </form>
 

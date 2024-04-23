@@ -21,7 +21,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
             <div class="">
               <p><b>{{ data['anotherAddresses'] | length }}</b> {% if (data['anotherAddresses'] | length > 1)
-                %}addresses{% else %}address{% endif %} found for <b>{{ data['another-location-postcode'] or '[postcode]' }}</b>. If
+                %}addresses{% else %}address{% endif %} found for <b>{{ data.queryString }}</b>. If
                 you can't find the address, check the postcode and <a href="another-location-postcode">search
                   again</a>, or enter the address manually.</p>
             </div>

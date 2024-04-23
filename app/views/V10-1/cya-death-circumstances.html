@@ -1,169 +1,129 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
-{% block pageTitle %}
-GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
-{% endblock %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 {% block content %}
+
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
+
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
+{% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
+{% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
-      <span class="govuk-caption-l govuk-caption--bottom">Actions after death</span>Check your answers
-    </h1>
-
-    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
-      Check that all the details are correct before you submit this Medical certificate of cause of death for sign-off by a medical examiner.
-    </div>    
-
-    
-    
-    
-    
-    <form action="check-your-answers-aad" method="post">
-
-      <dl class="govuk-summary-list">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+        <span class="govuk-caption-l govuk-caption--bottom">{{ data.translations.aadCheckAnswersTitleCaption[data.lang] }}</span>
+        {{ data.translations.aadCheckAnswersPageTitle[data.lang] }}
+      </h1>
 
 
-        <div class="govuk-summary-list__row">
+      <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.aadCheckAnswersDescription[data.lang] }}</div>
 
-          <dt class="govuk-summary-list__key">
-            Post-mortem
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['death-circumstances'] or 'A post-mortem is not being held' }}
-          </dd>
+      <form action="check-your-answers-aad" method="post" novalidate>
 
-          <dd class="govuk-summary-list__actions">
+        <dl class="govuk-summary-list">
 
-            <a href="death-circumstances">
-              Change<span class="govuk-visually-hidden"> post-mortem</span>
-            </a>
-
-          </dd>
-
-        </div>
-
-
-        <div class="govuk-summary-list__row">
-
-          <dt class="govuk-summary-list__key">
-            Additional information
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['boxB'] or 'Not applicable' }}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-            <a href="box-b">
-              Change<span class="govuk-visually-hidden"> provide additional information later</span>
-            </a>
-
-          </dd>
-
-        </div>
-
-
-        <!-- For the ME CERT -->
-        {% if data['role-type'] == 'me' %}
-      
+          <!-- POST-MORTEM -->
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Referring medical practitioner
-            </dt>
-            <dd class="govuk-summary-list__value">
-            <!--  {{ data['referring-mp-first-name'] or 'Owen' }} {{ data['referring-mp-middle-name'] or 'Dylan' }} {{ data['referring-mp-last-name'] or 'Jones' }} -->
-              {{ data['referring-mp-first-name'] }} {{ data['referring-mp-middle-name'] }} {{ data['referring-mp-last-name'] }}
-            </dd>
+            <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersPostMortem[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">{{ data['death-circumstances'] }}</dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="me-referring-mp-name">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a href="death-circumstances">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersPostMortem[data.lang] | lower }}</span></a>
             </dd>
           </div>
+
+          <!-- BOX B (ADDITIONAL INFORMATION) -->
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Senior coroner
-            </dt>
-            <dd class="govuk-summary-list__value">
-          <!--   {{ data['coroner-first-name'] or 'Dola' }} {{ data['coroner-middle-name'] or 'Chinelo' }} {{ data['coroner-last-name'] or 'Sadoh' }}-->
-              {{ data['coroner-first-name'] }} {{ data['coroner-middle-name'] }} {{ data['coroner-last-name'] }}
-            </dd>
+            <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersAdditionalInformation[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">{{ data['boxB'] or 'Not applicable' }}</dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="me-coroner-name">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a href="box-b">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersAdditionalInformation[data.lang] | lower}}</span></a>
+            </dd>
+          </div>
+
+
+        {% if data['role-type'] == 'me' %}
+      
+          <!-- MEDICAL PRACTITIONER -->
+          {% set medicalPractitionerName = [ data['referring-mp-first-name'], data['referring-mp-middle-name'], data['referring-mp-last-name'] ] %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">{{ medicalPractitionerName | join(' ') }}</dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="me-referring-mp-name">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- SENIOR CORONER -->
+          {% set seniorCoronerName = [ data['coroner-first-name'], data['coroner-middle-name'], data['coroner-last-name'] ] %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersSnrCoroner[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">{{ seniorCoronerName | join(' ') }}</dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="me-coroner-name">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersSnrCoroner[data.lang] | lower }}</span></a>
             </dd>
           </div>
 
         {% endif %}
 
+        <!-- IMPLANTS IN BODY -->
         <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Implants in body
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['implant'] or 'No' }}
-          </dd>
-
+          <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersImplantsInBody[data.lang] }}</dt>
+          <dd class="govuk-summary-list__value">{{ data['implant'] }}</dd>
           <dd class="govuk-summary-list__actions">
-
-            <a href="implant">
-              Change<span class="govuk-visually-hidden"> whether there was an implant in the body or not</span>
-            </a>
-
+            <a href="implant">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersAccessibleHintForImplantsInBody[data.lang] }}</span></a>
           </dd>
-
         </div>
 
         {% if data['implant'] == 'Yes' %}
+
+          <!-- IMPLANT DETAILS -->
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Implant details
-            </dt>
+            <dt class="govuk-summary-list__key">{{ data.translations.aadCheckAnswersImplantDetails[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
-              {{ data['implant-details']}}
-            </dd>
-
+              
+               {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['implant-details'] }}
+                {% if data.bilingual == 'true' and data['implant-details-welsh'] %}
+                  {{ hr | safe }}{{ welshLabel | safe }}{{ data['implant-details-welsh'] }}
+                {% endif %}
+              
+              </dd>
             <dd class="govuk-summary-list__actions">
-
-              <a href="implant">
-                Change<span class="govuk-visually-hidden"> implant details</span>
-              </a>
-
+              <a href="implant">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersImplantDetails[data.lang] | lower }}</span></a>
             </dd>
-
           </div>
         
-
-
+          <!-- HAVE THE IMPLANTS BEEN REMOVED? -->
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Implants removed
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['implant-removed']}}
-            </dd>
-
+            <dt class="govuk-summary-list__key">Implants removed?</dt>
+            <dd class="govuk-summary-list__value">{{ data['implant-removed'] }}</dd>
             <dd class="govuk-summary-list__actions">
-
-              <a href="implant-removed">
-                Change<span class="govuk-visually-hidden"> if the implant has been removed or not</span>
-              </a>
-
+              <a href="implant-removed">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersAccessibleHintForImplantsRemoved[data.lang] }}</span></a>
             </dd>
-
           </div>
+
         {% endif %}
 
+        </dl>
 
-      </dl>
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
+        {{ govukButton({
+            text: data.translations.globalSaveContinue[data.lang],
+            attributes: { type: 'submit' }
+          }) }}
 
-    </form>
+
+      </form>
 
   </div>
 </div>
+
+{{ data | debugData | safe }}
 
 {% endblock %}

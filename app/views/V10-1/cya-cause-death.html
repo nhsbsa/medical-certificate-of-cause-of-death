@@ -1,247 +1,255 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
-{% block pageTitle %}
-GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
-{% endblock %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 {% block content %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-three-quarters">
+{{ govukBackLink({
+text: data.translations.globalBackLink[data.lang],
+href: 'javascript:history.back()'
+}) }}
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
+{% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
+{% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
+{% set timeBetweenOnsetAndDeathLabel = '<strong>'+data.translations.codTimeBetweenOnsetDeath[data.lang]+'</strong><br />' %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
-      <span class="govuk-caption-l govuk-caption--bottom">Cause of death</span>Check your answers
+      <span class="govuk-caption-l govuk-caption--bottom">{{ data.translations.CYAcodTitleCaption[data.lang] }}</span>
+      {{ data.translations.CYAcodPageTitle[data.lang] }}
     </h1>
 
-    <div class="govuk-hint govuk-!-margin-bottom-7" id="hint">
-      Check that all the details are correct before you submit this Medical certificate of cause of death for sign-off by a medical examiner.
-    </div>
+    <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.CYAcodHint[data.lang] }}</div>
 
-
-    <form action="check-your-answers-cod" method="post">
-
-      <!-- OVER 28 DAYS --> 
-      {% if data['over-under-28'] == 'yes' or data['over-under-28'] == 'dpd66Or65RadioYes' %} 
-
+    <form action="check-your-answers-cod" method="post" novalidate>
       
-<!-- UNDER 28 Days -->
+      <dl class="govuk-summary-list">
 
-          <dl class="govuk-summary-list">
+          {% if data['over-under-28'] === 'yes' %}
 
-            <div class="govuk-summary-list__row">
-              
-              <dt class="govuk-summary-list__key" style="width:35%">
-                (a) Main diseases or condition in infant
-              </dt>
+          <!--
 
-              <dd class="govuk-summary-list__value">
-                {{ data['main-cause'] or 'Not specified' }}
-              </dd>
 
-              <dd class="govuk-summary-list__actions"><a href="cause-of-death?over-under-28=yes">Change<span class="govuk-visually-hidden"> main cause</span></a></dd>
+ _____  ____  _____  ________    _       ____  _____  _________  
+|_   _||_   \|_   _||_   __  |  / \     |_   \|_   _||  _   _  | 
+  | |    |   \ | |    | |_ \_| / _ \      |   \ | |  |_/ | | \_| 
+  | |    | |\ \| |    |  _|   / ___ \     | |\ \| |      | |     
+ _| |_  _| |_\   |_  _| |_  _/ /   \ \_  _| |_\   |_    _| |_    
+|_____||_____|\____||_____||____| |____||_____|\____|  |_____|   
+                                                                 
 
-            </div>
 
-            <div class="govuk-summary-list__row">
-              
-              <dt class="govuk-summary-list__key" style="width:35%">
-                (b) Other diseases or conditions in infant
-              </dt>
-
-              <dd class="govuk-summary-list__value">
-                {{ data['secondary-cause'] or 'Not specified' }}
-              </dd>
-
-              <dd class="govuk-summary-list__actions"><a href="cause-of-death?over-under-28=yes">Change<span class="govuk-visually-hidden"> secondary cause</span></a></dd>
-
-            </div>
-
-            <div class="govuk-summary-list__row">
-              
-              <dt class="govuk-summary-list__key" style="width:35%">
-                (c) Main maternal diseases or conditions affecting infant
-              </dt>
-
-              <dd class="govuk-summary-list__value">
-                {{ data['other-conditions-c'] or 'Not specified' }}
-              </dd>
-
-              <dd class="govuk-summary-list__actions"><a href="cause-of-death?over-under-28=yes">Change<span class="govuk-visually-hidden"> secondary cause</span></a></dd>
-
-            </div>
-
-            <div class="govuk-summary-list__row">
-              
-              <dt class="govuk-summary-list__key" style="width:35%">
-                (d) Other maternal diseases or conditions affecting infant
-              </dt>
-
-              <dd class="govuk-summary-list__value">
-                {{ data['other-conditions-d'] or 'Not specified' }}
-              </dd>
-
-              <dd class="govuk-summary-list__actions"><a href="cause-of-death?over-under-28=yes">Change<span class="govuk-visually-hidden"> secondary cause</span></a></dd>
-
-            </div>
-
-            <div class="govuk-summary-list__row">
-              
-              <dt class="govuk-summary-list__key" style="width:35%">
-                (e) Other relevant factors or circumstances (not diseases of infant or mother)
-              </dt>
-
-              <dd class="govuk-summary-list__value">
-                {{ data['other-conditions-e'] or 'Not specified' }}
-              </dd>
-
-              <dd class="govuk-summary-list__actions"><a href="cause-of-death?over-under-28=yes">Change<span class="govuk-visually-hidden"> secondary cause</span></a></dd>
-
-            </div>
-
-          </dl>
-          
-
-        {% else %}
-
+          -->
         
 
-          <dl class="govuk-summary-list">
+          <!-- INFANT, MAIN CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28aMainDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['main-cause'] }}
+              {% if data.bilingual == 'true' and data['main-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
-        <!-- [1a] + [Onset 1a] -->
-        <div class="govuk-summary-list__row">
+
+          <!-- INFANT, SECONDARY CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28bOtherDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['secondary-cause'] }}
+              {% if data.bilingual == 'true' and data['secondary-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- INFANT, 1(c) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28cMainMaternalDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-c'] }}
+              {% if data.bilingual == 'true' and data['other-conditions-c-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+          <!-- INFANT, 1(d) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28dOtherMaternalDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-d'] }}
+              {% if data.bilingual == 'true' and data['other-conditions-d-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+
+
+          <!-- INFANT, 1(e) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codU28eOtherRelevantFactors[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-e'] }}
+              {% if data.bilingual == 'true' and data['other-conditions-e-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-e-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
+     
+
+
+
+
           
-          <dt class="govuk-summary-list__key" style="width:35%">
-            1(a) Disease or condition directly leading to death
-          </dt>
 
-          <dd class="govuk-summary-list__value">
-            {{ data['main-cause'] or 'Intraperitoneal haemorrhage' }}
-          </dd>
+          {% else %}
 
-          <dd class="govuk-summary-list__value">
-            {{ data['duration1'] or '8' }} {{ data['time-unit-duration-1'] or 'minutes' }}
-          </dd>
+            <!-- 
 
-          <dd class="govuk-summary-list__actions">
-            <a href="cause-of-death">
-              Change<span class="govuk-visually-hidden"> main cause</span>
-            </a>
-          </dd>
 
-        </div>
+      _       ______   _____  _____  _____   _________  
+     / \     |_   _ `.|_   _||_   _||_   _| |  _   _  | 
+    / _ \      | | `. \ | |    | |    | |   |_/ | | \_| 
+   / ___ \     | |  | | | '    ' |    | |   _   | |     
+ _/ /   \ \_  _| |_.' /  \ \__/ /    _| |__/ | _| |_    
+|____| |____||______.'    `.__.'    |________||_____|   
+                                                        
 
-        <!-- [1b] + [Onset 1b] -->
-        {% if data['secondary-cause'] %}
-        <div class="govuk-summary-list__row">
-          
-          <dt class="govuk-summary-list__key" style="width:35%">
-            1(b) Other disease or condition, if any, leading to 1(a)
-          </dt>
 
-          <dd class="govuk-summary-list__value">
-            {{ data['secondary-cause'] or 'Not specified' }}
-          </dd>
-
-          <dd class="govuk-summary-list__value">
-            {% if data['duration2'] %}
-            {{ data['duration2'] }} {{ data['time-unit-duration-2'] }}
-            {% else %}
+            -->
             
-            {% endif %}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-            <a href="cause-of-death">Change<span class="govuk-visually-hidden"> main cause</span></a>
-          </dd>
-
-        </div>
-        {% endif %}
-
-        {% if data['other-conditions-c'] %}
-        <!-- [1c] + [Onset 1c] -->
-        <div class="govuk-summary-list__row">
-          
-          <dt class="govuk-summary-list__key" style="width:35%">
-            1(c) Other disease or condition, if any, leading to 1(b)
-          </dt>
-
-          <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-c'] or 'Not specified' }}
-          </dd>
-
-          <dd class="govuk-summary-list__value">
-            {% if data['duration3'] %}
-            {{ data['duration3'] }} {{ data['time-unit-duration-3'] }}
-            {% else %}
-            
-            {% endif %}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-            <a href="cause-of-death">Change<span class="govuk-visually-hidden"> main cause</span></a>
-          </dd>
-
-        </div>
-        {% endif %}
+            <!-- ADULT, MAIN CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281aMainDisease[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['main-cause'] }}
+              {% if data.bilingual == 'true' and data['main-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration1'] and data['time-unit-duration-1'] %}
+                {{ data['duration1'] }} {{ data['time-unit-duration-1'] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
 
-        <!-- [1d] + [Onset 1d] -->
-        {% if data['other-conditions-d'] %}
-        <div class="govuk-summary-list__row">
-          
-          <dt class="govuk-summary-list__key" style="width:35%">
-            1(d) Other disease or condition, if any, leading to 1(c)
-          </dt>
+          <!-- ADULT, SECONDARY CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281bDiseaseLeadingTo1a[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['secondary-cause'] }}
+              {% if data.bilingual == 'true' and data['secondary-cause-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration2'] and data['time-unit-duration-2'] %}
+                {{ data['duration2'] }} {{ data['time-unit-duration-2'] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
-          <dd class="govuk-summary-list__value">
-            {{ data['other-conditions-d'] or 'Not specified' }}
-          </dd>
+          <!-- ADULT, 1(c) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281cDiseaseLeadingTo1b[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-c'] }}
+              {% if data.bilingual == 'true' and data['other-conditions-c-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration3'] and data['time-unit-duration-3'] %}
+                {{ data['duration3'] }} {{ data['time-unit-duration-3'] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
-          <dd class="govuk-summary-list__value">
-            {% if data['duration4'] %}
-            {{ data['duration4'] }} {{ data['time-unit-duration-4'] }}
-            {% else %}
-            
-            {% endif %}
-          </dd>
+          <!-- ADULT, 1(d) CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO281dDiseaseLeadingTo1c[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-conditions-d'] }}
+              {% if data.bilingual == 'true' and data['other-conditions-d-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration4'] and data['time-unit-duration-4'] %}
+                {{ data['duration4'] }} {{ data['time-unit-duration-4'] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
-          <dd class="govuk-summary-list__actions">
-            <a href="cause-of-death">Change<span class="govuk-visually-hidden"> main cause</span></a>
-          </dd>
 
-        </div>
-        {% endif %}
+          <!-- ADULT, 2 CAUSE -->
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ data.translations.codO282OtherConditions[data.lang] }}</dt>
+            <dd class="govuk-summary-list__value">
+              {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                {{ data['other-significant-conditions'] }}
+              {% if data.bilingual == 'true' and data['other-significant-conditions-welsh'] %}
+                {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-significant-conditions-welsh'] }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__value">
+              {% if data['duration5'] and data['time-unit-duration-5'] %}
+                {{ data['duration5'] }} {{ data['time-unit-duration-5'] | lower }}
+              {% endif %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="cause-of-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodTitleCaption[data.lang] | lower }}</span></a>
+            </dd>
+          </div>
 
-        <!-- [2] + [Onset 2] -->
-        {% if data['other-significant-conditions'] %}
-        <div class="govuk-summary-list__row">
-          
-          <dt class="govuk-summary-list__key" style="width:35%">
-            2 Other significant conditions contributing to their death
-          </dt>
 
-          <dd class="govuk-summary-list__value">
-            {{ data['other-significant-conditions'] or 'Not specified' }}
-          </dd>
 
-          <dd class="govuk-summary-list__value">
-            {% if data['duration5'] %}
-            {{ data['duration5'] }} {{ data['time-unit-duration-5'] }}
-            {% else %}
-            
-            {% endif %}
-          </dd>
-
-          <dd class="govuk-summary-list__actions">
-            <a href="cause-of-death">Change<span class="govuk-visually-hidden"> main cause</span></a>
-          </dd>
-
-        </div>
-        {% endif %}
-
-        <!-- Employment -->
+          <!-- Employment -->
         <div class="govuk-summary-list__row">
             
           <dt class="govuk-summary-list__key" style="width:35%">
@@ -255,7 +263,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
           <dd class="govuk-summary-list__actions">
             <a href="caused-by-employment">
-              Change<span class="govuk-visually-hidden"> employment</span>
+              Change<span class="govuk-visually-hidden"> whether the death was affected by employment or not</span>
             </a>
           </dd>
 
@@ -275,7 +283,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
           <dd class="govuk-summary-list__actions">
             <a href="pregnant-at-death">
-              Change<span class="govuk-visually-hidden"> pregnancy</span>
+              Change<span class="govuk-visually-hidden"> whether the deceased person was pregnant in the year prior to their death</span>
             </a>
           </dd>
 
@@ -286,7 +294,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-summary-list__row">
           
           <dt class="govuk-summary-list__key" style="width:35%">
-            Death affected by pregnancy
+            Death affected by pregnancy?
           </dt>
 
           <dd class="govuk-summary-list__value">
@@ -296,26 +304,33 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
           <dd class="govuk-summary-list__actions">
             <a href="pregnancy-contributed">
-              Change<span class="govuk-visually-hidden"> pregnancy-contributed</span>
+              Change<span class="govuk-visually-hidden"> whether pregnancy contributed to their death or not</span>
             </a>
           </dd>
 
         </div>
 
+          
+
+
+
+          {% endif %}
+
+
+
       </dl>
-        
-        
 
-      {% endif %}
+      {{ govukButton({
+            text: data.translations.globalSaveContinue[data.lang]
+          }) }}
 
-
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
 
     </form>
 
+
   </div>
 </div>
+
+{{ data | debugData | safe }}
 
 {% endblock %}
