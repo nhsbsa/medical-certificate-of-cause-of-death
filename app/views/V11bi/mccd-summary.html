@@ -133,7 +133,7 @@
             {% endif %}
 
 
-            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 or patientStatus === 3 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
 
                 <!-- 
                     
@@ -396,10 +396,12 @@
         {% endif %}
 
         </div>
-
     </div>
+
+    {{ data | debugData | safe }}
+
 </div>
 
-{{ data | debugData | safe }}
+
 
 {% endblock %}

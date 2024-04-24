@@ -163,6 +163,7 @@ href: 'javascript:history.back()'
                 {% else %}
 
                   {% set fullAddress = [data['address-line-1'],data['address-line-2'],data['address-town'],data['address-county'],data['address-postcode']] %}
+                  {% set fullAddressWelsh = [data['address-line-1-welsh'],data['address-line-2-welsh'],data['address-town-welsh'],data['address-county-welsh'],data['address-postcode']] %}
                   
                   {% if data['death-in-hospital'] == 'globalRadioYes' %}
 
@@ -176,7 +177,15 @@ href: 'javascript:history.back()'
                     {% else %}
 
                       <!-- MANUAL ENTRY -->
-                      <dd class="govuk-summary-list__value">{{ fullAddress | join('<br />') | safe }}</dd>
+                      <dd class="govuk-summary-list__value">
+                        
+                        {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                          {{ fullAddress | join('<br />') | safe }}
+                        {% if data.bilingual == 'true' and ( fullAddressWelsh.join('<br />') !== data['address-postcode']) %}
+                          {{ hr | safe }}{{ welshLabel | safe }}{{ fullAddressWelsh | join('<br />') | safe }}
+                        {% endif %}
+
+                      </dd>
                       {% set deathLocationBackLink = 'place-of-death/location-death-hospital' %}
 
                     {% endif %}
@@ -193,7 +202,15 @@ href: 'javascript:history.back()'
                     {% else %}
 
                       <!-- MANUAL ENTRY -->
-                      <dd class="govuk-summary-list__value">{{ fullAddress | join('<br />') | safe }}</dd>
+                      <dd class="govuk-summary-list__value">
+
+                        {% if data.bilingual == 'true' %}{{ englishLabel | safe }}{% endif %}
+                          {{ fullAddress | join('<br />') | safe }}
+                        {% if data.bilingual == 'true' and ( fullAddressWelsh.join('<br />') !== data['address-postcode']) %}
+                          {{ hr | safe }}{{ welshLabel | safe }}{{ fullAddressWelsh | join('<br />') | safe }}
+                        {% endif %}
+
+                      </dd>
                       {% set deathLocationBackLink = 'place-of-death/exact-address' %}
 
                     {% endif %}

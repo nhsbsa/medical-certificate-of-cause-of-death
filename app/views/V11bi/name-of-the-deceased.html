@@ -24,10 +24,16 @@
             isPageHeading: true
           }
         }) %}
+
+          {% set firstNameLabel = data.translations.globalFirstName[data.lang] %}
+          {% if data['over-under-28'] == 'dpd66Or65RadioYes' %}
+          <!-- FIRST NAME OPTIONAL IF ON NEO-NATAL PATH -->
+          {% set firstNameLabel = firstNameLabel + ' ' + data.translations.globalOptional[data.lang] %}
+          {% endif %}
         
           {{ govukInput({
             label: {
-              text: data.translations.globalFirstName[data.lang] + ' ' + data.translations.globalOptional[data.lang]
+              text: firstNameLabel
             },
             id: 'deceased-first-name',
             name: 'deceased-first-name',

@@ -21,7 +21,7 @@
 
         <!-- MEDICAL EXAMINER (ME) MCCD SUBMIT -->
 
-        {% if data['me-mccd'] %}
+        {% if data['meMCCD'] === 'true' %}
 
           {{ govukCheckboxes({
             name: 'me-cert-declaration',

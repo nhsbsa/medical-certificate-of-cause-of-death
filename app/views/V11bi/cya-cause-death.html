@@ -249,6 +249,46 @@ href: 'javascript:history.back()'
 
 
 
+
+
+           <!-- EMPLOYMENT -->
+        <div class="govuk-summary-list__row">
+            
+          <dt class="govuk-summary-list__key">{{ data.translations.CYAcodO28Employment[data.lang] }}</dt>
+          <dd class="govuk-summary-list__value">{{ data.translations[data['caused-by-employment']][data.lang] }}</dd>
+          <dd></dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="caused-by-employment">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodO28Employment[data.lang] | lower }}</span></a>
+          </dd>
+
+        </div>
+
+        <!-- PREGNANT AT DEATH -->
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">{{ data.translations.CYAcodO28Pregnancy[data.lang] }}</dt>
+          <dd class="govuk-summary-list__value">{{ data.translations[data['pregnant-at-death']][data.lang] }}</dd>
+          <dd></dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="pregnant-at-death">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodO28Pregnancy[data.lang] | lower }}</span></a>
+          </dd>
+
+        </div>
+
+        {% if data['pregnant-at-death'] !== 'pregnancyInputNA' and data['pregnant-at-death'] !== 'pregnancyInputNotPregnant' and data['pregnant-at-death'] !== 'pregnancyInputUnknown' %}
+        
+        <!-- PREGNANCY CONTRIBUTED -->
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">{{ data.translations.CYAcodO28PregnancyContributed[data.lang] }}</dt>
+          <dd class="govuk-summary-list__value">{{ data.translations[data['pregnancy-contributed']][data.lang] }}</dd>
+          <dd></dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="pregnancy-contributed">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.CYAcodO28PregnancyContributed[data.lang] | lower }}</span></a>
+          </dd>
+        </div>
+
+        {% endif %}
+
+
           {% endif %}
 
 

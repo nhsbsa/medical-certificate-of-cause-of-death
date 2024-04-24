@@ -77,13 +77,70 @@
 
         {% endcall %}
 
-        <p class="govuk-!-margin-bottom-6">
-          <a href="hospital-postcode">{{ data.translations.dpdHospitalManualEntryLink[data.lang] }}</a>
-        </p>
+
+        {% if data.bilingual == 'true' %}
+
+          <!-- BILINGUAL FIELDS AND CHECKBOX -->
+          {% set welshAddressFields = govukInput({
+                label: { 
+                  text: data.translations.dpdOtherLocationManualEntryAddressLine1[data.lang]
+                },
+                value: data['address-line-1-welsh'],
+                id: 'address-line-1-welsh',
+                name: 'address-line-1-welsh'
+            }) + 
+          
+          govukInput({
+              label: { 
+                text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang]
+              },
+              value: data['address-line-2-welsh'],
+              id: 'address-line-2-welsh',
+              name: 'address-line-2-welsh'
+          }) + 
+
+          govukInput({
+                label: { 
+                  text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang]
+                },
+                value: data['address-town-welsh'],
+                id: 'address-town-welsh',
+                name: 'address-town-welsh',
+                classes: 'govuk-input--width-20'
+            }) + 
+            
+            govukInput({
+              label: { 
+                text: data.translations.dpdOtherLocationManualEntryCounty[data.lang]
+              },
+              classes: 'govuk-input--width-4',
+              value: data['address-county-welsh'],
+              id: 'address-county-welsh',
+              name: 'address-county-welsh',
+              classes: 'govuk-input--width-10'
+          }) %}
+
+          {{ govukCheckboxes({
+            name: 'add-welsh-hospital',
+            values: data['add-welsh-hospital'],
+            items: [
+              {
+                value: 'yes',
+                html: 'Enter address <strong>in Welsh</strong> ' + data.translations.globalOptional[data.lang],
+                conditional : { html: welshAddressFields }
+              }
+            ]
+          }) }}
+
+        {% endif %}
 
         {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
       }) }}
+
+      <p class="govuk-!-margin-bottom-6">
+          <a href="hospital-postcode">{{ data.translations.dpdOtherLocationHospitalPostcodeLink[data.lang] }}</a>
+        </p>
 
       </form>
 

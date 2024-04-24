@@ -5,23 +5,6 @@
 
 {% block content %}
 
-{% if data['role-type'] === 'ap' or data['role-type'] === 'me'%}
-  
-  {% if data['qualifications'] %}
-    <!-- NOTHING -->
-  {% else %}
-    <!-- REDIRECT TO HANDLE QUALIFICATION ENTRY -->
-    <script>
-      window.addEventListener('DOMContentLoaded', function(){
-        window.location.href = 'qualifications?return-to-dashboard=true';
-      });
-    </script>
-  {% endif%}
-
-  
-{% endif %}
-
-
  <!-- AP DASHBOARD -->
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -80,7 +63,7 @@
 
         {{ govukButton({
               text: 'Create a new ME MCCD',
-              href: '66-or-65',
+              href: '66-or-65?meMCCD=true',
               classes: 'create-mccd'
         }) }}
 

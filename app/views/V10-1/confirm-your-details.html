@@ -12,11 +12,9 @@ href: 'javascript:history.back()'
 
 <!-- SET VARIABLES -->
 
-{% set doctorName = 'Alera Singh' %}
 {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
 
 {% if data['role-type'] == 'ap' %}
-    {% set doctorName = 'Ashley Phillips' %}
     {% set pageTitle = 'Check your details are correct before submitting this certificate for scrutiny' %}
 {% endif %}
 
@@ -27,31 +25,38 @@ href: 'javascript:history.back()'
     <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ pageTitle }}</h1><br>
     <!--<div class="govuk-hint govuk-!-margin-top-3 govuk-!-margin-bottom-7" id="hint">{{ data.translations.dpdConfirmDetailsDescription[data.lang] }}</div>-->
 
-    {{ govukSummaryList({
-        rows: [
+    {% set summaryRows = [
             {
                 key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] },
-                value: { text: doctorName }
+                value: { text: data.user.name }
             },
             {
                 key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] },
-                value: { text: '12345678' }
+                value: { text: data.user.gmcNumber }
             },
             {
                 key: { text: data.translations.dpdConfirmDetailsWorkAddress[data.lang] },
-                value: { html: '123 Hospital Road<br />Wing 4<br />Newcastle<br />Tyne and Wear<br />NE12 3AB' }
+                value: { html: data.user.address | formatAddress }
             },
             {
                 key: { text: 'Primary qualification' },
                 value: { html: data['qualifications'] or 'Not specified' },
                 actions: { items: [ {  href: 'onboarding/qualifications', text: 'Change' } ] }
-            },
-            {
+            }
+        ] %}
+
+        {% if data.showContactMethodScreen === 'true' %}
+
+            {% set summaryRows = ( summaryRows.push( {
                 key: { text: 'Contact method' },
                 value: { html: data['contact-method'] or 'Not specified' },
                 actions: { items: [ {  href: 'onboarding/contact-method', text: 'Change' } ] }
-            }
-        ]
+            } ), summaryRows ) %}
+
+        {% endif %}
+
+    {{ govukSummaryList({
+        rows: summaryRows
         }) }}
 
     {{ govukButton({
