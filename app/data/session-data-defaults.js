@@ -74,6 +74,7 @@ module.exports = {
 
   requireAllTaskListSections: 'false',
   showContactMethodScreen: 'false',
+  validateCauseOfDeathScreen: 'true',
   
   translations: _getTranslations()
 

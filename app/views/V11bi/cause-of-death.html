@@ -149,6 +149,7 @@ href: 'javascript:history.back()'
             -->
 
 
+          {% if data.validateCauseOfDeathScreen === 'true' %}
           <script>
 
 
@@ -200,7 +201,7 @@ href: 'javascript:history.back()'
 
 
               /* TIME ERRORS */
-              errors.timeUnknown = 'Time between onset of disease must be empty if setting to Unknown'
+              errors.timeUnknown = 'Select a unit of time';
               errors.noTimeEntered = 'Enter time between onset of disease or condition';
               errors.timeIncorrect = 'Time between onset of disease or condition and death must only include digits 0 to 9, and be between 1 and 999'
 
@@ -265,8 +266,6 @@ href: 'javascript:history.back()'
                 const causeValue = cause.value.trim();
                 const timeValue = time.value.trim();
                 const unitValue = unit.options[unit.selectedIndex].value.trim();
-
-                console.log(i + ': ' + causeValue + ' | ' + timeValue + ' | ' + unitValue );
 
                 if( !causeValue && !timeValue && !unitValue ){
                     
@@ -437,6 +436,7 @@ href: 'javascript:history.back()'
             });
 
           </script>
+          {% endif %}
 
 
         <style> 
