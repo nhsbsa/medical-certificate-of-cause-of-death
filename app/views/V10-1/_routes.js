@@ -47,85 +47,6 @@ router.use((req, res, next) => {
 });
 
 
-// ************************************************************
-// MFA set up
-// ************************************************************
-
-// Email example screen
-router.post(/account-created-email/, (req, res) => {
-
-    req.session.data['account-creation-journey'] = 'active'
-    res.redirect('../index')
-
-});
-
-// Sign in
-router.post(/login-page/, (req, res) => {
-
-    const accountCreationJourney = req.session.data['account-creation-journey']
-
-    if (accountCreationJourney == 'active') {
-        res.redirect('../MFA/set-password')
-    } else {
-        res.redirect('../auth/enter-code')
-    }
-
-});
-
-// Set your password
-router.post(/set-password/, (req, res) => {
-    res.redirect('set-up-authenticator')
-});
-
-// Set up your account with an authentication app   
-router.post(/set-up-authenticator/, (req, res) => {
-
-    const authType = req.session.data['radioGroupAuth']
-
-    if (authType == 'desktop') {
-        res.redirect('enter-key')
-    } else {
-        res.redirect('get-security-code')
-    }
-
-});
-
-// Finish set up
-router.post(/auth-setup/, (req, res) => {
-    res.redirect('done')
-});
-
-// ************************************************************
-// Medical Examiner Registration Journey
-// ************************************************************
-
-router.post(/role-assignment/, (req, res) => {
-
-    const roleType = req.session.data['role-type']
-    res.redirect('your-name')
-
-});
-
-router.post(/me-full-name/, (req, res) => {
-    res.redirect('me-gmc-number')
-});
-
-router.post(/me-gmc-number/, (req, res) => {
-    res.redirect('primary-qualification')
-});
-
-router.post(/primary-qualification/, (req, res) => {
-    res.redirect('where-do-you-work')
-});
-
-router.post(/manual-work-address/, (req, res) => {
-    res.redirect('details-cya')
-});
-
-router.post(/me-email-address/, (req, res) => {
-    res.redirect('../MFA/set-password')
-});
-
 
 // ************************************************************
 // SIGN IN 
@@ -148,6 +69,7 @@ router.post(/enter-code/, (req, res) => {
 // Was the death more than 28 days after the birth?
 router.post(/66-or-65/, (req, res) => {
     res.redirect('nhs-number')
+    res
 });
 
 // What is the deceased persons NHS Number
@@ -166,6 +88,8 @@ router.post(/name-of-the-deceased/, (req, res) => {
 router.post(/date-of-birth/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
+
+
 
     if (overUnder28 == 'no') {
         res.redirect('age-66')
@@ -759,7 +683,7 @@ router.post( /care-id-role/, (req, res) => {
         } else if( !req.session.data['contact-method'] ){
 
             // Do they have a contact-method value set?
-            if( req.session.data.showContactMethodScreen ){
+            if( req.session.data.showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -786,7 +710,7 @@ router.post( /qualifications/, (req, res) => {
         if( !req.session.data['contact-method'] ){
 
            // Do they have a contact-method value set?
-           if( req.session.data.showContactMethodScreen ){
+           if( req.session.data.showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
