@@ -683,7 +683,7 @@ router.post( /care-id-role/, (req, res) => {
         } else if( !req.session.data['contact-method'] ){
 
             // Do they have a contact-method value set?
-            if( req.session.data.showContactMethodScreen ){
+            if( req.session.data.showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -710,7 +710,7 @@ router.post( /qualifications/, (req, res) => {
         if( !req.session.data['contact-method'] ){
 
            // Do they have a contact-method value set?
-           if( req.session.data.showContactMethodScreen ){
+           if( req.session.data.showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
