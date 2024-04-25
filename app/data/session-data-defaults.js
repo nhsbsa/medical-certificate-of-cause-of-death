@@ -51,6 +51,15 @@ module.exports = {
 
   debug: 'false',
 
+  user: { 
+    name: 'Kelly Jones',
+    role: ['ap','meo','me'],
+    email: 'kelly.jones@example.com',
+    hospitalName: 'St Gemma\'s Hospice',
+    address: 'St Gemma\'s Hospice, 329 Harrogate Road, Leeds, LS17 6QD',
+    gmcNumber: '6357812462'
+  },
+
   useSearch: 'false',
   useFilters: 'false',
   separateDraftsTable: 'false',
@@ -64,6 +73,7 @@ module.exports = {
   bilingual: 'false',
 
   requireAllTaskListSections: 'false',
+  showContactMethodScreen: 'false',
   
   translations: _getTranslations()
 

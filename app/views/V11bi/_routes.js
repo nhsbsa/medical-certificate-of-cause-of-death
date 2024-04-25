@@ -7,8 +7,36 @@ const router = govukPrototypeKit.requests.setupRouter();
 
 // External dependencies
 const axios = require('axios');
-const { urlencoded } = require('express');
-const { requireAllTaskListSections } = require('../../data/session-data-defaults');
+
+
+
+// ************************************************************
+// USER DATA FROM HEROKU
+// ************************************************************
+
+router.use((req, res, next) => {
+
+    let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
+
+    const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
+    userProfile = parseInt(userProfile);
+
+    if( !Number.isNaN(userProfile) && users.length > userProfile ){
+
+        req.session.data.user = users[userProfile];
+
+        // If there's only one role type, set it automatically...
+        if( req.session.data.user.role.length === 1 ){
+            req.session.data['role-type'] = req.session.data.user.role[0];
+        }
+
+    }
+  
+    next();
+
+});
+
+
 
 // ************************************************************
 // MFA set up
@@ -791,10 +819,6 @@ router.post( /care-id-smartcard/, (req,res) => {
 
 // ************************************************************
 
-
-
-
-
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
 
@@ -803,11 +827,19 @@ router.post( /care-id-role/, (req, res) => {
     if( roleType === 'ap' || roleType === 'me' ){
 
         if( !req.session.data['qualifications'] ){
+
              // Do they have a qualifications value set?
             res.redirect('../onboarding/qualifications');
+
         } else if( !req.session.data['contact-method'] ){
+
             // Do they have a contact-method value set?
-            res.redirect('../onboarding/contact-method');
+            if( req.session.data.showContactMethodScreen ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }
@@ -827,8 +859,14 @@ router.post( /qualifications/, (req, res) => {
     if( req.session.data['onboardingPath'] ){
         
         if( !req.session.data['contact-method'] ){
-            // Do they have a contact-method value set?
-            res.redirect('contact-method');
+
+           // Do they have a contact-method value set?
+           if( req.session.data.showContactMethodScreen ){
+                res.redirect('../onboarding/contact-method');
+            } else {
+                res.redirect('../dashboard');
+            }
+
         } else {
             res.redirect('../dashboard');
         }

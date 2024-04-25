@@ -27,6 +27,28 @@ addFilter('generateStaticSessionData', function(content){
 
 });
 
+//
+// FORMAT ADDRESS
+//
+addFilter('formatAddress',function(content){
+
+    // content: an address with commas in it
+    const addressArr = content.split(',');
+    let address = '';
+    addressArr.forEach( function( add, i ){
+        
+        if( i === 0 ){
+            address += add;
+        } else {
+            address += '<br />' + add;
+        }
+        
+    } );
+
+    return address;
+
+});
+
 
 //
 // GET MONTH STRING

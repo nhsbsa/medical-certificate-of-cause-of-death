@@ -8,6 +8,7 @@ if( process.env.NOTIFYAPIKEY ){
     const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 }
 
+
 // ************************************************************
 // CURRENT VERSION
 // ************************************************************
@@ -17,6 +18,34 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 // External dependencies
 const axios = require('axios')
+
+
+// ************************************************************
+// USER DATA FROM HEROKU
+// ************************************************************
+
+router.use((req, res, next) => {
+
+    let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
+
+    const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
+    userProfile = parseInt(userProfile);
+
+    if( !Number.isNaN(userProfile) && users.length > userProfile ){
+
+        req.session.data.user = users[userProfile];
+
+        // If there's only one role type, set it automatically...
+        if( req.session.data.user.role.length === 1 ){
+            req.session.data['role-type'] = req.session.data.user.role[0];
+        }
+
+    }
+  
+    next();
+
+});
+
 
 // ************************************************************
 // UR participant data setup
@@ -563,8 +592,6 @@ router.get(/hospital-lookup/, (req, res) => {
     // Check if we have found a query string
     if ( queryString ) {
 
-        req.session.data.queryString = queryString;
-
         // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the query string
         axios.get(url + encodeURI(queryString) + "&key=" + process.env.POSTCODEAPIKEY)
             .then(response => {
@@ -650,8 +677,6 @@ router.get(/another-location-lookup/, (req, res) => {
 
         // Check if the 'postcodeLookup' matches the specified 'regular expression'
         if (regex.test(postcodeLookup) === true) {
-
-            req.session.data.queryString = postcodeLookup;
 
             // Make an HTTP GET request to an external API (OS UK) to retrieve address data based on the postcode
             axios.get("https://api.os.uk/search/places/v1/postcode?postcode=" + postcodeLookup + "&key=" + process.env.POSTCODEAPIKEY)
@@ -758,9 +783,6 @@ router.post(/care-id-smartcard/, (req,res) => {
 
 // ************************************************************
 
-// Do we actually want to redirect to the contact method screen (since it's...experimental)
-const showContactMethodScreen = false;
-
 // BACK TO DASHBOARD
 router.post( /care-id-role/, (req, res) => {
 
@@ -776,7 +798,7 @@ router.post( /care-id-role/, (req, res) => {
         } else if( !req.session.data['contact-method'] ){
 
             // Do they have a contact-method value set?
-            if( showContactMethodScreen === true ){
+            if( req.session.data.showContactMethodScreen ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -803,7 +825,7 @@ router.post( /qualifications/, (req, res) => {
         if( !req.session.data['contact-method'] ){
 
            // Do they have a contact-method value set?
-           if( showContactMethodScreen ){
+           if( req.session.data.showContactMethodScreen ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -877,6 +899,11 @@ router.post( /mccd-tasklist/, (req, res) => {
 
         // Need everything there to proceed
         if( req.session.data.deceasedComplete && req.session.data.afterDeathComplete && req.session.data.causeDeathComplete  ){
+
+            // This variable lets the declaration page know that it's an ME MCCD 
+            if( req.session.data['role-type'] === 'me' ){
+                req.session.data['me-mccd'] = true;
+            }
 
             delete req.session.data.showTaskListError;
 
