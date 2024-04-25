@@ -47,121 +47,6 @@ router.use((req, res, next) => {
 });
 
 
-// ************************************************************
-// UR participant data setup
-// ************************************************************
-
-const { loadParticipant } = require('./_participant.js')
-
-
-router.get(/index/, (req, res) => {
-
-    loadParticipant(req);
-
-// let participantEmail = process.env['P1_EMAIL']
-//     req.session.data[participantEmail] = participantEmail
-// let participantRole = process.env[req.session.data['ur']+'_ROLE'];
-// let participantName = process.env[req.session.data['ur']+'_NAME'];
-// let participantWorkName = process.env[req.session.data['ur']+'_HOSPITALNAME'];
-// let participantWorkAddress = process.env[req.session.data['ur']+'_HOSPITALADDRESS'];
-// let participantGMC = process.env[req.session.data['ur']+'_GMCNUMBER'];
-
-
-    res.render('V10-1/index')
-});
-
-    // let participantEmail = process.env['P1_EMAIL'];
-    // let participantRole = process.env['P1_ROLE'];
-    // let participantName = process.env['P1_NAME'];
-    // let participantWorkName = process.env['P1_HOSPITALNAME'];
-    // let participantWorkAddress = process.env['P1_HOSPITALADDRESS'];
-    // let participantGMC = process.env['P1_GMCNUMBER'];
-
-
-//     const searchParams = new URLSearchParams(window.location.search);  
-//     const participant = urlParams.get('participant') ?? 'default'
-//     console.log(participant)
-
-
-// ************************************************************
-// MFA set up
-// ************************************************************
-
-// // Email example screen
-// router.post(/account-created-email/, (req, res) => {
-
-//     req.session.data['account-creation-journey'] = 'active'
-//     res.redirect('../index')
-
-// });
-
-// // Sign in
-// router.post(/login-page/, (req, res) => {
-
-//     const accountCreationJourney = req.session.data['account-creation-journey']
-
-//     if (accountCreationJourney == 'active') {
-//         res.redirect('../MFA/set-password')
-//     } else {
-//         res.redirect('../auth/enter-code')
-//     }
-
-// });
-
-// // Set your password
-// router.post(/set-password/, (req, res) => {
-//     res.redirect('set-up-authenticator')
-// });
-
-// // Set up your account with an authentication app   
-// router.post(/set-up-authenticator/, (req, res) => {
-
-//     const authType = req.session.data['radioGroupAuth']
-
-//     if (authType == 'desktop') {
-//         res.redirect('enter-key')
-//     } else {
-//         res.redirect('get-security-code')
-//     }
-
-// });
-
-// // Finish set up
-// router.post(/auth-setup/, (req, res) => {
-//     res.redirect('done')
-// });
-
-// // ************************************************************
-// // Medical Examiner Registration Journey
-// // ************************************************************
-
-// router.post(/role-assignment/, (req, res) => {
-
-//     const roleType = req.session.data['role-type']
-//     res.redirect('your-name')
-
-// });
-
-// router.post(/me-full-name/, (req, res) => {
-//     res.redirect('me-gmc-number')
-// });
-
-// router.post(/me-gmc-number/, (req, res) => {
-//     res.redirect('primary-qualification')
-// });
-
-// router.post(/primary-qualification/, (req, res) => {
-//     res.redirect('where-do-you-work')
-// });
-
-// router.post(/manual-work-address/, (req, res) => {
-//     res.redirect('details-cya')
-// });
-
-// router.post(/me-email-address/, (req, res) => {
-//     res.redirect('../MFA/set-password')
-// });
-
 
 // ************************************************************
 // SIGN IN 
@@ -212,7 +97,7 @@ router.post(/date-of-birth/, (req, res) => {
     // If Under 28 > Location of birth
 
     } else {
-        res.redirect('neo-natal-deaths/location-born?participant='+participant)
+        res.redirect('neo-natal-deaths/location-born')
 
     }
 });
