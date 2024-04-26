@@ -231,16 +231,23 @@
 
 
             <!-- ATTENDING PRACTITIONERS INFORMATION -->
+            {% set apRows = [
+                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123 46764' } },
+                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
+                ] %}
+
+            {% if data.showContactMethodScreen === 'true' %}
+                {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }), apRows ) %}
+            {% endif %}
+
+            
             {{ govukSummaryList({
                 card: {
                     title: { text: data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] }
                 },
-                rows: [
-                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
-                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123 46764' } },
-                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } },
-                    {  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }
-                ]
+                rows: apRows
+
             }) }}
 
         </main>
