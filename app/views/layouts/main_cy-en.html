@@ -50,11 +50,7 @@
                   <strong class="govuk-tag govuk-phase-banner__content__tag">
                       Beta
                   </strong>
-                  {% if data['lang'] == "en" %}
-                  <span class="govuk-phase-banner__text">
-                      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
-                  </span>
-                  {% elseif data['lang'] == "cy" %}
+                  {% if data.bilingual === 'true' and data.lang == "cy" %}
                   <span>
                     Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="#">adborth</a> yn ein helpu i’w wella.
                   </span>
@@ -72,6 +68,7 @@
 
 
     <!-- CURRENTLY TESTING -->
+    {% if data.loggedIn === 'true' %}
     <div class="govuk-width-container{% if data['bilingual'] !== "true" %} govuk-!-margin-bottom-9{% endif %}"> 
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
@@ -81,12 +78,13 @@
                   <li class="account-signed-in__list-item">{{ data.user.name or 'Ann Other' }}</li>
                   {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">GMC no: {{ data.user.gmcNumber or '0123456789' }}</li>{% endif %}                  
                   <li class="account-signed-in__list-item">{{ data.user.hospitalName or 'Unknown Hosptial' }}</li>
-                  <li class="account-signed-in__list-item"><a href="../index">Sign out</a></li>
+                  <li class="account-signed-in__list-item"><a href="../index?loggedIn=false">Sign out</a></li>
                   </ul>
               </div>
           </div>
       </div>
     </div>
+    {% endif %}
 
 
     <!--
