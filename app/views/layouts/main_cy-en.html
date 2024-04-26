@@ -37,7 +37,7 @@
         </div>
         <div class="govuk-header__content">
           <a href="/" class="govuk-header__link govuk-header__service-name">
-              Complete a medical certificate of cause of death 
+              {{ serviceName }}
           </a>
         </div>
       </div>
@@ -50,11 +50,7 @@
                   <strong class="govuk-tag govuk-phase-banner__content__tag">
                       Beta
                   </strong>
-                  {% if data['lang'] == "en" %}
-                  <span class="govuk-phase-banner__text">
-                      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
-                  </span>
-                  {% elseif data['lang'] == "cy" %}
+                  {% if data.bilingual === 'true' and data.lang == "cy" %}
                   <span>
                     Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="#">adborth</a> yn ein helpu i’w wella.
                   </span>
@@ -72,21 +68,25 @@
 
 
     <!-- CURRENTLY TESTING -->
-    <div class="govuk-width-container{% if data['bilingual'] !== "true" %} govuk-!-margin-bottom-9{% endif %}"> 
-      <div class="govuk-grid-row">
-          <div class="govuk-grid-column-full">
-              <div class="account-signed-in updated-version">
-                <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
-                  <li class="account-signed-in__list-item">{{ data.user.name or 'Ann Other' }}</li>
-                  {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">GMC no: {{ data.user.gmcNumber or '0123456789' }}</li>{% endif %}                  
-                  <li class="account-signed-in__list-item">{{ data.user.hospitalName or 'Unknown Hosptial' }}</li>
-                  <li class="account-signed-in__list-item"><a href="../index">Sign out</a></li>
-                  </ul>
-              </div>
-          </div>
+    {% if data.loggedIn === 'true' %}
+      <div class="govuk-width-container{% if data['bilingual'] !== "true" %} govuk-!-margin-bottom-9{% endif %}"> 
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="account-signed-in updated-version">
+                  <ul class="account-signed-in__list">
+                    <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
+                    <li class="account-signed-in__list-item">{{ data.user.name or 'Ann Other' }}</li>
+                    {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">GMC no: {{ data.user.gmcNumber or '0123456789' }}</li>{% endif %}                  
+                    <li class="account-signed-in__list-item">{{ data.user.hospitalName or 'Unknown Hosptial' }}</li>
+                    <li class="account-signed-in__list-item"><a href="../index?loggedIn=false">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
       </div>
-    </div>
+    {% else %}
+      <hr class="govuk-section-break govuk-section-break--l">
+    {% endif %}
 
 
     <!--

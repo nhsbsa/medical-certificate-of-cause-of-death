@@ -17,19 +17,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-xl">Complete a medical certificate of cause of death</h1>
+        <h1 class="govuk-heading-xl">Complete a Medical certificate of cause of death (MCCD)</h1>
 
-        <p class="govuk-body">Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children and infants dying within the first 28 days of life.</p>
-        <div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</div>
+        <p class="govuk-body">Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children, and infants dying within the first 28 days of life.</p>
         <p class="govuk-body">An MCCD is required to register all non-coronial deaths in England and Wales.</p>
-
         <p class="govuk-body">This digital MCCD replaces the paper MCCD. It does not replace your current methods of communication or processes between the medical examiner office and attending practitioner. For example, when discussing a cause of death or an amendment to the MCCD you must continue to contact your colleagues by email or telephone.</p>
-
 
         <h2 class="govuk-heading-m">Who can complete an MCCD</h2>
         <p class="govuk-body">An MCCD can be completed by a doctor who attended the deceased person at any time.</p>
         <p class="govuk-body">If an attending practitioner cannot be found and the senior coroner decides not to investigate the death, they will refer the case to a medical examiner to certify the death. The medical examiner MCCD will only be used in exceptional circumstances.</p>
-        
+
+        <div class="govuk-warning-text govuk-!-margin-bottom-2">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Warning</span>
+                An MCCD is not required in the case of a stillbirth
+            </strong>
+        </div>
+
+        <p class="govuk-body">Registration of stillbirths is a separate process from death certification. Refer to the guidance for <a href="https://www.gov.uk/register-stillbirth" class="govuk-link" rel="noreferrer noopener" target="_blank">registering a stillbirth</a>.</p>
+
         <h2 class="govuk-heading-m">Who can use this digital MCCD</h2>
         <p class="govuk-body govuk-!-margin-bottom-1">If you are an attending practitioner, you can use this digital MCCD to:</p>
         <ul class="govuk-list govuk-list--bullet">
@@ -49,10 +56,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <li>download a completed MCCD to send to the registrar</li>
         </ul>
         
-        <p class="govuk-body govuk-!-margin-top-4">
-            The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD.
-        </p>
-
+        <p class="govuk-body govuk-!-margin-top-4">The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD.</p>
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you start</h2>
         <p class="govuk-body">You'll need a secure method of logging in such as your smartcard as supplied by the NHS Care Identity Service.</p>
@@ -60,37 +64,29 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
         <p class="govuk-body">You'll need the personal details of the deceased person, and medical information relating to the cause of death.</p>
 
-        {% if data['bilingual'] == "true" %}
-        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">
-            The bilingual Welsh and English MCCD
-        </h2>
-        <p class="govuk-body">
-            If you complete the bilingual version of the MCCD you must give your answers in both Welsh and English when requested. You can switch between languages at any time in the journey.
-        </p>
-        <p class="govuk-body"> 
-            An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only.
-        </p>
-        {% else %}
-        <p class="govuk-body">
-            This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.  
-        </p>
-        {% endif %}
+        <!-- UPDATE 26 April: the bilingual service won't be released in MVP so we have removed mentions to it from V10-1 -->
+        <!-- <p class="govuk-body">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</p> -->
 
-        <!-- Warning text -->
-        <div class="govuk-warning-text govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-4">
+        {% if data['bilingual'] == "true" %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">The bilingual Welsh and English MCCD</h2>
+        <p class="govuk-body">If you complete the bilingual version of the MCCD you must give your answers in both Welsh and English when requested. You can switch between languages at any time in the journey.</p>
+        <p class="govuk-body">An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only.</p>
+        {% endif %}
+        
+        <div class="govuk-warning-text govuk-!-margin-bottom-7 govuk-!-margin-top-7">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <span class="govuk-warning-text__text">
-                Once you have signed in, if you do not do anything for 15 minutes any information you have not saved will be deleted.
-            </span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Warning</span>
+                Once you have signed in, if you do not do anything for 15 minutes any information you have not saved will be deleted
+            </strong>
         </div>
 
-    <!--    
-        
-        Until we have an alternative authentication method for sign in, only
-        CIS2 users will have access to the digital MCCD. We have removed the
-        gov.uk branded Sign In and Register routes (and respective CTAs).
+        <a href="auth/care-id-select" class="nhslogin-button">Sign in with Care ID</a>
 
-    
+
+        <!--    Until we have an alternative authentication method for sign in, only
+                CIS2 users will have access to the digital MCCD. We have removed the
+                gov.uk branded Sign In and Register routes (and respective CTAs).    
             
         <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
             <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
@@ -101,13 +97,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </a>
         </div>
     
-    -->
-
-    
-
-        <a href="auth/care-id-select" class="nhslogin-button">Sign in with Care ID</a>
+        -->
 
     </div>
+
+</div>
 
 {{ data | debugData | safe }}
 

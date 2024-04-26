@@ -53,6 +53,48 @@
             <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
 
 
+
+            {% if ( data['role-type'] === 'ap' and patientStatus === 2 ) %}
+
+                <!-- AP CERTIFICATE NEEDS AMENDING -->
+                
+                {{ govukInsetText({
+                    html: 'This MCCD must be amended. Contact your medical examiner officer to find out what amendments you must make.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+
+            {% elseif ( data['role-type'] === 'ap' and patientStatus === 4 ) %}
+
+                <!-- AP CERTIFICATE THAT HAS IS WAITING TO BE SUBMITTED -->
+                
+                {{ govukInsetText({
+                    html: 'This MCCD has been reviewed and signed off by a medical examiner. The medical examiner office will forward this certificate to the local register office.<br /><br />There is nothing further for you to do.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+
+            {% elseif ( data['role-type'] === 'ap' and patientStatus === 5 ) %}
+
+                <!-- AP CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
+                
+                {{ govukInsetText({
+                    html: 'This MCCD has been signed off by a medical examiner and sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+
+            {% elseif ( data['role-type'] === 'me' and patientStatus === 5 ) %}
+
+                <!-- ME CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
+                
+                {{ govukInsetText({
+                    html: 'This MCCD has been sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+            
+            {% endif %}
+
+
+
+
             {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
 
                 <!-- 

@@ -796,7 +796,17 @@ router.post( /care-id-authentication/, (req, res) => {
 });
 
 router.post( /care-id-code/, (req, res) => {
-    res.redirect('care-id-role')
+
+    // If there's only one option for role, select it and skip the role page...
+    if( req.session.data.user.role.length === 1 ){
+        req.session.data['role-type'] = req.session.data.user.role[0];
+        req.session.data.loggedIn = 'true';
+        res.redirect('../dashboard');
+    } else {
+        res.redirect('care-id-role');
+    }
+
+    
 });
 
 router.post( /care-id-authentication/, (req,res) => {
@@ -823,6 +833,8 @@ router.post( /care-id-smartcard/, (req,res) => {
 router.post( /care-id-role/, (req, res) => {
 
     const roleType = req.session.data['role-type'];
+
+    req.session.data.loggedIn = 'true';
 
     if( roleType === 'ap' || roleType === 'me' ){
 
