@@ -85,7 +85,9 @@
         </div>
       </div>
     {% else %}
-      <hr class="govuk-section-break govuk-section-break--l">
+      {% if data.bilingual !== 'true' %}
+        <hr class="govuk-section-break govuk-section-break--l">
+      {% endif %}
     {% endif %}
 
 
