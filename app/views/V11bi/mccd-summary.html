@@ -19,7 +19,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        {% import 'V11bi/data-patients.html' as patientData %}
+        {% import 'V10-1/data-patients.html' as patientData %}
         {% set patient = patientData.data | getPatientDataByID( data.id ) %}
 
         {% set patientStatus = patient.status %}
@@ -49,11 +49,20 @@
         <main class="govuk-main-wrapper govuk-!-padding-top-6">
             
             {{ patientStatus | getStatusTag | safe }}
-            <h1 class="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-bottom-2">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
-            <p class="govuk-body govuk-!-margin-bottom-6">Reference number: {{ patient.id }}</p>
+            <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
+            
+            <!-- REF NUMBER -->
+            <p class="govuk-body govuk-!-margin-bottom-2"><strong>Reference number</strong> {{ patient.id }}</p>
+            
+            <!-- CERTIFICATE TYPE -->
+            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.under28Days === true %}65{% else %}66{% endif %}{% if patient.belongsToAP === true %}AP{% else %}ME{% endif %}</p>
+
+            
+
+    
 
 
-
+            <div class="govuk-!-width-two-thirds">
             {% if ( data['role-type'] === 'ap' and patientStatus === 2 ) %}
 
                 <!-- AP CERTIFICATE NEEDS AMENDING -->
@@ -91,6 +100,7 @@
                 }) }}
             
             {% endif %}
+            </div>
 
 
 
@@ -104,15 +114,18 @@
                 -->
 
                 <!-- DECEASED PERSONS DETAILS -->
+                
+
                 {{ govukSummaryList({
                     card: {
-                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] }
+                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] },
+                        classes: 'govuk-!-margin-top-9'
                     },
                     rows: [
                         {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo }, actions: { items: [{ href: 'nhs-number', text: 'Change', visuallyHiddenText: 'NHS number' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name }, actions: { items: [{ href: 'name-of-the-deceased', text: 'Change', visuallyHiddenText: 'name' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } },
@@ -145,13 +158,14 @@
                 <!-- DECEASED PERSONS DETAILS -->
                 {{ govukSummaryList({
                     card: {
-                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] }
+                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] },
+                        classes: 'govuk-!-margin-top-9'
                     },
                     rows: [
                         {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo } },
                         {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name } },
                         {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
                         {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } },
@@ -175,7 +189,7 @@
             {% endif %}
 
 
-            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 or patientStatus === 3 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
 
                 <!-- 
                     
@@ -445,12 +459,10 @@
         {% endif %}
 
         </div>
+
     </div>
-
-    {{ data | debugData | safe }}
-
 </div>
 
-
+{{ data | debugData | safe }}
 
 {% endblock %}

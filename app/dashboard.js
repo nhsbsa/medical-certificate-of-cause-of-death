@@ -333,7 +333,7 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
     let overrideRows = false;
 
     if( _debug ){
-        console.log( '_overrideRowsForTesting(); Rows: ' + rows.length );
+        console.log( '_overrideRowsForTesting(); Rows remaining: ' + rows.length );
     }
 
     // ME 
