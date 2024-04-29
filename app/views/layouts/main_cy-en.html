@@ -69,7 +69,11 @@
 
     <!-- CURRENTLY TESTING -->
     {% if data.loggedIn === 'true' %}
-      <div class="govuk-width-container{% if data['bilingual'] !== "true" %} govuk-!-margin-bottom-9{% endif %}"> 
+    {% if data['bilingual'] !== "true" %}
+      <div class="govuk-width-container govuk-!-margin-bottom-9"> 
+      {% else %}
+      <div class="govuk-width-container">
+      {% endif %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
                 <div class="account-signed-in updated-version">
