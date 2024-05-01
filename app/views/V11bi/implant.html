@@ -33,7 +33,7 @@
 
                 {% set implantDetailsHtml %}
 
-                    <p class="govuk-hint">In some cases, it may be difficult to know with certainty all of the implantable medical devices that the deceased had fitted. Enter details of any implants using the records and information that you have available. You must enter details in English and Welsh, or in English only.</p>
+                    <p class="govuk-hint">{{ data.translations.implantsPagePara[data.lang] }}{% if data.bilingual === 'true' %} {{ data.translations.implantsPageParaBilingual[data.lang] }}{% endif %}</p>
 
                     {% if( data.bilingual == 'true' ) %}
 
