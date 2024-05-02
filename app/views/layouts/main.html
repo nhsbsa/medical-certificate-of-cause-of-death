@@ -71,8 +71,12 @@
     </div>
 
     <!-- CURRENTLY TESTING -->
-    <div class="govuk-width-container{% if data['bilingual'] !== "true" %} govuk-!-margin-bottom-9{% endif %}"> 
-      <div class="govuk-grid-row">
+    {% if data['bilingual'] !== "true" %} 
+    <div class="govuk-width-container govuk-!-margin-bottom-9"> 
+    {% else %}
+    <div class="govuk-width-container">
+    {% endif %} 
+        <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
               <div class="account-signed-in updated-version">
                 <ul class="account-signed-in__list">

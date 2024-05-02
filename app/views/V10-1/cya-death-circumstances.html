@@ -23,7 +23,8 @@ href: 'javascript:history.back()'
       </h1>
 
 
-      <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.aadCheckAnswersDescription[data.lang] }}</div>
+      <!-- <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.aadCheckAnswersDescription[data.lang] }}</div> -->
+      <div class="govuk-hint govuk-!-margin-bottom-7">Check all the details are correct before you submit this Medical certificate of cause of death for scrutiny by a medical examiner</div>
 
       <form action="check-your-answers-aad" method="post" novalidate>
 
@@ -102,7 +103,7 @@ href: 'javascript:history.back()'
         
           <!-- HAVE THE IMPLANTS BEEN REMOVED? -->
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Implants removed?</dt>
+            <dt class="govuk-summary-list__key">Implants removed</dt>
             <dd class="govuk-summary-list__value">{{ data['implant-removed'] }}</dd>
             <dd class="govuk-summary-list__actions">
               <a href="implant-removed">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.aadCheckAnswersAccessibleHintForImplantsRemoved[data.lang] }}</span></a>
