@@ -496,7 +496,9 @@ href: 'javascript:history.back()'
 
         {% endif %}
 
-        <h2 class="govuk-heading-m">{{ data.translations.codO28SectionTitleOne[data.lang] }}</h2>
+        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-1">{{ data.translations.codO28SectionTitleOne[data.lang] }}</h2>
+
+        <p class="govuk-body govuk-!-width-two-thirds">{{ data.translations.codO28SectionTitleOneDescription[data.lang] | safe }}</p>
 
         {% if data.showErrors === 'true' %}
 
@@ -724,11 +726,10 @@ href: 'javascript:history.back()'
 
 
 
+        <h2 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-margin-bottom-1">{{ data.translations.codO28SectionTitleTwo[data.lang] }}</h2>
+        <p class="govuk-body govuk-!-width-two-thirds">{{ data.translations.codO28SectionTitleTwoDescription[data.lang] | safe }}</p>
 
-
-
-        <h2 class="govuk-heading-m">{{ data.translations.codO28SectionTitleTwo[data.lang] }}</h2>
-
+ 
           <div id="other-significant-conditions-group" class="govuk-form-group">
           <!-- MEDICAL CAUSE, 2 -->
           <div class="govuk-grid-column-two-thirds no-padding">

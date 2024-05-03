@@ -23,7 +23,8 @@ href: 'javascript:history.back()'
       {{ data.translations.CYAcodPageTitle[data.lang] }}
     </h1>
 
-    <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.CYAcodHint[data.lang] }}</div>
+    <!-- <div class="govuk-hint govuk-!-margin-bottom-7">{{ data.translations.CYAcodHint[data.lang] }}</div> -->
+    <div class="govuk-hint govuk-!-margin-bottom-7">Check all the details are correct before you submit this Medical certificate of cause of death for scrutiny by a medical examiner</div>
 
     <form action="check-your-answers-cod" method="post" novalidate>
       
@@ -155,7 +156,7 @@ href: 'javascript:history.back()'
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['main-cause-welsh'] }}
               {% endif %}
             </dd>
-            <dd class="govuk-summary-list__value">
+            <dd class="govuk-summary-list__value" style="width:10%">
               {% if data['duration1'] and data['time-unit-duration-1'] %}
                 {{ data['duration1'] }} {{ data['time-unit-duration-1'] | lower }}
               {% endif %}
@@ -166,7 +167,7 @@ href: 'javascript:history.back()'
           </div>
 
 
-          <!-- ADULT, SECONDARY CAUSE -->
+          <!-- ADULT, 1(b) CAUSE -->
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">{{ data.translations.codO281bDiseaseLeadingTo1a[data.lang] }}</dt>
             <dd class="govuk-summary-list__value">
@@ -176,7 +177,7 @@ href: 'javascript:history.back()'
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['secondary-cause-welsh'] }}
               {% endif %}
             </dd>
-            <dd class="govuk-summary-list__value">
+            <dd class="govuk-summary-list__value" style="width:10%">
               {% if data['duration2'] and data['time-unit-duration-2'] %}
                 {{ data['duration2'] }} {{ data['time-unit-duration-2'] | lower }}
               {% endif %}
@@ -196,7 +197,7 @@ href: 'javascript:history.back()'
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-c-welsh'] }}
               {% endif %}
             </dd>
-            <dd class="govuk-summary-list__value">
+            <dd class="govuk-summary-list__value" style="width:10%">
               {% if data['duration3'] and data['time-unit-duration-3'] %}
                 {{ data['duration3'] }} {{ data['time-unit-duration-3'] | lower }}
               {% endif %}
@@ -216,7 +217,7 @@ href: 'javascript:history.back()'
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-conditions-d-welsh'] }}
               {% endif %}
             </dd>
-            <dd class="govuk-summary-list__value">
+            <dd class="govuk-summary-list__value" style="width:10%">
               {% if data['duration4'] and data['time-unit-duration-4'] %}
                 {{ data['duration4'] }} {{ data['time-unit-duration-4'] | lower }}
               {% endif %}
@@ -237,7 +238,7 @@ href: 'javascript:history.back()'
                 {{ hr | safe }}{{ welshLabel | safe }}{{ data['other-significant-conditions-welsh'] }}
               {% endif %}
             </dd>
-            <dd class="govuk-summary-list__value">
+            <dd class="govuk-summary-list__value" style="width:10%">
               {% if data['duration5'] and data['time-unit-duration-5'] %}
                 {{ data['duration5'] }} {{ data['time-unit-duration-5'] | lower }}
               {% endif %}
@@ -294,7 +295,7 @@ href: 'javascript:history.back()'
         <div class="govuk-summary-list__row">
           
           <dt class="govuk-summary-list__key" style="width:35%">
-            Death affected by pregnancy?
+            Death affected by pregnancy
           </dt>
 
           <dd class="govuk-summary-list__value">
