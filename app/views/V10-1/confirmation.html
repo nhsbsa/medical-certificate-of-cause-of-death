@@ -11,6 +11,10 @@
         <form action="confirmation" method="post" novalidate>
 
             {% if data['role-type'] == 'ap' %}
+
+                <!-- AP -->
+                {% if data.debug === 'true'%}<h1 class="govuk-heading-l">Role: AP</h1>{% endif %}
+
                 
                 <!-- AP MCCD CREATED (OR RESUBMITTED AFTER AMENDS) -->
                 <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
@@ -27,9 +31,13 @@
             {% elseif data['role-type'] == 'me' %}
 
                 <!-- ME -->
+                {% if data.debug === 'true'%}<h1 class="govuk-heading-l">Role: ME</h1>{% endif %}
+
                 {% if data['me-signoff'] == 'amend' %}
 
                     <!-- AP MCCD NEEDS AMENDS -->
+                    {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD needs amends</p>{% endif %}
+
                     <div class="govuk-panel govuk-panel--confirmation">
                         <h1 class="govuk-panel__title">Certificate returned to the attending practitioner</h1>
                     </div>
@@ -43,9 +51,11 @@
                 
                 {% else %}
 
-                    {% if data['me-mccd'] %}
+                    {% if data['me-mccd'] === 'true' %}
 
                         <!-- ME MCCD CREATED  -->
+                        {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> ME MCCD created</p>{% endif %}
+
                         <div class="govuk-panel govuk-panel--confirmation">
                             <h1 class="govuk-panel__title">Medical certificate of cause of death completed</h1>
                         </div>
@@ -58,6 +68,8 @@
                         <p class="govuk-body">The Medical certificate of cause of death (MCCD)  has been created and sent to the medical examiner office. This certificate will be available to view from your dashboard for 3 months.</p>
 
                     {% else %}
+
+                        {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD signed off by ME</p>{% endif %}
 
                         <!-- AP MCCD SIGNED OFF  -->
                         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
@@ -74,11 +86,14 @@
 
                 {% endif %}
 
-            {% else %}
+            {% elseif data['role-type'] == 'meo' %}
 
                 <!-- MEO -->
+                {% if data.debug === 'true'%}<h1 class="govuk-heading-l">Role: MEO</h1>{% endif %}
 
                 {% if data['sent-to-registrar'] %}
+
+                    {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> MEO downloaded MCCD and sent to local register office</p>{% endif %}
 
                     <!-- MCCD CONFIRMED AS SENT TO REGISTRAR -->
                     <div class="govuk-panel govuk-panel--confirmation">
@@ -93,6 +108,8 @@
 
 
                 {% else %}
+
+                        {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> MEO has sent the MCCD to the ME</p>{% endif %}
 
                         <!-- AP MCCD SENT TO ME FOR REVIEW -->
                         <div class="govuk-panel govuk-panel--confirmation">
@@ -109,9 +126,9 @@
                 {% endif %}
 
 
-                
-
             {% endif %}
+
+
 
             <!-- FEEDBACK FORM -->
             <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ data.translations.confirmationPageSubheadingTwo[data.lang] }}</h2>
