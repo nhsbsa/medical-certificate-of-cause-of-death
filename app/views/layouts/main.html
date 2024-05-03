@@ -42,6 +42,7 @@
         </div>
       </div>
     </header>
+
     <div class="govuk-width-container">
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
@@ -67,16 +68,11 @@
                   </p>
               </div>
           </div>
-      </div>
-    </div>
+
 
     <!-- CURRENTLY TESTING -->
-    {% if data['bilingual'] !== "true" %} 
-    <div class="govuk-width-container govuk-!-margin-bottom-9"> 
-    {% else %}
-    <div class="govuk-width-container">
-    {% endif %} 
-        <div class="govuk-grid-row">
+
+
           <div class="govuk-grid-column-full">
               <div class="account-signed-in updated-version">
                 <ul class="account-signed-in__list">
@@ -167,7 +163,7 @@
       </div>
     </div> -->
     
-  {% endblock %}
+    {% endblock %}
 
     {% block footer %}
 
