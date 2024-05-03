@@ -4,29 +4,32 @@
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
 
-{% block content %}
+{% block beforeContent %}
 
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
+
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <form action="another-location-lookup" method="get" novalidate>
     
       <div class="govuk-form-group">
-
-      <h1 class="govuk-label-wrapper">
-
-        <label class="govuk-label govuk-label--l" for="event-name">
-          What is the postcode of where the death took place?
-        </label>
-        
-      </h1>
-
-      <div id="event-name-hint" class="govuk-hint">
-        Enter the postcode of where the death occurred. For example, LS1 3EX.
-      </div>
-        <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="another-location-postcode">
+            What is the postcode of where the death took place?
+          </label>
+        </h1>
+        <div id="another-location-postcode-hint" class="govuk-hint">
+          Enter the postcode of where the death occurred. For example, LS1 3EX.
+        </div>
+          <input class="govuk-input govuk-input--width-10" id="another-location-postcode" name="another-location-postcode" type="text">
       </div>
 
       <button class="govuk-button govuk-!-margin-bottom-4" type="submit">
@@ -38,5 +41,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
   </div>
 </div>
+</main>
 
 {% endblock %}

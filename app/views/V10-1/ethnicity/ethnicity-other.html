@@ -4,56 +4,59 @@
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
 
-{% block content %}
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
 
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+    <form action="ethnicity" method="post" novalidate>
+    
+      <div class="govuk-form-group">
 
-        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-        <h1 class="govuk-heading-l">
-            What was the ethnicity of the deceased person?
-        </h1>
-        <p>
-          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not stated'.
-        </p>
-        <form action="ethnicity" method="post" novalidate>
-        
-            <div class="govuk-form-group">
-
-                <fieldset class="govuk-fieldset">
-                    
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Other ethnic group - Arab">
-                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
-                            Arab
-                          </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Other ethnic group - Other" data-aria-controls="conditional-ethnicityDetail-2">
-                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
-                            Any other ethnic group
-                          </label>
-                        </div>
-                        <div class="govuk-radios__divider">or</div>
-                        <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Other ethnic group - Not stated">
-                          <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
-                            Not stated
-                          </label>
-                        </div>
-                      </div>                      
-                </fieldset>
-
+          <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                What was the ethnicity of the deceased person?
+              </h1>
+            </legend>
+            <div id="ethnicity-hint" class="govuk-hint">
+              Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not stated'.
             </div>
+              <div class="govuk-radios" data-module="govuk-radios">
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Other ethnic group - Arab">
+                    <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
+                      Arab
+                    </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Other ethnic group - Other" data-aria-controls="conditional-ethnicityDetail-2">
+                    <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
+                      Any other ethnic group
+                    </label>
+                  </div>
+                  <div class="govuk-radios__divider">or</div>
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Other ethnic group - Not stated">
+                    <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
+                      Not stated
+                    </label>
+                  </div>
+                </div>                      
+          </fieldset>
 
-            <button class="govuk-button" type="submit">
-                Save and continue
-            </button>
-        </form>
+      </div>
+
+        <button class="govuk-button" type="submit">
+            Save and continue
+        </button>
+    </form>
 
     </div>
 </div>
+</main>
 
 {% endblock %}

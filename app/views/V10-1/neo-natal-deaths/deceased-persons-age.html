@@ -4,12 +4,14 @@
   GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
 
-{% block content %}
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
 
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        
-        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
         <form action="deceased-persons-age" method="post" novalidate>
             {% if data['over-under-24'] == 'yes' %} 
@@ -80,5 +82,5 @@
         
     </div>
 </div>
-
+</main>
 {% endblock %}
