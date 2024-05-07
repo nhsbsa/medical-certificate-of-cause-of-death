@@ -1,11 +1,20 @@
 {% extends "layouts/main_cy-en.html" %}
 
+{% block beforeContent %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
+
 {% block content %}
 
 <main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+   
 
     <h1 class="govuk-heading-l">Give feedback on Complete a Medical certificate of cause of death</h1>
 

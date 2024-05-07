@@ -2,12 +2,14 @@
 
 {% block content %}
 
-<main class="govuk-main-wrapper app-main-class" id="main-content">
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
-    <h1 class="govuk-heading-l">Give feedback on Complete a Medical certificate of cause of death</h1>
+    
+
+    <h1 class="govuk-heading-l govuk-!-margin-top-7">Give feedback on Complete a Medical certificate of cause of death</h1>
 
     <form action="confirmation" method="post" novalidate>
 
@@ -50,6 +52,5 @@
 
 {{ data | debugData | safe }}
 
-</main>
 
 {% endblock %}
