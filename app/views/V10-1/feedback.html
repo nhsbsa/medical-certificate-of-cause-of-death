@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<main class="govuk-main-wrapper app-main-class" id="main-content">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+    <h1 class="govuk-heading-l">Give feedback on Complete a Medical certificate of cause of death</h1>
+
+    <form action="confirmation" method="post" novalidate>
+
+      {{ govukRadios({
+                name: 'give-feedback',
+                value: data['give-feedback'],
+                fieldset: {
+                legend: {
+                    text: data.translations.confirmationPageGiveFeedbackQuestionOne[data.lang],
+                    classes: 'govuk-heading-s govuk-!-font-weight-bold'
+                }
+                },
+                items: [
+                { value: 'confirmationPageGiveFeedbackRadioOne', text: data.translations.confirmationPageGiveFeedbackRadioOne[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioTwo', text: data.translations.confirmationPageGiveFeedbackRadioTwo[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioThree', text: data.translations.confirmationPageGiveFeedbackRadioThree[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioFour', text: data.translations.confirmationPageGiveFeedbackRadioFour[data.lang] },
+                { value: 'confirmationPageGiveFeedbackRadioFive', text: data.translations.confirmationPageGiveFeedbackRadioFive[data.lang] }
+                ]
+            }) }}
+
+            {{ govukTextarea({
+                name: 'feedback-text', id: 'feedback-text', value: data['feedback-text'],
+                label: {
+                text: data.translations.confirmationPageGiveFeedbackQuestionTwo[data.lang],
+                classes: 'govuk-heading-s govuk-!-font-weight-bold'
+                },
+                hint: { text: data.translations.confirmationPageGiveFeedbackQuestionTwoHint[data.lang] }
+            }) }}
+
+              {{ govukButton({
+                  text: data.translations.confirmationPageCTAprimary[data.lang]
+              }) }}
+
+    </form>
+
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+</main>
+
+{% endblock %}

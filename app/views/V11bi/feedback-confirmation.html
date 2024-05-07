@@ -1,0 +1,29 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h1 class="govuk-panel__title">Feedback submitted</h1>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m" />
+    
+    <h2 class="govuk-heading-m">What happens next</h2>
+    <p class="govuk-body">We will review your comments and use them to improve the Medical certificate of cause of death service. There is nothing more for you to do.</p>
+
+    {{ govukButton({
+                    text: data.translations.confirmationPageCTAsecondary[data.lang],
+                    href: 'dashboard',
+                    classes: 'govuk-button--secondary'
+                }) }}
+
+  </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}
