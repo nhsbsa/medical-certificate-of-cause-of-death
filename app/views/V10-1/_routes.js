@@ -339,31 +339,6 @@ router.post(/check-your-answers-cod/, (req, res) => {
     res.redirect('mccd-tasklist');
 });
 
-// ************************************************************
-// Declaration
-// ************************************************************
-
-// Declaration page [AP]
-
-router.post(/ap-declaration/, (req, res) => {
-    res.redirect('confirmation')
-});
-router.post(/confirmation/, (req, res) => {
-    res.redirect('dashboard?role-type=ap')
-});
-
-router.post(/give-feedback/, (req, res) => {
-    res.redirect('dashboard')
-});
-
-// Declaration page [ME Cert]
-
-router.post(/me-cert-declaration/, (req, res) => {
-    res.redirect('confirmation')
-});
-router.post(/confirmation/, (req, res) => {
-    res.redirect('dashboard?role-type=me')
-});
 
 // ************************************************************
 
@@ -822,10 +797,22 @@ router.post( /declaration/, (req, res) => {
     res.redirect('confirmation');
 });
 
+// FEEDBACK
+router.get( [
+    '/onboarding/feedback',
+    '/auth/feedback',
+    '/ethnicity/feedback',
+    '/me-registration/feedback',
+    '/MFA/feedback',
+    '/neo-natal-deaths/feedback',
+    '/onboarding/feedback',
+    '/place-of-death/feedback'], (req, res) => {
+    res.redirect('/V10-1/feedback');
+    next();
+});
+
 // CONFIRMATION
 router.post( /confirmation/, (req, res) => {
-
-    // This clears all the possible 
 
     delete req.session.data['ap-cert-declaration'];
     delete req.session.data['me-cert-declaration'];
@@ -839,11 +826,12 @@ router.post( /confirmation/, (req, res) => {
     delete req.session.data['me-mccd'];
     delete req.session.data['sent-to-registrar'];
 
-    res.redirect('dashboard');
+    res.redirect('feedback-confirmation');
 
 });
 
 module.exports = router;
+
 
 // The URL here needs to match the URL of the page that the user is on
 // when they type in their email address
