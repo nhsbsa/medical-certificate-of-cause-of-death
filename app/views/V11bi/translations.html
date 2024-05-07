@@ -5,15 +5,19 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 {% block pageTitle %} Translations {% endblock %}
+{% block beforeContent %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
 
 {% block content %}
 
-{{ govukBackLink({
-    text: 'Back',
-    href: 'javascript:history.back()'
-  }) }}
-
 <!-- EXTRA BITS -->
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -55,5 +59,5 @@
 
     </div>
 </div>
-
+</main>
 {% endblock %}
