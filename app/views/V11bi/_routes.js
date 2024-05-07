@@ -976,10 +976,22 @@ router.post( /declaration/, (req, res) => {
     res.redirect('confirmation');
 });
 
+// FEEDBACK
+router.get( [
+    '/onboarding/feedback',
+    '/auth/feedback',
+    '/ethnicity/feedback',
+    '/me-registration/feedback',
+    '/MFA/feedback',
+    '/neo-natal-deaths/feedback',
+    '/onboarding/feedback',
+    '/place-of-death/feedback'], (req, res) => {
+    res.redirect('/V11bi/feedback');
+    next();
+});
+
 // CONFIRMATION
 router.post( /confirmation/, (req, res) => {
-
-    // This clears all the possible 
 
     delete req.session.data['ap-cert-declaration'];
     delete req.session.data['me-cert-declaration'];
@@ -993,10 +1005,9 @@ router.post( /confirmation/, (req, res) => {
     delete req.session.data['me-mccd'];
     delete req.session.data['sent-to-registrar'];
 
-    res.redirect('dashboard');
+    res.redirect('feedback-confirmation');
 
 });
-
 
 
 module.exports = router;

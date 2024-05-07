@@ -3,13 +3,17 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
-{% block content %}
+{% block beforeContent %}
 
 {{ govukBackLink({
-text: data.translations.globalBackLink[data.lang],
-href: 'javascript:history.back()'
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
 }) }}
 
+{% endblock %}
+
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <!-- SET VARIABLES -->
 
 {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
@@ -34,10 +38,7 @@ href: 'javascript:history.back()'
                 key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] },
                 value: { text: data.user.gmcNumber }
             },
-            {
-                key: { text: data.translations.dpdConfirmDetailsWorkAddress[data.lang] },
-                value: { html: data.user.address | formatAddress }
-            },
+
             {
                 key: { text: 'Primary qualification' },
                 value: { html: data['qualifications'] or 'Not specified' },
@@ -67,7 +68,7 @@ href: 'javascript:history.back()'
 
   </div>
 </div>
-
+</main>
 {{ data | debugData | safe }}
 
 
