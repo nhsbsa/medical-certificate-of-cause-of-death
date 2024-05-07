@@ -1,4 +1,5 @@
-{
+[
+    {
     "id": "MCCD-V0-1",
     "viewports": [
         {
@@ -246,4 +247,4 @@
     "debug": false,
     "debugWindow": false
 }
-
+];

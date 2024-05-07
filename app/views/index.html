@@ -1,5 +1,5 @@
 {% extends "layouts/prototype-main.html" %}
-
+{% from "govuk/components/table/macro.njk" import govukTable %}
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -43,6 +43,7 @@
       </summary>
       <div class="govuk-details__text">
 
+
         <h4 class="govuk-heading-s">What we created</h4>
         <ul>
           <li>Additional questions for the ME cert added</li>
@@ -69,6 +70,70 @@
       </div>
     </details>
 
+    <table>
+      <tbody>
+        <tr>
+          <th><strong>Version</strong></th>
+          <th><strong>Details</strong></th>
+          <th><strong>Description</strong></th>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v1/enter-email">v1</a></th>
+          <td>No research - incomplete prototype</td>
+          <td>Initial effort by CB</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v2/login-yes-no">v2</a></th>
+          <td>Pop-up research at Leeds Beckett and Holbeck One Stop (19 & 20 Sept). 24 participants</td>
+          <td>Testing usability, one vs two password entries</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v3/login-yes-no">v3</a></th>
+          <td>Pop-up research with 2 ESL users and 1 ESL user with cognitive impairment</td>
+          <td>Iterations on research (password field and HMW content)</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v4/enter-email">v4</a></th>
+          <td>Pop-up research December 17th at Leeds library</td>
+          <td>Researched 'remove log in' and email first</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v5/enter-email">v5</a></th>
+          <td>Latest prototype Will Hepworth (Previous UX) worked on</td>
+          <td>Included full reg journey, p5 test scenarios have been completed</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v5-a/enter-email">v5-a</a></th>
+          <td>[Include summarised research notes from v5-a here]</td>
+          <td>[Include summarised research notes from v5-a here]</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v5-b/enter-email">v5-b</a></th>
+          <td>[Include summarised research notes from v5-b here]</td>
+          <td>[Include summarised research notes from v5-b here]</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v6/enter-email">v6</a></th>
+          <td>Account recovery flow update</td>
+          <td>Account recovery journey pages updated to the new front-end NHS styles</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v7/enter-email">v7</a></th>
+          <td>Enter email page updated</td>
+          <td>Adjusted content as well as a COVID-19 callout</td>
+        </tr>
+        <tr>
+          <th><a href="/set-up/v8/enter-email">v8</a></th>
+          <td>Enter mobile phone number page updated</td>
+          <td>Page updated to now include conditional reveal for international phone numbers</td>
+        </tr>
+        <tr class="latest">
+          <th><a href="/set-up/v-9/enter-email">v9</a></th>
+          <td>Email confirmation flow update</td>
+          <td>Users now use a code to confirm their email</td>
+        </tr>
+      </tbody>
+    </table>
         <!-- Version 10.1 -->
 
         <details class="govuk-details" data-module="govuk-details">
