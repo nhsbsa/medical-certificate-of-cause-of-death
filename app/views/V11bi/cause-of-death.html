@@ -280,7 +280,7 @@
 
                 } else {
 
-                    const causeRegex = /^[a-zA-Z'&@:;,.\s\/-]*$/;
+                    const causeRegex = /^[a-zA-Z0-9'&@:;,.\s\/-]*$/;
                     const timeRegex = /^(0*[1-9][0-9]{0,2})$/;
 
                     const currentErrorsLength = errors.length;
@@ -333,11 +333,13 @@
 
 
 
-                    if( errors.length > currentErrorsLength && errorLevel === -1 && i !== 0 ){
+                    if( causeValue || timeValue || unitValue ){
 
-                      // An error must have been added to the list, and the level can't have been set yet, and it can't be on 0 = Secondary cause...
-                      errorLevel = i;
-                      
+                      if( i !== 0 ){
+                        // Altering the criteria 'cause there need not have been an error (previoulsy a correct row wouldn't trigger the preceeding row)...
+                        errorLevel = i;
+                      }
+
                     }
 
                 }
