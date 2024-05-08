@@ -19,7 +19,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <fieldset class="govuk-fieldset" aria-describedby="cause-death-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">
+            <h1 class="govuk-fieldset__heading govuk-!-margin-top-7">
               What caused the death?
             </h1>
           </legend>
@@ -370,7 +370,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <label class="govuk-label" for="main-cause">
               <span class="govuk-visually-hidden">Enter </span>1(a) Disease or condition directly leading to death
             </label>
-            <input class="govuk-input" id="main-cause" name="main-cause" type="text">
+            <input class="govuk-input" value="{{ data['main-cause'] }}" id="main-cause" name="main-cause" type="text">
           </div>
         </div>
 
@@ -383,20 +383,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-input__wrapper">
 
               <div class="govuk-form-group">
-                <input class="govuk-input border-hidden" id="duration1" name="duration1" type="text">
+                <input class="govuk-input border-hidden" value="{{ data.duration1 }}" id="duration1" name="duration1" type="text">
               </div>
 
               <div class="govuk-form-group">
                 <!--SELECT TIME UNIT - Duration 1-->
                 <select class="govuk-select" id="time-unit-duration-1" name="time-unit-duration-1">
                   <option value="" selected>Select unit or unknown</option>
-                  <option value="years before death">Years</option>
+                  <option value="years">Years</option>
                   <option value="months">Months</option>
                   <option value="days">Days</option>
                   <option value="hours">Hours</option>
                   <option value="minutes">Minutes</option>
                   <option value="Unknown">Unknown</option>
                 </select>
+                <script>document.querySelector('#time-unit-duration-1').value = "{{ data['time-unit-duration-1'] }}";</script>
               </div>
 
             </div>
@@ -412,7 +413,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <label class="govuk-label" for="secondary-cause">
               <span class="govuk-visually-hidden">Enter </span>1(b) Other disease or condition leading to 1(a) (optional)
             </label>
-            <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
+            <input class="govuk-input" value="{{ data['secondary-cause'] }}" id="secondary-cause" name="secondary-cause" type="text">
           </div>
         </div>
 
@@ -425,7 +426,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-input__wrapper">
 
               <div class="govuk-form-group">
-              <input class="govuk-input border-hidden" id="duration2" name="duration2" type="text">
+              <input class="govuk-input border-hidden" value="{{ data.duration2 }}" id="duration2" name="duration2" type="text">
               </div>
 
               <div class="govuk-form-group">
@@ -439,6 +440,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="minutes">Minutes</option>
                 <option value="minutes">Unknown</option>
               </select>
+              <script>document.querySelector('#time-unit-duration-2').value = "{{ data['time-unit-duration-2'] }}";</script>
               </div>
 
             </div>
@@ -454,7 +456,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <label class="govuk-label" for="other-conditions-c">
               <span class="govuk-visually-hidden">Enter </span>1(c) Other disease or condition leading to 1(b) (optional)
             </label>
-            <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
+            <input class="govuk-input" value="{{ data['other-conditions-c'] }}" id="other-conditions-c" name="other-conditions-c" type="text">
           </div>
         </div>
 
@@ -467,7 +469,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-input__wrapper">
 
               <div class="govuk-form-group">
-              <input class="govuk-input border-hidden" id="duration3" name="duration3" type="text">
+              <input class="govuk-input border-hidden" value="{{ data.duration3 }}" id="duration3" name="duration3" type="text">
               </div>
 
               <div class="govuk-form-group">
@@ -481,6 +483,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="minutes">Minutes</option>
                 <option value="minutes">Unknown</option>
               </select>
+              <script>document.querySelector('#time-unit-duration-3').value = "{{ data['time-unit-duration-3'] }}";</script>
               </div>
 
           </div>
@@ -498,7 +501,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <label class="govuk-label" for="other-conditions-d">
               <span class="govuk-visually-hidden">Enter </span>1(d) Other disease or condition leading to 1(c) (optional)
             </label>
-            <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
+            <input class="govuk-input" value="{{ data['other-conditions-d'] }}" id="other-conditions-d" name="other-conditions-d" type="text">
           </div>
         </div>
 
@@ -510,7 +513,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-input__wrapper">
 
               <div class="govuk-form-group">
-              <input class="govuk-input border-hidden" id="duration4" name="duration4" type="text">
+              <input class="govuk-input border-hidden" value="{{ data.duration4 }}" id="duration4" name="duration4" type="text">
               </div>
 
               <div class="govuk-form-group">
@@ -524,6 +527,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="minutes">Minutes</option>
                 <option value="minutes">Unknown</option>
               </select>
+              <script>document.querySelector('#time-unit-duration-4').value = "{{ data['time-unit-duration-4'] }}";</script>
               </div>
 
           </div>
@@ -548,7 +552,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <label class="govuk-label" for="other-significant-conditions">
               <span class="govuk-visually-hidden">Enter </span>2 Other significant condition (optional)
             </label>
-            <input class="govuk-input" id="other-significant-conditions" name="other-significant-conditions"
+            <input class="govuk-input" id="other-significant-conditions" value="{{ data['other-significant-conditions'] }}" name="other-significant-conditions"
               type="text">
           </div>
         </div>
@@ -563,7 +567,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             <div class="govuk-input__wrapper">
 
               <div class="govuk-form-group">
-              <input class="govuk-input border-hidden" id="duration5" name="duration5" type="text">
+              <input class="govuk-input border-hidden" value="{{ data.duration5 }}" id="duration5" name="duration5" type="text">
               </div>
 
               <div class="govuk-form-group">
@@ -577,6 +581,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="minutes">Minutes</option>
                 <option value="minutes">Unknown</option>
               </select>
+              <script>document.querySelector('#time-unit-duration-5').value = "{{ data['time-unit-duration-5'] }}";</script>
               </div>
 
           </div>
