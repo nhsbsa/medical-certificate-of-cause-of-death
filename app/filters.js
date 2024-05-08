@@ -30,9 +30,9 @@ addFilter('getCauseOfDeathLink', function( content ){
     }
 
     if( content.under28days === true ){
-        arr.push('over-under-28=yes');
-    } else {
         arr.push('over-under-28=no');
+    } else {
+        arr.push('over-under-28=yes');
     }
 
     let link = 'cause-of-death';
