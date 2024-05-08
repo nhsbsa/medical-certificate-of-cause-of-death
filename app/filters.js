@@ -18,6 +18,73 @@ addFilter('debugData', function(content) {
 
 
 //
+// GET CAUSE OF DEATH LINK
+//
+addFilter('getCauseOfDeathLink', function( content ){
+
+    // content: JSON data for the patient
+    let arr = [];
+
+    if( content.causeOfDeathExtras ){
+        arr.push( content.causeOfDeathExtras );
+    }
+
+    if( content.under28days === true ){
+        arr.push('over-under-28=yes');
+    } else {
+        arr.push('over-under-28=no');
+    }
+
+    let link = 'cause-of-death';
+    if( arr.length > 0 ){
+        link += '?' + arr.join('&');
+    }
+
+    return link;
+
+});
+
+//
+// GET CAUSE OF DEATH
+//
+addFilter('getCauseOfDeath', function( content, patientStatus, fieldName ){
+
+    // content: JSON data for the patient
+    // patientStatus: the status code
+    // fieldName: the fieldName to pull the value for
+
+    const fields = ['main-cause','secondary-cause','other-conditions-c','other-conditions-d','other-significant-conditions'];
+    const fieldIndex = 1 + fields.indexOf(fieldName);
+
+    const camelCaseField = fieldName.split('-').map((word, index) => {
+        if (index === 0) {
+          return word.toLowerCase(); // First word stays lowercase
+        } else {
+          // Capitalize the first letter of each subsequent word
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+      }).join('');
+
+    let causeOfDeath = '';
+    if( patientStatus === 1 ){
+
+        causeOfDeath = this.ctx.data[fieldName] || '';
+
+        const duration = this.ctx.data['duration'+fieldIndex] + ' ' + this.ctx.data['time-unit-duration-'+fieldIndex];
+        
+        if( duration.trim() !== '' && duration.indexOf('undefined') ){
+            causeOfDeath += ', ' + duration;
+        }
+    } else {
+        causeOfDeath = content[camelCaseField];
+    }
+
+    return causeOfDeath;
+
+})
+
+
+//
 // GENERATE STATIC SESSION DATA
 //
 addFilter('generateStaticSessionData', function(content){
@@ -368,10 +435,12 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const meoReview = this.ctx.data['meo-review'];
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
+    const lastName = this.ctx.data['deceased-last-name'];
+
     const filterDrafts = ( this.ctx.data.separateDraftsTable === 'true' ) ? true : false;
 
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );

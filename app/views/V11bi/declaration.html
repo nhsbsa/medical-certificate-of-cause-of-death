@@ -1,17 +1,21 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
-{% block content %}
+{% block beforeContent %}
 
 {{ govukBackLink({
-  text: data.translations.globalBackLink[data.lang],
-  href: 'javascript:history.back()'
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
 }) }}
 
+{% endblock %}
+
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
   
@@ -109,7 +113,7 @@
 
   </div>
 </div>
-
+</main>
 {{ data | debugData | safe }}
 
 {% endblock %}

@@ -328,58 +328,37 @@ function _getRow( patient ){
 //
 // OVERRIDE ROWS FOR TESTING FUNCTION
 //
-function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar ){
+function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar, lastName ){
 
-    let overrideRows = false;
+    let overrideRows = true;
+    let lastNameString = lastName || '';
 
     if( _debug ){
         console.log( '_overrideRowsForTesting(); Rows remaining: ' + rows.length );
     }
-
-    // ME 
-    // me-signoff, amend > 1 or registrar > 4
-    // Dickson, Adrian - 0002
-
-    // MEO 
-    // meo-review, amend > 1 or medical-examiner > 3
-    // Doyle, Joseph William - 0028
-
-    // sent-to-registrar (boolean) > 5
-    // Frost, Charley Angeli - 0010
 
     let arr = ( overrideRows ) ? [] : rows;
 
     if( overrideRows ){
         rows.forEach(function( row ){
 
-            if( row.id === '0002' ){
-
-                // ME
-                if( meSignOff === 'amend' ){
-                    row.status = 2;
-                } else if( meSignOff === 'registrar' ){
-                    row.status = 4;
+            // This code only allows the specified accounts in if the correct surname is entered...
+            if( row.id === 'XKSUPOF6O7-24' ){
+                if( lastNameString.trim().toLowerCase() === 'smith' ){
+                    arr.push( row );
                 }
-
-            } else if( row.id === '0028' ){
-
-                // MEO
-                if( meoReview === 'amend' ){
-                    row.status = 1;
-                } else if( meoReview === 'medical-examiner' ){
-                    row.status = 3;
+            } else if( row.id === 'GYRMYSJB7-24' ){
+                if( lastNameString.trim().toLowerCase() === 'james' ){
+                    arr.push( row );
                 }
-
-            } else if( row.id === '0010' ){
-
-                // MEO
-                if( sentToRegistrar ){
-                    row.status = 5;
+            } else if( row.id === 'DGGHM7VSQ-24' ){
+                if( lastNameString.trim().toLowerCase() === 'jones' ){
+                    arr.push( row );
                 }
-
+            } else {
+                arr.push( row );
             }
-
-            arr.push( row );
+            
 
         });
     }
@@ -413,7 +392,7 @@ function _filterDrafts( rows, filterDrafts ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName ){
 
     if( _debug ){
         console.log( 'START FILTERING ----------------' ); 
@@ -421,7 +400,7 @@ function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, 
 
     _roleType = roleType;
 
-    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
+    const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar, lastName ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 
     if( _debug ){
         console.log( 'END FILTERING ----------------' );

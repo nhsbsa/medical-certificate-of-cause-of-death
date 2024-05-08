@@ -5,13 +5,17 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 
-{% block content %}
+{% block beforeContent %}
 
 {{ govukBackLink({
     text: data.translations.globalBackLink[data.lang],
     href: 'javascript:history.back()'
-  }) }}
+}) }}
 
+{% endblock %}
+
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -65,7 +69,7 @@
 
   </div>
 </div>
-
+</main>
 {{ data | debugData | safe }}
 
 {% endblock %}

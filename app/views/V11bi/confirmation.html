@@ -4,7 +4,7 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block content %}
-
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -53,25 +53,10 @@
 
                     {% if data['me-mccd'] === 'true' %}
 
+
                         <!-- ME MCCD CREATED  -->
                         {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> ME MCCD created</p>{% endif %}
 
-                        <div class="govuk-panel govuk-panel--confirmation">
-                            <h1 class="govuk-panel__title">Medical certificate of cause of death completed</h1>
-                        </div>
-
-                        <hr class="govuk-section-break govuk-section-break--m" />
-
-                        <p class="govuk-body-l">The Medical certificate of cause of death has been created.</p>
-
-                        <h2 class="govuk-heading-m">What happens next</h2>
-                        <p class="govuk-body">The Medical certificate of cause of death (MCCD)  has been created and sent to the medical examiner office. This certificate will be available to view from your dashboard for 3 months.</p>
-
-                    {% else %}
-
-                        {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD signed off by ME</p>{% endif %}
-
-                        <!-- AP MCCD SIGNED OFF  -->
                         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-10">
                             <h1 class="govuk-panel__title">{{ data.translations.confirmationPageTitle[data.lang] }}</h1>
                         </div>
@@ -82,6 +67,25 @@
                         <h2 class="govuk-heading-m">{{ data.translations.confirmationPageSubheadingOne[data.lang] }}</h2>
                         <p class="govuk-body">{{ data.translations.confirmationPageWhatHappensNextContent[data.lang] }}</p>
 
+                        
+                    {% else %}
+
+                        <!-- AP MCCD SIGNED OFF  -->
+                        {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD signed off by ME</p>{% endif %}
+
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">Medical certificate of cause of death approved</h1>
+                        </div>
+
+                        <hr class="govuk-section-break govuk-section-break--m" />
+
+                        <p class="govuk-body-l">You have signed off this Medical certificate of cause of death (MCCD) following scrutiny of the cause of death.</p>
+
+                        <h2 class="govuk-heading-m">What happens next</h2>
+                        <p class="govuk-body">This MCCD will be sent to the local register office by your medical examiner office. There is nothing further for you to do.</p>
+
+                       
+                        
                     {% endif %}
 
                 {% endif %}
@@ -170,6 +174,7 @@
 
                 {{ govukButton({
                     text: data.translations.confirmationPageCTAsecondary[data.lang],
+                    href: 'dashboard',
                     classes: 'govuk-button--secondary'
                 }) }}
 
@@ -179,7 +184,7 @@
 
     </div>
 </div>
-
+</main>
 {{ data | debugData | safe }}
 
 {% endblock %}
