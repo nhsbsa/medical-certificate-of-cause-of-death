@@ -7,14 +7,16 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 
-
-{% block content %}
+{% block beforeContent %}
 
 {{ govukBackLink({
     text: data.translations.globalBackLink[data.lang],
     href: 'javascript:history.back()'
-  }) }}
+}) }}
 
+{% endblock %}
+{% block content %}
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -464,5 +466,5 @@
 </div>
 
 {{ data | debugData | safe }}
-
+</main>
 {% endblock %}

@@ -3,13 +3,19 @@
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
+{% block beforeContent %}
 
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
 {% block content %}
-
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
     <form action="death-hospital" method="post" novalidate>
 
@@ -58,5 +64,5 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
   </div>
 </div>
-
+</main>
 {% endblock %}

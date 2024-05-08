@@ -3,17 +3,22 @@
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
+{% block beforeContent %}
 
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
 {% block content %}
-
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
 
     <!-- English language selected-->
     {% if data['lang'] == "en" %}
 
     <div class="govuk-grid-column-two-thirds">
-
-      <a href="javascript:history.back()" class="govuk-back-link">Back</a>
   
       <h1 class="govuk-heading-l">
         What is the referring senior coroner's name?
@@ -145,5 +150,5 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
   
 </div>
-
+</main>
 {% endblock %}
