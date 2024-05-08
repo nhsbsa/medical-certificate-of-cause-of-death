@@ -16,19 +16,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-        <h1 class="govuk-heading-l">
-            What was the ethnicity of the deceased person?
-        </h1>
-        <p>
-          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not stated'.
-        </p>
         <form action="ethnicity" method="post" novalidate>
         
             <div class="govuk-form-group">
 
-                <fieldset class="govuk-fieldset">
+              <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                  <h1 class="govuk-fieldset__heading">
+                    What was the ethnicity of the deceased person?
+                  </h1>
+                </legend>
+                <div id="ethnicity-hint" class="govuk-hint">
+                  Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not stated'.
+                </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                           <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="White - English, Welsh, Scottish, Northern Irish or British">

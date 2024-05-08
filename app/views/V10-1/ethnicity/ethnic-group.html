@@ -15,20 +15,18 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <main class="govuk-main-wrapper app-main-class" id="main-content">
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-
-        <h1 class="govuk-heading-l">
-            What was the ethnic group of the deceased person?
-        </h1>
-        <p>
-          Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not known'.
-        </p>
-
         <form action="ethnic-group" method="post" novalidate>
 
             <div class="govuk-form-group">
-
-                <fieldset class="govuk-fieldset">
+              <fieldset class="govuk-fieldset" aria-describedby="ethnic-group-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                  <h1 class="govuk-fieldset__heading">
+                    What was the ethnic group of the deceased person?
+                  </h1>
+                </legend>
+                <div id="ethnic-group-hint" class="govuk-hint">
+                  Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not known'.
+                </div>
 
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">

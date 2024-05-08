@@ -24,7 +24,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <fieldset class="govuk-fieldset" aria-describedby="cause-death-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading govuk-!-margin-top-7">
+            <h1 class="govuk-fieldset__heading">
               What caused the death?
             </h1>
           </legend>
@@ -362,14 +362,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         </style>
 
         <!-- Using a DIV to prevent paragraph content going full-screen -->
-        <div id="cause-death-1-with-explainer" class="govuk-grid-column-two-thirds no-padding govuk-!-margin-top-5 govuk-!-margin-bottom-2">
+        <!-- <div id="cause-death-1-with-explainer" class="govuk-grid-column-two-thirds no-padding govuk-!-margin-top-5 govuk-!-margin-bottom-2">
           <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Cause of death (1)</h2>
           <p class="govuk-body">The disease or condition thought to be the underlying cause of death should appear in the lowest completed line of part 1.</p>
-        </div>
-
+        </div> -->
+    <fieldset class="govuk-fieldset" aria-describedby="cause-1-hint">
+          <div id="cause-death-1-with-explainer" class="govuk-grid-column-two-thirds no-padding">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h2 class="govuk-fieldset__heading">
+                Cause of death (1)
+              </h2>
+            </legend>
+            <div id="cause-1-hint" class="govuk-hint">
+              The disease or condition thought to be the underlying cause of death should appear in the lowest completed line of part 1.
+            </div>
+          </div>
+          
         <!-- MAIN CAUSE -->
-      <div id="main-cause-group" class="govuk-form-group">
 
+      <div id="main-cause-group" class="govuk-form-group">
         <div class="govuk-grid-column-two-thirds no-padding">
           <div class="govuk-form-group">
             <label class="govuk-label" for="main-cause">
@@ -541,17 +552,29 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </div>
         </div>
       </div>
-
+    </fieldset>
 
 
 
         <!-- Using a DIV to prevent paragraph content going full-screen -->
-        <div id="cause-death-2-with-explainer" class="govuk-grid-column-two-thirds no-padding govuk-!-margin-top-5 govuk-!-margin-bottom-2">
+        <!-- <div id="cause-death-2-with-explainer" class="govuk-grid-column-two-thirds no-padding govuk-!-margin-top-5 govuk-!-margin-bottom-2">
           <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Cause of death (2)</h2>
           <p class="govuk-body">Other significant condition contributing to the death but <b>not</b> relating to the disease or condition causing it.</p>
-        </div>
+        </div> -->
 
+    <fieldset class="govuk-fieldset" aria-describedby="cause-2-hint">
+        <div id="cause-death-2-with-explainer" class="govuk-grid-column-two-thirds no-padding">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h2 class="govuk-fieldset__heading">
+              Cause of death (2)
+            </h2>
+          </legend>
+          <div id="cause-2-hint" class="govuk-hint">
+            Other significant condition contributing to the death but <span><strong>not</strong></span> relating to the disease or condition causing it.
+          </div>
+        </div>
       <div id="other-significant-conditions-group" class="govuk-form-group">
+
         <div class="govuk-grid-column-two-thirds no-padding">
           <div class="govuk-form-group">
             <label class="govuk-label" for="other-significant-conditions">
