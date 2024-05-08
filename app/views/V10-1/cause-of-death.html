@@ -191,7 +191,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         // Check if cause contains special characters 
                         errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeWrongCharacters', i) } );
 
-                    } else if( unitValue === 'Unknown' || unitValue === 'globalTimeUnitUnknown' ){
+                    } else if( unitValue.toLowerCase() === 'unknown' || unitValue === 'globalTimeUnitUnknown' ){
 
                         if( timeValue ){
 
@@ -454,7 +454,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-2').value = "{{ data['time-unit-duration-2'] }}";</script>
               </div>
@@ -497,7 +497,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-3').value = "{{ data['time-unit-duration-3'] }}";</script>
               </div>
@@ -541,7 +541,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-4').value = "{{ data['time-unit-duration-4'] }}";</script>
               </div>
@@ -607,7 +607,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-5').value = "{{ data['time-unit-duration-5'] }}";</script>
               </div>
