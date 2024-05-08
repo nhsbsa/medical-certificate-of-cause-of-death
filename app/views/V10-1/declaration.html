@@ -4,20 +4,22 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% block beforeContent %}
 
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
 
 {% block content %}
-
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-
-<hr class="govuk-section-break govuk-section-break--l">
-
+<main class="govuk-main-wrapper app-main-class" id="main-content">
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
   
     <form action="declaration" method="post" novalidate>
-
 
       {% if data['role-type'] === 'me' %}
 
@@ -87,7 +89,7 @@
             legend: {
               text: data.translations.apDeclarationPageTitle[data.lang],
               isPageHeading: true,
-              classes: 'govuk-fieldset__legend--l' 
+              classes: 'govuk-fieldset__legend--l'
             }
           },
           items: [
@@ -113,5 +115,5 @@
 </div>
 
 {{ data | debugData | safe }}
-
+</main>
 {% endblock %}
