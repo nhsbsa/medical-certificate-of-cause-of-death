@@ -10,6 +10,7 @@ function _getTranslations(){
   });
 
   const translations = {};
+  const addWelsh = false;
 
   if( json ){
 
@@ -31,7 +32,13 @@ function _getTranslations(){
               let cy = ( row.E && row.E.trim() !== '' ) ? row.E : '[Welsh missing]';
               cy = cy.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-              translations[row.B] = { en: en, cy: cy };
+              let obj = { en: en };
+
+              if( addWelsh ){
+                obj.cy = cy;
+              }
+
+              translations[row.B] = obj;
 
             }
           }
