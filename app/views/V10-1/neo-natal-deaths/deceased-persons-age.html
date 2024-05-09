@@ -17,71 +17,160 @@
     <div class="govuk-grid-column-two-thirds">
         
 
-        <form action="deceased-persons-age" method="post" novalidate>
-            {% if data['over-under-24'] == 'yes' %} 
-            <div class="govuk-form-group">
-                <h1 class="govuk-label-wrapper">
-                  <label class="govuk-label govuk-label--l" for="deceased-persons-age-days">
-                    What was the deceased person's age?
-                  </label>
-                </h1>
-                <div class="govuk-input__wrapper">
-                    <input class="govuk-input govuk-input--width-5" id="deceased-persons-age-days" name="deceased-persons-age-days" type="text" spellcheck="false">
-                  <div class="govuk-input__suffix" aria-hidden="true">days</div>
+       <form action="deceased-persons-age" method="post">
+
+        <!-- OVER 24 HOURS, AGE IN DAYS -->
+        {% if data['over-under-24'] === 'yes' %} 
+
+        {% if data.showErrors === 'true' %}
+          <div class="govuk-error-summary" data-module="govuk-error-summary">
+              <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                  There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                  <ul class="govuk-list govuk-error-summary__list">
+                    <li>
+                      <a href="#age">Number of days must be 28 or less</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            {% else %}
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group">
-                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                      What was the deceased person's age?
-                    </h1>
-                  </legend>
-                  <div class="govuk-input__wrapper" id="ageHoursMinutes">
-                    <div class="govuk-input__wrapper">
-                      <div class="govuk-form-group">
-                        <label class="govuk-label govuk-label govuk-visually-hidden" for="deceased-persons-age-hours">
-                          Hours
-                        </label>
-                        <div class="govuk-input__wrapper govuk-!-margin-right-5">
-                                      
-                          <input class="govuk-input govuk-input--width-3" id="deceased-persons-age-hours" name="deceased-persons-age-hours" type="text">
-                            
-                                <div class="govuk-input__suffix" aria-hidden="true">
-                                  Hours
-                                </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="govuk-date-input__item">
-                      <div class="govuk-form-group">
-                        <label class="govuk-label govuk-date-input__label govuk-visually-hidden" for="deceased-persons-age-minutes">
-                          Minutes
-                        </label>
-                        <div class="govuk-input__wrapper govuk-!-margin-right-5">
-                                      
-                          <input class="govuk-input govuk-input--width-3" id="deceased-persons-age-minutes" name="deceased-persons-age-minutes" type="text">
-                            
-                                <div class="govuk-input__suffix" aria-hidden="true">
-                                  Minutes
-                                </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+            </div>
+          {% endif %}
+
+
+          <div id="age" class="govuk-form-group{% if data.showErrors === 'true' %} govuk-form-group--error{% endif %}">
+          {% call govukFieldset({
+              legend: {
+                text: data.translations.dpdAgePageTitle[data.lang],
+                classes: 'govuk-fieldset__legend--l',
+                isPageHeading: true
+              }
+            }) %}
+
+              {% set inputClasses = 'govuk-input--width-2' %}
+              {% if data.showErrors === 'true' %}
+                
+                <p class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Number of days must be 28 or less
+                </p>
+
+                {% set inputClasses = 'govuk-input--width-2 govuk-input--error' %}
+
+              {% endif %}
+
+              {{ govukInput({
+                label: {
+                  text: data.translations.dpdAgeDaysOld[data.lang] | capitalize,
+                  classes: 'govuk-visually-hidden'
+                },
+                classes: inputClasses,
+                value: data['deceased-persons-age-days'],
+                id: 'deceased-persons-age-days',
+                name: 'deceased-persons-age-days',
+                suffix: {
+                  'text' : data.translations.globalTimeUnitDays[data.lang] | lower
+                }
+            }) }}
+
+            {% endcall %}
+          </div>
+
+
+        {% else %} 
+
+          
+          <!-- UNDER 24 HOURS, AGE IN HOURS / MINS -->
+
+          {% if data.showErrors === 'true' %}
+          <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+              <h2 class="govuk-error-summary__title">
+                There is a problem
+              </h2>
+              <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                  <li>
+                    <a href="#age">Number of minutes must be 59 or less</a>
+                  </li>
+                </ul>
               </div>
+            </div>
+          </div>
+          {% endif %}
 
-            {% endif %}
-            
-        
 
-            <button class="govuk-button" type="submit">
-                Save and continue
-            </button>
+          <div id="age" class="govuk-form-group{% if data.showErrors === 'true' %} govuk-form-group--error{% endif %}">
+          {% call govukFieldset({
+            id: 'age',
+            legend: {
+              text: data.translations.dpdAgePageTitle[data.lang],
+              classes: 'govuk-fieldset__legend--l',
+              isPageHeading: true
+            }
+          }) %}
 
-        </form>
+            <style>
+              .govuk-input__wrapper .govuk-form-group + .govuk-form-group:not(:first-child) { margin-left: 20px; }
+              .govuk-form-group--error .govuk-form-group { margin-bottom: 0; }
+            </style>
+
+            {% set inputClasses = 'govuk-input--width-2' %}
+            {% if data.showErrors === 'true' %}
+                
+                <p class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Number of minutes must be 59 or less
+                </p>
+
+                {% set inputClasses = 'govuk-input--width-2 govuk-input--error' %}
+
+              {% endif %}
+
+           
+
+            <div class="govuk-input__wrapper">
+                          
+              {{ govukInput({
+                  label: { 
+                    text: data.translations.dpdAgeHours[data.lang] | capitalize,
+                    classes: 'govuk-visually-hidden'
+                  },
+                  classes: 'govuk-input--width-2',
+                  value: data['deceased-persons-age-hours'],
+                  id: 'deceased-persons-age-hours',
+                  name: 'deceased-persons-age-hours',
+                  suffix: { 'text' : data.translations.dpdAgeHours[data.lang] | capitalize }
+              }) }}
+
+              {{ govukInput({
+                label: { 
+                  text: data.translations.dpdAgeMinutes[data.lang] | capitalize,
+                  classes: 'govuk-visually-hidden'
+                 },
+                classes: inputClasses,
+                value: data['deceased-persons-age-minutes'],
+                id: 'deceased-persons-age-minutes',
+                name: 'deceased-persons-age-minutes',
+                suffix: { 'text' : data.translations.dpdAgeMinutes[data.lang] | capitalize }
+            }) }}
+
+          </div>
+
+          {% endcall %}
+
+          </div>
+
+
+        {% endif %}
+
+        {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang],
+          id: 'submit-button'
+        }) }}
+
+
+      </form>
           
         
     </div>
