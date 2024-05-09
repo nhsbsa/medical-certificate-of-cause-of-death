@@ -58,7 +58,7 @@
             <p class="govuk-body govuk-!-margin-bottom-2"><strong>Reference number</strong> {{ patient.id }}</p>
             
             <!-- CERTIFICATE TYPE -->
-            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.under28Days === true %}65{% else %}66{% endif %}{% if patient.belongsToAP === true %}AP{% else %}ME{% endif %}</p>
+            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{% if patient.belongsToAP === true %}AP{% else %}ME{% endif %}</p>
 
             
 

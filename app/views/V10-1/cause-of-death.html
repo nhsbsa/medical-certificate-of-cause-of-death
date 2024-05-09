@@ -191,7 +191,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         // Check if cause contains special characters 
                         errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeWrongCharacters', i) } );
 
-                    } else if( unitValue === 'Unknown' || unitValue === 'globalTimeUnitUnknown' ){
+                    } else if( unitValue.toLowerCase() === 'unknown' || unitValue === 'globalTimeUnitUnknown' ){
 
                         if( timeValue ){
 
@@ -454,7 +454,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-2').value = "{{ data['time-unit-duration-2'] }}";</script>
               </div>
@@ -497,7 +497,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-3').value = "{{ data['time-unit-duration-3'] }}";</script>
               </div>
@@ -541,7 +541,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-4').value = "{{ data['time-unit-duration-4'] }}";</script>
               </div>
@@ -607,7 +607,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="minutes">Minutes</option>
-                <option value="minutes">Unknown</option>
+                <option value="Unknown">Unknown</option>
               </select>
               <script>document.querySelector('#time-unit-duration-5').value = "{{ data['time-unit-duration-5'] }}";</script>
               </div>
@@ -631,35 +631,35 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <label class="govuk-label" for="main-cause">
             <span class="govuk-visually-hidden">Enter </span>a. Main disease or condition in infant
           </label>
-          <input class="govuk-input" id="main-cause" name="main-cause" type="text">
+          <input class="govuk-input" value="{{ data['main-cause'] }}" id="main-cause" name="main-cause" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="secondary-cause">
             <span class="govuk-visually-hidden">Enter </span>b. Other disease or condition in infant (optional)
           </label>
-          <input class="govuk-input" id="secondary-cause" name="secondary-cause" type="text">
+          <input class="govuk-input" value="{{ data['secondary-cause'] }}" id="secondary-cause" name="secondary-cause" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-c">
             <span class="govuk-visually-hidden">Enter </span>c. Main maternal disease or condition affecting infant (optional)
           </label>
-          <input class="govuk-input" id="other-conditions-c" name="other-conditions-c" type="text">
+          <input class="govuk-input" value="{{ data['other-conditions-c'] }}" id="other-conditions-c" name="other-conditions-c" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-d">
             <span class="govuk-visually-hidden">Enter </span>d. Other maternal diseases or conditions affecting infant (optional)
           </label>
-          <input class="govuk-input" id="other-conditions-d" name="other-conditions-d" type="text">
+          <input class="govuk-input" value="{{ data['other-conditions-d'] }}" id="other-conditions-d" name="other-conditions-d" type="text">
         </div>
 
         <div class="govuk-form-group">
           <label class="govuk-label" for="other-conditions-e">
             <span class="govuk-visually-hidden">Enter </span>e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)
           </label>
-          <input class="govuk-input" id="other-conditions-e" name="other-conditions-e" type="text">
+          <input class="govuk-input" value="{{ data['other-conditions-e'] }}" id="other-conditions-e" name="other-conditions-e" type="text">
         </div>
 
 

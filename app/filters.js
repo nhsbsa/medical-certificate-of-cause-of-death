@@ -22,17 +22,19 @@ addFilter('debugData', function(content) {
 //
 addFilter('getCauseOfDeathLink', function( content ){
 
+
     // content: JSON data for the patient
+    
     let arr = [];
 
-    if( content.causeOfDeathExtras ){
-        arr.push( content.causeOfDeathExtras );
-    }
-
-    if( content.under28days === true ){
+    if( content.isNeoNatal === true ){
         arr.push('over-under-28=yes');
     } else {
         arr.push('over-under-28=no');
+    }
+
+    if( content.causeOfDeathExtras ){
+        arr.push( content.causeOfDeathExtras );
     }
 
     let link = 'cause-of-death';
