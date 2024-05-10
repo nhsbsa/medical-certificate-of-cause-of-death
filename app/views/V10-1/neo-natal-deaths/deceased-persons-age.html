@@ -101,6 +101,196 @@
           {% endif %}
 
 
+          {% if data.validateNeoNatalUnder24HoursAge === 'true' %}
+          <script>
+
+            //
+            // GET ERROR MESSAGE FUNCTION
+            //
+            function _getErrorMessage( err, num ){
+
+              let errorMessage = '';
+              const errors = {};
+
+              errors.noAgeEntered = 'Enter the deceased person\'s age';
+              errors.invalidHours = 'Number of hours must only include digits 0 to 9';
+              errors.invalidMinutes = 'Number of minutes must only include digits 0 to 9';
+
+              errors.outOfBoundsHours = 'Number of hours must be 23 or less';
+              errors.outOfBoundsMinutes = 'Number of minutes must be 59 or less';
+
+              if( err ){
+                if( Array.isArray( errors[err] ) ){
+                  if( !Number.isNaN(parseInt(num)) ) {
+                    errorMessage = errors[err][num];
+                  }
+                } else{
+                  errorMessage = errors[err];
+                }
+              }
+
+              return errorMessage;
+
+            };
+
+
+            //
+            // VALIDATE FORM FUNCTION
+            //
+            function _validateForm(){
+
+              // Remove existing errors
+              document.querySelectorAll('.govuk-error-summary,.govuk-error-message').forEach(function(el){
+                el.remove();
+              });
+
+              document.querySelectorAll('.govuk-select--error,.govuk-input--error,.govuk-form-group--error').forEach(function(el){
+                el.classList.remove('govuk-select--error','govuk-input--error','govuk-form-group--error');
+              });
+
+              
+              const errors = [];
+
+              const hours = document.querySelector( '#deceased-persons-age-hours' );
+              const minutes = document.querySelector( '#deceased-persons-age-minutes' );
+
+              const hoursValue = hours.value.trim();
+              const minutesValue = minutes.value.trim();
+
+              if( !hoursValue && !minutesValue ){
+
+                // First, check if both are empty...
+                errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
+
+              } else {
+
+                const ageRegex = /^\d+$/;
+
+                if( !ageRegex.test(hoursValue) ){
+
+                  // Check if hours is integers only
+                  errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('invalidHours') } );
+
+                } else if( parseInt(hoursValue) > 23 ){
+
+                  // Check if hours is 0 - 23
+                  errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('outOfBoundsHours') } );
+
+                } else if( !ageRegex.test(minutesValue) ){
+
+                  // Check if minutes is integers only
+                  errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('invalidMinutes') } );
+
+                } else if( parseInt(minutesValue) > 59 ){
+
+                  // Check if minutes is 0 - 59
+                  errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('outOfBoundsMinutes') } );
+
+                } else if( parseInt(hoursValue) === 0 && parseInt(minutesValue) === 0 ){
+
+                  // Finally, check if both are set to zero...
+                  errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
+                
+                }
+
+              }
+
+              console.log( errors );
+
+              return errors;
+
+            };
+
+            //
+            // DRAW ERROR SUMMARY FUNCTION
+            //
+            function _drawErrorSummary( errors ){
+
+                // Draw summary
+                const summary = document.createElement('div');
+                summary.classList.add('govuk-error-summary');
+                summary.setAttribute('id','error-summary');
+                summary.setAttribute('data-module','govuk-error-summary');
+
+                let html = '<div role="alert"><h2 class="govuk-error-summary__title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list">';
+        
+                errors.forEach(function( err ){
+                  html += '<li><a href="#'+err.group+'">'+err.error+'</a></li>';
+                });
+        
+                html += '</ul></div></div>';
+
+                summary.innerHTML = html;
+
+                document.querySelector('form[action="deceased-persons-age"]').insertAdjacentElement('beforeBegin', summary);
+
+                return true;
+
+            };
+
+            //
+            // MARK ERRORS FUNCTION
+            //
+            function _markErrors( errors ){
+
+                errors.forEach(function( err ){
+                    
+                    const group = ( err.group ) ? document.querySelector('#' + err.group ) : false;
+                    const field = ( err.field ) ? document.querySelector('#' + err.field ) : false;
+
+                    const p = document.createElement('p');
+                    p.classList.add('govuk-error-message');
+                    p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
+
+                    if( group ){
+                      group.classList.add('govuk-form-group--error');
+                      group.querySelector('.govuk-fieldset__legend').insertAdjacentElement('afterEnd', p);
+                    }
+
+                    if( field ){
+                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                      field.classList.add(errorClass);
+                    }
+
+                });
+
+                return true;
+
+            };
+
+
+            //
+            // INIT PAGE
+            //
+            document.addEventListener('DOMContentLoaded',function(e){
+
+                
+                const submitButton = document.querySelector('#submit-button');
+
+                submitButton.addEventListener('click',function(e){
+
+                  const errors = _validateForm();
+
+                  if ( errors.length > 0 ) {
+
+                    _drawErrorSummary( errors );
+                    _markErrors( errors );
+                
+                    window.scrollTo( { top: 0, behavior: 'instant' });
+
+                    e.preventDefault();
+                    e.stopPropagation();  
+
+                  } 
+
+                });
+              
+            });
+
+          </script>
+          {% endif %}
+
+
           <div id="age" class="govuk-form-group{% if data.showErrors === 'true' %} govuk-form-group--error{% endif %}">
           {% call govukFieldset({
             id: 'age',
@@ -175,5 +365,8 @@
         
     </div>
 </div>
+
+{{ data | debugData | safe }}
+
 </main>
 {% endblock %}
