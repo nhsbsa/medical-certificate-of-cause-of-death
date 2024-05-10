@@ -82,6 +82,7 @@ module.exports = {
   requireAllTaskListSections: 'false',
   showContactMethodScreen: 'false',
   validateCauseOfDeathScreen: 'true',
+  validateNeoNatalUnder24HoursAge: 'true',
   
   translations: _getTranslations()
 
