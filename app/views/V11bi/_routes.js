@@ -795,18 +795,29 @@ router.post( /care-id-authentication/, (req, res) => {
     res.redirect('care-id-code')
 });
 
-router.post( /care-id-code/, (req, res) => {
+router.post(/care-id-code/, (req, res) => {
 
     // If there's only one option for role, select it and skip the role page...
     if( req.session.data.user.role.length === 1 ){
         req.session.data['role-type'] = req.session.data.user.role[0];
         req.session.data.loggedIn = 'true';
+
+        if( !req.session.data['qualifications'] ){
+
+            req.session.data['onboardingPath'] = 'true';
+            
+            // Do they have a qualifications value set?
+           res.redirect('../onboarding/qualifications');
+
+       } else {
         res.redirect('../dashboard');
+       }
+
+
     } else {
         res.redirect('care-id-role');
     }
 
-    
 });
 
 router.post( /care-id-authentication/, (req,res) => {

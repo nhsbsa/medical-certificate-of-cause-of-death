@@ -618,7 +618,18 @@ router.post(/care-id-code/, (req, res) => {
     if( req.session.data.user.role.length === 1 ){
         req.session.data['role-type'] = req.session.data.user.role[0];
         req.session.data.loggedIn = 'true';
+
+        if( !req.session.data['qualifications'] ){
+
+            req.session.data['onboardingPath'] = 'true';
+            // Do they have a qualifications value set?
+           res.redirect('../onboarding/qualifications');
+
+       } else {
         res.redirect('../dashboard');
+       }
+
+
     } else {
         res.redirect('care-id-role');
     }
