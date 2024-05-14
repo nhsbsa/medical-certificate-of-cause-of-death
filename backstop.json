@@ -36,7 +36,7 @@
         },
         {
             "label": "ap-qualification",
-            "url": "http://localhost:3000/V10-1/qualifications?return-to-dashboard=true&role-type=ap"
+            "url": "http://localhost:3000/V10-1/onboarding/qualifications?return-to-dashboard=true&role-type=ap"
         },
         {
             "label": "ap-dashboard",
@@ -84,7 +84,7 @@
         },
         {
             "label": "ethnic-group",
-            "url": "http://localhost:3000/V10-1/ethnic-group?role-type=ap"            
+            "url": "http://localhost:3000/V10-1/ethnicity/ethnic-group?role-type=ap"            
         },
         {
             "label": "ethnicity-white",
