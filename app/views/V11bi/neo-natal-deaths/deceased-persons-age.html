@@ -163,35 +163,45 @@
                 // First, check if both are empty...
                 errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
 
+              } else if( parseInt(hoursValue) === 0 && parseInt(minutesValue) === 0 ){
+
+                  // Check if both are set to zero...
+                  errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
+                
               } else {
 
                 const ageRegex = /^\d+$/;
+            
+                if( hoursValue ){
+                  if( !ageRegex.test(hoursValue) ){
 
-                if( !ageRegex.test(hoursValue) ){
+                    // Check if hours is integers only
+                    errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('invalidHours') } );
+                    hoursCheck = false;
 
-                  // Check if hours is integers only
-                  errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('invalidHours') } );
+                  } else if( parseInt(hoursValue) > 23 ){
 
-                } else if( parseInt(hoursValue) > 23 ){
+                    // Check if hours is 0 - 23
+                    errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('outOfBoundsHours') } );
+                    hoursCheck = false;
 
-                  // Check if hours is 0 - 23
-                  errors.push( { group: 'age', field: 'deceased-persons-age-hours', error: _getErrorMessage('outOfBoundsHours') } );
+                  } 
+                }
 
-                } else if( !ageRegex.test(minutesValue) ){
+                if( minutesValue ){
+                  if( !ageRegex.test(minutesValue) ){
 
-                  // Check if minutes is integers only
-                  errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('invalidMinutes') } );
+                    // Check if minutes is integers only
+                    errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('invalidMinutes') } );
+                    minutesCheck = false;
 
-                } else if( parseInt(minutesValue) > 59 ){
+                  } else if( parseInt(minutesValue) > 59 ){
 
-                  // Check if minutes is 0 - 59
-                  errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('outOfBoundsMinutes') } );
+                    // Check if minutes is 0 - 59
+                    errors.push( { group: 'age', field: 'deceased-persons-age-minutes', error: _getErrorMessage('outOfBoundsMinutes') } );
+                    minutesCheck = false;
 
-                } else if( parseInt(hoursValue) === 0 && parseInt(minutesValue) === 0 ){
-
-                  // Finally, check if both are set to zero...
-                  errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
-                
+                  } 
                 }
 
               }
