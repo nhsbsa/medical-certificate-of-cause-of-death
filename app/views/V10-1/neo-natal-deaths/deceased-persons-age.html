@@ -224,8 +224,10 @@
 
                 let html = '<div role="alert"><h2 class="govuk-error-summary__title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list">';
         
-                errors.forEach(function( err ){
-                  html += '<li><a href="#'+err.group+'">'+err.error+'</a></li>';
+                errors.forEach(function( err, i ){
+                  if( i === 0 ){
+                    html += '<li><a href="#'+err.group+'">'+err.error+'</a></li>';
+                  }
                 });
         
                 html += '</ul></div></div>';
@@ -243,23 +245,25 @@
             //
             function _markErrors( errors ){
 
-                errors.forEach(function( err ){
+                errors.forEach(function( err, i ){
                     
-                    const group = ( err.group ) ? document.querySelector('#' + err.group ) : false;
-                    const field = ( err.field ) ? document.querySelector('#' + err.field ) : false;
+                    if( i === 0 ){
+                      const group = ( err.group ) ? document.querySelector('#' + err.group ) : false;
+                      const field = ( err.field ) ? document.querySelector('#' + err.field ) : false;
 
-                    const p = document.createElement('p');
-                    p.classList.add('govuk-error-message');
-                    p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
+                      const p = document.createElement('p');
+                      p.classList.add('govuk-error-message');
+                      p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
 
-                    if( group ){
-                      group.classList.add('govuk-form-group--error');
-                      group.querySelector('.govuk-fieldset__legend').insertAdjacentElement('afterEnd', p);
-                    }
+                      if( group ){
+                        group.classList.add('govuk-form-group--error');
+                        group.querySelector('.govuk-fieldset__legend').insertAdjacentElement('afterEnd', p);
+                      }
 
-                    if( field ){
-                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
-                      field.classList.add(errorClass);
+                      if( field ){
+                        const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                        field.classList.add(errorClass);
+                      }
                     }
 
                 });
