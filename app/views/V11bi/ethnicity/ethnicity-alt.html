@@ -1,0 +1,518 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block beforeContent %}
+
+  {{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
+
+{% block content %}
+  <main class="govuk-main-wrapper app-main-class" id="main-content">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <form id="ethnicity-form" action="ethnicity" method="post" novalidate>
+
+          <!-- WHITE HTML -->
+          {% set whiteHTML %}
+
+          {{ govukRadios({
+            name: 'ethnicityDetail',
+            value: data['ethnicityDetail'],
+            fieldset: {
+              legend: {
+                text: 'Which of the following best describes the White background of the deceased person?',
+                classes: 'govuk-visually-hidden'
+              }
+            },
+            items: [
+              {
+                value: 'dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish',
+                text: data.translations.dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish[data.lang]
+              },
+              {
+                value: 'dpdEthnicityIrish',
+                text: data.translations.dpdEthnicityIrish[data.lang]
+              },
+              {
+                value: 'dpdEthnicityGypsyOrIrishTraveller',
+                text: data.translations.dpdEthnicityGypsyOrIrishTraveller[data.lang]
+              },
+              {
+                value: 'dpdEthnicityAnyOtherWhiteBackground',
+                text: data.translations.dpdEthnicityAnyOtherWhiteBackground[data.lang]
+              },
+              {
+                divider: data.translations.dpdEthnicGroupOr[data.lang]
+              },
+              {
+                value: 'dpdEthnicityNotStatedWhite',
+                text: data.translations.dpdEthnicityNotStatedWhite[data.lang]
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <!-- MIXED HTML -->
+          {% set mixedHTML %}
+
+          {{ govukRadios({
+            name: 'ethnicityDetail',
+            value: data['ethnicityDetail'],
+            fieldset: {
+              legend: {
+                text: 'Which of the following best describes the mixed or multiple ethnic groups background of the deceased person?',
+                classes: 'govuk-visually-hidden'
+              }
+            },
+            items: [
+              {
+                value: 'dpdEthnicityWhiteandBlackCaribbean',
+                text: data.translations.dpdEthnicityWhiteandBlackCaribbean[data.lang]
+              },
+              {
+                value: 'dpdEthnicityWhiteandBlackAfrican',
+                text: data.translations.dpdEthnicityWhiteandBlackAfrican[data.lang]
+              },
+              {
+                value: 'dpdEthnicityWhiteandAsian',
+                text: data.translations.dpdEthnicityWhiteandAsian[data.lang]
+              },
+              {
+                value: 'dpdEthnicityAnyOtherMixedOrMultipleEthnicBackground',
+                text: data.translations.dpdEthnicityAnyOtherMixedOrMultipleEthnicBackground[data.lang]
+              },
+              {
+                divider: data.translations.dpdEthnicGroupOr[data.lang]
+              },
+              {
+                value: 'dpdEthnicityNotStatedMixed',
+                text: data.translations.dpdEthnicityNotStatedMixed[data.lang]
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <!-- ASIAN HTML -->
+          {% set asianHTML %}
+
+          {{ govukRadios({
+            name: 'ethnicityDetail',
+            value: data['ethnicityDetail'],
+            fieldset: {
+              legend: {
+                text: 'Which of the following best describes the Asian or Asian British background of the deceased person?',
+                classes: 'govuk-visually-hidden'
+              }
+            },
+            items: [
+              {
+                value: 'dpdEthnicityIndian',
+                text: data.translations.dpdEthnicityIndian[data.lang]
+              },
+              {
+                value: 'dpdEthnicityPakistani',
+                text: data.translations.dpdEthnicityPakistani[data.lang]
+              },
+              {
+                value: 'dpdEthnicityBangladeshi',
+                text: data.translations.dpdEthnicityBangladeshi[data.lang]
+              },
+              {
+                value: 'dpdEthnicityChinese',
+                text: data.translations.dpdEthnicityChinese[data.lang]
+              },
+              {
+                value: 'dpdEthnicityAnyOtherAsianBackground',
+                text: data.translations.dpdEthnicityAnyOtherAsianBackground[data.lang]
+              },
+              {
+                divider: data.translations.dpdEthnicGroupOr[data.lang]
+              },
+              {
+                value: 'dpdEthnicityNotStatedAsian',
+                text: data.translations.dpdEthnicityNotStatedAsian[data.lang]
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <!-- BLACK HTML -->
+          {% set blackHTML %}
+
+          {{ govukRadios({
+            name: 'ethnicityDetail',
+            value: data['ethnicityDetail'],
+            fieldset: {
+              legend: {
+                text: 'Which of the following best describes the Black, African, Caribbean or Black British background of the deceased person?',
+                classes: 'govuk-visually-hidden'
+              }
+            },
+            items: [
+              {
+                value: 'dpdEthnicityArican',
+                text: data.translations.dpdEthnicityArican[data.lang]
+              },
+              {
+                value: 'dpdEthnicityCaribbean',
+                text: data.translations.dpdEthnicityCaribbean[data.lang]
+              },
+              {
+                value: 'dpdEthnicityAnyOtherBlackAfricanOrCaribbeanBackground',
+                text: data.translations.dpdEthnicityAnyOtherBlackAfricanOrCaribbeanBackground[data.lang]
+              },
+              {
+                divider: data.translations.dpdEthnicGroupOr[data.lang]
+              },
+              {
+                value: 'dpdEthnicityNotStatedBlack',
+                text: data.translations.dpdEthnicityNotStatedBlack[data.lang]
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <!-- OTHER HTML -->
+          {% set otherHTML %}
+
+          {{ govukRadios({
+            name: 'ethnicityDetail',
+            value: data['ethnicityDetail'],
+            fieldset: {
+              legend: {
+                text: 'Which of the following best describes the background of the deceased person?',
+                classes: 'govuk-visually-hidden'
+              }
+            },
+            items: [
+              {
+                value: 'dpdEthnicityArab',
+                text: data.translations.dpdEthnicityArab[data.lang]
+              },
+              {
+                value: 'dpdEthnicityAnyOtherEthnicGroup',
+                text: data.translations.dpdEthnicityAnyOtherEthnicGroup[data.lang]
+              },
+              {
+                divider: data.translations.dpdEthnicGroupOr[data.lang]
+              },
+              {
+                value: 'dpdEthnicityNotStatedOther',
+                text: data.translations.dpdEthnicityNotStatedOther[data.lang]
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <!--
+
+   __ _   _           _      _ _         
+  /__\ |_| |__  _ __ (_) ___(_) |_ _   _ 
+ /_\ | __| '_ \| '_ \| |/ __| | __| | | |
+//__ | |_| | | | | | | | (__| | |_| |_| |
+\__/  \__|_| |_|_| |_|_|\___|_|\__|\__, |
+                                   |___/ 
+
+-->
+
+          {{ govukRadios({
+          name: 'ethnic-group',
+          value: data['ethnic-group'],
+          hint: {
+            text: data.translations.dpdEthnicGroupHint[data.lang]
+          },
+          fieldset: {
+            legend: {
+              text: data.translations.dpdEthnicity[data.lang],
+              isPageHeading: true,
+              classes: 'govuk-fieldset__legend--l'
+            }
+          },
+          items: [
+            {
+              value: 'dpdEthnicGroupWhite',
+              text: data.translations.dpdEthnicGroupWhite[data.lang],
+              conditional: { html: whiteHTML }
+            },
+            {
+              value: 'dpdEthnicGroupMixedOrMultiple',
+              text: data.translations.dpdEthnicGroupMixedOrMultiple[data.lang],
+              conditional: { html: mixedHTML }
+            },
+            {
+              value: 'dpdEthnicGroupAsianOrAsianBritish',
+              text: data.translations.dpdEthnicGroupAsianOrAsianBritish[data.lang],
+              conditional: { html: asianHTML }
+            },
+            {
+              value: 'dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish',
+              text: data.translations.dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish[data.lang],
+              conditional: { html: blackHTML }
+            },
+            {
+              value: 'dpdEthnicGroupOtherEthnicGroup',
+              text: data.translations.dpdEthnicGroupOtherEthnicGroup[data.lang],
+              conditional: { html: otherHTML }
+            },
+            {
+              divider: data.translations.dpdEthnicGroupOr[data.lang]
+            },
+            {
+              value: 'dpdEthnicGroupUnknown',
+              text: data.translations.dpdEthnicGroupUnknown[data.lang]
+            }
+          ]
+        }) }}
+
+          {{ govukButton({
+          text: data.translations.globalSaveContinue[data.lang],
+          id: 'submit-button'
+        }) }}
+
+          <!-- VALIDATION -->
+          <script>
+
+            //
+            // GET ERROR MESSAGE FUNCTION
+            //
+            function _getErrorMessage( err, num ){
+
+              let errorMessage = '';
+              const errors = {};
+
+              errors.noEthnicGroup = 'Select the ethnicity of the deceased person';
+              errors.noEthnicityDetail = [
+                'Select the White background of the deceased person',
+                'Select the mixed or multiple ethnic groups background of the deceased person',
+                'Select the Asian or Asian British background of the deceased person',
+                'Select the Black, African, Caribbean or Black British background of the deceased person',
+                'Select the background of the deceased person'
+              ];
+
+              if( err ){
+                if( Array.isArray( errors[err] ) ){
+                  if( !Number.isNaN(parseInt(num)) ) {
+                    errorMessage = errors[err][num];
+                  }
+                } else{
+                  errorMessage = errors[err];
+                }
+              }
+
+              return errorMessage;
+
+            };
+
+            //
+            // CLEAR FORM FUNCTION
+            //
+            function _clearForm(){
+              
+              // Remove existing errors
+              document.querySelectorAll('.govuk-error-summary,.govuk-error-message').forEach(function(el){
+                el.remove();
+              });
+
+              document.querySelectorAll('.govuk-select--error,.govuk-input--error,.govuk-form-group--error').forEach(function(el){
+                el.classList.remove('govuk-select--error','govuk-input--error','govuk-form-group--error');
+              });
+
+            }
+
+            //
+            // VALIDATE FORM FUNCTION
+            //
+            function _validateForm(){
+
+                const errors = [];
+
+                const ethnicGroup = document.querySelector('input[name="ethnic-group"]:checked');
+                const ethnicityDetail = document.querySelector('input[name="ethnicityDetail"]:checked');
+
+                const ethnicGroupValue = ( ethnicGroup && ethnicGroup.value ) ? ethnicGroup.value : '';
+                const ethnicityDetailValue = ( ethnicityDetail && ethnicityDetail.value  ) ? ethnicityDetail.value : '';
+
+                console.log( ethnicGroupValue + ' | ' + ethnicityDetailValue );
+
+                if( !ethnicGroupValue ){
+
+                  // No ethnic group
+                  errors.push( { group: 'outer-form-group', field: '', error: _getErrorMessage('noEthnicGroup') } );
+
+                } else if ( ethnicGroupValue !== 'dpdEthnicGroupUnknown' ){
+                
+                  // Only check ethnicityDetails if ethnic group doesn't equal 'Not known'
+                  if( !ethnicityDetailValue ){
+
+                    const values = [
+                      'dpdEthnicGroupWhite',
+                      'dpdEthnicGroupMixedOrMultiple',
+                      'dpdEthnicGroupAsianOrAsianBritish',
+                      'dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish',
+                      'dpdEthnicGroupOtherEthnicGroup'
+                    ];
+
+                    const num = values.indexOf(ethnicGroupValue);
+                    let groupName = 'conditional-ethnic-group-inner';
+                    if( num > 0 ){
+                      groupName += '-'+(num+1);
+                    }
+                    
+                    // No ethnicity detail
+                    errors.push( { group: groupName, field: '', error: _getErrorMessage('noEthnicityDetail',num) } );
+
+                  }
+                  
+                }
+
+                return errors;
+
+            }
+
+
+            //
+            // DRAW ERROR SUMMARY FUNCTION
+            //
+            function _drawErrorSummary( errors ){
+
+                // Draw summary
+                const summary = document.createElement('div');
+                summary.classList.add('govuk-error-summary');
+                summary.setAttribute('id','error-summary');
+                summary.setAttribute('data-module','govuk-error-summary');
+
+                let html = '<div role="alert"><h2 class="govuk-error-summary__title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list">';
+        
+                errors.forEach(function( err ){
+                  html += '<li><a href="#'+err.group+'">'+err.error+'</a></li>';
+                });
+        
+                html += '</ul></div></div>';
+
+                summary.innerHTML = html;
+
+                document.querySelector('#ethnicity-form').insertAdjacentElement('beforeBegin', summary);
+
+                return true;
+
+            };
+
+            //
+            // MARK ERRORS FUNCTION
+            //
+            function _markErrors( errors ){
+
+                errors.forEach(function( err ){
+                    
+                    const group = ( err.group ) ? document.querySelector( '#'+err.group ) : false;
+                    const field = ( err.field ) ? document.querySelector( '#'+err.field ) : false;
+
+                    const p = document.createElement('p');
+                    p.classList.add('govuk-error-message');
+                    p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
+
+                    if( group ){
+                      group.classList.add('govuk-form-group--error');
+                      group.querySelector('.govuk-radios').insertAdjacentElement('beforeBegin', p);
+                    }
+
+                    if( field ){
+                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                      field.classList.add(errorClass);
+                    }
+
+                });
+
+                return true;
+
+            };
+
+
+            
+
+
+
+            window.addEventListener('DOMContentLoaded', function (e) {
+
+
+              // Mark groups
+              document.querySelector('form > .govuk-form-group').setAttribute('id','outer-form-group');
+
+            
+              for( var i = 0; i < 5; i++ ){
+                let groupName = 'conditional-ethnic-group';
+                let groupNameInner = 'conditional-ethnic-group-inner';
+                if( i > 0 ){
+                  groupName += '-' + (i+1);
+                  groupNameInner += '-' + (i+1);
+                }
+                groupName += ' > .govuk-form-group';
+                document.querySelector('#'+groupName).setAttribute('id',groupNameInner);
+              }
+
+
+              // Clear ethnicityDetail radio buttons on ethnic-group change...
+              const radios = document.querySelectorAll('input[name="ethnicityDetail"]');
+              document.body.addEventListener('change', function (ee) {
+
+                  if (ee.target.matches('input[name="ethnic-group"]')) {
+                    if (radios && radios.length > 0) {
+                      radios.forEach(function (el) {
+                        el.checked = false;
+                      });
+                    }
+                  }
+
+              });
+
+              // Handle submit button
+              const submitButton = document.querySelector('#submit-button');
+
+                submitButton.addEventListener('click',function(e){
+
+                  _clearForm();
+
+                  const errors = _validateForm();
+
+                  console.log( errors );
+
+                  if ( errors.length > 0 ) {
+
+                    _drawErrorSummary( errors );
+                    _markErrors( errors );
+                
+                    window.scrollTo( { top: 0, behavior: 'instant' });
+
+                    e.preventDefault();
+                    e.stopPropagation();  
+
+                  }
+
+                });
+
+
+            });
+          </script>
+
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  {{ data | debugData | safe }}
+
+{% endblock %}
