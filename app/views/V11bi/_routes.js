@@ -156,7 +156,16 @@ router.post( /nhs-number/, function (req, res) {
   if (completeDeceased === 'true') {
     res.redirect('cya-deceased')
   } else {
-    res.redirect('name-of-the-deceased')}
+
+    // Adding in warning text for if the NHS number is already used
+    if( req.session.data.nhsNumberAlreadyUsed === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
+        req.session.data.nhsNumberAlreadyUsed = 'false';
+        res.redirect('nhs-number?showNHSNumberWarning=true');
+    } else {
+        res.redirect('name-of-the-deceased');
+    }
+
+   }
 });
 
 // What is the deceased person's name?

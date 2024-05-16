@@ -4,6 +4,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% block beforeContent %}
 
@@ -21,6 +22,20 @@
   <div class="govuk-grid-column-two-thirds">
 
     <form action="nhs-number" method="post" novalidate>
+
+      {% if data.showNHSNumberWarning === 'true' %}
+        {% set html %}
+          <p class="govuk-notification-banner__heading">This NHS number has already been used to create an MCCD</p>
+          <p class="govuk-body">Continue if you want to create a new MCCD using this NHS number, or enter the deceased's correct NHS number.</p>
+        {% endset %}
+
+        {{ govukNotificationBanner({
+          html: html
+        }) }}
+      {% endif %}
+
+
+      
 
       {% set NHSNumberHTML %}
         {{ govukInput({
@@ -68,6 +83,7 @@
   </div>
 </div>
 </main>
+
 {{ data | debugData | safe }}
 
 {% endblock %}
