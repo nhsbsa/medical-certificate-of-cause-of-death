@@ -74,7 +74,7 @@
     <div class="govuk-width-container"> 
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
-              <div class="account-signed-in updated-version">
+              <div class="account-signed-in">
                 <ul class="account-signed-in__list">
                   <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
                   <li class="account-signed-in__list-item">{% if data['role-type'] == 'ap' %}Ashley Phillips{% else %}Alera Singh{% endif %}</li>
