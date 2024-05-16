@@ -116,6 +116,7 @@
               errors.noAgeEntered = 'Enter the deceased person\'s age';
               errors.invalidHours = 'Number of hours must only include digits 0 to 9';
               errors.invalidMinutes = 'Number of minutes must only include digits 0 to 9';
+              errors.doubleZero = 'Age must be more than 0';
 
               errors.outOfBoundsHours = 'Number of hours must be 23 or less';
               errors.outOfBoundsMinutes = 'Number of minutes must be 59 or less';
@@ -166,7 +167,7 @@
               } else if( parseInt(hoursValue) === 0 && parseInt(minutesValue) === 0 ){
 
                   // Check if both are set to zero...
-                  errors.push( { group: 'age', field: '', error: _getErrorMessage('noAgeEntered') } );
+                  errors.push( { group: 'age', field: '', error: _getErrorMessage('doubleZero') } );
                 
               } else {
 
