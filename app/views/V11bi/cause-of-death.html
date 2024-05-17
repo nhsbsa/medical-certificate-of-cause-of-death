@@ -205,7 +205,7 @@
 
 
               /* TIME ERRORS */
-              errors.timeUnknown = 'Select a unit of time';
+              errors.timeUnknown = 'Enter time between onset of disease or condition or select unknown';
               errors.noTimeEntered = 'Enter time between onset of disease or condition';
               errors.timeIncorrect = 'Time between onset of disease or condition and death must only include digits 0 to 9, and be between 1 and 999'
 
@@ -305,16 +305,23 @@
                         // Check if cause contains special characters 
                         errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeWrongCharacters', i) } );
 
+                    } else if( !timeValue && !unitValue ){
+                      
+                        // There's no time or unit
+                        errors.push( { group: group[0] + '-group', field: [group[1],group[2]], error: _getErrorMessage('timeUnknown', i) } );
+
+                      
                     } else if( unitValue === 'Unknown' || unitValue === 'globalTimeUnitUnknown' ){
 
                         if( timeValue ){
 
                           // If there's an unknown value, remove the time unit value
-                          errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('timeUnknown', i) } );
+                          errors.push( { group: group[0] + '-group', field: [group[1],group[2]], error: _getErrorMessage('timeUnknown', i) } );
 
-                        }
+                        } 
 
                     } else if( !timeValue ){
+
 
                         // Time is empty
                         errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('noTimeEntered', i) } );
@@ -386,10 +393,19 @@
             //
             function _markErrors( errors ){
 
+                console.log('MARK ERRORS');
+
                 errors.forEach(function( err ){
+
                     
                     const group = document.querySelector('#' + err.group );
-                    const field = document.querySelector('#' + err.field );
+
+                    let fields;
+                    if( Array.isArray(err.field) ){
+                        fields = document.querySelectorAll('#' + err.field.join(', #') );
+                    } else {
+                        fields = document.querySelectorAll('#' + err.field );
+                    }
 
                     const p = document.createElement('p');
                     p.classList.add('govuk-error-message');
@@ -400,9 +416,14 @@
                       group.insertAdjacentElement('beforeBegin', p);
                     }
 
-                    if( field ){
-                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
-                      field.classList.add(errorClass);
+                    if( fields ){
+                      
+                      
+                      fields.forEach(function(field){
+                        const errorClass = ( field.id.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                        field.classList.add(errorClass);
+                      })
+                      
                     }
 
                 });
@@ -435,7 +456,6 @@
 
                   } 
                   
-                  
 
                 });
               
@@ -447,19 +467,25 @@
 
         <style> 
 
+            
+           .govuk-form-group--error {
+              width: calc( 100% - 20px );
+            }
+            
+
           .no-padding { padding: 0; }
-          .govuk-grid-column-two-thirds.no-padding { padding: 0 20px 0 0; }  
           .govuk-form-group .govuk-input__wrapper .govuk-form-group { margin-bottom: 0; }
+
+          @media ( min-width: 900px ){
+            .govuk-grid-column-two-thirds { width: calc( 100% - 330px ); }
+            .govuk-grid-column-one-third { width: 310px; margin-left: 20px; } 
+          }
 
           @media ( max-width: 900px  ){
 
             .govuk-form-group .govuk-grid-column-two-thirds {
               max-width: 620px;
             }
-
-          }
-
-          @media ( max-width: 900px  ){
 
             .govuk-grid-column-one-third .govuk-label {
               margin-top: 10px;
@@ -469,6 +495,8 @@
             .govuk-form-group .govuk-grid-column-two-thirds {
               width: 100%;
             }
+
+            
 
           }
 

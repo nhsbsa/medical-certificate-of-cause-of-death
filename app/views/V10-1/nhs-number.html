@@ -19,55 +19,60 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
     <form action="nhs-number" method="post" novalidate>
 
-      <fieldset class="govuk-fieldset">
+      <form action="nhs-number" method="post" novalidate>
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              
-              <h1 class="govuk-heading-l">
-                Did the deceased person have an NHS number?
-              </h1>
+      {% set NHSNumberHTML %}
+        {{ govukInput({
+          id: 'nhs-number-input',
+          name: 'nhs-number-input',
+          value: data['nhs-number-input'],
+          classes: 'govuk-!-width-one-third',
+          label: {
+            text: data.translations.dpdNHSNumberEnterNumber[data.lang]
+          }
+        }) }}
+      {% endset -%}
+      
+      {{ govukRadios({
+        name: 'nhs-number',
+        value: data['nhs-number'],
+        fieldset: {
+          legend: {
+            text: data.translations.dpdNHSNumberPageTitle[data.lang],
+            isPageHeading: true,
+            classes: 'govuk-fieldset__legend--l'
+          }
+        },
+        items: [
+          {
+            value: 'globalRadioYes',
+            text: data.translations.globalRadioYes[data.lang],
+            conditional: {
+              html: NHSNumberHTML
+            }
+          },
+          {
+            value: 'globalRadioNo',
+            text: data.translations.globalRadioNo[data.lang]
+          }          
+        ]
+      }) }}
 
-            </legend>
+      {% if data.showNHSNumberWarning === 'true' %}
 
-            <div class="govuk-radios" data-module="govuk-radios">
+        {{ govukWarningText({
+          text: 'This NHS number has already been used to create an MCCD. Continue if you want to create a new MCCD using this NHS number, or enter the deceased\'s correct NHS number.',
+          iconFallbackText: 'Warning'
+        }) }}
 
-              <div class="govuk-radios__item">
+      {% endif %}
 
-                <input class="govuk-radios__input" id="nhs-number-yes" name="nhs-number" type="radio" value="Yes" data-aria-controls="nhs-number-input">
-                <label class="govuk-label govuk-radios__label" for="nhs-number-yes">
-                  Yes
-                </label>
-              </div>
+      {{ govukButton({
+        text: data.translations.globalSaveContinue[data.lang]
+      }) }}
 
-              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="nhs-number-input">
-                <div class="govuk-form-group">
-                  
-                  <label class="govuk-label" for="nhs-number">
-                    Enter NHS number
-                  </label>
+    </form>
 
-                  <input class="govuk-input govuk-input--width-10" id="nhs-number-input" name="nhs-number-input" type="text" inputmode="numeric" pattern="[0-9]*">
-                </div>
-              </div>
-
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="nhs-number-no" name="nhs-number" type="radio" value="No">
-                
-                <label class="govuk-label govuk-radios__label" for="nhs-number-no">
-                  No
-                </label>
-
-              </div>
-
-          </div>
-        </fieldset>
-      </div>
-
-      <button class="govuk-button" type="submit">
-        Save and continue
-      </button>
     </form>
 
   </div>
