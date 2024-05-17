@@ -91,7 +91,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
 
               /* TIME ERRORS */
-              errors.timeUnknown = 'Select a unit of time';
+              errors.timeUnknown = 'Enter time between onset of disease or condition or select unknown';
               errors.noTimeEntered = 'Enter time between onset of disease or condition';
               errors.timeIncorrect = 'Time between onset of disease or condition and death must only include digits 0 to 9, and be between 1 and 999'
 
@@ -191,16 +191,23 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                         // Check if cause contains special characters 
                         errors.push( { group: group[0] + '-group', field: group[0], error: _getErrorMessage('causeWrongCharacters', i) } );
 
-                    } else if( unitValue.toLowerCase() === 'unknown' || unitValue === 'globalTimeUnitUnknown' ){
+                    } else if( !timeValue && !unitValue ){
+                      
+                        // There's no time or unit
+                        errors.push( { group: group[0] + '-group', field: [group[1],group[2]], error: _getErrorMessage('timeUnknown', i) } );
+
+                      
+                    } else if( unitValue === 'Unknown' || unitValue === 'globalTimeUnitUnknown' ){
 
                         if( timeValue ){
 
                           // If there's an unknown value, remove the time unit value
-                          errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('timeUnknown', i) } );
+                          errors.push( { group: group[0] + '-group', field: [group[1],group[2]], error: _getErrorMessage('timeUnknown', i) } );
 
-                        }
+                        } 
 
                     } else if( !timeValue ){
+
 
                         // Time is empty
                         errors.push( { group: group[0] + '-group', field: group[1], error: _getErrorMessage('noTimeEntered', i) } );
@@ -218,7 +225,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     }
 
 
-                     if( causeValue || timeValue || unitValue ){
+
+                    if( causeValue || timeValue || unitValue ){
 
                       if( i !== 0 ){
                         // Altering the criteria 'cause there need not have been an error (previoulsy a correct row wouldn't trigger the preceeding row)...
@@ -236,6 +244,52 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
               errors.reverse();
 
               return errors;
+
+            };
+
+           
+
+            //
+            // MARK ERRORS FUNCTION
+            //
+            function _markErrors( errors ){
+
+                console.log('MARK ERRORS');
+
+                errors.forEach(function( err ){
+
+                    
+                    const group = document.querySelector('#' + err.group );
+
+                    let fields;
+                    if( Array.isArray(err.field) ){
+                        fields = document.querySelectorAll('#' + err.field.join(', #') );
+                    } else {
+                        fields = document.querySelectorAll('#' + err.field );
+                    }
+
+                    const p = document.createElement('p');
+                    p.classList.add('govuk-error-message');
+                    p.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + err.error;
+
+                    if( group ){
+                      group.classList.add('govuk-form-group--error');
+                      group.insertAdjacentElement('beforeBegin', p);
+                    }
+
+                    if( fields ){
+                      
+                      
+                      fields.forEach(function(field){
+                        const errorClass = ( field.id.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                        field.classList.add(errorClass);
+                      })
+                      
+                    }
+
+                });
+
+                return true;
 
             };
 
@@ -271,10 +325,19 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             //
             function _markErrors( errors ){
 
+                console.log('MARK ERRORS');
+
                 errors.forEach(function( err ){
+
                     
                     const group = document.querySelector('#' + err.group );
-                    const field = document.querySelector('#' + err.field );
+
+                    let fields;
+                    if( Array.isArray(err.field) ){
+                        fields = document.querySelectorAll('#' + err.field.join(', #') );
+                    } else {
+                        fields = document.querySelectorAll('#' + err.field );
+                    }
 
                     const p = document.createElement('p');
                     p.classList.add('govuk-error-message');
@@ -285,9 +348,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                       group.insertAdjacentElement('beforeBegin', p);
                     }
 
-                    if( field ){
-                      const errorClass = ( err.field.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
-                      field.classList.add(errorClass);
+                    if( fields ){
+                      
+                      
+                      fields.forEach(function(field){
+                        const errorClass = ( field.id.indexOf('time-unit') > -1 ) ? 'govuk-select--error' : 'govuk-input--error';
+                        field.classList.add(errorClass);
+                      })
+                      
                     }
 
                 });
@@ -334,19 +402,25 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
         <style> 
 
+            
+           .govuk-form-group--error {
+              width: calc( 100% - 20px );
+            }
+            
+
           .no-padding { padding: 0; }
-          .govuk-grid-column-two-thirds.no-padding { padding: 0 20px 0 0; }  
           .govuk-form-group .govuk-input__wrapper .govuk-form-group { margin-bottom: 0; }
+
+          @media ( min-width: 900px ){
+            .govuk-grid-column-two-thirds { width: calc( 100% - 330px ); }
+            .govuk-grid-column-one-third { width: 310px; margin-left: 20px; } 
+          }
 
           @media ( max-width: 900px  ){
 
             .govuk-form-group .govuk-grid-column-two-thirds {
               max-width: 620px;
             }
-
-          }
-
-          @media ( max-width: 900px  ){
 
             .govuk-grid-column-one-third .govuk-label {
               margin-top: 10px;
@@ -356,6 +430,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             .govuk-form-group .govuk-grid-column-two-thirds {
               width: 100%;
             }
+
+            
 
           }
 
@@ -570,7 +646,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </h2>
           </legend>
           <div id="cause-2-hint" class="govuk-hint">
-            Other significant condition contributing to the death but <span><strong>not</strong></span> relating to the disease or condition causing it.
+            Other significant conditions contributing to the death but <span><strong>not</strong></span> relating to the disease or condition causing it.
           </div>
         </div>
       <div id="other-significant-conditions-group" class="govuk-form-group">
@@ -578,7 +654,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <div class="govuk-grid-column-two-thirds no-padding">
           <div class="govuk-form-group">
             <label class="govuk-label" for="other-significant-conditions">
-              <span class="govuk-visually-hidden">Enter </span>2 Other significant condition (optional)
+              <span class="govuk-visually-hidden">Enter </span>2 Other significant conditions (optional)
             </label>
             <input class="govuk-input" id="other-significant-conditions" value="{{ data['other-significant-conditions'] }}" name="other-significant-conditions"
               type="text">

@@ -7,91 +7,109 @@
 // https://design.tax.service.gov.uk/examples/sign-out/example/
 
 
-.hmrc-sign-out-nav, .align-right {
-    float: right;
-}
-.hmrc-sign-out-nav .hmrc-sign-out-nav__link {
-    color: #ffffff;
-    font-weight: 700;
-    line-height: 1.8em;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-// Custom account signed in details and sign out link
-//.account-signed-in {
- //   text-align: right;
- //   margin-top: 10px;
- //   padding-bottom: 10px;
- //   border-bottom-width: 1px;
- //   border-bottom-style: solid;
- //   border-bottom-color: #b1b4b6;
-//
- //   p {
- //       display: inline-block;
- //       margin-bottom: 0;
- //   }
-// }
+/* ACCOUNT SIGNED-IN */
 
 .account-signed-in {
-  font-family: "GDS Transport", arial, sans-serif;
-  font-size: 19px;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: #b1b4b6;
-  margin-bottom: 0;
-  text-align: right;
+  padding: 5px 0;
+  border-bottom: 1px solid #b1b4b6;
+}
+
+.account-signed-in__list {
+  list-style: none;
+  position: relative;
+}
+
+.account-signed-in__list,
+.account-signed-in__list-item {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .account-signed-in__list-item {
-  display: inline-block;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-right: 1px solid #0b0c0c;
+  line-height: 14px;
+  padding: 5px 0;
+  font-size: 14px;
+  font-family: "GDS Transport", arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  float: left;
+  width: auto;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #b1b4b6;
 }
+
+.account-signed-in__list-item:first-child {
+  width: 100%;
+  border-right: none;
+  margin-bottom: 5px;
+}
+
 .account-signed-in__list-item:last-child {
-  padding-right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0;
+  white-space: nowrap;
   border-right: none;
 }
 
-.service-account {
-    background-color: #f3f2f1;
+.account-signed-in__list-item:nth-last-child(2) {
+  border-right: none;
 }
 
-.account-signed-in.updated-version  {
-  font-size: 16px;
-}
-
-.updated-version .account-signed-in__list {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.updated-version .account-signed-in__list-item {
+.account-signed-in .govuk-phase-banner__content__tag {
   display: block;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  float: left;
 }
 
-.updated-version .account-signed-in__list-item:not(:first-child) {
-  line-height: 16px;
-  padding: 5px 10px 4px 10px;
+@media ( min-width: 641px ){
+  .account-signed-in__list-item {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
 
-.updated-version .account-signed-in__list-item:first-child {
-  margin-right: auto;
-  padding: 0;
-  border: none;
+@media ( min-width: 900px ){
+
+  .account-signed-in__list {
+    display: flex;
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .account-signed-in__list-item {
+    float: none;
+    overflow: visible;
+    width: auto;
+    padding: 7px 10px 5px 0;
+  }
+
+  .account-signed-in__list-item:first-child {
+    width: auto;
+    padding: 5px 0;
+    margin: 0 auto 0 0;
+  }
+
+  .account-signed-in__list-item:nth-child(2) {
+    padding-left: 40px;
+  }
+
+  .account-signed-in__list-item:last-child {
+    position: static;
+  }
+
+  .account-signed-in__list-item:nth-last-child(2) {
+    border-right: 1px solid #b1b4b6;
+  }
+
 }
 
-.updated-version .account-signed-in__list-item:last-child {
-  padding-right: 0;
-}
 
 // Custom Input + Select in wrapper - used in Age Page 
 .border-hidden {

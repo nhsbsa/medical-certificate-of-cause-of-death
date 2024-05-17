@@ -4,6 +4,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% block beforeContent %}
 
@@ -59,6 +60,15 @@
         ]
       }) }}
 
+      {% if data.showNHSNumberWarning === 'true' %}
+
+        {{ govukWarningText({
+          text: 'This NHS number has already been used to create an MCCD. Continue if you want to create a new MCCD using this NHS number, or enter the deceased\'s correct NHS number.',
+          iconFallbackText: 'Warning'
+        }) }}
+
+      {% endif %}
+
       {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
       }) }}
@@ -68,6 +78,7 @@
   </div>
 </div>
 </main>
+
 {{ data | debugData | safe }}
 
 {% endblock %}

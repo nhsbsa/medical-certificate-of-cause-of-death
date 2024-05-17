@@ -74,7 +74,22 @@ router.post(/66-or-65/, (req, res) => {
 
 // What is the deceased persons NHS Number
 router.post(/nhs-number/, (req, res) => {
-    res.redirect('name-of-the-deceased')
+       // grab value from the data store
+        let completeDeceased = req.session.data.deceasedComplete
+        // if the journey is complete send back to the 'check-your-details' page
+        if (completeDeceased === 'true') {
+            res.redirect('cya-deceased')
+        } else {
+
+            // Adding in warning text for if the NHS number is already used
+            if( req.session.data.nhsNumberAlreadyUsed === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
+                req.session.data.nhsNumberAlreadyUsed = 'false';
+                res.redirect('nhs-number?showNHSNumberWarning=true');
+            } else {
+                res.redirect('name-of-the-deceased');
+            }
+
+        }
 });
 
 // What is the deceased person's name?

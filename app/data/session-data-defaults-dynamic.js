@@ -10,7 +10,7 @@ function _getTranslations(){
   });
 
   const translations = {};
-  const addWelsh = false;
+  const addWelsh = true;
 
   if( json ){
 
@@ -83,6 +83,7 @@ module.exports = {
   showContactMethodScreen: 'false',
   validateCauseOfDeathScreen: 'true',
   validateNeoNatalUnder24HoursAge: 'true',
+  nhsNumberAlreadyUsed: 'true',
   
   translations: _getTranslations()
 
