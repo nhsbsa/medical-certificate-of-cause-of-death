@@ -10,7 +10,7 @@ function _getTranslations(){
   });
 
   const translations = {};
-  const addWelsh = false;
+  const addWelsh = true;
 
   if( json ){
 
