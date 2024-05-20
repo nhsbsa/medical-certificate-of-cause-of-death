@@ -18,6 +18,17 @@ addFilter('debugData', function(content) {
 
 
 //
+// GET FEEDBACK LINK
+//
+addFilter('getFeedbackLink', function( content ){
+
+    // content: a blank string
+    return ( this.ctx.data.useEmbeddedFeedbackForm === 'true' ) ? 'feedback' : 'javascript:alert("Links to external NHS survey.");';
+
+});
+
+
+//
 // GET CAUSE OF DEATH LINK
 //
 addFilter('getCauseOfDeathLink', function( content ){

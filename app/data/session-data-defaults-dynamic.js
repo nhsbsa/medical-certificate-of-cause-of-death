@@ -84,6 +84,7 @@ module.exports = {
   validateCauseOfDeathScreen: 'true',
   validateNeoNatalUnder24HoursAge: 'true',
   nhsNumberAlreadyUsed: 'true',
+  useEmbeddedFeedbackForm: 'false',
   
   translations: _getTranslations()
 
