@@ -591,12 +591,12 @@ router.get(/another-location-lookup/, (req, res) => {
 // ME Review 
 
 router.get(/me-decision/, (req, res) => {
-const meApproveReject = req.session.data['me-decision']
-if (meApproveReject == 'approve') {
-    res.redirect('me-declaration')
-} else {
-    res.redirect('me-mccd-reviewed')
-}
+    const meApproveReject = req.session.data['me-decision']
+    if (meApproveReject == 'approve') {
+        res.redirect('me-declaration')
+    } else {
+        res.redirect('me-mccd-reviewed')
+    }
 });
 
 router.get(/me-declaration-scrutiny/, (req, res) => {
@@ -738,6 +738,12 @@ router.post( /contact-method/, (req, res) => {
     }
 
 });
+
+// MCCD SUMMARY AILIASES
+router.get( /view-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
+router.get( /amend-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
+router.get( /review-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
+router.get( /download-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
 
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
