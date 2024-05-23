@@ -282,13 +282,16 @@ function _getActionForStatus( status, id ){
 
     status = parseInt( status );
 
-    const link = 'mccd-summary?id='+id;
+    
 
     const actions = {
         ap: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
         me: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
         meo: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
     }
+
+    const useAliases = true;
+    let link = 'mccd-summary?id='+id;
 
     let html = '';
 
@@ -300,6 +303,9 @@ function _getActionForStatus( status, id ){
             break;
 
         default: 
+            if( useAliases ){
+                link = actions[_roleType][status].toLowerCase().split(' ').join('-');
+            }
             html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][status]+'</a>';
             break;
 
