@@ -921,6 +921,12 @@ router.post( /contact-method/, (req, res) => {
 
 });
 
+// MCCD SUMMARY AILIASES
+router.get( /view-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
+router.get( /amend-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
+router.get( /review-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
+router.get( /download-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
+
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
 
