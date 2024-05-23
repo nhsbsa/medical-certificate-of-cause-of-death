@@ -18,17 +18,16 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">This NHS number has already been used to create a Medical certificate of cause of death (MCCD)</h1>
-    <p class="govuk-body">An MCCD has already been created using the NHS number <span><strong>{{ data['nhs-number-input'] }}</strong></span>.</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>
+    <p class="govuk-body">An MCCD has already been created using the NHS number <span><strong>{{ data['nhs-number-input'] }}</strong></span>.<br>
         If you entered the wrong NHS number, go back and <a href="javascript:history.back()">enter the deceased's correct NHS number</a>.
-      </li>
-      <li>
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+    <li>
         If you want to create a new MCCD using this NHS number, select Continue.
-      </li>
-      <li>
-        If you do not want to create a new MCCD using this NHS number, select 'Return to dashboard'.
-      </li>
+    </li>
+    <li>
+        If you do not want to create a new MCCD using this NHS number, select Return to dashboard.
+    </li>
     </ul>
     
     <div class="govuk-button-group">
