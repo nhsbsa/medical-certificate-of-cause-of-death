@@ -58,11 +58,11 @@
                   </strong>
                   {% if data.bilingual === 'true' and data.lang == "cy" %}
                   <span>
-                    Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="#">adborth</a> yn ein helpu i’w wella.
+                    Gwasanaeth newydd yw hwn – bydd eich <a class="govuk-link" href="{{ '' | getFeedbackLink }}">adborth</a> yn ein helpu i’w wella.
                   </span>
                   {% else %}
                   <span class="govuk-phase-banner__text">
-                    This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+                    This is a new service – your <a class="govuk-link" href="{{ '' | getFeedbackLink }}">feedback</a> will help us to improve it.
                 </span>
                 {% endif %}
                   </p>

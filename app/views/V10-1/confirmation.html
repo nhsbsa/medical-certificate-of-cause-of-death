@@ -108,7 +108,7 @@
 
                     <h2 class="govuk-heading-m">What happens next</h2>
                     <p class="govuk-body">No further action is required.</p>
-                    <p class="govuk-body">This MCCD will be available to view from your dashboard for three months.</p>
+                    <p class="govuk-body">This Medical certificate of cause of death (MCCD) will be available to view from your dashboard for three months.</p>
 
 
                 {% else %}
@@ -133,6 +133,7 @@
             {% endif %}
 
 
+            {% if data.useEmbeddedFeedbackForm === 'true' %}
 
             <!-- FEEDBACK FORM -->
             <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ data.translations.confirmationPageSubheadingTwo[data.lang] }}</h2>
@@ -179,6 +180,21 @@
                 }) }}
 
             </div>
+
+
+            {% else %}
+
+                <h2 class="govuk-heading-m">Give feedback</h2>
+                <p class="govuk-body"><a href="{{ '' | getFeedbackLink }}">Tell us what you think about the Complete an MCCD service</a> (takes about 5 minutes)</p>
+
+                {{ govukButton({
+                    text: data.translations.confirmationPageCTAsecondary[data.lang],
+                    href: 'dashboard',
+                    classes: 'govuk-!-margin-top-4'
+                }) }}
+            
+
+            {% endif %}
 
         </form>
 
