@@ -304,7 +304,7 @@ function _getActionForStatus( status, id ){
 
         default: 
             if( useAliases ){
-                link = actions[_roleType][status].toLowerCase().split(' ').join('-');
+                link = actions[_roleType][status].toLowerCase().split(' ').join('-') + '?id='+id;
             }
             html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][status]+'</a>';
             break;
