@@ -84,7 +84,7 @@ router.post(/nhs-number/, (req, res) => {
             // Adding in warning text for if the NHS number is already used
             if( req.session.data.nhsNumberAlreadyUsed === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
                 req.session.data.nhsNumberAlreadyUsed = 'false';
-                res.redirect('nhs-number?showNHSNumberWarning=true');
+                res.redirect('nhs-number-duplicate');
             } else {
                 res.redirect('name-of-the-deceased');
             }
