@@ -441,12 +441,13 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  padding: 0 10px 0 0;
+  padding: 0 15px 0 0;
   position: relative;
   text-align: inherit;
   font-size: 1em;
   margin: 0;
   text-decoration: none;
+  display: inline-block;
 }
 
 [aria-sort] a:focus {
@@ -466,6 +467,11 @@
   right: -1px;
   top: 9px;
   font-size: 0.5em;
+}
+
+[aria-sort] a + span {
+  display: block;
+  margin: 0;
 }
 
 [aria-sort] a:after {
