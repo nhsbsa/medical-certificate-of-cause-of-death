@@ -43,7 +43,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                   {% for hospitalAddress in data['hospitalAddresses'] %}
                     <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="hospital-address-{{loop.index}}" name="hospital-address" type="radio" value="{{ hospitalAddress }}">
+                      <input class="govuk-radios__input" id="hospital-address-{{loop.index}}" name="hospital-address" type="radio" value="{{ hospitalAddress }}" {% if data['hospital-address'] === hospitalAddress %} checked{% endif %}>
                       <label class="govuk-label govuk-radios__label" for="hospital-address-{{loop.index}}">{{ hospitalAddress or 'Sample hospital address' }}</label>
                     </div>
                   {% endfor %}
