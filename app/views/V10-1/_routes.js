@@ -211,11 +211,6 @@ router.post( /death-hospital/, (req, res) => {
 
 // Hospital - select address
 
-router.post(/hospital-postcode/, (req, res) => {
-    res.redirect('select-hospital-address')
-
-});
-
 // Another location - postcode lookup
 router.post(/location-of-death/, (req, res) => {
 
