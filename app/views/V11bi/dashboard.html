@@ -4,7 +4,6 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 
-
 {% block content %}
 <main class="govuk-main-wrapper app-main-class" id="main-content">
 
@@ -186,7 +185,7 @@
           <!-- DRAFTS TABLE -->
             {{ govukTable({
             caption: 'Your drafts',
-            classes: 'table-dashboard',
+            classes: 'table-dashboard govuk-table--small-text-until-tablet',
             captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
             firstCellIsHeader: true,
             head: [ 
@@ -213,7 +212,7 @@
         <!-- MAIN TABLE -->
         {{ govukTable({
           caption: '' | getDashboardCaption,
-          classes: 'table-dashboard',
+          classes: 'table-dashboard govuk-table--small-text-until-tablet',
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
           head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),
