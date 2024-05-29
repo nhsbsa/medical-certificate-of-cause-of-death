@@ -386,7 +386,7 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
     // Name
     let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
     let nameObj = {
-        html: '<a href="'+nameLink+'">Deceased name</a><br /><span class="govuk-body-s">NHS number</span>',
+        html: '<a href="'+nameLink+'">Deceased name</a><span class="govuk-body-s">NHS number</span>',
         attributes: {
             'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
         } 
