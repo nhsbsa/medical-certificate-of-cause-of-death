@@ -195,14 +195,16 @@ router.post(/date-of-death/, (req, res) => {
 });
 
 // Hospital - postcode lookup
-router.post(/death-hospital/, (req, res) => {
+router.post( /death-hospital/, (req, res) => {
 
-    const DeathHospital = req.session.data['death-in-hospital']
+    const deathHospital = req.session.data['death-in-hospital'];
 
-    if (DeathHospital == 'yes') {
-        res.redirect('./place-of-death/hospital-postcode')
+    if ( deathHospital === 'Yes' ) {
+        req.session.data.addressPath = 'hospital';
+        res.redirect('place-of-death/hospital-postcode');
     } else {
-        res.redirect('./place-of-death/location-of-death')
+        req.session.data.addressPath = 'another';
+        res.redirect('place-of-death/location-of-death');
 
     }
 });
@@ -542,11 +544,6 @@ router.post( /select-hospital-address/, (req, res) => {
 
 });
 
-// Confirm hospital address
-router.post(/select-hospital-address/, (req, res) => {
-    res.redirect('confirm-address')
-});
-
 
 // CYA Deceased
 router.post(/confirm-address/, (req, res) => {
@@ -613,6 +610,14 @@ router.get(/another-location-lookup/, (req, res) => {
     }
 
 })
+
+// Confirm hospital address
+router.post(/select-another-address/, (req, res) => {
+    
+    req.session.data.addressPath = 'another';
+    res.redirect('confirm-address')
+
+});
 
 // ************************************************************
 
