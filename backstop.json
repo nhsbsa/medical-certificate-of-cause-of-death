@@ -3,8 +3,23 @@
     "viewports": [
         {
             "label": "desktop",
-            "width": 1000,
-            "height": 730
+            "width": 1440,
+            "height": 1024
+        },
+        {
+            "label": "mobile",
+            "width": 320,
+            "height": 568
+        },
+        {
+            "label": "tablet-ladscape",
+            "width": 1194,
+            "height": 834
+        },
+        {
+            "label": "tablet-portrait",
+            "width": 834,
+            "height": 1194
         }
     ],
     "onBeforeScript": "puppet/onBefore.js",
@@ -49,6 +64,10 @@
         {
             "label": "nhs-number",
             "url": "http://localhost:3000/V10-1/nhs-number?role-type=ap"            
+        },
+        {
+            "label": "nhs-number-duplicate",
+            "url": "http://localhost:3000/V10-1/nhs-number-duplicate?role-type=ap"            
         },
         {
             "label": "name-under-28",

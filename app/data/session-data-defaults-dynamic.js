@@ -83,7 +83,7 @@ module.exports = {
   showContactMethodScreen: 'false',
   validateCauseOfDeathScreen: 'true',
   validateNeoNatalUnder24HoursAge: 'true',
-  nhsNumberAlreadyUsed: 'true',
+  nhsNumberAlreadyUsed: 'false',
   useEmbeddedFeedbackForm: 'false',
   
   translations: _getTranslations()
