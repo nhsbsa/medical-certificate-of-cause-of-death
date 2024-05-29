@@ -76,25 +76,26 @@ router.post(/66-or-65/, (req, res) => {
 router.post(/nhs-number/, (req, res) => {
        // grab value from the data store
         let completeDeceased = req.session.data.deceasedComplete
+        let nhsDuplicate = req.session.data.nhsNumberAlreadyUsed
         // if the journey is complete send back to the 'check-your-details' page
         if (completeDeceased === 'true') {
             res.redirect('cya-deceased')
-        } else {
-
-            // Adding in warning text for if the NHS number is already used
-            if( req.session.data.nhsNumberAlreadyUsed === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
-                req.session.data.nhsNumberAlreadyUsed = 'false';
+        } else if ( nhsDuplicate === 'true'){
                 res.redirect('nhs-number-duplicate');
             } else {
                 res.redirect('name-of-the-deceased');
             }
-
-        }
 });
 
 // What is the deceased person's name?
 router.post(/name-of-the-deceased/, (req, res) => {
-    res.redirect('date-of-birth')
+    // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+        res.redirect('cya-deceased')
+    } else {
+    res.redirect('date-of-birth')}
 });
 
 // What was the deceased persons age?
@@ -103,10 +104,12 @@ router.post(/name-of-the-deceased/, (req, res) => {
 router.post(/date-of-birth/, (req, res) => {
 
     const overUnder28 = req.session.data['over-under-28']
-
-
-
-    if (overUnder28 == 'no') {
+    // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+        res.redirect('cya-deceased')
+    } else if (overUnder28 == 'no') {
         res.redirect('age-66')
 
     // If Under 28 > Location of birth
@@ -119,7 +122,13 @@ router.post(/date-of-birth/, (req, res) => {
 
 // Under 28 - Location of birth > Age
 router.post(/location-born/, (req, res) => {
-    res.redirect('triage-24-hours')
+     // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
+     // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+        res.redirect('cya-deceased')
+    } else {
+    res.redirect('triage-24-hours')}
 });
 
 router.post(/triage-24-hours/, (req, res) => {
@@ -135,13 +144,15 @@ router.post(/age-66/, (req, res) => {
 });
 
 // Under 28
-router.post(/deceased-persons-age/, (req, res) => {
-    res.redirect('/V10-1/ethnicity/ethnic-group')
-});
-
 router.post(/age-65-hours/, (req, res) => {
     res.redirect('ethnicity/ethnic-group')
 });
+
+router.post(/deceased-persons-age/, (req, res) => {
+
+    res.redirect('/V10-1/ethnicity/ethnic-group')
+});
+
 
 router.post(/ethnic-group/, (req,res) => {
     var ethnicGroup = req.session.data['ethnic-group']
@@ -162,14 +173,25 @@ router.post(/ethnic-group/, (req,res) => {
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
-    res.redirect('../date-of-death')
+        // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
+        // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+        res.redirect('../cya-deceased')
+    } else {
+    res.redirect('../date-of-death')}
 });
 
 // PLACE OF DEATH
 
 // Was the death in a hospital?
 router.post(/date-of-death/, (req, res) => {
-    res.redirect('death-hospital')
+    let completeDeceased = req.session.data.deceasedComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+    res.redirect('cya-deceased')
+    } else {
+    res.redirect('death-hospital')}
 });
 
 // Hospital - postcode lookup
@@ -215,11 +237,17 @@ router.post(/unknown-address/, (req, res) => {
     res.redirect('cya-deceased')
 });
 
+// Set journey as complete
+router.get('/cya-deceased', function (req, res) {
+    // set data store variable
+    req.session.data.deceasedComplete = 'true'
+    // render the page
+    return res.render('/V10-1/cya-deceased')
+  })
 // Check your answers
-router.post( /check-your-answers-d/, (req, res) => {
-    req.session.data['deceasedComplete'] = 'true';
-    res.redirect('mccd-tasklist');
-});
+// router.post( /check-your-answers-d/, (req, res) => {
+//     res.redirect('mccd-tasklist');
+// });
 
 // ************************************************************
 // Actions after death section
