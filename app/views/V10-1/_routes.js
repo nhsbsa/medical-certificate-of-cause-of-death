@@ -199,7 +199,7 @@ router.post( /death-hospital/, (req, res) => {
 
     const deathHospital = req.session.data['death-in-hospital'];
 
-    if ( deathHospital === 'Yes' ) {
+    if ( deathHospital === 'yes' ) {
         req.session.data.addressPath = 'hospital';
         res.redirect('place-of-death/hospital-postcode');
     } else {
@@ -210,11 +210,6 @@ router.post( /death-hospital/, (req, res) => {
 });
 
 // Hospital - select address
-
-router.post(/hospital-postcode/, (req, res) => {
-    res.redirect('select-hospital-address')
-
-});
 
 // Another location - postcode lookup
 router.post(/location-of-death/, (req, res) => {
