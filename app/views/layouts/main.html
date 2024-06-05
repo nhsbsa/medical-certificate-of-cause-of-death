@@ -5,6 +5,17 @@
   
   {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
   {% set mainClasses = "govuk-!-padding-top-0" %}
+
+  {% block head %}
+    
+      {{ super() }}
+
+      {% if data.allowBrowserNumberFormatting === 'false' %}
+        <meta name="format-detection" content="telephone=no" >
+      {% endif %}
+    
+  {% endblock %}
+
   
   {% block header %}
   <header class="govuk-header" data-module="govuk-header">
