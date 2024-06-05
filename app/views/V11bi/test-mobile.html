@@ -1,0 +1,114 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+ <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+          <h1 class="govuk-heading-l">Mobile test</h1>
+
+          {% if data.allowBrowserNumberFormatting === 'false' %}
+             {{ govukButton({
+                  text: 'Allow browser number formatting',
+                  href: '?allowBrowserNumberFormatting=true'
+              }) }}
+          {% else %}
+              {{ govukButton({
+                  text: 'Prevent browser number formatting',
+                  href: '?allowBrowserNumberFormatting=false'
+              }) }}
+          {% endif %}
+
+        
+          {{ govukTable({
+            caption: 'Examples',
+            captionClasses: 'govuk-table__caption--m',
+            firstCellIsHeader: true,
+            head: [
+              { text: 'Type' },
+              { text: 'Example' }
+            ],
+            rows: [
+              [
+                { text: 'NHS number' },
+                { text: '123 456 7890' }
+              ],
+              [
+                { text: 'a[href="tel:"] link' },
+                { html: '<a href="tel:+441311234567">0131 123 4567</a>' }
+              ],
+              [
+                { text: 'input[type="text"]' },
+                { html: govukInput({
+                  label: {
+                    text: 'Name 01',
+                    classes: 'govuk-visually-hidden'
+                  },
+                  id: 'name-01',
+                  name: 'name-01'
+                }) }
+              ],
+              [
+                { html: 'input[type="text"]<br />with autocomplete' },
+                { html: govukInput({
+                  label: {
+                    text: 'Name 02',
+                    classes: 'govuk-visually-hidden'
+                  },
+                  id: 'name-02',
+                  name: 'name-02',
+                  attributes: { 'autocomplete': 'off' }
+                }) }
+              ],
+              [
+                { html: 'input[type="text"]<br />with aria-autocomplete' },
+                { html: govukInput({
+                  label: {
+                    text: 'Name 03',
+                    classes: 'govuk-visually-hidden'
+                  },
+                  id: 'name-03',
+                  name: 'name-03',
+                  attributes: { 'aria-autocomplete': 'none' }
+                }) }
+              ],
+              [
+                { html: 'input[type="text"]<br />with autocomplete and aria-autocomplete' },
+                { html: govukInput({
+                  label: {
+                    text: 'Name 04',
+                    classes: 'govuk-visually-hidden'
+                  },
+                  id: 'name-04',
+                  name: 'name-04',
+                  attributes: { 'autocomplete': 'off', 'aria-autocomplete': 'none' }
+                }) }
+              ]
+            ]
+          }) }}
+
+
+        {{ govukInsetText({
+          html: '<h2 class="govuk-heading-s">Notes on autocomplete</h2>
+          <p>Standard advice seems to be to use autocomplete="none", however Edge on browser seems to ignore this and require aria-autocomplete="none".</p>
+          <p><a target="_blank" href="https://stackoverflow.com/questions/43132693/how-to-turn-off-html-input-form-field-suggestions">autocomplete="off"</a></p>
+          <p><a target="_blank" href="https://stackoverflow.com/questions/71031863/how-do-i-stop-type-from-your-saved-info-on-edge-from-appearing-on-my-sit#:~:text=If%20you%20want%20to%20turn%20off%20this%20prompt%2C,and%20disable%20this%20feature%20like%20this%20image%20below%3A">aria-autocomplete="none"</a></p>
+          <p>We need to also consider the use of <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck">spellcheck="false"</a></p>'
+        }) }}
+
+      
+
+          
+          
+
+
+    </div>
+  </div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}

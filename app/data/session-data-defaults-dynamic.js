@@ -85,6 +85,8 @@ module.exports = {
   validateNeoNatalUnder24HoursAge: 'true',
   nhsNumberAlreadyUsed: 'false',
   useEmbeddedFeedbackForm: 'false',
+
+  allowBrowserNumberFormatting: 'false',
   
   translations: _getTranslations()
 
