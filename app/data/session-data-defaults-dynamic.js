@@ -87,6 +87,7 @@ module.exports = {
   useEmbeddedFeedbackForm: 'false',
 
   allowBrowserNumberFormatting: 'false',
+  highlightBrowserNumberFormatting: 'false',
   
   translations: _getTranslations()
 

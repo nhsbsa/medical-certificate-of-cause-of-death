@@ -5,25 +5,87 @@
 
 {% block content %}
 
+<style>
+  
+  td .govuk-form-group { margin: 0; }
+  td .govuk-form-group .govuk-radios__item { margin-bottom: 0; }
+
+</style>
+
+{% if data.highlightBrowserNumberFormatting === 'true' %}
+  <style>
+    a[x-apple-data-detectors] { outline: 2px solid red !important; }
+  </style>
+{% else %}
+  <style>
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+  </style>
+{% endif %}
+
+
  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
 
           <h1 class="govuk-heading-l">Mobile test</h1>
 
-          {% if data.allowBrowserNumberFormatting === 'false' %}
-             {{ govukButton({
-                  text: 'Allow browser number formatting',
-                  href: '?allowBrowserNumberFormatting=true'
-              }) }}
-          {% else %}
-              {{ govukButton({
-                  text: 'Prevent browser number formatting',
-                  href: '?allowBrowserNumberFormatting=false'
-              }) }}
-          {% endif %}
-
+          <form action="test-mobile" method="post" novalidate>
         
+        <!-- TOGGLES -->
+            {{ govukTable({
+            caption: 'Toggles',
+            captionClasses: 'govuk-table__caption--m',
+            firstCellIsHeader: true,
+            rows: [
+              [
+                { text: 'Allow iOS number formatting' },
+                { html: govukRadios({
+                    classes: 'govuk-radios--inline',
+                    name: 'allowBrowserNumberFormatting',
+                    value: data['allowBrowserNumberFormatting'],
+                    fieldset: {
+                      legend: {
+                        text: 'Would you like to allow iOS number formatting?',
+                        classes: 'govuk-visually-hidden'
+                      }
+                    },
+                    items: [
+                      { value: 'true', text: 'Yes' },
+                      { value: 'false', text: 'No' }
+                    ]
+                  }) 
+                }
+              ],
+              [
+                { text: 'Highlight iOS number formatting' },
+                { html: govukRadios({
+                    classes: 'govuk-radios--inline',
+                    name: 'highlightBrowserNumberFormatting',
+                    value: data['highlightBrowserNumberFormatting'],
+                    fieldset: {
+                      legend: {
+                        text: 'Would you like to highlight iOS number formatting?',
+                        classes: 'govuk-visually-hidden'
+                      }
+                    },
+                    items: [
+                      { value: 'true', text: 'Yes' },
+                      { value: 'false', text: 'No' }
+                    ]
+                  })  }
+              ]
+            ]
+          }) }}
+
+
+          <!-- TESTS -->
           {{ govukTable({
             caption: 'Examples',
             captionClasses: 'govuk-table__caption--m',
@@ -53,7 +115,8 @@
                     classes: 'govuk-visually-hidden'
                   },
                   id: 'name-01',
-                  name: 'name-01'
+                  name: 'name-01',
+                  value: data['name-01']
                 }) }
               ],
               [
@@ -65,6 +128,7 @@
                   },
                   id: 'name-02',
                   name: 'name-02',
+                  value: data['name-02'],
                   attributes: { 'autocomplete': 'off' }
                 }) }
               ],
@@ -77,6 +141,7 @@
                   },
                   id: 'name-03',
                   name: 'name-03',
+                  value: data['name-03'],
                   attributes: { 'aria-autocomplete': 'none' }
                 }) }
               ],
@@ -89,11 +154,18 @@
                   },
                   id: 'name-04',
                   name: 'name-04',
+                  value: data['name-04'],
                   attributes: { 'autocomplete': 'off', 'aria-autocomplete': 'none' }
                 }) }
               ]
             ]
           }) }}
+
+          {{ govukButton({
+            text: 'Submit'
+          }) }}
+
+          </form>
 
 
         {{ govukInsetText({
