@@ -344,13 +344,13 @@ router.post(/caused-by-employment/, (req, res) => {
 
 // Was the deceased pregnant within the year prior to their death?
 router.post(/pregnant-at-death/, (req, res) => {
-    const preggo = ['Pregnant at time of death', 'Beichiog adeg y farwolaeth', 'Pregnant 1 to 42 days before death', 'Beichiog 1 i 42 o ddiwrnodau cyn y farwolaeth', 'Pregnant 43 days to a year before death', 'Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth']
-    const notPreggo = ['Not applicable', 'Amherthnasol', 'Not pregnant', 'Nid oedd yn feichiog', 'Unknown', 'Anhysbys']
+    const pregnant = ['Pregnant at time of death', 'Beichiog adeg y farwolaeth', 'Pregnant 1 to 42 days before death', 'Beichiog 1 i 42 o ddiwrnodau cyn y farwolaeth', 'Pregnant 43 days to a year before death', 'Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth']
+    const notPregnant = ['Not applicable', 'Amherthnasol', 'Not pregnant', 'Nid oedd yn feichiog', 'Unknown', 'Anhysbys']
     var pregnantAtDeath = req.session.data['pregnant-at-death']
-    if (preggo.includes(pregnantAtDeath)) {
+    if (pregnant.includes(pregnantAtDeath)) {
         res.redirect('pregnancy-contributed')
     }
-    if (notPreggo.includes(pregnantAtDeath)) {
+    if (notPregnant.includes(pregnantAtDeath)) {
         res.redirect('cya-cause-death')
     }
 });
