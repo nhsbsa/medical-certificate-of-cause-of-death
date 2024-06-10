@@ -22,7 +22,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        {% import 'V10-1/data-patients.html' as patientData %}
+        {% import 'V11bi/data-patients.html' as patientData %}
         {% set patient = patientData.data | getPatientDataByID( data.id ) %}
 
         {% set patientStatus = patient.status %}
@@ -33,6 +33,10 @@
 
 
         {% if patient %}
+
+        {% if data.debug === 'true' %}
+            <textarea>{{ patient | dump }}</textarea>
+        {% endif %}
 
 
         <!--
@@ -106,6 +110,17 @@
             </div>
 
 
+            <!--
+
+______                                 _  ______     _        _ _     
+|  _  \                               | | |  _  \   | |      (_) |    
+| | | |___  ___ ___  __ _ ___  ___  __| | | | | |___| |_ __ _ _| |___ 
+| | | / _ \/ __/ _ \/ _` / __|/ _ \/ _` | | | | / _ \ __/ _` | | / __|
+| |/ /  __/ (_|  __/ (_| \__ \  __/ (_| | | |/ /  __/ || (_| | | \__ \
+|___/ \___|\___\___|\__,_|___/\___|\__,_| |___/ \___|\__\__,_|_|_|___/
+                                                                      
+
+           -->
 
 
             {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
@@ -143,9 +158,9 @@
                     },
                     rows: [
                         {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
                     ]
                 }) }}
 
@@ -183,13 +198,27 @@
                     },
                     rows: [
                         {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: 'Yes' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: 'Pacemaker, chest' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: 'No' } }
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' } }
                     ]
                 }) }}
 
             {% endif %}
+
+
+            <!--
+
+ _____                               __  ______           _   _     
+/  __ \                             / _| |  _  \         | | | |    
+| /  \/ __ _ _   _ ___  ___    ___ | |_  | | | |___  __ _| |_| |__  
+| |    / _` | | | / __|/ _ \  / _ \|  _| | | | / _ \/ _` | __| '_ \ 
+| \__/\ (_| | |_| \__ \  __/ | (_) | |   | |/ /  __/ (_| | |_| | | |
+ \____/\__,_|\__,_|___/\___|  \___/|_|   |___/ \___|\__,_|\__|_| |_|
+
+
+            -->
+
 
 
             {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
@@ -207,11 +236,11 @@
                         title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
                     },
                     rows: [
-                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: patient.causeOfDeath.1a }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: '' }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: '' }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
                         {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'caused-by-employment', text: 'Change', visuallyHiddenText: 'whether employment affected the death' }] } },
                         {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } },
                         {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnancy-contributed', text: 'Change', visuallyHiddenText: 'whether the pregnancy contributed to the death' }] } }
@@ -226,18 +255,17 @@
                     
                 -->
 
-
                 <!-- CAUSE OF DEATH  -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
                     },
                     rows: [
-                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: patient.causeOfDeath.1a } },
+                        {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: patient.causeOfDeath.1b } },
+                        {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: patient.causeOfDeath.1c } },
+                        {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: patient.causeOfDeath.1d } },
+                        {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: patient.causeOfDeath.1e } },
                         {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' } },
                         {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' } },
                         {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' } }
@@ -247,15 +275,43 @@
             {% endif %}
 
 
+            <!-- 
+
+  ___  ______  ______     _        _ _     
+ / _ \ | ___ \ |  _  \   | |      (_) |    
+/ /_\ \| |_/ / | | | |___| |_ __ _ _| |___ 
+|  _  ||  __/  | | | / _ \ __/ _` | | / __|
+| | | || |     | |/ /  __/ || (_| | | \__ \
+\_| |_/\_|     |___/ \___|\__\__,_|_|_|___/
+                                           
+
+            -->
+
+
             <!-- ATTENDING PRACTITIONERS INFORMATION -->
-            {% set apRows = [
+
+            {% if data['role-type'] === 'ap' %}
+                {% set apRows = [
+                    {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: data.user.name or 'Ann Other' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: data.user.gmcNumber or '1234567' } },
+                    {  key: { text: 'Qualification' }, value: { html: data['qualifications'] or 'MB ChB' } }
+                ] %}
+            {% else %}
+                {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
-                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123 46764' } },
+                    {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123467' } },
                     {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
                 ] %}
+            {% endif %}
+
+            
 
             {% if data.showContactMethodScreen === 'true' %}
-                {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }), apRows ) %}
+                {% if data['role-type'] === 'ap' %}
+                    {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: data.user.email or 'email.address@nhsuk.net' } }), apRows ) %}
+                {% else %}
+                    {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }), apRows ) %}
+                {% endif %}
             {% endif %}
 
             

@@ -8,10 +8,11 @@ if( process.env.NOTIFYAPIKEY ){
     const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 }
 
-
 // ************************************************************
 // CURRENT VERSION
 // ************************************************************
+
+let version = 'V10-1';
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
@@ -26,6 +27,8 @@ const axios = require('axios')
 
 router.use((req, res, next) => {
 
+    req.session.data.version = version;
+    
     let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
 
     const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
@@ -152,7 +155,7 @@ router.post(/age-65-hours/, (req, res) => {
 
 router.post(/deceased-persons-age/, (req, res) => {
 
-    res.redirect('/V10-1/ethnicity/ethnic-group')
+    res.redirect('/'+version+'/ethnicity/ethnic-group')
 });
 
 
@@ -241,7 +244,7 @@ router.get('/cya-deceased', function (req, res) {
     // set data store variable
     req.session.data.deceasedComplete = 'true'
     // render the page
-    return res.render('/V10-1/cya-deceased')
+    return res.render('/'+version+'/cya-deceased')
   })
 // Check your answers
 // router.post( /check-your-answers-d/, (req, res) => {
@@ -770,10 +773,10 @@ router.post( /contact-method/, (req, res) => {
 });
 
 // MCCD SUMMARY AILIASES
-router.get( /view-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /amend-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /review-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /download-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
+router.get( /view-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /amend-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /review-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /download-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
@@ -860,7 +863,7 @@ router.get( [
     '/neo-natal-deaths/feedback',
     '/onboarding/feedback',
     '/place-of-death/feedback'], (req, res) => {
-    res.redirect('/V10-1/feedback');
+    res.redirect('/'+version+'/feedback');
     next();
 });
 

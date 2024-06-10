@@ -1,0 +1,222 @@
+{% set data = [{"name":"Kathryn Moore","nhsNo":"883 569 7845","status":6,"isNeoNatal":false,"age":"89 years old","causeOfDeath":{"1a":"Massive haemoptysis","1b":"Primary small cell carcinoma of left main bronchus","1c":"","1d":"","1e":"Primary adenocarcinoma of prostate"},"dateOfDeath":"28 April 2024","id":"WRXMOEBIHE-24","lastNameFirst":"Moore, Kathryn","belongsToAP":false,"belongsToME":false},{"name":"Annette Flynn","nhsNo":"766 806 1046","status":6,"isNeoNatal":false,"age":"72 years old","causeOfDeath":{"1a":"Subarachnoid haemorrhage","1b":"Ruptured aneurysm of anterior communicating artery","1c":"","1d":"","1e":""},"dateOfDeath":"29 April 2024","id":"APAM7VWLGD-24","lastNameFirst":"Flynn, Annette","belongsToAP":false,"belongsToME":false},{"name":"Lynne North","nhsNo":"369 701 750","status":6,"isNeoNatal":false,"age":"80 years old","causeOfDeath":{"1a":"Bronchopneumonia","1b":"Immobility and wasting","1c":"Alzheimer’s disease","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"SWQN6CND2-24","lastNameFirst":"North, Lynne","belongsToAP":false,"belongsToME":true},{"name":"Ibrahim Campbell","nhsNo":"130 582 7245","status":6,"isNeoNatal":false,"age":"82 years old","causeOfDeath":{"1a":"Haemorrhagic gastritis","1b":"Chronic lymphocytic leukaemia","1c":"","1d":"","1e":"Myocardial ischaemia, valvular heart disease"},"dateOfDeath":"27 April 2024","id":"2GUWRRAHC-24","lastNameFirst":"Campbell, Ibrahim","belongsToAP":false,"belongsToME":true},{"name":"Louise Paul","nhsNo":"758 016 4122","status":6,"isNeoNatal":false,"age":"76 years old","causeOfDeath":{"1a":"End-stage renal failure","1b":"Diabetic nephropathy","1c":"Insulin dependent diabetes mellitus","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"ZZ4WDFRQ2-24","lastNameFirst":"Paul, Louise","belongsToAP":false,"belongsToME":false},{"name":"Leo Sumner","nhsNo":"974 498 1815","status":6,"isNeoNatal":false,"age":"82 years old","causeOfDeath":{"1a":"Neutropenic sepsis","1b":"Acute myeloid leukaemia","1c":"","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"FMGRIKQTB-24","lastNameFirst":"Sumner, Leo","belongsToAP":false,"belongsToME":false},{"name":"Ismail Lawson","nhsNo":"848 615 5183","status":6,"isNeoNatal":true,"age":"27 days old","causeOfDeath":{"1a":"Sudden Infant Death Syndrome (SIDS)","1b":"","1c":"","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"HJCLUYFBN-24","lastNameFirst":"Lawson, Ismail","belongsToAP":false,"belongsToME":false},{"name":"Gareth Stanley","nhsNo":"136 819 5317","status":6,"isNeoNatal":false,"age":"79 years old","causeOfDeath":{"1a":"Pathological fractures of femoral neck and thoracic vertebrae","1b":"Severe osteoporosis","1c":"Old age","1d":"","1e":"Fibrosing alveolitis"},"dateOfDeath":"28 April 2024","id":"AQGEMOA6A-24","lastNameFirst":"Stanley, Gareth","belongsToAP":false,"belongsToME":false},{"name":"Patricia Parker","nhsNo":"660 133 063","status":6,"isNeoNatal":false,"age":"87 years old","causeOfDeath":{"1a":"Bilateral pneumothoraces","1b":"Multiple bronchopulmonary fistulae","1c":"Extensive, cavitating pulmonary tuberculosis (smear and culture positive)","1d":"","1e":"Iron deficiency anaemia; ventilator associated pseudomonas pneumonia"},"dateOfDeath":"29 April 2024","id":"GEEI5PM7LD-24","lastNameFirst":"Parker, Patricia","belongsToAP":true,"belongsToME":false},{"name":"Imogen Potts","nhsNo":"826 038 8130","status":6,"isNeoNatal":false,"age":"90 years old","causeOfDeath":{"1a":"Hepatic failure","1b":"Liver cirrhosis","1c":"Chronic hepatitis C infection and alcoholism","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"FVOMBCHLOX-24","lastNameFirst":"Potts, Imogen","belongsToAP":true,"belongsToME":false},{"name":"Austin Bruce","nhsNo":"199 249 9442","status":6,"isNeoNatal":true,"age":"8 days old","causeOfDeath":{"1a":"Necrotizing enterocolitis","1b":"Prematurity","1c":"","1d":"","1e":""},"dateOfDeath":"26 April 2024","id":"VWBXXU4CD-24","lastNameFirst":"Bruce, Austin","belongsToAP":false,"belongsToME":false},{"name":"Alexander Gould","nhsNo":"952 391 7010","status":6,"isNeoNatal":true,"age":"6 days old","causeOfDeath":{"1a":"Birth asphyxia","1b":"","1c":"","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"SEUMJYBAC-24","lastNameFirst":"Gould, Alexander","belongsToAP":false,"belongsToME":true},{"name":"Katharine Hough","nhsNo":"438 881 7825","status":6,"isNeoNatal":false,"age":"76 years old","causeOfDeath":{"1a":"Carcinomatosis and renal failure","1b":"Adenocarcinoma","1c":"","1d":"","1e":"Chronic obstructive airways disease and catheter associated Escherichia coli urinary tract infection"},"dateOfDeath":"27 April 2024","id":"QCASFJPHI-24","lastNameFirst":"Hough, Katharine","belongsToAP":false,"belongsToME":false},{"name":"Fay Khan","nhsNo":"717 351 2151","status":6,"isNeoNatal":false,"age":"71 years old","causeOfDeath":{"1a":"Post-transplant lymphoma","1b":"Immunosuppression following renal transplant","1c":"Glomerulonephrosis due to insulin dependent diabetes mellitus","1d":"","1e":"Recurrent urinary tract infections"},"dateOfDeath":"28 April 2024","id":"UGNWUBBYY-24","lastNameFirst":"Khan, Fay","belongsToAP":false,"belongsToME":false},{"name":"Sarah Bradford","nhsNo":"202 778 1306","status":6,"isNeoNatal":true,"age":"20 days old","causeOfDeath":{"1a":"Intracranial hemorrhage","1b":"Prematurity","1c":"","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"4O5E5ABGCW-24","lastNameFirst":"Bradford, Sarah","belongsToAP":true,"belongsToME":false},{"name":"Natalia Sharman","nhsNo":"905 268 8422","status":6,"isNeoNatal":false,"age":"73 years old","causeOfDeath":{"1a":"Renal failure","1b":"Necrotising-proliferative nephropathy","1c":"Systemic lupus erythematosus","1d":"","1e":"Raynaud’s phenomenon and vasculitis"},"dateOfDeath":"29 April 2024","id":"ZUULIFHBYZ-24","lastNameFirst":"Sharman, Natalia","belongsToAP":false,"belongsToME":false},{"name":"Harriet Howes","nhsNo":"839 823 3376","status":6,"isNeoNatal":false,"age":"88 years old","causeOfDeath":{"1a":"Cardiorespiratory failure","1b":"Ischaemic heart disease and chronic obstructive airways disease","1c":"","1d":"","1e":"Osteoarthritis"},"dateOfDeath":"27 April 2024","id":"JFCXG4I3H6-24","lastNameFirst":"Howes, Harriet","belongsToAP":true,"belongsToME":false},{"name":"Olive McCormick","nhsNo":"406 010 7110","status":6,"isNeoNatal":false,"age":"88 years old","causeOfDeath":{"1a":"Bronchopneumonia (hospital acquired meticillin resistant Staph aureus)","1b":"Multiple myeloma","1c":"","1d":"","1e":"Chronic obstructive airways disease"},"dateOfDeath":"27 April 2024","id":"5ZXF5C6H4-24","lastNameFirst":"McCormick, Olive","belongsToAP":false,"belongsToME":false},{"name":"Olga Farr","nhsNo":"609 412 1670","status":6,"isNeoNatal":false,"age":"75 years old","causeOfDeath":{"1a":"Liver failure","1b":"Hepatocellular carcinoma","1c":"Chronic Hepatitis B infection","1d":"","1e":"Congestive cardiac failure"},"dateOfDeath":"27 April 2024","id":"FFXQQRTW7A-24","lastNameFirst":"Farr, Olga","belongsToAP":false,"belongsToME":false},{"name":"Karin Lister","nhsNo":"430 122 9572","status":6,"isNeoNatal":false,"age":"72 years old","causeOfDeath":{"1a":"Intraventricular haemorrhage","1b":"Warfarin anticoagulation","1c":"Atrial fibrillation","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"C4DUN3HYU-24","lastNameFirst":"Lister, Karin","belongsToAP":false,"belongsToME":false},{"name":"Leanne Wakefield","nhsNo":"228 381 1450","status":6,"isNeoNatal":false,"age":"72 years old","causeOfDeath":{"1a":"Septicaemia - fully sensitive staphylococcus aureus","1b":"Gangrene of both feet due to peripheral vascular disease","1c":"Non-insulin-dependent diabetes mellitus","1d":"","1e":"Ischaemic heart disease"},"dateOfDeath":"28 April 2024","id":"6G34GFW5U-24","lastNameFirst":"Wakefield, Leanne","belongsToAP":false,"belongsToME":false},{"name":"Jim McNally","nhsNo":"156 133 5139","status":6,"isNeoNatal":false,"age":"80 years old","causeOfDeath":{"1a":"Neutropenic sepsis","1b":"Acute myeloid leukaemia","1c":"","1d":"","1e":""},"dateOfDeath":"26 April 2024","id":"FJX3CVGYM-24","lastNameFirst":"McNally, Jim","belongsToAP":false,"belongsToME":false},{"name":"Michal Harding","nhsNo":"159 932 818","status":6,"isNeoNatal":false,"age":"79 years old","causeOfDeath":{"1a":"Intraperitoneal haemorrhage","1b":"Metastases in liver","1c":"From primary adenocarcinoma of ascending colon","1d":"","1e":"Non-insulin dependent diabetes mellitus"},"dateOfDeath":"27 April 2024","id":"U7ZQBIKV7-24","lastNameFirst":"Harding, Michal","belongsToAP":false,"belongsToME":false},{"name":"Phoebe Parmar","nhsNo":"328 142 5203","status":6,"isNeoNatal":false,"age":"81 years old","causeOfDeath":{"1a":"Bronchopneumonia (hospital acquired meticillin resistant Staph aureus)","1b":"Multiple myeloma","1c":"","1d":"","1e":"Chronic obstructive airways disease"},"dateOfDeath":"27 April 2024","id":"LZVSHY6O2-24","lastNameFirst":"Parmar, Phoebe","belongsToAP":false,"belongsToME":true},{"name":"Nicole Pike","nhsNo":"212 654 8618","status":6,"isNeoNatal":false,"age":"87 years old","causeOfDeath":{"1a":"Renal failure","1b":"Necrotising-proliferative nephropathy","1c":"Systemic lupus erythematosus","1d":"","1e":"Raynaud’s phenomenon and vasculitis"},"dateOfDeath":"27 April 2024","id":"HPSXXMUY5-24","lastNameFirst":"Pike, Nicole","belongsToAP":false,"belongsToME":false},{"name":"Tracy Higgins","nhsNo":"478 313 3039","status":6,"isNeoNatal":false,"age":"82 years old","causeOfDeath":{"1a":"Intraventricular haemorrhage","1b":"Warfarin anticoagulation","1c":"Atrial fibrillation","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"3VJQLWFHO-24","lastNameFirst":"Higgins, Tracy","belongsToAP":false,"belongsToME":false},{"name":"Ewa Hulme","nhsNo":"734 642 0473","status":6,"isNeoNatal":false,"age":"73 years old","causeOfDeath":{"1a":"Septicaemia - fully sensitive staphylococcus aureus","1b":"Gangrene of both feet due to peripheral vascular disease","1c":"Non-insulin-dependent diabetes mellitus","1d":"","1e":"Ischaemic heart disease"},"dateOfDeath":"29 April 2024","id":"HZJBGTUPQ-24","lastNameFirst":"Hulme, Ewa","belongsToAP":false,"belongsToME":false},{"name":"Cathryn James","nhsNo":"284 878 8988","status":6,"isNeoNatal":false,"age":"74 years old","causeOfDeath":{"1a":"Pneumococcal pneumonia","1b":"Influenza A","1c":"","1d":"","1e":"Ischaemic heart disease"},"dateOfDeath":"26 April 2024","id":"KTUVGHDMG-24","lastNameFirst":"James, Cathryn","belongsToAP":true,"belongsToME":false},{"name":"James Burton","nhsNo":"529 823 474","status":6,"isNeoNatal":false,"age":"83 years old","causeOfDeath":{"1a":"Liver failure","1b":"Hepatocellular carcinoma","1c":"Chronic Hepatitis B infection","1d":"","1e":"Congestive cardiac failure"},"dateOfDeath":"28 April 2024","id":"D5NZOQOFPO-24","lastNameFirst":"Burton, James","belongsToAP":true,"belongsToME":false},{"name":"Ruby Mehta","nhsNo":"243 263 695","status":6,"isNeoNatal":false,"age":"71 years old","causeOfDeath":{"1a":"Intraperitoneal haemorrhage","1b":"Metastases in liver","1c":"From primary adenocarcinoma of ascending colon","1d":"","1e":"Non-insulin dependent diabetes mellitus"},"dateOfDeath":"29 April 2024","id":"QWT2RPAEYS-24","lastNameFirst":"Mehta, Ruby","belongsToAP":false,"belongsToME":false},{"name":"Glynn Dixon","nhsNo":"447 593 5480","status":6,"isNeoNatal":false,"age":"77 years old","causeOfDeath":{"1a":"Lung metastases","1b":"From testicular teratoma","1c":"","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"5XYA4S74KD-24","lastNameFirst":"Dixon, Glynn","belongsToAP":false,"belongsToME":false},{"name":"Jacqueline Prince","nhsNo":"151 359 8222","status":6,"isNeoNatal":false,"age":"88 years old","causeOfDeath":{"1a":"Intraventricular haemorrhage","1b":"Warfarin anticoagulation","1c":"Atrial fibrillation","1d":"","1e":""},"dateOfDeath":"26 April 2024","id":"Q3AWOWKAU-24","lastNameFirst":"Prince, Jacqueline","belongsToAP":true,"belongsToME":false},{"name":"Beverley Fisher","nhsNo":"695 212 6253","status":6,"isNeoNatal":false,"age":"73 years old","causeOfDeath":{"1a":"Subarachnoid haemorrhage","1b":"Ruptured aneurysm of anterior communicating artery","1c":"","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"ONPOUSPHYF-24","lastNameFirst":"Fisher, Beverley","belongsToAP":false,"belongsToME":false},{"name":"Beata Walter","nhsNo":"386 794 7259","status":6,"isNeoNatal":true,"age":"4 days old","causeOfDeath":{"1a":"Birth asphyxia","1b":"","1c":"","1d":"","1e":""},"dateOfDeath":"26 April 2024","id":"M7KHS6NP6-24","lastNameFirst":"Walter, Beata","belongsToAP":true,"belongsToME":false},{"name":"Suzanne Price","nhsNo":"180 000 0372","status":6,"isNeoNatal":false,"age":"73 years old","causeOfDeath":{"1a":"Pneumococcal pneumonia","1b":"Influenza A","1c":"","1d":"","1e":"Ischaemic heart disease"},"dateOfDeath":"27 April 2024","id":"YI7GPNPOFI-24","lastNameFirst":"Price, Suzanne","belongsToAP":true,"belongsToME":false},{"name":"Sybil Foster","nhsNo":"940 475 1871","status":6,"isNeoNatal":true,"age":"21 days old","causeOfDeath":{"1a":"Congenital heart defect","1b":"","1c":"","1d":"","1e":""},"dateOfDeath":"27 April 2024","id":"XF4ZABQQWA-24","lastNameFirst":"Foster, Sybil","belongsToAP":false,"belongsToME":false},{"name":"Carl Bennett","nhsNo":"703 489 8310","status":6,"isNeoNatal":false,"age":"77 years old","causeOfDeath":{"1a":"Old age","1b":"","1c":"","1d":"","1e":"Non-insulin dependent diabetes mellitus, essential hypertension and diverticular disease"},"dateOfDeath":"27 April 2024","id":"GL442KQIZH-24","lastNameFirst":"Bennett, Carl","belongsToAP":false,"belongsToME":true},{"name":"Tyrone Brooks","nhsNo":"322 562 6459","status":6,"isNeoNatal":true,"age":"17 days old","causeOfDeath":{"1a":"Maple syrup urine disease","1b":"","1c":"","1d":"","1e":""},"dateOfDeath":"26 April 2024","id":"CSWMVTI3TD-24","lastNameFirst":"Brooks, Tyrone","belongsToAP":false,"belongsToME":true},{"name":"Melanie Willis","nhsNo":"366 179 0300","status":6,"isNeoNatal":false,"age":"72 years old","causeOfDeath":{"1a":"Intraventricular haemorrhage","1b":"Warfarin anticoagulation","1c":"Atrial fibrillation","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"3KM4UH3TTC-24","lastNameFirst":"Willis, Melanie","belongsToAP":false,"belongsToME":false},{"name":"Tracie Weeks","nhsNo":"561 607 4783","status":6,"isNeoNatal":false,"age":"87 years old","causeOfDeath":{"1a":"End-stage renal failure","1b":"Diabetic nephropathy","1c":"Insulin dependent diabetes mellitus","1d":"","1e":""},"dateOfDeath":"28 April 2024","id":"74F5H6PIDN-24","lastNameFirst":"Weeks, Tracie","belongsToAP":false,"belongsToME":false}] %}
+{% extends "layouts/main_cy-en.html" %}
+
+{% block pageTitle %}
+Archive data
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds govuk-!-margin-top-8">
+
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="patient-data">
+          Archive data
+        </label>
+      </h1>
+      <div id="patient-data-hint" class="govuk-hint">
+        Information stored in the variable "data", passed to the <a href="archive">archive</a> page.
+      </div>
+      <textarea class="govuk-textarea" id="patient-data" name="moreDetail" rows="5" aria-describedby="patient-data-hint">{{ data | dump }}</textarea>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    //
+    // PLEASE NOTE:
+    // This code take the data from above and modifies it, outputting the result into
+    // the textarea shown when you view the page. It is used to tweak stuff (like the dates) 
+    // for testing
+    //
+    // If you want to update the data, you can copy/pase from the textarea into the first line above 
+    //
+
+    const textArea = document.querySelector('#patient-data');
+    const json = [];
+
+    const names = [
+      'Kathryn Moore',
+      'Annette Flynn',
+      'Lynne North',
+      'Ibrahim Campbell',
+      'Louise Paul',
+      'Leo Sumner',
+      'Ismail Lawson',
+      'Gareth Stanley',
+      'Patricia Parker',
+      'Imogen Potts',
+      'Austin Bruce',
+      'Alexander Gould',
+      'Katharine Hough',
+      'Fay Khan',
+      'Sarah Bradford',
+      'Natalia Sharman',
+      'Harriet Howes',
+      'Olive McCormick',
+      'Olga Farr',
+      'Karin Lister',
+      'Leanne Wakefield',
+      'Jim McNally',
+      'Michal Harding',
+      'Phoebe Parmar',
+      'Nicole Pike',
+      'Tracy Higgins',
+      'Ewa Hulme',
+      'Cathryn James',
+      'James Burton',
+      'Ruby Mehta',
+      'Glynn Dixon',
+      'Jacqueline Prince',
+      'Beverley Fisher',
+      'Beata Walter',
+      'Suzanne Price',
+      'Sybil Foster',
+      'Carl Bennett',
+      'Tyrone Brooks',
+      'Melanie Willis',
+      'Tracie Weeks'
+    ];
+
+    // {'1a':'','1b':'','1c':'','1d':'','1e':''}
+
+    const generalCOD = [
+      {'1a':'Cerebral infarction','1b':'Thrombosis of basilar artery','1c':'Cerebrovascular atherosclerosis','1d':'','1e':''},
+      {'1a':'Post-transplant lymphoma','1b':'Immunosuppression following renal transplant','1c':'Glomerulonephrosis due to insulin dependent diabetes mellitus','1d':'','1e':'Recurrent urinary tract infections'},
+      {'1a':'Cardiorespiratory failure','1b':'Ischaemic heart disease and chronic obstructive airways disease','1c':'','1d':'','1e':'Osteoarthritis'},
+      {'1a':'Hepatic failure','1b':'Liver cirrhosis','1c':'Chronic hepatitis C infection and alcoholism','1d':'','1e':''},
+      {'1a':'Pathological fractures of femoral neck and thoracic vertebrae','1b':'Severe osteoporosis','1c':'Old age','1d':'','1e':'Fibrosing alveolitis'},
+      {'1a':'Old age','1b':'','1c':'','1d':'','1e':'Non-insulin dependent diabetes mellitus, essential hypertension and diverticular disease'},
+      {'1a':'Renal failure','1b':'Necrotising-proliferative nephropathy','1c':'Systemic lupus erythematosus','1d':'','1e':'Raynaud’s phenomenon and vasculitis'},
+      {'1a':'Liver failure','1b':'Hepatocellular carcinoma','1c':'Chronic Hepatitis B infection','1d':'','1e':'Congestive cardiac failure'},
+      {'1a':'Subarachnoid haemorrhage','1b':'Ruptured aneurysm of anterior communicating artery','1c':'','1d':'','1e':''},
+      {'1a':'Intraventricular haemorrhage','1b':'Warfarin anticoagulation','1c':'Atrial fibrillation','1d':'','1e':''},
+      {'1a':'Carcinomatosis','1b':'Small cell carcinoma of left main bronchus','1c':'Heavy smoker','1d':'','1e':'Hypertension, cerebral arteriosclerosis, ischaemic heart disease'},
+      {'1a':'Intraperitoneal haemorrhage','1b':'Metastases in liver','1c':'From primary adenocarcinoma of ascending colon','1d':'','1e':'Non-insulin dependent diabetes mellitus'},
+      {'1a':'Pathological fractures of left shoulder, spine and shaft of right femur','1b':'Widespread skeletal secondaries','1c':'Primary adenocarcinoma of breast','1d':'','1e':'Hypercalcaemia'},
+      {'1a':'Lung metastases','1b':'From testicular teratoma','1c':'','1d':'','1e':''},
+      {'1a':'Massive haemoptysis','1b':'Primary small cell carcinoma of left main bronchus','1c':'','1d':'','1e':'Primary adenocarcinoma of prostate'},
+      {'1a':'Multiple organ failure','1b':'Poorly differentiated metastases throughout abdominal cavity','1c':'Unknown primary site','1d':'','1e':''},
+      {'1a':'Neutropenic sepsis','1b':'Acute myeloid leukaemia','1c':'','1d':'','1e':''},
+      {'1a':'Haemorrhagic gastritis','1b':'Chronic lymphocytic leukaemia','1c':'','1d':'','1e':'Myocardial ischaemia, valvular heart disease'},
+      {'1a':'End-stage renal failure','1b':'Diabetic nephropathy','1c':'Insulin dependent diabetes mellitus','1d':'','1e':''},
+      {'1a':'Septicaemia - fully sensitive staphylococcus aureus','1b':'Gangrene of both feet due to peripheral vascular disease','1c':'Non-insulin-dependent diabetes mellitus','1d':'','1e':'Ischaemic heart disease'},
+      {'1a':'Bilateral pneumothoraces','1b':'Multiple bronchopulmonary fistulae','1c':'Extensive, cavitating pulmonary tuberculosis (smear and culture positive)','1d':'','1e':'Iron deficiency anaemia; ventilator associated pseudomonas pneumonia'},
+      {'1a':'Clostridium difficile pseudomembranous colitis','1b':'Multiple antibiotic therapy','1c':'Community acquired pneumonia with severe sepsis','1d':'','1e':'Immobility, polymyalgia rheumatica, osteoporosis'},
+      {'1a':'Bronchopneumonia (hospital acquired meticillin resistant Staph aureus)','1b':'Multiple myeloma','1c':'','1d':'','1e':'Chronic obstructive airways disease'},
+      {'1a':'Carcinomatosis and renal failure','1b':'Adenocarcinoma','1c':'','1d':'','1e':'Chronic obstructive airways disease and catheter associated Escherichia coli urinary tract infection'},
+      {'1a':'Pneumococcal pneumonia','1b':'Influenza A','1c':'','1d':'','1e':'Ischaemic heart disease'},
+      {'1a':'Bronchopneumonia','1b':'Immobility and wasting','1c':'Alzheimer’s disease','1d':'','1e':''},
+      {'1a':'Pulmonary embolism','1b':'Fractured neck of femur','1c':'Tripped on loose floor rug at home','1d':'','1e':'Left sided weakness and difficulty with balance since haemorrhagic stroke; hemiarthroplasty'},
+      {'1a':'Carcinomatosis','1b':'Bronchogenic carcinoma upper lobe left lung','1c':'Smoked 30 cigarettes a day','1d':'','1e':'Chronic bronchitis and ischaemic heart disease'},
+      {'1a':'Hepatic encephalopathy','1b':'Alcoholic liver cirrhosis','1c':'','1d':'','1e':'Difficult to control insulin dependent diabetes'}
+    ];
+
+    const neoNatalCOD = [
+      {'1a':'Congenital heart defect','1b':'','1c':'','1d':'','1e':''},
+      {'1a':'Birth asphyxia','1b':'','1c':'','1d':'','1e':''},
+      {'1a':'Sepsis','1b':'Bacterial infection','1c':'','1d':'','1e':''},
+      {'1a':'Respiratory distress syndrome','1b':'Prematurity','1c':'','1d':'','1e':''},
+      {'1a':'Sudden Infant Death Syndrome (SIDS)','1b':'','1c':'','1d':'','1e':''},
+      {'1a':'Necrotizing enterocolitis','1b':'Prematurity','1c':'','1d':'','1e':''},
+      {'1a':'Intracranial hemorrhage','1b':'Prematurity','1c':'','1d':'','1e':''},
+      {'1a':'Pulmonary hypoplasia','1b':'Diaphragmatic hernia','1c':'','1d':'','1e':''},
+      {'1a':'Maple syrup urine disease','1b':'','1c':'','1d':'','1e':''}
+    ];
+
+    const _generateNHSNumber = function () {
+
+      const randomNumber = Math.floor(Math.random() * 10000000000);
+      let numberString = randomNumber.toString();
+      numberString = numberString.slice(0, 3) + ' ' + numberString.slice(3, 6) + ' ' + numberString.slice(6);
+
+      return numberString;
+    }
+
+    function _generateReferenceNumber() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+      const suffix = '-24';
+
+      // Randomly decide the length between 9 and 10
+      const randomLength = Math.floor(Math.random()*2) + 9;
+
+      let result = '';
+
+      // Generate random characters based on the calculated length
+      for (let i = 0; i < randomLength; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters[randomIndex];
+      }
+
+      // Append the suffix
+      result += suffix;
+
+      return result;
+    }
+
+    // Update the data
+    /*
+    names.forEach(function (name) {
+
+      const row = {};
+      row.name = name;
+
+      const currentDates = ['26 April 2024', '27 April 2024', '28 April 2024', '29 April 2024'];
+
+      // Feel free to uncomment these if you want to regenerate stuff, like dates, statuses etc...
+
+      row.nhsNo = _generateNHSNumber();
+      row.status = 6;
+      //row.status = Math.round(Math.random()*5); // Should generate a random number between 0-5
+      
+      row.isNeoNatal = ( Math.round(Math.random()*5) === 0 ) ? true : false;
+      if( row.isNeoNatal ){
+        // Neo-Natal
+        row.age = (Math.round(Math.random()*27)+1) + ' days old';
+        row.causeOfDeath = neoNatalCOD[Math.round(Math.random()*(neoNatalCOD.length-1))];
+      } else {
+        row.age = (Math.round(Math.random()*20)+70) + ' years old';
+        row.causeOfDeath = generalCOD[Math.round(Math.random()*(generalCOD.length-1))];
+      }
+
+      row.dateOfDeath = currentDates[Math.round(Math.random()*(currentDates.length-1))];
+      row.id = _generateReferenceNumber();
+
+      let nameArr = ( row.name ) ? row.name.split(' ') : ['First','Last'];
+      nameArr.unshift(nameArr.pop());
+
+      row.lastNameFirst = nameArr[0];
+      nameArr.shift();
+
+      row.lastNameFirst += ', ' + nameArr.join(' ');
+
+      row.belongsToAP = ( Math.round(Math.random()*3) === 0 ) ? true : false;
+      row.belongsToME = ( row.belongsToAP === false && Math.round(Math.random()*2) === 0 ) ? true : false;
+
+      json.push(row);
+
+    });
+    
+
+    textArea.innerHTML = JSON.stringify(json);
+
+    */
+    
+    
+
+  });
+</script>
+
+
+{% endblock %}
