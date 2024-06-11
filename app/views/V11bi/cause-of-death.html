@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
+
 <div class="govuk-grid-row">
 
     {% if data['over-under-28'] == 'dpd66Or65RadioYes' %}<div class="govuk-grid-column-two-thirds">{% else %}<div class="govuk-grid-column-full">{% endif %}
@@ -820,7 +820,7 @@
 
   </div>
 </div>
-</main>
+
 
 {{ data | debugData | safe }}
 

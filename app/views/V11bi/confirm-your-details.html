@@ -13,9 +13,8 @@
 {% endblock %}
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
-<!-- SET VARIABLES -->
 
+<!-- SET VARIABLES -->
 {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
 
 {% if data['role-type'] == 'ap' %}
@@ -68,7 +67,7 @@
 
   </div>
 </div>
-</main>
+
 {{ data | debugData | safe }}
 
 
