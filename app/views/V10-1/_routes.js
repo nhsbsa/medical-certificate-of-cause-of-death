@@ -26,8 +26,6 @@ const axios = require('axios')
 // ************************************************************
 
 router.use((req, res, next) => {
-
-    req.session.data.version = version;
     
     let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
 

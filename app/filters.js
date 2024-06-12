@@ -259,9 +259,7 @@ addFilter('getFooterStatus', function(content) {
         lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
     }
 
-    let version = this.ctx.data.version;
-
-    const returnStr = ( this.ctx.data.debug === 'true' ) ? 'Currently acting ' + roleType + ' ' + path + ' ' + lang + '(' + version + ')' : '(' + version + ')';
+    const returnStr = ( this.ctx.data.debug === 'true' ) ? 'Currently acting ' + roleType + ' ' + path + ' ' + lang : '';
 
     return returnStr;
 

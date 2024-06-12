@@ -18,7 +18,6 @@ const axios = require('axios');
 
 router.use((req, res, next) => {
 
-    req.session.data.version = version;
     let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
 
     const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
