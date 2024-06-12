@@ -25,38 +25,38 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           </div>
               <div class="govuk-radios" data-module="govuk-radios">
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian">
+                    <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Asian or Asian British - Indian" {% if data['ethnicityDetail'] === 'Asian or Asian British - Indian' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
                       Indian
                     </label>
                   </div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Asian or Asian British - Pakistani">
+                    <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Asian or Asian British - Pakistani" {% if data['ethnicityDetail'] === 'Asian or Asian British - Pakistani' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
                       Pakistani
                     </label>
                   </div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Asian or Asian British - Bangladeshi">
+                    <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Asian or Asian British - Bangladeshi" {% if data['ethnicityDetail'] === 'Asian or Asian British - Bangladeshi' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
                       Bangladeshi
                     </label>
                   </div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Asian or Asian British - Chinese">
+                    <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Asian or Asian British - Chinese" {% if data['ethnicityDetail'] === 'Asian or Asian British - Chinese' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
                       Chinese
                     </label>
                   </div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Asian or Asian British - Other" data-aria-controls="conditional-ethnicityDetail-5">
+                    <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Asian or Asian British - Other" data-aria-controls="conditional-ethnicityDetail-5" {% if data['ethnicityDetail'] === 'Asian or Asian British - Other' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail-5">
                       Any other Asian background
                     </label>
                   </div>
                   <div class="govuk-radios__divider">or</div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="ethnicityDetail-7" name="ethnicityDetail" type="radio" value="Asian or Asian British - Not stated">
+                    <input class="govuk-radios__input" id="ethnicityDetail-7" name="ethnicityDetail" type="radio" value="Asian or Asian British - Not stated" {% if data['ethnicityDetail'] === 'Asian or Asian British - Not stated' %}checked {% endif %}/>
                     <label class="govuk-label govuk-radios__label" for="ethnicityDetail-7">
                       Not stated
                     </label>

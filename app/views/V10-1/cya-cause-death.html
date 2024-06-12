@@ -294,7 +294,7 @@
         </div>
 
         <!-- Pregnancy Contributed? -->
-       
+       {% if data['pregnancy-contributed'] %}
         <div class="govuk-summary-list__row">
           
           <dt class="govuk-summary-list__key" style="width:35%">
@@ -302,7 +302,7 @@
           </dt>
 
           <dd class="govuk-summary-list__value">
-            {{ data['pregnancy-contributed'] or 'Not applicable' }}
+            {{ data['pregnancy-contributed'] }}
           </dd>
           <dd></dd>
 
@@ -313,6 +313,7 @@
           </dd>
 
         </div>
+        {% endif %}
 
           
 

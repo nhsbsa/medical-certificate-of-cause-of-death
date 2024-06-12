@@ -33,16 +33,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio"
-                value="Yes">
+              <input class="govuk-radios__input" id="implant-removed-yes" name="implant-removed" type="radio" value="Yes" {% if data['implant-removed'] === 'Yes' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="implant-removed-yes">
                 Yes
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio"
-                value="No">
+              <input class="govuk-radios__input" id="implant-removed-no" name="implant-removed" type="radio" value="No" {% if data['implant-removed'] === 'No' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="implant-removed-no">
                 No
               </label>
