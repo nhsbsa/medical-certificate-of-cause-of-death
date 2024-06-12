@@ -85,8 +85,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="implant-yes" name="implant" type="radio" value="Yes"
-                                data-aria-controls="conditional-implant">
+                            <input class="govuk-radios__input" id="implant-yes" name="implant" type="radio" value="Yes" data-aria-controls="conditional-implant"{% if data['implant'] === 'Yes' %}checked {% endif %}/>
                             <label class="govuk-label govuk-radios__label" for="implant-yes">
                                 Yes
                             </label>
@@ -97,11 +96,11 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                                 <label class="govuk-label" for="implant-details">
                                     Enter the details and location of any implants
                                 </label>
-                                <textarea class="govuk-textarea" id="implant-details" name="implant-details" rows="3"></textarea>
+                                <textarea class="govuk-textarea" id="implant-details" name="implant-details" rows="3">{{ data['implant-details'] }}</textarea>
                             </div>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="implant-no" name="implant" type="radio" value="No">
+                            <input class="govuk-radios__input" id="implant-no" name="implant" type="radio" value="No" {% if data['implant'] === 'No' %}checked {% endif %}/>
                             <label class="govuk-label govuk-radios__label" for="implant-no">
                                 No
                             </label>

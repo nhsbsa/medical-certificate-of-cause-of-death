@@ -8,6 +8,10 @@
 
 $govuk-new-typography-scale: true;
 
+.govuk-main-wrapper > .govuk-tag {
+  max-width: none;
+}
+
 /* ACCOUNT SIGNED-IN */
 
 .account-signed-in {

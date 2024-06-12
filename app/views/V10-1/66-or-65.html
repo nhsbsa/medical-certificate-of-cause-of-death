@@ -32,14 +32,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="over-under-28-yes" name="over-under-28" type="radio" value="yes">
+              <input class="govuk-radios__input" id="over-under-28-yes" name="over-under-28" type="radio" value="yes" {% if data['over-under-28'] === 'yes' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="over-under-28-yes">
                 Yes, the deceased was an infant less than 28 days old
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="over-under-28-no" name="over-under-28" type="radio" value="no">
+              <input class="govuk-radios__input" id="over-under-28-no" name="over-under-28" type="radio" value="no" {% if data['over-under-28'] === 'no' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="over-under-28-no">
                 No, the deceased was an adult or child 28 days old or over
               </label>

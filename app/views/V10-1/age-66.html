@@ -24,14 +24,17 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             </h1>
           </legend>
           <div class="govuk-input__wrapper">
-            <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66-input" name="age-66-input" type="text">
+            <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66-input" name="age-66-input" value="{{ data['age-66-input'] }}" type="text" />
 
             <select class="govuk-select" id="age-66-select" name="age-66-select" aria-describedby="age-66-select-hint">
-              <option value="select age unit" selected>Select age unit</option>
+              <option value="" selected>Select age unit</option>
               <option value="years old">Years old</option>
               <option value="months old">Months old</option>
               <option value="days old">Days old</option>
             </select>
+            <script>document.querySelector('#age-66-select').value = "{{ data['age-66-select'] }}";</script>
+
+
           </div>
         </fieldset>
         </div>

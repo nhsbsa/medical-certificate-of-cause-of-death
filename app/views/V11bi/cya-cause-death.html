@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
+
 {% set hr = '<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2" />' %}
 {% set englishLabel = '<strong>'+data.translations.globalEnglish[data.lang]+'</strong><br />' %}
 {% set welshLabel = '<strong>'+data.translations.globalWelsh[data.lang]+'</strong><br />' %}
@@ -309,7 +309,7 @@
 
   </div>
 </div>
-</main>
+
 {{ data | debugData | safe }}
 
 {% endblock %}

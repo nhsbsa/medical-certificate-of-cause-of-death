@@ -5,7 +5,6 @@
 
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -66,6 +65,70 @@
  </div>
 
 
+<style>
+
+    @media ( max-width: 600px ) {
+
+      .govuk-table__row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .govuk-table__row .govuk-table__header,
+      .govuk-table__row .govuk-table__cell {
+        border-bottom: none;
+        display: block;
+        width: calc( 30% - 20px );
+      }
+
+      .govuk-table__row .govuk-table__header:first-child,
+      .govuk-table__row .govuk-table__cell:first-child {
+        width: calc( 40% - 20px );
+      }
+
+      .govuk-table__row .govuk-table__header:last-child {
+        width: 100%;
+        border-top: 1px solid #b1b4b6;
+        border-bottom: 1px solid #b1b4b6;
+      }
+
+      
+      .govuk-table__row .govuk-table__cell:last-child {
+        width: 100%;
+        padding-top: 0;
+        border-bottom: 1px solid #b1b4b6;
+      }
+
+      .govuk-table__cell .govuk-tag {
+        width: auto;
+        text-align: center;
+        margin: 0;
+        white-space: nowrap;
+        display: block;
+        max-width: none;
+      }
+
+
+      /* compromise */
+
+      .govuk-table__head .govuk-table__row .govuk-table__header {
+        border-bottom: 1px solid #b1b4b6;
+      }
+
+      .govuk-table__row .govuk-table__header:nth-last-child(2) {
+        position:absolute !important;width:1px !important;height:1px !important;margin:0 !important;padding:0 !important;overflow:hidden !important;clip:rect(0 0 0 0) !important;-webkit-clip-path:inset(50%) !important;clip-path:inset(50%) !important;border:0 !important;white-space:nowrap !important;-webkit-user-select:none;-ms-user-select:none;user-select:none
+      }
+
+      .govuk-table__row .govuk-table__header:last-child {
+        width: calc( 30% - 20px );
+        padding-top: 10px;
+        border-top: none;
+      }
+
+
+    }
+
+</style>
 
 {% if data.useSearch == 'true' or data.useFilters == 'true' %}
 
@@ -79,6 +142,7 @@
   .input-button-group > .govuk-button {
     margin: 0 0 0 10px;
   }
+  
 
 </style>
 
@@ -226,7 +290,7 @@
     </div>
 
 </div>
-</main>
+
 {{ data | debugData | safe }}
 
 

@@ -31,32 +31,32 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="White - English, Welsh, Scottish, Northern Irish or British">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="White - English, Welsh, Scottish, Northern Irish or British" {% if data['ethnicityDetail'] === 'White - English, Welsh, Scottish, Northern Irish or British' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
                             English, Welsh, Scottish, Northern Irish or British
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="White - Irish">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="White - Irish" {% if data['ethnicityDetail'] === 'White - Irish' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
                             Irish
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="White - Gypsy or Irish Traveller">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="White - Gypsy or Irish Traveller" {% if data['ethnicityDetail'] === 'White - Gypsy or Irish Traveller' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
                             Gypsy or Irish Traveller
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="White - Other" data-aria-controls="conditional-ethnicityDetail-4">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="White - Other" data-aria-controls="conditional-ethnicityDetail-4" {% if data['ethnicityDetail'] === 'White - Other' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
                             Any other White background
                           </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="White - Not stated">
+                          <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="White - Not stated" {% if data['ethnicityDetail'] === 'White - Not stated' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-6">
                             Not stated
                           </label>

@@ -4,7 +4,6 @@
   #}
   
   {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-  {% set mainClasses = "govuk-!-padding-top-0" %}
   
   {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
   {% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
@@ -72,6 +71,7 @@
       </div>
     </div>
 
+    <!-- LOGGED IN BAR -->
     {% if data.loggedIn === 'true' %}
       <div class="govuk-width-container">
         <div class="govuk-grid-row">
@@ -88,47 +88,10 @@
             </div>
         </div>
       </div>
-    {% else %}
-      {% if data.bilingual !== 'true' %}
-        <hr class="govuk-section-break govuk-section-break--l">
-      {% endif %}
     {% endif %}
 
 
-    <!--
-
-      V11
-
-    <div class="govuk-width-container">
-      <div class="govuk-grid-row">
-          <div class="govuk-grid-column-full">
-              <div class="account-signed-in">
-                <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item">
-                    {% if data ['role-type'] == 'ap' %}Ashley Phillips{% else %}Alera Singh{% endif %}
-                  </li>
-                  <li class="account-signed-in__list-item">{% if data['lang'] == "cy" %}Rhif CMC: 12345678 {% else %}GMC no: 12345678 {% endif %}</li>
-                  <li class="account-signed-in__list-item">
-                    {% if data ['role-type'] == 'ap' %}
-                      attending.practitioner@nhs.net
-                    {% elseif data ['role-type'] == 'me' %}
-                      medical.examiner@nhs.net
-                    {% else %}
-                      your.name@nhs.net
-                    {% endif %}
-                  </li>
-                  <li class="account-signed-in__list-item">
-                    <a href="../index">Sign out</a>
-                  </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-    </div>
-    -->
-
-
-
+    <!-- BILINGUAL TOGGLE -->
     {% if data['bilingual'] == "true" %}
     <div class="govuk-width-container">
       <div class="govuk-grid-row">

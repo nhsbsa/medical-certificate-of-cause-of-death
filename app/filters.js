@@ -33,19 +33,16 @@ addFilter('getFeedbackLink', function( content ){
 //
 addFilter('getCauseOfDeathLink', function( content ){
 
-
     // content: JSON data for the patient
     
     let arr = [];
+    const yes = ( this.ctx.data.version === 'V10-1' ) ? 'yes' : 'dpd66Or65RadioYes';
+    const no = ( this.ctx.data.version === 'V10-1' ) ? 'no' : 'dpd66Or65RadioNo';
 
     if( content.isNeoNatal === true ){
-        arr.push('over-under-28=yes');
+        arr.push('over-under-28='+yes);
     } else {
-        arr.push('over-under-28=no');
-    }
-
-    if( content.causeOfDeathExtras ){
-        arr.push( content.causeOfDeathExtras );
+        arr.push('over-under-28='+no);
     }
 
     let link = 'cause-of-death';
@@ -60,6 +57,7 @@ addFilter('getCauseOfDeathLink', function( content ){
 //
 // GET CAUSE OF DEATH
 //
+/*
 addFilter('getCauseOfDeath', function( content, patientStatus, fieldName ){
 
     // content: JSON data for the patient
@@ -95,6 +93,7 @@ addFilter('getCauseOfDeath', function( content, patientStatus, fieldName ){
     return causeOfDeath;
 
 })
+*/
 
 
 //

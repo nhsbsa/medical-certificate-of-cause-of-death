@@ -32,32 +32,32 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black Caribbean">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black Caribbean" {% if data['ethnicityDetail'] === 'Mixed and multiple - White and Black Caribbean' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
                             White and Black Caribbean
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black African">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Black African" {% if data['ethnicityDetail'] === 'Mixed and multiple - White and Black African' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
                             White and Black African
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Asian">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Mixed and multiple - White and Asian" {% if data['ethnicityDetail'] === 'Mixed and multiple - White and Asian' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
                             White and Asian
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Mixed and multiple - Other" data-aria-controls="conditional-ethnicityDetail-4">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Mixed and multiple - Other" data-aria-controls="conditional-ethnicityDetail-4" {% if data['ethnicityDetail'] === 'Mixed and multiple - Other' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
                             Any other mixed or multiple ethnic background
                           </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="Mixed and multiple - Not stated">
+                          <input class="govuk-radios__input" id="ethnicityDetail-6" name="ethnicityDetail" type="radio" value="Mixed and multiple - Not stated" {% if data['ethnicityDetail'] === 'Mixed and multiple - Not stated' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-6">
                             Not stated
                           </label>

@@ -34,7 +34,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                             <div class="govuk-input__wrapper govuk-!-margin-bottom-5">
                               
-                            <input class="govuk-input govuk-input--width-3" id="Hours" name="Hours" type="text">
+                            <input class="govuk-input govuk-input--width-3" id="Hours" name="Hours" value="{{ data['Hours'] }}" type="text" />
                               
                                   <div class="govuk-input__suffix" aria-hidden="true">
                                     Hours
@@ -48,7 +48,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                             <div class="govuk-input__wrapper">
                       
-                                <input class="govuk-input govuk-input--width-3" id="Minutes" name="Minutes" type="text">
+                                <input class="govuk-input govuk-input--width-3" id="Minutes" name="Minutes" value="{{ data['Minutes'] }}" type="text" />
                       
                                   <div class="govuk-input__suffix" aria-hidden="true">
                                     Minutes

@@ -25,24 +25,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnancy-contributed-yes" name="pregnancy-contributed" type="radio"
-                value="Yes">
+              <input class="govuk-radios__input" id="pregnancy-contributed-yes" name="pregnancy-contributed" type="radio" value="Yes" {% if data['pregnancy-contributed'] === 'Yes' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-yes">
                 Yes
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnancy-contributed-no" name="pregnancy-contributed" type="radio"
-                value="No">
+              <input class="govuk-radios__input" id="pregnancy-contributed-no" name="pregnancy-contributed" type="radio" value="No" {% if data['pregnancy-contributed'] === 'No' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-no">
                 No
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnancy-contributed-unknown" name="pregnancy-contributed" type="radio"
-                value="Unknown">
+              <input class="govuk-radios__input" id="pregnancy-contributed-unknown" name="pregnancy-contributed" type="radio" value="Unknown" {% if data['pregnancy-contributed'] === 'Unknown' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnancy-contributed-unknown">
                 Unknown
               </label>

@@ -36,8 +36,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="dod-day">
                   Day
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dod-day" name="dod-day"
-                  type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dod-day" name="dod-day" value="{{ data['dod-day'] }}" type="text" pattern="[0-9]*" inputmode="numeric" />
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -45,8 +44,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="dod-month">
                   Month
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dod-month" name="dod-month"
-                  type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dod-month" name="dod-month" value="{{ data['dod-month'] }}" type="text" pattern="[0-9]*" inputmode="numeric" />
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -54,8 +52,7 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="dod-year">
                   Year
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dod-year" name="dod-year"
-                  type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dod-year" name="dod-year" value="{{ data['dod-year'] }}" type="text" pattern="[0-9]*" inputmode="numeric" />
               </div>
             </div>
           </div>

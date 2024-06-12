@@ -32,16 +32,14 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="caused-by-employment-yes" name="caused-by-employment" type="radio"
-                value="Yes">
+              <input class="govuk-radios__input" id="caused-by-employment-yes" name="caused-by-employment" type="radio" value="Yes" {% if data['caused-by-employment'] === 'Yes' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="caused-by-employment-yes">
                 Yes
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="caused-by-employment-no" name="caused-by-employment" type="radio"
-                value="No">
+              <input class="govuk-radios__input" id="caused-by-employment-no" name="caused-by-employment" type="radio" value="No" {% if data['caused-by-employment'] === 'No' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="caused-by-employment-no">
                 No
               </label>

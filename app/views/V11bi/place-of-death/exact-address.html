@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
 
-{{ govukBackLink({
+  {{ govukBackLink({
     text: data.translations.globalBackLink[data.lang],
     href: 'javascript:history.back()'
 }) }}
@@ -15,13 +15,13 @@
 {% endblock %}
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
 
-      <form action="death-location" method="post" novalidate>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-        {% call govukFieldset({
+    <form action="death-location" method="post" novalidate>
+
+      {% call govukFieldset({
         legend: {
           text: data.translations.dpdOtherLocationManualEntryPageTitle[data.lang],
           classes: 'govuk-fieldset__legend--l',
@@ -29,16 +29,16 @@
         }
       }) %}
 
-          {{ govukInput({
-                label: { 
-                  text: data.translations.dpdOtherLocationManualEntryAddressLine1[data.lang]
+      {{ govukInput({
+              label: { 
+                text: data.translations.dpdOtherLocationManualEntryAddressLine1[data.lang]
                 },
                 value: data['address-line-1'],
                 id: 'address-line-1',
                 name: 'address-line-1'
             }) }}
 
-          {{ govukInput({
+        {{ govukInput({
               label: { 
                 text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang]
               },
@@ -47,7 +47,7 @@
               name: 'address-line-2'
           }) }}
 
-          {{ govukInput({
+        {{ govukInput({
                 label: { 
                   text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang]
                 },
@@ -57,7 +57,7 @@
                 classes: 'govuk-input--width-20'
             }) }}
 
-          {{ govukInput({
+        {{ govukInput({
               label: { 
                 text: data.translations.dpdOtherLocationManualEntryCounty[data.lang]
               },
@@ -68,7 +68,7 @@
               classes: 'govuk-input--width-10'
           }) }}
 
-          {{ govukInput({
+        {{ govukInput({
             label: { 
               text: data.translations.dpdOtherLocationManualEntryPostcode[data.lang]
             },
@@ -80,8 +80,6 @@
         }) }}
 
         {% endcall %}
-
-
 
         {% if data.bilingual == 'true' %}
 
@@ -139,20 +137,19 @@
 
         {% endif %}
 
-
         {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
       }) }}
 
-      <p class="govuk-!-margin-bottom-6">
+        <p class="govuk-!-margin-bottom-6">
           <a href="another-location-postcode">{{ data.translations.dpdOtherLocationPostcodeLink[data.lang] }}</a>
         </p>
 
       </form>
 
-    </div>
   </div>
-</main>
-  {{ data | debugData | safe }}
+</div>
+
+{{ data | debugData | safe }}
 
 {% endblock %}

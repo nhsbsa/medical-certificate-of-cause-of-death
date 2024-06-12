@@ -32,20 +32,20 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Other ethnic group - Arab">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Other ethnic group - Arab" {% if data['ethnicityDetail'] === 'Other ethnic group - Arab' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
                             Arab
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Other ethnic group - Other" data-aria-controls="conditional-ethnicityDetail-2">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Other ethnic group - Other" data-aria-controls="conditional-ethnicityDetail-2" {% if data['ethnicityDetail'] === 'Other ethnic group - Other' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
                             Any other ethnic group
                           </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Other ethnic group - Not stated">
+                          <input class="govuk-radios__input" id="ethnicityDetail-4" name="ethnicityDetail" type="radio" value="Other ethnic group - Not stated" {% if data['ethnicityDetail'] === 'Other ethnic group - Not stated' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-4">
                             Not known
                           </label>
