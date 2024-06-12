@@ -1,4 +1,4 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -31,24 +31,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         <label class="govuk-label" for="referring-mp-first-name">
           First name
         </label>
-        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-first-name"
-          name="referring-mp-first-name" type="text">
+        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-first-name" name="referring-mp-first-name" value="{{ data['referring-mp-first-name'] }}" type="text" />
       </div>
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="referring-mp-middle-name">
           Middle names (optional)
         </label>
-        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-middle-name"
-          name="referring-mp-middle-name" type="text">
+        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-middle-name" name="referring-mp-middle-name" value="{{ data['referring-mp-middle-name'] }}" type="text" />
       </div>
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="referring-mp-last-name">
           Last name
         </label>
-        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-last-name"
-          name="referring-mp-last-name" type="text">
+        <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="referring-mp-last-name" name="referring-mp-last-name" value="{{ data['referring-mp-last-name'] }}" type="text" />
       </div>
 
       <button class="govuk-button" type="submit">

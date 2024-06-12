@@ -31,48 +31,42 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <div class="govuk-radios">
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-not-applicable" name="pregnant-at-death" type="radio"
-                value="Not applicable">
+              <input class="govuk-radios__input" id="pregnant-not-applicable" name="pregnant-at-death" type="radio" value="Not applicable" {% if data['pregnant-at-death'] === 'Not applicable' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-not-applicable">
                 Not applicable
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-at-death-yes" name="pregnant-at-death" type="radio"
-                value="Pregnant at time of death">
+              <input class="govuk-radios__input" id="pregnant-at-death-yes" name="pregnant-at-death" type="radio" value="Pregnant at time of death" {% if data['pregnant-at-death'] === 'Pregnant at time of death' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-at-death-yes">
                 Pregnant at time of death
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-1-42-days" name="pregnant-at-death" type="radio"
-                value="Pregnant 1 to 42 days before death">
+              <input class="govuk-radios__input" id="pregnant-1-42-days" name="pregnant-at-death" type="radio" value="Pregnant 1 to 42 days before death" {% if data['pregnant-at-death'] === 'Pregnant 1 to 42 days before death' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-1-42-days">
                 Pregnant 1 to 42 days before death
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-43-days-and-over" name="pregnant-at-death" type="radio"
-                value="Pregnant 43 days to a year before death">
+              <input class="govuk-radios__input" id="pregnant-43-days-and-over" name="pregnant-at-death" type="radio" value="Pregnant 43 days to a year before death" {% if data['pregnant-at-death'] === 'Pregnant 43 days to a year before death' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-43-days-and-over">
                 Pregnant 43 days to a year before death
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-no" name="pregnant-at-death" type="radio"
-                value="Not pregnant">
+              <input class="govuk-radios__input" id="pregnant-no" name="pregnant-at-death" type="radio" value="Not pregnant" {% if data['pregnant-at-death'] === 'Not pregnant' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-no">
                 Not pregnant
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="pregnant-unknown" name="pregnant-at-death" type="radio"
-                value="Unknown">
+              <input class="govuk-radios__input" id="pregnant-unknown" name="pregnant-at-death" type="radio" value="Unknown" {% if data['pregnant-at-death'] === 'Unknown' %}checked {% endif %}/>
               <label class="govuk-label govuk-radios__label" for="pregnant-unknown">
                 Unknown
               </label>
@@ -90,5 +84,8 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
   </div>
 </div>
+
+{{ data | debugData | safe }}
+
 </main>
 {% endblock %}

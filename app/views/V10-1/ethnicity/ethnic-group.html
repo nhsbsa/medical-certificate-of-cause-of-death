@@ -30,38 +30,38 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
 
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-1" name="ethnic-group" type="radio" value="white">
+                          <input class="govuk-radios__input" id="ethnicity-1" name="ethnic-group" type="radio" value="white" {% if data['ethnic-group'] === 'white' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-1">
                             White
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-2" name="ethnic-group" type="radio" value="multiple">
+                          <input class="govuk-radios__input" id="ethnicity-2" name="ethnic-group" type="radio" value="multiple" {% if data['ethnic-group'] === 'multiple' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-2">
                             Mixed or multiple ethnic groups
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-3" name="ethnic-group" type="radio" value="asian">
+                          <input class="govuk-radios__input" id="ethnicity-3" name="ethnic-group" type="radio" value="asian" {% if data['ethnic-group'] === 'asian' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-3">
                             Asian or Asian British
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-4" name="ethnic-group" type="radio" value="black">
+                          <input class="govuk-radios__input" id="ethnicity-4" name="ethnic-group" type="radio" value="black" {% if data['ethnic-group'] === 'black' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-4">
                             Black, African, Caribbean or Black British
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-5" name="ethnic-group" type="radio" value="other">
+                          <input class="govuk-radios__input" id="ethnicity-5" name="ethnic-group" type="radio" value="other" {% if data['ethnic-group'] === 'other' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-5">
                             Other ethnic group
                           </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicity-6" name="ethnic-group" type="radio" value="skip">
+                          <input class="govuk-radios__input" id="ethnicity-6" name="ethnic-group" type="radio" value="Not known" {% if data['ethnic-group'] === 'Not known' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicity-6">
                             Not known
                           </label>

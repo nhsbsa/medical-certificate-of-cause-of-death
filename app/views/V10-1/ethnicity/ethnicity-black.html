@@ -30,26 +30,26 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
                     </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - African">
+                          <input class="govuk-radios__input" id="ethnicityDetail" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - African" {% if data['ethnicityDetail'] === 'Black, African, Caribbean or Black British - African' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail">
                             African
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Caribbean">
+                          <input class="govuk-radios__input" id="ethnicityDetail-2" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Caribbean" {% if data['ethnicityDetail'] === 'Black, African, Caribbean or Black British - Caribbean' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-2">
                             Caribbean
                           </label>
                         </div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Other" data-aria-controls="conditional-ethnicityDetail-3">
+                          <input class="govuk-radios__input" id="ethnicityDetail-3" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Other" data-aria-controls="conditional-ethnicityDetail-3" {% if data['ethnicityDetail'] === 'Black, African, Caribbean or Black British - Other' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-3">
                             Any other Black, African or Caribbean background
                           </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Not stated">
+                          <input class="govuk-radios__input" id="ethnicityDetail-5" name="ethnicityDetail" type="radio" value="Black, African, Caribbean or Black British - Not stated" {% if data['ethnicityDetail'] === 'Black, African, Caribbean or Black British - Not stated' %}checked {% endif %}/>
                           <label class="govuk-label govuk-radios__label" for="ethnicityDetail-5">
                             Not stated
                           </label>

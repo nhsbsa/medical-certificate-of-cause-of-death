@@ -2,6 +2,8 @@
 // CURRENT VERSION
 // ************************************************************
 
+let version = 'V11bi';
+
 const govukPrototypeKit = require('govuk-prototype-kit');
 const router = govukPrototypeKit.requests.setupRouter();
 
@@ -210,7 +212,7 @@ router.post( /location-born/, (req, res) => {
   let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
-    res.redirect('/V11bi/cya-deceased')
+    res.redirect('/'+version+'/cya-deceased')
   } else {
     res.redirect('triage-24-hours')
   }
@@ -239,14 +241,14 @@ router.post( /age-66/, (req, res) => {
 
 // Under 28
 router.post( /deceased-persons-age/, (req, res) => {
-          // grab value from the data store
-  let completeDeceased = req.session.data.deceasedComplete
-  // if the journey is complete send back to the 'check-your-details' page
-  if (completeDeceased === 'true') {
-    res.redirect('/V11bi/cya-deceased')
-  } else {
-    res.redirect('/V11bi/ethnicity/ethnic-group')
-  }
+    // grab value from the data store
+    let completeDeceased = req.session.data.deceasedComplete
+    // if the journey is complete send back to the 'check-your-details' page
+    if (completeDeceased === 'true') {
+        res.redirect('/'+version+'/cya-deceased')
+    } else {
+        res.redirect('/'+version+'/ethnicity/ethnic-group')
+    }
 });
 
 router.post( /age-65-hours/, (req, res) => {
@@ -254,7 +256,7 @@ router.post( /age-65-hours/, (req, res) => {
   let completeDeceased = req.session.data.deceasedComplete
   // if the journey is complete send back to the 'check-your-details' page
   if (completeDeceased === 'true') {
-    res.redirect('/V11bi/cya-deceased')
+    res.redirect('/'+version+'/cya-deceased')
   } else {
     res.redirect('ethnicity/ethnic-group')
   }
@@ -263,6 +265,7 @@ router.post( /age-65-hours/, (req, res) => {
 router.post( /ethnic-group/, (req,res) => {
     
     var ethnicGroup = req.session.data['ethnic-group'];
+    let completeDeceased = req.session.data.deceasedComplete;
 
     if (ethnicGroup === 'dpdEthnicGroupWhite' ){
         res.redirect('ethnicity-white');
@@ -276,11 +279,16 @@ router.post( /ethnic-group/, (req,res) => {
     } else if (ethnicGroup === 'dpdEthnicGroupBlackAfricanCaribbeanOrBlackBritish' ){
         res.redirect('ethnicity-black');
 
-    } else if (ethnicGroup === 'dpdEthnicGroupUnknown'){
-        res.redirect('../date-of-death');
+    } else if (ethnicGroup === 'dpdEthnicGroupOtherEthnicGroup'){
+        res.redirect('ethnicity-other');
 
     } else {
-        res.redirect('ethnicity-other');
+
+        if( completeDeceased === 'true' ){
+            res.redirect('../cya-deceased');
+        } else {
+            res.redirect('../date-of-death');
+        }
 
     }
 
@@ -292,7 +300,7 @@ router.post( /ethnicity/, (req, res) => {
         let completeDeceased = req.session.data.deceasedComplete
         // if the journey is complete send back to the 'check-your-details' page
         if (completeDeceased === 'true') {
-            res.redirect('/V11bi/cya-deceased')
+            res.redirect('/'+version+'/cya-deceased')
         } else {
             res.redirect('../date-of-death')
         }
@@ -399,35 +407,29 @@ router.post( /box-b/, (req, res) => {
 
 // What is the full name of the referring medical practioner (ME CERT)
 router.post( /name-of-referring-mp/, (req,res) => {
-
     let completeAfterDeath = req.session.data.afterDeathComplete;
-      
     if (completeAfterDeath === 'true') {
         res.redirect('cya-death-circumstances');
     } else {
         res.redirect('me-coroner-name');
     }
-
 });
 
 // What is the senior coroners full name (ME CERT)
 router.post( /me-coroner-name/, (req, res) => {
-    // grab value from the data store
-        let completeAfterDeath = req.session.data.afterDeathComplete
-    // if the journey is complete send back to the 'check-your-details' page
-        if (completeAfterDeath === 'true') {
-        res.redirect('cya-death-circumstances')
-        } else {
-    res.redirect('implant')}
+    let completeAfterDeath = req.session.data.afterDeathComplete;
+    if (completeAfterDeath === 'true') {
+        res.redirect('cya-death-circumstances');
+    } else {
+        res.redirect('implant');
+    }
 });
 
 
 // Was any implant placed in the body which may become hazardous when the body is cremated?
 router.post( /implant/, (req, res) => {
-
     const implant = req.session.data['implant'];
     let completeAfterDeath = req.session.data.afterDeathComplete;
-
     if( completeAfterDeath === 'true') {
         res.redirect('cya-death-circumstances')
     } else {
@@ -437,8 +439,6 @@ router.post( /implant/, (req, res) => {
             res.redirect('cya-death-circumstances');
         }
     }
-    
-
 });
 
 // Has the implant/s been removed?
@@ -446,9 +446,14 @@ router.post( /has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances');
 });
 
+// Set journey as complete
+router.get(/cya-death-circumstances/, function (req, res) {
+    req.session.data.afterDeathComplete = 'true';
+    return res.render('/'+version+'/cya-death-circumstances');
+});
+
 // Check your answers (Actions After Death)
 router.post( /check-your-answers-aad/, (req, res) => {
-    req.session.data['afterDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
@@ -922,10 +927,10 @@ router.post( /contact-method/, (req, res) => {
 });
 
 // MCCD SUMMARY AILIASES
-router.get( /view-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
-router.get( /amend-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
-router.get( /review-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
-router.get( /download-certificate/, (req, res) => { res.render( '/V11bi/mccd-summary.html' ); });
+router.get( /view-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /amend-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /review-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /download-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
@@ -1012,7 +1017,7 @@ router.get( [
     '/neo-natal-deaths/feedback',
     '/onboarding/feedback',
     '/place-of-death/feedback'], (req, res) => {
-    res.redirect('/V11bi/feedback');
+    res.redirect('/'+version+'/feedback');
     next();
 });
 

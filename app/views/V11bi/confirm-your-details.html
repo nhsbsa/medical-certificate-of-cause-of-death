@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/main_cy-en.html" %}
 
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
@@ -13,9 +13,8 @@
 {% endblock %}
 
 {% block content %}
-<main class="govuk-main-wrapper app-main-class" id="main-content">
-<!-- SET VARIABLES -->
 
+<!-- SET VARIABLES -->
 {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
 
 {% if data['role-type'] == 'ap' %}
@@ -68,7 +67,7 @@
 
   </div>
 </div>
-</main>
+
 {{ data | debugData | safe }}
 
 

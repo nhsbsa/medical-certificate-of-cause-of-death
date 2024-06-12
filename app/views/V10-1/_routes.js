@@ -8,10 +8,11 @@ if( process.env.NOTIFYAPIKEY ){
     const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 }
 
-
 // ************************************************************
 // CURRENT VERSION
 // ************************************************************
+
+let version = 'V10-1';
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
@@ -25,7 +26,7 @@ const axios = require('axios')
 // ************************************************************
 
 router.use((req, res, next) => {
-
+    
     let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
 
     const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
@@ -152,12 +153,15 @@ router.post(/age-65-hours/, (req, res) => {
 
 router.post(/deceased-persons-age/, (req, res) => {
 
-    res.redirect('/V10-1/ethnicity/ethnic-group')
+    res.redirect('/'+version+'/ethnicity/ethnic-group')
 });
 
 
 router.post(/ethnic-group/, (req,res) => {
-    var ethnicGroup = req.session.data['ethnic-group']
+
+    var ethnicGroup = req.session.data['ethnic-group'];
+    let completeDeceased = req.session.data.deceasedComplete;
+
     if (ethnicGroup == 'white'){
         res.redirect('ethnicity-white')
     }else if (ethnicGroup == 'multiple'){
@@ -166,22 +170,29 @@ router.post(/ethnic-group/, (req,res) => {
         res.redirect('ethnicity-asian')
     }else if (ethnicGroup == 'black'){
         res.redirect('ethnicity-black')
-    }else if (ethnicGroup == 'skip'){
-        res.redirect('../date-of-death')
+    }else if (ethnicGroup == 'other'){
+        res.redirect('ethnicity-other');
     }else{
-    res.redirect('ethnicity-other')
+        if( completeDeceased === 'true' ){
+            req.session.data.ethnicityDetail = ethnicGroup;
+            res.redirect('../cya-deceased');
+        } else {
+            res.redirect('../date-of-death')
+            
+        }
     }
 });
 
 // What is their date of death?
 router.post(/ethnicity/, (req, res) => {
         // grab value from the data store
-    let completeDeceased = req.session.data.deceasedComplete
+    let completeDeceased = req.session.data.deceasedComplete;
         // if the journey is complete send back to the 'check-your-details' page
     if (completeDeceased === 'true') {
-        res.redirect('../cya-deceased')
+        res.redirect('../cya-deceased');
     } else {
-    res.redirect('../date-of-death')}
+        res.redirect('../date-of-death');
+    }
 });
 
 // PLACE OF DEATH
@@ -237,12 +248,11 @@ router.post(/unknown-address/, (req, res) => {
 });
 
 // Set journey as complete
-router.get('/cya-deceased', function (req, res) {
-    // set data store variable
-    req.session.data.deceasedComplete = 'true'
-    // render the page
-    return res.render('/V10-1/cya-deceased')
-  })
+router.get(/cya-deceased/, function (req, res) {
+    req.session.data.deceasedComplete = 'true';
+    return res.render('/'+version+'/cya-deceased');
+})
+
 // Check your answers
 // router.post( /check-your-answers-d/, (req, res) => {
 //     res.redirect('mccd-tasklist');
@@ -254,60 +264,69 @@ router.get('/cya-deceased', function (req, res) {
 
 // Has a post-mortem been held?
 router.post(/death-circumstances/, (req, res) => {
-    res.redirect('box-b')
+
+    let completeAfterDeath = req.session.data.afterDeathComplete;
+
+    if (completeAfterDeath === 'true') {
+      res.redirect('cya-death-circumstances');
+    } else {
+      res.redirect('box-b');
+    }
+
 });
 
 // Box B [ONS requirement]
-router.post(/box-b/, (req, res) => {
-    // grab value from the data store
-    let completeAfterDeath = req.session.data.afterDeathComplete
-    var userRole = req.session.data['role-type']
+router.post( /box-b/, (req, res) => {
 
-    if (userRole == 'me' && completeAfterDeath === 'true'){
-        res.redirect('cya-death-circumstances') 
-    }else if (userRole == 'me'){
-        res.redirect('me-referring-mp-name')
-    }else if (userRole == 'ap' && completeAfterDeath === 'true'){
-        res.redirect('cya-death-circumstances') 
-    }else{
-    res.redirect('implant')}
+    let completeAfterDeath = req.session.data.afterDeathComplete;
+    var userRole = req.session.data['role-type'];
+
+    if( completeAfterDeath === 'true'){
+        res.redirect('cya-death-circumstances');
+    } else {
+        if( userRole == 'me' ){
+            res.redirect('me-referring-mp-name');
+        } else {
+            res.redirect('implant');
+        }
+    }
+    
 });
 
 // What is the full name of the referring medical practioner (ME CERT)
 router.post(/name-of-referring-mp/, (req,res) => {
-      // grab value from the data store
-    let completeAfterDeath = req.session.data.afterDeathComplete
-      // if the journey is complete send back to the 'check-your-details' page
+    let completeAfterDeath = req.session.data.afterDeathComplete;
     if (completeAfterDeath === 'true') {
-    res.redirect('cya-death-circumstances')
+        res.redirect('cya-death-circumstances');
     } else {
-    res.redirect('me-coroner-name')
+        res.redirect('me-coroner-name');
     }
 });
 
 // What is the senior coroners full name (ME CERT)
 router.post(/me-coroner-name/, (req, res) => {
-    // grab value from the data store
-        let completeAfterDeath = req.session.data.afterDeathComplete
-    // if the journey is complete send back to the 'check-your-details' page
-        if (completeAfterDeath === 'true') {
-        res.redirect('cya-death-circumstances')
-        } else {
-    res.redirect('implant')}
+    let completeAfterDeath = req.session.data.afterDeathComplete;
+    if (completeAfterDeath === 'true') {
+        res.redirect('cya-death-circumstances');
+    } else {
+        res.redirect('implant');
+    }
 });
 
 
 // Was any implant placed in the body which may become hazardous when the body is cremated?
 router.post(/implant/, (req, res) => {
-
-    const implant = req.session.data['implant']
-
-    if (implant == 'Yes') {
-        res.redirect('implant-removed')
-    } else {
+    const implant = req.session.data['implant'];
+    let completeAfterDeath = req.session.data.afterDeathComplete;
+    if( completeAfterDeath === 'true') {
         res.redirect('cya-death-circumstances')
+    } else {
+        if (implant === 'Yes') {
+            res.redirect('implant-removed');
+        } else {
+            res.redirect('cya-death-circumstances');
+        }
     }
-
 });
 
 // Has the implant/s been removed?
@@ -315,9 +334,14 @@ router.post(/has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances')
 });
 
+// Set journey as complete
+router.get(/cya-death-circumstances/, function (req, res) {
+    req.session.data.afterDeathComplete = 'true';
+    return res.render('/'+version+'/cya-death-circumstances');
+});
+
 // Check your answers
 router.post(/check-your-answers-aad/, (req, res) => {
-    req.session.data['afterDeathComplete'] = 'true';
     res.redirect('mccd-tasklist');
 });
 
@@ -346,15 +370,21 @@ router.post(/caused-by-employment/, (req, res) => {
 
 // Was the deceased pregnant within the year prior to their death?
 router.post(/pregnant-at-death/, (req, res) => {
-    const preggo = ['Pregnant at time of death', 'Beichiog adeg y farwolaeth', 'Pregnant 1 to 42 days before death', 'Beichiog 1 i 42 o ddiwrnodau cyn y farwolaeth', 'Pregnant 43 days to a year before death', 'Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth']
-    const notPreggo = ['Not applicable', 'Amherthnasol', 'Not pregnant', 'Nid oedd yn feichiog', 'Unknown', 'Anhysbys']
-    var pregnantAtDeath = req.session.data['pregnant-at-death']
-    if (preggo.includes(pregnantAtDeath)) {
-        res.redirect('pregnancy-contributed')
+
+    const pregnant = ['Pregnant at time of death', 'Beichiog adeg y farwolaeth', 'Pregnant 1 to 42 days before death', 'Beichiog 1 i 42 o ddiwrnodau cyn y farwolaeth', 'Pregnant 43 days to a year before death', 'Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth']
+    const notPregnant = ['Not applicable', 'Amherthnasol', 'Not pregnant', 'Nid oedd yn feichiog', 'Unknown', 'Anhysbys']
+    
+    var pregnantAtDeath = req.session.data['pregnant-at-death'];
+    
+    if (pregnant.includes(pregnantAtDeath)) {
+        res.redirect('pregnancy-contributed');
     }
-    if (notPreggo.includes(pregnantAtDeath)) {
-        res.redirect('cya-cause-death')
+    
+    if (notPregnant.includes(pregnantAtDeath)) {
+        req.session.data['pregnancy-contributed'] = '';
+        res.redirect('cya-cause-death');
     }
+
 });
 
 // Could the pregnancy have contributed to their death?
@@ -363,8 +393,12 @@ router.post(/pregnancy-contributed/, (req, res) => {
 });
 
 // Check your answers
+router.get(/cya-cause-death/, (req, res) => {
+    req.session.data['causeDeathComplete'] = 'true';
+    return res.render('/'+version+'/cya-cause-death')
+});
+
 router.post(/check-your-answers-cod/, (req, res) => {
-    req.session.data['causeDeathComplete'] = 'true'
     res.redirect('mccd-tasklist');
 });
 
@@ -770,10 +804,10 @@ router.post( /contact-method/, (req, res) => {
 });
 
 // MCCD SUMMARY AILIASES
-router.get( /view-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /amend-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /review-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
-router.get( /download-certificate/, (req, res) => { res.render( '/V10-1/mccd-summary.html' ); });
+router.get( /view-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /amend-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /review-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /download-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {
@@ -860,7 +894,7 @@ router.get( [
     '/neo-natal-deaths/feedback',
     '/onboarding/feedback',
     '/place-of-death/feedback'], (req, res) => {
-    res.redirect('/V10-1/feedback');
+    res.redirect('/'+version+'/feedback');
     next();
 });
 

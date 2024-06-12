@@ -1,4 +1,4 @@
-{% extends "layouts/main_cy-en.html" %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
 GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
@@ -30,24 +30,21 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
           <label class="govuk-label" for="coroner-first-name">
             First name
           </label>
-          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-first-name"
-            name="coroner-first-name" type="text">
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-first-name" name="coroner-first-name" value="{{ data['coroner-first-name'] }}" type="text" />
         </div>
   
         <div class="govuk-form-group">
           <label class="govuk-label" for="coroner-middle-name">
             Middle names (optional)
           </label>
-          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-middle-name"
-            name="coroner-middle-name" type="text">
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-middle-name" name="coroner-middle-name" value="{{ data['coroner-middle-name'] }}" type="text" />
         </div>
   
         <div class="govuk-form-group">
           <label class="govuk-label" for="coroner-last-name">
             Last name
           </label>
-          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-last-name"
-            name="coroner-last-name" type="text">
+          <input class="govuk-input govuk-input govuk-!-width-three-quarters" id="coroner-last-name" name="coroner-last-name" value="{{ data['coroner-last-name'] }}" type="text" />
         </div>
   
         <button class="govuk-button" type="submit">
