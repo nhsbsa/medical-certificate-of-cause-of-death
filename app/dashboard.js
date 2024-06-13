@@ -354,13 +354,15 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar, l
                     arr.push( row );
                 }
             } else if( row.id === 'GYRMYSJB7-24' ){
-                if( lastNameString.trim().toLowerCase() === 'james' ){
+                if( lastNameString.trim().toLowerCase() === 'fletcher' ){
                     arr.push( row );
                 }
             } else if( row.id === 'DGGHM7VSQ-24' ){
+                /*
                 if( lastNameString.trim().toLowerCase() === 'jones' ){
                     arr.push( row );
                 }
+                */
             } else {
                 arr.push( row );
             }

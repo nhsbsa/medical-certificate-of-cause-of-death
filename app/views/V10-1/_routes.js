@@ -81,12 +81,14 @@ router.post(/nhs-number/, (req, res) => {
         // if the journey is complete send back to the 'check-your-details' page
         if (completeDeceased === 'true') {
             res.redirect('cya-deceased')
-        } else if ( nhsDuplicate === 'true'){
-                res.redirect('nhs-number-duplicate');
-            } else {
-                res.redirect('name-of-the-deceased');
-            }
+        } else if ( nhsDuplicate === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
+            req.session.data.nhsNumberAlreadyUsed = 'false';
+            res.redirect('nhs-number-duplicate');
+        } else {
+            res.redirect('name-of-the-deceased');
+        }
 });
+
 
 // What is the deceased person's name?
 router.post(/name-of-the-deceased/, (req, res) => {
