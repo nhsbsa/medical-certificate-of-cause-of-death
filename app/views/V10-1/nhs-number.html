@@ -17,8 +17,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
 
 
-    <form action="nhs-number" method="post" novalidate>
-
       <form action="nhs-number" method="post" novalidate>
 
       {% set NHSNumberHTML %}
@@ -70,8 +68,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
       {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
       }) }}
-
-    </form>
 
     </form>
 
