@@ -79,7 +79,7 @@ module.exports = {
   lang: 'en',
   bilingual: 'false',
 
-  requireAllTaskListSections: 'false',
+  requireAllTaskListSections: 'true',
   showContactMethodScreen: 'false',
   validateCauseOfDeathScreen: 'true',
   validateNeoNatalUnder24HoursAge: 'true',
