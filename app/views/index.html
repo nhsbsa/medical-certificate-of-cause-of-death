@@ -3,33 +3,32 @@
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full govuk-!-margin-bottom-6">
+  <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-xl">
+    <h1 class="govuk-heading-l">
       Create a Medical certificate of cause of death (MCCD)
     </h1>
     <p>One of the main benefits of this work is to improve what is a difficult experience for the bereaved by removing
       the need for the bereaved to transport the MCCD in a sealed envelope to the registrar in person and instead
       implementing a digital transfer of the MCCD.</p>
 
-  </div>
-  <div class="govuk-grid-column-two-thirds">
+
 
     <!-- ================================================ -->
     <!-- Current Version -->
     <!-- ================================================ -->
-
+<!-- 
     <h2 class="govuk-heading-m">Current Version</h2>
     <p>This version of the prototype is matching as close as possible to what is currently live.</p>
    <p><a href="current/index?account-creation-journey=no">Medical Certificate of Cause of Death Journey</a></p>
     <p><a href="current/MFA/account-created-email">Multi-factor authentication journey</a></p>
-    <p class="govuk-caption-m govuk-caption--bottom">Last updated: 19 July 2023</p>
+    <p class="govuk-caption-m govuk-caption--bottom">Last updated: 19 July 2023</p> -->
 
     <!-- ================================================ -->
     <!-- Iterations -->
     <!-- ================================================ -->
-
-    <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-8">
+<!-- 
+    <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-8"> -->
 
     <h2 class="govuk-heading-m">Iterations</h2>
 
@@ -42,13 +41,15 @@
         </span>
       </summary>
       <div class="govuk-details__text">
-
-
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-1">Post-Alpha experiments</h3>
+        <p class="govuk-caption-m govuk-caption--bottom">Design and testing of prioritised features from the Beta Roadmap</p>
         <h4 class="govuk-heading-s">What we created</h4>
         <ul>
           <li>Additional questions for the ME cert added</li>
           <li>First iteration of Office dashboard created</li>
+          <li>Statuses of the MCCD moving through the process</li>
           <li>Translations loaded from spreadsheet for bilingual path</li>
+          <li>MCCD output for registration</li>
         </ul>
 
         <h4 class="govuk-heading-s">What we plan to test</h4>
@@ -56,16 +57,33 @@
           <li>ME Cert - Medical examiners completing an MCCD</li>
           <li>MEO use of the service</li>
           <li>Bilingual MCCD</li>
+          <li>PDF formats to be sent to the Local Register Office for registration</li>
+        </ul>
+
+        <h4 class="govuk-heading-s">What we found</h4>
+        <ul>
+          <li>The additional questions for ME Certs caused no issues</li>
+          <li>Many users are still not familiar with CIS2</li>
+          <li>One office dashboard can be used by MEs and MEOs with actions specific to their roles</li>
+          <li>It will be valuable to ME and MEO users to search, sort or filter the dashboard to help find cases</li>
+          <li>A toggle for English and Welsh is expected on the Bilingual service</li>
+          <li>Users are somewhat frustrated by questions with multiple inputs to support dual entry in Welsh and English, however the majority understand why they are there</li>
         </ul>
 
         <h4 class="govuk-heading-s">Any known issues</h4>
+        <ul>
+          <li>Mapping of AP organisations to ME organisations</li>
+          <li>Rolling out in Wales while CIS2 is not supported</li>
+          <li>Users expect more integration to reduce the cognitive load on them</li>
+          <li>GDS design patterns are not best adapted for internal services such as dashboards and case management, so the table on dashboard is not optimal if users chose to access on mobile</li>
+        </ul>
 
         <div class="govuk-button-group">
-          <a href="V11bi/" class="govuk-button govuk-button--secondary">Start</a>
+          <a href="V11bi/" class="govuk-button govuk-button--secondary">Start V11.2</a>
         </div>
 
 
-        <a href="V11/govuk-start" class="govuk-link">Start (previous version)</a>
+        <a href="V11/govuk-start" class="govuk-button govuk-button--secondary">Start V11.1</a>
 
       </div>
     </details>
@@ -81,6 +99,7 @@
           <div class="govuk-details__text">
     
             <p class="govuk-body">Version 10.1 includes updated to content and minor changes to the journey as agreed by policy that were finalised and signed off post-alpha.</p>
+            <p class="govuk-body">This version has been used for end to end testing of the journey leading up to releasing the MVP to private Beta</p>
 
     
             <a href="V10-1/index" class="govuk-button govuk-button--secondary">Start</a>
@@ -168,7 +187,7 @@
     <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-          Version 8 - Iteration and postcode lookup
+          Version 8 - Iterate registration and postcode lookup
         </span>
       </summary>
       <div class="govuk-details__text">
@@ -293,12 +312,13 @@
   <!-- Useful links -->
   <!-- ================================================ -->
 
-  <div class="govuk-grid-column-one-third">
-    <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-padding-top-0">
+  <div class="govuk-grid-column-one-third govuk-!-margin-top-9">
+    <div class="govuk-inset-text">
       <h2 class="govuk-heading-m">Useful links</h2>
       <!-- <p><a href="bilingual/bilingual-index">Bilingual journey</a></p> -->
-      <p><a href="https://bsa2468.atlassian.net/wiki/spaces/ME/pages/4194238810/Design+History">Design History</a></p>
+      <p><a href="https://bsa2468.atlassian.net/wiki/spaces/ME/pages/4355751964/MCCD+UCD+decision+log+-+Beta">Design History</a></p>
       <p><a href="https://nhs-bsa-mccd.herokuapp.com/">Historic prototype</a><br>user/pass: bsa</p>
+      <p><a href="https://mccd-service-showcase-56ef44af564e.herokuapp.com/">Showcase site</a><br>user/pass: nhsbsamccd</p>
     </div>
   </div>
 </div>

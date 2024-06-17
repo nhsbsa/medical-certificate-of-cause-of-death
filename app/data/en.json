@@ -1,0 +1,1146 @@
+{
+  "global": {
+    "skipLink": "Skip to main content",
+    "back": "Go back",
+    "save": "Save and continue",
+    "return-to-dashboard": "Return to dashboard",
+    "address_save": "Use this address",
+    "find_address": "Find address",
+    "serviceName": "Complete a Medical certificate of cause of death (MCCD)",
+    "pageTitle": "Complete a Medical certificate of cause of death (MCCD) - NHSBSA",
+    "english": "English",
+    "bilingual": "Cymraeg",
+    "continue": "Continue",
+    "check-details": "Check that all the details are correct before this is sent to the registrar.",
+    "check-details-check-your-answer": "Check that all the details are correct before continuing."
+  },
+  "start": {
+    "title": "Complete a Medical certificate of cause of death (MCCD)",
+    "paragraph-0": "Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children, and infants dying within the first 28 days of life.",
+    "paragraph-1": "An MCCD is required to register all non-coronial deaths in England and Wales.",
+    "paragraph-2": "This digital MCCD replaces the paper MCCD. It does not replace your current methods of communication or processes between the medical examiner office and attending practitioner. For example, when discussing a cause of death or an amendment to the MCCD you must continue to contact your colleagues by email or telephone.",
+    "heading-2": "Who can complete an MCCD",
+    "paragraph-3": "An MCCD can be completed by a doctor who attended the deceased person at any time.",
+    "paragraph-4": "If an attending practitioner cannot be found and the senior coroner decides not to investigate the death, they will refer the case to a medical examiner to certify the death. The medical examiner MCCD will only be used in exceptional circumstances.",
+    "warning-text-1": "An MCCD is not required in the case of a stillbirth",
+    "paragraph-5": "Registration of stillbirths is a separate process from death certification. Refer to the guidance for <a class='govuk-link' href='https://www.gov.uk/register-stillbirth'> registering a stillbirth. </a>",
+    "heading-3": "Who can use this digital MCCD",
+    "list-1": "If you are an attending practitioner, you can use this digital MCCD to:",
+    "list-item-1": "create an MCCD",
+    "list-item-2": "edit an MCCD",
+    "list-2": "If you are a medical examiner, you can use this digital MCCD to:",
+    "list2-item-1": "review an MCCD",
+    "list2-item-2": "accept or reject an MCCD",
+    "list-3": "If you are a medical examiner officer, you can use this digital MCCD to:",
+    "list3-item-1": "review an MCCD",
+    "list3-item-2": "download a completed MCCD to send to the registrar",
+    "paragraph-6": "The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD.",
+    "heading-4": "Before you start",
+    "paragraph-7": "You'll need a secure method of logging in such as your smartcard as supplied by the NHS Care Identity Service.",
+    "heading-5": "Before you create or review an MCCD",
+    "paragraph-8": "You'll need the personal details of the deceased person, and medical information relating to the cause of death.",
+    "warning-text-2": "Once you have signed in, if you do not do anything for 15 minutes any information you have not saved will be deleted"
+  },
+  "cookies": {
+    "title": "Cookies",
+    "heading0": "What are cookies?",
+    "heading1": "How we use cookies",
+    "heading2": "Change your cookie settings",
+    "heading3": "How we use the information we collect",
+    "what0": "Cookies are files saved on your phone, tablet or computer when you visit a website.",
+    "what1": "They store information about how you use the website, such as the pages you visit.",
+    "what2": "Cookies are not viruses or computer programs. They are very small so do not take up much space.",
+    "use0": "We use cookies to:",
+    "use1": "make our website work, for example by keeping it secure",
+    "use2": "remember which pop-ups you've seen",
+    "use3": "measure how you use our website, such as which links you click on (analytics cookies)",
+    "use4": "help show you relevant health campaigns on social media",
+    "list": "List of cookies that make our website work",
+    "tracking0": "Some cookies, like those needed to measure how you use our website, are not needed for our website to work.",
+    "tracking1": "These cookies can help up make our website better, but we'll only use them if you say it's OK.",
+    "choose": "Choose which cookies we use",
+    "find-out": "To find out how we collect, store and use information about you or your visit, see the "
+  },
+  "cookie-details": {
+    "title": "Choose which cookies we use",
+    "let-us-know": "Let us know which cookies we can use. We'll use a cookie to save your settings for the next 3 calendar months.  This setting applies across all our digital services, not just the one you are accessing now.",
+    "heading0": "Cookies that measure website use (analytics cookies)",
+    "information": "These cookies store information about how you use our website, such as the links you click on. We use them to help make our website better.",
+    "list": "List of cookies that measure website use (analytics cookies)",
+    "legend": "Do you want to allow cookies to measure your website use?",
+    "yes": "Use cookies to measure my website use",
+    "no": "Do not use cookies to measure my website use",
+    "save": "Save my cookie settings"
+  },
+  "cookie-confirmation": {
+    "title": "Your cookie settings have been saved",
+    "save": "We'll save your settings for a year.",
+    "list0": "We'll ask you if you're still OK with us using cookies when either:",
+    "list1": "it's been a year since you last saved your settings",
+    "list2": "we add any new cookies or change the cookies we use",
+    "also": "You can also ",
+    "choose": "choose which cookies we use",
+    "time": "at any time.",
+    "select-continue": "Select Continue to go back to the page you were looking at.",
+    "continue": "Continue"
+  },
+  "dashboard": {
+    "title": "Your Dashboard",
+    "headers": {
+      "drafts": "Draft MCCDs",
+      "submitted": "Submitted MCCDs",
+      "name": "Deceased name",
+      "nhs-number": "NHS number",
+      "date-of-death": "Date of Death",
+      "action": "Action",
+      "status": "Status",
+      "date-submitted": "Date submitted",
+      "reference": "Reference"
+    },
+    "content": {
+      "apContent": {
+        "paragraph1": "This dashboard allows you to create a new Medical certificate of cause of death (MCCD) and manage current MCCDs.",
+        "paragraph2": "This dashboard will list MCCDs that:",
+        "list-item-1": "you have submitted to a medical examiner for approval",
+        "list-item-2": "have been approved by a medical examiner and need forwarding to the registrar's office",
+        "list-item-3": "have been rejected by a medical examiner and need amending",
+        "paragrahp3": "Completed MCCDs will be removed after three months.",
+        "ap-button": "Create a new MCCD"
+      },
+      "meContent": {
+        "paragraph1": "This dashboard gives you access to the Medical certificates of cause of death (MCCDs) assigned to you for review and approval.",
+        "paragraph2": "An MCCD can only be approved when scrutiny of the proposed cause of death is complete.",
+        "me-button": "Create a new ME MCCD"
+      },
+      "meoContent": {
+        "paragraph1": "This dashboard gives you access to the Medical certificates of cause of death (MCCDs) currently being completed in your trust. You can view the progress of MCCDs and download signed-off MCCDs to send to the registrar."
+      }
+    },
+    "tableCaption": "Certificates created by you",
+    "noCertificates": "There are currently no certificates available for you to view.",
+    "timeoutWarningText": "You will be logged out of the system after 15 minutes of inactivity."
+  },
+  "deceased-details": {
+    "caption": "Deceased person's details",
+    "global": {
+      "day": "Day",
+      "month": "Month",
+      "year": "Year",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "death-less-than-28-days-after-birth": {
+      "title": "Was the death less than 28 days after the birth?",
+      "yes-28-days": "Yes, the deceased was an infant less than 28 days old",
+      "no-28-days": "No, the deceased was an adult or child 28 days old or over"
+    },
+    "nhs-number": {
+      "title": "Did the deceased person have an NHS number?",
+      "label-nhs-number": "Enter NHS number"
+    },
+    "hospital-name-or-postcode": {
+      "title": "What is the name or postcode of the hospital?",
+      "sub-title": "Enter the full name or postcode of the hospital where the death occurred. For example, Leeds General Infirmary or LS1 3EX.",
+      "label-hospital": "Enter hospital name",
+      "label-postcode": "Enter hospital postcode"
+    },
+    "location-of-death-postcode": {
+      "title": "What is the postcode of where the death took place?",
+      "label-postcode": "Postcode"
+    },
+    "select-hospital-address": {
+      "title": "Select a hospital address"
+    },
+    "select-location-of-death-address": {
+      "title": "Select an address"
+    },
+    "confirm-hospital-address": {
+      "title": "Confirm hospital address"
+    },
+    "confirm-location-of-death-address": {
+      "title": "Confirm address"
+    },
+    "no-hospital-address-found": {
+      "title": "No address found",
+      "sub-title": "We could not find an address that matches <b>{{ address }}</b>. Search again or enter the address manually.",
+      "search-link": "Enter hospital name",
+      "enter-address": "Or enter hospital postcode"
+    },
+    "ethnic-group": {
+      "title": "What was the ethnic group of the deceased person?",
+      "label-ethnic": "Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'Not known'.",
+      "radio1": "White",
+      "radio2": "Mixed or multiple ethnic groups",
+      "radio3": "Asian or Asian British",
+      "radio4": "Black, African, Caribbean or Black British",
+      "radio5": "Other ethnic group",
+      "radio6": "Not known"
+    },
+    "ethnicity": {
+      "title": "What was the ethnicity of the deceased person?",
+      "label-ethnicity": "Select the ethnicity of the deceased person as it is recorded on the patient record. If there is no match with the list, or no ethnicity is recorded on the patient record, select 'not stated'.",
+      "not_stated": "Not stated",
+      "divider": "or",
+      "mixed-white-group": {
+        "radio1": "English, Welsh, Scottish, Northern Irish or British",
+        "radio2": "Irish",
+        "radio3": "Gypsy or Irish Traveller",
+        "radio4": "Any other White background"
+      },
+      "mixed-multiple-ethnic-group": {
+        "radio1": "White and Black Caribbean",
+        "radio2": "White and Black African",
+        "radio3": "White and Asian",
+        "radio4": "Any other mixed or multiple ethnic background"
+      },
+      "asian-asian-british-group": {
+        "radio1": "Indian",
+        "radio2": "Pakistani",
+        "radio3": "Bangladeshi",
+        "radio4": "Chinese",
+        "radio5": "Any other Asian background"
+      },
+      "black-black-british-african-group": {
+        "radio1": "African",
+        "radio2": "Caribbean",
+        "radio3": "Any other Black, African or Caribbean background"
+      },
+      "other-ethnicity-group": {
+        "radio1": "Arab",
+        "radio2": "Any other ethnic group"
+      }
+    },
+    "name": {
+      "title": "What is the deceased person's name?",
+      "label-first-name": "First name",
+      "label-first-name-optional": "First name (optional)",
+      "label-middle-name": "Middle names (optional)",
+      "label-last-name": "Last name"
+    },
+    "date-of-birth": {
+      "title": "What was the deceased person's date of birth?",
+      "hint": "For example, 21 8 2021"
+    },
+    "date-of-death": {
+      "title": "What was the deceased person's date of death?",
+      "hint": "For example, 10 11 2023"
+    },
+    "over-28-days-age-of-deceased": {
+      "caption": "Deceased person's details",
+      "title": "What was the deceased person's age?",
+      "label-age": "Enter age (optional)",
+      "select-days": "days old",
+      "select-months": "months old",
+      "select-years": "years old",
+      "select-default": "Select age unit",
+      "label-unit": "Select an age unit"
+    },
+    "hospital-death": {
+      "title": "Did the deceased person die in hospital?"
+    },
+    "over-24-hours": {
+      "title": "Was the deceased person over 24 hours old at the time of their death?"
+    },
+    "full-address": {
+      "title": "Do you know the address of where the death took place?"
+    },
+    "hospital-address": {
+      "global": {
+        "line1": "Address line 1",
+        "line2": "Address line 2 (optional)",
+        "townOrCity": "Town or city (optional)",
+        "county": "County (optional)",
+        "postCode": "Postcode"
+      },
+      "hospital": {
+        "title": "At which hospital did the death occur?"
+      },
+      "unknownAddress": {
+        "title": "Where approximately did the death take place?",
+        "label": "Enter details",
+        "hint": "For example, in Castle Park, Bingley near the fountain."
+      },
+      "exactAddress": {
+        "title": "At what address did the death take place?"
+      }
+    },
+    "place-birth": {
+      "title": "Where was the deceased person born?",
+      "hint": "For example, Royal Victoria Infirmary, Newcastle",
+      "label": "Enter place of birth (optional)"
+    },
+    "under-28-days-age-of-deceased": {
+      "title": "What was the deceased person's age?",
+      "label-hours": "Hours",
+      "label-minutes": "Minutes",
+      "label-age-unit": "days old"
+    },
+    "check-your-answers": {
+      "caption": "Deceased person's details",
+      "title": "Check your answers",
+      "check-details": "Check that all the details are correct before continuing.",
+      "subtitle": "Deceased person's details",
+      "change": "Change",
+      "over-28-days": "Death less than 28 days after the birth?",
+      "nhs-number": "NHS number",
+      "full-name": "Full name",
+      "date-of-birth": "Date of birth",
+      "age": "Age",
+      "dod": "Date of death",
+      "hospital-death": "Was the death in a hospital?",
+      "consultant": "Consultant responsible for care",
+      "location": "Place of death",
+      "full-location": "Full location of death?",
+      "place-birth": "Place of birth",
+      "ethnic-group": "Ethnic group",
+      "ethnicity": "Ethnicity",
+      "visually-hidden": {
+        "over-28-days": "Over 28 days old at time of death?",
+        "nhs-number": "NHS number",
+        "name": "Full name",
+        "dod": "Date of death",
+        "date-of-birth": "Date of birth",
+        "age": "Age",
+        "died-hospital": "Was the death in a hospital?",
+        "care-consultant": "Consultant responsible for care",
+        "location-death-known": "Is full location of death known",
+        "approximate-address": "Approximate address",
+        "location-death": "Full location of death?",
+        "location": "Location of death",
+        "location-birth": "Location of birth"
+      }
+    },
+    "online-service-not-ready": {
+      "title": "You need to complete the paper MCCD for neonatal deaths (Form 65)",
+      "description0": "You cannot create a medical certificate of cause of death (MCCD) for a person who died during the first 28 days of life yet. This is because the online service is still being developed and not everyone can use it yet.",
+      "description1": "You can still complete the paper neonatal MCCD (Form 65)",
+      "description2": "You can get a Form 65 MCCD booklet from:",
+      "bulletPoint0": "the administration team if you work in a community setting",
+      "bulletPoint1": "the bereavement team if you work in a trust",
+      "backtoStart": "Back to Start"
+    },
+    "tasklist": {
+      "tag": {
+        "completed": "Completed",
+        "not-started": "Not Started",
+        "started": "Started"
+      },
+      "title": "Medical certificate of cause of death (MCCD)",
+      "about-deceased": {
+        "title": "About the deceased person",
+        "section1": "Deceased person's details"
+      },
+      "about-death": {
+        "title": "About the death",
+        "section1": "Actions after death",
+        "section2": "Cause of death"
+      },
+      "save": "Save and come back later"
+    }
+  },
+  "auth": {
+    "sign-in": {
+      "pageTitle": "Sign in to medical certificate of cause of death",
+      "title": "Sign in",
+      "warning": "Warning",
+      "sessionLength": "Once you have signed in, your session will time out after 60 minutes of inactivity.",
+      "label-email": "Email address",
+      "label-password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "flash-message": "Use your new password to sign in"
+    },
+    "forgot-password": {
+      "title": "Forgot password",
+      "description": "We'll email you a code to confirm this is your account.",
+      "label": "Email address",
+      "send-email": "Send email",
+      "visually-hidden-warning": "Warning",
+      "warning-text": "Warning"
+    },
+    "set-new-password": {
+      "title": "Set a new password",
+      "label1": "New password",
+      "label2": "Confirm password",
+      "label3": "Verification code",
+      "hint1": "Must be 12 characters or more.",
+      "hint2": "This is a 6 digit sent to your email address.",
+      "details-title": "Creating a secure and memorable password",
+      "details-text": "To create a password that is easy to remember try using three random words. You can use numbers between the words instead of spaces. Avoid words that might be easy to guess or relate to you, such as names of pets.",
+      "reset-password": "Reset password"
+    },
+    "reset-password": {
+      "title": "Set your password",
+      "securePassword": "Creating a secure and memorable password",
+      "securePasswordHint": "To create a password that is easy to remember try using three random words. You can use numbers between the words instead of spaces. Avoid words that might be easy to guess or relate to you, such as names of pets.",
+      "label-password": "New password",
+      "hint": "Must be 12 characters or more.",
+      "label-confirm-password": "Confirm password",
+      "button": "Set password"
+    },
+    "signed-out": {
+      "title": "Signed out",
+      "text": "You have successfully signed out from your account",
+      "returnText": "Return to the homepage"
+    },
+    "challenge": {
+      "pageTitle": "Enter authentication code",
+      "title": "Sign in",
+      "heading": "Enter the code shown by your authentication app",
+      "hint": "This is a 6 digit code, like 123 456",
+      "label-code": "Enter code",
+      "button": "Continue"
+    },
+    "timedout": {
+      "title": "Session timed out",
+      "heading1": "You've been timed out",
+      "description1": "This is because you did not complete the action on the previous page within 3 minutes.",
+      "heading2": "For your security, we've signed you out",
+      "description2": "Your session ends if you don't use the service for 60 minutes.",
+      "description3": "We do this for your security. We have not saved any information you entered.",
+      "warning": "Warning",
+      "3minute": "You have 3 minutes to enter these details before your session times out."
+    },
+    "totp": {
+      "form": {
+        "label-code": "Enter the code that appears on your smartphone.",
+        "hint": "This is a 6 digit code, like 123 456",
+        "continue": "Continue"
+      },
+      "set-up": {
+        "title": "Set up authentication",
+        "heading": "Set up your account with an authentication app",
+        "description": "Set your account so that you can sign in using an authentication app on your smartphone or desktop computer.",
+        "description1": "Use the app to generate a 6 digit security code each time you sign in.",
+        "label-device": "Which device do you want to download an authentication app onto?",
+        "desktop": "Desktop (including laptop)",
+        "smartphone": "Smartphone",
+        "continue": "Continue"
+      },
+      "code": {
+        "title": "Activate your account with Authy",
+        "heading": "Get security code",
+        "caption": "Authenticate using desktop or smartphone",
+        "install": "Install one of these applications:",
+        "app1": "Authy",
+        "app2": "FreeOTP (smartphone only)",
+        "app3": "Google Authenticator (smartphone only)",
+        "open": "Open the application and enter the key:",
+        "important": "Important:",
+        "key": "Key",
+        "scan": "I want to scan a QR code using a smartphone.",
+        "codeLabel": "Enter the code that appears in your authentication app"
+      },
+      "qr-code": {
+        "title": "Activate your account with Authy",
+        "heading": "Get security code",
+        "caption": "Authenticate using smartphone",
+        "install": "Install one of these applications onto to your smartphone:",
+        "app1": "Authy",
+        "app2": "FreeOTP",
+        "app3": "Google Authenticator",
+        "open": "Open the app and scan the QR code.",
+        "scan": "I cannot scan the QR code."
+      }
+    },
+    "complete": {
+      "title": "Your account is set up",
+      "description": "You can use your authentication app to sign in to the Create a medical certificate of cause of death (MCCD) service",
+      "heading2": "What happens next",
+      "description1": "Use the authentication app to generate a 6 digit code each time you sign in.",
+      "description2": "To access the service, select <strong>Continue.</strong>",
+      "button": "Continue"
+    }
+  },
+  "error-page": {
+    "message": "Try again later.",
+    "title": "Sorry, there is a problem with the service",
+    "heading": "Sorry, there is a problem with the service",
+    "content": "We have not saved the information you have entered. When the service is available you will need to give us any information you have keyed again.",
+    "link": "Contact the MCCD support team ",
+    "content2": "if you have an urgent query about the service."
+  },
+  "page-not-found": {
+    "title": "Page not found",
+    "content": "If you typed the web address, check it is correct.",
+    "content2": "If you pasted the web address, check you copied the entire address.",
+    "content3": "If the web address is correct or you selected a link or button,",
+    "link": "contact the MCCD support team."
+  },
+
+  "validations": {
+    "title": "There is a problem",
+    "error": "Error: ",
+    "over28DaysCase": {
+      "mandatory": "Select yes if the death was less than 28 days after the birth"
+    },
+    "email": {
+      "mandatory": "Enter an email address",
+      "badFormat": "Enter an email address in the correct format, like name@example.com",
+      "notAuthorized": "Incorrect email or password"
+    },
+    "password": {
+      "notAuthorized": "Incorrect email or password",
+      "mandatory": "Enter a password",
+      "badFormat": "Password must be 12 characters or more",
+      "match": "Passwords do not match, enter the new password"
+    },
+    "confirmPassword": {
+      "mandatory": "Enter the new password",
+      "match": "Passwords do not match, enter the new password again to confirm it"
+    },
+    "code": {
+      "mandatory": "Enter verification code",
+      "invalid": "Incorrect code. Enter the 6 digit code that has been emailed to you"
+    },
+    "device": {
+      "mandatory": "Select a device"
+    },
+    "totpCode": {
+      "mandatory": "Enter authentication code",
+      "invalid": "Enter a correct 6 digit code from your authentication app",
+      "badFormat": "Code must be 6 characters long and only include digits 0 to 9"
+    },
+    "qualifications": {
+      "mandatory": "Enter your primary qualification",
+      "minLength": "Qualification must be 2 characters or more",
+      "maxLength": "Qualification must be 35 characters or less",
+      "badFormat": "Qualification must only include letters a to z, digits 0 to 9 and special characters such as hyphens, spaces, brackets and apostrophes."
+    },
+    "nhsNumberKnown": {
+      "mandatory": "Select yes if the deceased person has an NHS number"
+    },
+    "nhsNumber": {
+      "mandatory": "Enter an NHS number",
+      "minLength": "NHS number is too short. Enter an NHS number that is a 10 digit number, like 485 777 3456",
+      "maxLength": "NHS number is too long. Enter an NHS number that is a 10 digit number, like 485 777 3456",
+      "badFormat": "Enter an NHS number that is a 10 digit number, like 485 777 3456",
+      "duplicate": "The entered NHS number belongs to another person. Enter the correct NHS number for the deceased"
+    },
+    "ethnicGroup": {
+      "mandatory": "Select the ethnic group of the deceased person"
+    },
+    "firstName": {
+      "mandatory": "Enter the first name of the deceased person",
+      "minLength": "First name must be 2 characters or more",
+      "maxLength": "First name must be 35 characters or less",
+      "badFormat": "First name must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "middleNames": {
+      "minLength": "Middle names must be 2 characters or more",
+      "maxLength": "Middle names must be 35 characters or less",
+      "badFormat": "Middle name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "dateOfBirth": {
+      "badFormat": "Date of birth must be a real date",
+      "future": "Date of birth must be in the past",
+      "mandatory": "Enter date of birth",
+      "day": { "badFormat": "Date of birth must include a day" },
+      "month": { "badFormat": "Date of birth must include a month" },
+      "year": { "badFormat": "Date of birth must include a year" }
+    },
+    "dateOfDeath": {
+      "badFormat": "Date of death must be a real date",
+      "beforeDateOfBirth": "Date of death must be after the deceased's date of birth",
+      "beforeDateOfBirthNeoNatal": "Date of death must be the same as or after the deceased's date of birth",
+      "future": "Date of death must be in the past",
+      "mandatory": "Enter the date of death",
+      "lessThan28Days": "Date of death must be 28 days or more after the deceased's date of birth",
+      "day": { "badFormat": "Date of death must include a day" },
+      "month": { "badFormat": "Date of death must include a month" },
+      "year": { "badFormat": "Date of death must include a year" },
+      "moreThan28Days": "Date of death must be less than 28 days after the deceased's date of birth"
+    },
+    "deceasedPregnant": {
+      "mandatory": "Select if the deceased was pregnant within the year prior to their death"
+    },
+    "pregnancyContributedToDeath": {
+      "mandatory": "Select if the pregnancy contributed to their death"
+    },
+    "age": {
+      "mandatory": "Enter the age of the deceased",
+      "badFormat": "Age must only include digits 0 to 9",
+      "minLength": "The age of the deceased must be 2 characters or more",
+      "maxLength": "The age of the deceased must be 75 characters or fewer"
+    },
+    "enterNameOrPostcode": {
+      "mandatory": "Enter name of hospital or enter the hospital postcode",
+      "noRecordFound": "The postcode lookup is currently unavailable. Enter the address manually"
+    },
+    "hospitalAddress": {
+      "mandatory": "Select the hospital address"
+    },
+    "deathAddress": {
+      "mandatory": "Select the address where the death took place"
+    },
+    "hospitalPostcode": {
+      "mandatory": "Or enter postcode",
+      "badFormat": "Enter a full UK postcode",
+      "invalidChar": "Postcode must only include letters a to z, digits 0 to 9 and spaces",
+      "minLength": "Hospital name or postcode must be 2 characters or more",
+      "maxLength": "Hospital name must be 40 characters or less, postcode must be 8 characters or less"
+    },
+    "addressPostcode": {
+      "badFormat": "Enter a full UK postcode"
+    },
+    "hospitalName": {
+      "mandatory": "Either enter name of hospital",
+      "bothValueEntered": "Enter name of hospital or enter the hospital postcode",
+      "badFormat": "Hospital name or postcode must only include letters a to z, digits 0 to 9 and special characters such as hyphens, spaces and apostrophes.",
+      "minLength": "Hospital name or postcode must be 2 characters or more",
+      "maxLength": "Hospital name must be 40 characters or less, postcode must be 8 characters or less",
+      "noRecord": "The postcode lookup is currently unavailable. Enter the address manually"
+    },
+    "ageUnit": {
+      "mandatory": "Select if age is in years, months or days"
+    },
+    "neoNatalAge": {
+      "mandatory": "Enter the age of the deceased in full days and hours"
+    },
+    "ageHours": {
+      "mandatory": "Enter the deceased person's age",
+      "badFormat": "Age must only include digits 0 to 9",
+      "maxRange": "Number of hours must be 23 or less."
+    },
+    "ageMinutes": {
+      "mandatory": "Enter the deceased person's age",
+      "badFormat": "Age must only include digits 0 to 9",
+      "maxRange": "Number of minutes must be 59 or less"
+    },
+    "ageNumber": {
+      "mandatory": "Enter the deceased person's age",
+      "badFormat": "Age must only include digits 0 to 9",
+      "maxRange": "Number of days must be 28 or less",
+      "minRange": "Number of days must be 1 or more",
+      "needMoreThan27Days": "Age entered must be 28 days or more"
+    },
+    "hours": {
+      "badFormat": "The number of hours must only include digits 0 to 9",
+      "maxRange": "The number of hours must be 23 or less. Convert more than 24 hours into days and hours"
+    },
+    "days": {
+      "badFormat": "The number of days must only include digits 0 to 9",
+      "maxRange": "The number of days must be 27 or less"
+    },
+    "diedInHospital": {
+      "mandatory": "Select yes if the deceased person died in hospital"
+    },
+    "isOver24Hours": {
+      "mandatory": "Select yes if the deceased person was over 24 hours old at the time of their death"
+    },
+    "addressLine1": {
+      "badFormat": "Address line 1 must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands and brackets",
+      "mandatory": "Enter address line 1, typically the building and street",
+      "maxLength": "Address line 1 must be 128 characters or less",
+      "minLength": "Address line 1 must be 2 characters or more"
+    },
+    "addressLine2": {
+      "minLength": "Address line 2 must be 2 characters or more",
+      "maxLength": "Address line 2 must be 128 characters or less",
+      "badFormat": "Address line 2 must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands and brackets"
+    },
+    "townOrCity": {
+      "minLength": "Town or city must be 2 characters or more",
+      "maxLength": "Town or city must be 64 characters or less",
+      "badFormat": "Town or city must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands and brackets"
+    },
+    "county": {
+      "minLength": "County must be 2 characters or more",
+      "maxLength": "County must be 64 characters or less",
+      "badFormat": "County must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands and brackets"
+    },
+    "postCode": {
+      "mandatory": "Enter a postcode",
+      "badFormat": "Enter a full UK postcode",
+      "invalidFormat": "Enter a full UK postcode"
+    },
+    "isSeenBeforeDeath": {
+      "mandatory": "Select yes if you saw the deceased person before death",
+      "invalidInput": "Select yes if you saw the deceased person before death"
+    },
+    "dateLastSeenAlive": {
+      "mandatory": "Enter the date you last saw the deceased person alive",
+      "future": "Date you last saw the deceased person alive cannot be in the future",
+      "badFormat": "Date you last saw the deceased person alive must be a real date",
+      "afterDateOfDeath": "Date you last saw the deceased person alive cannot be after date of death",
+      "beforeDateOfBirth": "Date last seen alive cannot be before Date of Birth",
+      "moreThan28DaysBeforeDateOfDeath": "Date you last saw the deceased person alive must be 28 days or fewer before death"
+    },
+    "approximateLocationOfDeath": {
+      "mandatory": "Enter details of where the death took place",
+      "badFormat": "Details of where the death took place must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands and brackets",
+      "minLength": "Details of where the death took place must be 2 characters or more",
+      "maxLength": "Details of where the death took place must be 128 characters or less"
+    },
+    "locationOfBirth": {
+      "badFormat": "Place of birth must only include letters a to z, and special characters such as hyphens, spaces and apostrophes",
+      "minLength": "Place of birth must be 2 characters or more",
+      "maxLength": "Place of birth must be 100 characters or less"
+    },
+    "fullLocationOfDeath": {
+      "mandatory": "Select yes if you know the address of where the death took place"
+    },
+    "hasPostMortemBeenHeld": {
+      "mandatory": "Select if a post-mortem has been held"
+    },
+    "coronerFirstName": {
+      "mandatory": "Enter the first name of the senior coroner's name",
+      "minLength": "First name must be 2 characters or more",
+      "maxLength": "First name must be 35 characters or less",
+      "badFormat": "First name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "coronerMiddleName": {
+      "minLength": "Middle names must be 2 characters or more",
+      "maxLength": "Middle names must be 35 characters or less",
+      "badFormat": "Middle name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "coronerLastName": {
+      "mandatory": "Enter the last name of the senior coroner's name",
+      "minLength": "Last name must be 2 characters or more",
+      "maxLength": "Last name must be 35 characters or less",
+      "badFormat": "Last name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "referringPractitionerFirstName": {
+      "mandatory": "Enter the first name of the medical practitioner's name",
+      "minLength": "First name must be 2 characters or more",
+      "maxLength": "First name must be 35 characters or less",
+      "badFormat": "First name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "referringPractitionerMiddleName": {
+      "minLength": "Middle names must be 2 characters or more",
+      "maxLength": "Middle names must be 35 characters or less",
+      "badFormat": "Middle name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "referringPractitionerLastName": {
+      "mandatory": "Enter the last name of the medical practitioner's name",
+      "minLength": "Last name must be 2 characters or more",
+      "maxLength": "Last name must be 35 characters or less",
+      "badFormat": "Last name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "implantDetails": {
+      "mandatory": "Enter the details and location of any implants",
+      "badFormat": "Details and location of any implants fitted must only include letters  a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, brackets, dashes, @ and /",
+      "minLength": "Details and location of any implants must be 2 characters or more",
+      "maxLength": "Details and location of any implants must be 128 characters or less"
+    },
+    "implant fitted": {
+      "mandatory": "Select if the deceased person had any medical devices or implants fitted during their lifetime"
+    },
+    "implant removed": {
+      "mandatory": "Select yes if the implants have been removed"
+    },
+    "implantFitted": {
+      "mandatory": "Select if the deceased person had any medical devices or implants fitted during their lifetime"
+    },
+    "implantRemoved": {
+      "mandatory": "Select yes if the implants have been removed"
+    },
+    "seenByMedicalPractitionerAfterDeath": {
+      "mandatory": "Select whether or not the deceased person was seen by a doctor after death"
+    },
+    "causeOfDeath1a": {
+      "mandatory": "Enter disease or condition directly leading to death",
+      "badFormat": "Disease or condition directly leading to death must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /",
+      "minLength": "Disease or condition directly leading to death must be 2 characters or more",
+      "maxLength": "Disease or condition directly leading to death must be 170 characters or less"
+    },
+    "onsetInterval1aValue": {
+      "mandatory": "Enter time between onset of disease or condition",
+      "minLength": "Time between onset and death must be 2 characters or more",
+      "maxLength": "Time between onset and death must be 100 characters or fewer",
+      "badFormat": "Time between onset of disease or condition and death must only include digits 0 to 9"
+    },
+    "onsetInterval1aUnit": {
+      "mandatory": "Select a unit of time",
+      "timeOrUnknown": "Select a unit of time or select unknown"
+    },
+    "causeOfDeath1b": {
+      "mandatory": "Enter other disease or condition leading to 1(a)",
+      "empty": "Enter other disease or condition leading to 1(a)",
+      "badFormat": "Other disease or condition leading to 1(a) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /",
+      "minLength": "Other disease or condition leading to 1(a) must be 2 characters or more",
+      "maxLength": "Other disease or condition leading to 1(a) must be 170 characters or less"
+    },
+    "onsetInterval1bValue": {
+      "mandatory": "Enter time between onset of disease or condition",
+      "invalid": "Enter a disease or condition 1(b) if entering a time between onset and death.",
+      "minLength": "Time between onset and death must be 2 characters or more",
+      "maxLength": "Time between onset and death must be 100 characters or fewer",
+      "badFormat": "Time between onset of disease or condition and death must only include digits 0 to 9"
+    },
+    "onsetInterval1bUnit": {
+      "mandatory": "Select a unit of time",
+      "timeOrUnknown": "Enter time between onset of disease or condition or select unknown"
+    },
+    "causeOfDeath1c": {
+      "mandatory": "Enter other disease or condition leading to 1(b)",
+      "empty": "Enter other disease or condition leading to 1(b)",
+      "badFormat": "Other disease or condition leading to 1(b) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /",
+      "minLength": "Other disease or condition leading to 1(b) must be 2 characters or more",
+      "maxLength": "Other disease or condition leading to 1(b) must be 170 characters or less",
+      "invalid": "If you enter a disease or condition 1(c), you must also enter the disease or condition 1(b)"
+    },
+    "onsetInterval1cValue": {
+      "mandatory": "Enter time between onset of disease or condition",
+      "invalid": "Enter a disease or condition 1(c) if entering a time between onset and death.",
+      "minLength": "Time between onset and death must be 2 characters or more",
+      "maxLength": "Time between onset and death must be 100 characters or fewer",
+      "badFormat": "Time between onset of disease or condition and death must only include digits 0 to 9"
+    },
+    "onsetInterval1cUnit": {
+      "mandatory": "Select a unit of time",
+      "timeOrUnknown": "Enter time between onset of disease or condition or select unknown"
+    },
+    "causeOfDeath1d": {
+      "mandatory": "Enter other disease or condition leading to 1(c)",
+      "badFormat": "Other disease or condition leading to 1(c) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /",
+      "minLength": "Other disease or condition leading to 1(c)  must be 2 characters or more",
+      "maxLength": "Other disease or condition leading to 1(c)  must be 170 characters or less",
+      "invalid": "If you enter a disease or condition 1(c), you must also enter the disease or condition 1(b)"
+    },
+    "onsetInterval1dValue": {
+      "mandatory": "Enter time between onset of disease or condition",
+      "invalid": "Enter a disease or condition 1(c) if entering a time between onset and death.",
+      "minLength": "Time between onset and death must be 2 characters or more",
+      "maxLength": "Time between onset and death must be 100 characters or fewer",
+      "badFormat": "Time between onset of disease or condition and death must only include digits 0 to 9"
+    },
+    "onsetInterval1dUnit": {
+      "mandatory": "Select a unit of time",
+      "timeOrUnknown": "Enter time between onset of disease or condition or select unknown"
+    },
+    "causeOfDeath2": {
+      "badFormat": "Other significant conditions contributing to their death must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /",
+      "minLength": "Other significant conditions contributing to their death must be 2 characters or more",
+      "maxLength": "Other significant conditions contributing to their death must be 170 characters or less"
+    },
+    "onsetInterval2Value": {
+      "mandatory": "Enter time between onset of disease or condition",
+      "invalid": "Enter other significant conditions if entering a time between onset and death",
+      "minLength": "Time between onset and death must be 2 characters or more",
+      "maxLength": "Time between onset and death must be 100 characters or fewer",
+      "badFormat": "Time between onset of disease or condition and death must only include digits 0 to 9"
+    },
+    "onsetInterval2Unit": {
+      "mandatory": "Select a unit of time",
+      "timeOrUnknown": "Enter time between onset of disease or condition or select unknown"
+    },
+    "isDeathAffectedByJob": {
+      "mandatory": "Select yes if the deceased person's job caused or contributed to their death."
+    },
+    "mainCauseOfDeathInInfantA": {
+      "mandatory": "Enter main disease or condition in infant",
+      "minLength": "Main disease or condition in infant must be 2 characters or more",
+      "maxLength": "Main disease or condition in infant must be 170 characters or less",
+      "badFormat": "Main disease or condition in infant must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /"
+    },
+    "otherDiseasesInInfantB": {
+      "minLength": "Other disease or condition in infant must be 2 characters or more",
+      "maxLength": "Other disease or condition in infant must be 170 characters or less",
+      "badFormat": "Other disease or condition in infant must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /"
+
+    },
+    "maternalConditionsC": {
+      "minLength": "Main maternal disease or condition affecting infant must be 2 characters or more",
+      "maxLength": "Main maternal disease or condition affecting infant must be 170 characters or less",
+      "badFormat": "Main maternal disease or condition affecting infant must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /"
+    },
+    "otherMaternalConditionsD": {
+      "invalid": "Enter Main maternal disease or condition affecting infant.",
+      "minLength": "Other maternal disease or condition affecting infant must be 2 characters or more",
+      "maxLength": "Other maternal disease or condition affecting infant must be 170 characters or less",
+      "badFormat": "Other maternal disease or condition affecting infant must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /"
+    },
+    "otherRelevantCausesE": {
+      "minLength": "Other relevant factors or circumstances (not diseases of infant or mother) must be 2 characters or more",
+      "maxLength": "Other relevant factors or circumstances (not diseases of infant or mother) must be 170 characters or less",
+      "badFormat": "Other relevant factors or circumstances (not diseases of infant or mother) must only include letters a to z, digits 0 to 9, full stops, commas, colons, semi-colons, hyphens, apostrophes, ampersands, @ and /"
+    },
+    "firstNames": {
+      "mandatory": "Enter the first name of the deceased person",
+      "minLength": "First name must be 2 characters or more",
+      "maxLength": "First name must be 35 characters or less",
+      "badFormat": "First name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "lastName": {
+      "mandatory": "Enter the last name of the deceased person",
+      "minLength": "Last name must be 2 characters or more",
+      "maxLength": "Last name must be 35 characters or less",
+      "badFormat": "Last name must only include letters a to z, and special characters such as hyphens, spaces, apostrophes, accents and diacritics."
+    },
+    "declaration": {
+      "mandatory": "You must agree to the declaration to send the MCCD"
+    },
+    "emailAddress": {
+      "mandatory": "Enter the email address",
+      "badFormat": "Enter an email address in the correct format, like name@example.com"
+    },
+    "ethnicity": {
+      "mandatory": "Select the ethnicity of the deceased person"
+    },
+    "meoDeclaration": {
+      "mandatory": "Select that you confirm you have reviewed this certificate and it is ready for scrutiny"
+    },
+    "meoDownloadDeclaration": {
+      "mandatory": "Select that you have sent this certificate to the registrar"
+    },
+    "meSignOff": {
+      "mandatory": "Select that this certificate requires amendments or if the certificate is ready to be sent to the registrar"
+    }
+  },
+  "actions-after-death": {
+    "caption": "Actions after death",
+    "post-mortem": {
+      "title": "Has a post-mortem been held?",
+      "radio1": "The certified cause of death takes account of information obtained from a post-mortem",
+      "radio2": "Information from post-mortem may be available later",
+      "radio3": "A post-mortem is not being held",
+      "radio4": "This death was reported to the coroner whose duty to investigate under s1 CJA2009 was not engaged"
+    },
+    "referring-coroner": {
+      "title": "What is the referring senior coroner's name?"
+    },
+    "referring-practitioner": {
+      "title": "What is the referring medical practitioner's name?"
+    },
+    "implant": {
+      "title": "Did the deceased person have any implantable medical devices fitted during their lifetime?",
+      "details": "Enter the details and location of any implants",
+      "implantDetails": {
+        "textLine1": "Implantable medical devices include:",
+        "textLine2": "pacemakers",
+        "textLine3": "implantable cardioverter defibrillators (ICDs)",
+        "textLine4": "cardiac resynchronization therapy devices (CRTDs)",
+        "textLine5": "implantable loop recorders",
+        "textLine6": "ventricular assist devices (VADs): left ventricular assist devices (LVADs), right ventricular assist devices (RVADs), or biventricular assist devices BiVADs)",
+        "textLine7": "implantable drug pumps including intrathecal pumps",
+        "textLine8": "neurostimulators (including for pain and functional electrical stimulation)",
+        "textLine9": "bone growth stimulators",
+        "textLine10": "hydrocephalus programmable shunts",
+        "textLine11": "fixion nails",
+        "textLine12": "any other battery powered or pressurised implant",
+        "textLine13": "radioactive implants",
+        "textLine14": "radiopharmaceutical treatment (via injection)"
+      }
+    },
+    "implant-removed": {
+      "title": "Have the implants been removed?",
+      "details": "Enter the details and location of any implants"
+    },
+
+    "additional-information": {
+      "title": "Provide additional information",
+      "hint": "Tick if applicable",
+      "label1": "I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification."
+    },
+
+    "global": {
+      "yes": "Yes",
+      "no": "No",
+      "label-first-name": "First name",
+      "label-middle-name": "Middle names (optional)",
+      "label-last-name": "Last name"
+    },
+    "check-your-answers": {
+      "title": "Check your answers",
+      "post-mortem": "Post-mortem",
+      "referring-coroner": "Senior coroner",
+      "referring-practitioner": "Referring medical practitoner",
+      "implants-fitted": "Implants in body",
+      "implants-details": "Implant details",
+      "implants-removed": "Implants removed",
+      "additional-information": "Additional information",
+      "additional-information-true": "I may be in a position later to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.",
+      "additional-information-false": "Not applicable",
+      "change": "Change",
+      "visually-hidden": {
+        "post-mortem": "Post-mortem?",
+        "referring-coroner": "Referring senior coroner's name",
+        "referring-practitioner": "Referring medical practitoner's name",
+        "implants-fitted": "Implants in body",
+        "implants-details": "Implant details",
+        "implants-removed": "Implants removed",
+        "additional-information": "Additional information"
+      }
+    }
+  },
+  "cause-of-death": {
+    "caption": "Cause of death",
+    "hint": "Do not use abbreviations, vague terms, or symptoms.",
+    "title": "What caused the death?",
+    "causesOfDeathA": "a. Main disease or condition in infant",
+    "causesOfDeathB": "b. Other disease or condition in infant (optional)",
+    "causesOfDeathC": "c. Main maternal disease or condition affecting infant (optional)",
+    "causesOfDeathD": "d. Other maternal diseases or conditions affecting infant (optional)",
+    "causesOfDeathE": "e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)",
+    "global": {
+      "yes": "Yes",
+      "no": "No",
+      "unknown": "Unknown",
+      "not-applicable": "Not applicable"
+    },
+    "disease-or-condition-leading-to-death": {
+      "title": "What caused the death?",
+      "timeBetweenOnsetAndDeath": "Time between onset and death",
+      "legend": {
+        "causeOfDeath1": "Cause of death (1)",
+        "causeOfDeath2": "Cause of death (2)"
+      },
+      "hint": "The disease or condition thought to be the underlying cause of death should appear in the lowest completed line of part 1.",
+      "causeOfDeath1a": "1(a) Disease or condition directly leading to death",
+      "causeOfDeath1b": "1(b) Other disease or condition leading to 1(a) (optional)",
+      "causeOfDeath1c": "1(c) Other disease or condition leading to 1(b) (optional)",
+      "causeOfDeath1d": "1(d) Other disease or condition leading to 1(c) (optional)",
+      "causeOfDeath2": "2 Other significant conditions contributing to the death but not relating to the disease or condition causing it (optional)",
+      "onsetInterval": "Time between onset and death",
+      "unit": "Unit"
+    },
+    "job-contributed-to-death": {
+      "title": "Could the deceased person's job have caused or contributed to their death?",
+      "hint": "The death might have been due to or contributed to by the employment followed at some time by the deceased.",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "pregnant-year-before-death": {
+      "title": "Was the deceased pregnant within the year prior to their death?",
+      "label-pregnant": "Pregnant at time of death",
+      "label-pregnant-1-42-days": "Pregnant 1 to 42 days before death",
+      "label-pregnant-43-days-1-year": "Pregnant 43 days to a year before death",
+      "label-not-pregnant": "Not pregnant"
+    },
+    "pregnancy-contributed-to-death": {
+      "title": "Did the deceased's pregnancy contribute to their death?"
+    },
+    "check-your-answers": {
+      "title": "Check your answers",
+      "change": "Change",
+      "check-details": "Check that all the details are correct before continuing.",
+      "causeOfDeath1a": "1(a) Disease or condition directly leading to death",
+      "causeOfDeath1b": "1(b) Other disease or condition leading to 1(a) (optional)",
+      "causeOfDeath1c": "1(c) Other disease or condition leading to 1(b) (optional)",
+      "causeOfDeath1d": "1(d) Other disease or condition leading to 1(c) (optional)",
+      "causeOfDeath2": "2 Other significant conditions (optional)",
+      "isDeathAffectedByJob": "Death affected by employment",
+      "deceased-pregnant": "Pregnancy",
+      "pregnancy-contributed-to-death": "Death affected by pregnancy",
+      "mainDiseases": "a. Main disease or condition in infant",
+      "otherDiseases": "b. Other disease of condition in infant (optional)",
+      "maternalConditions": "c. Main maternal disease or condition affecting infant (optional)",
+      "otherMaternalConditions": "d. Other maternal diseases or conditions affecting infant (optional)",
+      "additionalConditions": "e. Other relevant factors or circumstances (not diseases of infant or mother) (optional)",
+      "visually-hidden": {
+        "cause-death-1a": "1(a) disease or condition directly leading to death",
+        "cause-death-1b": "1(b) Other disease or condition leading to 1(a) (optional)",
+        "cause-death-1c": "1(c) Other disease or condition leading to 1(b) (optional)",
+        "cause-death-1d": "1(d) Other disease or condition leading to 1(c) (optional)",
+        "cause-death-2": "2 Other significant conditions (optional)",
+        "death-affected-by-job": "Death affected by employment",
+        "deceased-pregnant": "Pregnancy",
+        "pregnancy-contributed-to-death": "Death affected by pregnancy"
+      }
+    }
+  },
+  "your-details": {
+    "caption": "Your details",
+    "primary-qualification": {
+      "title": "What is your primary qualification?",
+      "hint": "As registered by the GMC, for example MB ChB"
+    },
+    "where-do-you-work": {
+      "title": "Where do you work?",
+      "addressLine1": "Address line 1",
+      "addressLine2": "Address line 2 (optional)",
+      "townOrCity": "Town or city (optional)",
+      "county": "County (optional)",
+      "postCode": "Postcode"
+    },
+    "check-your-details": {
+      "titleME": "Check your details are correct before signing off this certificate",
+      "titleAP": "Check your details are correct before submitting this certificate for scrutiny",
+      "change": "Change",
+      "full-name": "Full name",
+      "gmc-number": "GMC number",
+      "work-address": "Work address",
+      "qualifications": "Qualifications",
+      "visually-hidden": {
+        "full-name": "Full name",
+        "gmc-number": "GMC number",
+        "work-address": "Work address",
+        "qualifications": "Qualifications"
+      }
+    }
+  },
+  "declaration": {
+    "title": "Declaration",
+    "label-me": "I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated in this certificate to the best of my knowledge and belief.",
+    "label-ap": "I confirm that I attended the deceased before their death and that the cause of death is as stated in this certificate to the best of my knowledge and belief."
+  },
+  "mccd-outputs": {
+    "caption": "MCCD outputs"
+  },
+  "confirmation": {
+    "what-happens-next-header": "What happens next",
+    "submitted-for-scrutiny": {
+      "title-panel-text": "Medical certificate of cause of death submitted for scrutiny",
+      "paragraph-1": "This Medical certificate of cause of death (MCCD) will be sent to your medical examiner office for review and scrutiny.",
+      "paragraph-2": "This certificate will be available to view from your dashboard for 3 months.",
+      "what-happens-next-paragraph": "You will be contacted by the medical examiner office if, following review and scrutiny of the cause of death the medical examiner requests that you amend this MCCD."
+    },
+    "sent-medical-examiners-sign-off": {
+      "title-panel-text": "Certificate sent to medical examiners for sign-off",
+      "paragraph-1": "Medical examiners in your organisation will now be able to access this certificate from their dashboard. They can review and sign off this certificate as part of the scrutiny process.",
+      "what-happens-next-paragraph": "When a medical examiner has signed off this certificate you must sign back into the MCCD digital service, download the signed-off certificate, and send it to the registrar."
+    },
+    "returned-to-attending-practitioner": {
+      "title-panel-text": "Certificate returned to the attending practitioner",
+      "paragraph-1": "You must contact the attending practitioner to inform them that this Medical certificate of cause of death (MCCD) must be amended.",
+      "what-happens-next-paragraph": "After the attending practitioner has amended this MCCD it will be available to view on the medical examiner dashboard marked 'For sign off by medical examiner'"
+    },
+    "mccd-approved": {
+      "title-panel-text": "Medical certificate of cause of death approved",
+      "paragraph-1": "You have signed off this Medical certificate of cause of death (MCCD) following scrutiny of the cause of death.",
+      "what-happens-next-paragraph": "This MCCD will be sent to the local register office by your medical examiner office. There is nothing further for you to do."
+    },
+    "sent-to-local-register-office": {
+      "title-panel-text": "Certificate downloaded and sent to the local register office",
+      "what-happens-next-paragraph": "No further action is required.",
+      "what-happens-next-paragraph-2": "This Medical certificate of cause of death (MCCD) will be available to view from your dashboard for three months."
+    },
+    "mccd-amended": {
+      "title-panel-text": "Medical certificate of cause of death amended",
+      "what-happens-next-paragraph": "No further action is required.",
+      "what-happens-next-paragraph-2": "This Medical certificate of cause of death (MCCD) will be available to view from your dashboard for three months."
+    },
+    "survey-link": "<a class='govuk-link' href='{{surveyLink}}'> Tell us what you think about the Complete an MCCD service</a> (takes about 5 minutes)"
+  },
+  "maintenance": {
+    "heading": "Scheduled Maintenance",
+    "text1": "This site will be down for essential maintenance on ",
+    "text2": " between ",
+    "text3": " and ",
+    "text4": "."
+  },
+  "viewMccdContent": {
+    "title-header": "Medical certificate of cause of death (MCCD)",
+    "reference-number": "<strong>Reference number:</strong> {{caseReference}}",
+    "cert-type-66-ap": "<strong>Certificate type:</strong> 66AP",
+    "cert-type-65-ap": "<strong>Certificate type:</strong> 65AP",
+    "amend-inset-text": "This MCCD must be amended. Contact your medical examiner officer to find out what amendments you must make.",
+    "submitted-inset1": "This MCCD has been  signed off by a medical examiner and sent to the local register office.",
+    "submitted-inset2": "There is nothing further for you to do.",
+    "send-to-registrar-inset1": "This MCCD has been reviewed and signed off by a medical examiner. The medical examiner office will forward this certificate to the local register office."
+  },
+  "meoDeclaration": {
+    "heading": "Medical examiner officer review",
+    "label": "I certify, to the best of my knowledge, that this certificate can be signed off by a medical examiner"
+  },
+  "meoDownloadDeclaration": {
+    "heading": "Download certificate",
+    "paragraph": "Download this certificate to your computer and send it to the registrar as an email attachment. After you have sent this MCCD to the registrar return to this screen and mark it as sent by ticking the checkbox.",
+    "label": "I have sent this certificate to the registrar."
+  },
+  "meSignOff": {
+    "heading": "Medical examiner sign-off",
+    "label-amends": "Needs Amendments",
+    "label-ready-to-send": "Ready to send to registrar"
+  }
+}
