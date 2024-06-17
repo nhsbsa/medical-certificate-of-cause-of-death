@@ -630,12 +630,12 @@ router.get(/hospital-lookup/, (req, res) => {
     if (postcodeLookup && regex.test(postcodeLookup)) {
     
         queryString = postcodeLookup;
-        url = 'https://api.os.uk/search/places/v1/postcode?fq=CLASSIFICATION_CODE_DESCRIPTION:Hospital&maxresults=10&postcode=';
+        url = 'https://api.os.uk/search/places/v1/postcode?fq=CLASSIFICATION_CODE:CM&maxresults=10&postcode=';
     
     } else if ( hospitalName && hospitalName.trim().length > 2 ) {
 
         queryString = hospitalName;
-        url = 'https://api.os.uk/search/places/v1/find?fq=CLASSIFICATION_CODE_DESCRIPTION:Hospital&maxresults=10&query=';
+        url = 'https://api.os.uk/search/places/v1/find?fq=CLASSIFICATION_CODE:CM&maxresults=10&query=';
 
     }
 
@@ -659,7 +659,7 @@ router.get(/hospital-lookup/, (req, res) => {
                             return part.toUpperCase();
                         }
                         return part
-cya-cause-death                            .split(' ')
+                            .split(' ')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                             .join(' ');
                     });
