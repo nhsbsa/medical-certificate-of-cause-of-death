@@ -7,14 +7,18 @@
     <h1 class="govuk-heading-l">Medical certificate of cause of death (MCCD)</h1>
     <div class="mccd-output-details">
         <ul style="padding-left: 0;">
-        <li class="mccd-output-details__header">Certificate type</li>  
+        <li class="mccd-output-details__header">Certificate type</li>
+        {% if data['over-under-28'] == 'yes' %}  
+        <li class="mccd-output-details__data">65 AP</li>
+        {% else %}
         <li class="mccd-output-details__data">66 AP</li>
+        {% endif %}
         </ul>
     </div>
     <div class="mccd-output-details">
         <ul style="padding-left: 0;">
         <li class="mccd-output-details__header">Date of issue</li>  
-        <li class="mccd-output-details__data">15 May 2024</li>
+        <li class="mccd-output-details__data">22 April 2024</li>
         </ul>
     </div>
 </div>
@@ -26,7 +30,7 @@
         </h2>
         </div>
         <div class="govuk-summary-card__content">
-          <dl class="govuk-summary-list">
+        <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Full name
@@ -51,6 +55,32 @@
                     Cardiff Royal Infirmary<br> Glossop Road <br> Cardiff<br> CF24 0SZ                
                 </dd>
                 </div>
+            {% if data['over-under-28'] == 'yes' %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Date of birth
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    19 April 2024
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Place of birth
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Cardiff Royal Infirmary
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Age
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    19 hours 45 minutes old
+                </dd>
+                </div>
+            {% else %}
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Date of birth
@@ -58,7 +88,7 @@
             <dd class="govuk-summary-list__value">
                 5 January 2000
             </dd>
-            </div>
+            </div>            
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Age
@@ -67,10 +97,11 @@
                 24 years old
             </dd>
             </div>
-          </dl>
+            {% endif %}
+        </dl>
         </div>
-      </div>
-      <div class="govuk-summary-card">
+    </div>
+    <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
             Medical details
@@ -105,6 +136,48 @@
         </div>
         <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
+            {% if data['over-under-28'] == 'yes' %}
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key" style="width:35%">
+                (a) Main diseases or condition in infant
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Meningitis
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key" style="width:35%">
+                (b) Other diseases or conditions in infant
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Pre-term birth
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key" style="width:35%">
+                (c) Main maternal diseases or conditions affecting infant
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Pre-eclampsia
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key" style="width:35%">
+                (d) Other maternal diseases or conditions affecting infant
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Endometriosis
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key" style="width:35%">
+                (e) Other relevant factors or circumstances (not diseases of infant or mother)
+            </dt>
+            <dd class="govuk-summary-list__value">
+                
+            </dd>
+            </div>
+            {% else %}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 1(a) disease or condition directly leading to death
@@ -159,6 +232,7 @@
                     4 years until death 
                 </dd>
                 </div>
+            {% endif %}
         </dl>
         </div>
     </div>
@@ -234,7 +308,7 @@
                 Authorisation date
             </dt>
             <dd class="govuk-summary-list__value">
-                18 May 2024
+                24 April 2024
             </dd>
             </div>
         </dl>
@@ -249,6 +323,40 @@
         </div>
         <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
+        {% if data['over-under-28'] == 'yes' %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Ethnicity
+            </dt>
+            <dd class="govuk-summary-list__value">
+                White - English, Welsh, Scottish, Northern Irish or British
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Implant in body
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Yes
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Implant details
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Pacemaker in chest
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Implant removed
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Yes
+            </dd>
+            </div>
+            {% else %}
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Death due to or contributed to by employment
@@ -306,6 +414,7 @@
                 No
             </dd>
             </div>
+            {% endif %}
         </dl>
         </div>
     </div>
