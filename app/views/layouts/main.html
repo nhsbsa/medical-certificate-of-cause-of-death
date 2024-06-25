@@ -10,9 +10,7 @@
     
       {{ super() }}
 
-      {% if data.allowBrowserNumberFormatting === 'false' %}
-        <meta name="format-detection" content="telephone=no" >
-      {% endif %}
+      <meta name="format-detection" content="telephone=no" >
     
   {% endblock %}
 

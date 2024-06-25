@@ -18,35 +18,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
 // External dependencies
-const axios = require('axios')
-
-
-// ************************************************************
-// USER DATA FROM HEROKU
-// ************************************************************
-
-router.use((req, res, next) => {
-    
-    let userProfile = ( req.session.data.userProfile ) ? req.session.data.userProfile : '0';
-
-    const users = ( process.env.USERS ) ? JSON.parse( process.env.USERS ) : [];
-    userProfile = parseInt(userProfile);
-
-    if( !Number.isNaN(userProfile) && users.length > userProfile ){
-
-        req.session.data.user = users[userProfile];
-
-        // If there's only one role type, set it automatically...
-        if( req.session.data.user.role.length === 1 ){
-            req.session.data['role-type'] = req.session.data.user.role[0];
-        }
-
-    }
-  
-    next();
-
-});
-
+const axios = require('axios');
 
 
 // ************************************************************
@@ -77,12 +49,12 @@ router.post(/66-or-65/, (req, res) => {
 router.post(/nhs-number/, (req, res) => {
        // grab value from the data store
         let completeDeceased = req.session.data.deceasedComplete
-        let nhsDuplicate = req.session.data.nhsNumberAlreadyUsed
+        let nhsDuplicate = req.session.data[res.locals.settings].nhsNumberAlreadyUsed
         // if the journey is complete send back to the 'check-your-details' page
         if (completeDeceased === 'true') {
             res.redirect('cya-deceased')
         } else if ( nhsDuplicate === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
-            req.session.data.nhsNumberAlreadyUsed = 'false';
+            req.session.data[res.locals.settings].nhsNumberAlreadyUsed = 'false';
             res.redirect('nhs-number-duplicate');
         } else {
             res.redirect('name-of-the-deceased');
@@ -750,7 +722,7 @@ router.post( /care-id-role/, (req, res) => {
         } else if( !req.session.data['contact-method'] ){
 
             // Do they have a contact-method value set?
-            if( req.session.data.showContactMethodScreen === 'true' ){
+            if( req.session.data[res.locals.settings].showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -777,7 +749,7 @@ router.post( /qualifications/, (req, res) => {
         if( !req.session.data['contact-method'] ){
 
            // Do they have a contact-method value set?
-           if( req.session.data.showContactMethodScreen === 'true' ){
+           if( req.session.data[res.locals.settings].showContactMethodScreen === 'true' ){
                 res.redirect('../onboarding/contact-method');
             } else {
                 res.redirect('../dashboard');
@@ -848,8 +820,10 @@ router.post( /mccd-summary/, (req, res) => {
 // MCCD TASKLIST
 router.post( /mccd-tasklist/, (req, res) => {
 
+    console.log( res.locals.settings );
+
     // This variable is set in the session data and allows you to toggle the requirement to have filled out the entire form...
-    if( req.session.data.requireAllTaskListSections === 'false' ){
+    if( req.session.data[res.locals.settings].validateTaskList === 'false' ){
 
         res.redirect('confirm-your-details');
 

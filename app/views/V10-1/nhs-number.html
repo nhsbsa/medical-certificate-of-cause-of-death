@@ -56,15 +56,6 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
         ]
       }) }}
 
-      {% if data.showNHSNumberWarning === 'true' %}
-
-        {{ govukWarningText({
-          text: 'This NHS number has already been used to create an MCCD. Continue if you want to create a new MCCD using this NHS number, or enter the deceased\'s correct NHS number.',
-          iconFallbackText: 'Warning'
-        }) }}
-
-      {% endif %}
-
       {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
       }) }}

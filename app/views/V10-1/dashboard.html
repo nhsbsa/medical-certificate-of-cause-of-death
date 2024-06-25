@@ -82,7 +82,7 @@
 
 
 
-{% if data.useSearch == 'true' or data.useFilters == 'true' %}
+{% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
 
 <style>
 
@@ -101,7 +101,7 @@
 <div class="govuk-grid-row">
 
 
-{% if data.useSearch == 'true' %}
+{% if data[settings].useSearch == 'true' %}
 
   <!-- SEARCH FORM -->
   <div class="govuk-grid-column-two-thirds">
@@ -110,7 +110,7 @@
       
       <div class="govuk-form-group">
 
-        <label class="govuk-table__caption--m" for="searchTerm">
+        <label class="govuk-label govuk-label--m" for="searchTerm">
           Search for a certificate
         </label>
   
@@ -135,13 +135,13 @@
   {% endif %}
 
 
-  {% if data.useFilters == 'true' %}
+  {% if data[settings].useFilters == 'true' %}
   <div class="govuk-grid-column-one-third">
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
         
-        <label class="govuk-table__caption--m" for="statusFilter">
+        <label class="govuk-label govuk-label--m" for="statusFilter">
           Filter by status
         </label>
   
@@ -260,10 +260,10 @@
 
           {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
 
-          {% if draftRows.length > 0 and data.separateDraftsTable === 'true' %}
+          {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
 
           <!-- DRAFTS TABLE -->
-            {{ govukTable({
+          {{ govukTable({
             caption: 'Your drafts',
             classes: 'table-dashboard govuk-table--small-text-until-tablet',
             captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',

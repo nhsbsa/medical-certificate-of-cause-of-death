@@ -258,8 +258,8 @@ addFilter('getFooterStatus', function(content) {
     if( this.ctx.data.bilingual === 'true' ){
         lang = ( this.ctx.data.lang === 'en' ) ? '(in English)' : '(in Welsh)';
     }
-
-    const returnStr = ( this.ctx.data.debug === 'true' ) ? 'Currently acting ' + roleType + ' ' + path + ' ' + lang : '';
+    const strVersion = ( this.ctx.version ) ? '(' + this.ctx.version + ') ' : '';
+    const returnStr = ( this.ctx.data.debug === 'true' ) ?  strVersion + 'Currently acting ' + roleType + ' ' + path + ' ' + lang : strVersion;
 
     return returnStr;
 
@@ -449,7 +449,7 @@ addFilter( 'getDashboardTableRows', function( content ) {
 
     const lastName = this.ctx.data['deceased-last-name'];
 
-    const filterDrafts = ( this.ctx.data.separateDraftsTable === 'true' ) ? true : false;
+    const filterDrafts = ( this.ctx.data[this.ctx.settings].useSeparateDraftsTable === 'true' ) ? true : false;
 
     // Perform the filtering, search term first, then status filters, then orders by date...
     let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName );
