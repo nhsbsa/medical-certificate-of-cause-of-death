@@ -82,7 +82,7 @@ module.exports = {
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
-    showContactMethodScreen: 'true',
+    showContactMethodScreen: 'false',
 
     validateTaskList: 'true',
     validateCauseOfDeathScreen: 'true',
@@ -99,7 +99,7 @@ module.exports = {
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
-    showContactMethodScreen: 'true',
+    showContactMethodScreen: 'false',
     showExplanationOfStatuses: 'false',
     
     validateTaskList: 'true',
