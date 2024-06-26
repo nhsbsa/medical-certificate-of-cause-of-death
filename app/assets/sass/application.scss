@@ -8,7 +8,7 @@
 
 $govuk-new-typography-scale: true;
 
-.govuk-main-wrapper > .govuk-tag {
+.govuk-main-wrapper > .govuk-tag{
   max-width: none;
 }
 
@@ -71,6 +71,7 @@ $govuk-new-typography-scale: true;
   text-align: center;
   white-space: nowrap;
   float: left;
+  max-width: none;
 }
 
 @media ( min-width: 641px ){

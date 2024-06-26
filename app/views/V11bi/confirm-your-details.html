@@ -45,7 +45,7 @@
             }
         ] %}
 
-        {% if data.showContactMethodScreen === 'true' %}
+        {% if data[settings].showContactMethodScreen === 'true' %}
 
             {% set summaryRows = ( summaryRows.push( {
                 key: { text: 'Contact method' },

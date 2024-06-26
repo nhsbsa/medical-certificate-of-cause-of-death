@@ -2,6 +2,7 @@
 //
 // RELOADS PAGE AUTOMATICALLY WHEN USING THE BACK BUTTON
 //
+/*
 window.addEventListener( 'pageshow', function ( event ) {
 
   console.log( event );
@@ -10,10 +11,12 @@ window.addEventListener( 'pageshow', function ( event ) {
       window.location.reload();
     }
 });
+*/
 
 //
 // CHECK FOR LANGUAGE CHANGE
 //
+/*
 window.addEventListener('DOMContentLoaded',function(){
 
   let url = new URL( window.location.href )
@@ -24,3 +27,4 @@ window.addEventListener('DOMContentLoaded',function(){
   } 
 
 });
+*/

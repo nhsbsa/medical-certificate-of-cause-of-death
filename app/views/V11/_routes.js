@@ -2,11 +2,14 @@
 // CURRENT VERSION
 // ************************************************************
 
+let version = 'V11';
+
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
 // External dependencies
 const axios = require('axios')
+
 
 // ************************************************************
 // MFA set up

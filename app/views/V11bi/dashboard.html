@@ -34,7 +34,20 @@
     text: data.translations.dashboardInactivityMessage[data.lang]
   }) }}
 
-  </div>
+
+  {% if data[settings].showExplanationOfStatuses === 'true' %}
+
+        <!-- DRAW STATUS EXPLANATIONS -->
+        {{ govukDetails({
+            summaryText: 'Explanation of statuses',
+            html: govukTable({
+              rows: '' | getStatusExplanationRows
+            })
+        }) }}
+        
+  {% endif %}
+
+</div>
 
   {% if data['role-type'] == 'ap' or data['role-type'] == 'me' %}
 
@@ -130,7 +143,7 @@
 
 </style>
 
-{% if data.useSearch == 'true' or data.useFilters == 'true' %}
+{% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
 
 <style>
 
@@ -149,8 +162,7 @@
 <!-- SEARCH ROW -->
 <div class="govuk-grid-row">
 
-
-{% if data.useSearch == 'true' %}
+{% if data[settings].useSearch === 'true' %}
 
   <!-- SEARCH FORM -->
   <div class="govuk-grid-column-two-thirds">
@@ -159,7 +171,7 @@
       
       <div class="govuk-form-group">
 
-        <label class="govuk-table__caption--m" for="searchTerm">
+        <label class="govuk-label govuk-label--m" for="searchTerm">
           Search for a certificate
         </label>
   
@@ -184,7 +196,7 @@
   {% endif %}
 
 
-  {% if data.useFilters == 'true' %}
+  {% if data[settings].useFilters == 'true' %}
   <div class="govuk-grid-column-one-third">
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
@@ -244,7 +256,7 @@
 
           {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
 
-          {% if draftRows.length > 0 and data.separateDraftsTable === 'true' %}
+          {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
 
           <!-- DRAFTS TABLE -->
             {{ govukTable({
@@ -264,14 +276,6 @@
           {% endif %}
 
         {% endif %}
-
-        <!-- DETAILS -->
-        {{ govukDetails({
-            summaryText: 'Explanation of statuses',
-            html: govukTable({
-              rows: '' | getStatusExplanationRows
-            })
-        }) }}
 
         <!-- MAIN TABLE -->
         {{ govukTable({
