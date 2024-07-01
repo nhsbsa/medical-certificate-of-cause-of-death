@@ -348,9 +348,9 @@ ______                                 _  ______     _        _ _
 
                 <!-- BACK TO DASHBOARD -->
                 {{ govukButton({
-                    text: data.translations.globalBackToDashboard[data.lang],
+                    text: data.translations.globalReturnToDashboard[data.lang],
                     href: 'dashboard',
-                    classes: 'govuk-button--secondary'
+                    classes: 'govuk-button'
                 }) }}
 
             {% elseif data['role-type'] == 'me' %}
@@ -383,7 +383,7 @@ ______                                 _  ______     _        _ _
                                 text: data.translations.globalSaveContinue[data.lang]
                             }) }}
                             {{ govukButton({
-                                text: data.translations.globalBackToDashboard[data.lang],
+                                text: data.translations.globalReturnToDashboard[data.lang],
                                 href: 'dashboard',
                                 classes: 'govuk-button--secondary'
                             }) }}
@@ -395,9 +395,9 @@ ______                                 _  ______     _        _ _
 
                     <!-- ELSE: BACK TO DASHBOARD -->
                     {{ govukButton({
-                        text: data.translations.globalBackToDashboard[data.lang],
+                        text: data.translations.globalReturnToDashboard[data.lang],
                         href: 'dashboard',
-                        classes: 'govuk-button--secondary'
+                        classes: 'govuk-button'
                     }) }}
 
                 {% endif %}
@@ -438,7 +438,7 @@ ______                                 _  ______     _        _ _
                             }) }}
 
                             {{ govukButton({
-                                text: data.translations.globalBackToDashboard[data.lang],
+                                text: data.translations.globalReturnToDashboard[data.lang],
                                 href: 'dashboard',
                                 classes: 'govuk-button--secondary'
                             }) }}
@@ -484,7 +484,7 @@ ______                                 _  ______     _        _ _
                                 text: 'Mark MCCD as sent to registrar'
                             }) }}
                             {{ govukButton({
-                                text: data.translations.globalBackToDashboard[data.lang],
+                                text: data.translations.globalReturnToDashboard[data.lang],
                                 href: 'dashboard',
                                 classes: 'govuk-button--secondary'
                             }) }}
@@ -496,9 +496,9 @@ ______                                 _  ______     _        _ _
 
                     <!-- BACK TO DASHBOARD -->
                     {{ govukButton({
-                        text: data.translations.globalBackToDashboard[data.lang],
+                        text: data.translations.globalReturnToDashboard[data.lang],
                         href: 'dashboard',
-                        classes: 'govuk-button--secondary'
+                        classes: 'govuk-button'
                     }) }}
                     
                 {% endif %}
