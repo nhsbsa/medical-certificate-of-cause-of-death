@@ -42,6 +42,8 @@
           value: data['hospital-name']
         }) }}
 
+        <div class="govuk-body govuk-!-margin-bottom-5">{{ data.translations.globalOr[data.lang] | lower }}</div>
+
         {{ govukInput({
           label: {
             text: data.translations.dpdHospitalPostcode[data.lang]
