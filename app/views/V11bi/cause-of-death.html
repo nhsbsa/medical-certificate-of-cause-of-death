@@ -6,6 +6,8 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
+{% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
+
 {% block beforeContent %}
 
 {{ govukBackLink({

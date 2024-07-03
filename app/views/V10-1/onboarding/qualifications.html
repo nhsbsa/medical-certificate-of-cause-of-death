@@ -1,6 +1,9 @@
 {% extends "layouts/main.html" %}
+
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
 
 {% block content %}
 <main class="govuk-main-wrapper app-main-class" id="main-content">

@@ -3,6 +3,8 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
+{% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
+
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -99,7 +101,7 @@
             text: data.translations.globalSaveContinue[data.lang]
           }) }}
           {{ govukButton({
-              text: data.translations.globalBackToDashboard[data.lang],
+              text: data.translations.globalReturnToDashboard[data.lang],
               href: 'dashboard',
               classes: 'govuk-button--secondary'
           }) }} 
