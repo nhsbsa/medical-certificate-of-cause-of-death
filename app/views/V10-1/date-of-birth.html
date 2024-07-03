@@ -26,9 +26,15 @@ GOV.UK page template - {{ serviceName }} - GOV.UK Prototype Kit
             What was the deceased person's date of birth?
           </h1>
         </legend>
+        {% if data['over-under-28'] == 'yes' %}
           <div class="govuk-hint" id="contact-hint">
-            Enter the date of birth if known. <br>For example, 21 8 2021
+          For example, 21 6 2024
           </div>
+        {% else %}
+        <div class="govuk-hint" id="contact-hint">
+          Enter the date of birth if known. <br>For example, 21 8 2021
+        </div>
+        {% endif %}
 
           <div class="govuk-date-input" id="example">
             <div class="govuk-date-input__item">
