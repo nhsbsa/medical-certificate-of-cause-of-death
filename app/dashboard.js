@@ -1,79 +1,90 @@
 //
-// INTERNAL VARIABLES
-
-const { separateDraftsTable } = require("./data/session-data-defaults");
-
+//
 //
 const _debug = false;
 let _roleType = '';
+let _settings = '';
+
 
 //
 // GET STATUSES FUNCTION
 // Now all calls for statuses come via here - should make updating stuff easier...
 //
-function _getStatuses( num, returnType ){
+function _getStatuses( num, returnType, settings ){
 
     // num: a number to return, else return everything
     // returnType: string - either 'statuses', 'tags' or 'explanations'
+    // settings: string - either V10 or V11 (currently)
 
     const returnTypes = ['statuses','tags','explanations'];
     returnType = ( returnTypes.indexOf(returnType) > -1 ) ? returnType : 'statuses';
 
+    const settingsArr = ['V10','V11'];
+    settings = ( settingsArr.indexOf(settings) > -1 ) ? settings : 'V10';
+
     num = parseInt(num);
 
-    /* 
+    const values = {};
+    values.V10 = {};
+    values.V11 = {};
 
-    PREVIOUS VERSION
-
-    const statuses = [
+    //
+    // STATUSES
+    //
+    values.V10.statuses = [
+        'Draft',
         'For officer review',
         'To be amended',
-        'Amended',
         'For sign off by medical examiner',
         'Review complete - send to registrar',
         'Submitted to registrar'
     ];
 
-    const tags = [ 
-        '<span class="govuk-tag govuk-tag--blue">For officer review</span>',
-        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
-        '<span class="govuk-tag govuk-tag--yellow">Amended</span>',
-        '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
-        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
-        '<span class="govuk-tag">Submitted to registrar</span>'
-    ];
-    */
-
-    const values = {};
-
-    values.statuses = [
+    values.V11.statuses = [
         'Draft',
-        'For review by MEO',
+        'For officer review',
         'To be amended',
         'For sign off by medical examiner',
-        'Review complete - send to registrar',
-        'Submitted to registrar'
+        'Review complete - send to register office',
+        'Submitted to register office'
     ];
 
-    values.tags = [ 
-        '<span class="govuk-tag govuk-tag--grey">Draft</span>',
-        '<span class="govuk-tag govuk-tag--blue">For review by MEO</span>',
-        '<span class="govuk-tag govuk-tag--orange">To be amended</span>',
-        '<span class="govuk-tag govuk-tag--green">For sign off by medical examiner</span>',
-        '<span class="govuk-tag govuk-tag--purple">Review complete - send to registrar</span>',
-        '<span class="govuk-tag">Submitted to registrar</span>'
+    //
+    // TAGS
+    //
+    values.V10.tags = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V10.statuses[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V10.statuses[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V10.statuses[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V10.statuses[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V10.statuses[4]+'</span>',
+        '<span class="govuk-tag">'+values.V10.statuses[5]+'</span>'
     ];
 
-    values.explanations = [
+    values.V11.tags = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V11.statuses[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V11.statuses[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V11.statuses[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V11.statuses[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V11.statuses[4]+'</span>',
+        '<span class="govuk-tag">'+values.V11.statuses[5]+'</span>'
+    ];
+
+    //
+    // EXPLANATIONS
+    //
+    values.V10.explanations = [
         'The MCCD has not been submitted.',
-        'An AP has submitted the MCCD and it has been passed to a medical examiner office for review by an MEO.',
-        'A ME has reviewed the MCCD and requires the AP to make changes.',
-        'The MCCD requires scrutiny from an ME.',
-        'The MCCD is ready to be sent to the register office by an MEO.',
-        'The MCCD has been sent to the register office.'
+        'An attending practitioner has submitted the MCCD and it has been passed to a medical examiner office for review by a medical examiner officer.',
+        'A medical examiner has reviewed the MCCD and requires the attending practitioner to make changes.',
+        'The MCCD requires scrutiny from an medical examiner.',
+        'The MCCD is ready to be sent to the local register office by a medical examiner officer.',
+        'The MCCD has been sent to the local register office.'
     ];
 
-    return ( Number.isNaN(num) ) ? values[returnType] : values[returnType][num];
+    values.V11.explanations = values.V10.explanations; // Same for now
+
+    return ( Number.isNaN(num) ) ? values[settings][returnType] : values[settings][returnType][num];
 
 }
 
@@ -325,7 +336,7 @@ function _getRow( patient ){
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: patient.dateOfDeath } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
-    arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags' ) });
+    arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags', _settings ) });
 
     return arr;
 
@@ -400,13 +411,14 @@ function _filterDrafts( rows, filterDrafts ){
 //
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName, settings ){
 
     if( _debug ){
         console.log( 'START FILTERING ----------------' ); 
     }
 
     _roleType = roleType;
+    _settings = settings;
 
     const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar, lastName ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 

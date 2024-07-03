@@ -305,7 +305,7 @@ addFilter( 'getStatusFilterOptions', function( content ){
         content = '';
     }
 
-    const statuses = dashboard.getStatuses();
+    const statuses = dashboard.getStatuses('','statuses',this.ctx.settings);
 
     let html = '<option value="">Show all statuses</option>';
     statuses.forEach(function( status, i ){
@@ -448,11 +448,13 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
     const lastName = this.ctx.data['deceased-last-name'];
+    const settings = this.ctx.settings;
 
     const filterDrafts = ( this.ctx.data[this.ctx.settings].useSeparateDraftsTable === 'true' ) ? true : false;
 
     // Perform the filtering, search term first, then status filters, then orders by date...
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName );
+    // I really need to tidy this up....
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName, settings );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
@@ -555,7 +557,7 @@ addFilter( 'getStatusTag', function( content ){
 
     content = parseInt(content);
     if( !Number.isNaN( content ) ){
-        html = dashboard.getStatuses(content, 'tags' );    
+        html = dashboard.getStatuses(content, 'tags', this.ctx.settings );    
     }
 
     return html;
@@ -569,8 +571,8 @@ addFilter('getStatusExplanationRows', function(content) {
 
      // content: blank string
     
-    const tags = dashboard.getStatuses( '', 'tags' );
-    const explanations = dashboard.getStatuses( '', 'explanations' );
+    const tags = dashboard.getStatuses( '', 'tags', this.ctx.settings );
+    const explanations = dashboard.getStatuses( '', 'explanations', this.ctx.settings );
 
     const rows = [];
     tags.forEach(function( tag, i ){

@@ -48,6 +48,20 @@
     text: 'You will be logged out of the system after 15 minutes of inactivity.'
   }) }}
 
+  {% if data[settings].showExplanationOfStatuses === 'true' %}
+
+        <!-- DRAW STATUS EXPLANATIONS -->
+        {{ govukDetails({
+            summaryText: 'Explanation of statuses',
+            html: govukTable({
+              rows: '' | getStatusExplanationRows
+            })
+        }) }}
+        
+  {% endif %}
+
+   
+
   </div>
 
   {% if data['role-type'] == 'ap' or data['role-type'] == 'me' %}
