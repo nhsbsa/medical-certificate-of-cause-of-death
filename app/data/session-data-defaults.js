@@ -83,12 +83,13 @@ module.exports = {
     useEmbeddedFeedbackForm: 'false',
 
     showContactMethodScreen: 'false',
+    showExplanationOfStatuses: 'false',
 
     validateTaskList: 'true',
     validateCauseOfDeathScreen: 'true',
     validateNeoNatalUnder24HoursAge: 'true',
 
-    nhsNumberAlreadyUsed: 'true',
+    nhsNumberAlreadyUsed: 'true'
 
   },
 
