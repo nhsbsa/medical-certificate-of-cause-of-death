@@ -1,6 +1,8 @@
 {% extends "layouts/main.html" %}
+
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
 
 {% block beforeContent %}
 
