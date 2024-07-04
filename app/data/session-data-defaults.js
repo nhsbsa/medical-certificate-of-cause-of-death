@@ -64,7 +64,7 @@ module.exports = {
     email: 'kelly.jones@example.com',
     hospitalName: 'St Gemma\'s Hospice',
     address: 'St Gemma\'s Hospice, 329 Harrogate Road, Leeds, LS17 6QD',
-    gmcNumber: '6357812462'
+    gmcNumber: '6357345'
   },
 
   rowsPerPage: 10,
@@ -74,6 +74,7 @@ module.exports = {
   
   lang: 'en',
   bilingual: 'false',
+  gmcNumberValidated: 'false',
 
   V10: {
 
