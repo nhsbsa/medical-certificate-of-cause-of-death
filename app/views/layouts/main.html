@@ -77,7 +77,19 @@
                 <ul class="account-signed-in__list">
                   <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
                   <li class="account-signed-in__list-item">{{ data.user.name or 'Ann Other' }}</li>
-                  {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">GMC no: {{ data.user.gmcNumber or '0123456789' }}</li>{% endif %}                  
+                  {% if data['role-type'] !== 'meo' %}
+
+                    {% if data.gmcNumberValidated === 'true' %}
+                      {% if data['gmc-number']%}
+                        <li class="account-signed-in__list-item">GMC no: {{ data['gmc-number'] }}</li>
+                      {% endif %}
+                    {% else %}
+                        {% if data.user.gmcNumber %}
+                          <li class="account-signed-in__list-item">GMC no: {{ data.user.gmcNumber }}</li>
+                        {% endif %}
+                    {% endif %}
+                    
+                  {% endif %}                  
                   <li class="account-signed-in__list-item">{{ data.user.hospitalName or 'Unknown Hosptial' }}</li>
                   <li class="account-signed-in__list-item"><a href="../index">Sign out</a></li>
                   </ul>
@@ -85,82 +97,6 @@
           </div>
       </div>
     </div>
-
-
-    <!--
-
-      v11 HEADER
-
-    <div class="govuk-width-container">
-      <div class="govuk-grid-row">
-          <div class="govuk-grid-column-full">
-              <div class="account-signed-in">
-                <ul class="account-signed-in__list">
-                  <li class="account-signed-in__list-item">{% if data ['role-type'] == 'ap' %}Ashley Phillips{% else %}Alera Singh{% endif %}</li>
-                  <li class="account-signed-in__list-item">GMC no: 12345678</li>
-                  <li class="account-signed-in__list-item">
-                    {% if data ['role-type'] == 'ap' %}
-                      attending.practitioner@nhs.net
-                    {% elseif data ['role-type'] == 'me' %}
-                      medical.examiner@nhs.net
-                    {% else %}
-                      your.name@nhs.net
-                    {% endif %}
-                  </li>
-                  <li class="account-signed-in__list-item">
-                    <a href="../index">Sign out</a>
-                  </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-    </div>
-    -->
-
-
-    <!-- <div class="govuk-width-container">
-      <div class="govuk-grid-row">
-          <div class="govuk-grid-column-full">
-              {% if data['lang'] == "en" %}
-              <nav class="dwp-language-toggle" aria-label="Language toggle">
-                <ul class="dwp-language-toggle__list">
-                <li class="dwp-language-toggle__list-item">
-                    English
-                </li>
-                <li lang="cy" class="dwp-language-toggle__list-item">
-                    <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
-                    <a href="?lang=cy" class="govuk-link">Cymraeg</a>
-                </li>
-                </ul>
-                </nav> 
-                {% elseif data['lang'] == "cy" %}
-                <nav class="dwp-language-toggle" aria-label="Language toggle">
-                  <ul class="dwp-language-toggle__list">
-                  <li lang="en" class="dwp-language-toggle__list-item">
-                      <span class="govuk-visually-hidden">Change the language to English</span>
-                      <a href="?lang=en" class="govuk-link">English</a>
-                  </li>
-                  <li class="dwp-language-toggle__list-item">
-                    Cymraeg
-                   </li>
-                  </ul>
-                  </nav> 
-                {% else %}
-                <nav class="dwp-language-toggle" aria-label="Language toggle">
-                  <ul class="dwp-language-toggle__list">
-                  <li class="dwp-language-toggle__list-item">
-                      English
-                  </li>
-                  <li lang="cy" class="dwp-language-toggle__list-item">
-                      <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
-                      <a href="?lang=cy" class="govuk-link">Cymraeg</a>
-                  </li>
-                  </ul>
-                  </nav> 
-                {% endif %}
-          </div>
-      </div>
-    </div> -->
     
     {% endblock %}
 
