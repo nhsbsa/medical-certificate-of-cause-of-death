@@ -7,7 +7,9 @@
 
 {% block content %}
 
-  <div class="govuk-grid-row">
+ {{ '' | setDashboardVariables( data['role-type'], settings, data.lang ) }}
+
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
 {% if data['role-type'] == 'ap' %}
@@ -265,12 +267,7 @@
             classes: 'table-dashboard govuk-table--small-text-until-tablet',
             captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
             firstCellIsHeader: true,
-            head: [ 
-              { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' }, 
-              { text: 'Date of death' },
-              { text: 'Action' },
-              { text: 'Status' }
-            ],
+            head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
             rows: draftRows
           }) }}
           
@@ -297,6 +294,5 @@
 </div>
 
 {{ data | debugData | safe }}
-
 
 {% endblock %}

@@ -341,6 +341,9 @@ addFilter( 'getDashboardCaption', function( content ){
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
     let caption = ( roleType === 'ap' ) ? 'Certificates created by you' : 'All certificates';
+    if( this.ctx.data.lang === 'cy' ){
+        caption = ( roleType === 'ap' ) ? 'Tystysgrifau a grëwyd gennych chi' : 'Pob tystysgrif';
+    }
 
     const regex = /^[0-9\s]+$/;
     const isNHSNumber = regex.test(searchTerm);
@@ -350,18 +353,22 @@ addFilter( 'getDashboardCaption', function( content ){
 
         if( isNHSNumber ){
             if( spaceLessSearchTerm.length === 10 ){
-                caption = 'Certificates with NHS number "'+searchTerm+'"';
+                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau gyda rhif GIG "'+searchTerm+'"' : 'Certificates with NHS number "'+searchTerm+'"';
             } else {
-                caption = 'Certificates with NHS number beginning with "'+searchTerm+'"';
+                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau gyda rhif GIG sy\'n dechrau gyda "'+searchTerm+'"' : 'Certificates with NHS number beginning with "'+searchTerm+'"';
             }
         } else {
-            caption = 'Certificates containing "'+searchTerm+'"';
+            caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau sy\'n cynnwys "'+searchTerm+'"' : 'Certificates containing "'+searchTerm+'"';
         }
 
     }
 
     if( statusFilter ){
-        caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
+        if( this.ctx.data.lang === 'cy' ){
+            caption += ' gyda statws "' + dashboard.getStatuses(statusFilter) + '"';
+        } else {
+            caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
+        }
     }
 
     return caption;
@@ -371,11 +378,16 @@ addFilter( 'getDashboardCaption', function( content ){
 //
 // GET DASHBOARD TABLE HEAD
 //
-addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
+addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, drafts ){
 
     // content:         blank string
     // sortBy:          name, date, status    ( defaults to date )
     // sortDirection:   ascending, descending ( defaults to ascending )
+
+    const headers = {
+        en: ['Deceased name','NHS number','Date of death','Action','Status'],
+        cy: ['Enw marw','Rhif y GIG','Dyddiad marw','Gweithred','Statws']
+    };
 
     let baseLink = '?currentPage=0';
     let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
@@ -384,8 +396,8 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 
     // Name
     let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
-    let nameObj = {
-        html: '<a href="'+nameLink+'">Deceased name</a><span class="govuk-body-s">NHS number</span>',
+    let nameObj = ( drafts ) ? { html: headers[this.ctx.data.lang][0] + '<br /><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>' } : {
+        html: '<a href="'+nameLink+'">'+headers[this.ctx.data.lang][0]+'</a><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>',
         attributes: {
             'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
         } 
@@ -393,20 +405,20 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
 
     // Date
     let dateLink = ( sortBy === 'date' ) ? baseLink + '&sortBy=date&sortDirection=' + opposite : baseLink + '&sortBy=date&sortDirection=ascending';
-    let dateObj = {
-        html: '<a href="'+dateLink+'">Date of death</a>',
+    let dateObj = ( drafts ) ? { text: headers[this.ctx.data.lang][2] } : {
+        html: '<a href="'+dateLink+'">'+headers[this.ctx.data.lang][2]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'date' ) ? sortDirection : 'none'
         } 
     };
 
     // Action
-    let actionObj = { text: 'Action' };
+    let actionObj = { text: headers[this.ctx.data.lang][3] };
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
-    let statusObj = {
-        html: '<a href="'+statusLink+'">Status</a>',
+    let statusObj = ( drafts ) ? { text: headers[this.ctx.data.lang][4] } : {
+        html: '<a href="'+statusLink+'">'+headers[this.ctx.data.lang][4]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         }
@@ -424,6 +436,24 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection ){
     return [ nameObj, dateObj, actionObj, statusObj ];
 
 } );
+
+//
+// SET DASHBOARD VARIABLES
+// You'll need to set these before using the statuses on any page...
+//
+addFilter( 'setDashboardVariables', function( content ){
+
+    // content: a blank string
+
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+    const settings = this.ctx.settings;
+    const lang = ( ['en','cy'].indexOf(this.ctx.data.lang) > -1 ) ? this.ctx.data.lang : 'en';
+
+    dashboard.setDashboardVariables( roleType, settings, lang );
+
+    return '';
+
+});
 
 //
 // GET DASHBOARD TABLE ROWS
@@ -448,20 +478,22 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const sentToRegistrar = ( this.ctx.data['sent-to-registrar'] ) ? true : false;
 
     const lastName = this.ctx.data['deceased-last-name'];
-    const settings = this.ctx.settings;
 
     const filterDrafts = ( this.ctx.data[this.ctx.settings].useSeparateDraftsTable === 'true' ) ? true : false;
 
     // Perform the filtering, search term first, then status filters, then orders by date...
     // I really need to tidy this up....
-    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName, settings );
+    let rows = dashboard.getFilteredResults( content, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName );
     this.ctx.data.noOfFilteredRows = rows.length;
 
     rows = dashboard.getPaginatedResults( rows, rowsPerPage, currentPage );
 
     // If rows is empty, display an error message
     if( rows.length === 0 ){
-        rows.push( [{ html:'<span class="govuk-body">No certificates found</span>', colspan: 5}] );
+
+        const noCertificatesFound = ( this.ctx.data.lang === 'cy' ) ? 'Dim tystysgrifau wedi\'u canfod' : 'No certificates found';
+
+        rows.push( [{ html:'<span class="govuk-body">'+noCertificatesFound+'</span>', colspan: 5}] );
     }
     
    return rows;
@@ -520,6 +552,8 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     }
 
+    obj.classes = 'govuk-pagination--'+this.ctx.data.lang;
+
     return obj;
 
 } );
@@ -569,7 +603,7 @@ addFilter( 'getStatusTag', function( content ){
 //
 addFilter('getStatusExplanationRows', function(content) {
 
-     // content: blank string
+    // content: blank string
     
     const tags = dashboard.getStatuses( '', 'tags', this.ctx.settings );
     const explanations = dashboard.getStatuses( '', 'explanations', this.ctx.settings );
