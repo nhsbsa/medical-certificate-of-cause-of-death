@@ -2,8 +2,10 @@
 //
 //
 const _debug = false;
+
 let _roleType = '';
 let _settings = '';
+let _lang = '';
 
 
 //
@@ -31,7 +33,8 @@ function _getStatuses( num, returnType, settings ){
     //
     // STATUSES
     //
-    values.V10.statuses = [
+    values.V10.statuses = {};
+    values.V10.statuses.en = [
         'Draft',
         'For officer review',
         'To be amended',
@@ -39,8 +42,17 @@ function _getStatuses( num, returnType, settings ){
         'Review complete - send to registrar',
         'Submitted to registrar'
     ];
+    values.V10.statuses.cy = [
+        'Drafft',
+        'Ar gyfer adolygiad swyddogion',
+        'I\'w diwygio',
+        'Ar gyfer cofrestru gan arholwr meddygol',
+        'Adolygiad wedi\'i gwblhau - anfonwch at registrar',
+        'Cyflwynwyd i\'r cofrestrydd'
+    ];
 
-    values.V11.statuses = [
+    values.V11.statuses = {};
+    values.V11.statuses.en = [
         'Draft',
         'For officer review',
         'To be amended',
@@ -48,32 +60,67 @@ function _getStatuses( num, returnType, settings ){
         'Review complete - send to register office',
         'Submitted to register office'
     ];
+    values.V11.statuses.cy = [
+        'Drafft',
+        'Ar gyfer adolygiad swyddogion',
+        'I\'w diwygio',
+        'Ar gyfer cofrestru gan arholwr meddygol',
+        'Adolygiad cyflawn - anfonwch at y swyddfa Gofrestru',
+        'Cyflwynwyd i\'r swyddfa gofrestru'
+    ];
 
     //
     // TAGS
     //
-    values.V10.tags = [ 
-        '<span class="govuk-tag govuk-tag--grey">'+values.V10.statuses[0]+'</span>',
-        '<span class="govuk-tag govuk-tag--blue">'+values.V10.statuses[1]+'</span>',
-        '<span class="govuk-tag govuk-tag--orange">'+values.V10.statuses[2]+'</span>',
-        '<span class="govuk-tag govuk-tag--green">'+values.V10.statuses[3]+'</span>',
-        '<span class="govuk-tag govuk-tag--purple">'+values.V10.statuses[4]+'</span>',
-        '<span class="govuk-tag">'+values.V10.statuses[5]+'</span>'
+    values.V10.tags = {};
+    values.V10.tags.en = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V10.statuses.en[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V10.statuses.en[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V10.statuses.en[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V10.statuses.en[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V10.statuses.en[4]+'</span>',
+        '<span class="govuk-tag">'+values.V10.statuses.en[5]+'</span>'
+    ];
+    values.V10.tags.cy = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V10.statuses.cy[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V10.statuses.cy[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V10.statuses.cy[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V10.statuses.cy[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V10.statuses.cy[4]+'</span>',
+        '<span class="govuk-tag">'+values.V10.statuses.cy[5]+'</span>'
     ];
 
-    values.V11.tags = [ 
-        '<span class="govuk-tag govuk-tag--grey">'+values.V11.statuses[0]+'</span>',
-        '<span class="govuk-tag govuk-tag--blue">'+values.V11.statuses[1]+'</span>',
-        '<span class="govuk-tag govuk-tag--orange">'+values.V11.statuses[2]+'</span>',
-        '<span class="govuk-tag govuk-tag--green">'+values.V11.statuses[3]+'</span>',
-        '<span class="govuk-tag govuk-tag--purple">'+values.V11.statuses[4]+'</span>',
-        '<span class="govuk-tag">'+values.V11.statuses[5]+'</span>'
+    values.V11.tags = {};
+    values.V11.tags.en = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V11.statuses.en[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V11.statuses.en[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V11.statuses.en[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V11.statuses.en[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V11.statuses.en[4]+'</span>',
+        '<span class="govuk-tag">'+values.V11.statuses.en[5]+'</span>'
+    ];
+    values.V11.tags.cy = [ 
+        '<span class="govuk-tag govuk-tag--grey">'+values.V11.statuses.cy[0]+'</span>',
+        '<span class="govuk-tag govuk-tag--blue">'+values.V11.statuses.cy[1]+'</span>',
+        '<span class="govuk-tag govuk-tag--orange">'+values.V11.statuses.cy[2]+'</span>',
+        '<span class="govuk-tag govuk-tag--green">'+values.V11.statuses.cy[3]+'</span>',
+        '<span class="govuk-tag govuk-tag--purple">'+values.V11.statuses.cy[4]+'</span>',
+        '<span class="govuk-tag">'+values.V11.statuses.cy[5]+'</span>'
     ];
 
     //
     // EXPLANATIONS
     //
-    values.V10.explanations = [
+    values.V10.explanations = {};
+    values.V10.explanations.en = [
+        'The MCCD has not been submitted.',
+        'An attending practitioner has submitted the MCCD and it has been passed to a medical examiner office for review by a medical examiner officer.',
+        'A medical examiner has reviewed the MCCD and requires the attending practitioner to make changes.',
+        'The MCCD requires scrutiny from an medical examiner.',
+        'The MCCD is ready to be sent to the local register office by a medical examiner officer.',
+        'The MCCD has been sent to the local register office.'
+    ];
+    values.V10.explanations.cy = [
         'The MCCD has not been submitted.',
         'An attending practitioner has submitted the MCCD and it has been passed to a medical examiner office for review by a medical examiner officer.',
         'A medical examiner has reviewed the MCCD and requires the attending practitioner to make changes.',
@@ -82,9 +129,13 @@ function _getStatuses( num, returnType, settings ){
         'The MCCD has been sent to the local register office.'
     ];
 
-    values.V11.explanations = values.V10.explanations; // Same for now
+    values.V11.explanations = {};
+    values.V11.explanations.en = values.V10.explanations.en; // Same for now
+    values.V11.explanations.cy = values.V10.explanations.cy; // Same for now
 
-    return ( Number.isNaN(num) ) ? values[settings][returnType] : values[settings][returnType][num];
+    var returnVal = ( Number.isNaN(num) ) ? values[settings][returnType][_lang] : values[settings][returnType][_lang][num];
+
+    return returnVal;
 
 }
 
@@ -296,9 +347,18 @@ function _getActionForStatus( status, id ){
     
 
     const actions = {
-        ap: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
-        me: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
-        meo: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate']
+        ap: {
+            en: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
+            cy: ['Tystysgrif gorffen','Gweld tystysgrif','Diwygio tystysgrif','Gweld tystysgrif','Gweld tystysgrif','Gweld tystysgrif']
+        },
+        me: {
+            en: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
+            cy: ['Tystysgrif gorffen','XXX certificate','XXX certificate','Tystysgrif adolygu','Gweld tystysgrif','Gweld tystysgrif']
+        },
+        meo: {
+            en: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate'],
+            cy: ['XXX certificate','Tystysgrif adolygu','Gweld tystysgrif','Gweld tystysgrif','Lawrlwytho tystysgrif','Gweld tystysgrif']
+        }
     }
 
     const useAliases = true;
@@ -310,14 +370,14 @@ function _getActionForStatus( status, id ){
     
         // Draft
         case 0:
-            html = '<a class="govuk-link" href="mccd-tasklist">'+actions[_roleType][status]+'</a>';
+            html = '<a class="govuk-link" href="mccd-tasklist">'+actions[_roleType][_lang][status]+'</a>';
             break;
 
         default: 
             if( useAliases ){
-                link = actions[_roleType][status].toLowerCase().split(' ').join('-') + '?id='+id;
+                link = actions[_roleType][_lang][status].toLowerCase().split(' ').join('-') + '?id='+id;
             }
-            html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][status]+'</a>';
+            html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][_lang][status]+'</a>';
             break;
 
     }
@@ -334,11 +394,29 @@ function _getRow( patient ){
     let arr = [];
 
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
-    arr.push( { text: patient.dateOfDeath } );
+    arr.push( { text: _translateDate( patient.dateOfDeath ) } );
     arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
     arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags', _settings ) });
 
     return arr;
+
+}
+
+//
+// TRANSLATE DATE FUNCTION
+//
+function _translateDate( date ){
+
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const monthsWelsh = ['Anhysbys','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr'];
+
+    if( _lang === 'cy' ){
+        months.forEach(function( month, i ){
+            date = date.split(month).join(monthsWelsh[i]);
+        });
+    }
+
+    return date;
 
 }
 
@@ -409,16 +487,26 @@ function _filterDrafts( rows, filterDrafts ){
 }
 
 //
+// SET DASHBOARD VARIABLES FUNCTION
+//
+function _setDashboardVariables( roleType, settings, lang ){
+
+    _roleType = roleType;
+    _settings = settings;
+    _lang = lang;
+
+    return true;
+
+}
+
+//
 // GET FILTERED RESULTS FUNCTION
 //
-function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName, settings ){
+function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName ){
 
     if( _debug ){
         console.log( 'START FILTERING ----------------' ); 
     }
-
-    _roleType = roleType;
-    _settings = settings;
 
     const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar, lastName ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 
@@ -485,5 +573,6 @@ module.exports = {
     getDraftResults: _getDraftResults,
     getFilteredResults: _getFilteredResults,
     getPaginatedResults: _getPaginatedResults,
-    getStatuses: _getStatuses
+    getStatuses: _getStatuses,
+    setDashboardVariables: _setDashboardVariables
 }
