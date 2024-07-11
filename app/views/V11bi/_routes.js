@@ -415,12 +415,6 @@ router.post( /has-been-removed/, (req, res) => {
     res.redirect('cya-death-circumstances');
 });
 
-// Set journey as complete
-router.get(/cya-death-circumstances/, function (req, res) {
-    req.session.data.afterDeathComplete = 'true';
-    return res.render('/'+version+'/cya-death-circumstances');
-});
-
 // Check your answers (Actions After Death)
 router.post( /check-your-answers-aad/, (req, res) => {
     res.redirect('mccd-tasklist');
@@ -933,6 +927,22 @@ router.post( /mccd-summary/, (req, res) => {
 
 });
 
+
+// CHECK YOUR ANSWERS OVERRIDES (They're currently leaking in from previous versions)
+router.get(/cya-deceased/, function (req, res) {
+    req.session.data.deceasedComplete = 'true';
+    return res.render('/'+version+'/cya-deceased');
+});
+
+router.get(/cya-death-circumstances/, function (req, res) {
+    req.session.data.afterDeathComplete = 'true';
+    return res.render('/'+version+'/cya-death-circumstances');
+});
+
+router.get(/cya-cause-death/, function (req, res) {
+    req.session.data.causeDeathComplete = 'true';
+    return res.render('/'+version+'/cya-cause-death');
+});
 
 
 // MCCD TASKLIST
