@@ -8,6 +8,8 @@
 
 {% block content %}
 
+{{ '' | setDashboardVariables( data['role-type'], settings, data.lang ) }}
+
  <!-- AP DASHBOARD -->
  <main class="govuk-main-wrapper app-main-class" id="main-content">
   <div class="govuk-grid-row">
@@ -280,12 +282,7 @@
             classes: 'table-dashboard govuk-table--small-text-until-tablet',
             captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
             firstCellIsHeader: true,
-            head: [ 
-              { html: 'Deceased name<br /><span class="govuk-body-s">NHS number</span>' }, 
-              { text: 'Date of death' },
-              { text: 'Action' },
-              { text: 'Status' }
-            ],
+            head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
             rows: draftRows
           }) }}
           

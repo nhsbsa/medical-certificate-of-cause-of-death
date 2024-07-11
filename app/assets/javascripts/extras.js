@@ -28,3 +28,19 @@ window.addEventListener('DOMContentLoaded',function(){
 
 });
 */
+
+//
+// CHANGE THE TEXT ON THE PREVIOUS/NEXT BUTTONS
+// The toolkit doesn't let you do this easily, 'cause you have to recalculate the link...
+//
+window.addEventListener('DOMContentLoaded',function(){
+
+  document.querySelectorAll('.govuk-pagination--cy .govuk-pagination__prev .govuk-pagination__link-title').forEach(function(el){
+    el.innerHTML = 'Tudalen flaenorol';
+  });
+
+  document.querySelectorAll('.govuk-pagination--cy .govuk-pagination__next .govuk-pagination__link-title').forEach(function(el){
+    el.innerHTML = 'Tudalen nesaf';
+  });
+
+});
