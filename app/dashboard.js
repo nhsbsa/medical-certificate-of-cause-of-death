@@ -47,27 +47,14 @@ function _getStatuses( num, returnType, settings ){
         'Ar gyfer adolygiad swyddogion',
         'I\'w diwygio',
         'Ar gyfer cofrestru gan arholwr meddygol',
-        'Adolygiad wedi\'i gwblhau - anfonwch at registrar',
-        'Cyflwynwyd i\'r cofrestrydd'
-    ];
-
-    values.V11.statuses = {};
-    values.V11.statuses.en = [
-        'Draft',
-        'For officer review',
-        'To be amended',
-        'For sign off by medical examiner',
-        'Review complete - send to register office',
-        'Submitted to register office'
-    ];
-    values.V11.statuses.cy = [
-        'Drafft',
-        'Ar gyfer adolygiad swyddogion',
-        'I\'w diwygio',
-        'Ar gyfer cofrestru gan arholwr meddygol',
         'Adolygiad cyflawn - anfonwch at y swyddfa Gofrestru',
         'Cyflwynwyd i\'r swyddfa gofrestru'
     ];
+
+    // Currently the same
+    values.V11.statuses = {};
+    values.V11.statuses.en = values.V10.statuses.en;
+    values.V11.statuses.cy = values.V10.statuses.cy;
 
     //
     // TAGS
