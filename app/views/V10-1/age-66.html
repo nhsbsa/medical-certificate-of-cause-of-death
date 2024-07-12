@@ -13,15 +13,15 @@
 
     <form action="age-66" method="post" novalidate>
 
-      <h1 class="govuk-heading-l">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-2">
         What was the deceased person's age?
       </h1>
       
       <div class="govuk-form-group">
 
-        <label class="govuk-label" for="location-of-birth">
+        <div class="govuk-hint">
           Enter age and select an age unit, if known
-        </label>
+        </div>
         
         <div class="govuk-input__wrapper">
           <input class="govuk-input govuk-input--width-5 border-hidden" id="age-66-input" name="age-66-input" value="{{ data['age-66-input'] }}" type="text" />

@@ -25,13 +25,12 @@
         <fieldset class="govuk-fieldset" aria-describedby="example-hint" role="group">
 
           {% if data['role-type'] == 'ap' %}
-          <label class="govuk-label">This is the date as stated to me as the attending practitioner</label>
-          <div class="govuk-hint" id="contact-hint">For example, 10 11 2023</div>
-          
-          {% else %}
-          <label class="govuk-label">This is the date as stated to me as the medical examiner</label>
-          <div class="govuk-hint" id="contact-hint">For example, 10 11 2023</div>
+            <p class="govuk-label">This is the date as stated to me as the attending practitioner</p>
+          {% elseif data['role-type'] == 'me' %}
+            <p class="govuk-label">This is the date as stated to me as the medical examiner</p>
           {% endif %}
+
+          <div class="govuk-hint" id="contact-hint">For example, 10 11 2023</div>
 
           <div class="govuk-date-input" id="example">
             <div class="govuk-date-input__item">
