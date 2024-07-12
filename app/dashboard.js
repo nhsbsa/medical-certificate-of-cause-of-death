@@ -39,8 +39,8 @@ function _getStatuses( num, returnType, settings ){
         'For officer review',
         'To be amended',
         'For sign off by medical examiner',
-        'Review complete - send to registrar',
-        'Submitted to registrar'
+        'Review complete - send to register office',
+        'Submitted to register office'
     ];
     values.V10.statuses.cy = [
         'Drafft',
