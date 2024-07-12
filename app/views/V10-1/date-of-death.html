@@ -24,9 +24,14 @@
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="example-hint" role="group">
 
-          <div class="govuk-hint" id="contact-hint">
-            For example, 10 11 2023
-          </div>
+          {% if data['role-type'] == 'ap' %}
+          <label class="govuk-label">This is the date as stated to me as the attending practitioner</label>
+          <div class="govuk-hint" id="contact-hint">For example, 10 11 2023</div>
+          
+          {% else %}
+          <label class="govuk-label">This is the date as stated to me as the medical examiner</label>
+          <div class="govuk-hint" id="contact-hint">For example, 10 11 2023</div>
+          {% endif %}
 
           <div class="govuk-date-input" id="example">
             <div class="govuk-date-input__item">
