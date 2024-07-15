@@ -26,7 +26,7 @@
 
       {% if data['role-type'] === 'me' %}
 
-        <!-- MEDICAL EXAMINER (ME) MCCD SUBMIT -->
+        <!-- MEDICAL EXAMINER (ME) MCCD SUBMIT - ME CERT -->
 
         {% if data['me-mccd'] === 'true' %}
 
@@ -42,7 +42,7 @@
             items: [
               {
                 value: 'meCertDeclarationContent',
-                text: data.translations.meCertDeclarationContent[data.lang]
+                text: "I am a duly appointed medical examiner and I confirm that following my review the cause of death is as stated in this certificate to the best of my knowledge and belief."
               }
             ]
           }) }}
@@ -67,7 +67,7 @@
             items: [
               {
                 value: 'meScrutinyDeclarationContent',
-                text: data.translations.meScrutinyDeclarationContent[data.lang]
+                text: "I am a duly appointed medical examiner and following scrutiny I confirm to the best of my knowledge and belief that the cause of death is as stated on the certificate."
               }
             ]
           }) }}
