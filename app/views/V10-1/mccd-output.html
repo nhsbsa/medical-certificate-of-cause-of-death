@@ -10,11 +10,20 @@
     <div class="mccd-output-details">
         <ul style="padding-left: 0;">
         <li class="mccd-output-details__header">Certificate type</li>
+    {% if data['role-type'] == 'me' %}
+        {% if data['over-under-28'] == 'yes' %}  
+        <li class="mccd-output-details__data">65 ME</li>
+        {% else %}
+        <li class="mccd-output-details__data">66 ME</li>
+        {% endif %}
+    {% endif %}
+    {% if data['role-type'] == 'ap' %}
         {% if data['over-under-28'] == 'yes' %}  
         <li class="mccd-output-details__data">65 AP</li>
         {% else %}
         <li class="mccd-output-details__data">66 AP</li>
         {% endif %}
+    {% endif %}
         </ul>
     </div>
     <div class="mccd-output-details">
@@ -238,6 +247,35 @@
         </dl>
         </div>
     </div>
+    {% if data['role-type'] == 'me' %}
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Referral details
+        </h2>
+        </div>
+        <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Referring medical practitioner's full name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Cerys Ann Ward
+            </dd>
+            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Referring senior coroner's full name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Aneet Patel
+            </dd>
+            </div>
+        </dl>
+        </div>
+    </div>
+    {% else %}
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -259,7 +297,7 @@
                 Qualification
             </dt>
             <dd class="govuk-summary-list__value">
-                MB Ch
+                MB ChB
             </dd>
             </div>
         <div class="govuk-summary-list__row">
@@ -273,6 +311,7 @@
         </dl>
         </div>
     </div>
+    {% endif %}
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -294,7 +333,7 @@
                 Qualification
             </dt>
             <dd class="govuk-summary-list__value">
-                MB Ch
+                MB ChB
             </dd>
             </div>
         <div class="govuk-summary-list__row">
@@ -305,6 +344,7 @@
                 3456789
             </dd>
             </div>
+            {% if data['role-type'] == 'ap' %}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Authorisation date
@@ -313,6 +353,8 @@
                 24 April 2024
             </dd>
             </div>
+            {% else %}
+            {% endif %}
         </dl>
         </div>
     </div>
