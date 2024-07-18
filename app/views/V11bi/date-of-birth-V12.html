@@ -35,7 +35,7 @@
             <div class="govuk-hint" id="DoB-hint">{{ data.translations.dpdDoBHintNeoNatal[data.lang] | safe }}</div>
           {% else %}
             <!-- ADULT (ALLOW UNKNOWN) -->
-            <div class="govuk-hint" id="DoB-hint">{{ data.translations.dpdDoBHint[data.lang] | safe }}</div>
+            <div class="govuk-hint" id="DoB-hint">{{ data.translations.dpdDoBHintV12[data.lang] | safe }}</div>
           {% endif %}
 
 
@@ -82,6 +82,22 @@
             </div>
 
           </div>
+
+          {% if data['over-under-28'] == 'dpd66Or65RadioNo' %}
+
+            <!-- ONLY ALLOW UNKNOWN FOR ADULTS -->
+            <div class="govuk-checkboxes govuk-checkboxes--small" style="margin-top: 10px;" data-module="govuk-checkboxes">
+                
+                <div class="govuk-checkboxes__divider">{{ data.translations.dpdDoBOr[data.lang] }}</div>
+
+                <div class="govuk-checkboxes__item">
+                  <input {% if data['dob-none'] == 'dpdDoBNoRegisteredDoB' %}checked {% endif %}class="govuk-checkboxes__input" id="dob-unregistered" name="dob-none" type="checkbox" value="dpdDoBNoRegisteredDoB">
+                  <label class="govuk-label govuk-checkboxes__label" for="dob-unregistered">{{ data.translations.dpdDoBNoRegisteredDoB[data.lang] }}</label>
+                </div>
+
+            </div>
+
+          {% endif %}
         
         </fieldset>
 

@@ -32,6 +32,12 @@
         }
       }) %}
 
+        {% if data['role-type'] === 'ap' %}
+          <p class="govuk-label">{{ data.translations.dpdDoDAsStatedAPText[data.lang] }}</p>
+          {% elseif data['role-type'] === 'me' %}
+          <p class="govuk-label">{{ data.translations.dpdDoDAsStatedMEText[data.lang] }}</p>
+        {% endif %}
+
         <div class="govuk-hint">{{ data.translations.dpdDoDHint[data.lang] }}</div>
         <style>.govuk-input__wrapper .govuk-form-group + .govuk-form-group { margin-left: 20px; }</style>
 

@@ -23,22 +23,9 @@
 
     <form action="age-66" method="post" novalidate>
 
-      {% if data.showErrors === 'true' %}
+      
 
-          {{ govukErrorSummary({
-            titleText: 'There is a problem',
-            errorList: [
-              {
-                text: 'Age must include a unit of time',
-                href: '#age-time-unit'
-              }
-            ]
-          }) }}
-
-
-          <div class="govuk-form-group--error">
-
-            {% call govukFieldset({
+      {% call govukFieldset({
               legend: {
                 text: data.translations.dpdAgePageTitle[data.lang],
                 classes: 'govuk-fieldset__legend--l',
@@ -46,88 +33,8 @@
               }
             }) %}
 
-            <style>
 
-              .govuk-form-group--error {
-                margin-bottom: 30px;
-              }
-
-              .govuk-form-group--error .govuk-input__wrapper .govuk-form-group {
-                margin-bottom: 0;
-              }
-
-            </style>
-
-            
-
-                <p id="age-time-unit" class="govuk-error-message">
-                  <span class="govuk-visually-hidden">Error:</span> Age must include a unit of time
-                </p>
-
-              <div class="govuk-input__wrapper">
-
-                {{ govukInput({
-                    label: { 
-                      text: data.translations.dpdAgeNumberTitle[data.lang],
-                      classes: 'govuk-visually-hidden'
-                    },
-                    classes: 'govuk-input--width-5 border-hidden',
-                    value: data['age-66'],
-                    id: 'age-66',
-                    name: 'age-66'
-                }) }}
-
-                {{ govukSelect({
-                  id: 'age-time-unit',
-                  name: 'age-time-unit',
-                  value: data['age-time-unit'],
-                  classes: 'govuk-select--error',
-                  label: {
-                    text: data.translations.dpdAgeUnitSelectTitle[data.lang],
-                    classes: 'govuk-visually-hidden'
-                  },
-                  items: [
-                    {
-                      value: '',
-                      text: data.translations.dpdAgeUnitSelectTitle[data.lang]
-                    },
-                    {
-                      value: 'dpdAgeYearsOld',
-                      text: data.translations.dpdAgeYearsOld[data.lang],
-                      selected: ( data['age-time-unit'] === 'dpdAgeYearsOld' )
-                    },
-                    {
-                      value: 'dpdAgeMonthsOld',
-                      text: data.translations.dpdAgeMonthsOld[data.lang],
-                      selected: ( data['age-time-unit'] === 'dpdAgeMonthsOld' )
-                    },
-                    {
-                      value: 'dpdAgeDaysOld',
-                      text: data.translations.dpdAgeDaysOld[data.lang],
-                      selected: ( data['age-time-unit'] === 'dpdAgeDaysOld' )
-                    }
-                  ]
-                }) }}
-
-                </div>
-              </div>
-
-            {% endcall %}
-
-
-
-      {% else %}
-
-
-            <!-- NO ERRORS -->
-
-            {% call govukFieldset({
-              legend: {
-                text: data.translations.dpdAgePageTitle[data.lang],
-                classes: 'govuk-fieldset__legend--l',
-                isPageHeading: true
-              }
-            }) %}
+            <div class="govuk-hint">{{ data.translations.dpdAgeHint[data.lang] }}</div>
 
               <div class="govuk-input__wrapper">
 
@@ -175,7 +82,6 @@
 
             {% endcall %}
 
-      {% endif%}
 
       {{ govukButton({
         text: data.translations.globalSaveContinue[data.lang]
