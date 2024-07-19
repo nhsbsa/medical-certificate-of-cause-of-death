@@ -376,7 +376,7 @@ ______                                 _  ______     _        _ _
                             },
                             items: [
                                 { text: 'This certificate requires amendments by the attending practitioner', value: 'amend' },
-                                { text: 'This certificate is ready to be sent to the registrar',  value: 'registrar' }
+                                { text: 'This certificate is ready to be sent to the local register office',  value: 'register office' }
                             ]
                         }) }}
                     
@@ -463,7 +463,7 @@ ______                                 _  ______     _        _ _
                                     <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
                                         Download certificate
                                     </h2>
-                                    <p>Download this certificate to your computer and send it to the registrar as an email attachment. After you have sent this MCCD to the registrar return to this screen and mark it as sent by ticking the checkbox.</p>
+                                    <p>Download this certificate to your computer and send it to the local register office as an email attachment. After you have sent this MCCD to the local register office return to this screen and mark it as sent by ticking the checkbox.</p>
                                     <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--secondary">Download certificate</span>
                     
                                 </legend>
@@ -472,7 +472,7 @@ ______                                 _  ______     _        _ _
                                     <div class="govuk-checkboxes__item">
                                         <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
                                         <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">
-                                            I have sent this certificate to the registrar
+                                            I have sent this certificate to the local register office
                                         </label>
                                     </div>
                                 </div>
@@ -483,7 +483,7 @@ ______                                 _  ______     _        _ _
 
                         <div class="govuk-button-group">
                             {{ govukButton({
-                                text: 'Mark MCCD as sent to registrar'
+                                text: 'Mark MCCD as sent to local register office'
                             }) }}
                             {{ govukButton({
                                 text: data.translations.globalReturnToDashboard[data.lang],
