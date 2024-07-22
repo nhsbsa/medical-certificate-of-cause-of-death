@@ -25,11 +25,13 @@
       <div class="govuk-form-group">
         <div class="govuk-radios">
 
+              <!-- SHOULD BE UNDER THE LABEL -->
+              <p class="govuk-body">{{ data['anotherAddresses'] | getPostCodeSearchStatus('another') | safe }}</p>
+
               <label class="govuk-label" for="select-address">
                 <h1 class="govuk-heading-l">{{ data.translations.dpdOtherLocationPostcodeSelectPageTitle[data.lang] }}</h1>
               </label>
-                
-                <p>{{ data['anotherAddresses'] | getPostCodeSearchStatus('another') | safe }}</p>
+              
 
                 {% if ( data['anotherAddresses'] | length > 0 )  %}
 
