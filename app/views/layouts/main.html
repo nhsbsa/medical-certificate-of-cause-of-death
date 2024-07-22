@@ -75,7 +75,7 @@
                   {% if data['role-type'] !== 'meo' %}
 
                     {% if data.gmcNumberValidated === 'true' %}
-                      {% if data['gmc-number']%}
+                      {% if data['gmc-number'] %}
                         <li class="account-signed-in__list-item">GMC no: {{ data['gmc-number'] }}</li>
                       {% endif %}
                     {% else %}

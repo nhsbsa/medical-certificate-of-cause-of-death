@@ -753,22 +753,12 @@ router.get( /me-declaration-scrutiny/, (req, res) => {
 
 // NHS - Care ID
 
-router.post( /care-id-select/, (req, res) => {
+router.post(/care-id-select/, (req, res) => {
     const careID = req.session.data['care-id-method']
     res.redirect('care-id-authentication')
-    
-    //if (careID == 'Smartcard') {
-      //  res.redirect('care-id-smartcard')
-    //} else if (careID == 'Windows Hello') {
-    //res.redirect('care-id-windows')
-    //} else if (careID == 'Security Key') {
-      //  res.redirect('care-id-key')
-    //} else if (careID == 'Authenticator App') {
-      //  res.redirect('care-id-authentication')
-    //}
 });
 
-router.post( /care-id-authentication/, (req, res) => {
+router.post(/care-id-authentication/, (req, res) => {
     res.redirect('care-id-code')
 });
 
@@ -776,20 +766,17 @@ router.post(/care-id-code/, (req, res) => {
 
     // If there's only one option for role, select it and skip the role page...
     if( req.session.data.user.role.length === 1 ){
+
         req.session.data['role-type'] = req.session.data.user.role[0];
         req.session.data.loggedIn = 'true';
 
-        if( !req.session.data['qualifications'] ){
-
+        if( req.session.data['role-type'] === 'ap' || req.session.data['role-type'] === 'me' ){
             req.session.data['onboardingPath'] = 'true';
-            
-            // Do they have a qualifications value set?
-           res.redirect('../onboarding/qualifications');
-
-       } else {
-        res.redirect('../dashboard');
-       }
-
+            res.redirect('../onboarding/gmc-number');
+        } else {
+            res.redirect('../dashboard');
+                     
+        }
 
     } else {
         res.redirect('care-id-role');
@@ -797,23 +784,21 @@ router.post(/care-id-code/, (req, res) => {
 
 });
 
-router.post( /care-id-authentication/, (req,res) => {
+router.post(/care-id-authentication/, (req,res) => {
     res.redirect('../dashboard')
 });
 
-router.post( /care-id-key/, (req,res) => {
+router.post(/care-id-key/, (req,res) => {
     res.redirect('../dashboard')
 });
 
-router.post( /care-id-windows/, (req,res) => {
+router.post(/care-id-windows/, (req,res) => {
     res.redirect('../dashboard')
 });
 
-router.post( /care-id-smartcard/, (req,res) => {
+router.post(/care-id-smartcard/, (req,res) => {
     res.redirect('../dashboard')
 });
-
-
 
 // ************************************************************
 
@@ -825,30 +810,23 @@ router.post( /care-id-role/, (req, res) => {
     req.session.data.loggedIn = 'true';
 
     if( roleType === 'ap' || roleType === 'me' ){
-
-        if( !req.session.data['qualifications'] ){
-
-             // Do they have a qualifications value set?
-            res.redirect('../onboarding/qualifications');
-
-        } else if( !req.session.data['contact-method'] ){
-
-            // Do they have a contact-method value set?
-            if( req.session.data[res.locals.settings].showContactMethodScreen === 'true' ){
-                res.redirect('../onboarding/contact-method');
-            } else {
-                res.redirect('../dashboard');
-            }
-
-        } else {
-            res.redirect('../dashboard');
-        }
-       
+        req.session.data['onboardingPath'] = 'true';
+        res.redirect('../onboarding/gmc-number');
     } else {
         res.redirect('../dashboard');
     }
-     
-    
+
+});
+
+// GMC NUMBER 
+router.post( /gmc-number/, (req, res) => {
+
+    if( req.session.data['onboardingPath'] ){
+        req.session.data.gmcNumberValidated = 'true';
+        res.redirect('qualifications');
+    } else {
+        res.redirect('../confirm-your-details');
+    }
 
 });
 
@@ -858,16 +836,10 @@ router.post( /qualifications/, (req, res) => {
     
     if( req.session.data['onboardingPath'] ){
         
-        if( !req.session.data['contact-method'] ){
-
-           // Do they have a contact-method value set?
-           if( req.session.data[res.locals.settings].showContactMethodScreen === 'true' ){
-                res.redirect('../onboarding/contact-method');
-            } else {
-                res.redirect('../dashboard');
-            }
-
+        if( req.session.data[res.locals.settings].showContactMethodScreen === 'true' ){
+            res.redirect('../onboarding/contact-method');
         } else {
+            delete req.session.data['onboardingPath'];
             res.redirect('../dashboard');
         }
         

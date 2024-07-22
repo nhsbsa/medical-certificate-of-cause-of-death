@@ -42,7 +42,6 @@ router.post(/enter-code/, (req, res) => {
 // Was the death more than 28 days after the birth?
 router.post(/66-or-65/, (req, res) => {
     res.redirect('nhs-number')
-    res
 });
 
 // What is the deceased persons NHS Number
@@ -688,19 +687,19 @@ router.post(/care-id-code/, (req, res) => {
 });
 
 router.post(/care-id-authentication/, (req,res) => {
-    res.redirect('/v10/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post(/care-id-key/, (req,res) => {
-    res.redirect('/v10/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post(/care-id-windows/, (req,res) => {
-    res.redirect('/v10/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 router.post(/care-id-smartcard/, (req,res) => {
-    res.redirect('/v10/dashboard?role-type=ap')
+    res.redirect('../dashboard')
 });
 
 // ************************************************************

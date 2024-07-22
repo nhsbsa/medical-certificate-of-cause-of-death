@@ -80,7 +80,19 @@
                   <ul class="account-signed-in__list">
                     <li class="account-signed-in__list-item"><strong class="govuk-tag govuk-tag--green govuk-phase-banner__content__tag">{% if data['role-type'] == 'ap' %}Attending practitioner{% elseif data['role-type'] == 'me' %}Medical examiner{% elseif data['role-type'] == 'meo' %}Medical examiner officer{% else %}Not set{% endif %}</strong></li>
                     <li class="account-signed-in__list-item">{{ data.user.name or 'Ann Other' }}</li>
-                    {% if data['role-type'] !== 'meo' %}<li class="account-signed-in__list-item">{{ data.translations.globalGMCNo[data.lang] }} {{ data.user.gmcNumber or '0123456789' }}</li>{% endif %}                  
+                    {% if data['role-type'] !== 'meo' %}
+
+                      {% if data.gmcNumberValidated === 'true' %}
+                        {% if data['gmc-number'] %}
+                          <li class="account-signed-in__list-item">{{ data.translations.globalGMCNo[data.lang] }} {{ data['gmc-number'] }}</li>
+                        {% endif %}
+                      {% else %}
+                          {% if data.user.gmcNumber %}
+                            <li class="account-signed-in__list-item">{{ data.translations.globalGMCNo[data.lang] }} {{ data.user.gmcNumber }}</li>
+                          {% endif %}
+                      {% endif %}
+
+                    {% endif %}                  
                     <li class="account-signed-in__list-item">{{ data.user.hospitalName or 'Unknown Hosptial' }}</li>
                     <li class="account-signed-in__list-item"><a href="../index?loggedIn=false">{{ data.translations.globalSignOut[data.lang] }}</a></li>
                     </ul>
