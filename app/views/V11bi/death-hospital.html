@@ -23,7 +23,7 @@
 
   <form action="death-hospital" method="post" novalidate>
 
-
+    <!-- THIS IS NOT USED IN V11bi -->
     {% set consultantHTML %}
         {{ govukInput({
           id: 'consultant',
@@ -35,6 +35,7 @@
           }
         }) }}
       {% endset -%}
+
       
       {{ govukRadios({
         name: 'death-in-hospital',
@@ -51,7 +52,7 @@
             value: 'globalRadioYes',
             text: data.translations.globalRadioYes[data.lang],
             conditional: {
-              html: consultantHTML
+              html: ''
             }
           },
           {

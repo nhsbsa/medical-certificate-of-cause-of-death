@@ -38,7 +38,7 @@
             },
             {
                 key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] },
-                value: { text: data['gmc-number'] },
+                value: { text: data['gmc-number'] or data.user.gmcNumber },
                 actions: { items: [ {  href: 'onboarding/gmc-number', html: 'Change<span class="govuk-visually-hidden"> GMC number</a>' } ] }
             },
             {
