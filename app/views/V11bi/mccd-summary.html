@@ -65,7 +65,7 @@
             <p class="govuk-body govuk-!-margin-bottom-2"><strong>Reference number</strong> {{ patient.id }}</p>
             
             <!-- CERTIFICATE TYPE -->
-            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{% if patient.belongsToAP === true %}AP{% else %}ME{% endif %}</p>
+            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
 
             
 
@@ -291,36 +291,37 @@ ______                                 _  ______     _        _ _
             -->
 
 
-            <!-- ATTENDING PRACTITIONERS INFORMATION -->
+            <!-- ATTENDING PRACTITIONERS / MEDICAL EXAMINERS INFORMATION -->
 
-            {% if data['role-type'] === 'ap' %}
+            {% set doctorTitle = data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] %}
+            {% if patient.certificateType === 'me' %}
+                {% set doctorTitle = data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] %}
+            {% endif %}
+
+            {% if ( data['role-type'] === 'ap' and patient.certificateType === 'ap' ) or ( data['role-type'] === 'me' and patient.certificateType === 'me' ) %}
+
+                <!-- USER DETAILS -->
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: data.user.name or 'Ann Other' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: data.user.gmcNumber or '1234567' } },
                     {  key: { text: 'Qualification' }, value: { html: data['qualifications'] or 'MB ChB' } }
                 ] %}
+
             {% else %}
+
+                <!-- DEFAULT VALUES -->
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123467' } },
                     {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
                 ] %}
-            {% endif %}
 
+            {% endif %}
             
 
-            {% if data.showContactMethodScreen === 'true' %}
-                {% if data['role-type'] === 'ap' %}
-                    {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: data.user.email or 'email.address@nhsuk.net' } }), apRows ) %}
-                {% else %}
-                    {% set apRows = ( apRows.push({  key: { text: 'Contact method' }, value: { html: 'email.address@nhsuk.net' } }), apRows ) %}
-                {% endif %}
-            {% endif %}
-
-            
             {{ govukSummaryList({
                 card: {
-                    title: { text: data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] }
+                    title: { text: doctorTitle }
                 },
                 rows: apRows
 
