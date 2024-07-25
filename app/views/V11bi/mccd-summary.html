@@ -58,7 +58,7 @@
 
         <main class="govuk-main-wrapper govuk-!-padding-top-6">
             
-            {{ patientStatus | getStatusTag | safe }}
+            {% if patient.amendsNotSubmitted === true %}<span class="govuk-tag amends-not-submitted govuk-!-margin-right-2">Amends not submitted</span>{% endif %}{{ patientStatus | getStatusTag | safe }}
             <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             
             <!-- REF NUMBER -->
@@ -108,7 +108,21 @@
                     html: 'This MCCD has been sent to the local register office.<br /><br />There is nothing further for you to do.',
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
-            
+
+            {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'ap' ) %}
+
+                {{ govukInsetText({
+                    html: 'You have made changes to the information on this certficate but have not submitted them.<br /><br />Review the information on this certificate and resubmit below.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+
+            {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'meo' ) %}
+
+                {{ govukInsetText({
+                    html: 'The author of this certificate has made changes, but has not submitted them. This certificate cannot be sent for review by the medical examiner until this has happened.',
+                    classes: 'govuk-!-margin-bottom-9'
+                }) }}
+
             {% endif %}
             </div>
 
@@ -349,12 +363,53 @@ ______                                 _  ______     _        _ _
 
                 <!-- AP -->
 
-                <!-- BACK TO DASHBOARD -->
-                {{ govukButton({
-                    text: data.translations.globalReturnToDashboard[data.lang],
-                    href: 'dashboard',
-                    classes: 'govuk-button'
-                }) }}
+                {% if( patient.amendsNotSubmitted === true ) %}
+
+                    <!-- AMENDS NOT SUBMITTED -->
+
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        {{ govukCheckboxes({
+                            name: 'ap-cert-declaration',
+                            fieldset: {
+                                legend: {
+                                text: data.translations.apDeclarationPageTitle[data.lang],
+                                isPageHeading: true,
+                                classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                {
+                                value: 'apDeclarationContent',
+                                text: data.translations.apDeclarationContent[data.lang]
+                                }
+                            ]
+                            }) }}
+
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: 'Submit amendments'
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalReturnToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+
+                    </form>
+
+
+                {% else %}
+
+                    <!-- BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalReturnToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button'
+                    }) }}
+
+                {% endif %}
 
             {% elseif data['role-type'] == 'me' %}
 
@@ -412,43 +467,57 @@ ______                                 _  ______     _        _ _
                 <!-- IF STATUS = For officer review -->
                 {% if patientStatus === 1  %}
 
-                    <form action="mccd-summary" method="post" novalidate>
+                    {% if ( patient.amendsNotSubmitted) %}
 
-                        {{ govukCheckboxes({
-                            name: 'meo-scrutiny-declaration',
-                            fieldset: {
-                                legend: {
-                                text: data.translations.meoDeclarationPageTitle[data.lang],
-                                isPageHeading: true,
-                                classes: 'govuk-fieldset__legend--l'
-                                }
-                            },
-                            items: [
-                                {
-                                value: 'meoDeclarationContent',
-                                text: data.translations.meoDeclarationContent[data.lang],
-                                checked: ( data['meo-cert-declaration'] )
-                                }
-                            ]
-                            }) }}
+                        <!-- BACK TO DASHBOARD -->
+                        {{ govukButton({
+                            text: data.translations.globalReturnToDashboard[data.lang],
+                            href: 'dashboard',
+                            classes: 'govuk-button'
+                        }) }}
 
-       
-                    
-                        <div class="govuk-button-group">
+                    {% else %}
 
-                            {{ govukButton({
-                            text: data.translations.meoDeclarationSubmitForScrutiny[data.lang]
-                            }) }}
+                        <!-- HAPPY TO SEND FOR ME REVIEW -->
+                        <form action="mccd-summary" method="post" novalidate>
 
-                            {{ govukButton({
-                                text: data.translations.globalReturnToDashboard[data.lang],
-                                href: 'dashboard',
-                                classes: 'govuk-button--secondary'
-                            }) }}
+                            {{ govukCheckboxes({
+                                name: 'meo-scrutiny-declaration',
+                                fieldset: {
+                                    legend: {
+                                    text: data.translations.meoDeclarationPageTitle[data.lang],
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                    }
+                                },
+                                items: [
+                                    {
+                                    value: 'meoDeclarationContent',
+                                    text: data.translations.meoDeclarationContent[data.lang],
+                                    checked: ( data['meo-cert-declaration'] )
+                                    }
+                                ]
+                                }) }}
 
-                        </div>
+        
                         
-                    </form>
+                            <div class="govuk-button-group">
+
+                                {{ govukButton({
+                                text: data.translations.meoDeclarationSubmitForScrutiny[data.lang]
+                                }) }}
+
+                                {{ govukButton({
+                                    text: data.translations.globalReturnToDashboard[data.lang],
+                                    href: 'dashboard',
+                                    classes: 'govuk-button--secondary'
+                                }) }}
+
+                            </div>
+                            
+                        </form>
+
+                    {% endif %}
 
                 {% elseif patientStatus === 4 %}
 
@@ -494,6 +563,7 @@ ______                                 _  ______     _        _ _
                         </div>
                     
                     </form>
+
 
                 {% else %}
 
