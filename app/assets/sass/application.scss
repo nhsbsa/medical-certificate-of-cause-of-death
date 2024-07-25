@@ -8,8 +8,13 @@
 
 $govuk-new-typography-scale: true;
 
-.govuk-main-wrapper > .govuk-tag{
+.govuk-main-wrapper > .govuk-tag {
   max-width: none;
+}
+
+.govuk-tag.amends-not-submitted {
+  background-color: #C00;
+  color: #FFF;
 }
 
 /* ACCOUNT SIGNED-IN */

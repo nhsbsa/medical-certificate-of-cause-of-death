@@ -866,6 +866,7 @@ router.get( /view-certificate/, (req, res) => { res.render( '/'+version+'/mccd-s
 router.get( /amend-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 router.get( /review-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 router.get( /download-certificate/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
+router.get( /submit-amends/, (req, res) => { res.render( '/'+version+'/mccd-summary.html' ); });
 
 // MCCD SUMMARY
 router.post( /mccd-summary/, (req, res) => {

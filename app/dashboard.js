@@ -7,6 +7,34 @@ let _roleType = '';
 let _settings = '';
 let _lang = '';
 
+//
+// SET DASHBOARD VARIABLES FUNCTION
+//
+function _setDashboardVariables( roleType, settings, lang ){
+
+    _roleType = roleType;
+    _settings = settings;
+    _lang = lang;
+
+    return true;
+
+}
+
+
+//
+// GET AMENDS NOT SUBMITTED FUNCTION
+// Extra translations for the Amends not submitted flag
+//
+function _getAmendsNotSubmittedFlag(){
+
+    let flag = ( _lang === 'cy' ) ? 'Newidiadau heb eu cyflwyno' : 'Amends not submitted';
+ 
+    let tag = '<span class="govuk-tag amends-not-submitted govuk-!-margin-right-2">'+flag+'</span>';
+
+    return tag;
+
+}
+
 
 //
 // GET STATUSES FUNCTION
@@ -331,8 +359,6 @@ function _getActionForStatus( status, id ){
 
     status = parseInt( status );
 
-    
-
     const actions = {
         ap: {
             en: ['Finish certificate','View certificate','Amend certificate','View certificate','View certificate','View certificate'],
@@ -354,7 +380,13 @@ function _getActionForStatus( status, id ){
     let html = '';
 
     switch ( status ){
-    
+
+        // Amends not submitted
+        case -1:
+            let linkText = ( _lang === 'cy' ) ? 'Cyflwyno newidiadau' : 'Submit amends';
+            html = '<a class="govuk-link" href="submit-amends?id='+id+'">'+linkText+'</a>';
+            break;
+
         // Draft
         case 0:
             html = '<a class="govuk-link" href="mccd-tasklist">'+actions[_roleType][_lang][status]+'</a>';
@@ -362,7 +394,7 @@ function _getActionForStatus( status, id ){
 
         default: 
             if( useAliases ){
-                link = actions[_roleType][_lang][status].toLowerCase().split(' ').join('-') + '?id='+id;
+                link = actions[_roleType]['en'][status].toLowerCase().split(' ').join('-') + '?id='+id;
             }
             html = '<a class="govuk-link" href="'+link+'">'+actions[_roleType][_lang][status]+'</a>';
             break;
@@ -382,8 +414,28 @@ function _getRow( patient ){
 
     arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
     arr.push( { text: _translateDate( patient.dateOfDeath ) } );
-    arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
-    arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags', _settings ) });
+    
+    if( patient.amendsNotSubmitted === true && _roleType === 'ap' ){
+
+        // Amends not submitted flag
+        arr.push( { html: _getActionForStatus( -1, patient.id ) } );
+        arr.push( { text: patient.status, html: _getAmendsNotSubmittedFlag() });
+
+    } else {
+
+        // Normal statuses
+        arr.push( { html: _getActionForStatus( patient.status, patient.id ) } );
+
+        if( patient.amendsNotSubmitted === true ){
+            // Needed for MEOs - they don't get a custom link
+            arr.push( { text: patient.status, html: _getAmendsNotSubmittedFlag() });
+        } else {
+            // Normal
+            arr.push( { text: patient.status, html: _getStatuses( patient.status, 'tags', _settings ) });
+        }
+        
+    
+    }
 
     return arr;
 
@@ -470,19 +522,6 @@ function _filterDrafts( rows, filterDrafts ){
     }
 
     return arr;
-
-}
-
-//
-// SET DASHBOARD VARIABLES FUNCTION
-//
-function _setDashboardVariables( roleType, settings, lang ){
-
-    _roleType = roleType;
-    _settings = settings;
-    _lang = lang;
-
-    return true;
 
 }
 
