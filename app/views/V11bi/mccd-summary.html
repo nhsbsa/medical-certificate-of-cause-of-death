@@ -140,7 +140,9 @@ ______                                 _  ______     _        _ _
            -->
 
 
-            {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) %}
+
+                <!-- or ( data['role-type'] === 'me' and patientStatus === 4 ) -->
 
                 <!-- 
 
@@ -238,7 +240,9 @@ ______                                 _  ______     _        _ _
 
 
 
-            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) %}
+
+            <!-- or ( data['role-type'] === 'me' and patientStatus === 4 ) -->
 
                 <!-- 
                     
