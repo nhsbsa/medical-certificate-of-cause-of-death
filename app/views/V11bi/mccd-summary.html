@@ -68,7 +68,20 @@
             <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
 
             
+            {% if patientStatus === 1 %}
 
+                <!-- ADDING ROUTING TO CHANGE LINKS FOR PROTO PURPOSES -->
+                <script>
+                    window.addEventListener('DOMContentLoaded',function(){
+                        document.querySelectorAll('.govuk-summary-list__actions .govuk-link').forEach(function(el){
+                            let href = el.getAttribute('href');
+                            href += ( href.indexOf('?') > -1 ) ? '&redirectToSummary=true' : '?redirectToSummary=true';
+                            el.setAttribute('href',href);
+                        });
+                    });
+                </script>
+                
+            {% endif %}
     
 
 
@@ -372,6 +385,8 @@ ______                                 _  ______     _        _ _
                     <!-- AMENDS NOT SUBMITTED -->
 
                     <form action="mccd-summary" method="post" novalidate>
+
+                        <input type="hidden" name="ap-amends" value="true" />
 
                         {{ govukCheckboxes({
                             name: 'ap-cert-declaration',
