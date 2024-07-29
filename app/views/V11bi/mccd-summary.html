@@ -373,6 +373,8 @@ ______                                 _  ______     _        _ _
 
                     <form action="mccd-summary" method="post" novalidate>
 
+                        <input type="hidden" name="ap-amends" value="true" />
+
                         {{ govukCheckboxes({
                             name: 'ap-cert-declaration',
                             fieldset: {
