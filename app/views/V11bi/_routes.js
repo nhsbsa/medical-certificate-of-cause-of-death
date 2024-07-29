@@ -900,6 +900,17 @@ router.post( /mccd-summary/, (req, res) => {
 
 });
 
+//
+// REDIRECT TO SUMMARY
+//
+router.post(/redirect-to-summary/, (req, res)=>{
+
+    delete req.session.data.redirectToSummary;
+    const id = req.session.data.id;
+    res.redirect('/'+version+'/mccd-summary?id=' + id);
+
+});
+
 
 // CHECK YOUR ANSWERS OVERRIDES (They're currently leaking in from previous versions)
 router.get(/cya-deceased/, function (req, res) {
@@ -972,9 +983,6 @@ router.get( [
     res.redirect('/'+version+'/feedback');
     next();
 });
-
-
-
 
 // CONFIRMATION
 router.post( /confirmation/, (req, res) => {

@@ -44,3 +44,19 @@ window.addEventListener('DOMContentLoaded',function(){
   });
 
 });
+
+//
+// AMENDS NOT SUBMITTED REDIRECTS
+//
+window.addEventListener('DOMContentLoaded',function(){
+
+  let url = new URL( window.location.href )
+  let params = new URLSearchParams(url.search);
+
+  if( params.get('redirectToSummary') ){
+    document.querySelectorAll('form[method="post"] ').forEach(function(el){
+      el.setAttribute('action','redirect-to-summary');
+    });
+  } 
+  
+});
