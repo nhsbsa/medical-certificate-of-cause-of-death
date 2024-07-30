@@ -876,9 +876,9 @@ router.post( /mccd-summary/, (req, res) => {
         case 'ap':
         case 'me':
 
-             if( req.session.data['me-signoff'] === 'amend' ){
+             if( req.session.data['me-signoff'] === 'amend' || req.session.data['ap-amends'] === 'true'  ){
 
-                // Certificate needs amendments from the AP...
+                // Certificate needs amendments from the AP or amends have been made by the AP (For officer review)...
                 res.redirect('confirmation')
 
              } else {
@@ -897,6 +897,17 @@ router.post( /mccd-summary/, (req, res) => {
             break;
 
     }
+
+});
+
+//
+// REDIRECT TO SUMMARY
+//
+router.post(/redirect-to-summary/, (req, res)=>{
+
+    delete req.session.data.redirectToSummary;
+    const id = req.session.data.id;
+    res.redirect('/'+version+'/mccd-summary?id=' + id);
 
 });
 
@@ -973,9 +984,6 @@ router.get( [
     next();
 });
 
-
-
-
 // CONFIRMATION
 router.post( /confirmation/, (req, res) => {
 
@@ -989,9 +997,14 @@ router.post( /confirmation/, (req, res) => {
     delete req.session.data['feedback-text'];
 
     delete req.session.data['me-mccd'];
+    delete req.session.data['ap-amends'];
     delete req.session.data['sent-to-registrar'];
-
-    res.redirect('feedback-confirmation');
+    
+    if( req.session.data[res.locals.settings].useEmbeddedFeedbackForm === 'true' ){
+        res.redirect('feedback-confirmation');
+    } else {
+        res.redirect('dashboard');
+    }
 
 });
 

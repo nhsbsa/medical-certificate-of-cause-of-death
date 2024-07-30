@@ -58,7 +58,7 @@
 
         <main class="govuk-main-wrapper govuk-!-padding-top-6">
             
-            {% if patient.amendsNotSubmitted === true %}<span class="govuk-tag amends-not-submitted govuk-!-margin-right-2">Amends not submitted</span>{% endif %}{{ patientStatus | getStatusTag | safe }}
+            {% if patient.amendsNotSubmitted === true %}<span class="govuk-tag govuk-tag--red govuk-!-margin-right-2">Amends not submitted</span>{% endif %}{{ patientStatus | getStatusTag | safe }}
             <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             
             <!-- REF NUMBER -->
@@ -68,7 +68,20 @@
             <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
 
             
+            {% if patientStatus === 1 %}
 
+                <!-- ADDING ROUTING TO CHANGE LINKS FOR PROTO PURPOSES -->
+                <script>
+                    window.addEventListener('DOMContentLoaded',function(){
+                        document.querySelectorAll('.govuk-summary-list__actions .govuk-link').forEach(function(el){
+                            let href = el.getAttribute('href');
+                            href += ( href.indexOf('?') > -1 ) ? '&redirectToSummary=true' : '?redirectToSummary=true';
+                            el.setAttribute('href',href);
+                        });
+                    });
+                </script>
+                
+            {% endif %}
     
 
 
@@ -112,14 +125,14 @@
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'ap' ) %}
 
                 {{ govukInsetText({
-                    html: 'You have made changes to the information on this certficate but have not submitted them.<br /><br />Review the information on this certificate and resubmit below.',
+                    html: 'You have amended this MCCD, but you still need to submit these changes.<br /><br />Review this certificate, read and select the declaration at the bottom, and submit your amendments.',
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'meo' ) %}
 
                 {{ govukInsetText({
-                    html: 'The author of this certificate has made changes, but has not submitted them. This certificate cannot be sent for review by the medical examiner until this has happened.',
+                    html: 'The attending practitioner has amended this MCCD but still needs to sign the declaration and submit this certificate. This MCCD cannot be sent to a medical examiner for review until this has been done.',
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -140,7 +153,9 @@ ______                                 _  ______     _        _ _
            -->
 
 
-            {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) %}
+
+                <!-- or ( data['role-type'] === 'me' and patientStatus === 4 ) -->
 
                 <!-- 
 
@@ -238,7 +253,9 @@ ______                                 _  ______     _        _ _
 
 
 
-            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) or ( data['role-type'] === 'me' and patientStatus === 4 ) %}
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) %}
+
+            <!-- or ( data['role-type'] === 'me' and patientStatus === 4 ) -->
 
                 <!-- 
                     
@@ -368,6 +385,8 @@ ______                                 _  ______     _        _ _
                     <!-- AMENDS NOT SUBMITTED -->
 
                     <form action="mccd-summary" method="post" novalidate>
+
+                        <input type="hidden" name="ap-amends" value="true" />
 
                         {{ govukCheckboxes({
                             name: 'ap-cert-declaration',

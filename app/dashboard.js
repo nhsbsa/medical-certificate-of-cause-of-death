@@ -29,7 +29,7 @@ function _getAmendsNotSubmittedFlag(){
 
     let flag = ( _lang === 'cy' ) ? 'Newidiadau heb eu cyflwyno' : 'Amends not submitted';
  
-    let tag = '<span class="govuk-tag amends-not-submitted govuk-!-margin-right-2">'+flag+'</span>';
+    let tag = '<span class="govuk-tag govuk-tag--red govuk-!-margin-right-2">'+flag+'</span>';
 
     return tag;
 
