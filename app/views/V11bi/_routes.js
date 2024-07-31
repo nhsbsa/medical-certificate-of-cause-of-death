@@ -131,7 +131,7 @@ router.post(/nhs-number/, (req, res) => {
      // if the journey is complete send back to the 'check-your-details' page
      if (completeDeceased === 'true') {
          res.redirect('cya-deceased')
-     } else if ( nhsDuplicate === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' ){
+     } else if ( nhsDuplicate === 'true' && req.session.data['nhs-number'] === 'globalRadioYes' && req.session.data['nhs-number-input'] ){
          req.session.data[res.locals.settings].nhsNumberAlreadyUsed = 'false';
          res.redirect('nhs-number-duplicate');
      } else {

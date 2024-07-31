@@ -132,7 +132,12 @@
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">{{ data.translations.dpdCheckAnswersEthnicity[data.lang] }}</dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data.translations[data['ethnicityDetail']][data.lang] }}</dd>
+                  {% if data['ethnicityDetail'] %}
+                    {{ data.translations[data['ethnic-group']][data.lang] }} - {{ data.translations[data['ethnicityDetail']][data.lang] }}
+                  {% else %}
+                    {{ data.translations[data['dpdEthnicGroupUnknown']][data.lang] }}
+                  {% endif %}
+                </dd>
                 <dd class="govuk-summary-list__actions">
                   <a href="./ethnicity/ethnic-group">{{ data.translations.globalChangeField[data.lang] }}<span class="govuk-visually-hidden"> {{ data.translations.dpdCheckAnswersEthnicity[data.lang] | lower }}</span></a>
                 </dd>

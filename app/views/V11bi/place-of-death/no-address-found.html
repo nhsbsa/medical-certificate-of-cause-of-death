@@ -21,9 +21,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">No address found</h1>
-
-    {% set query = 'empty search term' %}
+    <h1 class="govuk-heading-l">{{ data.translations.dpdNoAddressFoundPageTitle[data.lang] }}</h1>
 
     {% if data.addressPath === 'hospital' %}
 
@@ -37,9 +35,9 @@
 
         {% endif %}
 
-        <p class="govuk-body">We could not find an address that matches <strong>{{ data.queryString }}</strong>.</p>
+        <p class="govuk-body">{{ data.translations.dpdNoAddressFoundParagraph[data.lang] | replace( '[query]', data.queryString ) | safe }}</p>
 
-        <p class="govuk-body"><a href="{{ reselectLink }}">{{ data.translations.globalSelectDifferentAddress[data.lang] }}</a></p>
+        <p class="govuk-body"><a href="{{ reselectLink }}">{{ data.translations.dpdNoAddressFoundSearchAgain[data.lang] }}</a></p>
         <p class="govuk-body govuk-!-margin-bottom-0"><a href="{{ manualLink }}" class="govuk-link">{{ data.translations.globalEnterAddressManually[data.lang] }}</a></p>
 
   </div>
