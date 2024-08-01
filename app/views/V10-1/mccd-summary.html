@@ -347,7 +347,7 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: data.user.name or 'Ann Other' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: data.user.gmcNumber or '1234567' } },
-                    {  key: { text: 'Qualification' }, value: { html: data['qualifications'] or 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: data['qualifications'] or 'MB ChB' } }
                 ] %}
 
             {% else %}
@@ -356,7 +356,7 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123467' } },
-                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
                 ] %}
 
             {% endif %}
