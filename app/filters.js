@@ -448,8 +448,9 @@ addFilter( 'setDashboardVariables', function( content ){
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
     const settings = this.ctx.settings;
     const lang = ( ['en','cy'].indexOf(this.ctx.data.lang) > -1 ) ? this.ctx.data.lang : 'en';
+    const debug = ( ['true','false'].indexOf(this.ctx.data.debug) > -1 ) ? this.ctx.data.debug : 'false';
 
-    dashboard.setDashboardVariables( roleType, settings, lang );
+    dashboard.setDashboardVariables( roleType, settings, lang, debug );
 
     return '';
 

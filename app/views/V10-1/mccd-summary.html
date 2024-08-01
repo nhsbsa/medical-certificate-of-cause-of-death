@@ -37,10 +37,6 @@
 
         {% if patient %}
 
-        {% if data.debug === 'true' %}
-            <textarea>{{ patient | dump }}</textarea>
-        {% endif %}
-
 
         <!--
 
@@ -151,17 +147,26 @@ ______                                 _  ______     _        _ _
                     ]
                 }) }}
 
+                {% set aadRows = [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
+                    ] %}
+
+                    {% if patient.certificateType === 'me' %}
+
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'referring medical practitioner' }] } }), aadRows ) %}
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'senior coroner' }] } }), aadRows ) %}
+
+                    {% endif %}
+
                 <!-- ACTIONS AFTER DEATH -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
-                    rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
-                    ]
+                    rows: aadRows
                 }) }}
 
 
@@ -190,17 +195,27 @@ ______                                 _  ______     _        _ _
                     ]
                 }) }}
 
+                {% set aadRows = [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' } }
+                    ] %}
+
+
+                {% if patient.certificateType === 'me' %}
+
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' } }), aadRows ) %}
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' } }), aadRows ) %}
+
+                    {% endif %}
+
                 <!-- ACTIONS AFTER DEATH -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
-                    rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' } }
-                    ]
+                    rows: aadRows
                 }) }}
 
             {% endif %}
