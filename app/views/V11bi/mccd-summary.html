@@ -37,10 +37,6 @@
 
         {% if patient %}
 
-        {% if data.debug === 'true' %}
-            <textarea>{{ patient | dump }}</textarea>
-        {% endif %}
-
 
         <!--
 
@@ -178,8 +174,7 @@ ______                                 _  ______     _        _ _
                         {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-referring-mp-name', text: 'Change', visuallyHiddenText: 'consultant name' }] } }
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } }
                     ]
                 }) }}
 
@@ -228,8 +223,7 @@ ______                                 _  ______     _        _ _
                         {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' } }
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } }
                     ]
                 }) }}
 
@@ -355,7 +349,7 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: data.user.name or 'Ann Other' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: data.user.gmcNumber or '1234567' } },
-                    {  key: { text: 'Qualification' }, value: { html: data['qualifications'] or 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: data['qualifications'] or 'MB ChB' } }
                 ] %}
 
             {% else %}
@@ -364,7 +358,7 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123467' } },
-                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
                 ] %}
 
             {% endif %}
