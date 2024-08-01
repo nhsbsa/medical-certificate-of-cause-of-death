@@ -55,9 +55,11 @@
                     hint: { text: 'Must be 7 digits long' },
                     id: 'gmc-number',
                     name: 'gmc-number',
-                    value: data['gmc-number'] or data.user.gmcNumber,
+                    value: data['gmc-number'],
                     classes: 'govuk-input--width-10'
                 }) }}
+
+                <!-- If we want to prepopulate the GMC number with current CIS2 value: data['gmc-number'] or data.user.gmcNumber, -->
 
                 {{ govukButton({
                     text: data.translations.globalSaveContinue[data.lang]
