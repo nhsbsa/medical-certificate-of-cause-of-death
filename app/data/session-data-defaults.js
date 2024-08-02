@@ -78,6 +78,8 @@ module.exports = {
 
   V10: {
 
+    timeout: 30,
+
     useSearch: 'false',
     useFilters: 'false',
     useSeparateDraftsTable: 'false',
@@ -95,6 +97,8 @@ module.exports = {
   },
 
   V11: {
+
+    timeout: 30,
     
     useSearch: 'false',
     useFilters: 'false',

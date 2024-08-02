@@ -47,7 +47,7 @@
 {% endif %}
 
   {{ govukInsetText({
-    text: 'You will be logged out of the system after 15 minutes of inactivity.'
+    text: 'You will be logged out of the system after ' + data[settings].timeout + ' minutes of inactivity.'
   }) }}
 
   {% if data[settings].showExplanationOfStatuses === 'true' %}
