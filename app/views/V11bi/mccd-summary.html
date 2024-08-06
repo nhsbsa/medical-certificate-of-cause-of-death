@@ -336,7 +336,7 @@ ______                                 _  ______     _        _ _
             -->
 
 
-            <!-- ATTENDING PRACTITIONERS / MEDICAL EXAMINERS INFORMATION -->
+            <!-- ATTENDING PRACTITIONERS / MEDICAL EXAMINERS (ME CERT) INFORMATION -->
 
             {% set doctorTitle = data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] %}
             {% if patient.certificateType === 'me' %}
@@ -362,7 +362,6 @@ ______                                 _  ______     _        _ _
                 ] %}
 
             {% endif %}
-            
 
             {{ govukSummaryList({
                 card: {
@@ -371,6 +370,26 @@ ______                                 _  ______     _        _ _
                 rows: apRows
 
             }) }}
+
+
+            {% if patient.certificateType === 'ap' and ( patientStatus === 4 or patientStatus === 5 ) %}
+
+                <!-- MEDICAL EXAMINERS DETAILS -->
+                {{ govukSummaryList({
+                card: {
+                    title: { text: data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] }
+                },
+                rows: [
+                        { key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Alan Jakobsen' } },
+                        {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '6367472' } },
+                        {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
+                    ]
+
+            }) }}
+
+
+            {% endif %}
+
 
         </main>
 

@@ -34,7 +34,7 @@
 
         {% if data.bilingual == 'true' %}
 
-          <p class="govuk-hint">Enter location in English and Welsh, or in English only.</p>
+          <p class="govuk-hint">{{ data.translations.dpdApproximateLocationHintBilingual[data.lang] }}</p>
 
           <!-- BILINGUAL -->
           {{ govukTextarea({

@@ -34,7 +34,7 @@
 {% endif %}
 
   {{ govukInsetText({
-    text: data.translations.dashboardInactivityMessage[data.lang]
+    text: data.translations.dashboardInactivityMessage[data.lang] | replace( '999', data[settings].timeout )
   }) }}
 
 

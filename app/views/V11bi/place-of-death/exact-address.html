@@ -42,7 +42,7 @@
 
         {{ govukInput({
               label: { 
-                text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang]
+                text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang] + ' ' + data.translations.globalOptional[data.lang]
               },
               value: data['address-line-2'],
               id: 'address-line-2',
@@ -51,7 +51,7 @@
 
         {{ govukInput({
                 label: { 
-                  text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang]
+                  text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang] + ' ' + data.translations.globalOptional[data.lang]
                 },
                 value: data['address-town'],
                 id: 'address-town',
@@ -61,7 +61,7 @@
 
         {{ govukInput({
               label: { 
-                text: data.translations.dpdOtherLocationManualEntryCounty[data.lang]
+                text: data.translations.dpdOtherLocationManualEntryCounty[data.lang] + ' ' + data.translations.globalOptional[data.lang]
               },
               classes: 'govuk-input--width-4',
               value: data['address-county'],
@@ -88,7 +88,7 @@
           <!-- BILINGUAL FIELDS AND CHECKBOX -->
           {% set welshAddressFields = govukInput({
                 label: { 
-                  text: data.translations.dpdOtherLocationManualEntryAddressLine1[data.lang]
+                  text: data.translations.dpdOtherLocationManualEntryAddressLine1[data.lang] + ' ' + data.translations.globalOptional[data.lang]
                 },
                 value: data['address-line-1-welsh'],
                 id: 'address-line-1-welsh',
@@ -97,7 +97,7 @@
           
           govukInput({
               label: { 
-                text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang]
+                text: data.translations.dpdOtherLocationManualEntryAddressLine2[data.lang] + ' ' + data.translations.globalOptional[data.lang]
               },
               value: data['address-line-2-welsh'],
               id: 'address-line-2-welsh',
@@ -106,7 +106,7 @@
 
           govukInput({
                 label: { 
-                  text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang]
+                  text: data.translations.dpdOtherLocationManualEntryTownOrCity[data.lang] + ' ' + data.translations.globalOptional[data.lang]
                 },
                 value: data['address-town-welsh'],
                 id: 'address-town-welsh',
@@ -116,7 +116,7 @@
             
             govukInput({
               label: { 
-                text: data.translations.dpdOtherLocationManualEntryCounty[data.lang]
+                text: data.translations.dpdOtherLocationManualEntryCounty[data.lang] + ' ' + data.translations.globalOptional[data.lang]
               },
               classes: 'govuk-input--width-4',
               value: data['address-county-welsh'],
@@ -131,7 +131,7 @@
             items: [
               {
                 value: 'yes',
-                html: 'Enter address <strong>in Welsh</strong> ' + data.translations.globalOptional[data.lang],
+                html: data.translations.dpdEnterAddressInWelsh[data.lang] + ' ' + data.translations.globalOptional[data.lang],
                 conditional : { html: welshAddressFields }
               }
             ]
