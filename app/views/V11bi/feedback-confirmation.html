@@ -9,12 +9,12 @@
   <div class="govuk-grid-column-two-thirds">
 
     <div class="govuk-panel govuk-panel--confirmation">
-      <h1 class="govuk-panel__title">{{ data.translations.feedbackPageTitle[data.lang] }}</h1>
+      <h1 class="govuk-panel__title">{{ data.translations.feedbackConfirmationPageTitle[data.lang] }}</h1>
     </div>
 
     <hr class="govuk-section-break govuk-section-break--m" />
     
-    {{ data.translations.feedbackPageContent[data.lang] | safe }}
+    {{ data.translations.feedbackConfirmationPageContent[data.lang] | safe }}
 
     {{ govukButton({
       text: data.translations.confirmationPageCTAsecondary[data.lang],
