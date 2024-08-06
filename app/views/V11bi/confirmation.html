@@ -41,15 +41,12 @@
                     {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD needs amends</p>{% endif %}
 
                     <div class="govuk-panel govuk-panel--confirmation">
-                        <h1 class="govuk-panel__title">Certificate returned to the attending practitioner</h1>
+                        <h1 class="govuk-panel__title">{{ data.translations.meCertificateNeedsAmendsPageTitle[page.lang] }}</h1>
                     </div>
 
                     <hr class="govuk-section-break govuk-section-break--m" />
 
-                    <p class="govuk-body-l">You must contact the attending practitioner to inform them that this Medical certificate of cause of death (MCCD) must be amended.</p>
-                    
-                    <h2 class="govuk-heading-m">What happens next</h2>
-                    <p class="govuk-body">After the attending practitioner has amended this MCCD it will be available to view on the medical examiner dashboard marked ‘For sign off by medical examiner’.</p>
+                    {{ data.transition.meCertificateNeedsAmendsPageContent | safe }}
                 
                 {% else %}
 
@@ -76,15 +73,12 @@
                         {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD signed off by ME</p>{% endif %}
 
                         <div class="govuk-panel govuk-panel--confirmation">
-                            <h1 class="govuk-panel__title">Medical certificate of cause of death approved</h1>
+                            <h1 class="govuk-panel__title">{{ data.translations.meCertificatePassedScrutinyPageTitle[data.lang] }}</h1>
                         </div>
 
                         <hr class="govuk-section-break govuk-section-break--m" />
 
-                        <p class="govuk-body-l">You have signed off this Medical certificate of cause of death (MCCD) following scrutiny of the cause of death.</p>
-
-                        <h2 class="govuk-heading-m">What happens next</h2>
-                        <p class="govuk-body">This MCCD will be sent to the local register office by your medical examiner office. There is nothing further for you to do.</p>
+                        {{ data.translations.meCertificatePassedScrutinyPageContent[data.lang] | safe }}
 
                        
                         
@@ -101,33 +95,27 @@
 
                     {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> MEO downloaded MCCD and sent to local register office</p>{% endif %}
 
-                    <!-- MCCD CONFIRMED AS SENT TO REGISTRAR -->
+                    <!-- MEO - MCCD CONFIRMED AS SENT TO REGISTRAR -->
                     <div class="govuk-panel govuk-panel--confirmation">
-                        <h1 class="govuk-panel__title">Certificate downloaded and sent to the local register office</h1>
+                        <h1 class="govuk-panel__title">{{ data.translations.meoCertificateSentPageTitle[data.lang] }}</h1>
                     </div>
 
                     <hr class="govuk-section-break govuk-section-break--m" />
 
-                    <h2 class="govuk-heading-m">What happens next</h2>
-                    <p class="govuk-body">No further action is required.</p>
-                    <p class="govuk-body">This MCCD will be available to view from your dashboard for three months.</p>
-
+                    {{ data.translations.meoCertificateSentPageContent[data.lang] | safe }}
 
                 {% else %}
 
                         {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> MEO has sent the MCCD to the ME</p>{% endif %}
 
-                        <!-- AP MCCD SENT TO ME FOR REVIEW -->
+                        <!-- AP MCCD SENT TO ME FOR REVIEW BY MEO -->
                         <div class="govuk-panel govuk-panel--confirmation">
-                            <h1 class="govuk-panel__title">Certificate sent to medical examiners for sign-off</h1>
+                            <h1 class="govuk-panel__title">{{ data.translations.meoCertificatePassedReviewPageTitle[data.lang] }}</h1>
                         </div>
 
                         <hr class="govuk-section-break govuk-section-break--m" />
 
-                        <p class="govuk-body-l">Medical examiners in your organisation will now be able to access this certificate from their dashboard. They can review and sign off this certificate as part of the scrutiny process.</p>
-
-                        <h2 class="govuk-heading-m">What happens next</h2>
-                        <p class="govuk-body">When a medical examiner has signed off this certificate you must sign back into the MCCD digital service, download the signed-off certificate, and send it to the local register office.</p>
+                        {{ data.translations.meoCertificatePassedReviewPageContent[data.lang] | safe }}
 
                 {% endif %}
 
