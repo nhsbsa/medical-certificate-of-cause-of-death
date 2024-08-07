@@ -9,7 +9,20 @@
     <div class="mccd-output-details">
         <ul style="padding-left: 0;">
         <li class="mccd-output-details__header">Certificate type</li>  
-        <li class="mccd-output-details__data">Standard</li>
+        {% if data['role-type'] == 'me' %}
+        {% if data['over-under-28'] == 'yes' %}  
+        <li class="mccd-output-details__data">65 ME</li>
+        {% else %}
+        <li class="mccd-output-details__data">66 ME</li>
+        {% endif %}
+    {% endif %}
+    {% if data['role-type'] == 'ap' %}
+        {% if data['over-under-28'] == 'yes' %}  
+        <li class="mccd-output-details__data">65 AP</li>
+        {% else %}
+        <li class="mccd-output-details__data">66 AP</li>
+        {% endif %}
+    {% endif %}
         </ul>
     </div>
     <div class="mccd-output-details">
@@ -311,9 +324,119 @@
                     9876543
                 </dd>
                 </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Declaration
+                        <br>
+                        <span class="govuk-body">
+                            Datganiad
+                        </span>
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        I confirm that I attended the deceased before their death and that the cause of death is as stated in this certificate to the best of my knowledge and belief.
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        Cadarnhaf fy mod wedi mynychu’r ymadawedig cyn ei farwolaeth a bod achos y farwolaeth fel y’i nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a’m cred.
+                    </dd>
+                    </div>
+                    
         </dl>
-        </div>
+        </div> 
     </div>
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Medical examiner
+            <br>
+            <span class="govuk-body">
+                Archwilydd meddygol
+            </span>
+        </h2>
+        </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Medical examiner full name
+                <br>
+                <span class="govuk-body">
+                    Enw llawn yr archwilydd meddygol
+                </span>
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Edwin Thomas
+            </dd>
+            <dd class="govuk-summary-list__value">
+                Edwin Thomas
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Qualification
+                    <br>
+                    <span class="govuk-body">
+                        Cymhwyster
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    MB ChB
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    MB ChB
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    GMC number
+                    <br>
+                    <span class="govuk-body">
+                        Rhif CMC
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    1569874
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    1569874
+                </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Declaration
+                        <br>
+                        <span class="govuk-body">
+                            Datganiad
+                        </span>
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                    I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated in this certificate to the best of my knowledge and belief.
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        Rwy'n arholwr meddygol a benodwyd yn briodol ac ar ôl craffu rwy'n cadarnhau bod achos y farwolaeth fel y nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a'm cred.
+                    </dd>
+                    </div>
+                    {% if data['role-type'] == 'ap' %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Authorisation date
+                            <br>
+                            <span class="govuk-body">
+                                Dyddiad awdurdodiad
+                            </span>
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            24 April 2024
+                        </dd>
+                        <dd class="govuk-summary-list__value">
+                            24 Ebrill 2024
+                        </dd>
+                        </div>
+                        {% else %}
+                        {% endif %}
+        </dl>
+        </div> 
+    </div>
+    
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -325,22 +448,109 @@
         </h2>
         </div>
         <div class="govuk-summary-card__content">
-        <dl class="govuk-summary-list">
+            <dl class="govuk-summary-list">
+            {% if data['over-under-28'] == 'yes' %}
             <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Death due to or contributed to by employment
-                <br>
-                <span class="govuk-body">
-                    Marwolaeth oherwydd cyflogaeth neu y mae cyflogaeth yn cyfrannu ati
-                </span>
-            </dt>
-            <dd class="govuk-summary-list__value">
-                No
-            </dd>
-            <dd class="govuk-summary-list__value">
-                Nac oes
-            </dd>
+                <dt class="govuk-summary-list__key">
+                    Ethnicity
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    White - English, Welsh, Scottish, Northern Irish or British
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant in body
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Yes
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant details
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Pacemaker in chest
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant removed
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Yes
+                </dd>
+                </div>
+                {% else %}
+                <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Death due to or contributed to by employment
+                    <br>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    No
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Ethnicity
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    White - English, Welsh, Scottish, Northern Irish or British
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant in body
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Yes
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant details
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Pacemaker in chest
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Implant removed
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Yes
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Pregnant within the year prior to death
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Pregnant 43 days to a year before death
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Death due to or contributed to by employment
+                    <br>
+                    <span class="govuk-body">
+                        Marwolaeth oherwydd cyflogaeth neu y mae cyflogaeth yn cyfrannu ati
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    No
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Nac oes
+                </dd>
+                </div>
+                {% endif %}
+            </dl>
             </div>
+<div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     NHS number
