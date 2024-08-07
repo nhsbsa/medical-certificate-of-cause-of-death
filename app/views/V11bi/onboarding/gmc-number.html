@@ -16,31 +16,16 @@
 
                 <!-- USER PROFILE HAS A GMC NUMBER -->
 
-                <h1 class="govuk-heading-l">Confirm your GMC number</h1>
+                <h1 class="govuk-heading-l">{{ data.translations.gmcConfirmPageTitle[data.lang] }}</h1>
                 <div class="govuk-inset-text">{{ data.user.gmcNumber }}</div>
 
                 <input type="hidden" name="gmc-number" value="{{ data.user.gmcNumber }}" />
 
                 {{ govukButton({
-                    text: 'Use this number'
+                    text: data.translations.gmcConfirmCTA[data.lang]
                 }) }}
 
-                <p class="govuk-body govuk-!-margin-bottom-0"><a href="gmc-number?changing=true" class="govuk-link">Change GMC number</a></p>
-
-
-                <!--
-                {{ govukInput({
-                    label: {
-                        html: 'What is your GMC number?',
-                        classes: 'govuk-label--l',
-                        isPageHeading: true
-                    },
-                    hint: { text: 'Confirm the number below is correct' },
-                    id: 'gmc-number',
-                    name: 'gmc-number',
-                    value: data.user.gmcNumber,
-                    classes: 'govuk-input--width-10'
-                }) }} -->
+                <p class="govuk-body govuk-!-margin-bottom-0"><a href="gmc-number?changing=true" class="govuk-link">{{ data.translations.gmcConfirmLinkText[data.lang] }}</a></p>
 
             {% else %}
 
@@ -48,16 +33,18 @@
 
                 {{ govukInput({
                     label: {
-                        html: 'What is your GMC number?',
+                        html: data.translations.gmcPageTitle[data.lang],
                         classes: 'govuk-label--l',
                         isPageHeading: true
                     },
-                    hint: { text: 'Must be 7 digits long' },
+                    hint: { text: data.translations.gmcHintText[data.lang] },
                     id: 'gmc-number',
                     name: 'gmc-number',
-                    value: data['gmc-number'] or data.user.gmcNumber,
+                    value: data['gmc-number'],
                     classes: 'govuk-input--width-10'
                 }) }}
+
+                <!-- If we want to prepopulate the GMC number with current CIS2 value: data['gmc-number'] or data.user.gmcNumber, -->
 
                 {{ govukButton({
                     text: data.translations.globalSaveContinue[data.lang]

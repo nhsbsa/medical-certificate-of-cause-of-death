@@ -26,7 +26,7 @@
           {% set reselectLink = 'select-hospital-address' %}
           {% set manualLink = 'location-death-hospital' %}
 
-          <h1 class="govuk-heading-l">Confirm hospital address</h1>
+          <h1 class="govuk-heading-l">{{ data.translations.dpdConfirmHospitalAddressPageTitle[data.lang] }}</h1>
           <div class="govuk-inset-text">{{ data['hospital-address'] }}</div>
 
         {% else %}
@@ -34,7 +34,7 @@
           {% set reselectLink = 'select-another-address' %}
           {% set manualLink = 'exact-address' %}
 
-          <h1 class="govuk-heading-l">Confirm address</h1>
+          <h1 class="govuk-heading-l">{{ data.translations.dpdConfirmAddressPageTitle[data.lang] }}</h1>
           <div class="govuk-inset-text">{{ data['another-address'] }}</div>
 
         {% endif %}

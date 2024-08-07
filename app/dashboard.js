@@ -1,7 +1,7 @@
 //
 //
 //
-const _debug = false;
+const _debugInternal = false;
 
 let _roleType = '';
 let _settings = '';
@@ -10,11 +10,12 @@ let _lang = '';
 //
 // SET DASHBOARD VARIABLES FUNCTION
 //
-function _setDashboardVariables( roleType, settings, lang ){
+function _setDashboardVariables( roleType, settings, lang, debug ){
 
     _roleType = roleType;
     _settings = settings;
     _lang = lang;
+    _debug = debug;
 
     return true;
 
@@ -200,7 +201,7 @@ function _filterBySearchTerm( content, searchTerm ) {
 
     }
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( '_filterBySearchTerm(); Rows remaining: ' + rows.length );
     }
 
@@ -230,7 +231,7 @@ function _filterByStatus( rows, statusFilter ) {
         
     });
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( '_filterByStatus(); Rows remaining: ' + rows.length );
     }
 
@@ -282,7 +283,7 @@ function _filterBySortBy( rows, sortType, sortDirection ){
         arr = arr.reverse();
     }
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( '_filterBySortBy(); Rows remaining: ' + arr.length );
     }
 
@@ -343,7 +344,7 @@ function _filterByRoleType( rows, roleType ){
 
     }
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( '_filterByRoleType(); Rows remaining: ' + arr.length );
     }
     
@@ -411,8 +412,12 @@ function _getActionForStatus( status, id ){
 function _getRow( patient ){
 
     let arr = [];
+    let neoNatal = ( patient.isNeoNatal === true ) ? '65' : '66'; 
+    let extra = ( _debug === 'true' ) ? ' ('+neoNatal+patient.certificateType.toUpperCase()+') ' : '';
 
-    arr.push( { text: patient.lastNameFirst, html: patient.lastNameFirst + '<br /><span class="govuk-body-s govuk"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>' } );
+    let nameAndNumber = patient.lastNameFirst + extra + '<br /><span class="govuk-body-s"><span class="govuk-visually-hidden">NHS number: </span>' + patient.nhsNo + '</span>';
+
+    arr.push( { html: nameAndNumber } );
     arr.push( { text: _translateDate( patient.dateOfDeath ) } );
     
     if( patient.amendsNotSubmitted === true && _roleType === 'ap' ){
@@ -467,7 +472,7 @@ function _overrideRowsForTesting( rows, meSignOff, meoReview, sentToRegistrar, l
     let overrideRows = true;
     let lastNameString = lastName || '';
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( '_overrideRowsForTesting(); Rows remaining: ' + rows.length );
     }
 
@@ -530,13 +535,13 @@ function _filterDrafts( rows, filterDrafts ){
 //
 function _getFilteredResults( rows, roleType, searchTerm, statusFilter, sortBy, sortDirection, meSignOff, meoReview, sentToRegistrar, filterDrafts, lastName ){
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( 'START FILTERING ----------------' ); 
     }
 
     const filteredRows = _filterBySortBy( _filterByStatus( _filterBySearchTerm( _filterByRoleType( _overrideRowsForTesting( _filterDrafts( rows, filterDrafts ), meSignOff, meoReview, sentToRegistrar, lastName ), roleType ), searchTerm ), statusFilter ), sortBy, sortDirection );
 
-    if( _debug ){
+    if( _debugInternal ){
         console.log( 'END FILTERING ----------------' );
     }
 

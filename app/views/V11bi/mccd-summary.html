@@ -37,10 +37,6 @@
 
         {% if patient %}
 
-        {% if data.debug === 'true' %}
-            <textarea>{{ patient | dump }}</textarea>
-        {% endif %}
-
 
         <!--
 
@@ -62,10 +58,10 @@
             <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             
             <!-- REF NUMBER -->
-            <p class="govuk-body govuk-!-margin-bottom-2"><strong>Reference number</strong> {{ patient.id }}</p>
+            <p class="govuk-body govuk-!-margin-bottom-2"><strong>{{ data.translations.globalReferenceNumber[data.lang] }}</strong> {{ patient.id }}</p>
             
             <!-- CERTIFICATE TYPE -->
-            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
+            <p class="govuk-body"><strong>{{ data.translations.globalCertificateType[data.lang] }}</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
 
             
             {% if patientStatus === 1 %}
@@ -91,7 +87,7 @@
                 <!-- AP CERTIFICATE NEEDS AMENDING -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD must be amended. Contact your medical examiner officer to find out what amendments you must make.',
+                    html: data.translations.summaryCertificateNeedsAmends[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -100,7 +96,7 @@
                 <!-- AP CERTIFICATE THAT HAS IS WAITING TO BE SUBMITTED -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been reviewed and signed off by a medical examiner. The medical examiner office will forward this certificate to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryCertificateWaitingForSubmission[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -109,7 +105,7 @@
                 <!-- AP CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been signed off by a medical examiner and sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryCertificateSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -118,21 +114,21 @@
                 <!-- ME CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryMECertificateSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'ap' ) %}
 
                 {{ govukInsetText({
-                    html: 'You have amended this MCCD, but you still need to submit these changes.<br /><br />Review this certificate, read and select the declaration at the bottom, and submit your amendments.',
+                    html: data.translations.summaryCertificateAmendsNotSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'meo' ) %}
 
                 {{ govukInsetText({
-                    html: 'The attending practitioner has amended this MCCD but still needs to sign the declaration and submit this certificate. This MCCD cannot be sent to a medical examiner for review until this has been done.',
+                    html: data.translations.summaryCertificateAmendsNotSubmittedByAP[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -178,22 +174,31 @@ ______                                 _  ______     _        _ _
                         {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-referring-mp-name', text: 'Change', visuallyHiddenText: 'consultant name' }] } }
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } }
                     ]
                 }) }}
+
+
+                    {% set aadRows = [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
+                    ] %}
+
+                    {% if patient.certificateType === 'me' %}
+
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'referring medical practitioner' }] } }), aadRows ) %}
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'senior coroner' }] } }), aadRows ) %}
+
+                    {% endif %}
 
                 <!-- ACTIONS AFTER DEATH -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
-                    rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'whether a post mortem was held' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'whether the deceased had an implant' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'implant details' }] } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant-removed', text: 'Change', visuallyHiddenText: 'whether implant was removed' }] } }
-                    ]
+                    rows: aadRows
                 }) }}
 
 
@@ -218,22 +223,31 @@ ______                                 _  ______     _        _ _
                         {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age } },
                         {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
                         {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersConsultantName[data.lang] }, value: { text: '' } }
+                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } }
                     ]
                 }) }}
+
+                {% set aadRows = [
+                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' } },
+                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' } }
+                    ] %}
+
+
+                {% if patient.certificateType === 'me' %}
+
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' } }), aadRows ) %}
+                        {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' } }), aadRows ) %}
+
+                    {% endif %}
 
                 <!-- ACTIONS AFTER DEATH -->
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
                     },
-                    rows: [
-                        {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: '' } }
-                    ]
+                    rows: aadRows
                 }) }}
 
             {% endif %}
@@ -322,7 +336,7 @@ ______                                 _  ______     _        _ _
             -->
 
 
-            <!-- ATTENDING PRACTITIONERS / MEDICAL EXAMINERS INFORMATION -->
+            <!-- ATTENDING PRACTITIONERS / MEDICAL EXAMINERS (ME CERT) INFORMATION -->
 
             {% set doctorTitle = data.translations.pmMCCDTasklistAttendingPractitionersInformation[data.lang] %}
             {% if patient.certificateType === 'me' %}
@@ -335,7 +349,7 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: data.user.name or 'Ann Other' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: data.user.gmcNumber or '1234567' } },
-                    {  key: { text: 'Qualification' }, value: { html: data['qualifications'] or 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: data['qualifications'] or 'MB ChB' } }
                 ] %}
 
             {% else %}
@@ -344,11 +358,10 @@ ______                                 _  ______     _        _ _
                 {% set apRows = [
                     {  key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Sarah Smith' } },
                     {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '123467' } },
-                    {  key: { text: 'Qualification' }, value: { html: 'MB ChB' } }
+                    {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
                 ] %}
 
             {% endif %}
-            
 
             {{ govukSummaryList({
                 card: {
@@ -357,6 +370,26 @@ ______                                 _  ______     _        _ _
                 rows: apRows
 
             }) }}
+
+
+            {% if patient.certificateType === 'ap' and ( patientStatus === 4 or patientStatus === 5 ) %}
+
+                <!-- MEDICAL EXAMINERS DETAILS -->
+                {{ govukSummaryList({
+                card: {
+                    title: { text: data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] }
+                },
+                rows: [
+                        { key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Alan Jakobsen' } },
+                        {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '6367472' } },
+                        {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
+                    ]
+
+            }) }}
+
+
+            {% endif %}
+
 
         </main>
 
