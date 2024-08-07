@@ -58,10 +58,10 @@
             <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
             
             <!-- REF NUMBER -->
-            <p class="govuk-body govuk-!-margin-bottom-2"><strong>Reference number</strong> {{ patient.id }}</p>
+            <p class="govuk-body govuk-!-margin-bottom-2"><strong>{{ data.translations.globalReferenceNumber[data.lang] }}</strong> {{ patient.id }}</p>
             
             <!-- CERTIFICATE TYPE -->
-            <p class="govuk-body"><strong>Certificate type</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
+            <p class="govuk-body"><strong>{{ data.translations.globalCertificateType[data.lang] }}</strong> {% if patient.isNeoNatal === true %}65{% else %}66{% endif %}{{ patient.certificateType | upper }}</p>
 
             
             {% if patientStatus === 1 %}
@@ -87,7 +87,7 @@
                 <!-- AP CERTIFICATE NEEDS AMENDING -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD must be amended. Contact your medical examiner officer to find out what amendments you must make.',
+                    html: data.translations.summaryCertificateNeedsAmends[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -96,7 +96,7 @@
                 <!-- AP CERTIFICATE THAT HAS IS WAITING TO BE SUBMITTED -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been reviewed and signed off by a medical examiner. The medical examiner office will forward this certificate to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryCertificateWaitingForSubmission[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -105,7 +105,7 @@
                 <!-- AP CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been signed off by a medical examiner and sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryCertificateSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
@@ -114,21 +114,21 @@
                 <!-- ME CERTIFICATE THAT HAS BEEN SUBMITTED TO REGISTRAR -->
                 
                 {{ govukInsetText({
-                    html: 'This MCCD has been sent to the local register office.<br /><br />There is nothing further for you to do.',
+                    html: data.translations.summaryMECertificateSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'ap' ) %}
 
                 {{ govukInsetText({
-                    html: 'You have amended this MCCD, but you still need to submit these changes.<br /><br />Review this certificate, read and select the declaration at the bottom, and submit your amendments.',
+                    html: data.translations.summaryCertificateAmendsNotSubmitted[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 
             {% elseif ( patient.amendsNotSubmitted === true and data['role-type'] === 'meo' ) %}
 
                 {{ govukInsetText({
-                    html: 'The attending practitioner has amended this MCCD but still needs to sign the declaration and submit this certificate. This MCCD cannot be sent to a medical examiner for review until this has been done.',
+                    html: data.translations.summaryCertificateAmendsNotSubmittedByAP[data.lang],
                     classes: 'govuk-!-margin-bottom-9'
                 }) }}
 

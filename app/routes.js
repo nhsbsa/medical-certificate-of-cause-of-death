@@ -17,8 +17,8 @@ router.use((req, res, next) => {
     let redirect = false;
 
     let versions = {
-        'V10': ['/V10/','/V10-1/'],
-        'V11': ['/V11/','/V11bi/']
+        'V10': ['/V10/','/V10-1/','/v10/','/v10-1/'],
+        'V11': ['/V11/','/V11bi/','/v11/','/v11bi/']
     };
 
     function _findVersionAndPath(url, versions) {
