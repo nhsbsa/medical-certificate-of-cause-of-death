@@ -440,7 +440,7 @@ ______                                 _  ______     _        _ _
 
                         <div class="govuk-button-group">
                             {{ govukButton({
-                                text: 'Submit amendments'
+                                text: data.translations.summarySubmitAmendsCTA[data.lang]
                             }) }}
                             {{ govukButton({
                                 text: data.translations.globalReturnToDashboard[data.lang],
@@ -477,14 +477,14 @@ ______                                 _  ______     _        _ _
                             value: data['me-signoff'],
                             fieldset: {
                                 legend: {
-                                    text: 'Medical examiner sign off',
+                                    text: data.translations.summaryMEScrutinyPageTitle[data.lang],
                                     isPageHeading: true,
                                     classes: 'govuk-fieldset__legend--l'
                                 }
                             },
                             items: [
-                                { text: 'This certificate requires amendments by the attending practitioner', value: 'amend' },
-                                { text: 'This certificate is ready to be sent to the local register office',  value: 'register office' }
+                                { text: data.translations.summaryMEScrutinyCertificateNeedsAmends[data.lang], value: 'amend' },
+                                { text: data.translations.summaryMEScrutinyCertificatePassed[data.lang],  value: 'register office' }
                             ]
                         }) }}
                     
@@ -582,20 +582,16 @@ ______                                 _  ______     _        _ _
                     
                                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     
-                                    <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">
-                                        Download certificate
-                                    </h2>
-                                    <p>Download this certificate to your computer and send it to the local register office as an email attachment. After you have sent this MCCD to the local register office return to this screen and mark it as sent by ticking the checkbox.</p>
-                                    <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--secondary">Download certificate</span>
+                                    <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">{{ data.translations.summaryDownloadCertificatePageTitle[data.lang] }}</h2>
+                                    <p>{{ data.translations.summaryDownloadCertificatePageContent[data.lang] }}</p>
+                                    <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--secondary">{{ data.translations.summaryDownloadCertificateCTA[data.lang] }}</span>
                     
                                 </legend>
                     
                                 <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                                     <div class="govuk-checkboxes__item">
                                         <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
-                                        <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">
-                                            I have sent this certificate to the local register office
-                                        </label>
+                                        <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">{{ data.translations.summaryDownloadCertificateCheckBoxTitle[data.lang] }}</label>
                                     </div>
                                 </div>
                     
@@ -605,7 +601,7 @@ ______                                 _  ______     _        _ _
 
                         <div class="govuk-button-group">
                             {{ govukButton({
-                                text: 'Mark MCCD as sent to local register office'
+                                text: data.translations.summaryDownloadCertificateMarkAsSubmittedCTA[data.lang]
                             }) }}
                             {{ govukButton({
                                 text: data.translations.globalReturnToDashboard[data.lang],
@@ -635,10 +631,10 @@ ______                                 _  ______     _        _ _
 
         {% else %}
 
-            <h1 class="govuk-heading-l">Patient not found</h1>
+            <h1 class="govuk-heading-l">{{ data.translations.summaryRecordNotFoundPageTitle[data.lang] }}</h1>
 
             {{ govukInsetText({
-                text: 'No patient information could be found for that ID.'
+                text: data.translations.summaryRecordNotFoundPageContent[data.lang]
             }) }}
 
         {% endif %}

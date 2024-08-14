@@ -307,7 +307,7 @@ addFilter( 'getStatusFilterOptions', function( content ){
 
     const statuses = dashboard.getStatuses('','statuses',this.ctx.settings);
 
-    let html = '<option value="">Show all statuses</option>';
+    let html = ( this.ctx.data.lang === 'cy' ) ? '<option value="">Dangos pob statws</option>' : '<option value="">Show all statuses</option>';
     statuses.forEach(function( status, i ){
 
         // Add a unique value for ME

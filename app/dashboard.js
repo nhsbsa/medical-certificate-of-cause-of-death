@@ -137,12 +137,12 @@ function _getStatuses( num, returnType, settings ){
         'The MCCD has been sent to the local register office.'
     ];
     values.V10.explanations.cy = [
-        'The MCCD has not been submitted.',
-        'An attending practitioner has submitted the MCCD and it has been passed to a medical examiner office for review by a medical examiner officer.',
-        'A medical examiner has reviewed the MCCD and requires the attending practitioner to make changes.',
-        'The MCCD requires scrutiny from an medical examiner.',
-        'The MCCD is ready to be sent to the local register office by a medical examiner officer.',
-        'The MCCD has been sent to the local register office.'
+        'Nid yw\'r MCCD wedi\'i gyflwyno.',
+        'Mae ymarferydd sy\'n mynychu wedi cyflwyno\'r MCCD ac mae wedi\'i basio i swyddfa arholwr meddygol i\'w hadolygu gan swyddog arholwr meddygol.',
+        'Mae arholwr meddygol wedi adolygu\'r MCCD ac yn ei gwneud yn ofynnol i\'r ymarferydd sy\'n mynychu wneud newidiadau.',
+        'Mae\'r MCCD yn gofyn am graffu gan arholwr meddygol.',
+        'Mae\'r MCCD yn barod i gael ei anfon i\'r swyddfa gofrestru leol gan swyddog arholwr meddygol.',
+        'Mae\'r MCCD wedi cael ei anfon i\'r swyddfa gofrestru leol.'
     ];
 
     values.V11.explanations = {};
