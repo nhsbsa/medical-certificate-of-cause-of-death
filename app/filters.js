@@ -305,23 +305,19 @@ addFilter( 'getStatusFilterOptions', function( content ){
         content = '';
     }
 
-    const statuses = dashboard.getStatuses('','statuses',this.ctx.settings);
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+    const statuses = dashboard.getStatuses('','statuses',settings);
 
     let html = ( this.ctx.data.lang === 'cy' ) ? '<option value="">Dangos pob statws</option>' : '<option value="">Show all statuses</option>';
     statuses.forEach(function( status, i ){
 
-        // Add a unique value for ME
-        if( status === 'For sign off by medical examiner' ){
-            html += ( content === 3 ) ? '<option selected value="3">' : '<option value="3">';
-            html += 'For sign off by ME</option>';
-        } else if( status === 'Review complete - send to registrar' ){
-            html += ( content === 4 ) ? '<option selected value="4">' : '<option value="4">';
-            html += 'Send to registrar</option>';
+        if( i === 0 && useSeparateDraftsTable === 'true' ){
+            // Don't add drafts if there's a separate drafts table...
         } else {
             html += ( content === i ) ? '<option selected value="'+i+'">' : '<option value="'+i+'">';
             html += status + '</option>';
         }
-
     });
 
     return html;
