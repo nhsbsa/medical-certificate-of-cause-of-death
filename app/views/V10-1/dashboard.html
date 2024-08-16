@@ -118,7 +118,7 @@
 {% if data[settings].useSearch == 'true' %}
 
   <!-- SEARCH FORM -->
-  <div class="govuk-grid-column-two-thirds">
+  {% if data[settings].useFilters === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
       
@@ -150,7 +150,7 @@
 
 
   {% if data[settings].useFilters == 'true' %}
-  <div class="govuk-grid-column-one-third">
+  {% if data[settings].useSearch === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">

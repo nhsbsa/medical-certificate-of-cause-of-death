@@ -12,6 +12,34 @@ $govuk-new-typography-scale: true;
   max-width: none;
 }
 
+/* FILTER AND SEARCH */
+
+form .input-button-group select {
+  width: 100%;
+}
+
+form .input-button-group select + button {
+  width: 100px;
+}
+
+form .input-button-group input + button {
+  width: 100px;
+}
+
+@media (min-width: 40.0625rem) {
+  .govuk-grid-column-one-half {
+      width: 100%;
+      float: none;
+  }
+}
+
+@media (min-width: 48.0625rem) {
+  .govuk-grid-column-one-half {
+      width: 50%;
+      float: left;
+  }
+}
+
 /* ACCOUNT SIGNED-IN */
 
 .account-signed-in {
