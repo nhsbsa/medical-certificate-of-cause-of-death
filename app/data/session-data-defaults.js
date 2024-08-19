@@ -82,6 +82,7 @@ module.exports = {
 
     useSearch: 'false',
     useFilters: 'false',
+    useMultipleFilters: 'false',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
@@ -102,6 +103,7 @@ module.exports = {
     
     useSearch: 'false',
     useFilters: 'false',
+    useMultipleFilters: 'false',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 

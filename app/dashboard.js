@@ -148,8 +148,10 @@ function _getStatuses( num, returnType, settings ){
     values.V11.explanations = {};
     values.V11.explanations.en = values.V10.explanations.en; // Same for now
     values.V11.explanations.cy = values.V10.explanations.cy; // Same for now
+  
 
-    var returnVal = ( Number.isNaN(num) ) ? values[settings][returnType][_lang] : values[settings][returnType][_lang][num];
+    let returnVal = ( Number.isNaN(num) ) ? values[settings][returnType][_lang] : values[settings][returnType][_lang][num];
+    
 
     return returnVal;
 
@@ -214,20 +216,25 @@ function _filterBySearchTerm( content, searchTerm ) {
 //
 function _filterByStatus( rows, statusFilter ) {
 
-    statusFilter = parseInt( statusFilter );
-
     const arr = [];
 
     rows.forEach(function( row ){
 
-        if( Number.isNaN(statusFilter) ){
+        if( !Array.isArray(statusFilter) || statusFilter.length === 0 ){
+
+            // Not an array, or nothing in there...
             arr.push( row );
+
         } else {
-            if( parseInt(row[row.length-1].text) === statusFilter ){
+
+            // An array of strings...
+            let num = String(row[row.length-1].text);
+            
+            if( statusFilter.indexOf( num ) > -1  ){
                 arr.push( row );
             }
-        }
 
+        }
         
     });
 
