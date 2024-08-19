@@ -290,7 +290,32 @@ addFilter('getTranslationTableRows', function(content) {
 });
 
 
+//
+// GET STATUS FILTER OPTIONS
+//
+addFilter( 'getStatusMultipleFilterOptions', function( content ){
 
+    // content: blank string
+
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+    const roleType = this.ctx.data['role-type'];
+
+    const arr = [];
+    const statuses = dashboard.getStatuses('','statuses',settings);
+
+    statuses.forEach(function( status, i ){
+        if( i === 0 && ( useSeparateDraftsTable === 'true' || roleType === 'meo' ) ){
+            // Don't add drafts if there's a separate drafts table...
+        } else {
+            arr.push({ value : i, text: status });
+        }
+    });
+
+    return arr;
+
+
+});
 
 
 
@@ -300,19 +325,20 @@ addFilter('getTranslationTableRows', function(content) {
 addFilter( 'getStatusFilterOptions', function( content ){
 
     // content: statusFilter variable
-    content = parseInt(content);
-    if( Number.isNaN(content) ){
-        content = '';
+    if( !Array.isArray(content) ){
+        content = [];
     }
 
     const settings = this.ctx.settings;
     const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+    const roleType = this.ctx.data['role-type'];
+
     const statuses = dashboard.getStatuses('','statuses',settings);
 
     let html = ( this.ctx.data.lang === 'cy' ) ? '<option value="">Dangos pob statws</option>' : '<option value="">Show all statuses</option>';
     statuses.forEach(function( status, i ){
 
-        if( i === 0 && useSeparateDraftsTable === 'true' ){
+        if( i === 0 && ( useSeparateDraftsTable === 'true' || roleType === 'meo' ) ){
             // Don't add drafts if there's a separate drafts table...
         } else {
             html += ( content === i ) ? '<option selected value="'+i+'">' : '<option value="'+i+'">';
@@ -332,7 +358,19 @@ addFilter( 'getDashboardCaption', function( content ){
     // content: blank string
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    
+    let statusFilter = this.ctx.data.statusFilter;
+
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+
+    if( typeof statusFilter === 'string' ){
+        statusFilter = ( !Number.isNaN(parseInt(statusFilter)) ) ? [statusFilter] : [];
+    } else if( Array.isArray(statusFilter) ) {
+        statusFilter = this.ctx.data.statusFilter.slice();
+    } else {
+        statusFilter = [];
+    }
 
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
@@ -359,12 +397,24 @@ addFilter( 'getDashboardCaption', function( content ){
 
     }
 
-    if( statusFilter ){
+    // Have to handle multiple statuses now...
+
+    let maxStatuses = dashboard.getStatuses( '', 'statuses', settings );
+    maxStatuses = (useSeparateDraftsTable) ? maxStatuses.length - 1 : maxStatuses.length;
+
+    if( statusFilter.length > 0 && statusFilter.length !== maxStatuses && maxStatuses > statusFilter.length ){
+
+        let statusesArr = [];
+        statusFilter.forEach(function(status){
+            statusesArr.push( dashboard.getStatuses(status) );
+        });
+
         if( this.ctx.data.lang === 'cy' ){
-            caption += ' gyda statws "' + dashboard.getStatuses(statusFilter) + '"';
+            caption += ( statusesArr.length > 1 ) ? ' gyda statwsau "' +  statusesArr.join(', ') + '"' : ' gyda statws "' +  statusesArr.join(', ') + '"';
         } else {
-            caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
+            caption += ( statusesArr.length > 1 ) ? ' with statuses "' + statusesArr.join(', ') + '"' : ' with status "' + statusesArr.join(', ') + '"';
         }
+
     }
 
     return caption;
@@ -433,6 +483,21 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
 
 } );
 
+
+//
+// PROCESS STATUS FILTER
+// The single filter returns a string, the multiple an array, but the component only accepts a comma separated list...
+//
+addFilter( 'processStatusFilter', function( content ){
+    
+    // content = data.statusFilter
+   
+    return ( Array.isArray(content) ) ? content.join(',') : content;
+
+
+});
+
+
 //
 // SET DASHBOARD VARIABLES
 // You'll need to set these before using the statuses on any page...
@@ -463,7 +528,14 @@ addFilter( 'getDashboardTableRows', function( content ) {
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    let statusFilter = this.ctx.data.statusFilter;
+    if( typeof statusFilter === 'string' ){
+        statusFilter = ( !Number.isNaN(parseInt(statusFilter)) ) ? [statusFilter] : [];
+    } else if( Array.isArray(statusFilter) ) {
+        statusFilter = this.ctx.data.statusFilter.slice();
+    } else {
+        statusFilter = [];
+    }
     
     const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : 'date';
     const sortDirection = ( this.ctx.data.sortDirection ) ? this.ctx.data.sortDirection : 'descending';

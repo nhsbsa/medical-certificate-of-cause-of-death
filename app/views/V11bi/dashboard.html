@@ -151,23 +151,6 @@
 
 </style>
 
-{% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
-
-<style>
-
-  .input-button-group {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-  }
-  .input-button-group > .govuk-button {
-    margin: 0 0 0 10px;
-  }
-  
-
-</style>
-
-
 
 {% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
         
@@ -198,8 +181,21 @@
 
 
 
+{% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
 
+<style>
 
+  .input-button-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  .input-button-group > .govuk-button {
+    margin: 0 0 0 10px;
+  }
+  
+
+</style>
 
 
 
@@ -270,6 +266,71 @@
   </div>
   {% endif %}
 
+
+</div>
+{% endif %}
+
+
+
+{% if data[settings].useMultipleFilters == 'true' %}
+
+<!-- USE MULTIPLE FILTERS -->
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <form action="dashboard?currentPage=0" method="post" novalidate>
+
+        <div class="govuk-form-group">
+
+          <style>
+
+            /* Remove this class from the checkboxes below if you want them to display normally */
+
+            .govuk-checkboxes--inline {
+              display: flex;
+              flex-wrap: wrap;
+            }
+
+            .govuk-checkboxes--inline .govuk-checkboxes__item,
+            .govuk-checkboxes--inline .govuk-checkboxes__label {
+              white-space: nowrap;
+            }
+
+          </style>
+          
+          {% set innerHTML %}
+          
+           {{ govukCheckboxes({
+              name: 'statusFilter',
+              values: data.statusFilter | processStatusFilter,
+              classes: 'govuk-checkboxes--small govuk-checkboxes--inline',
+              hint: {
+                text: 'Show results with a chosen status'
+              },
+              items: '' | getStatusMultipleFilterOptions
+            }) }}
+
+            {{ govukButton({
+              text: 'Apply filters',
+              classes: 'govuk-button--secondary govuk-!-margin-top-5'
+            })  }}
+
+            {% if data.statusFilter %}
+              <p class="govuk-body"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filters</a></p>
+            {% endif %}
+                        
+          {% endset %}
+
+          {{ govukDetails({
+            summaryText: 'Filter by status',
+            open: ( data.statusFilter ),
+            html: innerHTML
+          }) }}
+
+        </div>
+
+    </form>
+  </div>
 
 </div>
 {% endif %}
