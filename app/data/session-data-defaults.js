@@ -67,7 +67,6 @@ module.exports = {
     gmcNumber: '6357345'
   },
 
-  rowsPerPage: 10,
   currentPage: 0,
   sortBy: 'date',
   sortDirection: 'ascending',
@@ -79,6 +78,7 @@ module.exports = {
   V10: {
 
     timeout: 30,
+    rowsPerPage: 10,
 
     useSearch: 'false',
     useFilters: 'false',
@@ -101,6 +101,7 @@ module.exports = {
   V11: {
 
     timeout: 30,
+    rowsPerPage: 10,
     
     useSearch: 'false',
     useFilters: 'false',

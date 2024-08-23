@@ -528,8 +528,10 @@ addFilter( 'getDashboardTableRows', function( content ) {
    
     // content: patient data from 'data-patients.html'
 
-    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) ) ) ? parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
+
+    console.log( rowsPerPage );
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
     let statusFilter = this.ctx.data.statusFilter;
