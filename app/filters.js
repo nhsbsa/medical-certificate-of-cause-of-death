@@ -435,14 +435,18 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
         cy: ['Enw marw','Rhif y GIG','Dyddiad marw','Gweithred','Statws']
     };
 
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+    let useSortableColumns = ( this.ctx.data[this.ctx.settings].useSortableColumns === 'true' ) ? true : false;
+    if( !roleType ){
+        useSortableColumns = false;
+    }
+
     let baseLink = '?currentPage=0';
     let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
 
-    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
-
     // Name
     let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
-    let nameObj = ( drafts ) ? { html: headers[this.ctx.data.lang][0] + '<br /><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>' } : {
+    let nameObj = ( drafts || !useSortableColumns ) ? { html: headers[this.ctx.data.lang][0] + '<br /><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>' } : {
         html: '<a href="'+nameLink+'">'+headers[this.ctx.data.lang][0]+'</a><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>',
         attributes: {
             'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
@@ -451,7 +455,7 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
 
     // Date
     let dateLink = ( sortBy === 'date' ) ? baseLink + '&sortBy=date&sortDirection=' + opposite : baseLink + '&sortBy=date&sortDirection=ascending';
-    let dateObj = ( drafts ) ? { text: headers[this.ctx.data.lang][2] } : {
+    let dateObj = ( drafts || !useSortableColumns ) ? { text: headers[this.ctx.data.lang][2] } : {
         html: '<a href="'+dateLink+'">'+headers[this.ctx.data.lang][2]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'date' ) ? sortDirection : 'none'
@@ -459,25 +463,25 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
     };
 
     // Action
-    let actionObj = { text: headers[this.ctx.data.lang][3] };
+    actionObj = { text: headers[this.ctx.data.lang][3] };
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
-    let statusObj = ( drafts ) ? { text: headers[this.ctx.data.lang][4] } : {
+    let statusObj = ( drafts || !useSortableColumns ) ? { text: headers[this.ctx.data.lang][4] } : {
         html: '<a href="'+statusLink+'">'+headers[this.ctx.data.lang][4]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         }
     };
 
-    /*
-    let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
-        html: '<a href="'+statusLink+'">Status</a>',
-        attributes: {
-            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
-        } 
-    };
-    */
+        /*
+        let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
+            html: '<a href="'+statusLink+'">Status</a>',
+            attributes: {
+                'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+            } 
+        };
+        */
 
     return [ nameObj, dateObj, actionObj, statusObj ];
 

@@ -83,6 +83,7 @@ module.exports = {
     useSearch: 'false',
     useFilters: 'false',
     useMultipleFilters: 'false',
+    useSortableColumns: 'false',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
@@ -104,6 +105,7 @@ module.exports = {
     useSearch: 'false',
     useFilters: 'false',
     useMultipleFilters: 'false',
+    useSortableColumns: 'true',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
