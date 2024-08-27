@@ -112,6 +112,7 @@ module.exports = {
 
     showContactMethodScreen: 'false',
     showExplanationOfStatuses: 'false',
+    showBilingual: 'true',
     
     validateTaskList: 'true',
     validateCauseOfDeathScreen: 'true',

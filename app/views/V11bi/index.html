@@ -15,87 +15,173 @@
 
     <div class="govuk-grid-column-two-thirds">
 
-        {% if data.bilingual === 'true' and data.lang === 'cy' %}
 
-            <h1 class="govuk-heading-l">Cwblhau Tystysgrif Feddygol o achos marwolaeth (MCCD)</h1>
+        {% if data[settings].showBilingual === 'true' %}
 
-            <p class="govuk-body">Defnyddiwch yr MCCD digidol hwn i greu neu gwblhau Tystysgrif Feddygol o achos marwolaeth (MCCD). Mae i'w ddefnyddio ar gyfer oedolion, plant, a babanod sy'n marw o fewn 28 diwrnod cyntaf bywyd.</p>
+            <!-- BILINGUAL COPY -->
+            {% if data.lang === 'cy' %}
 
-            <p class="govuk-body">Mae angen MCCD i gofrestru pob marwolaeth an-grwnerol yng Nghymru a Lloegr.</p>
+                <h1 class="govuk-heading-l">Cwblhau Tystysgrif Feddygol o achos marwolaeth (MCCD)</h1>
+                <p class="govuk-body">Defnyddiwch yr MCCD digidol hwn i greu neu gwblhau Tystysgrif Feddygol o achos marwolaeth (MCCD). Mae i'w ddefnyddio ar gyfer oedolion, plant, a babanod sy'n marw o fewn 28 diwrnod cyntaf bywyd.</p>
+                <p class="govuk-body">Mae angen MCCD i gofrestru pob marwolaeth an-grwnerol yng Nghymru a Lloegr.</p>
+                <p class="govuk-body">Mae'r MCCD digidol hwn yn disodli'r MCCD papur. Nid yw'n disodli eich dulliau cyfathrebu neu brosesau presennol rhwng swyddfa'r archwiliwr meddygol a'r ymarferydd sy'n mynychu. Er enghraifft, wrth drafod achos marwolaeth neu ddiwygiad i'r MCCD rhaid i chi barhau i gysylltu â'ch cydweithwyr trwy e-bost neu dros y ffôn.</p>
 
-             <p class="govuk-body">Mae'r MCCD digidol hwn yn disodli'r MCCD papur. Nid yw'n disodli eich dulliau cyfathrebu neu brosesau presennol rhwng swyddfa'r archwiliwr meddygol a'r ymarferydd sy'n mynychu. Er enghraifft, wrth drafod achos marwolaeth neu ddiwygiad i'r MCCD rhaid i chi barhau i gysylltu â'ch cydweithwyr trwy e-bost neu dros y ffôn.</p>
+                <h2 class="govuk-heading-m">Pwy all gwblhau MCCD</h2>
+                <p class="govuk-body">Gall meddyg a fynychodd y person ymadawedig gwblhau MCCD unrhyw bryd.</p>
+                <p class="govuk-body">Os na ellir dod o hyd i ymarferydd sy'n mynychu a bod yr uwch grwner yn penderfynu peidio ag ymchwilio i'r farwolaeth, bydd yn cyfeirio'r achos at archwiliwr meddygol i ardystio'r farwolaeth. Dim ond mewn amgylchiadau eithriadol y bydd yr archwiliwr meddygol MCCD yn cael ei ddefnyddio.</p>
 
-            <h2 class="govuk-heading-m">Pwy all gwblhau MCCD</h2>
+                <div class="govuk-warning-text govuk-!-margin-bottom-2">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Rhybudd</span>
+                        Nid oes angen MCCD yn achos marw-enedigaeth
+                    </strong>
+                </div>
 
-            <p class="govuk-body">Gall meddyg a fynychodd y person ymadawedig gwblhau MCCD unrhyw bryd.</p>
+                <p class="govuk-body">Mae cofrestru marw-enedigaethau yn broses ar wahân i dystysgrif marwolaeth. Cyfeiriwch at y canllawiau ar gyfer <a href="https://www.gov.uk/register-stillbirth" class="govuk-link" rel="noreferrer noopener" target="_blank">cofrestru marw-enedigaeth</a>.</p>
 
-            <p class="govuk-body">Os na ellir dod o hyd i ymarferydd sy'n mynychu a bod yr uwch grwner yn penderfynu peidio ag ymchwilio i'r farwolaeth, bydd yn cyfeirio'r achos at archwiliwr meddygol i ardystio'r farwolaeth. Dim ond mewn amgylchiadau eithriadol y bydd yr archwiliwr meddygol MCCD yn cael ei ddefnyddio.</p>
+                <h2 class="govuk-heading-m">Pwy all ddefnyddio'r MCCD digidol hwn</h2>
+                <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn ymarferydd sy'n mynychu, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>creu MCCD</li>
+                    <li>golygu MCCD</li> <!-- consider saying 'amend' -->
+                </ul>
 
-            <div class="govuk-warning-text govuk-!-margin-bottom-2">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Rhybudd</span>
-                    Nid oes angen MCCD yn achos marw-enedigaeth
-                </strong>
-            </div>
+                <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn archwiliwr meddygol, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>adolygu MCCD</li>
+                    <li>derbyn neu wrthod MCCD</li>
+                </ul>
 
-            <p class="govuk-body">Mae cofrestru marw-enedigaethau yn broses ar wahân i dystysgrif marwolaeth. Cyfeiriwch at y canllawiau ar gyfer <a href="https://www.gov.uk/register-stillbirth" class="govuk-link" rel="noreferrer noopener" target="_blank">cofrestru marw-enedigaeth</a>.</p>
+                <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn swyddog archwilio meddygol, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>adolygu MCCD</li>
+                    <li>lawrlwythwch MCCD wedi'i chwblhau i'w hanfon i'r swyddfa gofrestru leol</li>
+                </ul>
+                
+                <p class="govuk-body govuk-!-margin-top-4">Bydd y swyddfa gofrestru leol yn defnyddio'r MCCD wedi'i chwblhau i gofrestru marwolaeth person sydd wedi marw. Ni fydd teulu person sydd wedi marw yn gweld yr MCCD.</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi ddechrau</h2>
+                <p class="govuk-body">Bydd angen dull diogel o fewngofnodi fel eich cerdyn call a ddarperir gan Wasanaeth Hunaniaeth Gofal y GIG.</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi greu neu adolygu MCCD</h2>
+                <p class="govuk-body">Bydd angen i chi gael manylion personol y person sydd wedi marw, a gwybodaeth feddygol yn ymwneud ag achos y farwolaeth.</p>
+
+        
+                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Yr MCCD dwyieithog Cymraeg a Saesneg</h2>
+                <p class="govuk-body">Os byddwch yn llenwi fersiwn dwyieithog yr MCCD rhaid i chi roi eich atebion yn Gymraeg ac yn Saesneg pan ofynnir amdanynt. Gallwch newid rhwng ieithoedd unrhyw bryd yn ystod y daith.</p>
+                <p class="govuk-body">Gall hysbysydd ofyn am dystysgrif marwolaeth Gymraeg gan y cofrestrydd hyd yn oed os yw ymarferydd cymwys sy'n mynychu yn llenwi'r MCCD yn Saesneg yn unig.</p>
+
+                
+                <div class="govuk-warning-text govuk-!-margin-bottom-7 govuk-!-margin-top-7">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Rhybudd</span>
+                        Unwaith y byddwch wedi mewngofnodi, os na wnewch unrhyw beth am {{ data[settings].timeout }} munud bydd unrhyw wybodaeth nad ydych wedi'i chadw yn cael ei dileu
+                    </strong>
+                </div>
+
+                <a href="auth/care-id-select" class="nhslogin-button">Mewngofnodwch gyda Care ID</a>
 
 
-            <h2 class="govuk-heading-m">Pwy all ddefnyddio'r MCCD digidol hwn</h2>
-            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn ymarferydd sy'n mynychu, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>creu MCCD</li>
-                <li>golygu MCCD</li> <!-- consider saying 'amend' -->
-            </ul>
+            {% else %}
 
-            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn archwiliwr meddygol, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>adolygu MCCD</li>
-                <li>derbyn neu wrthod MCCD</li>
-            </ul>
+                <h1 class="govuk-heading-l">Complete a Medical certificate of cause of death (MCCD)</h1>
 
-            <p class="govuk-body govuk-!-margin-bottom-1">Os ydych yn swyddog archwilio meddygol, gallwch ddefnyddio'r MCCD digidol hwn i:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>adolygu MCCD</li>
-                <li>lawrlwythwch MCCD wedi'i chwblhau i'w hanfon i'r swyddfa gofrestru leol</li>
-            </ul>
+                <p class="govuk-body">Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children, and infants dying within the first 28 days of life.</p>
+
+                <div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</div>
+
+                <p class="govuk-body">An MCCD is required to register all non-coronial deaths in England and Wales.</p>
+
+                <p class="govuk-body">This digital MCCD replaces the paper MCCD. It does not replace your current methods of communication or processes between the medical examiner office and attending practitioner. For example, when discussing a cause of death or an amendment to the MCCD you must continue to contact your colleagues by email or telephone.</p>
+
+                <h2 class="govuk-heading-m">Who can complete an MCCD</h2>
+                <p class="govuk-body">An MCCD can be completed by a doctor who attended the deceased person at any time.</p>
+                <p class="govuk-body">If an attending practitioner cannot be found and the senior coroner decides not to investigate the death, they will refer the case to a medical examiner to certify the death. The medical examiner MCCD will only be used in exceptional circumstances.</p>
+
+                <div class="govuk-warning-text govuk-!-margin-bottom-2">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Warning</span>
+                        An MCCD is not required in the case of a stillbirth
+                    </strong>
+                </div>
+
+                <p class="govuk-body">Registration of stillbirths is a separate process from death certification. Refer to the guidance for <a href="https://www.gov.uk/register-stillbirth" class="govuk-link" rel="noreferrer noopener" target="_blank">registering a stillbirth</a>.</p>
+
+                <h2 class="govuk-heading-m">Who can use this digital MCCD</h2>
+                <p class="govuk-body govuk-!-margin-bottom-1">If you are an attending practitioner, you can use this digital MCCD to:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>create an MCCD</li>
+                    <li>edit an MCCD</li> <!-- consider saying 'amend' -->
+                </ul>
+
+                <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner, you can use this digital MCCD to:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>review an MCCD</li>
+                    <li>accept or reject an MCCD</li>
+                </ul>
+
+                <p class="govuk-body govuk-!-margin-bottom-1">If you are a medical examiner officer, you can use this digital MCCD to:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>review an MCCD</li>
+                    <li>download a completed MCCD to send to the local register office</li>
+                </ul>
+                
+                <p class="govuk-body govuk-!-margin-top-4">The local register office will use the completed MCCD to register the death of a deceased person. The family of a deceased person will not view the MCCD.</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you start</h2>
+                <p class="govuk-body">You'll need a secure method of logging in such as your smartcard as supplied by the NHS Care Identity Service.</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
+                <p class="govuk-body">You'll need the personal details of the deceased person, and medical information relating to the cause of death.</p>
+
+                {% if data['bilingual'] === 'true' %}
+                    <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">The bilingual Welsh and English MCCD</h2>
+                    <p class="govuk-body">If you complete the bilingual version of the MCCD you must give your answers in both Welsh and English when requested. You can switch between languages at any time in the journey.</p>
+                    <p class="govuk-body">An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only.</p>
+                {% endif %}
+                
+                <div class="govuk-warning-text govuk-!-margin-bottom-7 govuk-!-margin-top-7">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Warning</span>
+                        Once you have signed in, if you do not do anything for {{ data[settings].timeout }} minutes any information you have not saved will be deleted
+                    </strong>
+                </div>
+
+                <a href="auth/care-id-select?lang=en" class="nhslogin-button">Sign in with Care ID</a>
+
+
+                <!--    Until we have an alternative authentication method for sign in, only
+                        CIS2 users will have access to the digital MCCD. We have removed the
+                        gov.uk branded Sign In and Register routes (and respective CTAs).    
+                    
+                <div class="govuk-button-group govuk-!-margin-top-7 govuk-!-margin-right-2">
+                    <a href="auth/login-page?account-creation-journey=no" class="govuk-button">
+                        Sign in
+                    </a>
+                    <a href="#" class="govuk-button">
+                        Register
+                    </a>
+                </div>
             
-            <p class="govuk-body govuk-!-margin-top-4">Bydd y swyddfa gofrestru leol yn defnyddio'r MCCD wedi'i chwblhau i gofrestru marwolaeth person sydd wedi marw. Ni fydd teulu person sydd wedi marw yn gweld yr MCCD.</p>
+                -->
 
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi ddechrau</h2>
-            <p class="govuk-body">Bydd angen dull diogel o fewngofnodi fel eich cerdyn call a ddarperir gan Wasanaeth Hunaniaeth Gofal y GIG.</p>
-
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Cyn i chi greu neu adolygu MCCD</h2>
-            <p class="govuk-body">Bydd angen i chi gael manylion personol y person sydd wedi marw, a gwybodaeth feddygol yn ymwneud ag achos y farwolaeth.</p>
-
-     
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Yr MCCD dwyieithog Cymraeg a Saesneg</h2>
-            <p class="govuk-body">Os byddwch yn llenwi fersiwn dwyieithog yr MCCD rhaid i chi roi eich atebion yn Gymraeg ac yn Saesneg pan ofynnir amdanynt. Gallwch newid rhwng ieithoedd unrhyw bryd yn ystod y daith.</p>
-            <p class="govuk-body">Gall hysbysydd ofyn am dystysgrif marwolaeth Gymraeg gan y cofrestrydd hyd yn oed os yw ymarferydd cymwys sy'n mynychu yn llenwi'r MCCD yn Saesneg yn unig.</p>
-
-            
-            <div class="govuk-warning-text govuk-!-margin-bottom-7 govuk-!-margin-top-7">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Rhybudd</span>
-                    Unwaith y byddwch wedi mewngofnodi, os na wnewch unrhyw beth am {{ data[settings].timeout }} munud bydd unrhyw wybodaeth nad ydych wedi'i chadw yn cael ei dileu
-                </strong>
-            </div>
-
-            <a href="auth/care-id-select" class="nhslogin-button">Mewngofnodwch gyda Care ID</a>
+            {% endif %}
 
 
         {% else %}
 
+            <!-- NON-BILINGUAL COPY (FROM V10-1) -->
+
             <h1 class="govuk-heading-l">Complete a Medical certificate of cause of death (MCCD)</h1>
 
             <p class="govuk-body">Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children, and infants dying within the first 28 days of life.</p>
-
-            <div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</div>
+            <!--<div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</div>-->
 
             <p class="govuk-body">An MCCD is required to register all non-coronial deaths in England and Wales.</p>
-
             <p class="govuk-body">This digital MCCD replaces the paper MCCD. It does not replace your current methods of communication or processes between the medical examiner office and attending practitioner. For example, when discussing a cause of death or an amendment to the MCCD you must continue to contact your colleagues by email or telephone.</p>
 
             <h2 class="govuk-heading-m">Who can complete an MCCD</h2>
@@ -139,7 +225,10 @@
             <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">Before you create or review an MCCD</h2>
             <p class="govuk-body">You'll need the personal details of the deceased person, and medical information relating to the cause of death.</p>
 
-            {% if data['bilingual'] === 'true' %}
+            <!-- UPDATE 26 April: the bilingual service won't be released in MVP so we have removed mentions to it from V10-1 -->
+            <!-- <p class="govuk-body">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</p> -->
+
+            {% if data['bilingual'] == "true" %}
                 <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-3">The bilingual Welsh and English MCCD</h2>
                 <p class="govuk-body">If you complete the bilingual version of the MCCD you must give your answers in both Welsh and English when requested. You can switch between languages at any time in the journey.</p>
                 <p class="govuk-body">An informant can request a Welsh death certificate from the registrar even if a qualified attending practitioner completes the MCCD in English only.</p>
@@ -153,7 +242,7 @@
                 </strong>
             </div>
 
-            <a href="auth/care-id-select?lang=en" class="nhslogin-button">Sign in with Care ID</a>
+            <a href="auth/care-id-select?lang=en" class="nhslogin-button">Log in with my Care Identity</a>
 
 
             <!--    Until we have an alternative authentication method for sign in, only
@@ -172,6 +261,11 @@
             -->
 
         {% endif %}
+
+
+
+
+        
 
 
     </div>
