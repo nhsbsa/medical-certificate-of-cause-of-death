@@ -597,7 +597,7 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     // content: blank string
 
-    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) ) ) ? parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
     
     const noOfFilteredRows = ( Number.isInteger(this.ctx.data.noOfFilteredRows) ) ? this.ctx.data.noOfFilteredRows : 0;
@@ -607,6 +607,8 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     if( noOfFilteredRows > rowsPerPage ){
 
+        let items = [];
+
         if( currentPage !== 0 ){
             obj.previous = { 'href' : '?currentPage='+(currentPage-1) }
         }
@@ -614,7 +616,6 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
             obj.next = { 'href' : '?currentPage='+(currentPage+1) }
         }
 
-        obj.items = [];
         for( let i = 0; i < noOfPages; i++ ){
 
             let itemObj = {'number': (i+1), 'href':'?currentPage='+i };
@@ -622,7 +623,15 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
                 itemObj.current = true;
             }
 
-            obj.items.push( itemObj );
+            items.push( itemObj );
+
+        }
+
+        // Add ellipses if needed...
+        if( items.length > 6 ){
+            obj.items = dashboard.truncatePages(items,currentPage);
+        } else {
+            obj.items = items;
         }
 
     }

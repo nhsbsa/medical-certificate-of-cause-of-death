@@ -603,6 +603,78 @@ function _getDraftResults( rows, roleType ){
 
 }
 
+//
+// TRUNCATE PAGES FUNCTION
+//
+function _truncatePages(pageObjects, currentPage) {
+    
+    const noOfPages = pageObjects.length;
+  
+    // Start building the truncated array
+    const result = [];
+  
+    // Handle edge case when currentPage is the first item
+    if (currentPage === 0) {
+      // Always include the first item
+      result.push(pageObjects[0]);
+  
+      // Add the next two items if they exist
+      if (noOfPages > 1) result.push(pageObjects[1]);
+      if (noOfPages > 2) result.push(pageObjects[2]);
+  
+      if (noOfPages > 3) result.push({ 'ellipsis': true }); // Add ellipsis if there are more items beyond the first three
+  
+      // Always include the last item
+      result.push(pageObjects[noOfPages - 1]);
+  
+      return result;
+    }
+  
+    // Handle edge case when currentPage is the last item
+    if (currentPage === noOfPages - 1) {
+      // Always include the first item
+      result.push(pageObjects[0]);
+  
+      if (noOfPages > 4) result.push({ 'ellipsis': true }); // Add ellipsis if there are more than four items
+  
+      // Include the last three items
+      if (noOfPages > 2) result.push(pageObjects[noOfPages - 3]);
+      if (noOfPages > 1) result.push(pageObjects[noOfPages - 2]);
+      result.push(pageObjects[noOfPages - 1]);
+  
+      return result;
+    }
+  
+    // Normal case: currentPage is somewhere in the middle
+    // Always include the first item
+    result.push(pageObjects[0]);
+  
+    // Determine the range of items around the current item
+    const start = Math.max(1, currentPage - 1);
+    const end = Math.min(noOfPages - 2, currentPage + 1);
+  
+    // Add ellipsis if necessary between the first item and the range
+    if (start > 1) {
+      result.push({ 'ellipsis': true });
+    }
+  
+    // Add the range of items around the current item
+    for (let i = start; i <= end; i++) {
+      result.push(pageObjects[i]);
+    }
+  
+    // Add ellipsis if necessary between the range and the last item
+    if (end < noOfPages - 2) {
+      result.push({ 'ellipsis': true });
+    }
+  
+    // Always include the last item
+    result.push(pageObjects[noOfPages - 1]);
+  
+    return result;
+
+}
+
 
 //
 // EXPORT EVERYTHING
@@ -612,5 +684,6 @@ module.exports = {
     getFilteredResults: _getFilteredResults,
     getPaginatedResults: _getPaginatedResults,
     getStatuses: _getStatuses,
-    setDashboardVariables: _setDashboardVariables
+    setDashboardVariables: _setDashboardVariables,
+    truncatePages: _truncatePages
 }

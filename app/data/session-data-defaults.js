@@ -78,7 +78,7 @@ module.exports = {
   V10: {
 
     timeout: 30,
-    rowsPerPage: 10,
+    rowsPerPage: 500,
 
     useSearch: 'false',
     useFilters: 'false',
@@ -101,7 +101,7 @@ module.exports = {
   V11: {
 
     timeout: 30,
-    rowsPerPage: 10,
+    rowsPerPage: 20,
     
     useSearch: 'false',
     useFilters: 'false',
