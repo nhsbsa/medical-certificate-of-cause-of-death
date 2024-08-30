@@ -67,7 +67,6 @@ module.exports = {
     gmcNumber: '6357345'
   },
 
-  rowsPerPage: 10,
   currentPage: 0,
   sortBy: 'date',
   sortDirection: 'ascending',
@@ -79,10 +78,12 @@ module.exports = {
   V10: {
 
     timeout: 30,
+    rowsPerPage: 500,
 
     useSearch: 'false',
     useFilters: 'false',
     useMultipleFilters: 'false',
+    useSortableColumns: 'false',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
@@ -100,15 +101,18 @@ module.exports = {
   V11: {
 
     timeout: 30,
+    rowsPerPage: 20,
     
     useSearch: 'false',
     useFilters: 'false',
     useMultipleFilters: 'false',
+    useSortableColumns: 'true',
     useSeparateDraftsTable: 'false',
     useEmbeddedFeedbackForm: 'false',
 
     showContactMethodScreen: 'false',
     showExplanationOfStatuses: 'false',
+    showBilingual: 'true',
     
     validateTaskList: 'true',
     validateCauseOfDeathScreen: 'true',
