@@ -178,6 +178,83 @@
         <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
+                {% if data['over-under-28'] == 'yes' %}
+                <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width:35%">
+                    (a) Main diseases or condition in infant
+                    <br>
+                    <span class="govuk-body">
+                    (a) Prif afiechyd neu gyflwr mewn baban
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Meningitis
+                </dd>
+                <dd class="govuk-summary-list__value">
+                Llid yr ymennydd
+                </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width:35%">
+                    (b) Other diseases or conditions in infant
+                    <br>
+                    <span class="govuk-body">
+                    (b) Clefyd neu gyflwr arall mewn babanod
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Pre-term birth
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Genedigaeth cyn-dymor
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width:35%">
+                    (c) Main maternal diseases or conditions affecting infant
+                    <br>
+                    <span class="govuk-body">
+                    (c) Prif glefyd y fam neu gyflwr sy'n effeithio ar faban
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Pre-eclampsia
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Rhageclampsia
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width:35%">
+                    (d) Other maternal diseases or conditions affecting infant
+                    <br>
+                    <span class="govuk-body">
+                    (d) Clefydau neu gyflyrau mamol eraill sy'n effeithio ar fabanod
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Endometriosis
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    
+                </dd>
+                </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width:35%">
+                    (e) Other relevant factors or circumstances (not diseases of infant or mother)
+                    <br>
+                    <span class="govuk-body">
+                    (e) Ffactorau neu amgylchiadau perthnasol eraill (nid clefydau’r baban neu’r fam)
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    
+                </dd>
+                </div>
+                {% else %}
                 <dt class="govuk-summary-list__key">
                     1(a) disease or condition directly leading to death                     <br>
                     <span class="govuk-body">
@@ -240,10 +317,10 @@
                                 
                             </dd>
                             <dd class="govuk-summary-list__value">
-                               
+                            
                             </dd>
                             <dd class="govuk-summary-list__actions" style="text-align: left; width:15%;">
-                               
+                            
                             </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -261,9 +338,10 @@
                                     Heintiau llwybr wrinol rheolaidd
                                 </dd>
                                 <dd class="govuk-summary-list__actions" style="text-align: left; width:15%;">
-                                    4 years until death <br>1 dyddiau hyd farwolaeth
+                                    4 years until death <br>4 blynnyddoedd hyd farwolaeth
                                 </dd>
                                 </div>
+                        {% endif %}
         </dl>
         </div>
     </div>
@@ -453,122 +531,220 @@
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Ethnicity
+                    <br>
+                    <span class="govuk-body">
+                        Ethnigrwydd
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     White - English, Welsh, Scottish, Northern Irish or British
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Gwyn - Saesneg, Cymreig, Albanaidd, Gwyddelig Gogleddol neu Brydeinig
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant in body
+                    <br>
+                    <span class="govuk-body">
+                        Mewnblaniadau yn y corff
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Do
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant details
+                    <br>
+                    <span class="govuk-body">
+                        Manylion mewnblaniad
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pacemaker in chest
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    rheolyddion calon
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant removed
+                    <br>
+                    <span class="govuk-body">
+                        Mewnblaniad wedi'i dynnu
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Oes
                 </dd>
                 </div>
                 {% else %}
                 <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Death due to or contributed to by employment
-                    <br>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    No
-                </dd>
-                </div>
+                    <dt class="govuk-summary-list__key">
+                        Death due to or contributed to by employment
+                        <br>
+                        <span class="govuk-body">
+                            Marwolaeth oherwydd cyflogaeth neu y mae cyflogaeth yn cyfrannu ati
+                        </span>
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        No
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        Na allai
+                    </dd>
+                    </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Ethnicity
+                    <br>
+                    <span class="govuk-body">
+                        Ethnigrwydd
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     White - English, Welsh, Scottish, Northern Irish or British
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Gwyn - Saesneg, Cymreig, Albanaidd, Gwyddelig Gogleddol neu Brydeinig
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant in body
+                    <br>
+                    <span class="govuk-body">
+                        Mewnblaniadau yn y corff
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Do
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant details
+                    <br>
+                    <span class="govuk-body">
+                        Manylion mewnblaniad
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pacemaker in chest
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    rheolyddion calon
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Implant removed
+                    <br>
+                    <span class="govuk-body">
+                        Mewnblaniad wedi'i dynnu
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Oes
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Pregnant within the year prior to death
+                    <br>
+                    <span class="govuk-body">
+                        Beichiogrwydd
+                    </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pregnant 43 days to a year before death
                 </dd>
-                </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Death due to or contributed to by employment
-                    <br>
-                    <span class="govuk-body">
-                        Marwolaeth oherwydd cyflogaeth neu y mae cyflogaeth yn cyfrannu ati
-                    </span>
-                </dt>
                 <dd class="govuk-summary-list__value">
-                    No
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    Nac oes
+                    Beichiog 43 o ddiwrnodau i flwyddyn cyn y farwolaeth
                 </dd>
                 </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Death due to or contributed to by pregnancy
+                        <br>
+                        <span class="govuk-body">
+                        Marwolaeth yr effeithir arni gan feichiogrwydd
+                        </span>
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        No
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        Na do
+                    </dd>
+                    </div>
+
                 {% endif %}
-            </dl>
-            </div>
-<div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    NHS number
-                    <br>
-                    <span class="govuk-body">
-                        Rhif GIG
-                    </span>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    123 456 7891
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    123 456 7891
-                </dd>
-                </div>
         </dl>
         </div>
     </div>
+    
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Misc
+            <br>
+            <span class="govuk-body">
+                Amrywiol
+            </span>
+          </h2>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                NHS number
+                <br>
+                <span class="govuk-body">
+                    Rhif GIG
+                </span>
+            </dt>
+            <dd class="govuk-summary-list__value">
+                123 456 7891
+            </dd>
+            <dd class="govuk-summary-list__value">
+                123 456 7891
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Additional information
+                    <br>
+                    <span class="govuk-body">
+                        Gwybodaeth ychwanegol
+                    </span>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    I may be in a position to give, on application by the Registrar General, additional information as to the cause of death for the purpose of more precise statistical classification.
+                </dd>
+                <dd class="govuk-summary-list__value">
+                    Efallai fy mod mewn sefyllfa i roi, ar gais gan y Cofrestrydd Cyffredinol, wybodaeth ychwanegol ynghylch achos y farwolaeth at ddibenion dosbarthu ystadegol mwy manwl gywir.
+                </dd>
+                </div>
+          </dl> 
+        </div>
+      </div>
 
 </div>
 </div>
