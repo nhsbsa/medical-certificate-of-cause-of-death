@@ -7,6 +7,11 @@
 
 {% block content %}
 
+<!-- PATIENT DATA -->
+{% import 'V11bi/data-patients.html' as patientData %}
+
+
+
  {{ '' | setDashboardVariables( data['role-type'], settings, data.lang ) }}
 
 <div class="govuk-grid-row">
@@ -42,7 +47,7 @@
 
         <!-- DRAW STATUS EXPLANATIONS -->
         {{ govukDetails({
-            summaryText: 'Explanation of statuses',
+            summaryText: data.translations.dashboardExplanationOfStatusesTitle[data.lang],
             html: govukTable({
               rows: '' | getStatusExplanationRows
             })
@@ -146,6 +151,36 @@
 
 </style>
 
+
+{% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
+        
+  {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
+
+    {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
+
+      <!-- DRAFTS TABLE ROW -->
+      <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+
+            <!-- DRAFTS TABLE -->
+              {{ govukTable({
+              caption: data.translations.dashboardDraftsTableTitle[data.lang],
+              classes: 'table-dashboard govuk-table--small-text-until-tablet',
+              captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
+              firstCellIsHeader: true,
+              head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
+              rows: draftRows
+            }) }}
+
+        </div>
+      </div>
+          
+    {% endif %}
+
+{% endif %}
+
+
+
 {% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
 
 <style>
@@ -162,33 +197,32 @@
 
 </style>
 
+
+
+
 <!-- SEARCH ROW -->
 <div class="govuk-grid-row">
 
 {% if data[settings].useSearch === 'true' %}
 
   <!-- SEARCH FORM -->
-  <div class="govuk-grid-column-two-thirds">
+  {% if data[settings].useFilters === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
       
       <div class="govuk-form-group">
 
-        <label class="govuk-label govuk-label--m" for="searchTerm">
-          Search for a certificate
-        </label>
+        <label class="govuk-label govuk-label--m" for="searchTerm">{{ data.translations.dashboardSearchTitle[data.lang] }}</label>
   
-        <div id="search-hint" class="govuk-hint">
-          You can search by name or NHS number
-        </div>
+        <div id="search-hint" class="govuk-hint">{{ data.translations.dashboardSearchHintText[data.lang] }}</div>
   
         <div class="input-button-group">
           <input class="govuk-input" id="searchTerm" name="searchTerm" type="search" value="{{ data.searchTerm }}" aria-describedby="search-hint">
-          <button type="submit" class="govuk-button" data-module="govuk-button">Search</button>
+          <button type="submit" class="govuk-button" data-module="govuk-button">{{ data.translations.dashboardSearchCTA[data.lang] }}</button>
         </div>
 
         {% if data.searchTerm %}
-          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=&currentPage=0">Clear search</a></p>
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?searchTerm=&currentPage=0">{{ data.translations.dashboardSearchLinkText[data.lang] }}</a></p>
         {% endif %}
   
       </div>
@@ -200,18 +234,16 @@
 
 
   {% if data[settings].useFilters == 'true' %}
-  <div class="govuk-grid-column-one-third">
+
+  
+  {% if data[settings].useSearch === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
         
-        <label class="govuk-table__caption--m" for="statusFilter">
-          Filter by status
-        </label>
+        <label class="govuk-label govuk-label--m" for="statusFilter">{{ data.translations.dashboardFilterTitle[data.lang] }}</label>
   
-        <div id="filter-hint" class="govuk-hint">
-          Show results with a chosen status
-        </div>
+        <div id="filter-hint" class="govuk-hint">{{ data.translations.dashboardFilterHintText[data.lang] }}</div>
   
         <div class="input-button-group">
           
@@ -219,12 +251,12 @@
             {{ data.statusFilter | getStatusFilterOptions | safe }}
           </select>
 
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">Filter</button>
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">{{ data.translations.dashboardFilterCTA[data.lang] }}</button>
 
         </div>
 
         {% if data.statusFilter %}
-          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filter</a></p>
+          <p class="govuk-body govuk-!-margin-top-3"><a class="govuk-link" href="?statusFilter=&currentPage=0">{{ data.translations.dashboardFilterLinkText[data.lang] }}</a></p>
         {% endif %}
         
   
@@ -239,12 +271,75 @@
 {% endif %}
 
 
+
+{% if data[settings].useMultipleFilters == 'true' %}
+
+<!-- USE MULTIPLE FILTERS -->
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <form action="dashboard?currentPage=0" method="post" novalidate>
+
+        <div class="govuk-form-group">
+
+          <style>
+
+            /* Remove this class from the checkboxes below if you want them to display normally */
+
+            .govuk-checkboxes--inline {
+              display: flex;
+              flex-wrap: wrap;
+            }
+
+            .govuk-checkboxes--inline .govuk-checkboxes__item,
+            .govuk-checkboxes--inline .govuk-checkboxes__label {
+              white-space: nowrap;
+            }
+
+          </style>
+          
+          {% set innerHTML %}
+          
+           {{ govukCheckboxes({
+              name: 'statusFilter',
+              values: data.statusFilter | processStatusFilter,
+              classes: 'govuk-checkboxes--small govuk-checkboxes--inline',
+              hint: {
+                text: 'Show results with a chosen status'
+              },
+              items: '' | getStatusMultipleFilterOptions
+            }) }}
+
+            {{ govukButton({
+              text: 'Apply filters',
+              classes: 'govuk-button--secondary govuk-!-margin-top-5'
+            })  }}
+
+            {% if data.statusFilter %}
+              <p class="govuk-body"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filters</a></p>
+            {% endif %}
+                        
+          {% endset %}
+
+          {{ govukDetails({
+            summaryText: 'Filter by status',
+            open: ( data.statusFilter ),
+            html: innerHTML
+          }) }}
+
+        </div>
+
+    </form>
+  </div>
+
+</div>
+{% endif %}
+
+
 <!-- TABLE ROW -->
 <div class="govuk-grid-row">
     
     <div class="govuk-grid-column-full">
-
-        {% import 'V11bi/data-patients.html' as patientData %}
 
         <style>
 
@@ -254,26 +349,6 @@
           }
 
         </style>
-
-        {% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
-
-          {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
-
-          {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
-
-          <!-- DRAFTS TABLE -->
-            {{ govukTable({
-            caption: 'Your drafts',
-            classes: 'table-dashboard govuk-table--small-text-until-tablet',
-            captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
-            firstCellIsHeader: true,
-            head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
-            rows: draftRows
-          }) }}
-          
-          {% endif %}
-
-        {% endif %}
 
         <!-- MAIN TABLE -->
         {{ govukTable({

@@ -9,6 +9,7 @@
 {% block content %}
 
 {{ '' | setDashboardVariables( data['role-type'], settings, data.lang ) }}
+ {% import 'V10-1/data-patients.html' as patientData %}
 
  <!-- AP DASHBOARD -->
  <main class="govuk-main-wrapper app-main-class" id="main-content">
@@ -96,6 +97,40 @@
 
 
 
+
+
+{% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
+        
+  {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
+
+    {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
+
+      <!-- DRAFTS TABLE ROW -->
+      <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+
+            <!-- DRAFTS TABLE -->
+              {{ govukTable({
+              caption: data.translations.dashboardDraftsTableTitle[data.lang],
+              classes: 'table-dashboard govuk-table--small-text-until-tablet',
+              captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
+              firstCellIsHeader: true,
+              head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
+              rows: draftRows
+            }) }}
+
+        </div>
+      </div>
+          
+    {% endif %}
+
+{% endif %}
+
+
+
+
+
+
 {% if data[settings].useSearch == 'true' or data[settings].useFilters == 'true' %}
 
 <style>
@@ -111,6 +146,7 @@
 
 </style>
 
+
 <!-- SEARCH ROW -->
 <div class="govuk-grid-row">
 
@@ -118,7 +154,7 @@
 {% if data[settings].useSearch == 'true' %}
 
   <!-- SEARCH FORM -->
-  <div class="govuk-grid-column-two-thirds">
+  {% if data[settings].useFilters === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
       
@@ -150,7 +186,9 @@
 
 
   {% if data[settings].useFilters == 'true' %}
-  <div class="govuk-grid-column-one-third">
+
+  <!-- USE SINGLE FILTER -->
+  {% if data[settings].useSearch === 'true' %}<div class="govuk-grid-column-one-half">{% else %}<div class="govuk-grid-column-two-thirds">{% endif %}
     <form class="govuk-!-margin-top-5" action="dashboard?currentPage=0" method="post" novalidate>
 
       <div class="govuk-form-group">
@@ -187,6 +225,74 @@
 
 </div>
 {% endif %}
+
+
+
+{% if data[settings].useMultipleFilters == 'true' %}
+
+<!-- USE MULTIPLE FILTERS -->
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <form action="dashboard?currentPage=0" method="post" novalidate>
+
+        <div class="govuk-form-group">
+
+          <style>
+
+            /* Remove this class from the checkboxes below if you want them to display normally */
+
+            .govuk-checkboxes--inline {
+              display: flex;
+              flex-wrap: wrap;
+            }
+
+            .govuk-checkboxes--inline .govuk-checkboxes__item,
+            .govuk-checkboxes--inline .govuk-checkboxes__label {
+              white-space: nowrap;
+            }
+
+          </style>
+          
+          {% set innerHTML %}
+          
+           {{ govukCheckboxes({
+              name: 'statusFilter',
+              values: data.statusFilter | processStatusFilter,
+              classes: 'govuk-checkboxes--small govuk-checkboxes--inline',
+              hint: {
+                text: 'Show results with a chosen status'
+              },
+              items: '' | getStatusMultipleFilterOptions
+            }) }}
+
+            {{ govukButton({
+              text: 'Apply filters',
+              classes: 'govuk-button--secondary govuk-!-margin-top-5'
+            })  }}
+
+            {% if data.statusFilter %}
+              <p class="govuk-body"><a class="govuk-link" href="?statusFilter=&currentPage=0">Clear filters</a></p>
+            {% endif %}
+                        
+          {% endset %}
+
+          {{ govukDetails({
+            summaryText: 'Filter by status',
+            open: ( data.statusFilter ),
+            html: innerHTML
+          }) }}
+
+        </div>
+
+    </form>
+  </div>
+
+</div>
+{% endif %}
+
+
+
 
 <style>
 
@@ -259,8 +365,6 @@
     
     <div class="govuk-grid-column-full">
 
-        {% import 'V10-1/data-patients.html' as patientData %}
-
         <style>
 
           .table-dashboard th,
@@ -270,30 +374,11 @@
 
         </style>
 
-        {% if data['role-type'] === 'ap' or data['role-type'] === 'me' %}
-
-          {% set draftRows = patientData.data | getDashboardTableDraftRows(data['role-type']) %}
-
-          {% if draftRows.length > 0 and data[settings].useSeparateDraftsTable === 'true' %}
-
-          <!-- DRAFTS TABLE -->
-          {{ govukTable({
-            caption: 'Your drafts',
-            classes: 'table-dashboard govuk-table--small-text-until-tablet',
-            captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
-            firstCellIsHeader: true,
-            head: '' | getDashboardTableHead( data.sortBy, data.sortDirection, true ),
-            rows: draftRows
-          }) }}
-          
-          {% endif %}
-
-        {% endif %}
-
         <!-- MAIN TABLE -->
         {{ govukTable({
           caption: '' | getDashboardCaption,
           classes: 'table-dashboard',
+          id: 'main-table',
           captionClasses: 'govuk-table__caption--m govuk-!-margin-top-5',
           firstCellIsHeader: true,
           head: '' | getDashboardTableHead( data.sortBy, data.sortDirection ),

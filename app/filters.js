@@ -290,7 +290,32 @@ addFilter('getTranslationTableRows', function(content) {
 });
 
 
+//
+// GET STATUS FILTER OPTIONS
+//
+addFilter( 'getStatusMultipleFilterOptions', function( content ){
 
+    // content: blank string
+
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+    const roleType = this.ctx.data['role-type'];
+
+    const arr = [];
+    const statuses = dashboard.getStatuses('','statuses',settings);
+
+    statuses.forEach(function( status, i ){
+        if( i === 0 && ( useSeparateDraftsTable === 'true' || roleType === 'meo' ) ){
+            // Don't add drafts if there's a separate drafts table...
+        } else {
+            arr.push({ value : i, text: status });
+        }
+    });
+
+    return arr;
+
+
+});
 
 
 
@@ -300,28 +325,25 @@ addFilter('getTranslationTableRows', function(content) {
 addFilter( 'getStatusFilterOptions', function( content ){
 
     // content: statusFilter variable
-    content = parseInt(content);
-    if( Number.isNaN(content) ){
-        content = '';
+    if( !Array.isArray(content) ){
+        content = [];
     }
 
-    const statuses = dashboard.getStatuses('','statuses',this.ctx.settings);
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+    const roleType = this.ctx.data['role-type'];
 
-    let html = '<option value="">Show all statuses</option>';
+    const statuses = dashboard.getStatuses('','statuses',settings);
+
+    let html = ( this.ctx.data.lang === 'cy' ) ? '<option value="">Dangos pob statws</option>' : '<option value="">Show all statuses</option>';
     statuses.forEach(function( status, i ){
 
-        // Add a unique value for ME
-        if( status === 'For sign off by medical examiner' ){
-            html += ( content === 3 ) ? '<option selected value="3">' : '<option value="3">';
-            html += 'For sign off by ME</option>';
-        } else if( status === 'Review complete - send to registrar' ){
-            html += ( content === 4 ) ? '<option selected value="4">' : '<option value="4">';
-            html += 'Send to registrar</option>';
+        if( i === 0 && ( useSeparateDraftsTable === 'true' || roleType === 'meo' ) ){
+            // Don't add drafts if there's a separate drafts table...
         } else {
             html += ( content === i ) ? '<option selected value="'+i+'">' : '<option value="'+i+'">';
             html += status + '</option>';
         }
-
     });
 
     return html;
@@ -336,7 +358,19 @@ addFilter( 'getDashboardCaption', function( content ){
     // content: blank string
 
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    
+    let statusFilter = this.ctx.data.statusFilter;
+
+    const settings = this.ctx.settings;
+    const useSeparateDraftsTable = this.ctx.data[settings].useSeparateDraftsTable;
+
+    if( typeof statusFilter === 'string' ){
+        statusFilter = ( !Number.isNaN(parseInt(statusFilter)) ) ? [statusFilter] : [];
+    } else if( Array.isArray(statusFilter) ) {
+        statusFilter = this.ctx.data.statusFilter.slice();
+    } else {
+        statusFilter = [];
+    }
 
     const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
 
@@ -363,12 +397,24 @@ addFilter( 'getDashboardCaption', function( content ){
 
     }
 
-    if( statusFilter ){
+    // Have to handle multiple statuses now...
+
+    let maxStatuses = dashboard.getStatuses( '', 'statuses', settings );
+    maxStatuses = (useSeparateDraftsTable) ? maxStatuses.length - 1 : maxStatuses.length;
+
+    if( statusFilter.length > 0 && statusFilter.length !== maxStatuses && maxStatuses > statusFilter.length ){
+
+        let statusesArr = [];
+        statusFilter.forEach(function(status){
+            statusesArr.push( dashboard.getStatuses(status) );
+        });
+
         if( this.ctx.data.lang === 'cy' ){
-            caption += ' gyda statws "' + dashboard.getStatuses(statusFilter) + '"';
+            caption += ( statusesArr.length > 1 ) ? ' gyda statwsau "' +  statusesArr.join(', ') + '"' : ' gyda statws "' +  statusesArr.join(', ') + '"';
         } else {
-            caption += ' with status "' + dashboard.getStatuses(statusFilter) + '"';
+            caption += ( statusesArr.length > 1 ) ? ' with statuses "' + statusesArr.join(', ') + '"' : ' with status "' + statusesArr.join(', ') + '"';
         }
+
     }
 
     return caption;
@@ -389,14 +435,18 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
         cy: ['Enw marw','Rhif y GIG','Dyddiad marw','Gweithred','Statws']
     };
 
+    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
+    let useSortableColumns = ( this.ctx.data[this.ctx.settings].useSortableColumns === 'true' ) ? true : false;
+    if( !roleType ){
+        useSortableColumns = false;
+    }
+
     let baseLink = '?currentPage=0';
     let opposite = ( sortDirection === 'descending' ) ? 'ascending' : 'descending'; 
 
-    const roleType = ( this.ctx.data['role-type'] ) ? this.ctx.data['role-type'] : '';
-
     // Name
     let nameLink = ( sortBy === 'name' ) ? baseLink + '&sortBy=name&sortDirection=' + opposite : baseLink + '&sortBy=name&sortDirection=ascending';
-    let nameObj = ( drafts ) ? { html: headers[this.ctx.data.lang][0] + '<br /><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>' } : {
+    let nameObj = ( drafts || !useSortableColumns ) ? { html: headers[this.ctx.data.lang][0] + '<br /><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>' } : {
         html: '<a href="'+nameLink+'">'+headers[this.ctx.data.lang][0]+'</a><span class="govuk-body-s">'+headers[this.ctx.data.lang][1]+'</span>',
         attributes: {
             'aria-sort': ( sortBy === 'name' ) ? sortDirection : 'none'
@@ -405,7 +455,7 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
 
     // Date
     let dateLink = ( sortBy === 'date' ) ? baseLink + '&sortBy=date&sortDirection=' + opposite : baseLink + '&sortBy=date&sortDirection=ascending';
-    let dateObj = ( drafts ) ? { text: headers[this.ctx.data.lang][2] } : {
+    let dateObj = ( drafts || !useSortableColumns ) ? { text: headers[this.ctx.data.lang][2] } : {
         html: '<a href="'+dateLink+'">'+headers[this.ctx.data.lang][2]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'date' ) ? sortDirection : 'none'
@@ -413,29 +463,44 @@ addFilter( 'getDashboardTableHead', function( content, sortBy, sortDirection, dr
     };
 
     // Action
-    let actionObj = { text: headers[this.ctx.data.lang][3] };
+    actionObj = { text: headers[this.ctx.data.lang][3] };
 
     // Status
     let statusLink = ( sortBy === 'status' ) ? baseLink + '&sortBy=status&sortDirection=' + opposite : baseLink + '&sortBy=status&sortDirection=ascending';
-    let statusObj = ( drafts ) ? { text: headers[this.ctx.data.lang][4] } : {
+    let statusObj = ( drafts || !useSortableColumns ) ? { text: headers[this.ctx.data.lang][4] } : {
         html: '<a href="'+statusLink+'">'+headers[this.ctx.data.lang][4]+'</a>',
         attributes: {
             'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
         }
     };
 
-    /*
-    let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
-        html: '<a href="'+statusLink+'">Status</a>',
-        attributes: {
-            'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
-        } 
-    };
-    */
+        /*
+        let statusObj = ( roleType === 'me' ) ? { text: 'Status' } : {
+            html: '<a href="'+statusLink+'">Status</a>',
+            attributes: {
+                'aria-sort': ( sortBy === 'status' ) ? sortDirection : 'none'
+            } 
+        };
+        */
 
     return [ nameObj, dateObj, actionObj, statusObj ];
 
 } );
+
+
+//
+// PROCESS STATUS FILTER
+// The single filter returns a string, the multiple an array, but the component only accepts a comma separated list...
+//
+addFilter( 'processStatusFilter', function( content ){
+    
+    // content = data.statusFilter
+   
+    return ( Array.isArray(content) ) ? content.join(',') : content;
+
+
+});
+
 
 //
 // SET DASHBOARD VARIABLES
@@ -463,11 +528,20 @@ addFilter( 'getDashboardTableRows', function( content ) {
    
     // content: patient data from 'data-patients.html'
 
-    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) ) ) ? parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
 
+    console.log( rowsPerPage );
+
     const searchTerm = ( this.ctx.data.searchTerm && this.ctx.data.searchTerm.trim().length > 2 ) ? this.ctx.data.searchTerm.trim() : '';
-    const statusFilter = ( this.ctx.data.statusFilter ) ? this.ctx.data.statusFilter : '';
+    let statusFilter = this.ctx.data.statusFilter;
+    if( typeof statusFilter === 'string' ){
+        statusFilter = ( !Number.isNaN(parseInt(statusFilter)) ) ? [statusFilter] : [];
+    } else if( Array.isArray(statusFilter) ) {
+        statusFilter = this.ctx.data.statusFilter.slice();
+    } else {
+        statusFilter = [];
+    }
     
     const sortBy = ( this.ctx.data.sortBy ) ? this.ctx.data.sortBy : 'date';
     const sortDirection = ( this.ctx.data.sortDirection ) ? this.ctx.data.sortDirection : 'descending';
@@ -523,7 +597,7 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     // content: blank string
 
-    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data.rowsPerPage) ) ) ? parseInt(this.ctx.data.rowsPerPage) : 10;
+    const rowsPerPage = ( Number.isInteger( parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) ) ) ? parseInt(this.ctx.data[this.ctx.settings].rowsPerPage) : 10;
     const currentPage = ( Number.isInteger( parseInt(this.ctx.data.currentPage) ) ) ? parseInt(this.ctx.data.currentPage) : 0;
     
     const noOfFilteredRows = ( Number.isInteger(this.ctx.data.noOfFilteredRows) ) ? this.ctx.data.noOfFilteredRows : 0;
@@ -533,6 +607,8 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
 
     if( noOfFilteredRows > rowsPerPage ){
 
+        let items = [];
+
         if( currentPage !== 0 ){
             obj.previous = { 'href' : '?currentPage='+(currentPage-1) }
         }
@@ -540,7 +616,6 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
             obj.next = { 'href' : '?currentPage='+(currentPage+1) }
         }
 
-        obj.items = [];
         for( let i = 0; i < noOfPages; i++ ){
 
             let itemObj = {'number': (i+1), 'href':'?currentPage='+i };
@@ -548,7 +623,15 @@ addFilter( 'getDashboardPaginationLinks', function( content ){
                 itemObj.current = true;
             }
 
-            obj.items.push( itemObj );
+            items.push( itemObj );
+
+        }
+
+        // Add ellipses if needed...
+        if( items.length > 6 ){
+            obj.items = dashboard.truncatePages(items,currentPage);
+        } else {
+            obj.items = items;
         }
 
     }
