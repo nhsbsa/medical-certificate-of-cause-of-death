@@ -522,7 +522,7 @@
                         Rwy'n arholwr meddygol a benodwyd yn briodol ac ar ôl craffu rwy'n cadarnhau bod achos y farwolaeth fel y nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a'm cred.
                     </dd>
                     </div>
-
+                    {% if data['role-type'] == 'ap' %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Authorisation date
@@ -538,7 +538,8 @@
                             24 Ebrill 2024
                         </dd>
                         </div>
-
+                        {% else %}
+                        {% endif %}
         </dl>
         </div> 
     </div>

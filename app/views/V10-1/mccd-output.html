@@ -384,6 +384,7 @@
                     I am a duly appointed medical examiner and following scrutiny I confirm that the cause of death is as stated in this certificate to the best of my knowledge and belief.
                 </dd>
                 </div>
+                {% if data['role-type'] == 'ap' %}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Authorisation date
@@ -392,7 +393,8 @@
                 24 April 2024
             </dd>
             </div>
-
+            {% else %}
+            {% endif %}
         </dl>
         </div>
     </div>
