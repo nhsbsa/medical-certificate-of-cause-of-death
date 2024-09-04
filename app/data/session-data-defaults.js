@@ -80,6 +80,12 @@ module.exports = {
     timeout: 30,
     rowsPerPage: 500,
 
+    validateTaskList: 'true',
+    validateCauseOfDeathScreen: 'true',
+    validateNeoNatalUnder24HoursAge: 'true',
+
+    nhsNumberAlreadyUsed: 'true',
+
     useSearch: 'false',
     useFilters: 'false',
     useMultipleFilters: 'false',
@@ -88,13 +94,7 @@ module.exports = {
     useEmbeddedFeedbackForm: 'false',
 
     showContactMethodScreen: 'false',
-    showExplanationOfStatuses: 'false',
-
-    validateTaskList: 'true',
-    validateCauseOfDeathScreen: 'true',
-    validateNeoNatalUnder24HoursAge: 'true',
-
-    nhsNumberAlreadyUsed: 'true'
+    showExplanationOfStatuses: 'false'
 
   },
 
@@ -102,6 +102,12 @@ module.exports = {
 
     timeout: 30,
     rowsPerPage: 20,
+
+    validateTaskList: 'true',
+    validateCauseOfDeathScreen: 'true',
+    validateNeoNatalUnder24HoursAge: 'true',
+
+    nhsNumberAlreadyUsed: 'true',
     
     useSearch: 'false',
     useFilters: 'false',
@@ -112,13 +118,9 @@ module.exports = {
 
     showContactMethodScreen: 'false',
     showExplanationOfStatuses: 'false',
-    showBilingual: 'true',
+    showBilingual: 'true'
     
-    validateTaskList: 'true',
-    validateCauseOfDeathScreen: 'true',
-    validateNeoNatalUnder24HoursAge: 'true',
-
-    nhsNumberAlreadyUsed: 'true'
+   
 
   },
   
