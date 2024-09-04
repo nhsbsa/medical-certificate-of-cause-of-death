@@ -5,16 +5,9 @@
 
 {% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
 
-{% block beforeContent %}
-
-{{ govukBackLink({
-    text: data.translations.globalBackLink[data.lang],
-    href: 'javascript:history.back()'
-}) }}
-
-{% endblock %}
 {% block content %}
 <main class="govuk-main-wrapper app-main-class" id="main-content">
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -26,7 +19,7 @@
                 {% set hintText = 'Following a review of this MCCD, a medical examiner officer or medical examiner may ask you to make an amendment.<br /><br />Enter an email address or phone number as your preferred method of contact.' %}
             {% endif %}
 
-            {{ govukInput({
+            {{ govukTextarea({
                     label: {
                         html: 'How do you want the medical examiner office to contact you?',
                         classes: 'govuk-label--l',
@@ -35,8 +28,7 @@
                     hint: { html: hintText },
                     id: 'contact-method',
                     name: 'contact-method',
-                    value: data['contact-method'],
-                    classes: 'govuk-input--width-10'
+                    value: data['contact-method']
                 }) }}
 
 

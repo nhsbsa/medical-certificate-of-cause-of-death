@@ -1,0 +1,283 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% block pageTitle %} Feature flags {% endblock %}
+
+{% block content %}
+
+<!-- TABLE -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-5">Version feature flags and settings</h1>
+
+        <style>
+            .govuk-table__cell .govuk-link { white-space: nowrap; }
+        </style>
+
+        <p class="govuk-body">Clear the prototype data first to view the version defaults accurately.</p>
+
+         {{ govukButton({
+            text: 'Clear data',
+            href: '/manage-prototype/clear-data'
+        }) }}
+
+        {{ govukDetails({
+            classes: 'govuk-!-margin-bottom-8',
+            summaryText: 'How to use query string variables',
+            html: '<p class="govuk-body">This prototype uses query string variables to trigger different functionality within the prototype.</p><p class="govuk-body">These are made up of key and value pairs, which are linked by an equals sign. For example, lang=en</p><p class="govuk-body">Multiple key/value pairs can be chained together with ampersands. For example, bilingual=true&lang=cy</p><p class="govuk-body">These chains are then added to the end of a URL with a question mark symbol to pass information to the prototype. For example, https://mccd-govuk.herokuapp.com/V11bi/?bilingual=true&lang=cy</p>'
+        }) }}
+
+
+        {% set v10FeatureFlagsHTML %}
+
+            <!-- V10 -->
+
+            {{ govukTable({
+            caption: 'V10 feature flags',
+            captionClasses: 'govuk-table__caption--m govuk-visually-hidden',
+            firstCellIsHeader: true,
+            head: [
+                { html: 'Name<br /><span class="govuk-body-s">Type</span>' },
+                { text: 'Default' },
+                { text: 'Description' },
+                { text: 'Example link' }
+            ],
+            rows: [
+                [
+                    { 'html' : 'timeout<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.timeout },
+                    { 'html' : '<span class="govuk-body-s">Number of minutes before the session times out. Appears in the warning text on the bottom of the index page.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/?V10[timeout]=15">?V10[timeout]=15</a>' }
+                ],
+                [
+                    { 'html' : 'rowsPerPage<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.rowsPerPage },
+                    { 'html' : '<span class="govuk-body-s">Sets the number of rows displayed on the dashboard for pagination. Setting to a higher number than the number of patient records will essentially switch off pagination.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=meo&V10[rowsPerPage]=5">?V10[rowsPerPage]=5</a>' }
+                ],
+                [
+                    { 'html' : 'validateTaskList<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.validateTaskList },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the MCCD tasklist page.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/mccd-tasklist?role-type=ap&V10[validateTaskList]=true">?V10[validateTaskList]=true</a>' }
+                ],
+                [
+                    { 'html' : 'validateCauseOfDeathScreen<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.validateCauseOfDeathScreen },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the Cause of death page (general path only).</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/cause-of-death?role-type=ap&over-under-28=no&V10[validateCauseOfDeathScreen]=true">?V10[validateCauseOfDeathScreen]=true</a>' }
+                ],
+                [
+                    { 'html' : 'validateNeoNatalUnder24HoursAge<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.validateNeoNatalUnder24HoursAge },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the neo-natal, under 24 hours route (hours and minutes entry).</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/neo-natal-deaths/deceased-persons-age?role-type=ap&over-under-28=yes&over-under-24=no&V10[validateNeoNatalUnder24HoursAge]=true">?V10[validateNeoNatalUnder24HoursAge]=true</a>' }
+                ],
+                [
+                    { 'html' : 'nhsNumberAlreadyUsed<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V10.nhsNumberAlreadyUsed },
+                    { 'html' : '<span class="govuk-body-s">Determines whether or not the "NHS number has already been used" screen appears.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/nhs-number?role-type=ap&V10[nhsNumberAlreadyUsed]=true">?V10[nhsNumberAlreadyUsed]=true</a>' }
+                ],
+
+
+
+                [
+                    { 'html' : 'useSearch<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useSearch },
+                    { 'html' : '<span class="govuk-body-s">Triggers the search bar on the dashboard. Search is programmed for name and NHS number.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=meo&V10[useSearch]=true">?V10[useSearch]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useFilters<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useFilters },
+                    { 'html' : '<span class="govuk-body-s">Triggers a simple filter that uses a select box on the dashboard. This allows the results to be filtered by a single status.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=meo&V10[useFilters]=true">?V10[useFilters]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useMultipleFilters<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useMultipleFilters },
+                    { 'html' : '<span class="govuk-body-s">Triggers a more complex filter that uses checkboxes on the dashboard. This allows the results to be filtered by multiple statuses.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=meo&V10[useMultipleFilters]=true">?V10[useMultipleFilters]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useSortableColumns<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useSortableColumns },
+                    { 'html' : '<span class="govuk-body-s">Allows the rows in the dashboard to be sorted by column header.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=meo&V10[useSortableColumns]=true">?V10[useSortableColumns]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useSeparateDraftsTable<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useSeparateDraftsTable },
+                    { 'html' : '<span class="govuk-body-s">When an AP or ME is using the dashboard, any MCCDs with "Draft" status are split out into a separate table.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=ap&V10[useSeparateDraftsTable]=true">?V10[useSeparateDraftsTable]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useEmbeddedFeedbackForm<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.useEmbeddedFeedbackForm },
+                    { 'html' : '<span class="govuk-body-s">Shows an embedded feedback form (rather than a link to the usual external NHS BSA survey) on confirmation pages.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/confirmation?role-type=ap&V10[useEmbeddedFeedbackForm]=true">?V10[useEmbeddedFeedbackForm]=true</a>' }
+                ],
+                [
+                    { 'html' : 'showContactMethodScreen<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.showContactMethodScreen },
+                    { 'html' : '<span class="govuk-body-s">Adds a screen for adding a prefered contact method to the onboarding flow. Requires more work on integration with various summary screens.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/auth/care-id-role?role-type=ap&V10[showContactMethodScreen]=true">?V10[showContactMethodScreen]=true</a>' }
+                ],
+                [
+                    { 'html' : 'showExplanationOfStatuses<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V10.showExplanationOfStatuses },
+                    { 'html' : '<span class="govuk-body-s">Shows a details component that opens to reveal an explanation of the statuses on the dashboard.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V10-1/dashboard?role-type=ap&V10[showExplanationOfStatuses]=true">?V10[showExplanationOfStatuses]=true</a>' }
+                ]
+            ]
+            }) }}
+
+        {% endset -%}
+
+
+
+
+
+        {% set v11FeatureFlagsHTML %}
+
+            <!-- V11 -->
+
+            {{ govukTable({
+            caption: 'V11 feature flags',
+            captionClasses: 'govuk-table__caption--m govuk-visually-hidden',
+            firstCellIsHeader: true,
+            head: [
+                { html: 'Name<br /><span class="govuk-body-s">Type</span>' },
+                { text: 'Default' },
+                { text: 'Description' },
+                { text: 'Example link' }
+            ],
+            rows: [
+                [
+                    { 'html' : 'timeout<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.timeout },
+                    { 'html' : '<span class="govuk-body-s">Number of minutes before the session times out. Appears in the warning text on the bottom of the index page.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/?V11[timeout]=15">?V11[timeout]=15</a>' }
+                ],
+                [
+                    { 'html' : 'rowsPerPage<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.rowsPerPage },
+                    { 'html' : '<span class="govuk-body-s">Sets the number of rows displayed on the dashboard for pagination. Setting to a higher number than the number of patient records will essentially switch off pagination.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=meo&V11[rowsPerPage]=5">?V11[rowsPerPage]=5</a>' }
+                ],
+                [
+                    { 'html' : 'validateTaskList<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.validateTaskList },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the MCCD tasklist page.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/mccd-tasklist?role-type=ap&V11[validateTaskList]=true">?V11[validateTaskList]=true</a>' }
+                ],
+                [
+                    { 'html' : 'validateCauseOfDeathScreen<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.validateCauseOfDeathScreen },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the Cause of death page (general path only).</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/cause-of-death?role-type=ap&over-under-28=dpd66Or65RadioNo&V11[validateCauseOfDeathScreen]=true">?V11[validateCauseOfDeathScreen]=true</a>' }
+                ],
+                [
+                    { 'html' : 'validateNeoNatalUnder24HoursAge<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.validateNeoNatalUnder24HoursAge },
+                    { 'html' : '<span class="govuk-body-s">Enables the valdiation on the neo-natal, under 24 hours route (hours and minutes entry).</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/neo-natal-deaths/deceased-persons-age?role-type=ap&over-under-28=dpd66Or65RadioYes&over-under-24=globalRadioNo&V11[validateNeoNatalUnder24HoursAge]=true">?V11[validateNeoNatalUnder24HoursAge]=true</a>' }
+                ],
+                [
+                    { 'html' : 'nhsNumberAlreadyUsed<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.nhsNumberAlreadyUsed },
+                    { 'html' : '<span class="govuk-body-s">Determines whether or not the "NHS number has already been used" screen appears.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/nhs-number?role-type=ap&V11[nhsNumberAlreadyUsed]=true">?V11[nhsNumberAlreadyUsed]=true</a>' }
+                ],
+                [
+                    { 'html' : 'showBilingual<br /><span class="govuk-body-s">Setting</span>' },
+                    { 'text' : data.V11.showBilingual },
+                    { 'html' : '<span class="govuk-body-s">Allows bilingual mode to be set by the user from the index page.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/?V11[showBilingual]=true">?V11[showBilingual]=true</a>' }
+                ],
+
+
+
+                [
+                    { 'html' : 'useSearch<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useSearch },
+                    { 'html' : '<span class="govuk-body-s">Triggers the search bar on the dashboard. Search is programmed for name and NHS number.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=meo&V11[useSearch]=true">?V11[useSearch]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useFilters<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useFilters },
+                    { 'html' : '<span class="govuk-body-s">Triggers a simple filter that uses a select box on the dashboard. This allows the results to be filtered by a single status.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=meo&V11[useFilters]=true">?V11[useFilters]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useMultipleFilters<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useMultipleFilters },
+                    { 'html' : '<span class="govuk-body-s">Triggers a more complex filter that uses checkboxes on the dashboard. This allows the results to be filtered by multiple statuses.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=meo&V11[useMultipleFilters]=true">?V11[useMultipleFilters]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useSortableColumns<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useSortableColumns },
+                    { 'html' : '<span class="govuk-body-s">Allows the rows in the dashboard to be sorted by column header.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=meo&V11[useSortableColumns]=true">?V11[useSortableColumns]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useSeparateDraftsTable<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useSeparateDraftsTable },
+                    { 'html' : '<span class="govuk-body-s">When an AP or ME is using the dashboard, any MCCDs with "Draft" status are split out into a separate table.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=ap&V11[useSeparateDraftsTable]=true">?V11[useSeparateDraftsTable]=true</a>' }
+                ],
+                [
+                    { 'html' : 'useEmbeddedFeedbackForm<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.useEmbeddedFeedbackForm },
+                    { 'html' : '<span class="govuk-body-s">Shows an embedded feedback form (rather than a link to the usual external NHS BSA survey) on confirmation pages.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/confirmation?role-type=ap&V11[useEmbeddedFeedbackForm]=true">?V11[useEmbeddedFeedbackForm]=true</a>' }
+                ],
+                [
+                    { 'html' : 'showContactMethodScreen<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.showContactMethodScreen },
+                    { 'html' : '<span class="govuk-body-s">Adds a screen for adding a prefered contact method to the onboarding flow. Requires more work on integration with various summary screens.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/auth/care-id-role?role-type=ap&V11[showContactMethodScreen]=true">?V11[showContactMethodScreen]=true</a>' }
+                ],
+                [
+                    { 'html' : 'showExplanationOfStatuses<br /><span class="govuk-body-s">Feature</span>' },
+                    { 'text' : data.V11.showExplanationOfStatuses },
+                    { 'html' : '<span class="govuk-body-s">Shows a details component that opens to reveal an explanation of the statuses on the dashboard.</span>' },
+                    { 'html' : '<a class="govuk-link govuk-body-s" href="V11bi/dashboard?role-type=ap&V11[showExplanationOfStatuses]=true">?V11[showExplanationOfStatuses]=true</a>' }
+                ]
+            ]
+            }) }}
+
+        {% endset -%}
+
+
+
+        <!-- TABS -->
+        {{ govukTabs({
+            items: [
+                {
+                label: 'V10',
+                id: 'V10',
+                panel: {
+                    html: v10FeatureFlagsHTML
+                }
+                },
+                {
+                label: 'V11',
+                id: 'V11',
+                panel: {
+                    html: v11FeatureFlagsHTML
+                }
+                }
+            ]    
+        }) }}
+
+
+        
+
+    </div>
+</div>
+
+{% endblock %}
