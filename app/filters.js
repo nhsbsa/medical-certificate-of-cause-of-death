@@ -664,8 +664,63 @@ addFilter( 'getPatientDataByID', function( content, id ){
 
 } );
 
+
+//
+// GET CAUSE OF DEATH AND DURATION
+// Generates a random duration between onset and death for a cause of death and returns formatted html
+//
+addFilter( 'getCauseOfDeathAndDuration', function( content, id ){
+
+    // content: a string from the patient data, may or may not be blank
+
+    const units = ['hours','minutes','days','months','years','unknown'];
+    let unit = units[Math.round(Math.random()*(units.length-1))];
+
+    let duration = 0;
+
+    switch( unit ){
+        case 'hours':
+            duration = Math.round(Math.random()*23)+1; 
+            break;
+
+        case 'minutes':
+            duration = Math.round(Math.random()*55)+5;
+            break;
+
+        case 'days':
+            duration = Math.round(Math.random()*29)+1;
+            break;
+
+        case 'months':
+            duration = Math.round(Math.random()*11)+1;
+            break;
+
+        case 'years':
+            duration = Math.round(Math.random()*2)+1;
+            break;
+
+        default:
+            duration = 0;
+            unit = 'Unknown time';
+            break;
+    }
+
+    if( duration === 1 ){
+        unit = unit.substring(0,unit.length-1);
+    }
+
+    duration = ( duration === 0 ) ? unit : duration + ' ' + unit;
+    
+    const html = ( content ) ? '<div class="govuk-grid-column-one-half">' + content + '</div><div class="govuk-grid-column-one-half">' + duration + ' between onset and death</div>' : '';
+    
+    return html;
+
+} );
+
+
 //
 // GET STATUS TAG
+// Returns the html for a status tag set in the dashboard.js
 //
 addFilter( 'getStatusTag', function( content ){
 
@@ -684,6 +739,7 @@ addFilter( 'getStatusTag', function( content ){
 
 //
 // GET STATUS EXPLANATION ROWS
+// Returns the rows used in the status explanations feature
 //
 addFilter('getStatusExplanationRows', function(content) {
 
