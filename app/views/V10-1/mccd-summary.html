@@ -233,6 +233,36 @@ ______                                 _  ______     _        _ _
 
             -->
 
+            <style>
+
+                .govuk-summary-list__row > .govuk-summary-list__key,
+                .govuk-summary-list__row > .govuk-summary-list__actions {
+                    vertical-align: top;
+                }
+
+                .govuk-summary-list__value .govuk-grid-column-one-half {
+                    padding-left: 0;
+                }
+
+                @media all and ( max-width: 40.0625rem ){
+
+                    .govuk-summary-list__value .govuk-grid-column-one-half {
+                        margin-top: 10px;
+                        display: block;
+                    }
+
+                }
+
+                @media all and ( min-width: 40.0625rem ){
+
+                    .govuk-summary-list__row > .govuk-summary-list__actions {
+                        width: 100px;
+                    }
+
+                }
+
+            </style>
+
 
             {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) %}
 
@@ -271,11 +301,11 @@ ______                                 _  ______     _        _ _
                             title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
                         },
                         rows: [
-                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: patient.causeOfDeath.1a }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: patient.causeOfDeath.1b }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: patient.causeOfDeath.1c }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: patient.causeOfDeath.1d }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
-                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: patient.causeOfDeath.1e }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { html: patient.causeOfDeath.1a | getCauseOfDeathAndDuration }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { html: patient.causeOfDeath.1b | getCauseOfDeathAndDuration }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { html: patient.causeOfDeath.1c | getCauseOfDeathAndDuration }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { html: patient.causeOfDeath.1d | getCauseOfDeathAndDuration }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { html: patient.causeOfDeath.1e | getCauseOfDeathAndDuration }, actions: { items: [{ href: patient | getCauseOfDeathLink, text: 'Change', visuallyHiddenText: 'cause of death' }] } },
                             {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'caused-by-employment', text: 'Change', visuallyHiddenText: 'whether employment affected the death' }] } },
                             {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } },
                             {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'pregnancy-contributed', text: 'Change', visuallyHiddenText: 'whether the pregnancy contributed to the death' }] } }
@@ -317,11 +347,11 @@ ______                                 _  ______     _        _ _
                             title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
                         },
                         rows: [
-                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { text: patient.causeOfDeath.1a } },
-                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { text: patient.causeOfDeath.1b } },
-                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { text: patient.causeOfDeath.1c } },
-                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { text: patient.causeOfDeath.1d } },
-                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { text: patient.causeOfDeath.1e } },
+                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { html: patient.causeOfDeath.1a | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { html: patient.causeOfDeath.1b | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { html: patient.causeOfDeath.1c | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { html: patient.causeOfDeath.1d | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { html: patient.causeOfDeath.1e | getCauseOfDeathAndDuration } },
                             {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: '' } },
                             {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: '' } },
                             {  key: { text: data.translations.CYAcodO28PregnancyContributed[data.lang] }, value: { text: '' } }
@@ -495,7 +525,7 @@ ______                                 _  ______     _        _ _
                         <div class="govuk-button-group">
 
                             {{ govukButton({
-                            text: data.translations.meoDeclarationSubmitForScrutiny[data.lang]
+                            text: data.translations.meoDeclarationSubmitForScrutinyCTA[data.lang]
                             }) }}
 
                             {{ govukButton({
