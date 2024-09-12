@@ -160,23 +160,32 @@ ______                                 _  ______     _        _ _
                 -->
 
                 <!-- DECEASED PERSONS DETAILS -->
+
+                {% set dpdRows = [
+                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo }, actions: { items: [{ href: 'nhs-number', text: 'Change', visuallyHiddenText: 'NHS number' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name }, actions: { items: [{ href: 'name-of-the-deceased', text: 'Change', visuallyHiddenText: 'name' }] } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } }
+                    ] %}
+
                 
+                {% if patient.isNeoNatal === true %}
+                    {% set dpdRows = ( dpdRows.push({  key: { text: data.translations.dpdCheckAnswersBirthLocation[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'neo-natal-deaths/location-born', text: 'Change', visuallyHiddenText: 'place of birth' }] } }), dpdRows ) %}
+                {% endif %}
+
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } } ), dpdRows ) %}
 
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] },
                         classes: 'govuk-!-margin-top-9'
                     },
-                    rows: [
-                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo }, actions: { items: [{ href: 'nhs-number', text: 'Change', visuallyHiddenText: 'NHS number' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name }, actions: { items: [{ href: 'name-of-the-deceased', text: 'Change', visuallyHiddenText: 'name' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'date-of-birth', text: 'Change', visuallyHiddenText: 'date of birth' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age }, actions: { items: [{ href: 'age-66', text: 'Change', visuallyHiddenText: 'age' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: 'Change', visuallyHiddenText: 'ethnicity' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath }, actions: { items: [{ href: 'date-of-death', text: 'Change', visuallyHiddenText: 'date of death' }] } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath }, actions: { items: [{ href: 'unknown-address', text: 'Change', visuallyHiddenText: 'place of death' }] } }
-                    ]
+                    rows: dpdRows
                 }) }}
+
+
 
 
                     {% set aadRows = [
@@ -187,10 +196,8 @@ ______                                 _  ______     _        _ _
                     ] %}
 
                     {% if patient.certificateType === 'me' %}
-
                         {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'death-circumstances', text: 'Change', visuallyHiddenText: 'referring medical practitioner' }] } }), aadRows ) %}
                         {% set aadRows = ( aadRows.push({  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'implant', text: 'Change', visuallyHiddenText: 'senior coroner' }] } }), aadRows ) %}
-
                     {% endif %}
 
                 <!-- ACTIONS AFTER DEATH -->
@@ -211,21 +218,32 @@ ______                                 _  ______     _        _ _
                 -->
 
                 <!-- DECEASED PERSONS DETAILS -->
+
+                {% set dpdRows = [
+                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo } },
+                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name } },
+                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' } }
+                    ] %}
+
+                {% if patient.isNeoNatal === true %}
+                    {% set dpdRows = ( dpdRows.push({  key: { text: data.translations.dpdCheckAnswersBirthLocation[data.lang] }, value: { text: '' } }), dpdRows ) %}
+                {% endif %}
+
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } } ), dpdRows ) %}
+                {% set dpdRows = ( dpdRows.push( {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } } ), dpdRows ) %}
+
                 {{ govukSummaryList({
                     card: {
                         title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] },
                         classes: 'govuk-!-margin-top-9'
                     },
-                    rows: [
-                        {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: patient.nhsNo } },
-                        {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: patient.name } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: patient.age } },
-                        {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: '' } },
-                        {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: patient.dateOfDeath } },
-                        {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: patient.placeOfDeath } }
-                    ]
+                    rows: dpdRows
                 }) }}
+
+
+
 
                 {% set aadRows = [
                         {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: '' } },
@@ -451,16 +469,15 @@ ______                                 _  ______     _        _ _
 
                 <!-- MEDICAL EXAMINERS DETAILS -->
                 {{ govukSummaryList({
-                card: {
-                    title: { text: data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] }
-                },
-                rows: [
-                        { key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Alan Jakobsen' } },
-                        {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '6367472' } },
-                        {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
-                    ]
-
-            }) }}
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] }
+                    },
+                    rows: [
+                            { key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Alan Jakobsen' } },
+                            {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '6367472' } },
+                            {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
+                        ]
+                }) }}
 
 
             {% endif %}
