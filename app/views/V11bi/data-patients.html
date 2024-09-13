@@ -144,7 +144,7 @@
     //
 
     const textArea = document.querySelector('#patient-data');
-    const json = JSON.parse(textArea.innerHTML);
+    let json = JSON.parse(textArea.innerHTML);
 
     const _generateNHSNumber = function () {
 
@@ -176,9 +176,11 @@
       return result;
     }
 
+    console.log(  _generateReferenceNumber() );
+
     // Update the data
     // CLEARING UNTIL NEEDED
-    json = {};
+    json = [];
     
     json.forEach(function (row) {
 

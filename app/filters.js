@@ -673,45 +673,60 @@ addFilter( 'getCauseOfDeathAndDuration', function( content, id ){
 
     // content: a string from the patient data, may or may not be blank
 
-    const units = ['hours','minutes','days','months','years','unknown'];
-    let unit = units[Math.round(Math.random()*(units.length-1))];
+    const units = {
+        'en': ['hours','minutes','days','months','years','unknown'],
+        'cy': ['awr','munud','diwrnod','mis','blynedd','unknown']
+    }
+
+    const singleUnitsWelsh = ['awr','munud','dydd','mis','blwyddyn'];
+
+    const lang = this.ctx.data.lang;
+    const num = Math.round(Math.random()*(units.en.length-1));
+
+    let unit = units[lang][num];
 
     let duration = 0;
 
-    switch( unit ){
-        case 'hours':
+    switch( num ){
+        case 0:
             duration = Math.round(Math.random()*23)+1; 
             break;
 
-        case 'minutes':
+        case 1:
             duration = Math.round(Math.random()*55)+5;
             break;
 
-        case 'days':
+        case 2:
             duration = Math.round(Math.random()*29)+1;
             break;
 
-        case 'months':
+        case 3:
             duration = Math.round(Math.random()*11)+1;
             break;
 
-        case 'years':
+        case 4:
             duration = Math.round(Math.random()*2)+1;
             break;
 
         default:
             duration = 0;
-            unit = 'Unknown time';
+            unit = ( lang === 'cy' ) ? 'Amser anhysbys' : 'Unknown time';
             break;
     }
 
     if( duration === 1 ){
-        unit = unit.substring(0,unit.length-1);
+        if( lang === 'cy' ){
+            unit = singleUnitsWelsh[num];
+        } else {
+            unit = unit.substring(0,unit.length-1);
+        }
+        
     }
 
     duration = ( duration === 0 ) ? unit : duration + ' ' + unit;
-    
-    const html = ( content ) ? '<div class="govuk-grid-column-one-half">' + content + '</div><div class="govuk-grid-column-one-half">' + duration + ' between onset and death</div>' : '';
+
+    const onsetAndDeath = ( lang === 'cy' ) ? 'rhwng dechrau a marwolaeth' : 'between onset and death';
+    const html = ( content ) ? '<div class="govuk-grid-column-one-half">' + content + '</div><div class="govuk-grid-column-one-half">' + duration + ' ' + onsetAndDeath + '</div>' : '';
     
     return html;
 
