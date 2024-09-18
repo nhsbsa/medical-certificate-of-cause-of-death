@@ -118,9 +118,9 @@ module.exports = {
 
     showContactMethodScreen: 'false',
     showExplanationOfStatuses: 'false',
-    showBilingual: 'true'
-    
-   
+
+    showBilingualService: 'true',
+    hasUsedBilingualService: 'true'
 
   },
   
