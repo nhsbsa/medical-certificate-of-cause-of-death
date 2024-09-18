@@ -16,6 +16,11 @@
 
         <p class="govuk-hint">Version: {{ data.translations.globalTranslationsID[data.lang] }}</p>
 
+        {{ govukWarningText({
+            text: 'The translations currently used in this prototype are sourced from Google Translate and used as crude placeholders. They are not intended for production.',
+            iconFallbackText: 'Warning'
+        }) }}
+
          {{ govukButton({
             text: 'Clear data',
             href: '/manage-prototype/clear-data'
