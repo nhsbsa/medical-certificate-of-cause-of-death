@@ -16,7 +16,7 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-        {% if data[settings].showBilingual === 'true' %}
+        {% if data[settings].showBilingualService === 'true' %}
 
             <!-- BILINGUAL COPY -->
             {% if data.lang === 'cy' %}
@@ -90,7 +90,7 @@
 
                 <p class="govuk-body">Use this digital MCCD to create or complete a Medical certificate of cause of death (MCCD). It is to be used for adults, children, and infants dying within the first 28 days of life.</p>
 
-                <div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&lang=cy">bilingual service in Welsh and English</a>.</div>
+                <div class="govuk-inset-text">This service is available in Wales as a <a href="?bilingual=true&hasUsedBilingualService=true&lang=cy">bilingual service in Welsh and English</a>.</div>
 
                 <p class="govuk-body">An MCCD is required to register all non-coronial deaths in England and Wales.</p>
 
@@ -151,7 +151,7 @@
                     </strong>
                 </div>
 
-                <a href="auth/care-id-select?lang=en" class="nhslogin-button">Sign in with Care ID</a>
+                <a href="auth/care-id-select" class="nhslogin-button">Sign in with Care ID</a>
 
 
                 <!--    Until we have an alternative authentication method for sign in, only
@@ -242,7 +242,7 @@
                 </strong>
             </div>
 
-            <a href="auth/care-id-select?lang=en" class="nhslogin-button">Log in with my Care Identity</a>
+            <a href="auth/care-id-select" class="nhslogin-button">Log in with my Care Identity</a>
 
 
             <!--    Until we have an alternative authentication method for sign in, only

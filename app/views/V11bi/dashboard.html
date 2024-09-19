@@ -55,6 +55,8 @@
         
   {% endif %}
 
+
+
 </div>
 
   {% if data['role-type'] == 'ap' or data['role-type'] == 'me' %}
@@ -80,7 +82,38 @@
 
       {% endif %}
 
+
+
+      {% if data.bilingual === 'true' %}
+
+          <!-- USING BILINGUAL ROUTE -->
+          {{ govukWarningText({
+            html: '<p class="govuk-body govuk-body-s">' + data.translations.dashboardToggleBilingual[data.lang] + '</p><p class="govuk-body govuk-body-s"><a class="govuk-link" href="?bilingual=false&lang=en">' + data.translations.dashboardToggleBilingualLink[data.lang] + '</a></p>',
+            iconFallbackText: 'Warning'
+          }) }}
+
+        {% else %}
+
+          {% if data[settings].hasUsedBilingualService === 'true' %}
+            <!-- USING MONOLINGUAL ROUTE -->
+            {{ govukWarningText({
+              html: '<p class="govuk-body govuk-body-s">' + data.translations.dashboardToggleMonolingual[data.lang] + '</p><p class="govuk-body govuk-body-s"><a class="govuk-link" href="?bilingual=true&V11[hasUsedBilingualService]=true&lang=cy">' + data.translations.dashboardToggleMonolingualLink[data.lang] + '</a></p>',
+              iconFallbackText: 'Warning'
+            }) }}
+          {% endif %}
+
+        {% endif %}
+
+
     </div>
+
+  {% else %}
+
+    <!-- MEO -->
+    {% if data[settings].hasUsedBilingualService === 'true' %}
+
+    {% endif %}
+  
   {% endif %}
 
  </div>

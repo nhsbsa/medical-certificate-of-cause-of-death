@@ -104,7 +104,7 @@
 
 
     <!-- BILINGUAL TOGGLE -->
-    {% if data['bilingual'] == "true" %}
+    {% if data['bilingual'] === 'true' or ( data['role-type'] === 'meo' and data[settings].hasUsedBilingualService === 'true' ) %}
     <div class="govuk-width-container">
       <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
