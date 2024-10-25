@@ -28,7 +28,7 @@ function _setDashboardVariables( roleType, settings, lang, debug ){
 //
 function _getAmendsNotSubmittedFlag(){
 
-    let flag = ( _lang === 'cy' ) ? 'Newidiadau heb eu cyflwyno' : 'Amends not submitted';
+    let flag = ( _lang === 'cy' ) ? 'Diwygiadau heb eu cyflwyno' : 'Amends not submitted';
  
     let tag = '<span class="govuk-tag govuk-tag--red govuk-!-margin-right-2">'+flag+'</span>';
 
@@ -73,10 +73,10 @@ function _getStatuses( num, returnType, settings ){
     ];
     values.V10.statuses.cy = [
         'Drafft',
-        'Ar gyfer adolygiad swyddogion',
-        'I\'w diwygio',
-        'Ar gyfer cofrestru gan arholwr meddygol',
-        'Adolygiad cyflawn - anfonwch at y swyddfa Gofrestru',
+        'I\'w adolygu gan swyddogion',
+        'I\'w ddiwygio',
+        'I\'w gymeradwyo gan archwiliwr meddygol',
+        'Adolygiad wedi\'i gwblhau - anfon i\'r swyddfa gofrestru',
         'Cyflwynwyd i\'r swyddfa gofrestru'
     ];
 
@@ -137,11 +137,11 @@ function _getStatuses( num, returnType, settings ){
         'The MCCD has been sent to the local register office.'
     ];
     values.V10.explanations.cy = [
-        'Nid yw\'r MCCD wedi\'i gyflwyno.',
-        'Mae ymarferydd sy\'n mynychu wedi cyflwyno\'r MCCD ac mae wedi\'i basio i swyddfa arholwr meddygol i\'w hadolygu gan swyddog arholwr meddygol.',
-        'Mae arholwr meddygol wedi adolygu\'r MCCD ac yn ei gwneud yn ofynnol i\'r ymarferydd sy\'n mynychu wneud newidiadau.',
-        'Mae\'r MCCD yn gofyn am graffu gan arholwr meddygol.',
-        'Mae\'r MCCD yn barod i gael ei anfon i\'r swyddfa gofrestru leol gan swyddog arholwr meddygol.',
+        'Nid yw\'r MCCD wedi cael ei gyflwyno.',
+        'Mae ymarferydd sy\'n mynychu wedi cyflwyno\'r MCCD ac mae wedi\'i drosglwyddo i swyddfa archwiliwr meddygol i\'w adolygu gan swyddog archwilio meddygol.',
+        'Mae archwiliwr meddygol wedi adolygu\'r MCCD ac yn ei wneud yn ofynnol i\'r ymarferydd sy\'n mynychu wneud newidiadau.',
+        'Mae angen i archwiliwr meddygol graffu ar yr MCCD.',
+        'Mae\'r MCCD yn barod i gael ei anfon i\'r swyddfa gofrestru leol gan swyddog archwilio meddygol.',
         'Mae\'r MCCD wedi cael ei anfon i\'r swyddfa gofrestru leol.'
     ];
 
@@ -374,11 +374,11 @@ function _getActionForStatus( status, id ){
         },
         me: {
             en: ['Finish certificate','XXX certificate','XXX certificate','Review certificate','View certificate','View certificate'],
-            cy: ['Tystysgrif gorffen','XXX certificate','XXX certificate','Tystysgrif adolygu','Gweld tystysgrif','Gweld tystysgrif']
+            cy: ['Tystysgrif gorffen','XXX certificate','XXX certificate','Adolygu tystysgrif','Gweld tystysgrif','Gweld tystysgrif']
         },
         meo: {
             en: ['XXX certificate','Review certificate','View certificate','View certificate','Download certificate','View certificate'],
-            cy: ['XXX certificate','Tystysgrif adolygu','Gweld tystysgrif','Gweld tystysgrif','Lawrlwytho tystysgrif','Gweld tystysgrif']
+            cy: ['XXX certificate','Adolygu tystysgrif','Gweld tystysgrif','Gweld tystysgrif','Lawrlwytho tystysgrif','Gweld tystysgrif']
         }
     }
 
@@ -391,7 +391,7 @@ function _getActionForStatus( status, id ){
 
         // Amends not submitted
         case -1:
-            let linkText = ( _lang === 'cy' ) ? 'Cyflwyno newidiadau' : 'Submit amends';
+            let linkText = ( _lang === 'cy' ) ? 'Cyflwyno gwelliannau' : 'Submit amends';
             html = '<a class="govuk-link" href="submit-amends?id='+id+'">'+linkText+'</a>';
             break;
 
@@ -459,7 +459,7 @@ function _getRow( patient ){
 function _translateDate( date ){
 
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const monthsWelsh = ['Anhysbys','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr'];
+    const monthsWelsh = ['Ionawr','Chwefror','Mawrth','Ebrill','Mai','Mehefin','Gorffennaf','Awst','Medi','Hydref','Tachwedd','Rhagfyr'];
 
     if( _lang === 'cy' ){
         months.forEach(function( month, i ){

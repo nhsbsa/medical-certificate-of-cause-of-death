@@ -387,9 +387,9 @@ addFilter( 'getDashboardCaption', function( content ){
 
         if( isNHSNumber ){
             if( spaceLessSearchTerm.length === 10 ){
-                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau gyda rhif GIG "'+searchTerm+'"' : 'Certificates with NHS number "'+searchTerm+'"';
+                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau â rhif GIG "'+searchTerm+'"' : 'Certificates with NHS number "'+searchTerm+'"';
             } else {
-                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau gyda rhif GIG sy\'n dechrau gyda "'+searchTerm+'"' : 'Certificates with NHS number beginning with "'+searchTerm+'"';
+                caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau â rhif GIG sy\'n dechrau gyda "'+searchTerm+'"' : 'Certificates with NHS number beginning with "'+searchTerm+'"';
             }
         } else {
             caption = ( this.ctx.data.lang === 'cy' ) ? 'Tystysgrifau sy\'n cynnwys "'+searchTerm+'"' : 'Certificates containing "'+searchTerm+'"';
@@ -410,7 +410,7 @@ addFilter( 'getDashboardCaption', function( content ){
         });
 
         if( this.ctx.data.lang === 'cy' ){
-            caption += ( statusesArr.length > 1 ) ? ' gyda statwsau "' +  statusesArr.join(', ') + '"' : ' gyda statws "' +  statusesArr.join(', ') + '"';
+            caption += ( statusesArr.length > 1 ) ? ' â statwsau "' +  statusesArr.join(', ') + '"' : ' â statws "' +  statusesArr.join(', ') + '"';
         } else {
             caption += ( statusesArr.length > 1 ) ? ' with statuses "' + statusesArr.join(', ') + '"' : ' with status "' + statusesArr.join(', ') + '"';
         }
@@ -566,7 +566,7 @@ addFilter( 'getDashboardTableRows', function( content ) {
     // If rows is empty, display an error message
     if( rows.length === 0 ){
 
-        const noCertificatesFound = ( this.ctx.data.lang === 'cy' ) ? 'Dim tystysgrifau wedi\'u canfod' : 'No certificates found';
+        const noCertificatesFound = ( this.ctx.data.lang === 'cy' ) ? 'Heb ganfod tystysgrifau' : 'No certificates found';
 
         rows.push( [{ html:'<span class="govuk-body">'+noCertificatesFound+'</span>', colspan: 5}] );
     }
