@@ -24,12 +24,14 @@ function _getTranslations(){
           if( i > 0 ){
             if( row.B && row.B.trim() !== '' ){
 
-              // English
-              let en = ( row.C && row.C.trim() !== '' ) ? row.C : '[English missing]';
+              // Englis
+              let enRow = row.C;
+              let en = ( enRow && enRow.trim() !== '' ) ? enRow : '[English missing]';
               en = en.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
               // Welsh
-              let cy = ( row.E && row.E.trim() !== '' ) ? row.E : '[Welsh missing]';
+              let cyRow = row.F;
+              let cy = ( cyRow && cyRow.trim() !== '' ) ? cyRow : '[Welsh missing]';
               cy = cy.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
               let obj = { en: en };
