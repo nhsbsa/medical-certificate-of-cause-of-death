@@ -6,25 +6,18 @@
 <!-- <main class="govuk-main-wrapper app-main-class" id="main-content"> -->
 <div class="govuk-grid-row">
 <div class="govuk-grid-column-two-thirds">
-    <span class="govuk-caption-l">Tystysgrif Feddygol o Achos Marwolaeth</span>
-    <h1 class="govuk-heading-l">Medical certificate of cause of death (MCCD)</h1>
+      <span class="govuk-caption-l">{{ data.translations.mccdTasklistPageTitle.cy }}</span>
+    <h1 class="govuk-heading-l">{{ data.translations.mccdTasklistPageTitle.en }}</h1>
     <div class="mccd-output-details">
         <ul style="padding-left: 0;">
-        <li class="mccd-output-details__header">Certificate type</li>  
-        {% if data['role-type'] == 'me' %}
-        {% if data['over-under-28'] == 'yes' %}  
-        <li class="mccd-output-details__data">65 ME</li>
+        <li class="mccd-output-details__header">{{ data.translations.globalCertificateType.en }}</li>  
+        
+       
+        {% if data['over-under-28'] === 'yes' %}  
+        <li class="mccd-output-details__data">65AP</li>
         {% else %}
-        <li class="mccd-output-details__data">66 ME</li>
+        <li class="mccd-output-details__data">66AP</li>
         {% endif %}
-    {% endif %}
-    {% if data['role-type'] == 'ap' %}
-        {% if data['over-under-28'] == 'yes' %}  
-        <li class="mccd-output-details__data">65 AP</li>
-        {% else %}
-        <li class="mccd-output-details__data">66 AP</li>
-        {% endif %}
-    {% endif %}
         </ul>
     </div>
     <div class="mccd-output-details">
@@ -38,21 +31,16 @@
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-            Deceased person's details<br>
-            <span class="govuk-body">
-                Manylion y person sydd wedi marw
-            </span>
+            {{ data.translations.dpdCheckAnswersTitleCaption.en }}<br>
+            <span class="govuk-body">{{ data.translations.dpdCheckAnswersTitleCaption.cy }}</span>
         </h2>
         </div>
         <div class="govuk-summary-card__content">
           <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                Full name
-                <br>
-                <span class="govuk-body">
-                    Enw llawn
-                </span>
+                {{ data.translations.dpdConfirmDetailsFullName.en }}<br>
+                <span class="govuk-body">{{ data.translations.dpdConfirmDetailsFullName.cy }}</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 Owen Arwel Jones
@@ -63,11 +51,8 @@
             </div>
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                Date of death
-                <br>
-                <span class="govuk-body">
-                    Dyddiad marwolaeth
-                </span>
+               {{ data.translations.dpdCheckAnswersDoD.en }}<br>
+                <span class="govuk-body">{{ data.translations.dpdCheckAnswersDoD.cy }}</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 3 June 2024
@@ -78,11 +63,8 @@
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Place of death
-                    <br>
-                    <span class="govuk-body">
-                        Man marwolaeth
-                    </span>
+                    {{ data.translations.dpdCheckAnswersDeathLocation.en }}<br>
+                    <span class="govuk-body">{{ data.translations.dpdCheckAnswersDeathLocation.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Ysbyty Cwm Rhondda Hospital, Llwynypia, Tonypandy CF40 2LX                </dd>
@@ -91,11 +73,8 @@
                 </div>
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                Date of birth
-                <br>
-                <span class="govuk-body">
-                    Dyddiad geni
-                </span>
+                {{ data.translations.dpdCheckAnswersDoB.en }}<br>
+                <span class="govuk-body">{{ data.translations.dpdCheckAnswersDoB.cy }}</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 5 January 2000
@@ -106,11 +85,8 @@
             </div>
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                Age
-                <br>
-                <span class="govuk-body">
-                    Oed
-                </span>
+                {{ data.translations.dpdCheckAnswersAgeAtDeath.en }}<br>
+                <span class="govuk-body">{{ data.translations.dpdCheckAnswersAgeAtDeath.cy }}</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 24 years old
@@ -125,22 +101,16 @@
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-            Medical details
-            <br>
-            <span class="govuk-body">
-                Manylion meddygol
-            </span>
+            Medical details<br>
+            <span class="govuk-body">Manylion meddygol</span>
         </h2>
         </div>
         <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                MCCD unique identifier
-                <br>
-                <span class="govuk-body">
-                    Tystysgrif dynodwr unigryw
-                </span>
+                MCCD unique identifier<br>
+                <span class="govuk-body">Tystysgrif dynodwr unigryw</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 AEPKWYOMX4-24
@@ -151,17 +121,14 @@
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Post-mortem held?
-                    <br>
-                    <span class="govuk-body">
-                        Cynhaliwyd post-mortem?
-                    </span>
+                    {{ data.translations.pmPageTitle.en }}<br>
+                    <span class="govuk-body">{{ data.translations.pmPageTitle.cy }}</span>
                 </dt>
-                <dd class="govuk-summary-list__value">
-                    A post-mortem is not being held
+                 <dd class="govuk-summary-list__value">
+                    {{ data.translations.pmInputLabelNotHeld.en }}
                 </dd>
                 <dd class="govuk-summary-list__value">
-                    Ni chynhelir post-mortem
+                    {{ data.translations.pmInputLabelNotHeld.cy }}
                 </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -182,14 +149,13 @@
         </dl>
         </div>
     </div>
+
+    <!-- CAUSE OF DEATH -->
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-            Cause of death
-            <br>
-            <span class="govuk-body">
-                Achos marwolaeth
-            </span>
+            {{ data.translations.pmMCCDTasklistCoD.en }}<br>
+            <span class="govuk-body">{{ data.translations.pmMCCDTasklistCoD.cy }}</span>
         </h2>
         </div>
         <div class="govuk-summary-card__content">
@@ -198,26 +164,20 @@
                 {% if data['over-under-28'] == 'yes' %}
                 <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width:35%">
-                    (a) Main diseases or condition in infant
-                    <br>
-                    <span class="govuk-body">
-                    (a) Prif afiechyd neu gyflwr mewn baban
-                    </span>
+                    {{ data.translations.CYAcodU28aMainDisease.en }}<br>
+                    <span class="govuk-body">{{ data.translations.CYAcodU28aMainDisease.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Meningitis
                 </dd>
                 <dd class="govuk-summary-list__value">
-                Llid yr ymennydd
+                    Llid yr ymennydd
                 </dd>
                 </div>
                 <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width:35%">
-                    (b) Other diseases or conditions in infant
-                    <br>
-                    <span class="govuk-body">
-                    (b) Clefyd neu gyflwr arall mewn babanod
-                    </span>
+                    {{ data.translations.CYAcodU28bOtherDisease.en }}<br>
+                    <span class="govuk-body">{{ data.translations.CYAcodU28bOtherDisease.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pre-term birth
@@ -228,11 +188,9 @@
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width:35%">
-                    (c) Main maternal diseases or conditions affecting infant
+                    {{ data.translations.CYAcodU28cMainMaternalDisease.en }}
                     <br>
-                    <span class="govuk-body">
-                    (c) Prif glefyd y fam neu gyflwr sy'n effeithio ar faban
-                    </span>
+                    <span class="govuk-body">{{ data.translations.CYAcodU28cMainMaternalDisease.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pre-eclampsia
@@ -243,11 +201,9 @@
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width:35%">
-                    (d) Other maternal diseases or conditions affecting infant
+                    {{ data.translations.CYAcodU28dOtherMaternalDisease.en }}
                     <br>
-                    <span class="govuk-body">
-                    (d) Clefydau neu gyflyrau mamol eraill sy'n effeithio ar fabanod
-                    </span>
+                    <span class="govuk-body">{{ data.translations.CYAcodU28dOtherMaternalDisease.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Endometriosis
@@ -258,11 +214,9 @@
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width:35%">
-                    (e) Other relevant factors or circumstances (not diseases of infant or mother)
+                    {{ data.translations.CYAcodU28eOtherRelevantFactors.en }}
                     <br>
-                    <span class="govuk-body">
-                    (e) Ffactorau neu amgylchiadau perthnasol eraill (nid clefydau’r baban neu’r fam)
-                    </span>
+                    <span class="govuk-body">{{ data.translations.CYAcodU28eOtherRelevantFactors.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     
@@ -273,10 +227,8 @@
                 </div>
                 {% else %}
                 <dt class="govuk-summary-list__key">
-                    1(a) disease or condition directly leading to death                     <br>
-                    <span class="govuk-body">
-                        1(a) Clefyd neu gyflwr sy'n arwain yn uniongyrchol at farwolaeth
-                    </span>
+                    {{ data.translations.CYAcodO281aMainDisease.en }}<br>
+                    <span class="govuk-body">{{ data.translations.CYAcodO281aMainDisease.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Post-transplant lymphoma
@@ -290,10 +242,8 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        1(b) other disease or condition leading to 1(a)                    <br>
-                        <span class="govuk-body">
-                            1(b) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(a)
-                        </span>
+                        {{ data.translations.CYAcodO281bDiseaseLeadingTo1a.en }}<br>
+                        <span class="govuk-body">{{ data.translations.CYAcodO281bDiseaseLeadingTo1a.cy }}</span>
                     </dt>
                     <dd class="govuk-summary-list__value">
                         Immuno-suppression following renal transplant 10 years ago
@@ -307,10 +257,8 @@
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            1(c) other disease or condition leading to 1(b)                   <br>
-                            <span class="govuk-body">
-                                1(c) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(b)
-                            </span>
+                            {{ data.translations.CYAcodO281cDiseaseLeadingTo1b.en }}<br>
+                            <span class="govuk-body">{{ data.translations.CYAcodO281cDiseaseLeadingTo1b.cy }}</span>
                         </dt>
                         <dd class="govuk-summary-list__value">
                             Glomerulonephrosis due to insulin dependent diabetes mellitus
@@ -324,11 +272,9 @@
                         </div>
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                1(d) other disease or condition leading to 1(c)                     
+                                {{ data.translations.CYAcodO281dDiseaseLeadingTo1c.en }}                
                                 <br>
-                                <span class="govuk-body">
-                                    1(d) Clefyd neu gyflwr arall, os oedd un, yn arwain at 1(c)
-                                </span>
+                                <span class="govuk-body">{{ data.translations.CYAcodO281dDiseaseLeadingTo1c.cy }}</span>
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 
@@ -342,11 +288,9 @@
                             </div>
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
-                                    2 Other significant conditions contributing to their death
+                                    {{ data.translations.CYAcodO282OtherConditions.en }}
                                     <br>
-                                    <span class="govuk-body">
-                                        2 Cyflyrau arwyddocaol eraill sy'n cyfrannu at eu farwolaeth
-                                    </span>
+                                    <span class="govuk-body">{{ data.translations.CYAcodO282OtherConditions.cy }}</span>
                                 </dt>
                                 <dd class="govuk-summary-list__value">
                                     Recurrent urinary tract infections
@@ -362,14 +306,13 @@
         </dl>
         </div>
     </div>
+
+    <!-- ATTENDING PRACTITIONER -->
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-            Attending practitioner
-            <br>
-            <span class="govuk-body">
-                Ymarferydd meddygol
-            </span>
+            {{ data.translations.globalRoleAttendingPractitioner.en }}<br>
+            <span class="govuk-body">{{ data.translations.globalRoleAttendingPractitioner.cy }}</span>
         </h2>
         </div>
         <div class="govuk-summary-card__content">
@@ -379,7 +322,7 @@
                 Attending practitioner full name
                 <br>
                 <span class="govuk-body">
-                    Enw llawn yr ymarferydd meddygol
+                    Enw llawn yr ymarferydd sy'n mynychu
                 </span>
             </dt>
             <dd class="govuk-summary-list__value">
@@ -421,19 +364,12 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Declaration
-                        <br>
-                        <span class="govuk-body">
-                            Datganiad
-                        </span>
+                        {{ data.translations.apDeclarationPageTitle.en }}<br>
+                        <span class="govuk-body">{{ data.translations.apDeclarationPageTitle.cy }}</span>
                     </dt>
-                    <dd class="govuk-summary-list__value">
-                        I confirm that I attended the deceased before their death and that the cause of death is as stated in this certificate to the best of my knowledge and belief.
-                    </dd>
-                    <dd class="govuk-summary-list__value">
-                        Cadarnhaf fy mod wedi mynychu’r ymadawedig cyn ei farwolaeth a bod achos y farwolaeth fel y’i nodir yn y dystysgrif hon hyd eithaf fy ngwybodaeth a’m cred.
-                    </dd>
-                    </div>
+                    <dd class="govuk-summary-list__value">{{ data.translations.apDeclarationContent.en }}</dd>
+                    <dd class="govuk-summary-list__value">{{ data.translations.apDeclarationContent.cy }}</dd>
+                </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Date of issue
@@ -452,6 +388,8 @@
         </dl>
         </div> 
     </div>
+
+    <!-- MEDICAL EXAMINER -->
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -546,6 +484,8 @@
         </div> 
     </div>
     
+    <!-- OTHER STATS INFO -->
+
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -558,29 +498,28 @@
         </div>
         <div class="govuk-summary-card__content">
             <dl class="govuk-summary-list">
-            {% if data['over-under-28'] == 'yes' %}
-            <div class="govuk-summary-list__row">
+
+
+                 <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Ethnicity
+                    {{ data.translations.dpdCheckAnswersEthnicity.en }}
                     <br>
                     <span class="govuk-body">
-                        Ethnigrwydd
+                        {{ data.translations.dpdCheckAnswersEthnicity.cy }}
                     </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    White - English, Welsh, Scottish, Northern Irish or British
+                    {{ data.translations.dpdEthnicGroupWhite.en }} - {{ data.translations.dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish.en }}
                 </dd>
                 <dd class="govuk-summary-list__value">
-                    Gwyn - Saesneg, Cymreig, Albanaidd, Gwyddelig Gogleddol neu Brydeinig
+                    {{ data.translations.dpdEthnicGroupWhite.cy }} - {{ data.translations.dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish.cy }}
                 </dd>
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Implant in body
+                    {{ data.translations.aadCheckAnswersImplantsInBody.en }}
                     <br>
-                    <span class="govuk-body">
-                        Mewnblaniadau yn y corff
-                    </span>
+                    <span class="govuk-body">{{ data.translations.aadCheckAnswersImplantsInBody.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
@@ -591,10 +530,10 @@
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Implant details
+                    {{ data.translations.aadCheckAnswersImplantDetails.en }}
                     <br>
                     <span class="govuk-body">
-                        Manylion mewnblaniad
+                        {{ data.translations.aadCheckAnswersImplantDetails.cy }}
                     </span>
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -606,11 +545,9 @@
                 </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Implant removed
+                    {{ data.translations.aadCheckAnswersImplantsRemoved.en }}
                     <br>
-                    <span class="govuk-body">
-                        Mewnblaniad wedi'i dynnu
-                    </span>
+                    <span class="govuk-body">{{ data.translations.aadCheckAnswersImplantsRemoved.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Yes
@@ -619,89 +556,14 @@
                     Oes
                 </dd>
                 </div>
-                {% else %}
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Death due to or contributed to by employment
-                        <br>
-                        <span class="govuk-body">
-                            Marwolaeth oherwydd cyflogaeth neu y mae cyflogaeth yn cyfrannu ati
-                        </span>
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        No
-                    </dd>
-                    <dd class="govuk-summary-list__value">
-                        Na allai
-                    </dd>
-                    </div>
+
+
+            {% if data['over-under-28'] !== 'yes' %}
+
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Ethnicity
-                    <br>
-                    <span class="govuk-body">
-                        Ethnigrwydd
-                    </span>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    White - English, Welsh, Scottish, Northern Irish or British
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    Gwyn - Saesneg, Cymreig, Albanaidd, Gwyddelig Gogleddol neu Brydeinig
-                </dd>
-                </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Implant in body
-                    <br>
-                    <span class="govuk-body">
-                        Mewnblaniadau yn y corff
-                    </span>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    Yes
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    Do
-                </dd>
-                </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Implant details
-                    <br>
-                    <span class="govuk-body">
-                        Manylion mewnblaniad
-                    </span>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    Pacemaker in chest
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    rheolyddion calon
-                </dd>
-                </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Implant removed
-                    <br>
-                    <span class="govuk-body">
-                        Mewnblaniad wedi'i dynnu
-                    </span>
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    Yes
-                </dd>
-                <dd class="govuk-summary-list__value">
-                    Oes
-                </dd>
-                </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Pregnant within the year prior to death
-                    <br>
-                    <span class="govuk-body">
-                        Beichiogrwydd
-                    </span>
+                    {{ data.translations.CYAcodO28Pregnancy.en }}<br>
+                    <span class="govuk-body">{{ data.translations.CYAcodO28Pregnancy.cy }}</span>
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Pregnant 43 days to a year before death
@@ -712,11 +574,9 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Death due to or contributed to by pregnancy
+                        {{ data.translations.CYAcodO28PregnancyContributed.en }}
                         <br>
-                        <span class="govuk-body">
-                        Marwolaeth yr effeithir arni gan feichiogrwydd
-                        </span>
+                        <span class="govuk-body">{{ data.translations.CYAcodO28PregnancyContributed.cy }}</span>
                     </dt>
                     <dd class="govuk-summary-list__value">
                         No
@@ -731,10 +591,12 @@
         </div>
     </div>
     
+
+    <!-- MISC -->
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
           <h2 class="govuk-summary-card__title">
-            Misc
+                Miscellaneous
             <br>
             <span class="govuk-body">
                 Amrywiol
@@ -745,11 +607,9 @@
             <dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                NHS number
+                {{ data.translations.dpdCheckAnswersNHSNumber.en }}
                 <br>
-                <span class="govuk-body">
-                    Rhif GIG
-                </span>
+                <span class="govuk-body">{{ data.translations.dpdCheckAnswersNHSNumber.cy }}</span>
             </dt>
             <dd class="govuk-summary-list__value">
                 123 456 7891
