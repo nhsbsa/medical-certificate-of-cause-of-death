@@ -41,12 +41,12 @@
                     {% if data.debug === 'true'%}<p class="govuk-body"><strong>Scenario:</strong> AP MCCD needs amends</p>{% endif %}
 
                     <div class="govuk-panel govuk-panel--confirmation">
-                        <h1 class="govuk-panel__title">{{ data.translations.meCertificateNeedsAmendsPageTitle[page.lang] }}</h1>
+                        <h1 class="govuk-panel__title">{{ data.translations.meCertificateNeedsAmendsPageTitle[data.lang] }}</h1>
                     </div>
 
                     <hr class="govuk-section-break govuk-section-break--m" />
 
-                    {{ data.transition.meCertificateNeedsAmendsPageContent | safe }}
+                    {{ data.translations.meCertificateNeedsAmendsPageContent[data.lang] | safe }}
                 
                 {% else %}
 
