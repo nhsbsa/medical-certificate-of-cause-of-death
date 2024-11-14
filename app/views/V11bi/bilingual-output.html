@@ -497,6 +497,27 @@
         </div>
         <div class="govuk-summary-card__content">
             <dl class="govuk-summary-list">
+                
+            {% if data['over-under-28'] !== 'yes' %}
+
+                <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                {{ data.translations.CYAcodO28Employment.en }}
+                <br>
+                <span class="govuk-body">
+                    {{ data.translations.CYAcodO28Employment.cy }}
+                </span>
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.translations.globalRadioNo.en }}
+            </dd>
+            <dd class="govuk-summary-list__value">
+                {{ data.translations.globalRadioNo.cy }}
+            </dd>
+            </div>
+
+            {% endif %}
+
 
 
                  <div class="govuk-summary-list__row">
@@ -558,6 +579,8 @@
 
 
             {% if data['over-under-28'] !== 'yes' %}
+
+
 
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
