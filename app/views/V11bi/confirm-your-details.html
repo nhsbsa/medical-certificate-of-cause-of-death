@@ -17,10 +17,25 @@
 {% block content %}
 
 <!-- SET VARIABLES -->
-{% set pageTitle = 'Check your details are correct before signing off this certificate' %}
 
-{% if data['role-type'] == 'ap' %}
-    {% set pageTitle = 'Check your details are correct before submitting this certificate for scrutiny' %}
+{% if data.lang === '' %}
+
+    {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
+
+    'Gwiriwch fod eich manylion yn gywir cyn llofnodi'r dystysgrif hon'
+
+    {% if data['role-type'] == 'ap' %}
+        {% set pageTitle = 'Check your details are correct before submitting this certificate for scrutiny' %}
+    {% endif %}
+
+{% else %}
+
+    {% set pageTitle = 'Gwiriwch fod eich manylion yn gywir cyn llofnodi\'r dystysgrif hon' %}
+
+    {% if data['role-type'] == 'ap' %}
+        {% set pageTitle = 'Gwiriwch fod eich manylion yn gywir cyn cyflwyno\'r dystysgrif hon i\'w graffu' %}
+    {% endif %}
+
 {% endif %}
 
 
@@ -45,7 +60,7 @@
                 value: { html: data.user.address | formatAddress }
             },
             {
-                key: { text: 'Primary qualification' },
+                key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] },
                 value: { html: data['qualifications'] or 'Not specified' },
                 actions: { items: [ {  href: 'onboarding/qualifications', text: 'Change' } ] }
             }
