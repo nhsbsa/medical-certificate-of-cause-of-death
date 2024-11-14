@@ -22,8 +22,6 @@
 
     {% set pageTitle = 'Check your details are correct before signing off this certificate' %}
 
-    'Gwiriwch fod eich manylion yn gywir cyn llofnodi'r dystysgrif hon'
-
     {% if data['role-type'] == 'ap' %}
         {% set pageTitle = 'Check your details are correct before submitting this certificate for scrutiny' %}
     {% endif %}
