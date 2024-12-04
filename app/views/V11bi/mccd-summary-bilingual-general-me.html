@@ -1,0 +1,523 @@
+{% extends "layouts/main_cy-en.html" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block pageTitle %}{{ version }} - {{ serviceName }}{% endblock %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+    text: data.translations.globalBackLink[data.lang],
+    href: 'javascript:history.back()'
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+{{ '' | setDashboardVariables( data['role-type'], settings, data.lang ) }}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+
+
+
+        <!--
+
+
+ ______   ________  _________     _       _____  _____      ______   
+|_   _ `.|_   __  ||  _   _  |   / \     |_   _||_   _|   .' ____ \  
+  | | `. \ | |_ \_||_/ | | \_|  / _ \      | |    | |     | (___ \_| 
+  | |  | | |  _| _     | |     / ___ \     | |    | |   _  _.____`.  
+ _| |_.' /_| |__/ |   _| |_  _/ /   \ \_  _| |_  _| |__/ || \____) | 
+|______.'|________|  |_____||____| |____||_____||________| \______.' 
+                                                                     
+
+
+        -->
+
+        <main class="govuk-main-wrapper govuk-!-padding-top-6">
+
+             {% set patientStatus = data.bilingualStatus | int %}
+
+            {{ patientStatus | getStatusTag | safe }}
+            <h1 class="govuk-heading-l govuk-!-margin-top-3">{{ data.translations.mccdTasklistPageTitle[data.lang] }}</h1>
+            
+            <!-- REF NUMBER -->
+            <p class="govuk-body govuk-!-margin-bottom-2"><strong>{{ data.translations.globalReferenceNumber[data.lang] }}</strong> 2YQWJRDVD-24</p>
+            
+            <!-- CERTIFICATE TYPE -->
+            <p class="govuk-body"><strong>{{ data.translations.globalCertificateType[data.lang] }}</strong> 66ME</p>
+
+                <!-- ADDING ROUTING TO CHANGE LINKS FOR PROTO PURPOSES -->
+                <script>
+                    window.addEventListener('DOMContentLoaded',function(){
+                        document.querySelectorAll('.govuk-summary-list__actions .govuk-link').forEach(function(el){
+                            let href = el.getAttribute('href');
+                            href += ( href.indexOf('?') > -1 ) ? '&redirectToSummary=true' : '?redirectToSummary=true';
+                            el.setAttribute('href',href);
+                        });
+                    });
+                </script>
+
+
+            <!--
+
+______                                 _  ______     _        _ _     
+|  _  \                               | | |  _  \   | |      (_) |    
+| | | |___  ___ ___  __ _ ___  ___  __| | | | | |___| |_ __ _ _| |___ 
+| | | / _ \/ __/ _ \/ _` / __|/ _ \/ _` | | | | / _ \ __/ _` | | / __|
+| |/ /  __/ (_|  __/ (_| \__ \  __/ (_| | | |/ /  __/ || (_| | | \__ \
+|___/ \___|\___\___|\__,_|___/\___|\__,_| |___/ \___|\__\__,_|_|_|___/
+                                                                      
+
+           -->
+
+
+                <!-- DECEASED PERSONS DETAILS -->
+
+                {% set deathLocationHTML = '<strong>' + data.translations.globalEnglish[data.lang] + '</strong><br />University Hospital of Wales<br />Heath Park<br />Cardiff<br />CF14 4XW<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2"><strong>' + data.translations.globalWelsh[data.lang] + '</strong><br />Ysbyty Athrofaol Cymru<br />Parc y Mynydd Bychan<br />Caerdydd<br />CF14 4XW' %}
+
+
+                {% if ( data['role-type'] === 'ap' and patientStatus === 1 ) %}
+
+                    <!-- CHANGEABLE -->
+
+                    {% set dpdRows = [
+                            {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: '934 912 7623' }, actions: { items: [{ href: 'nhs-number', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'NHS number' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: 'John Alan Staples' }, actions: { items: [{ href: 'name-of-the-deceased', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'name' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '13 ' + data.translations.globalMonthSep[data.lang] + ' 2024' }, actions: { items: [{ href: 'date-of-birth', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'date of birth' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '55 ' + data.translations.globalTimeUnitYears[data.lang] | lower }, actions: { items: [{ href: 'age-66', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'age' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: data.translations.dpdEthnicGroupWhite[data.lang] + ' - ' + data.translations.dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish[data.lang] }, actions: { items: [{ href: 'ethnicity/ethnic-group', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'ethnicity' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: '5 ' + data.translations.globalMonthApr[data.lang] + ' 1969' }, actions: { items: [{ href: 'date-of-death', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'date of death' }] } },
+                            {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: deathLocationHTML }, actions: { items: [{ href: 'unknown-address', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'place of death' }] } }
+                    ] %}    
+
+                    {% set aadRows = [
+                            {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: data.translations.pmInputLabelNotHeld[data.lang] }, actions: { items: [{ href: 'death-circumstances', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'whether a post mortem was held' }] } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: data.translations.globalRadioYes[data.lang] }, actions: { items: [{ href: 'implant', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'whether the deceased had an implant' }] } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { html: implantDetailsHTML }, actions: { items: [{ href: 'implant', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'implant details' }] } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: data.translations.globalRadioYes[data.lang] }, actions: { items: [{ href: 'implant-removed', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'whether implant was removed' }] } },
+                            {  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-referring-mp-name', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'referring medical practitioner' }] } },
+                            {  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' }, actions: { items: [{ href: 'me-coroner-name', text: data.translations.globalChangeField[data.lang], visuallyHiddenText: 'senior coroner' }] } }
+                        ] %}
+
+                {% else %}
+
+                    <!-- NON CHANGEABLE -->
+
+                    {% set dpdRows = [
+                            {  key: { text: data.translations.dpdCheckAnswersNHSNumber[data.lang] }, value: { text: '934 912 7623' } },
+                            {  key: { text: data.translations.dpdCheckAnswersFullName[data.lang] }, value: { text: 'John Alan Staples' } },
+                            {  key: { text: data.translations.dpdCheckAnswersDoB[data.lang] }, value: { text: '13 ' + data.translations.globalMonthSep[data.lang] + ' 2024' } },
+                            {  key: { text: data.translations.dpdCheckAnswersAgeAtDeath[data.lang] }, value: { text: '55 ' + data.translations.globalTimeUnitYears[data.lang] | lower } },
+                            {  key: { text: data.translations.dpdCheckAnswersEthnicity[data.lang] }, value: { text: data.translations.dpdEthnicGroupWhite[data.lang] + ' - ' + data.translations.dpdEthnicityEnglishWelshScottishNorthernIrishOrBritish[data.lang] } },
+                            {  key: { text: data.translations.dpdCheckAnswersDoD[data.lang] }, value: { text: '5 ' + data.translations.globalMonthApr[data.lang] + ' 1969' } },
+                            {  key: { text: data.translations.dpdCheckAnswersDeathLocation[data.lang] }, value: { html: deathLocationHTML } }
+                    ] %}    
+
+                    {% set aadRows = [
+                            {  key: { text: data.translations.aadCheckAnswersPostMortem[data.lang] }, value: { text: data.translations.pmInputLabelNotHeld[data.lang] } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantsInBody[data.lang] }, value: { text: data.translations.globalRadioYes[data.lang] } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantDetails[data.lang] }, value: { html: implantDetailsHTML } },
+                            {  key: { text: data.translations.aadCheckAnswersImplantsRemoved[data.lang] }, value: { text: data.translations.globalRadioYes[data.lang] } },
+                            {  key: { text: data.translations.aadCheckAnswersRefMedicalPractitioner[data.lang] }, value: { text: '' } },
+                            {  key: { text: data.translations.aadCheckAnswersSnrCoroner[data.lang] }, value: { text: '' } }
+                        ] %}
+
+                {% endif %}
+
+
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistDeceasedPersonsDetails[data.lang] },
+                        classes: 'govuk-!-margin-top-9'
+                    },
+                    rows: dpdRows
+                }) }}
+
+                   {% set implantDetailsHTML = '<strong>' + data.translations.globalEnglish[data.lang] + '</strong><br />Radioactive implant<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2"><strong>' + data.translations.globalWelsh[data.lang] + '</strong><br />Mewnblaniad ymbelydrol' %}
+
+                    
+
+                <!-- ACTIONS AFTER DEATH -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistActionsAfterDeath[data.lang] }
+                    },
+                    rows: aadRows
+                }) }}
+
+
+            <!--
+
+ _____                               __  ______           _   _     
+/  __ \                             / _| |  _  \         | | | |    
+| /  \/ __ _ _   _ ___  ___    ___ | |_  | | | |___  __ _| |_| |__  
+| |    / _` | | | / __|/ _ \  / _ \|  _| | | | / _ \/ _` | __| '_ \ 
+| \__/\ (_| | |_| \__ \  __/ | (_) | |   | |/ /  __/ (_| | |_| | | |
+ \____/\__,_|\__,_|___/\___|  \___/|_|   |___/ \___|\__,_|\__|_| |_|
+
+
+            -->
+
+
+            <style>
+
+                .govuk-summary-list__row > .govuk-summary-list__key,
+                .govuk-summary-list__row > .govuk-summary-list__actions {
+                    vertical-align: top;
+                }
+
+                .govuk-summary-list__value .govuk-grid-column-one-half {
+                    padding-left: 0;
+                }
+
+                @media all and ( max-width: 40.0625rem ){
+
+                    .govuk-summary-list__value .govuk-grid-column-one-half {
+                        margin-top: 10px;
+                        display: block;
+                    }
+
+                }
+
+                @media all and ( min-width: 40.0625rem ){
+
+                    .govuk-summary-list__row > .govuk-summary-list__actions {
+                        width: 100px;
+                    }
+
+                }
+
+            </style>
+
+
+            {% set causeOfDeathAHTML = '<strong>' + data.translations.globalEnglish[data.lang] + '</strong><br />Hepatic encephalopathy<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2"><strong>' + data.translations.globalWelsh[data.lang] + '</strong><br />Enseffalopathi hepatig' %}
+            {% set causeOfDeathBHTML = '<strong>' + data.translations.globalEnglish[data.lang] + '</strong><br />Alcoholic liver cirrhosis<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2"><strong>' + data.translations.globalWelsh[data.lang] + '</strong><br />Cirrhosis yr afu alcoholig' %}
+            {% set causeOfDeath2HTML = '<strong>' + data.translations.globalEnglish[data.lang] + '</strong><br />Difficult to control insulin dependent diabetes<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-2"><strong>' + data.translations.globalWelsh[data.lang] + '</strong><br />Anodd rheoli diabetes sy\'n ddibynnol ar inswlin' %}
+
+
+            {% if data['role-type'] === 'ap' and ( patientStatus === 1 or patientStatus === 2 ) %}
+
+                <!-- CHANGEABLE -->
+
+                {% set codRows =  [
+                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { html: causeOfDeathAHTML | getCauseOfDeathAndDuration }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { html: causeOfDeathBHTML | getCauseOfDeathAndDuration }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { html: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { html: '' }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { html: causeOfDeath2HTML | getCauseOfDeathAndDuration }, actions: { items: [{ href: 'cause-of-death', text: 'Change', visuallyHiddenText: 'cause of death' }] } },
+                            {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: data.translations.globalRadioNo[data.lang] }, actions: { items: [{ href: 'caused-by-employment', text: 'Change', visuallyHiddenText: 'whether employment affected the death' }] } },
+                            {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: data.translations.pregnancyInputNotPregnant[data.lang] }, actions: { items: [{ href: 'pregnant-at-death', text: 'Change', visuallyHiddenText: 'whether deceased was pregnant at the time of their death' }] } }
+                            
+                        ] %}
+
+
+
+            {% else %}
+
+                <!-- NON-CHANGEABLE -->
+
+                 {% set codRows =  [
+                            {  key: { text: data.translations.CYAcodO281aMainDisease[data.lang] }, value: { html: causeOfDeathAHTML | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO281bDiseaseLeadingTo1a[data.lang] }, value: { html: causeOfDeathBHTML | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO281cDiseaseLeadingTo1b[data.lang] }, value: { html: '' } },
+                            {  key: { text: data.translations.CYAcodO281dDiseaseLeadingTo1c[data.lang] }, value: { html: '' } },
+                            {  key: { text: data.translations.CYAcodO282OtherConditions[data.lang] }, value: { html: causeOfDeath2HTML | getCauseOfDeathAndDuration } },
+                            {  key: { text: data.translations.CYAcodO28Employment[data.lang] }, value: { text: data.translations.globalRadioNo[data.lang] } },
+                            {  key: { text: data.translations.CYAcodO28Pregnancy[data.lang] }, value: { text: data.translations.pregnancyInputNotPregnant[data.lang] } }
+                        ] %}
+
+            {% endif %}
+
+
+             <!-- ADULT -->
+                    {{ govukSummaryList({
+                        card: {
+                            title: { text: data.translations.pmMCCDTasklistCoD[data.lang] }
+                        },
+                        rows: codRows
+                    }) }}
+
+
+            <!-- 
+
+___  ___ _____  ______     _        _ _     
+|  \/  ||  ___| |  _  \   | |      (_) |    
+| .  . || |__   | | | |___| |_ __ _ _| |___ 
+| |\/| ||  __|  | | | / _ \ __/ _` | | / __|
+| |  | || |___  | |/ /  __/ || (_| | | \__ \
+\_|  |_/\____/  |___/ \___|\__\__,_|_|_|___/
+                                            
+    
+                                        
+            -->
+
+
+             <!-- MEDICAL EXAMINERS DETAILS -->
+                {{ govukSummaryList({
+                    card: {
+                        title: { text: data.translations.pmMCCDTasklistMedicalExaminersInformation[data.lang] }
+                    },
+                    rows: [
+                            { key: { text: data.translations.dpdConfirmDetailsFullName[data.lang] }, value: { text: 'Alan Jakobsen' } },
+                            {  key: { text: data.translations.dpdConfirmDetailsGMC[data.lang] }, value: { text: '6367472' } },
+                            {  key: { text: data.translations.dpdConfirmDetailsPrimaryQualification[data.lang] }, value: { html: 'MB ChB' } }
+                        ]
+                }) }}
+
+            
+
+
+        </main>
+        
+
+<!--
+
+
+      _        ______  _________  _____   ___   ____  _____   ______   
+     / \     .' ___  ||  _   _  ||_   _|.'   `.|_   \|_   _|.' ____ \  
+    / _ \   / .'   \_||_/ | | \_|  | | /  .-.  \ |   \ | |  | (___ \_| 
+   / ___ \  | |           | |      | | | |   | | | |\ \| |   _.____`.  
+ _/ /   \ \_\ `.___.'\   _| |_    _| |_\  `-'  /_| |_\   |_ | \____) | 
+|____| |____|`.____ .'  |_____|  |_____|`.___.'|_____|\____| \______.' 
+                                                                       
+
+
+            -->
+
+        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
+
+            {% if data['role-type'] == 'ap' %}
+
+                <!-- AP -->
+
+                {% if( patient.amendsNotSubmitted === true ) %}
+
+                    <!-- AMENDS NOT SUBMITTED -->
+
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        <input type="hidden" name="ap-amends" value="true" />
+
+                        {{ govukCheckboxes({
+                            name: 'ap-cert-declaration',
+                            fieldset: {
+                                legend: {
+                                text: data.translations.apDeclarationPageTitle[data.lang],
+                                isPageHeading: true,
+                                classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                {
+                                value: 'apDeclarationContent',
+                                text: data.translations.apDeclarationContent[data.lang]
+                                }
+                            ]
+                            }) }}
+
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.summarySubmitAmendsCTA[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalReturnToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+
+                    </form>
+
+
+                {% else %}
+
+                    <!-- BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalReturnToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button'
+                    }) }}
+
+                {% endif %}
+
+            {% elseif data['role-type'] == 'me' %}
+
+                <!-- ME -->
+            
+                {% if patientStatus === 3 %}
+
+                    <!-- IF STATUS = For sign off by Medical Examiner -->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        {{ govukRadios({
+                            name: 'me-signoff',
+                            value: data['me-signoff'],
+                            fieldset: {
+                                legend: {
+                                    text: data.translations.summaryMEScrutinyPageTitle[data.lang],
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                }
+                            },
+                            items: [
+                                { text: data.translations.summaryMEScrutinyCertificateNeedsAmends[data.lang], value: 'amend' },
+                                { text: data.translations.summaryMEScrutinyCertificatePassed[data.lang],  value: 'register office' }
+                            ]
+                        }) }}
+                    
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.globalSaveContinue[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalReturnToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                        
+                    </form>
+
+                {% else %}
+
+                    <!-- ELSE: BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalReturnToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button'
+                    }) }}
+
+                {% endif %}
+
+            {% else %}
+
+                <!-- MEO -->
+
+                <!-- IF STATUS = For officer review -->
+                {% if patientStatus === 1  %}
+
+                    {% if ( patient.amendsNotSubmitted) %}
+
+                        <!-- BACK TO DASHBOARD -->
+                        {{ govukButton({
+                            text: data.translations.globalReturnToDashboard[data.lang],
+                            href: 'dashboard',
+                            classes: 'govuk-button'
+                        }) }}
+
+                    {% else %}
+
+                        <!-- HAPPY TO SEND FOR ME REVIEW -->
+                        <form action="mccd-summary" method="post" novalidate>
+
+                            {{ govukCheckboxes({
+                                name: 'meo-scrutiny-declaration',
+                                fieldset: {
+                                    legend: {
+                                    text: data.translations.meoDeclarationPageTitle[data.lang],
+                                    isPageHeading: true,
+                                    classes: 'govuk-fieldset__legend--l'
+                                    }
+                                },
+                                items: [
+                                    {
+                                    value: 'meoDeclarationContent',
+                                    text: data.translations.meoDeclarationContent[data.lang],
+                                    checked: ( data['meo-cert-declaration'] )
+                                    }
+                                ]
+                                }) }}
+
+        
+                        
+                            <div class="govuk-button-group">
+
+                                {{ govukButton({
+                                text: data.translations.meoDeclarationSubmitForScrutinyCTA[data.lang]
+                                }) }}
+
+                                {{ govukButton({
+                                    text: data.translations.globalReturnToDashboard[data.lang],
+                                    href: 'dashboard',
+                                    classes: 'govuk-button--secondary'
+                                }) }}
+
+                            </div>
+                            
+                        </form>
+
+                    {% endif %}
+
+                {% elseif patientStatus === 4 %}
+
+                    <!--IF STATUS = Review complete - send to registrar-->
+                    <form action="mccd-summary" method="post" novalidate>
+
+                        <div class="govuk-form-group">
+                    
+                            <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                    
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    
+                                    <h2 class="govuk-fieldset__heading govuk-!-margin-top-5 govuk-!-margin-bottom-3">{{ data.translations.summaryDownloadCertificatePageTitle[data.lang] }}</h2>
+                                    <p>{{ data.translations.summaryDownloadCertificatePageContent[data.lang] }}</p>
+                                    <span style="user-select:none;cursor:not-allowed;" class="govuk-button govuk-button--secondary">{{ data.translations.summaryDownloadCertificateCTA[data.lang] }}</span>
+                    
+                                </legend>
+                    
+                                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="sent-to-registrar" name="sent-to-registrar" type="checkbox" value="I have sent this certificate to the registrar">
+                                        <label class="govuk-label govuk-checkboxes__label" for="sent-to-registrar">{{ data.translations.summaryDownloadCertificateCheckBoxTitle[data.lang] }}</label>
+                                    </div>
+                                </div>
+                    
+                            </fieldset>
+                        </div>
+
+
+                        <div class="govuk-button-group">
+                            {{ govukButton({
+                                text: data.translations.summaryDownloadCertificateMarkAsSubmittedCTA[data.lang]
+                            }) }}
+                            {{ govukButton({
+                                text: data.translations.globalReturnToDashboard[data.lang],
+                                href: 'dashboard',
+                                classes: 'govuk-button--secondary'
+                            }) }}
+                        </div>
+                    
+                    </form>
+
+
+                {% else %}
+
+                    <!-- BACK TO DASHBOARD -->
+                    {{ govukButton({
+                        text: data.translations.globalReturnToDashboard[data.lang],
+                        href: 'dashboard',
+                        classes: 'govuk-button'
+                    }) }}
+                    
+                {% endif %}
+
+            {% endif %}
+        
+
+        </div>
+
+    </div>
+</div>
+
+{{ data | debugData | safe }}
+
+{% endblock %}
